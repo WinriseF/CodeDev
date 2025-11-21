@@ -1,0 +1,49 @@
+import { TitleBar } from "@/components/layout/TitleBar";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { useAppStore } from "@/store/useAppStore";
+
+function App() {
+  const { currentView } = useAppStore();
+
+  return (
+    <div className="h-screen w-full bg-slate-950 text-slate-200 overflow-hidden flex flex-col rounded-xl border border-slate-700/50">
+      {/* 1. 自定义深色标题栏 (固定在顶部) */}
+      <TitleBar />
+
+      {/* 2. 主体区域 (在标题栏下方) */}
+      <div className="flex-1 flex overflow-hidden">
+        
+        {/* 左侧可伸缩侧边栏 */}
+        <Sidebar />
+
+        {/* 右侧内容区 */}
+        <main className="flex-1 flex flex-col min-w-0 bg-slate-950 relative">
+          
+          {/* 面包屑 / 页面标题 */}
+          <header className="h-12 border-b border-slate-800 flex items-center px-6 bg-slate-950/50 backdrop-blur select-none shrink-0">
+             <h2 className="text-sm text-slate-400 flex items-center gap-2">
+               <span className="w-2 h-2 rounded-full bg-blue-500/50"></span>
+               {currentView === 'prompts' && "Prompt-Verse 灵感库"}
+               {currentView === 'context' && "Context-Forge 打包机"}
+               {currentView === 'patch' && "Patch-Weaver 缝合怪"}
+             </h2>
+          </header>
+
+          {/* 滚动内容区 */}
+          <div className="flex-1 overflow-auto p-6 scroll-smooth">
+             <div className="max-w-5xl mx-auto">
+                <div className="flex flex-col items-center justify-center h-[50vh] border border-dashed border-slate-800 rounded-xl bg-slate-900/20">
+                  <span className="text-4xl mb-4">🚧</span>
+                  <p className="text-xl font-semibold text-slate-600 capitalize">
+                    {currentView} Module
+                  </p>
+                </div>
+             </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+export default App;
