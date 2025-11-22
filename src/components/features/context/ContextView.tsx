@@ -4,7 +4,8 @@ import { writeTextFile } from '@tauri-apps/api/fs';
 import { writeText as writeClipboard } from '@tauri-apps/api/clipboard';
 import { 
   FolderOpen, RefreshCw, Loader2, FileJson, 
-  PanelLeft, Search, ArrowRight, CheckCircle2, SlidersHorizontal, ChevronUp
+  PanelLeft, Search, ArrowRight, CheckCircle2, SlidersHorizontal, ChevronUp,
+  LayoutDashboard, FileText // ✨ 引入新图标
 } from 'lucide-react';
 import { useContextStore } from '@/store/useContextStore';
 import { useAppStore } from '@/store/useAppStore';
@@ -13,53 +14,54 @@ import { calculateIdealTreeWidth } from '@/lib/tree_utils';
 import { calculateStats, generateContext } from '@/lib/context_assembler';
 import { FileTreeNode } from './FileTreeNode';
 import { TokenDashboard } from './TokenDashboard';
-import { FilterManager } from './FilterManager'; // 引入组件
+import { FilterManager } from './FilterManager';
+import { ContextPreview } from './ContextPreview'; // ✨ 引入预览组件
 import { cn } from '@/lib/utils';
 
 export function ContextView() {
-  // --- Store Hooks ---
   const { 
     projectRoot, fileTree, isScanning, 
-    projectIgnore, updateProjectIgnore, // ✨ 获取项目配置
-    refreshTreeStatus,
+    projectIgnore, updateProjectIgnore, 
+    refreshTreeStatus, 
     setProjectRoot, setFileTree, setIsScanning, toggleSelect 
   } = useContextStore();
 
   const { 
     isContextSidebarOpen, setContextSidebarOpen,
     contextSidebarWidth, setContextSidebarWidth,
-    globalIgnore // ✨ 获取全局配置
+    globalIgnore 
   } = useAppStore();
 
-  // --- Local State ---
   const [pathInput, setPathInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
-  
-  // ✨ 控制过滤器面板展开/折叠
   const [showFilters, setShowFilters] = useState(false); 
 
-  // Sync input with store
+  // ✨ 新增：视图模式状态 ('dashboard' | 'preview')
+  const [rightViewMode, setRightViewMode] = useState<'dashboard' | 'preview'>('dashboard');
+
+  useEffect(() => {
+    if (projectRoot) setPathInput(projectRoot);
+  }, [projectRoot]);
+
   useEffect(() => {
     if (fileTree.length > 0) {
       refreshTreeStatus(globalIgnore);
     }
-  }, [globalIgnore, projectIgnore, refreshTreeStatus]); // 依赖项
+  }, [globalIgnore, projectIgnore, refreshTreeStatus]);
 
-  // --- Statistics (Memoized) ---
   const stats = useMemo(() => {
     return calculateStats(fileTree);
   }, [fileTree]);
 
-  // --- Helper: Show Toast ---
+  // --- Helpers & Actions ---
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2000);
   };
 
-  // --- Action: Copy / Save (保持不变) ---
   const handleCopyContext = async () => {
     if (isGenerating) return;
     setIsGenerating(true);
@@ -99,14 +101,10 @@ export function ContextView() {
     }
   };
 
-  // --- Logic: Scan & Resize ---
   const performScan = async (path: string) => {
     if (!path.trim()) return;
-    
     setIsScanning(true);
     try {
-      // ✨ 关键：动态合并配置 (Global + Project)
-      // 使用 Set 去重
       const effectiveConfig = {
         dirs: Array.from(new Set([...globalIgnore.dirs, ...projectIgnore.dirs])),
         files: Array.from(new Set([...globalIgnore.files, ...projectIgnore.files])),
@@ -118,12 +116,8 @@ export function ContextView() {
       setProjectRoot(path);
       
       const idealWidth = calculateIdealTreeWidth(tree);
-      if (idealWidth > contextSidebarWidth) {
-         setContextSidebarWidth(idealWidth);
-      }
-      
+      if (idealWidth > contextSidebarWidth) setContextSidebarWidth(idealWidth);
       if (!isContextSidebarOpen) setContextSidebarOpen(true);
-
     } catch (err) {
       console.error("Scan failed:", err);
     } finally {
@@ -131,7 +125,6 @@ export function ContextView() {
     }
   };
 
-  // --- Handlers ---
   const handleBrowse = async () => {
     try {
       const selected = await open({ directory: true, multiple: false, recursive: false });
@@ -146,7 +139,6 @@ export function ContextView() {
     if (e.key === 'Enter') performScan(pathInput);
   };
 
-  // --- Resizing Logic ---
   const isResizingRef = useRef(false);
   const startResizing = () => { isResizingRef.current = true; };
   
@@ -165,7 +157,6 @@ export function ContextView() {
     };
   }, [setContextSidebarWidth]);
 
-  // --- Render ---
   return (
     <div className="h-full flex flex-col bg-background relative">
       
@@ -173,11 +164,7 @@ export function ContextView() {
       <div className="h-14 border-b border-border flex items-center px-4 gap-3 shrink-0 bg-background/80 backdrop-blur z-10">
         <button 
           onClick={() => setContextSidebarOpen(!isContextSidebarOpen)} 
-          className={cn(
-            "p-2 rounded-md transition-colors", 
-            !isContextSidebarOpen ? "text-primary bg-primary/10" : "text-muted-foreground hover:bg-secondary"
-          )}
-          title={isContextSidebarOpen ? "Show Explorer" : "Hide Explorer"}
+          className={cn("p-2 rounded-md transition-colors", !isContextSidebarOpen ? "text-primary bg-primary/10" : "text-muted-foreground hover:bg-secondary")}
         >
           <PanelLeft size={18} />
         </button>
@@ -192,9 +179,7 @@ export function ContextView() {
             onKeyDown={handleKeyDown}
           />
           {pathInput && pathInput !== projectRoot && (
-             <button onClick={() => performScan(pathInput)} className="p-1 hover:bg-primary hover:text-primary-foreground rounded-sm transition-colors">
-               <ArrowRight size={14} />
-             </button>
+             <button onClick={() => performScan(pathInput)} className="p-1 hover:bg-primary hover:text-primary-foreground rounded-sm transition-colors"><ArrowRight size={14} /></button>
           )}
         </div>
 
@@ -209,95 +194,106 @@ export function ContextView() {
       {/* Main Split View */}
       <div className="flex-1 flex overflow-hidden relative">
         
-        {/* Left Sidebar: Explorer + Filters */}
+        {/* Left Sidebar */}
         <div 
-          className={cn(
-            "flex flex-col bg-secondary/5 border-r border-border transition-all duration-75 ease-linear overflow-hidden relative group/sidebar",
-            !isContextSidebarOpen && "w-0 border-none opacity-0"
-          )}
+          className={cn("flex flex-col bg-secondary/5 border-r border-border transition-all duration-75 ease-linear overflow-hidden relative group/sidebar", !isContextSidebarOpen && "w-0 border-none opacity-0")}
           style={{ width: isContextSidebarOpen ? `${contextSidebarWidth}px` : 0 }}
         >
-          {/* Explorer Header */}
           <div className="p-3 border-b border-border/50 text-xs font-bold text-muted-foreground uppercase tracking-wider flex justify-between shrink-0 items-center">
              <span className="flex items-center gap-1"><FileJson size={12}/> EXPLORER</span>
              <span className="bg-secondary/50 px-1.5 py-0.5 rounded text-[10px]">{stats.fileCount} selected</span>
           </div>
-          
-          {/* File Tree Body (Takes remaining space) */}
           <div className="flex-1 overflow-y-auto custom-scrollbar p-2">
             {!projectRoot ? (
-              <div className="mt-10 flex flex-col items-center justify-center text-muted-foreground opacity-50 gap-2 text-center px-4">
-                <p className="text-sm">Enter a path or browse to open a project</p>
-              </div>
+              <div className="mt-10 flex flex-col items-center justify-center text-muted-foreground opacity-50 gap-2 text-center px-4"><p className="text-sm">Enter a path to open</p></div>
             ) : isScanning ? (
-              <div className="flex flex-col items-center justify-center mt-10 gap-3 text-sm text-muted-foreground animate-pulse">
-                <Loader2 size={20} className="animate-spin text-primary" /> 
-                <span>Scanning files...</span>
-              </div>
+              <div className="flex flex-col items-center justify-center mt-10 gap-3 text-sm text-muted-foreground animate-pulse"><Loader2 size={20} className="animate-spin text-primary" /><span>Scanning...</span></div>
             ) : fileTree.length === 0 ? (
               <div className="mt-10 text-center text-sm text-muted-foreground">Empty directory</div>
             ) : (
-              fileTree.map(node => (
-                <FileTreeNode key={node.id} node={node} onToggleSelect={toggleSelect} />
-              ))
+              fileTree.map(node => <FileTreeNode key={node.id} node={node} onToggleSelect={toggleSelect} />)
             )}
           </div>
-
-          {/* ✨ Project Filters Section (Bottom) */}
           <div className="border-t border-border bg-background shrink-0 flex flex-col z-10">
               <button 
                   onClick={() => setShowFilters(!showFilters)}
                   className="flex items-center justify-between px-3 py-2 text-xs font-bold text-muted-foreground uppercase tracking-wider hover:bg-secondary/50 transition-colors"
-                  title="Manage ignore rules for this project"
               >
                   <span className="flex items-center gap-2"><SlidersHorizontal size={12}/> Filters</span>
                   <ChevronUp size={14} className={cn("transition-transform duration-200", showFilters ? "rotate-180" : "rotate-0")} />
               </button>
-              
               {showFilters && (
                   <div className="h-64 p-3 bg-secondary/5 overflow-hidden border-t border-border/50 animate-in slide-in-from-bottom-2">
-                      <FilterManager 
-                          localConfig={projectIgnore}
-                          globalConfig={globalIgnore} // ✨ 传入全局配置，触发锁定逻辑
-                          onUpdate={updateProjectIgnore}
-                      />
+                      <FilterManager localConfig={projectIgnore} globalConfig={globalIgnore} onUpdate={updateProjectIgnore} />
                   </div>
               )}
           </div>
-
-          {/* Resize Handle */}
-          {isContextSidebarOpen && (
-            <div onMouseDown={startResizing} className="absolute top-0 right-0 bottom-0 w-1 cursor-col-resize hover:bg-primary/50 active:bg-primary transition-colors z-20" />
-          )}
+          {isContextSidebarOpen && <div onMouseDown={startResizing} className="absolute top-0 right-0 bottom-0 w-1 cursor-col-resize hover:bg-primary/50 active:bg-primary transition-colors z-20" />}
         </div>
 
-        {/* Right Content: Dashboard */}
+        {/* Right Content */}
         <div className="flex-1 bg-background min-w-0 flex flex-col relative">
             <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] [mask-image:linear-gradient(to_bottom,transparent,black)] pointer-events-none" />
             
-            <TokenDashboard 
-              stats={stats}
-              onCopy={handleCopyContext}
-              onSave={handleSaveToFile}
-              isGenerating={isGenerating}
-            />
-        </div>
+            {/* ✨ 视图切换开关 (Segmented Control) */}
+            <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+               <div className="bg-secondary/80 backdrop-blur-md border border-border p-1 rounded-xl flex items-center shadow-sm">
+                  <ViewToggleBtn 
+                    active={rightViewMode === 'dashboard'} 
+                    onClick={() => setRightViewMode('dashboard')}
+                    icon={<LayoutDashboard size={14} />} 
+                    label="Dashboard" 
+                  />
+                  <ViewToggleBtn 
+                    active={rightViewMode === 'preview'} 
+                    onClick={() => setRightViewMode('preview')}
+                    icon={<FileText size={14} />} 
+                    label="Preview" 
+                  />
+               </div>
+            </div>
 
+            {/* 内容区域 */}
+            <div className="flex-1 overflow-hidden pt-16"> {/* pt-16 为顶部开关留出空间 */}
+                {rightViewMode === 'dashboard' ? (
+                   <TokenDashboard 
+                     stats={stats}
+                     onCopy={handleCopyContext}
+                     onSave={handleSaveToFile}
+                     isGenerating={isGenerating}
+                   />
+                ) : (
+                   <ContextPreview fileTree={fileTree} />
+                )}
+            </div>
+        </div>
       </div>
 
-      {/* Toast Notification */}
-      <div className={cn(
-        "fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-out pointer-events-none", 
-        showToast ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-      )}>
+      {/* Toast */}
+      <div className={cn("fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-out pointer-events-none", showToast ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0")}>
         <div className="bg-foreground/90 text-background px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-3 text-sm font-medium backdrop-blur-md border border-white/10">
           <CheckCircle2 size={18} className="text-green-400" />
-          <div className="flex flex-col">
-            <span>{toastMessage}</span>
-          </div>
+          <span>{toastMessage}</span>
         </div>
       </div>
-
     </div>
+  );
+}
+
+// ✨ 子组件：切换按钮
+function ViewToggleBtn({ active, onClick, icon, label }: any) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-all duration-200",
+        active 
+          ? "bg-background text-foreground shadow-sm ring-1 ring-black/5 dark:ring-white/10" 
+          : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+      )}
+    >
+      {icon}
+      <span>{label}</span>
+    </button>
   );
 }
