@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Copy, Edit3, Trash2, Star, Hash, Terminal, Folder, FileCode } from 'lucide-react';
+import { Copy, Edit3, Trash2, Star, Hash, Terminal } from 'lucide-react';
 import { Prompt } from '@/types/prompt';
 import { cn } from '@/lib/utils';
 import { usePromptStore } from '@/store/usePromptStore';
@@ -7,20 +7,19 @@ import { usePromptStore } from '@/store/usePromptStore';
 interface PromptCardProps {
   prompt: Prompt;
   onEdit: (prompt: Prompt) => void;
-  onTrigger: (prompt: Prompt) => void; // 核心：触发智能填充或直接复制
+  onDelete: (prompt: Prompt) => void; // ✨ 新增：删除回调
+  onTrigger: (prompt: Prompt) => void;
 }
 
-export function PromptCard({ prompt, onEdit, onTrigger }: PromptCardProps) {
-  const { deletePrompt, toggleFavorite } = usePromptStore();
+export function PromptCard({ prompt, onEdit, onDelete, onTrigger }: PromptCardProps) {
+  const { toggleFavorite } = usePromptStore(); // 这里不再需要 deletePrompt
   const [isHovered, setIsHovered] = useState(false);
 
-  // 处理点击卡片或复制按钮
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onTrigger(prompt);
   };
 
-  // 根据分类名称返回不同颜色/图标
   const getGroupStyle = (group: string) => {
     switch (group) {
       case 'Git': return 'bg-orange-500/10 text-orange-500';
@@ -53,7 +52,6 @@ export function PromptCard({ prompt, onEdit, onTrigger }: PromptCardProps) {
             </h3>
         </div>
         
-        {/* 收藏按钮 */}
         <button 
           onClick={(e) => { e.stopPropagation(); toggleFavorite(prompt.id); }}
           className={cn(
@@ -65,30 +63,28 @@ export function PromptCard({ prompt, onEdit, onTrigger }: PromptCardProps) {
         </button>
       </div>
 
-      {/* Body: Content Preview */}
+      {/* Body */}
       <div className="px-4 flex-1 overflow-hidden relative">
         <code className="text-xs text-muted-foreground/80 font-mono break-all whitespace-pre-wrap leading-relaxed">
             {prompt.content.slice(0, 150)}
             {prompt.content.length > 150 && "..."}
         </code>
-        
-        {/* 底部渐变遮罩 */}
         <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card to-transparent pointer-events-none" />
       </div>
 
-      {/* Footer: Meta info & Actions */}
+      {/* Footer */}
       <div className="px-4 py-3 border-t border-border/50 bg-secondary/20 flex items-center justify-between text-xs text-muted-foreground shrink-0">
         <span className="flex items-center gap-1 opacity-70">
             <Hash size={12} /> {prompt.group}
         </span>
 
-        {/* Actions Area - Hover Only */}
         <div className={cn(
             "flex items-center gap-1 transition-all duration-200 translate-y-8 opacity-0",
             isHovered && "translate-y-0 opacity-100"
         )}>
            <ActionButton icon={<Edit3 size={14} />} onClick={() => onEdit(prompt)} title="编辑" />
-           <ActionButton icon={<Trash2 size={14} />} onClick={() => deletePrompt(prompt.id)} title="删除" danger />
+           {/* ✨ 这里改为调用 onDelete 回调 */}
+           <ActionButton icon={<Trash2 size={14} />} onClick={() => onDelete(prompt)} title="删除" danger />
            <div className="w-px h-3 bg-border mx-1" />
            <button 
              className="flex items-center gap-1 bg-primary/90 hover:bg-primary text-primary-foreground px-2 py-1 rounded text-xs font-medium transition-colors active:scale-95"
@@ -102,7 +98,6 @@ export function PromptCard({ prompt, onEdit, onTrigger }: PromptCardProps) {
   );
 }
 
-// 辅助小组件：图标按钮
 function ActionButton({ icon, onClick, title, danger }: any) {
     return (
         <button 
