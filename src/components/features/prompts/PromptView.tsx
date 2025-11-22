@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { usePromptStore } from '@/store/usePromptStore';
+import { useAppStore } from '@/store/useAppStore'; // ✨ 引入 AppStore
 import { Search, Plus, Folder, Star, Hash, Trash2, Layers, CheckCircle2, PanelLeft, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Prompt } from '@/types/prompt';
@@ -14,11 +15,13 @@ export function PromptView() {
   const { 
     groups, activeGroup, setActiveGroup, 
     prompts, searchQuery, setSearchQuery, 
-    deleteGroup, deletePrompt // 引入 deletePrompt
+    deleteGroup, deletePrompt 
   } = usePromptStore();
 
+  // ✨ 从 AppStore 获取侧栏状态和修改方法
+  const { isPromptSidebarOpen, setPromptSidebarOpen } = useAppStore();
+
   const [showToast, setShowToast] = useState(false);
-  const [isInnerSidebarOpen, setIsInnerSidebarOpen] = useState(true);
 
   // CRUD States
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -29,7 +32,7 @@ export function PromptView() {
   const [fillPrompt, setFillPrompt] = useState<Prompt | null>(null);
   const [fillVars, setFillVars] = useState<string[]>([]);
 
-  // ✨ Delete Confirmation States (新增)
+  // Delete Confirmation States
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [promptToDelete, setPromptToDelete] = useState<Prompt | null>(null);
 
@@ -48,13 +51,11 @@ export function PromptView() {
     setIsEditorOpen(true);
   };
 
-  // ✨ 新增：点击删除按钮，只打开弹窗，不删数据
   const handleDeleteClick = (prompt: Prompt) => {
     setPromptToDelete(prompt);
     setIsDeleteConfirmOpen(true);
   };
 
-  // ✨ 新增：确认删除逻辑
   const confirmDelete = () => {
     if (promptToDelete) {
       deletePrompt(promptToDelete.id);
@@ -91,7 +92,8 @@ export function PromptView() {
       <aside 
         className={cn(
           "flex flex-col bg-secondary/5 select-none transition-all duration-300 ease-in-out overflow-hidden",
-          isInnerSidebarOpen ? "w-52 border-r border-border opacity-100" : "w-0 border-none opacity-0"
+          // ✨ 这里直接使用 Store 里的状态
+          isPromptSidebarOpen ? "w-52 border-r border-border opacity-100" : "w-0 border-none opacity-0"
         )}
       >
         <div className="p-4 pb-2 min-w-[13rem]">
@@ -148,12 +150,13 @@ export function PromptView() {
         
         <header className="h-14 border-b border-border flex items-center gap-3 px-4 shrink-0 bg-background/80 backdrop-blur z-10">
           <button 
-            onClick={() => setIsInnerSidebarOpen(!isInnerSidebarOpen)}
+            // ✨ 这里调用 Store 的 action
+            onClick={() => setPromptSidebarOpen(!isPromptSidebarOpen)}
             className={cn(
               "p-2 rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors",
-              !isInnerSidebarOpen && "text-primary bg-primary/10"
+              !isPromptSidebarOpen && "text-primary bg-primary/10"
             )}
-            title={isInnerSidebarOpen ? "收起侧栏" : "展开侧栏"}
+            title={isPromptSidebarOpen ? "收起侧栏" : "展开侧栏"}
           >
             <PanelLeft size={18} />
           </button>
@@ -188,7 +191,6 @@ export function PromptView() {
                         key={prompt.id} 
                         prompt={prompt} 
                         onEdit={handleEdit} 
-                        // ✨ 这里传入删除处理函数
                         onDelete={handleDeleteClick}
                         onTrigger={handleTrigger} 
                     />
@@ -207,13 +209,11 @@ export function PromptView() {
         </div>
 
         {/* --- Modals --- */}
-        
         <PromptEditorDialog 
             isOpen={isEditorOpen} 
             onClose={() => setIsEditorOpen(false)} 
             initialData={editingPrompt} 
         />
-        
         <VariableFillerDialog 
             isOpen={isFillerOpen}
             onClose={() => setIsFillerOpen(false)}
@@ -222,7 +222,6 @@ export function PromptView() {
             onSuccess={triggerToast}
         />
 
-        {/* ✨ 新增：删除确认弹窗 */}
         {isDeleteConfirmOpen && promptToDelete && (
           <div className="fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-200">
             <div className="w-[400px] bg-background border border-border rounded-xl shadow-2xl p-6 animate-in zoom-in-95 duration-200">
