@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { fileStorage } from '@/lib/storage';
-import { IgnoreConfig, DEFAULT_IGNORE_CONFIG, FileNode } from '@/types/context';
+import { IgnoreConfig, DEFAULT_PROJECT_IGNORE, FileNode } from '@/types/context';
 
 // --- 辅助函数：递归处理勾选逻辑 ---
 
@@ -46,7 +46,8 @@ const updateNodeState = (nodes: FileNode[], targetId: string, isSelected: boolea
 
 interface ContextState {
   // --- 持久化设置 ---
-  ignoreConfig: IgnoreConfig;
+  // ✨ 改名：这里只存项目特有的配置，不再包含默认值
+  projectIgnore: IgnoreConfig;
   
   // --- 运行时状态 (不持久化) ---
   projectRoot: string | null;
@@ -58,10 +59,9 @@ interface ContextState {
   setFileTree: (tree: FileNode[]) => void;
   setIsScanning: (status: boolean) => void;
   
-  // 黑名单管理
-  addIgnoreItem: (type: keyof IgnoreConfig, value: string) => void;
-  removeIgnoreItem: (type: keyof IgnoreConfig, value: string) => void;
-  resetIgnoreConfig: () => void;
+  // ✨ 新增：修改项目配置
+  updateProjectIgnore: (type: keyof IgnoreConfig, action: 'add' | 'remove', value: string) => void;
+  resetProjectIgnore: () => void;
 
   // 树操作
   toggleSelect: (nodeId: string, checked: boolean) => void;
@@ -71,7 +71,7 @@ export const useContextStore = create<ContextState>()(
   persist(
     (set) => ({
       // 初始状态
-      ignoreConfig: DEFAULT_IGNORE_CONFIG,
+      projectIgnore: DEFAULT_PROJECT_IGNORE,
       projectRoot: null,
       fileTree: [],
       isScanning: false,
@@ -81,22 +81,23 @@ export const useContextStore = create<ContextState>()(
       setFileTree: (tree) => set({ fileTree: tree }),
       setIsScanning: (status) => set({ isScanning: status }),
 
-      // 黑名单操作
-      addIgnoreItem: (type, value) => set((state) => ({
-        ignoreConfig: {
-          ...state.ignoreConfig,
-          [type]: [...state.ignoreConfig[type], value]
+      // ✨ 黑名单操作 (项目级)
+      updateProjectIgnore: (type, action, value) => set((state) => {
+        const currentList = state.projectIgnore[type];
+        let newList = currentList;
+        
+        if (action === 'add' && !currentList.includes(value)) {
+          newList = [...currentList, value];
+        } else if (action === 'remove') {
+          newList = currentList.filter(item => item !== value);
         }
-      })),
-
-      removeIgnoreItem: (type, value) => set((state) => ({
-        ignoreConfig: {
-          ...state.ignoreConfig,
-          [type]: state.ignoreConfig[type].filter(item => item !== value)
-        }
-      })),
+        
+        return {
+          projectIgnore: { ...state.projectIgnore, [type]: newList }
+        };
+      }),
       
-      resetIgnoreConfig: () => set({ ignoreConfig: DEFAULT_IGNORE_CONFIG }),
+      resetProjectIgnore: () => set({ projectIgnore: DEFAULT_PROJECT_IGNORE }),
 
       // 核心：递归勾选
       toggleSelect: (nodeId, checked) => set((state) => ({
@@ -106,9 +107,9 @@ export const useContextStore = create<ContextState>()(
     {
       name: 'context-config', // 对应 context-config.json
       storage: createJSONStorage(() => fileStorage),
-      // 过滤：只持久化 ignoreConfig，其他状态重启后重置
+      // 过滤：只持久化 projectIgnore
       partialize: (state) => ({
-        ignoreConfig: state.ignoreConfig
+        projectIgnore: state.projectIgnore
       }),
     }
   )
