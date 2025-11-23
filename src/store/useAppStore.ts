@@ -46,8 +46,12 @@ export const DEFAULT_MODELS: AIModelConfig[] = [
   }
 ];
 
-// ✨ 修正后的真实 Raw 链接
-const REMOTE_CONFIG_URL = 'https://raw.githubusercontent.com/WinriseF/Code-Forge-AI/main/models/models.json'; 
+// ✨ 修改：配置 URL 列表 (CDN 优先 + GitHub 原站)
+const REMOTE_CONFIG_URLS = [
+  'https://gitee.com/winriseF/models/raw/master/models/models.json',
+  'https://cdn.jsdelivr.net/gh/WinriseF/Code-Forge-AI@main/models/models.json', // 方案一：jsDelivr CDN (国内快)
+  'https://raw.githubusercontent.com/WinriseF/Code-Forge-AI/main/models/models.json' // 方案二：GitHub 原站 (备用)
+];
 
 // --- 3. Store 接口 ---
 interface AppState {
@@ -128,26 +132,37 @@ export const useAppStore = create<AppState>()(
         return { globalIgnore: { ...state.globalIgnore, [type]: newList } };
       }),
 
-      // ✨ 核心：从云端同步模型
+      // ✨ 核心升级：并发请求多个源，谁快用谁
       syncModels: async () => {
-        try {
-          console.log('[AppStore] Fetching models from:', REMOTE_CONFIG_URL);
-          const response = await fetch<AIModelConfig[]>(REMOTE_CONFIG_URL, {
+        console.log('[AppStore] Starting model sync...');
+        
+        // 定义单个请求的逻辑
+        const fetchUrl = async (url: string) => {
+          console.log(`[Sync] Trying: ${url}`);
+          const response = await fetch<AIModelConfig[]>(url, {
             method: 'GET',
-            timeout: 15,
+            timeout: 10, // 10秒超时
           });
 
           if (response.ok && Array.isArray(response.data) && response.data.length > 0) {
-            set({ 
-              models: response.data, 
-              lastUpdated: Date.now() 
-            });
-            console.log(`[AppStore] Models synced successfully: ${response.data.length} models found.`);
-          } else {
-            console.warn('[AppStore] Fetch response invalid:', response.status);
+            return response.data;
           }
+          throw new Error(`Invalid response from ${url}`);
+        };
+
+        try {
+          // Promise.any 会等待第一个成功的 Promise，如果全部失败则抛出 AggregateError
+          // 这实现了“赛跑”机制，CDN 通常会胜出
+          const data = await Promise.any(REMOTE_CONFIG_URLS.map(url => fetchUrl(url)));
+
+          set({ 
+            models: data, 
+            lastUpdated: Date.now() 
+          });
+          console.log(`[AppStore] Models synced successfully! Count: ${data.length}`);
+          
         } catch (err) {
-          console.warn('[AppStore] Failed to sync models, keeping local cache.', err);
+          console.warn('[AppStore] All sync sources failed. Keeping local cache.', err);
         }
       },
 
