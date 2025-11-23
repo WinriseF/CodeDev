@@ -1,10 +1,10 @@
 [
   {
-    "id": "gemini-3-pro",
-    "name": "Gemini 3 Pro",
+    "id": "gemini-3-pro-preview",
+    "name": "Gemini 3 Pro (Preview)",
     "provider": "Google",
-    "contextLimit": 2097152,
-    "inputPricePerMillion": 2.50,
+    "contextLimit": 1000000,
+    "inputPricePerMillion": 2.00,
     "color": "bg-blue-600"
   },
   {
