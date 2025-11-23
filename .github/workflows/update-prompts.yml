@@ -1,18 +1,13 @@
 name: Update Prompt Library
 
-# 触发条件
 on:
-  # 1. 自动：每周一北京时间早上 8:00 (UTC 0:00) 运行
   schedule:
     - cron: '0 0 * * 1'
-  # 2. 手动：允许你在网页上点按钮立即运行
   workflow_dispatch:
-  # 3. 推送：当你修改了脚本时自动测试一次 (可选，不需要可以删掉)
   push:
     paths:
       - 'build/build_tldr.py'
 
-# 权限：允许 Action 修改你的仓库代码 (为了把生成的 json 传回来)
 permissions:
   contents: write
 
@@ -21,13 +16,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 拉取你的代码
+      # 1. 拉取 GitHub 代码 (此时包含 src, models, build 等所有代码)
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           ref: main
 
-      # 2. 拉取 tldr 官方数据 (挂载到 build/tldr)
+      # 2. 拉取 tldr 数据
       - name: Checkout Official Data
         uses: actions/checkout@v4
         with:
@@ -38,30 +33,86 @@ jobs:
             pages.zh
           fetch-depth: 1
 
-      # 3. 准备 Python
+      # 3. 设置 Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
-      # 4. 运行你的脚本
+      # 4. 运行脚本 (生成数据到 build/dist)
       - name: Run ETL Script
         run: python build/build_tldr.py
 
-      # 5. 提交生成的 JSON 到 main 分支
-      - name: Commit and Push
+      # 5. 提交生成的 JSON 到 GitHub (这一步保持不变，GitHub 依然保留完整代码)
+      - name: Commit and Push to GitHub
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
-          # 强制添加 build/dist 目录 (不管 gitignore 怎么写)
+          # 确保 build/dist 被添加到 git (即便是被忽略的)
           git add -f build/dist
           
-          # 只有当文件有变化时才提交
           if git diff --staged --quiet; then
-            echo "✅ 数据没有变化，无需提交。"
+            echo "✅ GitHub: 数据没有变化。"
           else
             git commit -m "chore(data): auto-update tldr prompts [skip ci]"
             git push origin main
-            echo "🚀 数据已推送到 main 分支！"
+            echo "🚀 GitHub: 数据已推送到 main 分支！"
+          fi
+
+      # ----------------------------------------------------------------
+      # 6. ✨ 核心修改：纯净同步 build 和 models 到 Gitee
+      # ----------------------------------------------------------------
+      - name: Sync Only build & models to Gitee
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          if [ -z "$GITEE_TOKEN" ]; then
+            echo "❌ Error: GITEE_TOKEN is not set."
+            exit 1
+          fi
+
+          echo "📥 Cloning Gitee repo..."
+          git clone https://oauth2:${GITEE_TOKEN}@gitee.com/winriseF/models.git gitee_workspace
+
+          # --- A. 清理 Gitee 目录 (实现“只有这两个文件夹”) ---
+          echo "🧹 Cleaning Gitee workspace..."
+          cd gitee_workspace
+          # 删除当前目录下除了 .git 目录以外的所有文件和文件夹
+          # find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
+          # 上面命令比较复杂，用 git rm 更简单暴力（删除所有被 git 追踪的文件）
+          git rm -rf . --ignore-unmatch
+          # 清理可能残留的未追踪文件
+          git clean -fdx
+          cd ..
+
+          # --- B. 复制指定文件夹 ---
+          echo "Dg Copying specific folders..."
+          
+          # 1. 复制 build (包含脚本和生成的 dist)
+          # 确保目标目录结构存在
+          mkdir -p gitee_workspace/build
+          # 复制 build 下的所有内容
+          cp -r build/* gitee_workspace/build/
+          
+          # 2. 复制 models (你的 json 配置)
+          mkdir -p gitee_workspace/models
+          cp -r models/* gitee_workspace/models/
+          
+          # --- C. 提交并推送 ---
+          cd gitee_workspace
+          
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          # 添加所有变更 (包括删除的文件和新复制的文件)
+          git add .
+
+          if git diff --staged --quiet; then
+            echo "✅ Gitee: 内容与 GitHub 完全一致，无需推送。"
+          else
+            echo "📦 Pushing clean state to Gitee..."
+            git commit -m "chore(sync): sync build and models only [skip ci]"
+            git push https://oauth2:${GITEE_TOKEN}@gitee.com/winriseF/models.git master
+            echo "🚀 Gitee: 同步成功！现在 Gitee 上只有 build 和 models。"
           fi
