@@ -3908,7 +3908,7 @@
   {
     "id": "tldr-zh-linux-beep-3",
     "title": "beep - 将每个新的频率和持续时间作为单独的哔哔声播放",
-    "content": "beep -f {{频率}} -l {{持续时间}} -n -f {{频率}} -l {{持续时间}}",
+    "content": "beep -f {{频率}} -l {{持续时间}} {{[-n|--new]}} -f {{频率}} -l {{持续时间}}",
     "group": "Linux 运维",
     "description": "beep: 让电脑扬声器发出哔哔声的实用程序。 (将每个新的频率和持续时间作为单独的哔哔声播放)",
     "tags": [
@@ -3922,7 +3922,7 @@
   {
     "id": "tldr-zh-linux-beep-4",
     "title": "beep - 播放 C 大调",
-    "content": "beep -f {{262}} -n -f {{294}} -n -f {{330}} -n -f {{349}} -n -f {{392}} -n -f {{440}} -n -f {{494}} -n -f {{523}}",
+    "content": "beep -f {{262}} {{[-n|--new]}} -f {{294}} {{[-n|--new]}} -f {{330}} {{[-n|--new]}} -f {{349}} {{[-n|--new]}} -f {{392}} {{[-n|--new]}} -f {{440}} {{[-n|--new]}} -f {{494}} {{[-n|--new]}} -f {{523}}",
     "group": "Linux 运维",
     "description": "beep: 让电脑扬声器发出哔哔声的实用程序。 (播放 C 大调)",
     "tags": [

@@ -6766,7 +6766,7 @@
     "title": "valet - Start the valet daemon",
     "content": "valet start",
     "group": "macOS",
-    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on `http://example.test`. (Start the valet daemon)",
+    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on . (Start the valet daemon)",
     "tags": [
       "osx",
       "valet",
@@ -6780,7 +6780,7 @@
     "title": "valet - Register the current working directory as a path that Valet should search for sites",
     "content": "valet park",
     "group": "macOS",
-    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on `http://example.test`. (Register the current working directory as a path that Valet should search for sites)",
+    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on . (Register the current working directory as a path that Valet should search for sites)",
     "tags": [
       "osx",
       "valet",
@@ -6794,7 +6794,7 @@
     "title": "valet - View \"parked\" paths",
     "content": "valet paths",
     "group": "macOS",
-    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on `http://example.test`. (View \"parked\" paths)",
+    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on . (View \"parked\" paths)",
     "tags": [
       "osx",
       "valet",
@@ -6808,7 +6808,7 @@
     "title": "valet - Serve a single site instead of an entire directory",
     "content": "valet link {{application_name}}",
     "group": "macOS",
-    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on `http://example.test`. (Serve a single site instead of an entire directory)",
+    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on . (Serve a single site instead of an entire directory)",
     "tags": [
       "osx",
       "valet",
@@ -6822,7 +6822,7 @@
     "title": "valet - Share a project via an Ngrok tunnel",
     "content": "valet share",
     "group": "macOS",
-    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on `http://example.test`. (Share a project via an Ngrok tunnel)",
+    "description": "valet: A Laravel development environment that allows hosting sites via local tunnels on . (Share a project via an Ngrok tunnel)",
     "tags": [
       "osx",
       "valet",
@@ -7772,7 +7772,7 @@
   {
     "id": "tldr-en-osx-wacaw-1",
     "title": "wacaw - Record a video",
-    "content": "wacaw --video {{filename}} --duration {{10}}",
+    "content": "wacaw --video {{filename}} {{[-D|--duration]}} {{10}}",
     "group": "macOS",
     "description": "wacaw: Capture both still pictures and video from an attached camera. (Record a video)",
     "tags": [
@@ -7786,7 +7786,7 @@
   {
     "id": "tldr-en-osx-wacaw-2",
     "title": "wacaw - Take a picture with custom resolution",
-    "content": "wacaw --width {{width}} --height {{100}} {{filename}}",
+    "content": "wacaw {{[-x|--width]}} {{width}} {{[-y|--height]}} {{100}} {{filename}}",
     "group": "macOS",
     "description": "wacaw: Capture both still pictures and video from an attached camera. (Take a picture with custom resolution)",
     "tags": [
@@ -7814,7 +7814,7 @@
   {
     "id": "tldr-en-osx-wacaw-4",
     "title": "wacaw - List the devices available",
-    "content": "wacaw --list-devices",
+    "content": "wacaw {{[-L|--list-devices]}}",
     "group": "macOS",
     "description": "wacaw: Capture both still pictures and video from an attached camera. (List the devices available)",
     "tags": [
@@ -8934,7 +8934,7 @@
   {
     "id": "tldr-en-osx-mate-2",
     "title": "mate - Specify the filetype of a file",
-    "content": "mate --type {{filetype}} {{path/to/file}}",
+    "content": "mate {{[-t|--type]}} {{filetype}} {{path/to/file}}",
     "group": "macOS",
     "description": "mate: General-purpose text editor for macOS. (Specify the filetype of a file)",
     "tags": [
@@ -8948,7 +8948,7 @@
   {
     "id": "tldr-en-osx-mate-3",
     "title": "mate - Open and wait until finished editing a specific file",
-    "content": "mate --wait {{path/to/file}}",
+    "content": "mate {{[-w|--wait]}} {{path/to/file}}",
     "group": "macOS",
     "description": "mate: General-purpose text editor for macOS. (Open and wait until finished editing a specific file)",
     "tags": [
@@ -8962,7 +8962,7 @@
   {
     "id": "tldr-en-osx-mate-4",
     "title": "mate - Open a file with the cursor at a specific line and column",
-    "content": "mate --line {{line_number}}:{{column_number}} {{path/to/file}}",
+    "content": "mate {{[-l|--line]}} {{line_number}}:{{column_number}} {{path/to/file}}",
     "group": "macOS",
     "description": "mate: General-purpose text editor for macOS. (Open a file with the cursor at a specific line and column)",
     "tags": [

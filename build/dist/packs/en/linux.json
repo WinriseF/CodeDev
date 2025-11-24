@@ -672,20 +672,6 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-archinstall-1",
-    "title": "archinstall - Start a preset installer",
-    "content": "archinstall {{minimal|unattended}}",
-    "group": "Linux Ops",
-    "description": "archinstall: Guided Arch Linux installer with a twist. (Start a preset installer)",
-    "tags": [
-      "linux",
-      "archinstall",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
     "id": "tldr-en-linux-flatpak-update-0",
     "title": "flatpak-update - Update all installed applications and runtimes (use `-y` to confirm all prompts automatically)",
     "content": "flatpak update",
@@ -70926,7 +70912,7 @@
   {
     "id": "tldr-en-linux-lsinitrd-1",
     "title": "lsinitrd - Show the contents of the initramfs image for the specified kernel",
-    "content": "lsinitrd --kver {{kernel_version}}",
+    "content": "lsinitrd {{[-k|--kver]}} {{kernel_version}}",
     "group": "Linux Ops",
     "description": "lsinitrd: Show the contents of an initramfs image. (Show the contents of the initramfs image for the specified kernel)",
     "tags": [
@@ -70954,7 +70940,7 @@
   {
     "id": "tldr-en-linux-lsinitrd-3",
     "title": "lsinitrd - List modules included in the initramfs image",
-    "content": "lsinitrd --mod",
+    "content": "lsinitrd {{[-m|--mod]}}",
     "group": "Linux Ops",
     "description": "lsinitrd: Show the contents of an initramfs image. (List modules included in the initramfs image)",
     "tags": [
