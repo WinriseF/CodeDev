@@ -1,6 +1,7 @@
 [
   {
     "id": "tldr-zh-android-dumpsys-0",
+    "type": "command",
     "title": "dumpsys - 获取所有系统服务的诊断输出",
     "content": "dumpsys",
     "group": "Android 开发",
@@ -15,6 +16,7 @@
   },
   {
     "id": "tldr-zh-android-dumpsys-1",
+    "type": "command",
     "title": "dumpsys - 获取指定系统服务的诊断输出",
     "content": "dumpsys {{服务}}",
     "group": "Android 开发",
@@ -29,6 +31,7 @@
   },
   {
     "id": "tldr-zh-android-dumpsys-2",
+    "type": "command",
     "title": "dumpsys - 列出 `dumpsys` 可以提供的所有服务信息",
     "content": "dumpsys -l",
     "group": "Android 开发",
@@ -43,6 +46,7 @@
   },
   {
     "id": "tldr-zh-android-dumpsys-3",
+    "type": "command",
     "title": "dumpsys - 列出服务的指定服务参数",
     "content": "dumpsys {{服务}} -h",
     "group": "Android 开发",
@@ -57,6 +61,7 @@
   },
   {
     "id": "tldr-zh-android-dumpsys-4",
+    "type": "command",
     "title": "dumpsys - 从诊断输出中排除指定服务",
     "content": "dumpsys --skip {{服务}}",
     "group": "Android 开发",
@@ -71,6 +76,7 @@
   },
   {
     "id": "tldr-zh-android-dumpsys-5",
+    "type": "command",
     "title": "dumpsys - 指定超时时间，以秒为单位（默认为 10s）",
     "content": "dumpsys -t {{秒数}}",
     "group": "Android 开发",
@@ -85,6 +91,7 @@
   },
   {
     "id": "tldr-zh-android-am-0",
+    "type": "command",
     "title": "am - 启动一个指定的活动",
     "content": "am start -n {{com.android.settings/.Settings}}",
     "group": "Android 开发",
@@ -99,6 +106,7 @@
   },
   {
     "id": "tldr-zh-android-am-1",
+    "type": "command",
     "title": "am - 启动一个活动并将数据传递给它",
     "content": "am start -a {{android.intent.action.VIEW}} -d {{tel:123}}",
     "group": "Android 开发",
@@ -113,6 +121,7 @@
   },
   {
     "id": "tldr-zh-android-am-2",
+    "type": "command",
     "title": "am - 启动与特定操作和类别匹配的活动",
     "content": "am start -a {{android.intent.action.MAIN}} -c {{android.intent.category.HOME}}",
     "group": "Android 开发",
@@ -127,6 +136,7 @@
   },
   {
     "id": "tldr-zh-android-am-3",
+    "type": "command",
     "title": "am - 将意图转换为 URI",
     "content": "am to-uri -a {{android.intent.action.VIEW}} -d {{tel:123}}",
     "group": "Android 开发",
@@ -141,6 +151,7 @@
   },
   {
     "id": "tldr-zh-android-wm-0",
+    "type": "command",
     "title": "wm - 显示 Android 设备屏幕的物理尺寸",
     "content": "wm size",
     "group": "Android 开发",
@@ -155,6 +166,7 @@
   },
   {
     "id": "tldr-zh-android-wm-1",
+    "type": "command",
     "title": "wm - 显示 Android 设备屏幕的物理密度",
     "content": "wm density",
     "group": "Android 开发",
@@ -169,6 +181,7 @@
   },
   {
     "id": "tldr-zh-android-screencap-0",
+    "type": "command",
     "title": "screencap - 捕获屏幕截图",
     "content": "screencap {{路径/到/文件}}",
     "group": "Android 开发",
@@ -183,6 +196,7 @@
   },
   {
     "id": "tldr-zh-android-getprop-0",
+    "type": "command",
     "title": "getprop - 显示关于 Android 系统属性的信息",
     "content": "getprop",
     "group": "Android 开发",
@@ -197,6 +211,7 @@
   },
   {
     "id": "tldr-zh-android-getprop-1",
+    "type": "command",
     "title": "getprop - 显示关于指定属性的信息",
     "content": "getprop {{prop}}",
     "group": "Android 开发",
@@ -211,6 +226,7 @@
   },
   {
     "id": "tldr-zh-android-getprop-2",
+    "type": "command",
     "title": "getprop - 显示 SDK API 级别",
     "content": "getprop {{ro.build.version.sdk}}",
     "group": "Android 开发",
@@ -225,6 +241,7 @@
   },
   {
     "id": "tldr-zh-android-getprop-3",
+    "type": "command",
     "title": "getprop - 显示 Android 版本",
     "content": "getprop {{ro.build.version.release}}",
     "group": "Android 开发",
@@ -239,6 +256,7 @@
   },
   {
     "id": "tldr-zh-android-getprop-4",
+    "type": "command",
     "title": "getprop - 显示 Android 设备型号",
     "content": "getprop {{ro.vendor.product.model}}",
     "group": "Android 开发",
@@ -253,6 +271,7 @@
   },
   {
     "id": "tldr-zh-android-getprop-5",
+    "type": "command",
     "title": "getprop - 显示 OEM 解锁状态",
     "content": "getprop {{ro.oem_unlock_supported}}",
     "group": "Android 开发",
@@ -267,6 +286,7 @@
   },
   {
     "id": "tldr-zh-android-getprop-6",
+    "type": "command",
     "title": "getprop - 显示 Android WiFi 卡的 MAC 地址",
     "content": "getprop {{ro.boot.wifimacaddr}}",
     "group": "Android 开发",
@@ -281,6 +301,7 @@
   },
   {
     "id": "tldr-zh-android-bugreportz-0",
+    "type": "command",
     "title": "bugreportz - 生成一个完整的 Android 设备压缩错误报告",
     "content": "bugreportz",
     "group": "Android 开发",
@@ -295,6 +316,7 @@
   },
   {
     "id": "tldr-zh-android-bugreportz-1",
+    "type": "command",
     "title": "bugreportz - 显示正在运行的 `bugreportz` 操作的进度",
     "content": "bugreportz -p",
     "group": "Android 开发",
@@ -309,6 +331,7 @@
   },
   {
     "id": "tldr-zh-android-bugreportz-2",
+    "type": "command",
     "title": "bugreportz - 将 Android 错误报告的内容写入 `stdout`",
     "content": "bugreportz -s",
     "group": "Android 开发",
@@ -323,6 +346,7 @@
   },
   {
     "id": "tldr-zh-android-bugreportz-3",
+    "type": "command",
     "title": "bugreportz - 显示帮助",
     "content": "bugreportz -h",
     "group": "Android 开发",
@@ -337,6 +361,7 @@
   },
   {
     "id": "tldr-zh-android-bugreportz-4",
+    "type": "command",
     "title": "bugreportz - 显示版本",
     "content": "bugreportz -v",
     "group": "Android 开发",
@@ -351,6 +376,7 @@
   },
   {
     "id": "tldr-zh-android-logcat-0",
+    "type": "command",
     "title": "logcat - 显示系统日志",
     "content": "logcat",
     "group": "Android 开发",
@@ -365,6 +391,7 @@
   },
   {
     "id": "tldr-zh-android-logcat-1",
+    "type": "command",
     "title": "logcat - 将系统日志写入文件（[f]ile）",
     "content": "logcat -f {{路径/到/文件}}",
     "group": "Android 开发",
@@ -379,6 +406,7 @@
   },
   {
     "id": "tldr-zh-android-logcat-2",
+    "type": "command",
     "title": "logcat - 显示与正则表达式匹配的日志行",
     "content": "logcat --regex {{正则表达式}}",
     "group": "Android 开发",
@@ -393,6 +421,7 @@
   },
   {
     "id": "tldr-zh-android-logcat-3",
+    "type": "command",
     "title": "logcat - 显示特定 PID 的日志",
     "content": "logcat --pid {{pid}}",
     "group": "Android 开发",
@@ -407,6 +436,7 @@
   },
   {
     "id": "tldr-zh-android-logcat-4",
+    "type": "command",
     "title": "logcat - 显示特定包的进程日志",
     "content": "logcat --pid $(pidof -s {{包}})",
     "group": "Android 开发",
@@ -421,6 +451,7 @@
   },
   {
     "id": "tldr-zh-android-dalvikvm-0",
+    "type": "command",
     "title": "dalvikvm - 启动一个 Java 程序",
     "content": "dalvikvm -classpath {{path/to/file.jar}} {{classname}}",
     "group": "Android 开发",
@@ -435,6 +466,7 @@
   },
   {
     "id": "tldr-zh-android-pm-0",
+    "type": "command",
     "title": "pm - 打印所有已安装应用程序的列表",
     "content": "pm list packages",
     "group": "Android 开发",
@@ -449,6 +481,7 @@
   },
   {
     "id": "tldr-zh-android-pm-1",
+    "type": "command",
     "title": "pm - 打印所有已安装的系统应用程序的列表",
     "content": "pm list packages -s",
     "group": "Android 开发",
@@ -463,6 +496,7 @@
   },
   {
     "id": "tldr-zh-android-pm-2",
+    "type": "command",
     "title": "pm - 打印所有已安装的第三方应用程序的列表",
     "content": "pm list packages -3",
     "group": "Android 开发",
@@ -477,6 +511,7 @@
   },
   {
     "id": "tldr-zh-android-pm-3",
+    "type": "command",
     "title": "pm - 打印与指定关键字匹配的应用程序列表",
     "content": "pm list packages {{关键词}}",
     "group": "Android 开发",
@@ -491,6 +526,7 @@
   },
   {
     "id": "tldr-zh-android-pm-4",
+    "type": "command",
     "title": "pm - 打印指定应用的 APK 的路径",
     "content": "pm path {{应用名}}",
     "group": "Android 开发",
@@ -505,6 +541,7 @@
   },
   {
     "id": "tldr-zh-android-cmd-0",
+    "type": "command",
     "title": "cmd - 列出所有正在运行的服务",
     "content": "cmd -l",
     "group": "Android 开发",
@@ -519,6 +556,7 @@
   },
   {
     "id": "tldr-zh-android-cmd-1",
+    "type": "command",
     "title": "cmd - 调用指定服务",
     "content": "cmd {{alarm}}",
     "group": "Android 开发",
@@ -533,6 +571,7 @@
   },
   {
     "id": "tldr-zh-android-cmd-2",
+    "type": "command",
     "title": "cmd - 调用服务同时传递参数",
     "content": "cmd {{vibrator}} {{vibrate 300}}",
     "group": "Android 开发",
@@ -547,6 +586,7 @@
   },
   {
     "id": "tldr-zh-android-input-0",
+    "type": "command",
     "title": "input - 将单个字符的事件代码发送到 Android 设备",
     "content": "input keyevent {{event_code}}",
     "group": "Android 开发",
@@ -561,6 +601,7 @@
   },
   {
     "id": "tldr-zh-android-input-1",
+    "type": "command",
     "title": "input - 将文本发送到 Android 设备（`%s` 代表空格）",
     "content": "input text \"{{text}}\"",
     "group": "Android 开发",
@@ -575,6 +616,7 @@
   },
   {
     "id": "tldr-zh-android-input-2",
+    "type": "command",
     "title": "input - 将轻触发送到 Android 设备",
     "content": "input tap {{x_pos}} {{y_pos}}",
     "group": "Android 开发",
@@ -589,6 +631,7 @@
   },
   {
     "id": "tldr-zh-android-input-3",
+    "type": "command",
     "title": "input - 将滑动手势发送到 Android 设备",
     "content": "input swipe {{x_start}} {{y_start}} {{x_end}} {{y_end}} {{duration_in_ms}}",
     "group": "Android 开发",
@@ -603,6 +646,7 @@
   },
   {
     "id": "tldr-zh-android-input-4",
+    "type": "command",
     "title": "input - 使用滑动手势将长按发送到 Android 设备",
     "content": "input swipe {{x_pos}} {{y_pos}} {{x_pos}} {{y_pos}} {{duration_in_ms}}",
     "group": "Android 开发",
@@ -617,6 +661,7 @@
   },
   {
     "id": "tldr-zh-android-settings-0",
+    "type": "command",
     "title": "settings - 在 `全局` 命名空间中显示环境变量列表",
     "content": "settings list {{global}}",
     "group": "Android 开发",
@@ -631,6 +676,7 @@
   },
   {
     "id": "tldr-zh-android-settings-1",
+    "type": "command",
     "title": "settings - 获取指定环境变量的值",
     "content": "settings get {{global}} {{airplane_mode_on}}",
     "group": "Android 开发",
@@ -645,6 +691,7 @@
   },
   {
     "id": "tldr-zh-android-settings-2",
+    "type": "command",
     "title": "settings - 设置指定环境变量的值",
     "content": "settings put {{system}} {{screen_brightness}} {{42}}",
     "group": "Android 开发",
@@ -659,6 +706,7 @@
   },
   {
     "id": "tldr-zh-android-settings-3",
+    "type": "command",
     "title": "settings - 删除指定环境变量",
     "content": "settings delete {{secure}} {{screensaver_enabled}}",
     "group": "Android 开发",
@@ -673,6 +721,7 @@
   },
   {
     "id": "tldr-zh-android-bugreport-0",
+    "type": "command",
     "title": "bugreport - 显示 Android 设备的完整错误报告",
     "content": "bugreport",
     "group": "Android 开发",
@@ -687,6 +736,7 @@
   },
   {
     "id": "tldr-zh-android-pkg-0",
+    "type": "command",
     "title": "pkg - 升级所有已安装的包",
     "content": "pkg upgrade",
     "group": "Android 开发",
@@ -701,6 +751,7 @@
   },
   {
     "id": "tldr-zh-android-pkg-1",
+    "type": "command",
     "title": "pkg - 安装一个包",
     "content": "pkg install {{包名}}",
     "group": "Android 开发",
@@ -715,6 +766,7 @@
   },
   {
     "id": "tldr-zh-android-pkg-2",
+    "type": "command",
     "title": "pkg - 卸载一个包",
     "content": "pkg uninstall {{包名}}",
     "group": "Android 开发",
@@ -729,6 +781,7 @@
   },
   {
     "id": "tldr-zh-android-pkg-3",
+    "type": "command",
     "title": "pkg - 重新安装一个包",
     "content": "pkg reinstall {{包名}}",
     "group": "Android 开发",
@@ -743,6 +796,7 @@
   },
   {
     "id": "tldr-zh-android-pkg-4",
+    "type": "command",
     "title": "pkg - 搜索一个包",
     "content": "pkg search {{包名}}",
     "group": "Android 开发",

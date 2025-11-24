@@ -1,6 +1,7 @@
 [
   {
     "id": "tldr-en-openbsd-chpass-0",
+    "type": "command",
     "title": "chpass - Set a specific login shell for the current user interactively",
     "content": "doas chpass",
     "group": "Openbsd",
@@ -15,6 +16,7 @@
   },
   {
     "id": "tldr-en-openbsd-chpass-1",
+    "type": "command",
     "title": "chpass - Set a specific login [s]hell for the current user",
     "content": "doas chpass -s {{path/to/shell}}",
     "group": "Openbsd",
@@ -29,6 +31,7 @@
   },
   {
     "id": "tldr-en-openbsd-chpass-2",
+    "type": "command",
     "title": "chpass - Set a login [s]hell for a specific user",
     "content": "doas chpass -s {{path/to/shell}} {{username}}",
     "group": "Openbsd",
@@ -43,6 +46,7 @@
   },
   {
     "id": "tldr-en-openbsd-chpass-3",
+    "type": "command",
     "title": "chpass - Specify a user database entry in the `passwd` file format",
     "content": "doas chpass -a {{username:encrypted_password:uid:gid:...}}",
     "group": "Openbsd",
@@ -57,6 +61,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg_add-0",
+    "type": "command",
     "title": "pkg_add - Update all packages, including dependencies",
     "content": "pkg_add -u",
     "group": "Openbsd",
@@ -71,6 +76,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg_add-1",
+    "type": "command",
     "title": "pkg_add - Install a new package",
     "content": "pkg_add {{package}}",
     "group": "Openbsd",
@@ -85,6 +91,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg_add-2",
+    "type": "command",
     "title": "pkg_add - Install packages from the raw output of `pkg_info`",
     "content": "pkg_add -l {{path/to/file}}",
     "group": "Openbsd",
@@ -99,6 +106,7 @@
   },
   {
     "id": "tldr-en-openbsd-sed-0",
+    "type": "command",
     "title": "sed - Replace all `apple` (basic `regex`) occurrences with `mango` (basic `regex`) in all input lines and print the result to `stdout`",
     "content": "{{command}} | sed 's/apple/mango/g'",
     "group": "Openbsd",
@@ -113,6 +121,7 @@
   },
   {
     "id": "tldr-en-openbsd-sed-1",
+    "type": "command",
     "title": "sed - Execute a specific script [f]ile and print the result to `stdout`",
     "content": "{{command}} | sed -f {{path/to/script.sed}}",
     "group": "Openbsd",
@@ -127,6 +136,7 @@
   },
   {
     "id": "tldr-en-openbsd-sed-2",
+    "type": "command",
     "title": "sed - Delay opening each file until a command containing the related `w` function or flag is applied to a line of input",
     "content": "{{command}} | sed -fa {{path/to/script.sed}}",
     "group": "Openbsd",
@@ -141,6 +151,7 @@
   },
   {
     "id": "tldr-en-openbsd-sed-3",
+    "type": "command",
     "title": "sed - Replace all `apple` (extended `regex`) occurrences with `APPLE` (extended `regex`) in all input lines and print the result to `stdout`",
     "content": "{{command}} | sed -E 's/(apple)/\\U\\1/g'",
     "group": "Openbsd",
@@ -155,6 +166,7 @@
   },
   {
     "id": "tldr-en-openbsd-sed-4",
+    "type": "command",
     "title": "sed - Print just a first line to `stdout`",
     "content": "{{command}} | sed -n '1p'",
     "group": "Openbsd",
@@ -169,6 +181,7 @@
   },
   {
     "id": "tldr-en-openbsd-sed-5",
+    "type": "command",
     "title": "sed - Replace all `apple` (basic `regex`) occurrences with `mango` (basic `regex`) in a specific file and overwrite the original file in place",
     "content": "sed -i 's/apple/mango/g' {{path/to/file}}",
     "group": "Openbsd",
@@ -183,6 +196,7 @@
   },
   {
     "id": "tldr-en-openbsd-chfn-0",
+    "type": "command",
     "title": "chfn - View documentation for the original command",
     "content": "tldr chpass",
     "group": "Openbsd",
@@ -197,6 +211,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg_info-0",
+    "type": "command",
     "title": "pkg_info - Search for a package using the package name",
     "content": "pkg_info -Q {{package}}",
     "group": "Openbsd",
@@ -211,6 +226,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg_info-1",
+    "type": "command",
     "title": "pkg_info - Output a list of installed packages for use with `pkg_add -l`",
     "content": "pkg_info -mz",
     "group": "Openbsd",
@@ -225,6 +241,7 @@
   },
   {
     "id": "tldr-en-openbsd-df-0",
+    "type": "command",
     "title": "df - Display all filesystems and their disk usage (using 512-byte units)",
     "content": "df",
     "group": "Openbsd",
@@ -239,6 +256,7 @@
   },
   {
     "id": "tldr-en-openbsd-df-1",
+    "type": "command",
     "title": "df - Display all filesystems in [h]uman-readable form (based on powers of 1024)",
     "content": "df -h",
     "group": "Openbsd",
@@ -253,6 +271,7 @@
   },
   {
     "id": "tldr-en-openbsd-df-2",
+    "type": "command",
     "title": "df - Display the filesystem containing the specified file or directory",
     "content": "df {{path/to/file_or_directory}}",
     "group": "Openbsd",
@@ -267,6 +286,7 @@
   },
   {
     "id": "tldr-en-openbsd-df-3",
+    "type": "command",
     "title": "df - Include statistics on the number of free and used [i]nodes",
     "content": "df -i",
     "group": "Openbsd",
@@ -281,6 +301,7 @@
   },
   {
     "id": "tldr-en-openbsd-df-4",
+    "type": "command",
     "title": "df - Use [k]ibibyte (1024 byte) units when showing size figures",
     "content": "df -k",
     "group": "Openbsd",
@@ -295,6 +316,7 @@
   },
   {
     "id": "tldr-en-openbsd-df-5",
+    "type": "command",
     "title": "df - Display information in a [P]ortable way",
     "content": "df -P",
     "group": "Openbsd",
@@ -309,6 +331,7 @@
   },
   {
     "id": "tldr-en-openbsd-chsh-0",
+    "type": "command",
     "title": "chsh - View documentation for the original command",
     "content": "tldr chpass",
     "group": "Openbsd",
@@ -323,6 +346,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg_delete-0",
+    "type": "command",
     "title": "pkg_delete - Delete a package",
     "content": "pkg_delete {{package}}",
     "group": "Openbsd",
@@ -337,6 +361,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg_delete-1",
+    "type": "command",
     "title": "pkg_delete - Delete a package, including its unused dependencies",
     "content": "pkg_delete -a {{package}}",
     "group": "Openbsd",
@@ -351,6 +376,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg_delete-2",
+    "type": "command",
     "title": "pkg_delete - Dry-run deletion of a package",
     "content": "pkg_delete -n {{package}}",
     "group": "Openbsd",
@@ -365,6 +391,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg-0",
+    "type": "command",
     "title": "pkg - View documentation for installing/updating packages",
     "content": "tldr pkg_add",
     "group": "Openbsd",
@@ -379,6 +406,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg-1",
+    "type": "command",
     "title": "pkg - View documentation for removing packages",
     "content": "tldr pkg_delete",
     "group": "Openbsd",
@@ -393,6 +421,7 @@
   },
   {
     "id": "tldr-en-openbsd-pkg-2",
+    "type": "command",
     "title": "pkg - View documentation for viewing information about packages",
     "content": "tldr pkg_info",
     "group": "Openbsd",
@@ -407,6 +436,7 @@
   },
   {
     "id": "tldr-en-openbsd-cal-0",
+    "type": "command",
     "title": "cal - Display a calendar for the current month",
     "content": "cal",
     "group": "Openbsd",
@@ -421,6 +451,7 @@
   },
   {
     "id": "tldr-en-openbsd-cal-1",
+    "type": "command",
     "title": "cal - Display a calendar for a specific year",
     "content": "cal {{year}}",
     "group": "Openbsd",
@@ -435,6 +466,7 @@
   },
   {
     "id": "tldr-en-openbsd-cal-2",
+    "type": "command",
     "title": "cal - Display a calendar for a specific month and year",
     "content": "cal {{month}} {{year}}",
     "group": "Openbsd",
@@ -449,6 +481,7 @@
   },
   {
     "id": "tldr-en-openbsd-cal-3",
+    "type": "command",
     "title": "cal - Display a calendar for the current [y]ear",
     "content": "cal -y",
     "group": "Openbsd",
@@ -463,6 +496,7 @@
   },
   {
     "id": "tldr-en-openbsd-cal-4",
+    "type": "command",
     "title": "cal - Display [j]ulian days (starting from one, numbered from January 1)",
     "content": "cal -j",
     "group": "Openbsd",
@@ -477,6 +511,7 @@
   },
   {
     "id": "tldr-en-openbsd-cal-5",
+    "type": "command",
     "title": "cal - Use [m]onday as week start instead of Sunday",
     "content": "cal -m",
     "group": "Openbsd",
@@ -491,6 +526,7 @@
   },
   {
     "id": "tldr-en-openbsd-cal-6",
+    "type": "command",
     "title": "cal - Number [w]eek numbers (incompatible with `-j`)",
     "content": "cal -w",
     "group": "Openbsd",

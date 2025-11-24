@@ -1,7 +1,29 @@
 {
-  "updated_at": 1763947537057,
-  "version": "1.0.0",
+  "updated_at": 1763964199821,
+  "version": "2.0.0",
   "packages": [
+    {
+      "id": "en-roles",
+      "language": "en",
+      "platform": "llm",
+      "name": "ChatGPT Prompts (English)",
+      "description": "Collection of 219 role-play prompts.",
+      "count": 219,
+      "size_kb": 184.97,
+      "url": "packs/prompts-en-roles.json",
+      "category": "prompt"
+    },
+    {
+      "id": "zh-roles",
+      "language": "zh",
+      "platform": "llm",
+      "name": "中文角色扮演精选",
+      "description": "Collection of 124 role-play prompts.",
+      "count": 124,
+      "size_kb": 97.47,
+      "url": "packs/prompts-zh-roles.json",
+      "category": "prompt"
+    },
     {
       "id": "zh-android",
       "language": "zh",
@@ -9,8 +31,9 @@
       "name": "Android 开发 (ZH)",
       "description": "Contains 54 zh commands for android.",
       "count": 54,
-      "size_kb": 22,
-      "url": "packs/zh/android.json"
+      "size_kb": 23,
+      "url": "packs/zh/android.json",
+      "category": "command"
     },
     {
       "id": "zh-windows",
@@ -19,8 +42,9 @@
       "name": "Windows (ZH)",
       "description": "Contains 406 zh commands for windows.",
       "count": 406,
-      "size_kb": 166,
-      "url": "packs/zh/windows.json"
+      "size_kb": 175,
+      "url": "packs/zh/windows.json",
+      "category": "command"
     },
     {
       "id": "zh-linux",
@@ -29,8 +53,9 @@
       "name": "Linux 运维 (ZH)",
       "description": "Contains 704 zh commands for linux.",
       "count": 704,
-      "size_kb": 300,
-      "url": "packs/zh/linux.json"
+      "size_kb": 316,
+      "url": "packs/zh/linux.json",
+      "category": "command"
     },
     {
       "id": "zh-common",
@@ -39,8 +64,9 @@
       "name": "通用工具 (Common) (ZH)",
       "description": "Contains 3058 zh commands for common.",
       "count": 3058,
-      "size_kb": 1417,
-      "url": "packs/zh/common.json"
+      "size_kb": 1485,
+      "url": "packs/zh/common.json",
+      "category": "command"
     },
     {
       "id": "zh-osx",
@@ -49,8 +75,9 @@
       "name": "macOS (ZH)",
       "description": "Contains 462 zh commands for osx.",
       "count": 462,
-      "size_kb": 182,
-      "url": "packs/zh/osx.json"
+      "size_kb": 193,
+      "url": "packs/zh/osx.json",
+      "category": "command"
     },
     {
       "id": "zh-sunos",
@@ -60,7 +87,8 @@
       "description": "Contains 3 zh commands for sunos.",
       "count": 3,
       "size_kb": 1,
-      "url": "packs/zh/sunos.json"
+      "url": "packs/zh/sunos.json",
+      "category": "command"
     },
     {
       "id": "en-android",
@@ -69,8 +97,9 @@
       "name": "Android Dev (EN)",
       "description": "Contains 54 en commands for android.",
       "count": 54,
-      "size_kb": 23,
-      "url": "packs/en/android.json"
+      "size_kb": 24,
+      "url": "packs/en/android.json",
+      "category": "command"
     },
     {
       "id": "en-windows",
@@ -79,8 +108,9 @@
       "name": "Windows (EN)",
       "description": "Contains 1089 en commands for windows.",
       "count": 1089,
-      "size_kb": 507,
-      "url": "packs/en/windows.json"
+      "size_kb": 531,
+      "url": "packs/en/windows.json",
+      "category": "command"
     },
     {
       "id": "en-dos",
@@ -89,8 +119,9 @@
       "name": "Dos (EN)",
       "description": "Contains 11 en commands for dos.",
       "count": 11,
-      "size_kb": 4,
-      "url": "packs/en/dos.json"
+      "size_kb": 5,
+      "url": "packs/en/dos.json",
+      "category": "command"
     },
     {
       "id": "en-openbsd",
@@ -99,8 +130,9 @@
       "name": "Openbsd (EN)",
       "description": "Contains 36 en commands for openbsd.",
       "count": 36,
-      "size_kb": 15,
-      "url": "packs/en/openbsd.json"
+      "size_kb": 16,
+      "url": "packs/en/openbsd.json",
+      "category": "command"
     },
     {
       "id": "en-netbsd",
@@ -109,8 +141,9 @@
       "name": "Netbsd (EN)",
       "description": "Contains 41 en commands for netbsd.",
       "count": 41,
-      "size_kb": 18,
-      "url": "packs/en/netbsd.json"
+      "size_kb": 19,
+      "url": "packs/en/netbsd.json",
+      "category": "command"
     },
     {
       "id": "en-freebsd",
@@ -119,8 +152,9 @@
       "name": "Freebsd (EN)",
       "description": "Contains 63 en commands for freebsd.",
       "count": 63,
-      "size_kb": 27,
-      "url": "packs/en/freebsd.json"
+      "size_kb": 29,
+      "url": "packs/en/freebsd.json",
+      "category": "command"
     },
     {
       "id": "en-linux",
@@ -129,18 +163,20 @@
       "name": "Linux Ops (EN)",
       "description": "Contains 7532 en commands for linux.",
       "count": 7532,
-      "size_kb": 3386,
-      "url": "packs/en/linux.json"
+      "size_kb": 3555,
+      "url": "packs/en/linux.json",
+      "category": "command"
     },
     {
       "id": "en-common",
       "language": "en",
       "platform": "common",
       "name": "Common Tools (EN)",
-      "description": "Contains 18934 en commands for common.",
-      "count": 18934,
-      "size_kb": 8755,
-      "url": "packs/en/common.json"
+      "description": "Contains 18941 en commands for common.",
+      "count": 18941,
+      "size_kb": 9184,
+      "url": "packs/en/common.json",
+      "category": "command"
     },
     {
       "id": "en-osx",
@@ -149,8 +185,9 @@
       "name": "macOS (EN)",
       "description": "Contains 931 en commands for osx.",
       "count": 931,
-      "size_kb": 392,
-      "url": "packs/en/osx.json"
+      "size_kb": 412,
+      "url": "packs/en/osx.json",
+      "category": "command"
     },
     {
       "id": "en-sunos",
@@ -159,8 +196,9 @@
       "name": "SunOS (EN)",
       "description": "Contains 42 en commands for sunos.",
       "count": 42,
-      "size_kb": 17,
-      "url": "packs/en/sunos.json"
+      "size_kb": 18,
+      "url": "packs/en/sunos.json",
+      "category": "command"
     },
     {
       "id": "en-cisco-ios",
@@ -169,8 +207,9 @@
       "name": "Cisco-Ios (EN)",
       "description": "Contains 42 en commands for cisco-ios.",
       "count": 42,
-      "size_kb": 16,
-      "url": "packs/en/cisco-ios.json"
+      "size_kb": 17,
+      "url": "packs/en/cisco-ios.json",
+      "category": "command"
     }
   ]
 }

@@ -1,6 +1,7 @@
 [
   {
     "id": "tldr-en-freebsd-chpass-0",
+    "type": "command",
     "title": "chpass - Add or change user database information for the current user interactively",
     "content": "su -c chpass",
     "group": "Freebsd",
@@ -15,6 +16,7 @@
   },
   {
     "id": "tldr-en-freebsd-chpass-1",
+    "type": "command",
     "title": "chpass - Set a specific login [s]hell for the current user",
     "content": "chpass -s {{path/to/shell}}",
     "group": "Freebsd",
@@ -29,6 +31,7 @@
   },
   {
     "id": "tldr-en-freebsd-chpass-2",
+    "type": "command",
     "title": "chpass - Set a login [s]hell for a specific user",
     "content": "chpass -s {{path/to/shell}} {{username}}",
     "group": "Freebsd",
@@ -43,6 +46,7 @@
   },
   {
     "id": "tldr-en-freebsd-chpass-3",
+    "type": "command",
     "title": "chpass - Change the account [e]xpire time (in seconds from the epoch, UTC)",
     "content": "su -c 'chpass -e {{time}} {{username}}'",
     "group": "Freebsd",
@@ -57,6 +61,7 @@
   },
   {
     "id": "tldr-en-freebsd-chpass-4",
+    "type": "command",
     "title": "chpass - Change a user's password",
     "content": "su -c 'chpass -p {{encrypted_password}} {{username}}'",
     "group": "Freebsd",
@@ -71,6 +76,7 @@
   },
   {
     "id": "tldr-en-freebsd-chpass-5",
+    "type": "command",
     "title": "chpass - Specify the [h]ostname or address of an NIS server to query",
     "content": "su -c 'chpass -h {{hostname}} {{username}}'",
     "group": "Freebsd",
@@ -85,6 +91,7 @@
   },
   {
     "id": "tldr-en-freebsd-chpass-6",
+    "type": "command",
     "title": "chpass - Specify a particular NIS [d]omain (system domain name by default)",
     "content": "su -c 'chpass -d {{domain}} {{username}}'",
     "group": "Freebsd",
@@ -99,6 +106,7 @@
   },
   {
     "id": "tldr-en-freebsd-ypchpass-0",
+    "type": "command",
     "title": "ypchpass - View documentation for the original command",
     "content": "tldr chpass",
     "group": "Freebsd",
@@ -113,6 +121,7 @@
   },
   {
     "id": "tldr-en-freebsd-procstat-0",
+    "type": "command",
     "title": "procstat - Display file descriptors of a specific process",
     "content": "procstat fds {{pid}}",
     "group": "Freebsd",
@@ -127,6 +136,7 @@
   },
   {
     "id": "tldr-en-freebsd-procstat-1",
+    "type": "command",
     "title": "procstat - Show virtual memory mappings of a process",
     "content": "procstat vm {{pid}}",
     "group": "Freebsd",
@@ -141,6 +151,7 @@
   },
   {
     "id": "tldr-en-freebsd-procstat-2",
+    "type": "command",
     "title": "procstat - Display process arguments",
     "content": "procstat arguments {{pid}}",
     "group": "Freebsd",
@@ -155,6 +166,7 @@
   },
   {
     "id": "tldr-en-freebsd-procstat-3",
+    "type": "command",
     "title": "procstat - Show resource limits of a process",
     "content": "procstat rlimit {{pid}}",
     "group": "Freebsd",
@@ -169,6 +181,7 @@
   },
   {
     "id": "tldr-en-freebsd-ipmitool-0",
+    "type": "command",
     "title": "ipmitool - Load the IPMI kernel module for local connections",
     "content": "kldload ipmi.ko",
     "group": "Freebsd",
@@ -183,6 +196,7 @@
   },
   {
     "id": "tldr-en-freebsd-ipmitool-1",
+    "type": "command",
     "title": "ipmitool - Open IPMI shell on the local hardware",
     "content": "ipmitool shell",
     "group": "Freebsd",
@@ -197,6 +211,7 @@
   },
   {
     "id": "tldr-en-freebsd-ipmitool-2",
+    "type": "command",
     "title": "ipmitool - Open IPMI shell on a remote host",
     "content": "ipmitool -H {{ip_address}} -U {{user_name}} shell",
     "group": "Freebsd",
@@ -211,6 +226,7 @@
   },
   {
     "id": "tldr-en-freebsd-look-0",
+    "type": "command",
     "title": "look - Search for lines beginning with a specific prefix in a specific file",
     "content": "look {{prefix}} {{path/to/file}}",
     "group": "Freebsd",
@@ -225,6 +241,7 @@
   },
   {
     "id": "tldr-en-freebsd-look-1",
+    "type": "command",
     "title": "look - Case-insensitively search only on alphanumeric characters",
     "content": "look {{[-f|--ignore-case]}} {{[-d|--alphanum]}} {{prefix}} {{path/to/file}}",
     "group": "Freebsd",
@@ -239,6 +256,7 @@
   },
   {
     "id": "tldr-en-freebsd-look-2",
+    "type": "command",
     "title": "look - Specify a string termination character (space by default)",
     "content": "look {{[-t|--terminate]}} {{,}}",
     "group": "Freebsd",
@@ -253,6 +271,7 @@
   },
   {
     "id": "tldr-en-freebsd-look-3",
+    "type": "command",
     "title": "look - Search in `/usr/share/dict/words` (`--ignore-case` and `--alphanum` are assumed)",
     "content": "look {{prefix}}",
     "group": "Freebsd",
@@ -267,6 +286,7 @@
   },
   {
     "id": "tldr-en-freebsd-sed-0",
+    "type": "command",
     "title": "sed - Replace all `apple` (basic `regex`) occurrences with `mango` (basic `regex`) in all input lines and print the result to `stdout`",
     "content": "{{command}} | sed 's/apple/mango/g'",
     "group": "Freebsd",
@@ -281,6 +301,7 @@
   },
   {
     "id": "tldr-en-freebsd-sed-1",
+    "type": "command",
     "title": "sed - Execute a specific script [f]ile and print the result to `stdout`",
     "content": "{{command}} | sed -f {{path/to/script.sed}}",
     "group": "Freebsd",
@@ -295,6 +316,7 @@
   },
   {
     "id": "tldr-en-freebsd-sed-2",
+    "type": "command",
     "title": "sed - Delay opening each file until a command containing the related `w` function or flag is applied to a line of input",
     "content": "{{command}} | sed -fa {{path/to/script.sed}}",
     "group": "Freebsd",
@@ -309,6 +331,7 @@
   },
   {
     "id": "tldr-en-freebsd-sed-3",
+    "type": "command",
     "title": "sed - Replace all `apple` (extended `regex`) occurrences with `APPLE` (extended `regex`) in all input lines and print the result to `stdout`",
     "content": "{{command}} | sed -E 's/(apple)/\\U\\1/g'",
     "group": "Freebsd",
@@ -323,6 +346,7 @@
   },
   {
     "id": "tldr-en-freebsd-sed-4",
+    "type": "command",
     "title": "sed - Print just a first line to `stdout`",
     "content": "{{command}} | sed -n '1p'",
     "group": "Freebsd",
@@ -337,6 +361,7 @@
   },
   {
     "id": "tldr-en-freebsd-sed-5",
+    "type": "command",
     "title": "sed - Replace all `apple` (basic `regex`) occurrences with `mango` (basic `regex`) in a specific file and overwrite the original file in place",
     "content": "sed -i 's/apple/mango/g' {{path/to/file}}",
     "group": "Freebsd",
@@ -351,6 +376,7 @@
   },
   {
     "id": "tldr-en-freebsd-ypchfn-0",
+    "type": "command",
     "title": "ypchfn - View documentation for the original command",
     "content": "tldr chpass",
     "group": "Freebsd",
@@ -365,6 +391,7 @@
   },
   {
     "id": "tldr-en-freebsd-chfn-0",
+    "type": "command",
     "title": "chfn - View documentation for the original command",
     "content": "tldr chpass",
     "group": "Freebsd",
@@ -379,6 +406,7 @@
   },
   {
     "id": "tldr-en-freebsd-sockstat-0",
+    "type": "command",
     "title": "sockstat - View which users/processes are [l]istening on which ports",
     "content": "sockstat -l",
     "group": "Freebsd",
@@ -393,6 +421,7 @@
   },
   {
     "id": "tldr-en-freebsd-sockstat-1",
+    "type": "command",
     "title": "sockstat - Show information for IPv[4]/IPv[6] sockets [l]istening on specific [p]orts using a specific [P]rotocol",
     "content": "sockstat -{{4|6}} -l -P {{tcp|udp|sctp|divert}} -p {{port1,port2...}}",
     "group": "Freebsd",
@@ -407,6 +436,7 @@
   },
   {
     "id": "tldr-en-freebsd-sockstat-2",
+    "type": "command",
     "title": "sockstat - Also show [c]onnected sockets, not resolving [n]umeric UIDs to user names and using a [w]ider field size",
     "content": "sockstat -cnw",
     "group": "Freebsd",
@@ -421,6 +451,7 @@
   },
   {
     "id": "tldr-en-freebsd-sockstat-3",
+    "type": "command",
     "title": "sockstat - Only show sockets that belong to a specific [j]ail ID or name in [v]erbose mode",
     "content": "sockstat -jv",
     "group": "Freebsd",
@@ -435,6 +466,7 @@
   },
   {
     "id": "tldr-en-freebsd-sockstat-4",
+    "type": "command",
     "title": "sockstat - Display the protocol [s]tate and the remote [U]DP encapsulation port number, if applicable (these are currently only implemented for SCTP and TCP)",
     "content": "sockstat -sU",
     "group": "Freebsd",
@@ -449,6 +481,7 @@
   },
   {
     "id": "tldr-en-freebsd-sockstat-5",
+    "type": "command",
     "title": "sockstat - Display the [C]ongestion control module and the protocol [S]tack, if applicable (these are currently only implemented for TCP)",
     "content": "sockstat -CS",
     "group": "Freebsd",
@@ -463,6 +496,7 @@
   },
   {
     "id": "tldr-en-freebsd-sockstat-6",
+    "type": "command",
     "title": "sockstat - Only show Internet sockets if the local and foreign addresses are not in the loopback network prefix 127.0.0.0/8, or do not contain the IPv6 loopback address ::1",
     "content": "sockstat -L",
     "group": "Freebsd",
@@ -477,6 +511,7 @@
   },
   {
     "id": "tldr-en-freebsd-sockstat-7",
+    "type": "command",
     "title": "sockstat - Do not show the header ([q]uiet mode), showing [u]nix sockets and displaying the `inp_gencnt`",
     "content": "sockstat -qui",
     "group": "Freebsd",
@@ -491,6 +526,7 @@
   },
   {
     "id": "tldr-en-freebsd-df-0",
+    "type": "command",
     "title": "df - Display all filesystems and their disk usage (using 512-byte units)",
     "content": "df",
     "group": "Freebsd",
@@ -505,6 +541,7 @@
   },
   {
     "id": "tldr-en-freebsd-df-1",
+    "type": "command",
     "title": "df - Use [h]uman-readable units (based on powers of 1024) and display a grand total",
     "content": "df -h -c",
     "group": "Freebsd",
@@ -519,6 +556,7 @@
   },
   {
     "id": "tldr-en-freebsd-df-2",
+    "type": "command",
     "title": "df - Use [H]uman-readable units (based on powers of 1000)",
     "content": "df -{{-si|H}}",
     "group": "Freebsd",
@@ -533,6 +571,7 @@
   },
   {
     "id": "tldr-en-freebsd-df-3",
+    "type": "command",
     "title": "df - Display the filesystem containing the specified file or directory",
     "content": "df {{path/to/file_or_directory}}",
     "group": "Freebsd",
@@ -547,6 +586,7 @@
   },
   {
     "id": "tldr-en-freebsd-df-4",
+    "type": "command",
     "title": "df - Include statistics on the number of free and used [i]nodes, including the filesystem [T]ypes",
     "content": "df -iT",
     "group": "Freebsd",
@@ -561,6 +601,7 @@
   },
   {
     "id": "tldr-en-freebsd-df-5",
+    "type": "command",
     "title": "df - Use [k]ibibyte (1024 byte) units when showing size figures",
     "content": "df -k",
     "group": "Freebsd",
@@ -575,6 +616,7 @@
   },
   {
     "id": "tldr-en-freebsd-df-6",
+    "type": "command",
     "title": "df - Display information in a [P]ortable way",
     "content": "df -P",
     "group": "Freebsd",
@@ -589,6 +631,7 @@
   },
   {
     "id": "tldr-en-freebsd-chsh-0",
+    "type": "command",
     "title": "chsh - View documentation for the original command",
     "content": "tldr chpass",
     "group": "Freebsd",
@@ -603,6 +646,7 @@
   },
   {
     "id": "tldr-en-freebsd-pkg-0",
+    "type": "command",
     "title": "pkg - Install a new package",
     "content": "pkg install {{package}}",
     "group": "Freebsd",
@@ -617,6 +661,7 @@
   },
   {
     "id": "tldr-en-freebsd-pkg-1",
+    "type": "command",
     "title": "pkg - Delete a package",
     "content": "pkg delete {{package}}",
     "group": "Freebsd",
@@ -631,6 +676,7 @@
   },
   {
     "id": "tldr-en-freebsd-pkg-2",
+    "type": "command",
     "title": "pkg - Upgrade all packages",
     "content": "pkg upgrade",
     "group": "Freebsd",
@@ -645,6 +691,7 @@
   },
   {
     "id": "tldr-en-freebsd-pkg-3",
+    "type": "command",
     "title": "pkg - Search for a package",
     "content": "pkg search {{keyword}}",
     "group": "Freebsd",
@@ -659,6 +706,7 @@
   },
   {
     "id": "tldr-en-freebsd-pkg-4",
+    "type": "command",
     "title": "pkg - List installed packages",
     "content": "pkg info",
     "group": "Freebsd",
@@ -673,6 +721,7 @@
   },
   {
     "id": "tldr-en-freebsd-pkg-5",
+    "type": "command",
     "title": "pkg - Remove unneeded dependencies",
     "content": "pkg autoremove",
     "group": "Freebsd",
@@ -687,6 +736,7 @@
   },
   {
     "id": "tldr-en-freebsd-ypchsh-0",
+    "type": "command",
     "title": "ypchsh - View documentation for the original command",
     "content": "tldr chpass",
     "group": "Freebsd",
@@ -701,6 +751,7 @@
   },
   {
     "id": "tldr-en-freebsd-cal-0",
+    "type": "command",
     "title": "cal - Display a calendar for the current month",
     "content": "cal",
     "group": "Freebsd",
@@ -715,6 +766,7 @@
   },
   {
     "id": "tldr-en-freebsd-cal-1",
+    "type": "command",
     "title": "cal - Display a calendar for a specific year",
     "content": "cal {{year}}",
     "group": "Freebsd",
@@ -729,6 +781,7 @@
   },
   {
     "id": "tldr-en-freebsd-cal-2",
+    "type": "command",
     "title": "cal - Display a calendar for a specific month and year",
     "content": "cal {{month}} {{year}}",
     "group": "Freebsd",
@@ -743,6 +796,7 @@
   },
   {
     "id": "tldr-en-freebsd-cal-3",
+    "type": "command",
     "title": "cal - Display the whole calendar for the current year",
     "content": "cal -y",
     "group": "Freebsd",
@@ -757,6 +811,7 @@
   },
   {
     "id": "tldr-en-freebsd-cal-4",
+    "type": "command",
     "title": "cal - Don't [h]ighlight today and display [3] months spanning the date",
     "content": "cal -h -3 {{month}} {{year}}",
     "group": "Freebsd",
@@ -771,6 +826,7 @@
   },
   {
     "id": "tldr-en-freebsd-cal-5",
+    "type": "command",
     "title": "cal - Display the 2 months [B]efore and 3 [A]fter a specific [m]onth of the current year",
     "content": "cal -A 3 -B 2 {{month}}",
     "group": "Freebsd",
@@ -785,6 +841,7 @@
   },
   {
     "id": "tldr-en-freebsd-cal-6",
+    "type": "command",
     "title": "cal - Display [j]ulian days (starting from one, numbered from January 1)",
     "content": "cal -j",
     "group": "Freebsd",
@@ -799,6 +856,7 @@
   },
   {
     "id": "tldr-en-freebsd-base64-0",
+    "type": "command",
     "title": "base64 - Encode a file to `stdout`",
     "content": "base64 {{[-i|--input]}} {{path/to/file}}",
     "group": "Freebsd",
@@ -813,6 +871,7 @@
   },
   {
     "id": "tldr-en-freebsd-base64-1",
+    "type": "command",
     "title": "base64 - Encode a file to the specified output file",
     "content": "base64 {{[-i|--input]}} {{path/to/input_file}} {{[-o|--output]}} {{path/to/output_file}}",
     "group": "Freebsd",
@@ -827,6 +886,7 @@
   },
   {
     "id": "tldr-en-freebsd-base64-2",
+    "type": "command",
     "title": "base64 - Wrap encoded output at a specific width (`0` disables wrapping)",
     "content": "base64 {{[-b|--break]}} {{0|76|...}} {{path/to/file}}",
     "group": "Freebsd",
@@ -841,6 +901,7 @@
   },
   {
     "id": "tldr-en-freebsd-base64-3",
+    "type": "command",
     "title": "base64 - Decode a file to `stdout`",
     "content": "base64 {{[-d|--decode]}} {{[-i|--input]}} {{path/to/file}}",
     "group": "Freebsd",
@@ -855,6 +916,7 @@
   },
   {
     "id": "tldr-en-freebsd-base64-4",
+    "type": "command",
     "title": "base64 - Encode from `stdin` to `stdout`",
     "content": "{{command}} | base64",
     "group": "Freebsd",
@@ -869,6 +931,7 @@
   },
   {
     "id": "tldr-en-freebsd-base64-5",
+    "type": "command",
     "title": "base64 - Decode from `stdin` to `stdout`",
     "content": "{{command}} | base64 {{[-d|--decode]}}",
     "group": "Freebsd",
