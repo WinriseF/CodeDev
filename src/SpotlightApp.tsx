@@ -118,18 +118,18 @@ export default function SpotlightApp() {
       <div className="w-full h-full max-h-[400px] flex flex-col bg-background/80 backdrop-blur-xl border border-border/50 rounded-xl shadow-2xl overflow-hidden ring-1 ring-white/10">
         
         {/* 搜索栏 */}
-        <div className="h-14 flex items-center px-4 gap-3 border-b border-border/50 shrink-0 bg-secondary/20">
-          <Search className="text-muted-foreground w-5 h-5" />
+        <div data-tauri-drag-region className="h-14 flex items-center px-4 gap-3 border-b border-border/50 shrink-0 bg-secondary/20">
+          <Search className="text-muted-foreground w-5 h-5 pointer-events-none" />
           <input
             ref={inputRef}
-            className="flex-1 bg-transparent border-none outline-none text-lg placeholder:text-muted-foreground/50 h-full"
-            placeholder="Type to search commands..."
+            className="flex-1 bg-transparent border-none outline-none text-lg placeholder:text-muted-foreground/50 h-full cursor-text"
+            placeholder="Type to search..."
             value={query}
             onChange={e => { setQuery(e.target.value); setSelectedIndex(0); }}
             onKeyDown={handleKeyDown}
             autoFocus
           />
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 pointer-events-none">
             <span className="text-[10px] bg-secondary border border-border px-1.5 py-0.5 rounded text-muted-foreground">ESC</span>
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function SpotlightApp() {
         </div>
         
         {/* 底部状态栏 (为未来的知识库做预留) */}
-        <div className="h-8 bg-secondary/30 border-t border-border/50 flex items-center justify-between px-3 text-[10px] text-muted-foreground shrink-0">
+        <div data-tauri-drag-region className="h-8 bg-secondary/30 border-t border-border/50 flex items-center justify-between px-3 text-[10px] text-muted-foreground shrink-0">
             <span>{filtered.length} results</span>
             <div className="flex gap-3">
                 <span>Select: ↑↓</span>

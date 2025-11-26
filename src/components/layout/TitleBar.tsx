@@ -34,7 +34,7 @@ export function TitleBar() {
       <div className="flex h-full">
         <button onClick={() => appWindow.minimize()} className={btnClass}><Minus size={14} /></button>
         <button onClick={toggleMaximize} className={btnClass}>{isMaximized ? <Maximize2 size={12} /> : <Square size={12} />}</button>
-        <button onClick={() => appWindow.close()} className={cn(btnClass, "hover:bg-destructive hover:text-destructive-foreground")}><X size={14} /></button>
+        <button onClick={() => appWindow.hide()} className={cn(btnClass, "hover:bg-destructive hover:text-destructive-foreground")}><X size={14} /></button>
       </div>
     </div>
   );
