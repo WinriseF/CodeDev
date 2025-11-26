@@ -6045,6 +6045,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-systemctl-kexec-0",
+    "type": "command",
+    "title": "systemctl-kexec - Fast reboot using kexec (if kernel is pre-loaded)",
+    "content": "systemctl kexec",
+    "group": "Linux Ops",
+    "description": "systemctl-kexec: Reboot the system via kexec. (Fast reboot using kexec (if kernel is pre-loaded))",
+    "tags": [
+      "linux",
+      "systemctl-kexec",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-systemctl-kexec-1",
+    "type": "command",
+    "title": "systemctl-kexec - Force normal reboot even if kexec is available",
+    "content": "systemctl kexec {{[-f|--force]}}",
+    "group": "Linux Ops",
+    "description": "systemctl-kexec: Reboot the system via kexec. (Force normal reboot even if kexec is available)",
+    "tags": [
+      "linux",
+      "systemctl-kexec",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-auditctl-0",
     "type": "command",
     "title": "auditctl - Display the [s]tatus of the audit system",
@@ -55112,10 +55142,10 @@
   {
     "id": "tldr-en-linux-aide-4",
     "type": "command",
-    "title": "aide - Define a config file to override the default `./aide.conf`",
+    "title": "aide - Define a config file to override the default `aide.conf`",
     "content": "sudo aide {{[-c|--config]}} {{path/to/config_file}}",
     "group": "Linux Ops",
-    "description": "aide: Advanced Intrusion Detection Environment to validate file integrity. (Define a config file to override the default `./aide.conf`)",
+    "description": "aide: Advanced Intrusion Detection Environment to validate file integrity. (Define a config file to override the default `aide.conf`)",
     "tags": [
       "linux",
       "aide",
@@ -66992,10 +67022,10 @@
   {
     "id": "tldr-en-linux-autorecon-0",
     "type": "command",
-    "title": "autorecon - Perform reconnaissance on target host(s) (detailed scan results will be dumped in `./results`)",
+    "title": "autorecon - Perform reconnaissance on target host(s) (detailed scan results will be dumped in `results`)",
     "content": "sudo autorecon {{host_or_ip1,host_or_ip2,...}}",
     "group": "Linux Ops",
-    "description": "autorecon: A multi-threaded network reconnaissance tool which performs automated enumeration of services. (Perform reconnaissance on target host(s) (detailed scan results will be dumped in `./results`))",
+    "description": "autorecon: A multi-threaded network reconnaissance tool which performs automated enumeration of services. (Perform reconnaissance on target host(s) (detailed scan results will be dumped in `results`))",
     "tags": [
       "linux",
       "autorecon",
@@ -75558,7 +75588,7 @@
     "id": "tldr-en-linux-nixos-option-4",
     "type": "command",
     "title": "nixos-option - List all subkeys of a given key on another NixOS configuration",
-    "content": "NIXOS_CONFIG={{path_to_configuration.nix}} nixos-option {{option_key}}",
+    "content": "NIXOS_CONFIG={{path/to/configuration.nix}} nixos-option {{option_key}}",
     "group": "Linux Ops",
     "description": "nixos-option: Inspect a NixOS configuration. (List all subkeys of a given key on another NixOS configuration)",
     "tags": [
@@ -76683,7 +76713,7 @@
     "id": "tldr-en-linux-fluidsynth-0",
     "type": "command",
     "title": "fluidsynth - Play a MIDI file",
-    "content": "fluidsynth {{path/to/soundfont.sf2}} {{path/to/file.midi}}",
+    "content": "fluidsynth {{/usr/share/soundfonts/soundfont.sf2}} {{path/to/file.midi}}",
     "group": "Linux Ops",
     "description": "fluidsynth: Synthesize audio from MIDI files. (Play a MIDI file)",
     "tags": [
@@ -76698,7 +76728,7 @@
     "id": "tldr-en-linux-fluidsynth-1",
     "type": "command",
     "title": "fluidsynth - Specify the audio driver",
-    "content": "fluidsynth {{[-a|--audio-driver]}} {{pipewire|pulseaudio}} {{path/to/soundfont.sf2}} {{path/to/file.midi}}",
+    "content": "fluidsynth {{[-a|--audio-driver]}} {{pipewire|pulseaudio}} {{/usr/share/soundfonts/soundfont.sf2}} {{path/to/file.midi}}",
     "group": "Linux Ops",
     "description": "fluidsynth: Synthesize audio from MIDI files. (Specify the audio driver)",
     "tags": [
@@ -87633,7 +87663,7 @@
     "id": "tldr-en-linux-ltrace-0",
     "type": "command",
     "title": "ltrace - Print (trace) library calls of a program binary",
-    "content": "ltrace ./{{program}}",
+    "content": "ltrace {{path/to/program}}",
     "group": "Linux Ops",
     "description": "ltrace: Display dynamic library calls of a process. (Print (trace) library calls of a program binary)",
     "tags": [

@@ -4515,6 +4515,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-]-0",
+    "type": "command",
+    "title": "] - 查看 `[` 关键字的文档",
+    "content": "tldr [",
+    "group": "通用工具 (Common)",
+    "description": "]: 这个 shell 关键字用于结束 `[` 。 (查看 `[` 关键字的文档)",
+    "tags": [
+      "common",
+      "]",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-rsync-0",
     "type": "command",
     "title": "rsync - 复制文件",
@@ -34908,7 +34923,7 @@
     "id": "tldr-zh-common-2to3-1",
     "type": "command",
     "title": "2to3 - 将 Python 2 文件转化为 Python 3",
-    "content": "2to3 --write {{路径/到/文件.py}}",
+    "content": "2to3 {{[-w|--write]}} {{路径/到/文件.py}}",
     "group": "通用工具 (Common)",
     "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (将 Python 2 文件转化为 Python 3)",
     "tags": [
@@ -34923,7 +34938,7 @@
     "id": "tldr-zh-common-2to3-2",
     "type": "command",
     "title": "2to3 - 将 Python 2 语言特性转化为 Python 3",
-    "content": "2to3 --write {{路径/到/文件.py}} --fix {{raw_input}} --fix {{print}}",
+    "content": "2to3 {{[-w|--write]}} {{路径/到/文件.py}} {{[-f|--fix]}} {{raw_input}} {{[-f|--fix]}} {{print}}",
     "group": "通用工具 (Common)",
     "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (将 Python 2 语言特性转化为 Python 3)",
     "tags": [
@@ -34938,7 +34953,7 @@
     "id": "tldr-zh-common-2to3-3",
     "type": "command",
     "title": "2to3 - 除了某个语言特性外将所有其他的 Python 2 语言特性转化为 Python 3",
-    "content": "2to3 --write {{路径/到/文件.py}} --nofix {{has_key}} --nofix {{isinstance}}",
+    "content": "2to3 {{[-w|--write]}} {{路径/到/文件.py}} {{[-x|--nofix]}} {{has_key}} {{[-x|--nofix]}} {{isinstance}}",
     "group": "通用工具 (Common)",
     "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (除了某个语言特性外将所有其他的 Python 2 语言特性转化为 Python 3)",
     "tags": [
@@ -34953,7 +34968,7 @@
     "id": "tldr-zh-common-2to3-4",
     "type": "command",
     "title": "2to3 - 列出 Python 2 所有可转化为 Python 3 的语言特性",
-    "content": "2to3 --list-fixes",
+    "content": "2to3 {{[-l|--list-fixes]}}",
     "group": "通用工具 (Common)",
     "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (列出 Python 2 所有可转化为 Python 3 的语言特性)",
     "tags": [
@@ -34968,7 +34983,7 @@
     "id": "tldr-zh-common-2to3-5",
     "type": "command",
     "title": "2to3 - 将某一文件夹的所有 Python 2 文件转化为 Python 3",
-    "content": "2to3 --output-dir {{路径/到/Python 3 目录}} --write-unchanged-files --nobackups {{路径/到/Python 2 目录}}",
+    "content": "2to3 {{[-o|--output-dir]}} {{路径/到/Python 3 目录}} {{[-W|--write-unchanged-files]}} {{[-n|--nobackups]}} {{路径/到/Python 2 目录}}",
     "group": "通用工具 (Common)",
     "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (将某一文件夹的所有 Python 2 文件转化为 Python 3)",
     "tags": [
@@ -34983,7 +34998,7 @@
     "id": "tldr-zh-common-2to3-6",
     "type": "command",
     "title": "2to3 - 使用多线程运行 2to3",
-    "content": "2to3 --processes {{4}} --output-dir {{路径/到/Python 3 目录}} --write --nobackups --no-diff {{路径/到/Python 2 目录}}",
+    "content": "2to3 {{[-j|--processes]}} {{4}} {{[-o|--output-dir]}} {{路径/到/Python 3 目录}} {{[-w|--write]}} {{[-n|--nobackups]}} --no-diffs {{路径/到/Python 2 目录}}",
     "group": "通用工具 (Common)",
     "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (使用多线程运行 2to3)",
     "tags": [

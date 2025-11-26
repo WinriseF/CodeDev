@@ -1,5 +1,5 @@
 {
-  "updated_at": 1763964374243,
+  "updated_at": 1764153556256,
   "version": "2.0.0",
   "packages": [
     {
@@ -62,9 +62,9 @@
       "language": "zh",
       "platform": "common",
       "name": "通用工具 (Common) (ZH)",
-      "description": "Contains 3058 zh commands for common.",
-      "count": 3058,
-      "size_kb": 1485,
+      "description": "Contains 3059 zh commands for common.",
+      "count": 3059,
+      "size_kb": 1486,
       "url": "packs/zh/common.json",
       "category": "command"
     },
@@ -161,9 +161,9 @@
       "language": "en",
       "platform": "linux",
       "name": "Linux Ops (EN)",
-      "description": "Contains 7532 en commands for linux.",
-      "count": 7532,
-      "size_kb": 3555,
+      "description": "Contains 7534 en commands for linux.",
+      "count": 7534,
+      "size_kb": 3556,
       "url": "packs/en/linux.json",
       "category": "command"
     },
@@ -172,9 +172,9 @@
       "language": "en",
       "platform": "common",
       "name": "Common Tools (EN)",
-      "description": "Contains 18941 en commands for common.",
-      "count": 18941,
-      "size_kb": 9184,
+      "description": "Contains 18946 en commands for common.",
+      "count": 18946,
+      "size_kb": 9187,
       "url": "packs/en/common.json",
       "category": "command"
     },
