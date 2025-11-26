@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Download, Trash2, RefreshCw, Box, Check, Loader2, Globe, Sparkles, Terminal, AlertCircle } from 'lucide-react';
+import { Download, Trash2, RefreshCw, Box, Check, Loader2, Globe, Sparkles, Terminal, AlertCircle, ExternalLink } from 'lucide-react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore } from '@/store/useAppStore';
 import { cn } from '@/lib/utils';
 import { getText } from '@/lib/i18n';
+import { open } from '@tauri-apps/api/shell'; 
 
 export function PromptLibraryManager() {
   const { 
     manifest, fetchManifest, installPack, uninstallPack, 
-    installedPackIds, isStoreLoading 
+    installedPackIds, isStoreLoading
   } = usePromptStore();
   
   const { language } = useAppStore();
   const [activeTab, setActiveTab] = useState<'prompt' | 'command'>('prompt');
+  
+  // 错误信息状态
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
@@ -21,26 +24,42 @@ export function PromptLibraryManager() {
 
   const handleInstall = async (pack: any) => {
       try {
-          setErrorMsg(null); // 清除旧错误
+          setErrorMsg(null);
           await installPack(pack);
       } catch (err: any) {
-          // 显示错误信息
           const msg = err.message || "Unknown error";
           setErrorMsg(msg);
-          
-          // 5秒后自动消失，或者保留直到用户点击
           setTimeout(() => setErrorMsg(null), 8000);
       }
   };
 
-  // 过滤：当前语言 + 当前 Tab 分类
   const availablePacks = manifest?.packages.filter(p => 
       p.language === language && 
-      (p.category || 'command') === activeTab // 兼容旧数据，没 category 默认为 command
+      (p.category || 'command') === activeTab
   ) || [];
 
+  // 定义固定的数据源信息
+  const getSourceInfo = () => {
+      if (activeTab === 'command') {
+          return {
+              name: 'tldr-pages/tldr',
+              url: 'https://github.com/tldr-pages/tldr'
+          };
+      } else {
+          // Prompts
+          return {
+              name: 'Awesome ChatGPT Prompts',
+              url: 'https://github.com/f/awesome-chatgpt-prompts'
+          };
+      }
+  };
+
+  const sourceInfo = getSourceInfo();
+
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full relative">
+      
+      {/* Header */}
       <div className="mb-4 flex items-center justify-between shrink-0">
          <div>
             <h3 className="text-sm font-medium text-foreground flex items-center gap-2">
@@ -49,11 +68,21 @@ export function PromptLibraryManager() {
             </h3>
             <div className="text-xs text-muted-foreground mt-1 flex flex-wrap items-center gap-1">
                 <span>{getText('library', 'desc', language)}</span>
+                
+                {/* 渲染固定的来源链接 */}
+                <button 
+                    onClick={() => open(sourceInfo.url)}
+                    className="flex items-center gap-0.5 text-primary hover:underline hover:text-primary/80 transition-colors bg-primary/5 px-1.5 py-0.5 rounded cursor-pointer font-medium"
+                    title={`Open ${sourceInfo.url}`}
+                >
+                    {sourceInfo.name}
+                    <ExternalLink size={10} />
+                </button>
             </div>
          </div>
          
          <button 
-           onClick={() => fetchManifest()} 
+           onClick={() => { setErrorMsg(null); fetchManifest(); }} 
            disabled={isStoreLoading}
            className="p-2 hover:bg-secondary rounded-full transition-colors"
            title="Refresh"
@@ -62,6 +91,7 @@ export function PromptLibraryManager() {
          </button>
       </div>
 
+      {/* 错误提示条 */}
       {errorMsg && (
         <div className="mb-4 p-3 rounded-lg bg-destructive/10 border border-destructive/20 flex gap-3 items-start animate-in fade-in slide-in-from-top-2">
             <AlertCircle size={16} className="text-destructive shrink-0 mt-0.5" />
@@ -73,28 +103,23 @@ export function PromptLibraryManager() {
         </div>
       )}
 
-      {/* Tab 切换 */}
+      {/* Tabs */}
       <div className="flex gap-2 mb-4 border-b border-border/50">
           <button 
               onClick={() => setActiveTab('prompt')}
-              className={cn(
-                  "px-4 py-2 text-xs font-bold border-b-2 transition-colors flex items-center gap-2",
-                  activeTab === 'prompt' ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"
-              )}
+              className={cn("px-4 py-2 text-xs font-bold border-b-2 transition-colors flex items-center gap-2", activeTab === 'prompt' ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground")}
           >
               <Sparkles size={14} /> Prompts
           </button>
           <button 
               onClick={() => setActiveTab('command')}
-              className={cn(
-                  "px-4 py-2 text-xs font-bold border-b-2 transition-colors flex items-center gap-2",
-                  activeTab === 'command' ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"
-              )}
+              className={cn("px-4 py-2 text-xs font-bold border-b-2 transition-colors flex items-center gap-2", activeTab === 'command' ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground")}
           >
               <Terminal size={14} /> Commands
           </button>
       </div>
 
+      {/* List */}
       <div className="flex-1 overflow-y-auto custom-scrollbar space-y-3 pr-2">
         {isStoreLoading && !manifest && (
             <div className="flex justify-center py-10 text-muted-foreground">
@@ -113,7 +138,6 @@ export function PromptLibraryManager() {
 
         {availablePacks.map(pack => {
             const isInstalled = installedPackIds.includes(pack.id);
-            
             return (
                 <div key={pack.id} className="border border-border rounded-lg p-3 bg-card flex items-center justify-between group hover:border-primary/30 transition-all">
                     <div className="flex items-center gap-3 overflow-hidden">
