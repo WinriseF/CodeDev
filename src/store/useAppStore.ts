@@ -4,6 +4,7 @@ import { fileStorage } from '@/lib/storage';
 import { IgnoreConfig, DEFAULT_GLOBAL_IGNORE } from '@/types/context';
 import { AIModelConfig } from '@/types/model';
 import { fetch } from '@tauri-apps/api/http';
+import { emit } from '@tauri-apps/api/event'; 
 
 // --- 1. 导出类型 ---
 export type AppView = 'prompts' | 'context' | 'patch';
@@ -79,7 +80,7 @@ interface AppState {
   setPromptSidebarOpen: (open: boolean) => void;
   setContextSidebarOpen: (open: boolean) => void;
   setContextSidebarWidth: (width: number) => void;
-  setTheme: (theme: AppTheme) => void;
+  setTheme: (theme: AppTheme, skipEmit?: boolean) => void;
   setLanguage: (lang: AppLang) => void;
   updateGlobalIgnore: (type: keyof IgnoreConfig, action: 'add' | 'remove', value: string) => void;
   
@@ -114,10 +115,13 @@ export const useAppStore = create<AppState>()(
       setPromptSidebarOpen: (open) => set({ isPromptSidebarOpen: open }),
       setContextSidebarOpen: (open) => set({ isContextSidebarOpen: open }),
       setContextSidebarWidth: (width) => set({ contextSidebarWidth: width }),
-      setTheme: (theme) => set(() => {
+      setTheme: (theme, skipEmit = false) => set(() => {
         const root = document.documentElement;
         if (theme === 'dark') root.classList.add('dark');
         else root.classList.remove('dark');
+        if (!skipEmit) {
+            emit('theme-changed', theme).catch(err => console.error(err));
+        }
         return { theme };
       }),
       setLanguage: (language) => set({ language }),

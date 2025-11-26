@@ -4,6 +4,8 @@ import { writeText } from '@tauri-apps/api/clipboard';
 import { Search, Sparkles, Terminal, CornerDownLeft } from 'lucide-react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { cn } from '@/lib/utils';
+import { useAppStore, AppTheme } from '@/store/useAppStore';
+import { listen } from '@tauri-apps/api/event';
 
 export default function SpotlightApp() {
   const [query, setQuery] = useState('');
@@ -14,7 +16,29 @@ export default function SpotlightApp() {
   // 从 Store 获取数据
   // 注意：因为是新窗口，store 会重新初始化并读取文件，数据是同步的
   const { getAllPrompts } = usePromptStore();
+  const { theme, setTheme } = useAppStore();
   const allPrompts = useMemo(() => getAllPrompts(), []);
+
+  useEffect(() => {
+    // 1. 初始化：应用启动时的当前主题
+    const root = document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+
+    // 2. 监听：来自主窗口的切换事件
+    const unlistenPromise = listen<AppTheme>('theme-changed', (event) => {
+        const newTheme = event.payload;
+        // 更新 React 状态
+        setTheme(newTheme, true); 
+        // 强制更新 DOM (setTheme 内部虽然做了，但跨窗口 state 同步可能会有延迟，手动再保底一次)
+        root.classList.remove('light', 'dark');
+        root.classList.add(newTheme);
+    });
+
+    return () => {
+        unlistenPromise.then(unlisten => unlisten());
+    };
+  }, []); // 空依赖数组，只运行一次
 
   // 过滤逻辑
   const filtered = useMemo(() => {
