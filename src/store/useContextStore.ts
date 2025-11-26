@@ -68,8 +68,6 @@ const applyLockState = (nodes: FileNode[], fullConfig: IgnoreConfig): FileNode[]
     // 4. 递归处理子节点
     if (newNode.children) {
       newNode.children = applyLockState(newNode.children, fullConfig);
-      
-      // (可选优化) 如果所有子节点都被 Lock 了，父节点也可以标记一下，但这里先不做太复杂
     }
 
     return newNode;
@@ -80,8 +78,9 @@ const applyLockState = (nodes: FileNode[], fullConfig: IgnoreConfig): FileNode[]
 
 interface ContextState {
   // --- 持久化设置 ---
-  // ✨ 改名：这里只存项目特有的配置，不再包含默认值
+  // 这里只存项目特有的配置，不再包含默认值
   projectIgnore: IgnoreConfig;
+  removeComments: boolean;
   
   // --- 运行时状态 (不持久化) ---
   projectRoot: string | null;
@@ -93,18 +92,20 @@ interface ContextState {
   setFileTree: (tree: FileNode[]) => void;
   setIsScanning: (status: boolean) => void;
   
-  // ✨ 新增：修改项目配置
+  // 修改项目配置
   updateProjectIgnore: (type: keyof IgnoreConfig, action: 'add' | 'remove', value: string) => void;
   resetProjectIgnore: () => void;
   refreshTreeStatus: (globalConfig: IgnoreConfig) => void;
   // 树操作
   toggleSelect: (nodeId: string, checked: boolean) => void;
+  setRemoveComments: (enable: boolean) => void;
 }
 
 export const useContextStore = create<ContextState>()(
   persist(
     (set) => ({
       projectIgnore: DEFAULT_PROJECT_IGNORE,
+      removeComments: false,
       projectRoot: null,
       fileTree: [],
       isScanning: false,
@@ -131,7 +132,7 @@ export const useContextStore = create<ContextState>()(
       
       resetProjectIgnore: () => set({ projectIgnore: DEFAULT_PROJECT_IGNORE }),
 
-      // ✨ 刷新树状态（应用黑名单）
+      // 刷新树状态（应用黑名单）
       refreshTreeStatus: (globalConfig) => set((state) => {
         // 合并配置
         const effectiveConfig = {
@@ -148,12 +149,15 @@ export const useContextStore = create<ContextState>()(
       toggleSelect: (nodeId, checked) => set((state) => ({
         fileTree: updateNodeState(state.fileTree, nodeId, checked)
       })),
+
+      setRemoveComments: (enable) => set({ removeComments: enable }),
     }),
     {
       name: 'context-config',
       storage: createJSONStorage(() => fileStorage),
       partialize: (state) => ({
-        projectIgnore: state.projectIgnore
+        projectIgnore: state.projectIgnore,
+        removeComments: state.removeComments
       }),
     }
   )

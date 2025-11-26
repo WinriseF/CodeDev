@@ -1,14 +1,14 @@
 import { useMemo } from 'react';
 import { 
   CheckCircle2, AlertCircle, FileText, Database, Cpu, Save, 
-  DollarSign, PieChart, TrendingUp, AlertTriangle 
-} from 'lucide-react';
+  DollarSign, PieChart, TrendingUp, AlertTriangle, Eraser} from 'lucide-react';
 import { ContextStats } from '@/lib/context_assembler';
 import { analyzeContext } from '@/lib/context_analytics';
 import { FileNode } from '@/types/context';
 import { AIModelConfig } from '@/types/model';
 import { cn } from '@/lib/utils';
 import { useAppStore } from '@/store/useAppStore';
+import { useContextStore } from '@/store/useContextStore';
 import { getText } from '@/lib/i18n';
 
 interface TokenDashboardProps {
@@ -29,6 +29,9 @@ export function TokenDashboard({
   isGenerating 
 }: TokenDashboardProps) {
   const { language } = useAppStore();
+  // 获取状态和修改器
+  const { removeComments, setRemoveComments } = useContextStore();
+
   const analytics = useMemo(() => {
     return analyzeContext(fileTree, stats.estimatedTokens, models);
   }, [fileTree, stats.estimatedTokens, models]);
@@ -43,7 +46,7 @@ export function TokenDashboard({
 
   const formatCost = (val: number) => {
     if (val < 0.0001 && val > 0) return '< $0.0001';
-    return `$${val.toFixed(4)}`; // 高精度，适应 DeepSeek 等便宜模型
+    return `$${val.toFixed(4)}`; 
   };
 
   return (
@@ -56,8 +59,34 @@ export function TokenDashboard({
         <StatCard icon={<Cpu className="text-orange-500" />} label={getText('context', 'statTokens', language)} value={stats.estimatedTokens.toLocaleString()} highlight />
       </div>
 
+      {/* 功能开关区 */}
+      <div className="flex items-center justify-end px-2">
+         <button 
+           onClick={() => setRemoveComments(!removeComments)}
+           className={cn(
+             "flex items-center gap-3 px-4 py-2 rounded-lg border transition-all duration-200 shadow-sm",
+             removeComments 
+               ? "bg-primary/10 border-primary/30 text-primary" 
+               : "bg-card border-border text-muted-foreground hover:bg-secondary/50"
+           )}
+         >
+            <div className={cn(
+                "w-8 h-4 rounded-full relative transition-colors duration-300",
+                removeComments ? "bg-primary" : "bg-slate-300 dark:bg-slate-600"
+            )}>
+                <div className={cn(
+                    "absolute top-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-300 shadow-sm",
+                    removeComments ? "left-4.5 translate-x-0" : "left-0.5"
+                )} style={{ left: removeComments ? '18px' : '2px' }} />
+            </div>
+            <div className="flex items-center gap-2">
+                <Eraser size={16} />
+                <span className="text-sm font-medium">Remove Comments</span>
+            </div>
+         </button>
+      </div>
+
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        
         {/* 2. 左栏：语言 & 成本 */}
         <div className="space-y-6">
            {/* 语言分布 */}
@@ -87,7 +116,6 @@ export function TokenDashboard({
               <div className="flex items-center justify-between">
                  <h3 className="text-sm font-semibold flex items-center gap-2"><DollarSign size={16} /> {getText('context', 'estCost', language)}</h3>
               </div>
-              {/* 这里的 Grid 会根据卡片数量自动换行 */}
               <div className="grid grid-cols-2 gap-3">
                  {analytics.modelCosts.map(model => (
                     <div key={model.modelId} className="p-3 bg-secondary/30 rounded-lg flex flex-col gap-1 overflow-hidden">

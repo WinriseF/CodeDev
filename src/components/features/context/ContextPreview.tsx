@@ -4,6 +4,7 @@ import { FileNode } from '@/types/context';
 import { generateContext } from '@/lib/context_assembler';
 import { writeText } from '@tauri-apps/api/clipboard';
 import { useAppStore } from '@/store/useAppStore';
+import { useContextStore } from '@/store/useContextStore';
 import { getText } from '@/lib/i18n';
 
 interface ContextPreviewProps {
@@ -15,15 +16,16 @@ export function ContextPreview({ fileTree }: ContextPreviewProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
   const { language } = useAppStore();
-  // 当组件挂载或文件树变化时，生成预览内容
+  const { removeComments } = useContextStore();
+
+  // 当组件挂载或文件树、配置变化时，生成预览内容
   useEffect(() => {
     let isMounted = true;
     
     const loadPreview = async () => {
       setIsLoading(true);
       try {
-        // 这里不需要 Token 计算，只需要文本，所以解构出 text
-        const { text } = await generateContext(fileTree);
+        const { text } = await generateContext(fileTree, { removeComments });
         if (isMounted) setContent(text);
       } catch (err) {
         console.error("Preview generation failed", err);
@@ -33,13 +35,13 @@ export function ContextPreview({ fileTree }: ContextPreviewProps) {
       }
     };
 
-    // 防抖：避免稍微勾选一下就疯狂重算
+    // 防抖
     const timer = setTimeout(loadPreview, 300);
     return () => {
       isMounted = false;
       clearTimeout(timer);
     };
-  }, [fileTree]);
+  }, [fileTree, removeComments]);
 
   const handleCopy = async () => {
     await writeText(content);
@@ -74,6 +76,7 @@ export function ContextPreview({ fileTree }: ContextPreviewProps) {
           <span>{getText('context', 'previewTitle', language)}</span>
           <span className="text-xs text-muted-foreground font-normal ml-2">
             ({getText('context', 'chars', language, { count: content.length.toLocaleString() })})
+            {removeComments && <span className="ml-2 px-1.5 py-0.5 bg-green-500/10 text-green-600 text-[10px] rounded border border-green-500/20">No Comments</span>}
           </span>
         </div>
         <button

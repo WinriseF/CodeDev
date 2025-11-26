@@ -24,7 +24,7 @@ export function ContextView() {
     projectRoot, fileTree, isScanning, 
     projectIgnore, updateProjectIgnore, 
     refreshTreeStatus, 
-    setProjectRoot, setFileTree, setIsScanning, toggleSelect 
+    setProjectRoot, setFileTree, setIsScanning, toggleSelect, removeComments 
   } = useContextStore();
 
   const { 
@@ -69,7 +69,7 @@ export function ContextView() {
     if (isGenerating) return;
     setIsGenerating(true);
     try {
-      const { text, tokenCount } = await generateContext(fileTree);
+      const { text, tokenCount } = await generateContext(fileTree, { removeComments });
       await writeClipboard(text);
       console.log(`Context copied! Actual tokens: ${tokenCount}`);
       triggerToast(getText('context', 'toastCopied', language));
@@ -93,7 +93,7 @@ export function ContextView() {
         setIsGenerating(false);
         return;
       }
-      const { text } = await generateContext(fileTree);
+      const { text } = await generateContext(fileTree, { removeComments });
       await writeTextFile(filePath, text);
       triggerToast(getText('context', 'toastSaved', language));
     } catch (err) {
@@ -295,7 +295,6 @@ export function ContextView() {
   );
 }
 
-// ... ViewToggleBtn component ...
 function ViewToggleBtn({ active, onClick, icon, label }: any) {
   return (
     <button

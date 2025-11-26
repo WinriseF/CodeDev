@@ -1,7 +1,19 @@
 import { readTextFile } from '@tauri-apps/api/fs';
 import { FileNode } from '@/types/context';
-import { countTokens, estimateTokens } from './tokenizer';
-import { generateAsciiTree } from './tree_generator'; // ✨ 引入树生成器
+import { countTokens } from './tokenizer';
+import { generateAsciiTree } from './tree_generator';
+import { stripSourceComments } from './comment_stripper'; // ✨ 引入
+
+// 二进制/非文本后缀黑名单
+const BINARY_EXTENSIONS = new Set([
+  'png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'webp', 'svg',
+  'mp3', 'mp4', 'wav', 'ogg', 'mov', 'avi',
+  'zip', 'tar', 'gz', '7z', 'rar', 'jar',
+  'exe', 'dll', 'so', 'dylib', 'bin', 'obj', 'o', 'a', 'lib',
+  'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+  'ttf', 'otf', 'woff', 'woff2', 'eot',
+  'db', 'sqlite', 'sqlite3', 'class', 'pyc', 'DS_Store'
+]);
 
 export interface ContextStats {
   fileCount: number;
@@ -31,39 +43,72 @@ export function calculateStats(nodes: FileNode[]): ContextStats {
   return {
     fileCount: files.length,
     totalSize: totalSize,
-    estimatedTokens: estimateTokens(totalSize)
+    estimatedTokens: Math.ceil(totalSize / 4)
   };
 }
 
+// 定义生成选项接口
+interface GenerateOptions {
+  removeComments: boolean;
+}
+
 /**
- * ✨ 升级后的上下文生成器
- * 包含：元数据 + 结构树 + 文件内容
+ * 升级后的上下文生成器
  */
-export async function generateContext(nodes: FileNode[]): Promise<{ text: string, tokenCount: number }> {
+export async function generateContext(
+  nodes: FileNode[], 
+  options: GenerateOptions = { removeComments: false } // ✨ 接收选项
+): Promise<{ text: string, tokenCount: number }> {
+  
   const files = getSelectedFiles(nodes);
-  const treeString = generateAsciiTree(nodes); // 生成树
+  const treeString = generateAsciiTree(nodes);
   
   const parts: string[] = [];
 
-  // --- 1. System Preamble (引导语) ---
+  // --- 1. System Preamble ---
   parts.push(`<project_context>`);
   parts.push(`This is a source code context provided by CodeForge AI.`);
   parts.push(`Total Files: ${files.length}`);
+  if (options.removeComments) {
+      parts.push(`Note: Comments have been stripped to save tokens.`);
+  }
   parts.push(``);
 
-  // --- 2. Project Structure (结构树) ---
+  // --- 2. Project Structure ---
   parts.push(`<project_structure>`);
   parts.push(treeString);
   parts.push(`</project_structure>`);
   parts.push(``);
 
-  // --- 3. File Contents (文件内容) ---
+  // --- 3. File Contents ---
   parts.push(`<source_files>`);
   
   const filePromises = files.map(async (file) => {
     try {
-      const content = await readTextFile(file.path);
-      // 使用 XML 标签包裹文件内容，增加 path 属性方便 AI 定位
+      // 防御 1: 检查后缀 (Binary Guard)
+      const ext = file.name.split('.').pop()?.toLowerCase();
+      if (ext && BINARY_EXTENSIONS.has(ext)) {
+          return `
+<file path="${file.path}">
+[Binary file omitted: ${file.name}]
+</file>`;
+      }
+
+      // 防御 2: 检查大小 (> 1MB)
+      if (file.size && file.size > 1024 * 1024) { 
+           return `
+<file path="${file.path}">
+[File too large to include: ${(file.size / 1024 / 1024).toFixed(2)} MB]
+</file>`;
+      }
+
+      let content = await readTextFile(file.path);
+
+      // 特性: 移除注释
+      if (options.removeComments) {
+          content = stripSourceComments(content, file.name);
+      }
+
       return `
 <file path="${file.path}">
 ${content}
