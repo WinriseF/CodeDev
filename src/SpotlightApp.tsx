@@ -2,15 +2,21 @@ import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import { appWindow, LogicalSize } from '@tauri-apps/api/window';
 import { writeText } from '@tauri-apps/api/clipboard';
 import { listen } from '@tauri-apps/api/event';
-import { Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, Command, Bot } from 'lucide-react';
+import { Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, Command, Bot, User } from 'lucide-react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore, AppTheme } from '@/store/useAppStore';
 import { Prompt } from '@/types/prompt';
 import { cn } from '@/lib/utils';
+import { streamChatCompletion, ChatMessage } from '@/lib/llm';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // 常量定义
 const FIXED_HEIGHT = 106; 
 const MAX_WINDOW_HEIGHT = 460;
+const MAX_CHAT_HEIGHT = 600;
 
 interface ScoredPrompt extends Prompt {
   score: number;
@@ -25,24 +31,24 @@ export default function SpotlightApp() {
   
   const [mode, setMode] = useState<SpotlightMode>('search');
   const [chatInput, setChatInput] = useState('');
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [isStreaming, setIsStreaming] = useState(false);
   
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const chatEndRef = useRef<HTMLDivElement>(null); 
   
   const { getAllPrompts, initStore } = usePromptStore();
-  const { theme, setTheme } = useAppStore(); 
+  const { theme, setTheme, aiConfig } = useAppStore(); 
   
   const allPrompts = getAllPrompts();
 
-  // --- 初始化与同步 ---
   useEffect(() => { initStore(); }, []);
 
-  // --- Theme Sync ---
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
-
     const unlistenPromise = listen<AppTheme>('theme-changed', (event) => {
         setTheme(event.payload, true); 
         root.classList.remove('light', 'dark');
@@ -51,11 +57,11 @@ export default function SpotlightApp() {
     return () => { unlistenPromise.then(unlisten => unlisten()); };
   }, [theme, setTheme]);
 
-  // --- Focus Logic ---
   useEffect(() => {
     const unlistenPromise = appWindow.onFocusChanged(async ({ payload: isFocused }) => {
       if (isFocused) {
         await usePromptStore.persist.rehydrate();
+        await useAppStore.persist.rehydrate();
         setTimeout(() => inputRef.current?.focus(), 50);
         setSelectedIndex(0);
         setCopiedId(null);
@@ -64,23 +70,18 @@ export default function SpotlightApp() {
     return () => { unlistenPromise.then(f => f()); };
   }, []);
 
-  // --- Search Logic ---
   const filtered = useMemo(() => {
     if (mode === 'chat') return [];
-
     const rawQuery = query.trim().toLowerCase();
     if (!rawQuery) return allPrompts.slice(0, 20);
-
     const terms = rawQuery.split(/\s+/).filter(t => t.length > 0);
     const results: ScoredPrompt[] = [];
-
     for (const p of allPrompts) {
       let score = 0;
       const title = p.title.toLowerCase();
       const content = p.content.toLowerCase();
       const group = p.group.toLowerCase();
       let isMatch = true;
-
       for (const term of terms) {
         let termScore = 0;
         if (title.includes(term)) {
@@ -101,7 +102,6 @@ export default function SpotlightApp() {
     return results.sort((a, b) => b.score - a.score).slice(0, 20);
   }, [query, allPrompts, mode]);
 
-  // --- Height Calculation ---
   useLayoutEffect(() => {
     let finalHeight = 120;
     if (mode === 'search') {
@@ -109,12 +109,12 @@ export default function SpotlightApp() {
         const totalIdealHeight = FIXED_HEIGHT + listHeight;
         finalHeight = Math.min(Math.max(totalIdealHeight, 120), MAX_WINDOW_HEIGHT);
     } else {
-        finalHeight = 400; 
+        // 如果有消息，窗口变高；没有消息，保持紧凑的空状态高度
+        finalHeight = messages.length > 0 ? MAX_CHAT_HEIGHT : 300;
     }
     appWindow.setSize(new LogicalSize(640, finalHeight));
-  }, [filtered, query, selectedIndex, mode]);
+  }, [filtered, query, selectedIndex, mode, messages.length]);
 
-  // --- Actions ---
   const handleCopy = async (prompt: Prompt) => {
     if (!prompt) return;
     try {
@@ -134,7 +134,58 @@ export default function SpotlightApp() {
     setTimeout(() => inputRef.current?.focus(), 10);
   };
 
-  // --- Keyboard ---
+  const handleSendToAI = async () => {
+      if (!chatInput.trim() || isStreaming) return;
+      
+      const userText = chatInput.trim();
+      setChatInput('');
+      
+      const newMessages: ChatMessage[] = [
+          ...messages,
+          { role: 'user', content: userText }
+      ];
+      setMessages(newMessages);
+      setIsStreaming(true);
+
+      setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+
+      await streamChatCompletion(
+          newMessages,
+          aiConfig,
+          (delta) => {
+              setMessages(current => {
+                  const updated = [...current];
+                  const lastIndex = updated.length - 1;
+                  const lastMsg = updated[lastIndex];
+
+                  if (lastMsg.role === 'assistant') {
+                      updated[lastIndex] = {
+                          ...lastMsg,
+                          content: lastMsg.content + delta
+                      };
+                  }
+                  return updated;
+              });
+          },
+          (err) => {
+              setMessages(current => {
+                  const updated = [...current];
+                  updated[updated.length - 1].content += `\n\n**[Error]**: ${err}`;
+                  return updated;
+              });
+          },
+          () => {
+              setIsStreaming(false);
+          }
+      );
+  };
+
+  useEffect(() => {
+      if (mode === 'chat' && chatEndRef.current) {
+          chatEndRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+  }, [messages, mode]);
+
   useEffect(() => {
     const handleGlobalKeyDown = async (e: KeyboardEvent) => {
       if (e.isComposing) return;
@@ -167,15 +218,14 @@ export default function SpotlightApp() {
       } else {
           if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault();
-              console.log('Send to AI:', chatInput);
+              handleSendToAI();
           }
       }
     };
     document.addEventListener('keydown', handleGlobalKeyDown);
     return () => document.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [filtered, selectedIndex, query, mode, chatInput]);
+  }, [filtered, selectedIndex, query, mode, chatInput, isStreaming, messages]);
 
-  // Auto Scroll
   useEffect(() => {
     if (mode === 'search' && listRef.current && filtered.length > 0) {
         const activeItem = listRef.current.children[selectedIndex] as HTMLElement;
@@ -187,7 +237,6 @@ export default function SpotlightApp() {
 
   return (
     <>
-      {/* ✨ 注入一个局部样式来实现缓慢流动的关键帧动画 */}
       <style>{`
         @keyframes gradient-flow {
           0% { background-position: 0% 50%; }
@@ -195,30 +244,27 @@ export default function SpotlightApp() {
           100% { background-position: 0% 50%; }
         }
         .animate-gradient-flow {
-          background-size: 400% 400%; /* 放大背景以允许移动 */
-          animation: gradient-flow 10s ease infinite; /* 10秒循环一次，非常缓慢 */
+          background-size: 400% 400%;
+          animation: gradient-flow 10s ease infinite;
         }
+        /* Markdown 样式微调 */
+        .markdown-body p { margin-bottom: 0.5em; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body pre { margin: 0.5em 0; border-radius: 0.375rem; overflow: hidden; }
+        .markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.9em; }
       `}</style>
 
       <div className="w-screen h-screen flex flex-col items-center p-1 bg-transparent font-sans overflow-hidden">
         <div className="w-full h-full flex flex-col bg-background/95 backdrop-blur-2xl border border-border/50 rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 relative overflow-hidden">
           
-          {/* 柔和的背景流动层 */}
+          {/* 背景流动层 */}
           <div 
               className={cn(
                   "absolute inset-0 pointer-events-none transition-opacity duration-1000 ease-in-out",
-                  // 仅在 Chat 模式显示
                   mode === 'chat' ? "opacity-100" : "opacity-0"
               )}
           >
-              {/* 
-                  1. 使用 animate-gradient-flow 类(上方style定义的) 
-                  2. 颜色使用了 /10 的极低透明度
-                  3. 颜色跨度：靛蓝 -> 紫 -> 粉 -> 青
-              */}
               <div className="absolute inset-0 animate-gradient-flow bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />
-              
-              {/* 顶部叠加一层静态微光，增加通透感 */}
               <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-purple-500/5 to-transparent" />
           </div>
 
@@ -227,11 +273,9 @@ export default function SpotlightApp() {
             data-tauri-drag-region 
             className={cn(
                "h-16 shrink-0 flex items-center px-5 gap-4 border-b transition-colors duration-300 cursor-move relative z-10",
-               // AI 模式下，分割线变色
                mode === 'chat' ? "border-purple-500/20" : "border-border/40"
             )}
           >
-            {/* 图标切换按钮 */}
             <button 
               onClick={toggleMode}
               className="w-6 h-6 flex items-center justify-center relative outline-none group"
@@ -257,7 +301,6 @@ export default function SpotlightApp() {
               spellCheck={false}
             />
             
-            {/* 右侧提示 */}
             <div className="flex items-center gap-2 pointer-events-none opacity-50 relative z-10">
                <span className={cn(
                    "text-[10px] px-1.5 py-0.5 rounded font-medium border transition-colors duration-300",
@@ -341,18 +384,83 @@ export default function SpotlightApp() {
                   )}
                   </div>
               ) : (
-                  // --- Chat Mode (Placeholder) ---
-                  <div className="flex-1 p-6 overflow-y-auto custom-scrollbar flex flex-col items-center justify-center text-muted-foreground animate-in fade-in slide-in-from-bottom-2 duration-500">
-                      <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-4 text-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.15)] animate-pulse">
-                          <Sparkles size={24} />
-                      </div>
-                      <h3 className="text-foreground font-medium mb-1">AI Assistant Ready</h3>
-                      <p className="text-xs text-center max-w-[200px] opacity-70 leading-relaxed">
-                          Type your question and press Enter to start chatting with <span className="text-purple-500 font-medium">{useAppStore.getState().aiConfig.providerId}</span>.
-                      </p>
-                      <div className="mt-8 text-[10px] opacity-40 font-mono bg-background/50 border border-border/50 px-2 py-1 rounded">
-                          Ephemeral Mode (History not saved)
-                      </div>
+                  // --- Chat Mode (Fixed) ---
+                  <div className="flex-1 p-4 overflow-y-auto custom-scrollbar flex flex-col gap-4">
+                      
+                      {messages.length === 0 ? (
+                           // 空状态 (Empty State)
+                           <div className="flex-1 flex flex-col items-center justify-start text-muted-foreground animate-in fade-in slide-in-from-bottom-2 duration-500">
+                               <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-4 text-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.15)] animate-pulse">
+                                   <Sparkles size={24} />
+                               </div>
+                               <h3 className="text-foreground font-medium mb-1">AI Assistant Ready</h3>
+                               <p className="text-xs text-center max-w-[200px] opacity-70 leading-relaxed">
+                                   Type your question and press Enter to start chatting with <span className="text-purple-500 font-medium">{useAppStore.getState().aiConfig.providerId}</span>.
+                               </p>
+                               <div className="mt-8 text-[10px] opacity-40 font-mono bg-background/50 border border-border/50 px-2 py-1 rounded">
+                                   Ephemeral Mode (History not saved)
+                               </div>
+                           </div>
+                      ) : (
+                          // 消息列表 (Message List)
+                          <div className="space-y-4 pb-2">
+                               {messages.map((msg, idx) => (
+                                   <div key={idx} className={cn(
+                                       "flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300", 
+                                       msg.role === 'user' ? "flex-row-reverse" : "flex-row"
+                                   )}>
+                                       {/* 头像 */}
+                                       <div className={cn(
+                                           "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm",
+                                           msg.role === 'user' 
+                                              ? "bg-secondary/80 border-border text-foreground" 
+                                              : "bg-purple-500/10 border-purple-500/20 text-purple-500"
+                                       )}>
+                                           {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
+                                       </div>
+
+                                       {/* 气泡 */}
+                                       <div className={cn(
+                                           "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm border",
+                                           msg.role === 'user'
+                                              ? "bg-primary text-primary-foreground border-primary/50 rounded-tr-sm"
+                                              : "bg-secondary/50 border-border/50 text-foreground rounded-tl-sm markdown-body"
+                                       )}>
+                                           {msg.role === 'user' ? (
+                                               <div className="whitespace-pre-wrap">{msg.content}</div>
+                                           ) : (
+                                               <ReactMarkdown
+                                                   remarkPlugins={[remarkGfm]}
+                                                   components={{
+                                                       code({node, inline, className, children, ...props}: any) {
+                                                           const match = /language-(\w+)/.exec(className || '')
+                                                           return !inline && match ? (
+                                                               <SyntaxHighlighter
+                                                                   style={vscDarkPlus}
+                                                                   language={match[1]}
+                                                                   PreTag="div"
+                                                                   {...props}
+                                                               >
+                                                                   {String(children).replace(/\n$/, '')}
+                                                               </SyntaxHighlighter>
+                                                           ) : (
+                                                               <code className={cn("bg-black/20 px-1 py-0.5 rounded font-mono", className)} {...props}>
+                                                                   {children}
+                                                               </code>
+                                                           )
+                                                       }
+                                                   }}
+                                               >
+                                                   {msg.content || (isStreaming && idx === messages.length -1 ? "..." : "")}
+                                               </ReactMarkdown>
+                                           )}
+                                       </div>
+                                   </div>
+                               ))}
+                               {/* 底部锚点 */}
+                               <div ref={chatEndRef} />
+                          </div>
+                      )}
                   </div>
               )}
           </div>
@@ -362,8 +470,9 @@ export default function SpotlightApp() {
               data-tauri-drag-region
               className="h-8 shrink-0 bg-secondary/30 border-t border-border/40 flex items-center justify-between px-4 text-[10px] text-muted-foreground/60 select-none backdrop-blur-sm cursor-move relative z-10"
           >
-              <span className="pointer-events-none">
+              <span className="pointer-events-none flex items-center gap-2">
                   {mode === 'search' ? `${filtered.length} results` : 'AI Console'}
+                  {isStreaming && <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />}
               </span>
               <div className="flex gap-4 pointer-events-none">
                   {mode === 'search' ? (
