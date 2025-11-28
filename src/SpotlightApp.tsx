@@ -77,10 +77,6 @@ export default function SpotlightApp() {
         
         setSelectedIndex(0);
         setCopiedId(null);
-        
-        if (allPrompts.length === 0) {
-            initStore();
-        }
       } 
     });
     return () => { unlisten.then(f => f()); };
