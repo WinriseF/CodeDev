@@ -25,10 +25,10 @@ export default function SpotlightApp() {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   
-  const { getAllPrompts, initStore, localPrompts, repoPrompts } = usePromptStore();
+  const { getAllPrompts, initStore } = usePromptStore();
   const { theme, setTheme } = useAppStore(); 
   
-  const allPrompts = useMemo(() => getAllPrompts(), [getAllPrompts, localPrompts, repoPrompts]);
+  const allPrompts = getAllPrompts();
 
   // --- 初始化与同步 ---
   useEffect(() => { initStore(); }, []);
@@ -84,7 +84,7 @@ export default function SpotlightApp() {
       } 
     });
     return () => { unlisten.then(f => f()); };
-  }, [allPrompts.length]);
+  }, []);
 
   // --- 智能搜索算法 ---
   const filtered = useMemo(() => {
