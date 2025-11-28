@@ -65,9 +65,14 @@ export default function SpotlightApp() {
 
   // --- Focus Logic ---
   useEffect(() => {
-    const unlisten = appWindow.onFocusChanged(async ({ payload: isFocused }) => {
+    const unlistenPromise = appWindow.onFocusChanged(async ({ payload: isFocused }) => {
       if (isFocused) {
-        // 延迟一小会儿，等待 React 渲染完成
+        console.log('[Spotlight] Window focused, hydrating data...');
+        
+        // 强制从硬盘重载数据 (同步主窗口的修改)
+        await usePromptStore.persist.rehydrate();
+        
+        // UI 交互优化
         setTimeout(() => {
             if (inputRef.current) {
                 inputRef.current.focus();
@@ -79,7 +84,10 @@ export default function SpotlightApp() {
         setCopiedId(null);
       } 
     });
-    return () => { unlisten.then(f => f()); };
+    
+    return () => { 
+        unlistenPromise.then(f => f()); 
+    };
   }, []);
 
   // --- 智能搜索算法 ---

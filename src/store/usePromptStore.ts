@@ -5,6 +5,7 @@ import { fileStorage } from '@/lib/storage';
 import { Prompt, DEFAULT_GROUP, PackManifest, PackManifestItem } from '@/types/prompt';
 import { fetch } from '@tauri-apps/api/http';
 import { emit } from '@tauri-apps/api/event';
+import { appWindow } from '@tauri-apps/api/window'
 
 // 多源 URL 配置 (GitHub + Gitee)
 const MANIFEST_URLS = [
@@ -329,7 +330,27 @@ export const usePromptStore = create<PromptState>()(
     }),
     {
       name: 'prompts-data',
-      storage: createJSONStorage(() => fileStorage),
+      storage: createJSONStorage(() => ({
+        // 读操作：所有窗口都可以读取
+        getItem: fileStorage.getItem,
+        // 写操作：核心拦截逻辑
+        setItem: async (name, value) => {
+          // 获取当前窗口的 label
+          const label = appWindow.label;
+          // 如果是 spotlight 窗口，禁止写入，直接返回
+          if (label === 'spotlight') {
+            return;
+          }
+          // 只有主窗口可以写入硬盘
+          return fileStorage.setItem(name, value);
+        },
+        // 禁止 spotlight 删除数据文件
+        removeItem: async (name) => {
+          if (appWindow.label === 'spotlight') return;
+          return fileStorage.removeItem(name);
+        }
+      })),
+
       // 只持久化本地数据
       partialize: (state) => ({
         localPrompts: state.localPrompts,
@@ -337,6 +358,7 @@ export const usePromptStore = create<PromptState>()(
         installedPackIds: state.installedPackIds
       }),
 
+      // 用于启动时加载外部指令包
       onRehydrateStorage: () => {
         return (state, _error) => {
           if (state) {
