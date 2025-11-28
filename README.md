@@ -132,6 +132,19 @@ Spotlight 是一个始终置顶的悬浮窗，拥有两种模式，按 **`Tab`**
 *   **Windows**: `.msi` 或 `.exe`
 ---
 
+## 关于报毒
+
+启动应用时，你可能会看到 **“Windows 已保护你的电脑” (Microsoft Defender SmartScreen)** 的蓝色拦截窗口。
+
+**这是正常现象**。因为 CodeForge AI 是一个由个人维护的开源项目，没有购买昂贵的微软数字签名证书 (EV Code Signing Certificate)，所以会被系统标记为“未知发布者”。
+
+**如何运行：**
+1. 在蓝色拦截窗口中，点击 **<u>更多信息 (More info)</u>**。
+2. 点击下方出现的 **仍要运行 (Run anyway)** 按钮。
+
+> 🔒 **安全承诺**：本项目完全开源，构建过程由 GitHub Actions 自动化完成，绝不包含任何恶意代码。如果您仍有顾虑，欢迎审查源码自行构建。
+![alt text](images/ScreenShot_2025-11-28_205723_002.png)
+
 *CodeForge AI - Forge your code with intelligence.*
 
 ## 致谢与开源声明 (Credits)
