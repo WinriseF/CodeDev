@@ -1,9 +1,6 @@
-// src/components/features/patch/patch_types.ts
-
 export type PatchMode = 'patch' | 'diff';
 
 export interface PatchOperation {
-  type: 'replace' | 'insert_after';
   originalBlock: string;
   modifiedBlock: string;
 }
@@ -19,6 +16,8 @@ export interface PatchFileItem {
   original: string;
   modified: string;
   status: 'pending' | 'success' | 'error';
+  // 如果 status 是 error，这里存储具体的失败原因
   errorMsg?: string;
-  isManual?: boolean; // ✨ 新增：标记是否为手动对比模式的草稿
+  // 标记是否为手动模式
+  isManual?: boolean;
 }

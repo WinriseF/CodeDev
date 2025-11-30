@@ -1,168 +1,182 @@
-import yaml from 'js-yaml';
-import { PatchOperation, FilePatch } from '@/components/features/patch/patch_types';
+import { FilePatch, PatchOperation } from '@/components/features/patch/patch_types';
 
-// 定义应用结果接口
 export interface ApplyResult {
   modified: string;
   success: boolean;
   errors: string[];
 }
 
-interface YamlPatchItem {
-  file?: string;
-  replace?: {
-    original: string;
-    modified: string;
-    context_before?: string;
-    context_after?: string;
-  };
-  insert_after?: {
-    anchor: string;
-    content: string;
-  };
-}
-
 /**
- * 解析 YAML
+ * 解析 SEARCH/REPLACE 格式
+ * 格式示例:
+ * <<<<<<< SEARCH
+ * original code
+ * =======
+ * new code
+ * >>>>>>> REPLACE
  */
-export function parseMultiFilePatch(yamlContent: string): FilePatch[] {
+export function parseMultiFilePatch(text: string): FilePatch[] {
   const filePatches: FilePatch[] = [];
-  let currentFile: FilePatch | null = null;
+  
+  // 1. 按文件块分割 (支持 ### File: path 或 File: path)
+  const fileRegex = /(?:^|\n)#{0,3}\s*File:\s*(.+?)(?=\n|$)/gi;
+  let match;
+  
+  // 找出所有文件的起始位置
+  const fileMatches: { path: string, start: number }[] = [];
+  while ((match = fileRegex.exec(text)) !== null) {
+    fileMatches.push({ path: match[1].trim(), start: match.index });
+  }
 
-  // 预处理：有些 AI 会在 YAML 外面包一层 ```yaml，先去除
-  const cleanYaml = yamlContent.replace(/```yaml/g, '').replace(/```/g, '').trim();
-
-  try {
-    const doc = yaml.load(cleanYaml);
-    if (!Array.isArray(doc)) return [];
-
-    for (const item of doc as YamlPatchItem[]) {
-      if (item.file) {
-        let existing = filePatches.find(f => f.filePath === item.file);
-        if (!existing) {
-          existing = { filePath: item.file, operations: [] };
-          filePatches.push(existing);
-        }
-        currentFile = existing;
-      }
-
-      // 如果没有 file 字段但有操作，归属到上一个文件或 unknown
-      if (!currentFile && (item.replace || item.insert_after)) {
-         currentFile = { filePath: 'unknown_file', operations: [] };
-         filePatches.push(currentFile);
-      }
-
-      if (!currentFile) continue;
-
-      if (item.replace) {
-        const { original, modified, context_before = '', context_after = '' } = item.replace;
-        // 拼接上下文，增加定位准确度
-        const originalBlock = [context_before, original, context_after].filter(Boolean).join('\n');
-        const modifiedBlock = [context_before, modified, context_after].filter(Boolean).join('\n');
-        
-        currentFile.operations.push({
-          type: 'replace',
-          originalBlock,
-          modifiedBlock,
-        });
-      } else if (item.insert_after) {
-        const { anchor, content } = item.insert_after;
-        currentFile.operations.push({
-          type: 'insert_after',
-          originalBlock: anchor,
-          modifiedBlock: `${anchor}\n${content}`,
-        });
-      }
+  if (fileMatches.length === 0) {
+    // 没找到文件标记，尝试当做单文件处理（或者是纯 Block）
+    const ops = parseOperations(text);
+    if (ops.length > 0) {
+      filePatches.push({ filePath: 'current_file', operations: ops });
     }
-  } catch (e) {
-    console.error("YAML Parse Error", e);
+    return filePatches;
+  }
+
+  // 2. 解析每个文件的内容
+  for (let i = 0; i < fileMatches.length; i++) {
+    const current = fileMatches[i];
+    const next = fileMatches[i+1];
+    const end = next ? next.start : text.length;
+    
+    const content = text.substring(current.start, end);
+    const ops = parseOperations(content);
+    
+    if (ops.length > 0) {
+        filePatches.push({
+            filePath: current.path,
+            operations: ops
+        });
+    }
   }
 
   return filePatches;
 }
 
-/**
- * 辅助：标准化代码字符串（移除所有空白符，用于模糊匹配定位）
- */
-function normalizeToStream(str: string): string {
-    return str.replace(/\s+/g, '');
+function parseOperations(content: string): PatchOperation[] {
+  const ops: PatchOperation[] = [];
+  // 匹配 Search/Replace 块
+  // 允许 <<<<<<< SEARCH 或 <<<<<<< search
+  const blockRegex = /<{5,}\s*SEARCH\s*([\s\S]*?)\s*={5,}\s*([\s\S]*?)\s*>{5,}\s*REPLACE/gi;
+  
+  let match;
+  while ((match = blockRegex.exec(content)) !== null) {
+    ops.push({
+      originalBlock: match[1], // 不trim，保留内部结构，外层空白在apply时处理
+      modifiedBlock: match[2]
+    });
+  }
+  return ops;
 }
 
 /**
- * 核心：应用补丁（带三级容错）
+ * 核心算法：基于 Token 映射的模糊替换
  */
 export function applyPatches(originalCode: string, operations: PatchOperation[]): ApplyResult {
-  let resultCode = originalCode.replace(/\r\n/g, '\n'); // 统一换行符
+  let currentCode = originalCode; // 不要在循环外统一 replace 换行符，保持原样最好
   const errors: string[] = [];
-  let successCount = 0;
 
   for (const op of operations) {
-    const searchBlock = op.originalBlock.replace(/\r\n/g, '\n').trim();
-    const replaceBlock = op.modifiedBlock.replace(/\r\n/g, '\n').trim();
+    const searchBlock = op.originalBlock;
+    const replaceBlock = op.modifiedBlock;
 
-    if (!searchBlock) continue;
-
-    // --- 策略 1: 严格全字匹配 ---
-    if (resultCode.includes(searchBlock)) {
-      resultCode = resultCode.replace(searchBlock, replaceBlock);
-      successCount++;
+    // 1. 尝试精确匹配 (最快，最安全)
+    if (currentCode.includes(searchBlock)) {
+      currentCode = currentCode.replace(searchBlock, replaceBlock);
       continue;
     }
 
-    // --- 策略 2: 宽松匹配 (忽略首尾空格) ---
-    const searchLines = searchBlock.split('\n').map(l => l.trim());
-    const sourceLines = resultCode.split('\n');
-    
-    let matchFound = false;
-    
-    // 简单的滑动窗口匹配
-    for (let i = 0; i <= sourceLines.length - searchLines.length; i++) {
-        let isMatch = true;
-        for (let j = 0; j < searchLines.length; j++) {
-            if (sourceLines[i + j].trim() !== searchLines[j]) {
-                isMatch = false;
-                break;
-            }
-        }
-
-        if (isMatch) {
-            // 找到了！替换 sourceLines 从 i 到 i + searchLines.length 的内容
-            const before = sourceLines.slice(0, i);
-            const after = sourceLines.slice(i + searchLines.length);
-            
-            // 插入新的块
-            resultCode = [...before, replaceBlock, ...after].join('\n');
-            matchFound = true;
-            successCount++;
-            break;
-        }
+    // 2. 尝试标准化换行符匹配 (解决 Windows/Linux 差异)
+    const normalizedCode = currentCode.replace(/\r\n/g, '\n');
+    const normalizedSearch = searchBlock.replace(/\r\n/g, '\n');
+    if (normalizedCode.includes(normalizedSearch)) {
+       // 如果匹配到了，我们需要用正则去替换，因为 currentCode 可能包含 \r
+       // 简单的做法是把 currentCode 也转成 LF (这通常是可以接受的)
+       currentCode = normalizedCode.replace(normalizedSearch, replaceBlock);
+       continue;
     }
 
-    if (matchFound) continue;
-
-    // --- 策略 3: 极简流式匹配 (最后手段) ---
-    // 用于区分 "完全找不到" 还是 "格式太乱导致无法自动应用"
-    if (searchBlock.length > 10) {
-        const normSearch = normalizeToStream(searchBlock);
-        const normSource = normalizeToStream(resultCode);
-        
-        // 真正使用了 normSource 和 normSearch
-        if (normSource.includes(normSearch)) {
-            // 代码内容存在，但空白符/换行符差异太大，导致策略2失败
-            // 这种情况下很难自动安全替换，因为不知道 replaceBlock 应该插入的具体索引
-            errors.push(`Found content but format differs significantly: "${searchBlock.substring(0, 30)}..."`);
-        } else {
-            // 连压缩后的内容都找不到，说明代码真的不存在
-            errors.push(`Block not found: "${searchBlock.substring(0, 30)}..."`);
-        }
+    // 3. 终极武器：基于无空白 Token 流的锚点匹配 (Fuzzy Anchor)
+    // 这能解决缩进、空行不一致的问题
+    const matchResult = fuzzyReplace(currentCode, searchBlock, replaceBlock);
+    if (matchResult.success) {
+        currentCode = matchResult.newCode;
     } else {
-        errors.push(`Block not found (too short): "${searchBlock.substring(0, 30)}..."`);
+        errors.push(`Could not locate block:\n${searchBlock.substring(0, 50)}...`);
     }
   }
 
   return {
-      modified: resultCode,
-      success: errors.length === 0,
-      errors
+    modified: currentCode,
+    success: errors.length === 0,
+    errors
   };
+}
+
+/**
+ * 模糊替换算法
+ * 原理：生成无空白的字符流，并记录映射关系。在流中找到位置后，映射回原字符串的索引。
+ */
+function fuzzyReplace(source: string, search: string, replacement: string): { success: boolean, newCode: string } {
+    // 1. 构建源文件的 Token 映射表
+    // map[i] = j 表示：去除空白后的第 i 个字符，对应原字符串的索引 j
+    const sourceMap: number[] = [];
+    let sourceStream = '';
+    
+    for (let i = 0; i < source.length; i++) {
+        const char = source[i];
+        if (!/\s/.test(char)) { // 如果不是空白字符
+            sourceStream += char;
+            sourceMap.push(i);
+        }
+    }
+
+    // 2. 构建搜索块的 Token 流
+    const searchStream = search.replace(/\s/g, '');
+
+    if (searchStream.length === 0) return { success: false, newCode: source };
+
+    // 3. 在流中查找
+    const streamIndex = sourceStream.indexOf(searchStream);
+
+    if (streamIndex === -1) {
+        return { success: false, newCode: source };
+    }
+
+    // 4. 映射回原字符串索引
+    // 开始索引：流中匹配到的第一个字符在原字符串的位置
+    const originalStartIndex = sourceMap[streamIndex];
+    
+    // 结束索引：流中匹配到的最后一个字符在原字符串的位置 + 1
+    // 注意：searchStream.length 是流长度
+    const lastCharIndexInStream = streamIndex + searchStream.length - 1;
+    
+    // 我们需要包含最后一个字符，所以 slice 的 end 应该是索引+1
+    // 但这只能覆盖到最后一个非空字符。
+    // 为了更自然，我们需要尝试“贪婪”匹配到行尾吗？
+    // 简单策略：直接取最后一个非空字符的位置+1
+    const originalEndIndex = sourceMap[lastCharIndexInStream] + 1;
+
+    // 5. 执行替换
+    // 我们保留 originalStartIndex 之前的部分，和 originalEndIndex 之后的部分
+    // 中间替换为 replacement
+    // ⚠️ 注意：这种替换会丢失 searchBlock 内部原有的缩进风格，而用 replacement 完全替代
+    // 这通常是符合预期的，因为 replacement 是 AI 写的新代码
+    
+    // 进阶优化：尝试扩展 originalEndIndex 到行尾（如果后面只有空白）
+    // 这样可以避免留下奇怪的空行
+    let finalEndIndex = originalEndIndex;
+    while (finalEndIndex < source.length && /[ \t]/.test(source[finalEndIndex])) {
+        finalEndIndex++;
+    }
+    // 如果碰到了换行符，把换行符留给下一行，或者包含进去？
+    // 通常保留换行符比较安全
+
+    const newCode = source.slice(0, originalStartIndex) + replacement + source.slice(finalEndIndex);
+    
+    return { success: true, newCode };
 }
