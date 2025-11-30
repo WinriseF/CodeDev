@@ -1,6 +1,13 @@
 import yaml from 'js-yaml';
 import { PatchOperation, FilePatch } from '@/components/features/patch/patch_types';
 
+// 定义应用结果接口
+export interface ApplyResult {
+  modified: string;
+  success: boolean;
+  errors: string[];
+}
+
 interface YamlPatchItem {
   file?: string;
   replace?: {
@@ -16,14 +23,17 @@ interface YamlPatchItem {
 }
 
 /**
- * 解析多文件 YAML Patch (保持不变)
+ * 解析 YAML
  */
 export function parseMultiFilePatch(yamlContent: string): FilePatch[] {
   const filePatches: FilePatch[] = [];
   let currentFile: FilePatch | null = null;
 
+  // 预处理：有些 AI 会在 YAML 外面包一层 ```yaml，先去除
+  const cleanYaml = yamlContent.replace(/```yaml/g, '').replace(/```/g, '').trim();
+
   try {
-    const doc = yaml.load(yamlContent);
+    const doc = yaml.load(cleanYaml);
     if (!Array.isArray(doc)) return [];
 
     for (const item of doc as YamlPatchItem[]) {
@@ -36,30 +46,31 @@ export function parseMultiFilePatch(yamlContent: string): FilePatch[] {
         currentFile = existing;
       }
 
+      // 如果没有 file 字段但有操作，归属到上一个文件或 unknown
       if (!currentFile && (item.replace || item.insert_after)) {
          currentFile = { filePath: 'unknown_file', operations: [] };
          filePatches.push(currentFile);
       }
 
-      if (item.replace && currentFile) {
+      if (!currentFile) continue;
+
+      if (item.replace) {
         const { original, modified, context_before = '', context_after = '' } = item.replace;
-        const originalBlock = `${context_before}\n${original}\n${context_after}`.trim();
-        const modifiedBlock = `${context_before}\n${modified}\n${context_after}`.trim();
+        // 拼接上下文，增加定位准确度
+        const originalBlock = [context_before, original, context_after].filter(Boolean).join('\n');
+        const modifiedBlock = [context_before, modified, context_after].filter(Boolean).join('\n');
         
         currentFile.operations.push({
           type: 'replace',
-          originalBlock, // 注意：这里的 block 可能会被 parser 去掉首尾空行，下面 apply 时会处理
-          modifiedBlock,
-        });
-      } else if (item.insert_after && currentFile) {
-        const { anchor, content } = item.insert_after;
-        const originalBlock = anchor.trim();
-        const modifiedBlock = `${anchor}\n${content}`.trim();
-
-        currentFile.operations.push({
-          type: 'insert_after',
           originalBlock,
           modifiedBlock,
+        });
+      } else if (item.insert_after) {
+        const { anchor, content } = item.insert_after;
+        currentFile.operations.push({
+          type: 'insert_after',
+          originalBlock: anchor,
+          modifiedBlock: `${anchor}\n${content}`,
         });
       }
     }
@@ -71,43 +82,87 @@ export function parseMultiFilePatch(yamlContent: string): FilePatch[] {
 }
 
 /**
- * 增加了换行符标准化和容错匹配
+ * 辅助：标准化代码字符串（移除所有空白符，用于模糊匹配定位）
  */
-export function applyPatches(originalCode: string, operations: PatchOperation[]): string {
-  // 1. 统一原代码的换行符为 LF (\n)，解决 Windows CRLF 问题
-  let resultCode = originalCode.replace(/\r\n/g, '\n');
+function normalizeToStream(str: string): string {
+    return str.replace(/\s+/g, '');
+}
+
+/**
+ * 核心：应用补丁（带三级容错）
+ */
+export function applyPatches(originalCode: string, operations: PatchOperation[]): ApplyResult {
+  let resultCode = originalCode.replace(/\r\n/g, '\n'); // 统一换行符
+  const errors: string[] = [];
+  let successCount = 0;
 
   for (const op of operations) {
-    // 2. 同样标准化补丁块的换行符
-    const searchBlock = op.originalBlock.replace(/\r\n/g, '\n');
-    const replaceBlock = op.modifiedBlock.replace(/\r\n/g, '\n');
+    const searchBlock = op.originalBlock.replace(/\r\n/g, '\n').trim();
+    const replaceBlock = op.modifiedBlock.replace(/\r\n/g, '\n').trim();
 
-    // 3. 尝试严格匹配
+    if (!searchBlock) continue;
+
+    // --- 策略 1: 严格全字匹配 ---
     if (resultCode.includes(searchBlock)) {
       resultCode = resultCode.replace(searchBlock, replaceBlock);
-    } 
-    // 4. 容错匹配：如果严格匹配失败，尝试忽略首尾空白进行匹配
-    // (AI 生成的代码块经常在末尾多一个换行或少一个空格)
-    else {
-      const trimmedSearch = searchBlock.trim();
-      // 在代码中查找去掉首尾空白的版本
-      const idx = resultCode.indexOf(trimmedSearch);
-      
-      if (idx !== -1) {
-        // 找到了！构建新的字符串
-        const before = resultCode.substring(0, idx);
-        // 跳过原文中对应长度的内容
-        const after = resultCode.substring(idx + trimmedSearch.length);
+      successCount++;
+      continue;
+    }
+
+    // --- 策略 2: 宽松匹配 (忽略首尾空格) ---
+    const searchLines = searchBlock.split('\n').map(l => l.trim());
+    const sourceLines = resultCode.split('\n');
+    
+    let matchFound = false;
+    
+    // 简单的滑动窗口匹配
+    for (let i = 0; i <= sourceLines.length - searchLines.length; i++) {
+        let isMatch = true;
+        for (let j = 0; j < searchLines.length; j++) {
+            if (sourceLines[i + j].trim() !== searchLines[j]) {
+                isMatch = false;
+                break;
+            }
+        }
+
+        if (isMatch) {
+            // 找到了！替换 sourceLines 从 i 到 i + searchLines.length 的内容
+            const before = sourceLines.slice(0, i);
+            const after = sourceLines.slice(i + searchLines.length);
+            
+            // 插入新的块
+            resultCode = [...before, replaceBlock, ...after].join('\n');
+            matchFound = true;
+            successCount++;
+            break;
+        }
+    }
+
+    if (matchFound) continue;
+
+    // --- 策略 3: 极简流式匹配 (最后手段) ---
+    // 用于区分 "完全找不到" 还是 "格式太乱导致无法自动应用"
+    if (searchBlock.length > 10) {
+        const normSearch = normalizeToStream(searchBlock);
+        const normSource = normalizeToStream(resultCode);
         
-        // 插入修改后的块 (也建议 trim 一下以防 AI 引入多余空行，或者根据情况保留)
-        // 这里选择 trim() 后的 replaceBlock 以保持紧凑，通常更加安全
-        resultCode = before + replaceBlock.trim() + after;
-        
-        console.log(`[Patch] Applied fuzzy match for block starting with: ${trimmedSearch.substring(0, 20)}...`);
-      } else {
-        console.warn(`[Patch] Failed to match block. Strict and fuzzy search failed.\nBlock:\n${searchBlock}`);
-      }
+        // 真正使用了 normSource 和 normSearch
+        if (normSource.includes(normSearch)) {
+            // 代码内容存在，但空白符/换行符差异太大，导致策略2失败
+            // 这种情况下很难自动安全替换，因为不知道 replaceBlock 应该插入的具体索引
+            errors.push(`Found content but format differs significantly: "${searchBlock.substring(0, 30)}..."`);
+        } else {
+            // 连压缩后的内容都找不到，说明代码真的不存在
+            errors.push(`Block not found: "${searchBlock.substring(0, 30)}..."`);
+        }
+    } else {
+        errors.push(`Block not found (too short): "${searchBlock.substring(0, 30)}..."`);
     }
   }
-  return resultCode;
+
+  return {
+      modified: resultCode,
+      success: errors.length === 0,
+      errors
+  };
 }
