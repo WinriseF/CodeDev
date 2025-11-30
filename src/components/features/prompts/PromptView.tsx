@@ -1,7 +1,7 @@
-import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback, useLayoutEffect } from 'react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore } from '@/store/useAppStore';
-import { Search, Plus, Folder, Star, Hash, Trash2, Layers, PanelLeft, AlertTriangle, Loader2, Terminal, Sparkles } from 'lucide-react';
+import { Search, Plus, Folder, Star, Hash, Trash2, Layers, PanelLeft, AlertTriangle, Terminal, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Prompt } from '@/types/prompt';
 import { writeText } from '@tauri-apps/api/clipboard';
@@ -22,7 +22,9 @@ function useDebounce<T>(value: T, delay: number): T {
   return debouncedValue;
 }
 
-const PAGE_SIZE = 24;
+// 常量定义：卡片高度(180px) + Grid Gap(16px)
+// 这是一个估算值，用于虚拟滚动计算占位高度
+const ITEM_HEIGHT = 196;
 
 export function PromptView() {
   const { 
@@ -37,7 +39,7 @@ export function PromptView() {
 
   const [activeCategory, setActiveCategory] = useState<'command' | 'prompt'>('prompt');
 
-  // 2. Toast 状态
+  // Toast 状态
   const [toastState, setToastState] = useState<{ show: boolean; msg: string; type: ToastType }>({
       show: false,
       msg: '',
@@ -51,7 +53,12 @@ export function PromptView() {
   const [fillVars, setFillVars] = useState<string[]>([]);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [promptToDelete, setPromptToDelete] = useState<Prompt | null>(null);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+  // --- Virtual Scroll State (虚拟滚动状态) ---
+  const [scrollTop, setScrollTop] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(800);
+  const [containerWidth, setContainerWidth] = useState(1000);
+
   const debouncedSearchQuery = useDebounce(searchQuery, 300); 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -125,23 +132,79 @@ export function PromptView() {
 
   }, [allPrompts, activeGroup, activeCategory, debouncedSearchQuery]);
 
-  const visiblePrompts = useMemo(() => filteredPrompts.slice(0, visibleCount), [filteredPrompts, visibleCount]);
+  // --- Virtualization Logic Start ---
 
+  // 1. 监听容器尺寸变化 (ResizeObserver)
+  useLayoutEffect(() => {
+    if (!scrollContainerRef.current) return;
+    
+    const updateSize = () => {
+      if (scrollContainerRef.current) {
+        setContainerWidth(scrollContainerRef.current.clientWidth);
+        setContainerHeight(scrollContainerRef.current.clientHeight);
+      }
+    };
+
+    updateSize(); // 初始化
+
+    const resizeObserver = new ResizeObserver(updateSize);
+    resizeObserver.observe(scrollContainerRef.current);
+
+    return () => resizeObserver.disconnect();
+  }, [isPromptSidebarOpen]); // 侧边栏展开/收起会改变主区域宽度
+
+  // 2. 监听滚动事件
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    setScrollTop(e.currentTarget.scrollTop);
+  }, []);
+
+  // 切换分组或搜索时，重置滚动条到顶部
   useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
     scrollContainerRef.current?.scrollTo(0, 0);
+    setScrollTop(0);
   }, [activeGroup, activeCategory, debouncedSearchQuery]);
 
-  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
-    if (scrollHeight - scrollTop - clientHeight < 200) {
-      if (visibleCount < filteredPrompts.length) {
-        setVisibleCount(prev => Math.min(prev + PAGE_SIZE, filteredPrompts.length));
-      }
-    }
-  }, [filteredPrompts.length, visibleCount]);
+  // 3. 计算当前 Grid 布局的列数 (Column Count)
+  // 这里的断点逻辑必须与 CSS Grid 类名 (md:grid-cols-2 lg:grid-cols-3 ...) 保持一致
+  const columnCount = useMemo(() => {
+     // 注意：需要减去 padding (p-4 md:p-6)，这里简化处理，直接用容器宽判断
+     const w = containerWidth;
+     if (w >= 1536) return 5; // 2xl
+     if (w >= 1280) return 4; // xl
+     if (w >= 1024) return 3; // lg
+     if (w >= 768) return 2;  // md
+     return 1;
+  }, [containerWidth]);
+
+  // 4. 核心计算：根据滚动位置计算需要渲染的数据切片
+  const { visibleItems, paddingTop, paddingBottom } = useMemo(() => {
+    const totalItems = filteredPrompts.length;
+    const totalRows = Math.ceil(totalItems / columnCount);
+    
+    // 缓冲区 (Buffer)：上下各多渲染 2 行，防止滚动太快出现白屏
+    const bufferRows = 2; 
+    
+    // 计算起始行和结束行
+    const startRow = Math.max(0, Math.floor(scrollTop / ITEM_HEIGHT) - bufferRows);
+    const visibleRowsCount = Math.ceil(containerHeight / ITEM_HEIGHT) + (2 * bufferRows);
+    const endRow = Math.min(totalRows, startRow + visibleRowsCount);
+
+    // 转换为数据索引
+    const startIndex = startRow * columnCount;
+    const endIndex = endRow * columnCount;
+
+    // 截取当前需要渲染的数据
+    const visibleItems = filteredPrompts.slice(startIndex, endIndex);
+    
+    // 计算占位填充高度 (Padding)
+    const paddingTop = startRow * ITEM_HEIGHT;
+    const paddingBottom = Math.max(0, (totalRows - endRow) * ITEM_HEIGHT);
+
+    return { visibleItems, paddingTop, paddingBottom };
+  }, [filteredPrompts, scrollTop, containerHeight, columnCount]);
+
+  // --- Virtualization Logic End ---
   
-  // 3. 触发器
   const triggerToast = (msg?: string) => { 
       setToastState({ 
           show: true, 
@@ -150,9 +213,10 @@ export function PromptView() {
       }); 
   };
 
-  const handleCreate = () => { setEditingPrompt(null); setIsEditorOpen(true); };
-  const handleEdit = (prompt: Prompt) => { setEditingPrompt(prompt); setIsEditorOpen(true); };
-  const handleDeleteClick = (prompt: Prompt) => { setPromptToDelete(prompt); setIsDeleteConfirmOpen(true); };
+  // 使用 useCallback 优化 Props 传递，避免子组件 PromptCard 重复渲染
+  const handleCreate = useCallback(() => { setEditingPrompt(null); setIsEditorOpen(true); }, []);
+  const handleEdit = useCallback((prompt: Prompt) => { setEditingPrompt(prompt); setIsEditorOpen(true); }, []);
+  const handleDeleteClick = useCallback((prompt: Prompt) => { setPromptToDelete(prompt); setIsDeleteConfirmOpen(true); }, []);
   
   const confirmDelete = () => {
     if (promptToDelete) {
@@ -162,7 +226,7 @@ export function PromptView() {
     }
   };
 
-  const handleTrigger = async (prompt: Prompt) => {
+  const handleTrigger = useCallback(async (prompt: Prompt) => {
     const vars = parseVariables(prompt.content);
     if (vars.length > 0) {
       setFillPrompt(prompt);
@@ -172,7 +236,7 @@ export function PromptView() {
       await writeText(prompt.content);
       triggerToast();
     }
-  };
+  }, [language]); // 依赖 language 是为了 triggerToast 中的文字
 
   const switchCategory = (cat: 'command' | 'prompt') => {
       setActiveCategory(cat);
@@ -264,30 +328,39 @@ export function PromptView() {
           </button>
         </header>
 
+        {/* Scrollable Area (虚拟滚动容器) */}
         <div 
             ref={scrollContainerRef}
             onScroll={handleScroll}
-            className="flex-1 overflow-y-auto p-4 md:p-6 scroll-smooth"
+            className="flex-1 overflow-y-auto p-4 md:p-6" // 移除 scroll-smooth 以提高虚拟滚动的响应速度
         >
-          <div className="max-w-[1600px] mx-auto">
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 pb-20">
-                {visiblePrompts.map(prompt => (
-                    <PromptCard key={prompt.id} prompt={prompt} onEdit={handleEdit} onDelete={handleDeleteClick} onTrigger={handleTrigger} />
-                ))}
+          <div className="max-w-[1600px] mx-auto min-h-full">
+             
+             {/* 虚拟滚动核心：使用 Padding 撑开高度，中间只渲染 visibleItems */}
+             <div style={{ paddingTop: `${paddingTop}px`, paddingBottom: `${paddingBottom}px` }}>
+                <div 
+                  className="grid gap-4"
+                  style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}
+                >
+                    {visibleItems.map(prompt => (
+                        <PromptCard 
+                          key={prompt.id} 
+                          prompt={prompt} 
+                          onEdit={handleEdit} 
+                          onDelete={handleDeleteClick} 
+                          onTrigger={handleTrigger} 
+                        />
+                    ))}
+                </div>
 
-                {visibleCount < filteredPrompts.length && (
-                    <div className="col-span-full flex justify-center py-6 text-muted-foreground">
-                        <Loader2 className="animate-spin w-6 h-6" />
-                    </div>
-                )}
-
-                {filteredPrompts.length === 0 && (
-                    <div className="col-span-full flex flex-col items-center justify-center py-20 text-muted-foreground opacity-60">
-                        <div className="w-16 h-16 bg-secondary/50 rounded-2xl flex items-center justify-center mb-4"><Search size={32} /></div>
-                        <p>{getText('prompts', 'noResults', language)}</p>
-                    </div>
-                )}
              </div>
+
+             {filteredPrompts.length === 0 && (
+                <div className="h-[60vh] flex flex-col items-center justify-center text-muted-foreground opacity-60">
+                    <div className="w-16 h-16 bg-secondary/50 rounded-2xl flex items-center justify-center mb-4"><Search size={32} /></div>
+                    <p>{getText('prompts', 'noResults', language)}</p>
+                </div>
+             )}
           </div>
         </div>
 
@@ -320,7 +393,7 @@ export function PromptView() {
           </div>
         )}
 
-        {/* ✨ 4. 使用统一的 Toast 组件 */}
+        {/* 全局 Toast */}
         <Toast 
             message={toastState.msg} 
             type={toastState.type} 
