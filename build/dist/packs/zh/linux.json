@@ -2088,7 +2088,7 @@
     "id": "tldr-zh-linux-a2dissite-1",
     "type": "command",
     "title": "a2dissite - 不显示信息性消息",
-    "content": "sudo a2dissite --quiet {{虚拟主机名}}",
+    "content": "sudo a2dissite {{[-q|--quiet]}} {{虚拟主机名}}",
     "group": "Linux 运维",
     "description": "a2dissite: 在基于 Debian 的操作系统上禁用 Apache 虚拟主机。 (不显示信息性消息)",
     "tags": [
@@ -2778,7 +2778,7 @@
     "id": "tldr-zh-linux-a2disconf-1",
     "type": "command",
     "title": "a2disconf - 不显示信息性消息",
-    "content": "sudo a2disconf --quiet {{配置文件}}",
+    "content": "sudo a2disconf {{[-q|--quiet]}} {{配置文件}}",
     "group": "Linux 运维",
     "description": "a2disconf: 在基于 Debian 的操作系统上禁用 Apache 配置文件。 (不显示信息性消息)",
     "tags": [
@@ -7368,7 +7368,7 @@
     "id": "tldr-zh-linux-a2ensite-1",
     "type": "command",
     "title": "a2ensite - 不显示信息性消息",
-    "content": "sudo a2ensite --quiet {{虚拟主机名}}",
+    "content": "sudo a2ensite {{[-q|--quiet]}} {{虚拟主机名}}",
     "group": "Linux 运维",
     "description": "a2ensite: 在基于 Debian 的操作系统上启用 Apache 虚拟主机。 (不显示信息性消息)",
     "tags": [
@@ -7638,7 +7638,7 @@
     "id": "tldr-zh-linux-a2enconf-1",
     "type": "command",
     "title": "a2enconf - 不显示信息性消息",
-    "content": "sudo a2enconf --quiet {{配置文件}}",
+    "content": "sudo a2enconf {{[-q|--quiet]}} {{配置文件}}",
     "group": "Linux 运维",
     "description": "a2enconf: 在基于 Debian 的操作系统上启用 Apache 配置文件。 (不显示信息性消息)",
     "tags": [
@@ -7938,7 +7938,7 @@
     "id": "tldr-zh-linux-a2enmod-1",
     "type": "command",
     "title": "a2enmod - 不显示信息性消息",
-    "content": "sudo a2enmod --quiet {{模块名}}",
+    "content": "sudo a2enmod {{[-q|--quiet]}} {{模块名}}",
     "group": "Linux 运维",
     "description": "a2enmod: 在基于 Debian 的操作系统上启用 Apache 模块。 (不显示信息性消息)",
     "tags": [
@@ -9408,7 +9408,7 @@
     "id": "tldr-zh-linux-a2dismod-1",
     "type": "command",
     "title": "a2dismod - 不显示信息性消息",
-    "content": "sudo a2dismod --quiet {{模块路径}}",
+    "content": "sudo a2dismod {{[-q|--quiet]}} {{模块路径}}",
     "group": "Linux 运维",
     "description": "a2dismod: 在基于 Debian 的操作系统上禁用 Apache 模块。 (不显示信息性消息)",
     "tags": [

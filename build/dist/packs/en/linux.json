@@ -6645,6 +6645,66 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-systemctl-isolate-0",
+    "type": "command",
+    "title": "systemctl-isolate - Switch to a target (assumed `.target` if no extension provided)",
+    "content": "systemctl isolate {{target}}",
+    "group": "Linux Ops",
+    "description": "systemctl-isolate: Start the specified unit with its dependencies and stop all others. Ignores the units which have `IgnoreOnIsolate=yes`. (Switch to a target (assumed `.target` if no extension provided))",
+    "tags": [
+      "linux",
+      "systemctl-isolate",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-systemctl-isolate-1",
+    "type": "command",
+    "title": "systemctl-isolate - Switch to graphical target explicitly",
+    "content": "systemctl isolate graphical.target",
+    "group": "Linux Ops",
+    "description": "systemctl-isolate: Start the specified unit with its dependencies and stop all others. Ignores the units which have `IgnoreOnIsolate=yes`. (Switch to graphical target explicitly)",
+    "tags": [
+      "linux",
+      "systemctl-isolate",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-systemctl-isolate-2",
+    "type": "command",
+    "title": "systemctl-isolate - Switch to rescue (single-user) mode",
+    "content": "systemctl isolate rescue.target",
+    "group": "Linux Ops",
+    "description": "systemctl-isolate: Start the specified unit with its dependencies and stop all others. Ignores the units which have `IgnoreOnIsolate=yes`. (Switch to rescue (single-user) mode)",
+    "tags": [
+      "linux",
+      "systemctl-isolate",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-systemctl-isolate-3",
+    "type": "command",
+    "title": "systemctl-isolate - Switch to emergency mode",
+    "content": "systemctl isolate emergency.target",
+    "group": "Linux Ops",
+    "description": "systemctl-isolate: Start the specified unit with its dependencies and stop all others. Ignores the units which have `IgnoreOnIsolate=yes`. (Switch to emergency mode)",
+    "tags": [
+      "linux",
+      "systemctl-isolate",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-whiptail-0",
     "type": "command",
     "title": "whiptail - Display a simple message",
@@ -8619,6 +8679,21 @@
     "tags": [
       "linux",
       "logread",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-barotrauma-0",
+    "type": "command",
+    "title": "barotrauma - Start the server",
+    "content": "{{path/to/DedicatedServer}}",
+    "group": "Linux Ops",
+    "description": "barotrauma: Start a headless Barotrauma server. Note: The server is configured by editing the `serversettings.xml` file in the game directory. (Start the server)",
+    "tags": [
+      "linux",
+      "barotrauma",
       "tldr",
       "en"
     ],
@@ -31200,6 +31275,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-pactrans-0",
+    "type": "command",
+    "title": "pactrans - Install a package from a repository",
+    "content": "sudo pactrans --install {{package_name}}",
+    "group": "Linux Ops",
+    "description": "pactrans: Install, remove, and upgrade ALPM packages. (Install a package from a repository)",
+    "tags": [
+      "linux",
+      "pactrans",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pactrans-1",
+    "type": "command",
+    "title": "pactrans - Remove a package",
+    "content": "sudo pactrans --remove {{package_name}}",
+    "group": "Linux Ops",
+    "description": "pactrans: Install, remove, and upgrade ALPM packages. (Remove a package)",
+    "tags": [
+      "linux",
+      "pactrans",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pactrans-2",
+    "type": "command",
+    "title": "pactrans - Upgrade all installed packages",
+    "content": "sudo pactrans --sysupgrade",
+    "group": "Linux Ops",
+    "description": "pactrans: Install, remove, and upgrade ALPM packages. (Upgrade all installed packages)",
+    "tags": [
+      "linux",
+      "pactrans",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pactrans-3",
+    "type": "command",
+    "title": "pactrans - Install a package file",
+    "content": "sudo pactrans --file {{path/to/package.pkg.tar.zst}}",
+    "group": "Linux Ops",
+    "description": "pactrans: Install, remove, and upgrade ALPM packages. (Install a package file)",
+    "tags": [
+      "linux",
+      "pactrans",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pactrans-4",
+    "type": "command",
+    "title": "pactrans - Replace a locally installed package with a package from a repository",
+    "content": "sudo pactrans local/{{package_to_remove}} {{repository_name}}/{{package_to_install}}",
+    "group": "Linux Ops",
+    "description": "pactrans: Install, remove, and upgrade ALPM packages. (Replace a locally installed package with a package from a repository)",
+    "tags": [
+      "linux",
+      "pactrans",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pactrans-5",
+    "type": "command",
+    "title": "pactrans - Print what the transaction would do without performing it",
+    "content": "pactrans --print-only --install {{package_name}}",
+    "group": "Linux Ops",
+    "description": "pactrans: Install, remove, and upgrade ALPM packages. (Print what the transaction would do without performing it)",
+    "tags": [
+      "linux",
+      "pactrans",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-systemd-sysext-0",
     "type": "command",
     "title": "systemd-sysext - List installed extension images",
@@ -35580,6 +35745,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-pacreport-0",
+    "type": "command",
+    "title": "pacreport - Generate a summary of installed packages",
+    "content": "pacreport",
+    "group": "Linux Ops",
+    "description": "pacreport: Generate a report of installed packages. (Generate a summary of installed packages)",
+    "tags": [
+      "linux",
+      "pacreport",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacreport-1",
+    "type": "command",
+    "title": "pacreport - List unowned files",
+    "content": "pacreport --unowned-files",
+    "group": "Linux Ops",
+    "description": "pacreport: Generate a report of installed packages. (List unowned files)",
+    "tags": [
+      "linux",
+      "pacreport",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacreport-2",
+    "type": "command",
+    "title": "pacreport - List missing package files",
+    "content": "pacreport --missing-files",
+    "group": "Linux Ops",
+    "description": "pacreport: Generate a report of installed packages. (List missing package files)",
+    "tags": [
+      "linux",
+      "pacreport",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacreport-3",
+    "type": "command",
+    "title": "pacreport - Search for unmerged backup files (i.e. `.pacnew`, `.pacsave`) in `/etc`",
+    "content": "pacreport --backups",
+    "group": "Linux Ops",
+    "description": "pacreport: Generate a report of installed packages. (Search for unmerged backup files (i.e. `.pacnew`, `.pacsave`) in `/etc`)",
+    "tags": [
+      "linux",
+      "pacreport",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacreport-4",
+    "type": "command",
+    "title": "pacreport - Display packages in a specific group that are not currently installed",
+    "content": "pacreport --group {{group_name}}",
+    "group": "Linux Ops",
+    "description": "pacreport: Generate a report of installed packages. (Display packages in a specific group that are not currently installed)",
+    "tags": [
+      "linux",
+      "pacreport",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-kscreen-doctor-0",
     "type": "command",
     "title": "kscreen-doctor - Show display output information",
@@ -36834,6 +37074,36 @@
     "tags": [
       "linux",
       "tshark",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pct-move-volume-0",
+    "type": "command",
+    "title": "pct-move-volume - Move the root filesystem of a container to a different storage",
+    "content": "pct {{[mov|move-volume]}} {{100}} rootfs {{storage_id}}",
+    "group": "Linux Ops",
+    "description": "pct-move-volume: Move a volume to a different storage or to a different container. (Move the root filesystem of a container to a different storage)",
+    "tags": [
+      "linux",
+      "pct-move-volume",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pct-move-volume-1",
+    "type": "command",
+    "title": "pct-move-volume - Delete the filesystem association to the old volume once the move is complete",
+    "content": "pct {{[mov|move-volume]}} {{100}} rootfs {{storage_id}} --delete",
+    "group": "Linux Ops",
+    "description": "pct-move-volume: Move a volume to a different storage or to a different container. (Delete the filesystem association to the old volume once the move is complete)",
+    "tags": [
+      "linux",
+      "pct-move-volume",
       "tldr",
       "en"
     ],
@@ -48201,6 +48471,21 @@
     "content": "pvesh {{[u|usage]}} {{/pools}}",
     "group": "Linux Ops",
     "description": "pvesh: Interface with the Proxmox VE API. (Display API path usage instructions)",
+    "tags": [
+      "linux",
+      "pvesh",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pvesh-4",
+    "type": "command",
+    "title": "pvesh - Add a new thinpool to Proxmox",
+    "content": "pvesh create /storage --storage {{storage_id}} --vgname {{volume_group}} --type lvmthin --thinpool {{thinpool_name}} --content {{content_type1,content_type2,...}}",
+    "group": "Linux Ops",
+    "description": "pvesh: Interface with the Proxmox VE API. (Add a new thinpool to Proxmox)",
     "tags": [
       "linux",
       "pvesh",
@@ -66720,6 +67005,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-pct-unmount-0",
+    "type": "command",
+    "title": "pct-unmount - Unmount the filesystem of a specific container",
+    "content": "pct unmount {{100}}",
+    "group": "Linux Ops",
+    "description": "pct-unmount: Unmount a container's filesystem from the host. (Unmount the filesystem of a specific container)",
+    "tags": [
+      "linux",
+      "pct-unmount",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-srun-0",
     "type": "command",
     "title": "srun - Submit a basic interactive job",
@@ -79800,6 +80100,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-update-grub-0",
+    "type": "command",
+    "title": "update-grub - View documentation for the original command",
+    "content": "tldr grub-mkconfig",
+    "group": "Linux Ops",
+    "description": "update-grub: This command is an alias of `grub-mkconfig --output /boot/grub/grub.cfg`. (View documentation for the original command)",
+    "tags": [
+      "linux",
+      "update-grub",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-terraria-0",
     "type": "command",
     "title": "terraria - Start an interactive server setup",
@@ -80490,6 +80805,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-pct-move_volume-0",
+    "type": "command",
+    "title": "pct-move_volume - View documentation for the original command",
+    "content": "tldr pct move-volume",
+    "group": "Linux Ops",
+    "description": "pct-move_volume: This command is an alias of `pct move-volume`. (View documentation for the original command)",
+    "tags": [
+      "linux",
+      "pct-move_volume",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-pacremove-0",
     "type": "command",
     "title": "pacremove - View documentation for the original command",
@@ -80747,10 +81077,10 @@
   {
     "id": "tldr-en-linux-tune2fs-1",
     "type": "command",
-    "title": "tune2fs - Set the filesystem label to MY_LABEL",
+    "title": "tune2fs - Set the filesystem label to `MY_LABEL`",
     "content": "sudo tune2fs -L 'MY_LABEL' {{/dev/sdXN}}",
     "group": "Linux Ops",
-    "description": "tune2fs: Adjust parameters of an ext2, ext3 or ext4 filesystem. May be used on mounted filesystems. (Set the filesystem label to MY_LABEL)",
+    "description": "tune2fs: Adjust parameters of an ext2, ext3 or ext4 filesystem. May be used on mounted filesystems. (Set the filesystem label to `MY_LABEL`)",
     "tags": [
       "linux",
       "tune2fs",
@@ -87378,7 +87708,7 @@
     "id": "tldr-en-linux-paclock-0",
     "type": "command",
     "title": "paclock - Lock the database",
-    "content": "paclock",
+    "content": "sudo paclock",
     "group": "Linux Ops",
     "description": "paclock: Lock/unlock the libalpm database (used by `pacman`) to prevent or allow simultaneous package management operations. (Lock the database)",
     "tags": [
@@ -87408,7 +87738,7 @@
     "id": "tldr-en-linux-paclock-2",
     "type": "command",
     "title": "paclock - Unlock the database",
-    "content": "paclock --unlock",
+    "content": "sudo paclock --unlock",
     "group": "Linux Ops",
     "description": "paclock: Lock/unlock the libalpm database (used by `pacman`) to prevent or allow simultaneous package management operations. (Unlock the database)",
     "tags": [
@@ -90774,6 +91104,81 @@
     "tags": [
       "linux",
       "pacinfo",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacsync-0",
+    "type": "command",
+    "title": "pacsync - Update all sync databases",
+    "content": "sudo pacsync",
+    "group": "Linux Ops",
+    "description": "pacsync: Update sync databases. (Update all sync databases)",
+    "tags": [
+      "linux",
+      "pacsync",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacsync-1",
+    "type": "command",
+    "title": "pacsync - Update specific sync databases",
+    "content": "sudo pacsync {{repository1 repository2 ...}}",
+    "group": "Linux Ops",
+    "description": "pacsync: Update sync databases. (Update specific sync databases)",
+    "tags": [
+      "linux",
+      "pacsync",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacsync-2",
+    "type": "command",
+    "title": "pacsync - Update sync databases even if they are already up-to-date",
+    "content": "sudo pacsync --force",
+    "group": "Linux Ops",
+    "description": "pacsync: Update sync databases. (Update sync databases even if they are already up-to-date)",
+    "tags": [
+      "linux",
+      "pacsync",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacsync-3",
+    "type": "command",
+    "title": "pacsync - Update sync databases using a specific configuration file",
+    "content": "sudo pacsync --config {{path/to/pacman.conf}}",
+    "group": "Linux Ops",
+    "description": "pacsync: Update sync databases. (Update sync databases using a specific configuration file)",
+    "tags": [
+      "linux",
+      "pacsync",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pacsync-4",
+    "type": "command",
+    "title": "pacsync - Update sync databases and return true only if a database was actually updated",
+    "content": "sudo pacsync --updated",
+    "group": "Linux Ops",
+    "description": "pacsync: Update sync databases. (Update sync databases and return true only if a database was actually updated)",
+    "tags": [
+      "linux",
+      "pacsync",
       "tldr",
       "en"
     ],
@@ -99294,6 +99699,21 @@
     "tags": [
       "linux",
       "lrzuntar",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pct-mount-0",
+    "type": "command",
+    "title": "pct-mount - Mount the filesystem of a specific container",
+    "content": "pct mount {{100}}",
+    "group": "Linux Ops",
+    "description": "pct-mount: Mount a container's filesystem on the host. (Mount the filesystem of a specific container)",
+    "tags": [
+      "linux",
+      "pct-mount",
       "tldr",
       "en"
     ],

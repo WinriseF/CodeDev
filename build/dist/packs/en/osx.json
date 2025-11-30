@@ -7820,7 +7820,7 @@
     "title": "java_home - List JVMs based on a specific version",
     "content": "java_home --version {{1.5+}}",
     "group": "macOS",
-    "description": "java_home: Return a value for $JAVA_HOME or execute command using this variable. (List JVMs based on a specific version)",
+    "description": "java_home: Return a value for `$JAVA_HOME` or execute command using this variable. (List JVMs based on a specific version)",
     "tags": [
       "osx",
       "java_home",
@@ -7835,7 +7835,7 @@
     "title": "java_home - List JVMs based on a specific [arch]itecture",
     "content": "java_home --arch {{i386}}",
     "group": "macOS",
-    "description": "java_home: Return a value for $JAVA_HOME or execute command using this variable. (List JVMs based on a specific [arch]itecture)",
+    "description": "java_home: Return a value for `$JAVA_HOME` or execute command using this variable. (List JVMs based on a specific [arch]itecture)",
     "tags": [
       "osx",
       "java_home",
@@ -7850,7 +7850,7 @@
     "title": "java_home - List JVMs based on a specific tasks (defaults to `CommandLine`)",
     "content": "java_home --datamodel {{Applets|WebStart|BundledApp|JNI|CommandLine}}",
     "group": "macOS",
-    "description": "java_home: Return a value for $JAVA_HOME or execute command using this variable. (List JVMs based on a specific tasks (defaults to `CommandLine`))",
+    "description": "java_home: Return a value for `$JAVA_HOME` or execute command using this variable. (List JVMs based on a specific tasks (defaults to `CommandLine`))",
     "tags": [
       "osx",
       "java_home",
@@ -7865,7 +7865,7 @@
     "title": "java_home - List JVMs in a XML format",
     "content": "java_home --xml",
     "group": "macOS",
-    "description": "java_home: Return a value for $JAVA_HOME or execute command using this variable. (List JVMs in a XML format)",
+    "description": "java_home: Return a value for `$JAVA_HOME` or execute command using this variable. (List JVMs in a XML format)",
     "tags": [
       "osx",
       "java_home",
@@ -7880,7 +7880,7 @@
     "title": "java_home - Display help",
     "content": "java_home --help",
     "group": "macOS",
-    "description": "java_home: Return a value for $JAVA_HOME or execute command using this variable. (Display help)",
+    "description": "java_home: Return a value for `$JAVA_HOME` or execute command using this variable. (Display help)",
     "tags": [
       "osx",
       "java_home",
@@ -11013,7 +11013,7 @@
     "id": "tldr-en-osx-tag-0",
     "type": "command",
     "title": "tag - Add tags to a file",
-    "content": "tag --add {{tag_name1,tag_name2,...}} {{path/to/file}}",
+    "content": "tag {{[-a|--add]}} {{tag_name1,tag_name2,...}} {{path/to/file}}",
     "group": "macOS",
     "description": "tag: Edit tags on Mac OS X files (10.9 Mavericks and above). (Add tags to a file)",
     "tags": [
@@ -11028,7 +11028,7 @@
     "id": "tldr-en-osx-tag-1",
     "type": "command",
     "title": "tag - Remove a tag",
-    "content": "tag --remove {{tag_name}} {{path/to/file}}",
+    "content": "tag {{[-r|--remove]}} {{tag_name}} {{path/to/file}}",
     "group": "macOS",
     "description": "tag: Edit tags on Mac OS X files (10.9 Mavericks and above). (Remove a tag)",
     "tags": [
@@ -11043,7 +11043,7 @@
     "id": "tldr-en-osx-tag-2",
     "type": "command",
     "title": "tag - Remove all tags from a file",
-    "content": "tag --remove \\* {{path/to/file}}",
+    "content": "tag {{[-r|--remove]}} \\* {{path/to/file}}",
     "group": "macOS",
     "description": "tag: Edit tags on Mac OS X files (10.9 Mavericks and above). (Remove all tags from a file)",
     "tags": [
@@ -11058,7 +11058,7 @@
     "id": "tldr-en-osx-tag-3",
     "type": "command",
     "title": "tag - Show all files with a given tag",
-    "content": "tag --match {{tag_name}}",
+    "content": "tag {{[-m|--match]}} {{tag_name}}",
     "group": "macOS",
     "description": "tag: Edit tags on Mac OS X files (10.9 Mavericks and above). (Show all files with a given tag)",
     "tags": [
