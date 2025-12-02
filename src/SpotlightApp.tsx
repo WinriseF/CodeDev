@@ -279,7 +279,7 @@ export default function SpotlightApp() {
       if (mode === 'chat' && chatEndRef.current) {
           chatEndRef.current.scrollIntoView({ behavior: "smooth" });
       }
-  }, [messages, mode]);
+  }, [messages.length, mode]); 
 
   useEffect(() => {
     const handleGlobalKeyDown = async (e: KeyboardEvent) => {
