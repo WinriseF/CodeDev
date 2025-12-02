@@ -2,17 +2,19 @@ import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import { appWindow, LogicalSize } from '@tauri-apps/api/window';
 import { writeText } from '@tauri-apps/api/clipboard';
 import { listen } from '@tauri-apps/api/event';
-import { Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, Command, Bot, User, Brain, ChevronDown, Zap } from 'lucide-react';
+import { 
+  Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, 
+  Command, Bot, User, Brain, ChevronDown, Zap, Copy, FileText, Code 
+} from 'lucide-react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore, AppTheme } from '@/store/useAppStore';
 import { Prompt } from '@/types/prompt';
-import { cn } from '@/lib/utils';
+import { cn, stripMarkdown } from '@/lib/utils'; // 引入工具函数
 import { streamChatCompletion, ChatMessage } from '@/lib/llm';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { getText } from './lib/i18n';
+import { CodeBlock } from '@/components/ui/CodeBlock'; // 引入新组件
 
 // 常量定义
 const FIXED_HEIGHT = 106; 
@@ -23,6 +25,77 @@ interface ScoredPrompt extends Prompt {
 }
 
 type SpotlightMode = 'search' | 'chat';
+
+/**
+ * 内部组件：消息复制菜单
+ * 处理悬停显示、点击展开下拉菜单、复制纯文本/Markdown的逻辑
+ */
+function MessageCopyMenu({ content }: { content: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // 点击外部关闭菜单
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+
+  const handleCopy = async (type: 'text' | 'markdown') => {
+    try {
+      // 根据类型处理文本
+      const textToCopy = type === 'text' ? stripMarkdown(content) : content;
+      await writeText(textToCopy);
+      
+      setIsCopied(true);
+      setIsOpen(false);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  return (
+    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-20" ref={menuRef}>
+       {/* 触发按钮 */}
+       <button
+         onClick={() => setIsOpen(!isOpen)}
+         className={cn(
+            "p-1.5 rounded-md bg-secondary/80 hover:bg-background border border-border/50 shadow-sm backdrop-blur-sm transition-colors",
+            isCopied ? "text-green-500 border-green-500/20 bg-green-500/10" : "text-muted-foreground hover:text-foreground"
+         )}
+         title="Copy message"
+       >
+         {isCopied ? <Check size={14} /> : <Copy size={14} />}
+       </button>
+
+       {/* 下拉菜单 */}
+       {isOpen && (
+         <div className="absolute right-0 top-full mt-1 w-36 bg-popover border border-border rounded-md shadow-lg py-1 flex flex-col animate-in fade-in zoom-in-95 duration-100 origin-top-right z-30">
+            <button
+              onClick={() => handleCopy('text')}
+              className="flex items-center gap-2 px-3 py-2 text-xs hover:bg-secondary text-left w-full transition-colors text-foreground"
+            >
+              <FileText size={12} className="text-muted-foreground" />
+              <span>Copy as Text</span>
+            </button>
+            <button
+              onClick={() => handleCopy('markdown')}
+              className="flex items-center gap-2 px-3 py-2 text-xs hover:bg-secondary text-left w-full transition-colors text-foreground"
+            >
+              <Code size={12} className="text-muted-foreground" />
+              <span>Copy Markdown</span>
+            </button>
+         </div>
+       )}
+    </div>
+  );
+}
 
 export default function SpotlightApp() {
   const [query, setQuery] = useState('');
@@ -43,7 +116,6 @@ export default function SpotlightApp() {
   
   const allPrompts = getAllPrompts();
 
-  // 简单的 Provider 循环切换逻辑
   const cycleProvider = () => {
     const providers: Array<'openai' | 'deepseek' | 'anthropic'> = ['deepseek', 'openai', 'anthropic'];
     const currentIndex = providers.indexOf(aiConfig.providerId);
@@ -118,7 +190,6 @@ export default function SpotlightApp() {
         const totalIdealHeight = FIXED_HEIGHT + listHeight;
         finalHeight = Math.min(Math.max(totalIdealHeight, 120), MAX_WINDOW_HEIGHT);
     } else {
-        // 如果有消息，窗口变高；没有消息，保持紧凑的空状态高度
         finalHeight = messages.length > 0 ? spotlightAppearance.maxChatHeight : 300;
     }
     appWindow.setSize(new LogicalSize(targetWidth, finalHeight));
@@ -143,7 +214,7 @@ export default function SpotlightApp() {
     setTimeout(() => inputRef.current?.focus(), 10);
   };
 
-const handleSendToAI = async () => {
+  const handleSendToAI = async () => {
       if (!chatInput.trim() || isStreaming) return;
       
       const userText = chatInput.trim();
@@ -156,27 +227,18 @@ const handleSendToAI = async () => {
       setMessages(newMessages);
       setIsStreaming(true);
 
-      // 初始化时，reasoning 设为空字符串
       setMessages(prev => [...prev, { role: 'assistant', content: '', reasoning: '' }]);
 
       await streamChatCompletion(
           newMessages,
           aiConfig,
-          // 接收两个参数
           (contentDelta, reasoningDelta) => {
               setMessages(current => {
-                  // 如果当前数组为空（说明用户刚按了清空），直接返回，不进行任何操作
                   if (current.length === 0) return current;
-
                   const updated = [...current];
                   const lastIndex = updated.length - 1;
-                  
-                  // 二重保险：确保索引有效
                   if (lastIndex < 0) return current;
-
                   const lastMsg = updated[lastIndex];
-                  
-                  // 三重保险：确保最后一条消息存在且是 assistant
                   if (lastMsg && lastMsg.role === 'assistant') {
                       updated[lastIndex] = {
                           ...lastMsg,
@@ -189,9 +251,7 @@ const handleSendToAI = async () => {
           },
           (err) => {
               setMessages(current => {
-                  // 防崩溃检查
                   if (current.length === 0) return current;
-
                   const updated = [...current];
                   const lastIndex = updated.length - 1;
                   if (lastIndex >= 0 && updated[lastIndex]) {
@@ -212,7 +272,7 @@ const handleSendToAI = async () => {
   const handleClearChat = () => {
       setMessages([]);
       setChatInput('');
-      setIsStreaming(false); // 强制停止流式状态（虽然无法物理中断 fetch，但能停止 UI 更新）
+      setIsStreaming(false);
       setTimeout(() => inputRef.current?.focus(), 50);
   };
 
@@ -466,7 +526,7 @@ const handleSendToAI = async () => {
                           <div className="space-y-4 pb-2">
                                {messages.map((msg, idx) => (
                                    <div key={idx} className={cn(
-                                       "flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300", 
+                                       "flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300 group", 
                                        msg.role === 'user' ? "flex-row-reverse" : "flex-row"
                                    )}>
                                        {/* 头像 */}
@@ -481,26 +541,31 @@ const handleSendToAI = async () => {
 
                                        {/* 气泡 */}
                                        <div className={cn(
-                                           "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm border",
+                                           "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm border relative",
                                            msg.role === 'user'
                                               ? "bg-primary text-primary-foreground border-primary/50 rounded-tr-sm"
-                                              : "bg-secondary/50 border-border/50 text-foreground rounded-tl-sm markdown-body"
+                                              : "bg-secondary/50 border-border/50 text-foreground rounded-tl-sm markdown-body pr-8" // pr-8 留出复制按钮空间
                                        )}>
+                                           
+                                           {/* AI 消息右上角的复制菜单 (只对 Assistant 显示) */}
+                                           {msg.role === 'assistant' && !isStreaming && (
+                                               <MessageCopyMenu content={msg.content} />
+                                           )}
+
                                            {msg.role === 'user' ? (
                                                <div className="whitespace-pre-wrap">{msg.content}</div>
                                            ) : (
                                               <>
                                                   {/* 1. 思考过程模块 */}
                                                   {msg.reasoning && (
-                                                      <details className="mb-2 group" open={isStreaming && idx === messages.length - 1}>
+                                                      <details className="mb-2 group/reasoning" open={isStreaming && idx === messages.length - 1}>
                                                           <summary className="flex items-center gap-1.5 text-[10px] uppercase font-bold text-muted-foreground/60 cursor-pointer hover:text-purple-400 transition-colors select-none list-none outline-none">
                                                               <Brain size={12} />
                                                               <span>{getText('spotlight', 'thinking', language)}</span>
-                                                              <ChevronDown size={12} className="group-open:rotate-180 transition-transform duration-200" />
+                                                              <ChevronDown size={12} className="group-open/reasoning:rotate-180 transition-transform duration-200" />
                                                           </summary>
                                                           <div className="mt-2 pl-2 border-l-2 border-purple-500/20 text-xs font-mono text-muted-foreground/80 whitespace-pre-wrap leading-relaxed opacity-80">
                                                               {msg.reasoning}
-                                                              {/* 思考时的光标 */}
                                                               {isStreaming && idx === messages.length - 1 && !msg.content && (
                                                                   <span className="inline-block w-1.5 h-3 ml-1 bg-purple-500/50 align-middle animate-pulse" />
                                                               )}
@@ -515,14 +580,9 @@ const handleSendToAI = async () => {
                                                           code({node, inline, className, children, ...props}: any) {
                                                               const match = /language-(\w+)/.exec(className || '')
                                                               return !inline && match ? (
-                                                                  <SyntaxHighlighter
-                                                                      style={vscDarkPlus}
-                                                                      language={match[1]}
-                                                                      PreTag="div"
-                                                                      {...props}
-                                                                  >
+                                                                  <CodeBlock language={match[1]} className="text-sm">
                                                                       {String(children).replace(/\n$/, '')}
-                                                                  </SyntaxHighlighter>
+                                                                  </CodeBlock>
                                                               ) : (
                                                                   <code className={cn("bg-black/20 px-1 py-0.5 rounded font-mono", className)} {...props}>
                                                                       {children}
@@ -531,7 +591,7 @@ const handleSendToAI = async () => {
                                                           }
                                                       }}
                                                   >
-                                                      {/* 如果正在流式传输且正文为空（正在思考），显示省略号占位，否则显示正文 */}
+                                                      {/* 如果正在流式传输且正文为空（正在思考），显示省略号占位 */}
                                                       {msg.content || (isStreaming && idx === messages.length - 1 && !msg.reasoning ? "..." : "")}
                                                   </ReactMarkdown>
                                               </>
