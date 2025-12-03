@@ -1,16 +1,28 @@
 import { useState, useEffect } from 'react';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { Minus, Square, X, Maximize2 } from 'lucide-react';
+import { Minus, Square, X, Maximize2, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAppStore } from '@/store/useAppStore';
+
 const appWindow = getCurrentWebviewWindow()
 
 export function TitleBar() {
   const [isMaximized, setIsMaximized] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const { language } = useAppStore();
 
   useEffect(() => {
     const checkMaximized = async () => { setIsMaximized(await appWindow.isMaximized()); };
     const unlisten = appWindow.onResized(checkMaximized);
-    return () => { unlisten.then(f => f()); }
+    
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => { 
+      unlisten.then(f => f());
+      clearInterval(timer);
+    }
   }, []);
 
   const toggleMaximize = async () => {
@@ -18,18 +30,31 @@ export function TitleBar() {
     setIsMaximized(await appWindow.isMaximized());
   };
 
-  // 通用按钮样式
+  const formatTime = (date: Date) => {
+    return new Intl.DateTimeFormat(language === 'zh' ? 'zh-CN' : 'en-US', {
+      month: 'short',     // 12月 / Dec
+      day: 'numeric',     // 03
+      weekday: 'short',   // 周三 / Wed
+      hour: 'numeric',    // 21
+      minute: '2-digit',  // 57
+      hour12: false       // 24小时制
+    }).format(date);
+  };
+
   const btnClass = "h-full w-10 flex items-center justify-center text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors";
 
   return (
-    // 修改：bg-slate-950 -> bg-background, border-slate-800 -> border-border
     <div 
       data-tauri-drag-region 
       className="h-8 bg-background flex items-center justify-between select-none border-b border-border shrink-0 transition-colors duration-300"
     >
-      <div className="flex items-center gap-2 px-4 pointer-events-none">
-        <div className="w-3 h-3 bg-primary rounded-full" />
-        <span className="text-xs font-bold text-muted-foreground tracking-wide">CodeForge AI</span>
+      <div className="flex items-center gap-2 px-4 pointer-events-none h-full">
+        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-secondary/30 border border-border/50">
+           <Clock size={12} className="text-primary/70" />
+           <span className="text-[10px] font-mono font-medium text-muted-foreground tracking-wide tabular-nums">
+              {formatTime(currentTime)}
+           </span>
+        </div>
       </div>
 
       <div className="flex h-full">

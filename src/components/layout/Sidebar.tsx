@@ -27,7 +27,8 @@ export function Sidebar() {
       <div className="h-14 flex items-center border-b border-border shrink-0 overflow-hidden">
         <div className="h-full flex items-center min-w-[256px] pl-5"> 
           <div className={cn(
-              "w-2 h-2 bg-primary rounded-full shrink-0 mr-3 transition-all duration-300",
+              "w-2.5 h-2.5 rounded-full shrink-0 mr-3 transition-all duration-300",
+              "bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 animate-gradient-dot",
               isSidebarOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
             )} 
           />
