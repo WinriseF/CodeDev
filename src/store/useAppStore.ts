@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { fileStorage } from '@/lib/storage';
 import { IgnoreConfig, DEFAULT_GLOBAL_IGNORE } from '@/types/context';
-import { fetch } from '@tauri-apps/api/http';
+import { fetch } from '@tauri-apps/plugin-http';
 import { emit } from '@tauri-apps/api/event'; 
 import { AIModelConfig, AIProviderConfig, AIProviderSetting, DEFAULT_AI_CONFIG, DEFAULT_PROVIDER_SETTINGS } from '@/types/model';
 
@@ -13,37 +13,37 @@ export type AppLang = 'en' | 'zh';
 
 // --- 2. 默认/兜底模型数据 ---
 export const DEFAULT_MODELS: AIModelConfig[] = [
-  { 
-    id: 'gpt-4o', 
-    name: 'GPT-4o', 
-    provider: 'OpenAI',
-    contextLimit: 128000, 
-    inputPricePerMillion: 2.50,
-    color: 'bg-green-500' 
-  },
-  { 
-    id: 'claude-3-5-sonnet', 
-    name: 'Claude 3.5 Sonnet', 
-    provider: 'Anthropic',
-    contextLimit: 200000, 
-    inputPricePerMillion: 3.00, 
-    color: 'bg-orange-500' 
-  },
-  { 
-    id: 'gemini-1-5-pro', 
-    name: 'Gemini 1.5 Pro', 
-    provider: 'Google',
-    contextLimit: 2000000, 
-    inputPricePerMillion: 1.25, 
-    color: 'bg-blue-500' 
+  {
+    "id": "Gemini-3-pro-preview",
+    "name": "Gemini 3 Pro",
+    "provider": "Google",
+    "contextLimit": 1048576,
+    "inputPricePerMillion": 2.00,
+    "color": "bg-blue-600"
   },
   {
-    id: 'deepseek-v3',
-    name: 'DeepSeek V3',
-    provider: 'DeepSeek',
-    contextLimit: 64000,
-    inputPricePerMillion: 0.14,
-    color: 'bg-purple-500'
+    "id": "Grok-4-1",
+    "name": "Grok 4.1",
+    "provider": "Other",
+    "contextLimit": 2000000,
+    "inputPricePerMillion": 0.20,
+    "color": "bg-gray-900"
+  },
+  {
+    "id": "DeepSeek-v3-2",
+    "name": "DeepSeek V3.2",
+    "provider": "DeepSeek",
+    "contextLimit": 128000,
+    "inputPricePerMillion": 0.28,
+    "color": "bg-purple-600"
+  },
+  {
+    "id": "GLM-4-6",
+    "name": "GLM 4.6",
+    "provider": "Other",
+    "contextLimit": 200000,
+    "inputPricePerMillion": 0.6,
+    "color": "bg-blue-400"
   }
 ];
 
@@ -192,20 +192,23 @@ export const useAppStore = create<AppState>()(
         return { globalIgnore: { ...state.globalIgnore, [type]: newList } };
       }),
 
-      // ✨ 核心升级：并发请求多个源，谁快用谁
+      // 并发请求多个源，谁快用谁
       syncModels: async () => {
         console.log('[AppStore] Starting model sync...');
         
         // 定义单个请求的逻辑
         const fetchUrl = async (url: string) => {
           console.log(`[Sync] Trying: ${url}`);
-          const response = await fetch<AIModelConfig[]>(url, {
+          const response = await fetch(url, {
             method: 'GET',
-            timeout: 10, // 10秒超时
           });
 
-          if (response.ok && Array.isArray(response.data) && response.data.length > 0) {
-            return response.data;
+          if (response.ok) {
+            // 使用 .json() 获取数据
+            const data = await response.json() as AIModelConfig[];
+            if (Array.isArray(data) && data.length > 0) {
+              return data;
+            }
           }
           throw new Error(`Invalid response from ${url}`);
         };

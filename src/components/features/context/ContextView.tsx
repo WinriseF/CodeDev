@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { open, save } from '@tauri-apps/api/dialog';
-import { writeTextFile } from '@tauri-apps/api/fs';
-import { writeText as writeClipboard } from '@tauri-apps/api/clipboard';
+import { open, save } from '@tauri-apps/plugin-dialog';
+import { writeTextFile } from '@tauri-apps/plugin-fs';
+import { writeText as writeClipboard } from '@tauri-apps/plugin-clipboard-manager';
 import { 
   FolderOpen, RefreshCw, Loader2, FileJson, 
   PanelLeft, Search, ArrowRight, SlidersHorizontal, ChevronUp,

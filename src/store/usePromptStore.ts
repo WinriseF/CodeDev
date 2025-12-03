@@ -3,8 +3,11 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
 import { fileStorage } from '@/lib/storage';
 import { Prompt, DEFAULT_GROUP, PackManifest, PackManifestItem } from '@/types/prompt';
-import { fetch } from '@tauri-apps/api/http';
-import { appWindow } from '@tauri-apps/api/window'
+import { fetch } from '@tauri-apps/plugin-http';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+
+// 获取当前窗口实例
+const appWindow = getCurrentWebviewWindow();
 
 // 多源 URL 配置 (GitHub + Gitee)
 const MANIFEST_URLS = [
@@ -71,7 +74,6 @@ export const usePromptStore = create<PromptState>()(
       installedPackIds: [], 
 
       // 实现 Shadowing (遮蔽) 逻辑
-      // 如果本地有一个 prompt 标记了 originalId 指向官方 prompt，则隐藏官方那个，防止重复显示
       getAllPrompts: () => {
         const { localPrompts, repoPrompts } = get();
         
@@ -120,7 +122,7 @@ export const usePromptStore = create<PromptState>()(
                  }));
                  
                  loadedPrompts.push(...labeled);
-                 validIds.push(packId); // ✨ 只有读成功的才算有效
+                 validIds.push(packId); // 只有读成功的才算有效
              } catch (e) {
                  console.error(`Failed to parse pack ${packId}`, e);
                  // 解析失败的也不算有效，会被自动剔除
@@ -192,7 +194,7 @@ export const usePromptStore = create<PromptState>()(
                 isFavorite: true,  // 默认收藏
                 createdAt: Date.now(),
                 updatedAt: Date.now(),
-                packId: undefined, // 清除 packId (因为它现在属于用户了)
+                packId: undefined, // 清除 packId
                 originalId: repoPrompt.id
             };
             return {
@@ -219,8 +221,12 @@ export const usePromptStore = create<PromptState>()(
         set({ isStoreLoading: true });
         
         const fetchOne = async (url: string) => {
-             const res = await fetch<PackManifest>(url, { method: 'GET', timeout: 8000 });
-             if (res.ok) return { data: res.data, url };
+             const res = await fetch(url, { method: 'GET' });
+             if (res.ok) {
+                // 使用 json() 解析
+                const data = await res.json() as PackManifest;
+                return { data, url };
+             }
              throw new Error("Failed");
         };
 
@@ -242,26 +248,25 @@ export const usePromptStore = create<PromptState>()(
         set({ isStoreLoading: true });
         try {
             const baseUrl = getBaseUrl(get().activeManifestUrl);
-            // 兼容路径问题修复
             const url = `${baseUrl}${pack.url}`; 
             
             console.log(`[Store] Downloading pack from ${url}`);
 
-            const response = await fetch<Prompt[]>(url);
+            // 移除泛型
+            const response = await fetch(url);
             
-            // 详细检查状态码
             if (!response.ok) {
                 if (response.status === 404) {
                     throw new Error(`404 Not Found: 无法在服务器找到文件。\nURL: ${url}`);
                 }
                 if (response.status === 403) {
-                    throw new Error(`403 Forbidden: 访问被拒绝 (可能是 Gitee 拦截了敏感词)。`);
+                    throw new Error(`403 Forbidden: 访问被拒绝。`);
                 }
                 throw new Error(`下载失败 (Status: ${response.status})`);
             }
             
-            // 解析数据
-            const data = response.data;
+            // 使用 json() 解析
+            const data = await response.json() as Prompt[];
             if (!Array.isArray(data)) {
                  throw new Error("数据格式错误：下载的内容不是数组。");
             }
@@ -289,7 +294,6 @@ export const usePromptStore = create<PromptState>()(
 
         } catch (e: any) {
             console.error("Install failed:", e);
-            // 把错误抛出去，让 UI 层能捕获到
             throw e; 
         } finally {
             set({ isStoreLoading: false });
@@ -300,15 +304,12 @@ export const usePromptStore = create<PromptState>()(
         set({ isStoreLoading: true });
         try {
             const filename = `${packId}.json`;
-            // 尝试删除文件
             try {
                 await fileStorage.packs.removePack(filename);
             } catch (fsErr) {
                 console.warn(`File ${filename} maybe already deleted or locked:`, fsErr);
-                // 忽略文件系统的错误，继续执行状态更新
             }
             
-            // 无论文件删除是否成功，都强制在内存中移除这个 ID
             set(state => ({
                 installedPackIds: state.installedPackIds.filter(id => id !== packId),
                 repoPrompts: state.repoPrompts.filter(p => p.packId !== packId)
@@ -325,34 +326,25 @@ export const usePromptStore = create<PromptState>()(
     {
       name: 'prompts-data',
       storage: createJSONStorage(() => ({
-        // 读操作：所有窗口都可以读取
         getItem: fileStorage.getItem,
-        // 写操作：核心拦截逻辑
         setItem: async (name, value) => {
-          // 获取当前窗口的 label
-          const label = appWindow.label;
-          // 如果是 spotlight 窗口，禁止写入，直接返回
-          if (label === 'spotlight') {
+          if (appWindow?.label === 'spotlight') {
             return;
           }
-          // 只有主窗口可以写入硬盘
           return fileStorage.setItem(name, value);
         },
-        // 禁止 spotlight 删除数据文件
         removeItem: async (name) => {
-          if (appWindow.label === 'spotlight') return;
+          if (appWindow?.label === 'spotlight') return;
           return fileStorage.removeItem(name);
         }
       })),
 
-      // 只持久化本地数据
       partialize: (state) => ({
         localPrompts: state.localPrompts,
         groups: state.groups,
         installedPackIds: state.installedPackIds
       }),
 
-      // 用于启动时加载外部指令包
       onRehydrateStorage: () => {
         return (state, _error) => {
           if (state) {

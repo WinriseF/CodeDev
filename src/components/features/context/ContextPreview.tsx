@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Copy, FileText, Loader2, AlertCircle } from 'lucide-react';
 import { FileNode } from '@/types/context';
 import { generateContext } from '@/lib/context_assembler';
-import { writeText } from '@tauri-apps/api/clipboard';
+import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { useAppStore } from '@/store/useAppStore';
 import { useContextStore } from '@/store/useContextStore';
 import { getText } from '@/lib/i18n';

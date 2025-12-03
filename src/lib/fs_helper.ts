@@ -1,5 +1,6 @@
-import { readDir } from '@tauri-apps/api/fs';
-import { invoke } from '@tauri-apps/api/tauri'; // ✨ 引入 invoke
+import { readDir } from '@tauri-apps/plugin-fs';
+import { invoke } from '@tauri-apps/api/core';
+import { join } from '@tauri-apps/api/path';
 import { FileNode, IgnoreConfig } from '@/types/context';
 
 /**
@@ -10,15 +11,16 @@ export async function scanProject(
   config: IgnoreConfig
 ): Promise<FileNode[]> {
   try {
-    // 读取当前目录内容
-    const entries = await readDir(path, { recursive: false });
+    const entries = await readDir(path);
     
     // 并行处理
     const nodes = await Promise.all(entries.map(async (entry) => {
-      const name = entry.name || '';
-      const fullPath = entry.path;
+      const name = entry.name;
+      // 手动拼接完整路径
+      const fullPath = await join(path, name);
       
-      // 1. 黑名单过滤
+      // 1. 黑名单过滤 (保持原有逻辑)
+      // 这里简单按名称过滤，未区分文件/文件夹
       if (config.dirs.includes(name)) return null;
       if (config.files.includes(name)) return null;
       
@@ -26,20 +28,21 @@ export async function scanProject(
       if (ext && config.extensions.includes(ext)) return null;
 
       // 2. 探测类型 & 递归
+      const isDir = entry.isDirectory;
+      
       let children: FileNode[] | undefined = undefined;
-      let isDir = false;
       let size = 0;
 
-      try {
-        // 尝试递归读取 (如果是文件夹，这步会成功)
-        children = await scanProject(fullPath, config);
-        isDir = true;
-      } catch (e) {
-        // 报错说明是文件
-        isDir = false;
-        
-        // ✨ 核心修复：调用 Rust 后端获取真实大小
-        // 这比前端读取文件快几千倍，且不会崩
+      if (isDir) {
+        try {
+          // 如果是文件夹，递归扫描
+          children = await scanProject(fullPath, config);
+        } catch (e) {
+          // 如果递归失败（如权限问题），视为空文件夹或被忽略
+          console.warn(`Failed to scan dir: ${fullPath}`, e);
+        }
+      } else {
+        // 如果是文件，调用 Rust 获取真实大小
         try {
           size = await invoke('get_file_size', { path: fullPath });
         } catch (err) {
@@ -53,7 +56,7 @@ export async function scanProject(
         name: name,
         path: fullPath,
         kind: isDir ? 'dir' : 'file',
-        size: size, // 这里现在是真实的字节数了！
+        size: size,
         children: isDir ? children : undefined,
         isSelected: true, 
         isExpanded: false

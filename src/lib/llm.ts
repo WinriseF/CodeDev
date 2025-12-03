@@ -1,4 +1,6 @@
 import { AIProviderConfig } from "@/types/model";
+// 使用 Tauri 的 fetch 绕过 CORS
+import { fetch } from '@tauri-apps/plugin-http';
 
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
@@ -12,7 +14,7 @@ export interface ChatMessage {
 export async function streamChatCompletion(
   messages: ChatMessage[],
   config: AIProviderConfig,
-  // 2. 修改回调签名：同时返回 content 和 reasoning
+  // 同时返回 content 和 reasoning
   onChunk: (contentDelta: string, reasoningDelta: string) => void,
   onError: (err: string) => void,
   onFinish: () => void
@@ -29,6 +31,7 @@ export async function streamChatCompletion(
       temperature: config.temperature,
     };
 
+    // 使用 plugin-http 的 fetch
     const response = await fetch(`${config.baseUrl}/chat/completions`, {
       method: "POST",
       headers: {
@@ -39,6 +42,7 @@ export async function streamChatCompletion(
     });
 
     if (!response.ok) {
+        // fetch 的 response.text() 也返回 Promise
         const errorText = await response.text();
         throw new Error(`API Error ${response.status}: ${errorText}`);
     }
@@ -57,6 +61,7 @@ export async function streamChatCompletion(
       buffer += chunk;
       
       const lines = buffer.split("\n");
+      // 保留最后一行可能不完整的数据到下一次循环
       buffer = lines.pop() || ""; 
 
       for (const line of lines) {

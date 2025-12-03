@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { appWindow } from '@tauri-apps/api/window';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { listen } from '@tauri-apps/api/event';
 import { TitleBar } from "@/components/layout/TitleBar";
 import { Sidebar } from "@/components/layout/Sidebar";
@@ -8,6 +8,7 @@ import { useAppStore, AppTheme } from "@/store/useAppStore";
 import { PromptView } from '@/components/features/prompts/PromptView';
 import { ContextView } from '@/components/features/context/ContextView';
 import { PatchView } from '@/components/features/patch/PatchView';
+const appWindow = getCurrentWebviewWindow()
 
 function App() {
   // 解构出 setTheme

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
-import { appWindow, LogicalSize } from '@tauri-apps/api/window';
-import { writeText } from '@tauri-apps/api/clipboard';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { LogicalSize } from '@tauri-apps/api/dpi';
+import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { listen } from '@tauri-apps/api/event';
 import { 
   Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, 
@@ -15,6 +16,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getText } from './lib/i18n';
 import { CodeBlock } from '@/components/ui/CodeBlock';
+
+const appWindow = getCurrentWebviewWindow()
 
 // 常量定义
 const FIXED_HEIGHT = 106; 

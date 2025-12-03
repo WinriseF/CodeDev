@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { appWindow } from '@tauri-apps/api/window';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { Minus, Square, X, Maximize2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+const appWindow = getCurrentWebviewWindow()
 
 export function TitleBar() {
   const [isMaximized, setIsMaximized] = useState(false);

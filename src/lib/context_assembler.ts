@@ -1,4 +1,4 @@
-import { readTextFile } from '@tauri-apps/api/fs';
+import { readTextFile } from '@tauri-apps/plugin-fs';
 import { FileNode } from '@/types/context';
 import { countTokens } from './tokenizer';
 import { generateAsciiTree } from './tree_generator';

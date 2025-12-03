@@ -4,7 +4,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { Search, Plus, Folder, Star, Hash, Trash2, Layers, PanelLeft, AlertTriangle, Terminal, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Prompt } from '@/types/prompt';
-import { writeText } from '@tauri-apps/api/clipboard';
+import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { parseVariables } from '@/lib/template';
 import { getText } from '@/lib/i18n'; 
 import { Toast, ToastType } from '@/components/ui/Toast';

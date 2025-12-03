@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Copy, Terminal } from 'lucide-react';
 import { Prompt } from '@/types/prompt';
 import { fillTemplate } from '@/lib/template';
-import { writeText } from '@tauri-apps/api/clipboard';
+import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { cn } from '@/lib/utils';
 import { useAppStore } from '@/store/useAppStore';
 import { getText } from '@/lib/i18n';

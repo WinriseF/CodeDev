@@ -4,7 +4,7 @@ import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore } from '@/store/useAppStore';
 import { cn } from '@/lib/utils';
 import { getText } from '@/lib/i18n';
-import { open } from '@tauri-apps/api/shell'; 
+import { open } from '@tauri-apps/plugin-shell'; 
 
 export function PromptLibraryManager() {
   const { 

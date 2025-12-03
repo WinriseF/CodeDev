@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { open as openDialog } from '@tauri-apps/api/dialog';
-import { readTextFile, writeTextFile } from '@tauri-apps/api/fs';
-import { writeText as writeClipboard } from '@tauri-apps/api/clipboard';
+import { open as openDialog } from '@tauri-apps/plugin-dialog';
+import { readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
+import { writeText as writeClipboard } from '@tauri-apps/plugin-clipboard-manager';
 import { useAppStore } from '@/store/useAppStore';
 import { getText } from '@/lib/i18n';
 import { parseMultiFilePatch, applyPatches } from '@/lib/patch_parser';
