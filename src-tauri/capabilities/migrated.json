@@ -18,6 +18,7 @@
     "core:window:allow-hide",
     "core:window:allow-show",
     "core:window:allow-set-focus",
+    "core:window:allow-set-size",
     "fs:default",
     {
       "identifier": "fs:scope",
@@ -38,13 +39,8 @@
     {
       "identifier": "http:default",
       "allow": [
-        { "url": "https://*.openai.com/*" },
-        { "url": "https://*.anthropic.com/*" },
-        { "url": "https://*.deepseek.com/*" },
-        { "url": "https://raw.githubusercontent.com/*" },
-        { "url": "https://gist.githubusercontent.com/*" },
-        { "url": "https://cdn.jsdelivr.net/*" },
-        { "url": "https://gitee.com/*" }
+        { "url": "https://*/*" },
+        { "url": "http://*/*" }
       ]
     }
   ]
