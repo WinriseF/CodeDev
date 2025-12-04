@@ -1,5 +1,5 @@
 {
-  "updated_at": 1764840183924,
+  "updated_at": 1764847689395,
   "version": "2.0.0",
   "packages": [
     {
@@ -161,9 +161,9 @@
       "language": "en",
       "platform": "linux",
       "name": "Linux Ops (EN)",
-      "description": "Contains 7579 en commands for linux.",
-      "count": 7579,
-      "size_kb": 3578,
+      "description": "Contains 7584 en commands for linux.",
+      "count": 7584,
+      "size_kb": 3581,
       "url": "packs/en/linux.json",
       "category": "command"
     },

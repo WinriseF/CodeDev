@@ -300,6 +300,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-systemctl-force-reload-0",
+    "type": "command",
+    "title": "systemctl-force-reload - View documentation for the original command",
+    "content": "tldr systemctl try-reload-or-restart",
+    "group": "Linux Ops",
+    "description": "systemctl-force-reload: This command is an alias of `systemctl try-reload-or-restart`. (View documentation for the original command)",
+    "tags": [
+      "linux",
+      "systemctl-force-reload",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-edit-0",
     "type": "command",
     "title": "edit - Edit action can be used to view any file on default mailcap explorer",
@@ -5049,6 +5064,21 @@
     "tags": [
       "linux",
       "checkupdates",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-systemctl-condreload-0",
+    "type": "command",
+    "title": "systemctl-condreload - View documentation for the original command",
+    "content": "tldr systemctl try-reload-or-restart",
+    "group": "Linux Ops",
+    "description": "systemctl-condreload: This command is an alias of `systemctl try-reload-or-restart`. (View documentation for the original command)",
+    "tags": [
+      "linux",
+      "systemctl-condreload",
       "tldr",
       "en"
     ],
@@ -70740,6 +70770,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-systemctl-condstop-0",
+    "type": "command",
+    "title": "systemctl-condstop - View documentation for the original command",
+    "content": "tldr systemctl stop",
+    "group": "Linux Ops",
+    "description": "systemctl-condstop: This command is an alias of `systemctl stop`. (View documentation for the original command)",
+    "tags": [
+      "linux",
+      "systemctl-condstop",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-spa-acp-tool-0",
     "type": "command",
     "title": "spa-acp-tool - List all ALSA objects",
@@ -100695,6 +100740,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-systemctl-reload-or-try-restart-0",
+    "type": "command",
+    "title": "systemctl-reload-or-try-restart - View documentation for the original command",
+    "content": "tldr systemctl try-reload-or-restart",
+    "group": "Linux Ops",
+    "description": "systemctl-reload-or-try-restart: This command is an alias of `systemctl try-reload-or-restart`. (View documentation for the original command)",
+    "tags": [
+      "linux",
+      "systemctl-reload-or-try-restart",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-jobs-0",
     "type": "command",
     "title": "jobs - View jobs spawned by the current shell",
@@ -109764,6 +109824,21 @@
     "tags": [
       "linux",
       "lvextend",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-systemctl-condrestart-0",
+    "type": "command",
+    "title": "systemctl-condrestart - View documentation for the original command",
+    "content": "tldr systemctl try-restart",
+    "group": "Linux Ops",
+    "description": "systemctl-condrestart: This command is an alias of `systemctl try-restart`. (View documentation for the original command)",
+    "tags": [
+      "linux",
+      "systemctl-condrestart",
       "tldr",
       "en"
     ],
