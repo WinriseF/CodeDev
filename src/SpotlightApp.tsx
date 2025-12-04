@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { LogicalSize } from '@tauri-apps/api/dpi';
-import { writeText } from '@tauri-apps/plugin-clipboard-manager';
+import { readText, writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { listen } from '@tauri-apps/api/event';
 import { 
   Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, 
@@ -139,16 +139,62 @@ export default function SpotlightApp() {
     return () => { unlistenPromise.then(unlisten => unlisten()); };
   }, [theme, setTheme]);
 
-  useEffect(() => {
-    const handleContextMenu = (e: MouseEvent) => {
-      e.preventDefault(); 
-    };
+  const handleSmartContextMenu = async (e: React.MouseEvent) => {
+    e.preventDefault(); // 禁止原生菜单
 
-    document.addEventListener('contextmenu', handleContextMenu);
-    return () => {
-      document.removeEventListener('contextmenu', handleContextMenu);
-    };
-  }, []);
+    // --- 复制 (Copy) ---
+    // 检查是否有选中的文本
+    const selection = window.getSelection()?.toString();
+    if (selection && selection.length > 0) {
+      try {
+        await writeText(selection);
+        console.log("Copied:", selection);
+      } catch (err) {
+        console.error("Copy failed:", err);
+      }
+      return;
+    }
+
+    // --- 粘贴 (Paste) ---
+    // 如果没有选中文本，且点击的是输入框
+    if (e.target === inputRef.current) {
+      try {
+        const clipboardText = await readText();
+        if (!clipboardText) return;
+
+        const input = inputRef.current;
+        if (!input) return;
+
+        // 获取光标位置，确保在光标处插入，而不是覆盖
+        const start = input.selectionStart || 0;
+        const end = input.selectionEnd || 0;
+        
+        // 获取当前对应的 state (搜索模式用 query，对话模式用 chatInput)
+        const currentValue = mode === 'search' ? query : chatInput;
+        
+        // 拼接新字符串
+        const newValue = currentValue.substring(0, start) + clipboardText + currentValue.substring(end);
+
+        // 更新 State
+        if (mode === 'search') {
+          setQuery(newValue);
+        } else {
+          setChatInput(newValue);
+        }
+
+        // 恢复光标位置 (需要等待 React 渲染更新后)
+        setTimeout(() => {
+            if (input) {
+                const newCursorPos = start + clipboardText.length;
+                input.setSelectionRange(newCursorPos, newCursorPos);
+            }
+        }, 0);
+
+      } catch (err) {
+        console.error("Paste failed:", err);
+      }
+    }
+  };
 
   useEffect(() => {
     const unlistenPromise = appWindow.onFocusChanged(async ({ payload: isFocused }) => {
@@ -371,7 +417,7 @@ export default function SpotlightApp() {
         .markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.9em; }
       `}</style>
 
-      <div className="w-screen h-screen flex flex-col items-center p-1 bg-transparent font-sans overflow-hidden">
+      <div className="w-screen h-screen flex flex-col items-center p-1 bg-transparent font-sans overflow-hidden" onContextMenu={handleSmartContextMenu}>
         <div className="w-full h-full flex flex-col bg-background/95 backdrop-blur-2xl border border-border/50 rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 relative overflow-hidden">
           
           {/* 背景流动层 */}
