@@ -1,3 +1,5 @@
+export type ShellType = 'auto' | 'cmd' | 'powershell' | 'bash' | 'zsh';
+
 export interface Prompt {
   id: string;
   title: string;
@@ -14,6 +16,9 @@ export interface Prompt {
   originalId?: string;
   
   type?: 'command' | 'prompt'; 
+
+  isExecutable?: boolean; // 是否为可执行指令
+  shellType?: ShellType;  // 指定执行环境
 }
 
 export const DEFAULT_GROUP = 'Default';

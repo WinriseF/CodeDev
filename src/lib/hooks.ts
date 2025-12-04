@@ -1,36 +1,38 @@
 import { useCallback } from 'react';
 import { readText, writeText } from '@tauri-apps/plugin-clipboard-manager';
 
-interface SmartContextMenuOptions {
-  onPaste: (pastedText: string, textarea: HTMLTextAreaElement | null) => void;
+// 1. 定义一个更通用的元素类型，它只需要有 value, selectionStart, selectionEnd 属性
+type InputLikeElement = HTMLInputElement | HTMLTextAreaElement;
+
+// 2. 更新接口，使其参数类型为这个通用类型
+interface SmartContextMenuOptions<T extends InputLikeElement> {
+  onPaste: (pastedText: string, element: T | null) => void;
 }
 
 /**
- * 一个可复用的 React Hook，用于为 textarea 提供智能右键菜单功能。
- * - 如果选中了文本，右键点击会【复制】选中的内容。
- * - 如果没有选中任何文本，右键点击会【粘贴】剪贴板的内容。
+ * 一个可复用的、类型安全的 React Hook，用于为 input/textarea 提供智能右键菜单功能。
  * @param options 包含一个 onPaste 回调函数，用于处理粘贴逻辑。
  */
-export function useSmartContextMenu({ onPaste }: SmartContextMenuOptions) {
+export function useSmartContextMenu<T extends InputLikeElement>({ onPaste }: SmartContextMenuOptions<T>) {
   
-  const handleContextMenu = useCallback(async (e: React.MouseEvent<HTMLTextAreaElement>) => {
+  // 3. handleContextMenu 的事件参数类型现在由泛型 T 决定
+  const handleContextMenu = useCallback(async (e: React.MouseEvent<T>) => {
     e.preventDefault();
-    const textarea = e.currentTarget;
+    const element = e.currentTarget;
 
-    // 1. 复制逻辑
+    // 复制逻辑 (保持不变)
     const selection = window.getSelection()?.toString();
     if (selection && selection.length > 0) {
       await writeText(selection);
       return;
     }
 
-    // 2. 粘贴逻辑
+    // 粘贴逻辑
     try {
       const clipboardText = await readText();
       if (!clipboardText) return;
       
-      // 将 textarea 引用传递给回调函数
-      onPaste(clipboardText, textarea);
+      onPaste(clipboardText, element);
 
     } catch (err) {
       console.error("Paste operation failed:", err);

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { X, Save, Tag, FileText, Folder, ChevronDown, Check, Plus, Sparkles, Terminal } from 'lucide-react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore } from '@/store/useAppStore'; 
-import { Prompt, DEFAULT_GROUP } from '@/types/prompt';
+import { Prompt, DEFAULT_GROUP, ShellType } from '@/types/prompt';
 import { cn } from '@/lib/utils';
 import { getText } from '@/lib/i18n';
 
@@ -12,6 +12,14 @@ interface PromptEditorDialogProps {
   initialData?: Prompt | null;
 }
 
+const SHELL_OPTIONS: { value: ShellType; label: string }[] = [
+  { value: 'auto', label: 'Auto Detect' },
+  { value: 'cmd', label: 'Command Prompt (cmd)' },
+  { value: 'powershell', label: 'PowerShell' },
+  { value: 'bash', label: 'Bash' },
+  { value: 'zsh', label: 'Zsh' },
+];
+
 export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEditorDialogProps) {
   const { groups, addPrompt, updatePrompt, addGroup } = usePromptStore();
   const { language } = useAppStore();
@@ -19,10 +27,12 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [group, setGroup] = useState(DEFAULT_GROUP);
-  
-  // 类型状态，默认为 'prompt'
   const [type, setType] = useState<'command' | 'prompt'>('prompt');
   
+  // --- 新增状态 ---
+  const [isExecutable, setIsExecutable] = useState(false);
+  const [shellType, setShellType] = useState<ShellType>('auto');
+
   const [newGroupMode, setNewGroupMode] = useState(false);
   const [newGroupName, setNewGroupName] = useState('');
   const [isGroupOpen, setIsGroupOpen] = useState(false);
@@ -33,14 +43,18 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
         setTitle(initialData.title);
         setContent(initialData.content);
         setGroup(initialData.group);
-        // 恢复类型，如果没有(老数据)则默认为 prompt
         setType(initialData.type || 'prompt');
+        // --- 初始化新增状态 ---
+        setIsExecutable(initialData.isExecutable || false);
+        setShellType(initialData.shellType || 'auto');
       } else {
+        // --- 重置新增状态 ---
         setTitle('');
         setContent('');
         setGroup(DEFAULT_GROUP);
-        // 新建时默认为 prompt
         setType('prompt');
+        setIsExecutable(false);
+        setShellType('auto');
       }
       setNewGroupMode(false);
       setNewGroupName('');
@@ -63,7 +77,10 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
         title, 
         content, 
         group: finalGroup,
-        type: type // 保存类型
+        type: type,
+        // --- 保存新增字段 ---
+        isExecutable: isExecutable,
+        shellType: shellType,
     };
 
     if (initialData) {
@@ -76,7 +93,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-200 p-4">
-      <div className="w-full max-w-[600px] bg-background border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col max-h-[85vh]">
+      <div className="w-full max-w-[600px] bg-background border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
         
         <div className="h-14 px-6 border-b border-border flex items-center justify-between bg-secondary/10 shrink-0">
           <h2 className="font-semibold text-foreground flex items-center gap-2">
@@ -188,24 +205,71 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
             )}
           </div>
 
+          <div className="space-y-4 pt-4 border-t border-border/50">
+            <div className="flex items-center justify-between">
+                <label htmlFor="executable-toggle" className="flex items-center gap-2 cursor-pointer">
+                    <Terminal size={14} className="text-muted-foreground" />
+                    <div className="flex flex-col">
+                        <span className="font-medium text-sm text-foreground">Executable Command</span>
+                        <span className="text-xs text-muted-foreground">Run this in the system terminal instead of copying.</span>
+                    </div>
+                </label>
+                <div 
+                    onClick={() => setIsExecutable(!isExecutable)}
+                    id="executable-toggle"
+                    className={cn(
+                        "w-10 h-5 rounded-full relative transition-colors duration-300 cursor-pointer",
+                        isExecutable ? "bg-primary" : "bg-slate-300 dark:bg-slate-600"
+                    )}
+                >
+                    <div className={cn(
+                        "absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform duration-300 shadow",
+                        isExecutable ? "translate-x-5" : "translate-x-0.5"
+                    )} />
+                </div>
+            </div>
+            
+            {isExecutable && (
+                <div className="space-y-2 pl-6 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                        Execution Shell
+                    </label>
+                    <div className="relative">
+                        <select
+                            value={shellType}
+                            onChange={(e) => setShellType(e.target.value as ShellType)}
+                            className="w-full appearance-none bg-secondary/20 border border-border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-primary/50 focus:border-primary/50 outline-none transition-all"
+                        >
+                            {SHELL_OPTIONS.map(opt => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                            ))}
+                        </select>
+                        <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+                    </div>
+                    <p className="text-[10px] text-muted-foreground/70">
+                        'Auto' is recommended. Choose a specific shell if your command requires it (e.g., PowerShell syntax).
+                    </p>
+                </div>
+            )}
+          </div>
+
           {/* Content */}
-          <div className="space-y-2">
+          <div className="space-y-2 pt-4 border-t border-border/50">
             <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
               <FileText size={14} /> {getText('editor', 'labelContent', language)}
             </label>
             <div className="relative">
               <textarea 
                 className="w-full h-48 bg-secondary/20 border border-border rounded-lg p-3 text-sm font-mono focus:ring-2 focus:ring-primary/50 focus:border-primary/50 outline-none resize-none leading-relaxed placeholder:text-muted-foreground/40"
-                placeholder={getText('editor', 'placeholderContent', language)}
+                placeholder={isExecutable ? "e.g. cd {{path}} && npm install" : "Enter command or prompt. Use {{variable}} for slots."}
                 value={content}
                 onChange={e => setContent(e.target.value)}
               />
               <div className="absolute bottom-3 right-3 text-xs text-muted-foreground/60 bg-background/50 px-2 py-1 rounded border border-border/50 backdrop-blur-sm">
-                {getText('editor', 'tip', language)}
+                {isExecutable ? "Use '&&' to chain commands" : "Tip: Use {{variable}} to create fillable slots"}
               </div>
             </div>
           </div>
-
         </div>
 
         <div className="p-4 border-t border-border bg-secondary/5 flex justify-end gap-3 shrink-0">
@@ -221,7 +285,6 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
             {getText('editor', 'btnSave', language)}
           </button>
         </div>
-
       </div>
     </div>
   );

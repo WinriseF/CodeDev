@@ -29,6 +29,7 @@
     "fs:allow-mkdir",
     "fs:allow-remove",
     "fs:allow-exists",
+    "shell:default",
     "shell:allow-open",
     "dialog:default",
     "clipboard-manager:allow-write-text",
@@ -42,6 +43,19 @@
         { "url": "https://*/*" },
         { "url": "http://*/*" }
       ]
-    }
+    },
+    {
+      "identifier": "shell:allow-open"
+    },
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        { "name": "cmd", "cmd": "cmd", "args": true },
+        { "name": "powershell", "cmd": "powershell", "args": true },
+        { "name": "osascript", "cmd": "osascript", "args": true },
+        { "name": "x-terminal-emulator", "cmd": "x-terminal-emulator", "args": true }
+      ]
+    },
+    "core:app:allow-identifier"
   ]
 }

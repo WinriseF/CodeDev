@@ -1,5 +1,5 @@
 import { useState, useRef, memo } from 'react';
-import { Copy, Edit3, Trash2, Star, Hash, Terminal, BadgeCheck } from 'lucide-react';
+import { Copy, Edit3, Trash2, Star, Hash, Terminal, BadgeCheck, Zap } from 'lucide-react';
 import { Prompt } from '@/types/prompt';
 import { cn } from '@/lib/utils';
 import { usePromptStore } from '@/store/usePromptStore';
@@ -22,64 +22,43 @@ function PromptCardComponent({ prompt, onEdit, onDelete, onTrigger }: PromptCard
   const [showTooltip, setShowTooltip] = useState(false);
   const [anchorRect, setAnchorRect] = useState<DOMRect | null>(null);
   
-  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null); // 打开定时器
-  const closeTimerRef = useRef<NodeJS.Timeout | null>(null); // 关闭定时器
+  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
   
   const cardRef = useRef<HTMLDivElement>(null);
+
+  const isExecutable = !!prompt.isExecutable;
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onTrigger(prompt);
   };
 
-  // 鼠标进入卡片
   const handleMouseEnter = () => {
     setIsHovered(true);
-    
-    // 如果有关闭定时器正在运行（比如刚从Tooltip移出来），取消它，保持显示
-    if (closeTimerRef.current) {
-        clearTimeout(closeTimerRef.current);
-        closeTimerRef.current = null;
-    }
-
-    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    
-    // 如果还没显示，开启显示延时
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     if (!showTooltip) {
-        hoverTimerRef.current = setTimeout(() => {
-            if (cardRef.current) {
-                setAnchorRect(cardRef.current.getBoundingClientRect());
-                setShowTooltip(true);
-            }
-        }, 200);
+      hoverTimerRef.current = setTimeout(() => {
+        if (cardRef.current) {
+          setAnchorRect(cardRef.current.getBoundingClientRect());
+          setShowTooltip(true);
+        }
+      }, 200);
     }
   };
 
-  // 鼠标离开卡片
   const handleMouseLeave = () => {
     setIsHovered(false);
     if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    
-    // ✨ 不要立即关闭，而是延迟 300ms
-    // 给用户时间把鼠标移动到 Tooltip 上
-    closeTimerRef.current = setTimeout(() => {
-        setShowTooltip(false);
-    }, 150);
+    closeTimerRef.current = setTimeout(() => setShowTooltip(false), 150);
   };
 
-  // Tooltip 鼠标进入：取消关闭
   const handleTooltipEnter = () => {
-      if (closeTimerRef.current) {
-          clearTimeout(closeTimerRef.current);
-          closeTimerRef.current = null;
-      }
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
   };
 
-  // Tooltip 鼠标离开：开启关闭倒计时
   const handleTooltipLeave = () => {
-      closeTimerRef.current = setTimeout(() => {
-          setShowTooltip(false);
-      }, 300);
+    closeTimerRef.current = setTimeout(() => setShowTooltip(false), 300);
   };
 
   const getGroupStyle = (group: string) => {
@@ -89,7 +68,7 @@ function PromptCardComponent({ prompt, onEdit, onDelete, onTrigger }: PromptCard
       case 'Docker': return 'bg-cyan-500/10 text-cyan-500';
       case 'Javascript': 
       case 'TypeScript': return 'bg-yellow-500/10 text-yellow-500';
-      default: return 'bg-primary/10 text-primary';
+      default: return isExecutable ? 'bg-indigo-500/10 text-indigo-400' : 'bg-primary/10 text-primary';
     }
   };
 
@@ -99,7 +78,10 @@ function PromptCardComponent({ prompt, onEdit, onDelete, onTrigger }: PromptCard
     <>
         <div 
           ref={cardRef}
-          className="group relative border border-border bg-card hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 rounded-xl transition-all duration-300 flex flex-col h-[180px] overflow-hidden cursor-pointer"
+          className={cn(
+            "group relative border border-border bg-card hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 rounded-xl transition-all duration-300 flex flex-col h-[180px] overflow-hidden cursor-pointer",
+            isExecutable && "hover:border-indigo-500/50 hover:shadow-indigo-500/5"
+          )}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={handleClick}
@@ -111,7 +93,8 @@ function PromptCardComponent({ prompt, onEdit, onDelete, onTrigger }: PromptCard
                   "p-1.5 rounded-md shrink-0 transition-colors",
                   getGroupStyle(prompt.group)
                 )}>
-                   <Terminal size={14} />
+                   {/* --- 根据是否可执行显示不同图标 --- */}
+                   {isExecutable ? <Zap size={14} /> : <Terminal size={14} />}
                 </div>
                 <h3 className="font-semibold text-foreground truncate text-sm" title={prompt.title}>
                     {prompt.title}
@@ -160,11 +143,18 @@ function PromptCardComponent({ prompt, onEdit, onDelete, onTrigger }: PromptCard
                         <div className="w-px h-3 bg-border mx-1" />
                     </>
                )}
+               {/* --- 条件渲染按钮样式和内容 --- */}
                <button 
-                 className="flex items-center gap-1 bg-primary/90 hover:bg-primary text-primary-foreground px-2 py-1 rounded text-xs font-medium transition-colors active:scale-95"
+                 className={cn(
+                   "flex items-center gap-1.5 px-2 py-1 rounded text-xs font-medium transition-colors active:scale-95",
+                   isExecutable
+                     ? "bg-indigo-600 hover:bg-indigo-500 text-white"
+                     : "bg-primary/90 hover:bg-primary text-primary-foreground"
+                 )}
                  onClick={handleClick}
                >
-                 <Copy size={12} /> {getText('actions', 'copy', language)}
+                 {isExecutable ? <Zap size={12} /> : <Copy size={12} />}
+                 {isExecutable ? "Run" : getText('actions', 'copy', language)}
                </button>
             </div>
           </div>
@@ -174,7 +164,6 @@ function PromptCardComponent({ prompt, onEdit, onDelete, onTrigger }: PromptCard
             prompt={prompt} 
             anchorRect={anchorRect} 
             isOpen={showTooltip}
-            // ✨ 传入事件处理函数
             onMouseEnter={handleTooltipEnter}
             onMouseLeave={handleTooltipLeave} 
         />
@@ -203,6 +192,7 @@ export const PromptCard = memo(PromptCardComponent, (prev, next) => {
         prev.prompt.isFavorite === next.prompt.isFavorite &&
         prev.prompt.title === next.prompt.title &&
         prev.prompt.content === next.prompt.content &&
-        prev.prompt.group === next.prompt.group
+        prev.prompt.group === next.prompt.group &&
+        prev.prompt.isExecutable === next.prompt.isExecutable
     );
 });

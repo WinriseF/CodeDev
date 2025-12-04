@@ -56,11 +56,11 @@ export function DiffWorkspace({
     }, 0);
   };
   
-  const { onContextMenu: onOriginalContextMenu } = useSmartContextMenu({ 
+  const { onContextMenu: onOriginalContextMenu } = useSmartContextMenu<HTMLTextAreaElement>({ 
     onPaste: (text, textarea) => handlePaste(text, textarea, 'original') 
   });
   
-  const { onContextMenu: onModifiedContextMenu } = useSmartContextMenu({ 
+  const { onContextMenu: onModifiedContextMenu } = useSmartContextMenu<HTMLTextAreaElement>({ 
     onPaste: (text, textarea) => handlePaste(text, textarea, 'modified') 
   });
 

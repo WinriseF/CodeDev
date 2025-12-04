@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { LogicalSize } from '@tauri-apps/api/dpi';
-import { readText, writeText } from '@tauri-apps/plugin-clipboard-manager';
+import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { listen } from '@tauri-apps/api/event';
+import { message } from '@tauri-apps/plugin-dialog';
 import { 
   Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, 
   Command, Bot, User, Brain, ChevronDown, Zap, Copy, FileText, Code 
@@ -16,10 +17,15 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getText } from './lib/i18n';
 import { CodeBlock } from '@/components/ui/CodeBlock';
+import { useSmartContextMenu } from '@/lib/hooks';
+import { parseVariables } from '@/lib/template';
+
+// 导入核心执行模块和 store
+import { executeCommand } from './lib/command_executor';
+import { useContextStore } from './store/useContextStore';
 
 const appWindow = getCurrentWebviewWindow()
 
-// 常量定义
 const FIXED_HEIGHT = 106; 
 const MAX_WINDOW_HEIGHT = 460;
 
@@ -31,14 +37,12 @@ type SpotlightMode = 'search' | 'chat';
 
 /**
  * 内部组件：消息复制菜单
- * 将位置调整到气泡右侧外部，防止遮挡内容
  */
 function MessageCopyMenu({ content }: { content: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // 点击外部关闭菜单
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -64,7 +68,6 @@ function MessageCopyMenu({ content }: { content: string }) {
 
   return (
     <div className="absolute top-2 left-[100%] ml-2 opacity-0 group-hover:opacity-100 transition-opacity z-20" ref={menuRef}>
-       {/* 触发按钮 */}
        <button
          onClick={() => setIsOpen(!isOpen)}
          className={cn(
@@ -76,7 +79,6 @@ function MessageCopyMenu({ content }: { content: string }) {
          {isCopied ? <Check size={14} /> : <Copy size={14} />}
        </button>
 
-       {/* 下拉菜单 */}
        {isOpen && (
          <div className="absolute right-0 top-full mt-1 w-36 bg-popover border border-border rounded-md shadow-lg py-1 flex flex-col animate-in fade-in zoom-in-95 duration-100 origin-top-right z-30">
             <button
@@ -115,9 +117,34 @@ export default function SpotlightApp() {
   
   const { getAllPrompts, initStore } = usePromptStore();
   const { theme, setTheme, aiConfig, setAIConfig, spotlightAppearance, language } = useAppStore(); 
+  const { projectRoot } = useContextStore();
   
   const allPrompts = getAllPrompts();
 
+  const handlePaste = (pastedText: string, input: HTMLInputElement | HTMLTextAreaElement | null) => {
+    if (!input || !(input instanceof HTMLInputElement)) return;
+
+    const { selectionStart, selectionEnd } = input;
+    const currentValue = mode === 'search' ? query : chatInput;
+    const newValue = currentValue.substring(0, selectionStart ?? 0) + pastedText + currentValue.substring(selectionEnd ?? 0);
+    
+    if (mode === 'search') {
+      setQuery(newValue);
+    } else {
+      setChatInput(newValue);
+    }
+
+    setTimeout(() => {
+      if (input) {
+        const newCursorPos = (selectionStart ?? 0) + pastedText.length;
+        input.focus();
+        input.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
+  };
+
+  const { onContextMenu } = useSmartContextMenu({ onPaste: handlePaste });
+  
   const cycleProvider = () => {
     const providers: Array<'openai' | 'deepseek' | 'anthropic'> = ['deepseek', 'openai', 'anthropic'];
     const currentIndex = providers.indexOf(aiConfig.providerId);
@@ -139,68 +166,12 @@ export default function SpotlightApp() {
     return () => { unlistenPromise.then(unlisten => unlisten()); };
   }, [theme, setTheme]);
 
-  const handleSmartContextMenu = async (e: React.MouseEvent) => {
-    e.preventDefault(); // 禁止原生菜单
-
-    // --- 复制 (Copy) ---
-    // 检查是否有选中的文本
-    const selection = window.getSelection()?.toString();
-    if (selection && selection.length > 0) {
-      try {
-        await writeText(selection);
-        console.log("Copied:", selection);
-      } catch (err) {
-        console.error("Copy failed:", err);
-      }
-      return;
-    }
-
-    // --- 粘贴 (Paste) ---
-    // 如果没有选中文本，且点击的是输入框
-    if (e.target === inputRef.current) {
-      try {
-        const clipboardText = await readText();
-        if (!clipboardText) return;
-
-        const input = inputRef.current;
-        if (!input) return;
-
-        // 获取光标位置，确保在光标处插入，而不是覆盖
-        const start = input.selectionStart || 0;
-        const end = input.selectionEnd || 0;
-        
-        // 获取当前对应的 state (搜索模式用 query，对话模式用 chatInput)
-        const currentValue = mode === 'search' ? query : chatInput;
-        
-        // 拼接新字符串
-        const newValue = currentValue.substring(0, start) + clipboardText + currentValue.substring(end);
-
-        // 更新 State
-        if (mode === 'search') {
-          setQuery(newValue);
-        } else {
-          setChatInput(newValue);
-        }
-
-        // 恢复光标位置 (需要等待 React 渲染更新后)
-        setTimeout(() => {
-            if (input) {
-                const newCursorPos = start + clipboardText.length;
-                input.setSelectionRange(newCursorPos, newCursorPos);
-            }
-        }, 0);
-
-      } catch (err) {
-        console.error("Paste failed:", err);
-      }
-    }
-  };
-
   useEffect(() => {
     const unlistenPromise = appWindow.onFocusChanged(async ({ payload: isFocused }) => {
       if (isFocused) {
         await usePromptStore.persist.rehydrate();
         await useAppStore.persist.rehydrate();
+        await useContextStore.persist.rehydrate();
         setTimeout(() => inputRef.current?.focus(), 50);
         setSelectedIndex(0);
         setCopiedId(null);
@@ -254,17 +225,31 @@ export default function SpotlightApp() {
     appWindow.setSize(new LogicalSize(targetWidth, finalHeight));
   }, [filtered, query, selectedIndex, mode, messages.length, spotlightAppearance]);
 
-  const handleCopy = async (prompt: Prompt) => {
+  const handleEnterAction = async (prompt: Prompt) => {
     if (!prompt) return;
-    try {
-      await writeText(prompt.content);
-      setCopiedId(prompt.id);
-      setTimeout(async () => {
-        await appWindow.hide();
-        setCopiedId(null);
-      }, 300);
-    } catch (err) {
-      console.error(err);
+    
+    if (prompt.isExecutable) {
+      const vars = parseVariables(prompt.content);
+      if (vars.length > 0) {
+        await message("This command has variables. Please use it from the main window to fill them in.", {
+          title: "Action Required",
+          kind: 'info'
+        });
+        return;
+      }
+      await executeCommand(prompt.content, prompt.shellType, projectRoot);
+      await appWindow.hide();
+    } else {
+      try {
+        await writeText(prompt.content);
+        setCopiedId(prompt.id);
+        setTimeout(async () => {
+          await appWindow.hide();
+          setCopiedId(null);
+        }, 300);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
     }
   };
 
@@ -275,31 +260,19 @@ export default function SpotlightApp() {
 
   const handleSendToAI = async () => {
       if (!chatInput.trim() || isStreaming) return;
-      
       const userText = chatInput.trim();
       setChatInput(''); 
-      
-      const newMessages: ChatMessage[] = [
-          ...messages,
-          { role: 'user', content: userText }
-      ];
+      const newMessages: ChatMessage[] = [...messages, { role: 'user', content: userText }];
       setMessages(newMessages);
       setIsStreaming(true);
-
       setMessages(prev => [...prev, { role: 'assistant', content: '', reasoning: '' }]);
-
-      await streamChatCompletion(
-          newMessages,
-          aiConfig,
+      await streamChatCompletion(newMessages, aiConfig,
           (contentDelta, reasoningDelta) => {
               setMessages(current => {
-                  if (current.length === 0) return current;
                   const updated = [...current];
-                  const lastIndex = updated.length - 1;
-                  if (lastIndex < 0) return current;
-                  const lastMsg = updated[lastIndex];
+                  const lastMsg = updated[updated.length - 1];
                   if (lastMsg && lastMsg.role === 'assistant') {
-                      updated[lastIndex] = {
+                      updated[updated.length - 1] = {
                           ...lastMsg,
                           content: lastMsg.content + contentDelta,
                           reasoning: (lastMsg.reasoning || "") + reasoningDelta
@@ -310,21 +283,18 @@ export default function SpotlightApp() {
           },
           (err) => {
               setMessages(current => {
-                  if (current.length === 0) return current;
                   const updated = [...current];
-                  const lastIndex = updated.length - 1;
-                  if (lastIndex >= 0 && updated[lastIndex]) {
-                      updated[lastIndex] = {
-                          ...updated[lastIndex],
-                          content: updated[lastIndex].content + `\n\n**[Error]**: ${err}`
+                  const lastMsg = updated[updated.length - 1];
+                  if (lastMsg) {
+                      updated[updated.length - 1] = {
+                          ...lastMsg,
+                          content: lastMsg.content + `\n\n**[Error]**: ${err}`
                       };
                   }
                   return updated;
               });
           },
-          () => {
-              setIsStreaming(false);
-          }
+          () => setIsStreaming(false)
       );
   };
 
@@ -339,7 +309,7 @@ export default function SpotlightApp() {
       if (mode === 'chat' && chatEndRef.current) {
           chatEndRef.current.scrollIntoView({ behavior: "smooth" });
       }
-  }, [messages.length, mode]); 
+  }, [messages.length, mode, isStreaming]); 
 
   useEffect(() => {
     const handleGlobalKeyDown = async (e: KeyboardEvent) => {
@@ -370,13 +340,13 @@ export default function SpotlightApp() {
       if (mode === 'search') {
           if (e.key === 'ArrowDown') {
             e.preventDefault();
-            setSelectedIndex(prev => (prev + 1) % filtered.length);
+            setSelectedIndex(prev => (prev + 1) % (filtered.length || 1));
           } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            setSelectedIndex(prev => (prev - 1 + filtered.length) % filtered.length);
+            setSelectedIndex(prev => (prev - 1 + (filtered.length || 1)) % (filtered.length || 1));
           } else if (e.key === 'Enter') {
             e.preventDefault();
-            if (filtered[selectedIndex]) handleCopy(filtered[selectedIndex]);
+            if (filtered[selectedIndex]) handleEnterAction(filtered[selectedIndex]);
           }
       } else {
           if (e.key === 'Enter' && !e.shiftKey) {
@@ -401,61 +371,31 @@ export default function SpotlightApp() {
   return (
     <>
       <style>{`
-        @keyframes gradient-flow {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient-flow {
-          background-size: 400% 400%;
-          animation: gradient-flow 10s ease infinite;
-        }
-        /* Markdown 样式微调 */
+        @keyframes gradient-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .animate-gradient-flow { background-size: 400% 400%; animation: gradient-flow 10s ease infinite; }
         .markdown-body p { margin-bottom: 0.5em; }
         .markdown-body p:last-child { margin-bottom: 0; }
-        .markdown-body pre { margin: 0.5em 0; border-radius: 0.375rem; overflow: hidden; }
+        .markdown-body pre { margin: 0.5em 0; }
         .markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.9em; }
       `}</style>
 
-      <div className="w-screen h-screen flex flex-col items-center p-1 bg-transparent font-sans overflow-hidden" onContextMenu={handleSmartContextMenu}>
+      <div className="w-screen h-screen flex flex-col items-center p-1 bg-transparent font-sans overflow-hidden">
         <div className="w-full h-full flex flex-col bg-background/95 backdrop-blur-2xl border border-border/50 rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 relative overflow-hidden">
           
-          {/* 背景流动层 */}
-          <div 
-              className={cn(
-                  "absolute inset-0 pointer-events-none transition-opacity duration-1000 ease-in-out",
-                  mode === 'chat' ? "opacity-100" : "opacity-0"
-              )}
-          >
+          <div className={cn("absolute inset-0 pointer-events-none transition-opacity duration-1000 ease-in-out", mode === 'chat' ? "opacity-100" : "opacity-0")}>
               <div className="absolute inset-0 animate-gradient-flow bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />
               <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-purple-500/5 to-transparent" />
           </div>
 
-          {/* Header */}
-          <div 
-            data-tauri-drag-region 
-            className={cn(
-               "h-16 shrink-0 flex items-center px-5 gap-4 border-b transition-colors duration-300 cursor-move relative z-10",
-               mode === 'chat' ? "border-purple-500/20" : "border-border/40"
-            )}
-          >
-            <button 
-              onClick={toggleMode}
-              className="w-6 h-6 flex items-center justify-center relative outline-none group"
-              title="Toggle Mode (Tab)"
-            >
-                <SearchIcon 
-                   className={cn("absolute transition-all duration-300 text-muted-foreground/70 group-hover:text-foreground", mode === 'search' ? "scale-100 opacity-100" : "scale-50 opacity-0 rotate-90")} 
-                   size={24} 
-                />
-                <Bot 
-                   className={cn("absolute transition-all duration-300 text-purple-500", mode === 'chat' ? "scale-100 opacity-100 rotate-0" : "scale-50 opacity-0 -rotate-90")} 
-                   size={24} 
-                />
+          <div data-tauri-drag-region className={cn("h-16 shrink-0 flex items-center px-5 gap-4 border-b transition-colors duration-300 cursor-move relative z-10", mode === 'chat' ? "border-purple-500/20" : "border-border/40")}>
+            <button onClick={toggleMode} className="w-6 h-6 flex items-center justify-center relative outline-none group" title="Toggle Mode (Tab)">
+                <SearchIcon className={cn("absolute transition-all duration-300 text-muted-foreground/70 group-hover:text-foreground", mode === 'search' ? "scale-100 opacity-100" : "scale-50 opacity-0 rotate-90")} size={24} />
+                <Bot className={cn("absolute transition-all duration-300 text-purple-500", mode === 'chat' ? "scale-100 opacity-100 rotate-0" : "scale-50 opacity-0 -rotate-90")} size={24} />
             </button>
 
             <input
               ref={inputRef}
+              onContextMenu={onContextMenu}
               className="flex-1 bg-transparent border-none outline-none text-xl placeholder:text-muted-foreground/40 h-full text-foreground caret-primary relative z-10"
               placeholder={mode === 'search' ? getText('spotlight', 'searchPlaceholder', language) : getText('spotlight', 'chatPlaceholder', language)}
               value={mode === 'search' ? query : chatInput}
@@ -466,39 +406,21 @@ export default function SpotlightApp() {
             
             <div className="flex items-center gap-2 relative z-10">
                {mode === 'chat' && (
-                  <button 
-                    onClick={cycleProvider}
-                    className="flex items-center gap-1.5 px-2 py-1 rounded bg-secondary/50 hover:bg-secondary text-[10px] font-medium transition-colors border border-border/50 group"
-                    title={`Current: ${aiConfig.providerId}. Click to switch.`}
-                  >
-                      <Zap size={10} className={cn(
-                          aiConfig.providerId === 'deepseek' ? "text-blue-500" :
-                          aiConfig.providerId === 'openai' ? "text-green-500" : "text-orange-500"
-                      )} />
+                  <button onClick={cycleProvider} className="flex items-center gap-1.5 px-2 py-1 rounded bg-secondary/50 hover:bg-secondary text-[10px] font-medium transition-colors border border-border/50 group" title={`Current: ${aiConfig.providerId}. Click to switch.`}>
+                      <Zap size={10} className={cn(aiConfig.providerId === 'deepseek' ? "text-blue-500" : aiConfig.providerId === 'openai' ? "text-green-500" : "text-orange-500")} />
                       <span className="opacity-70 group-hover:opacity-100 uppercase">{aiConfig.providerId}</span>
                   </button>
                )}
-
                <div className="flex items-center gap-2 pointer-events-none opacity-50">
-                    <span className={cn(
-                        "text-[10px] px-1.5 py-0.5 rounded font-medium border transition-colors duration-300",
-                        mode === 'chat' ? "bg-purple-500/10 text-purple-500 border-purple-500/20" : "bg-secondary text-muted-foreground border-border"
-                    )}>
-                        TAB
-                    </span>
+                    <span className={cn("text-[10px] px-1.5 py-0.5 rounded font-medium border transition-colors duration-300", mode === 'chat' ? "bg-purple-500/10 text-purple-500 border-purple-500/20" : "bg-secondary text-muted-foreground border-border")}>TAB</span>
                     {mode === 'search' && query && <span className="text-[10px] bg-secondary px-1.5 py-0.5 rounded text-muted-foreground font-medium border border-border">ESC {getText('spotlight', 'clear', language)}</span>}
                </div>
             </div>
           </div>
 
-          {/* Content Area */}
           <div className="relative z-10 flex-1 min-h-0 flex flex-col">
               {mode === 'search' ? (
-                  // --- Search List Mode ---
-                  <div 
-                      ref={listRef}
-                      className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar scroll-smooth"
-                  >
+                  <div ref={listRef} className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar scroll-smooth">
                   {filtered.length === 0 ? (
                       <div className="h-full flex flex-col items-center justify-center text-muted-foreground gap-2 opacity-60 min-h-[100px]">
                           <Command size={24} strokeWidth={1.5} />
@@ -506,68 +428,49 @@ export default function SpotlightApp() {
                       </div>
                   ) : (
                       filtered.map((item, index) => {
-                      const isActive = index === selectedIndex;
-                      const isCopied = copiedId === item.id;
-                      const hasDesc = !!item.description;
+                        const isActive = index === selectedIndex;
+                        const isCopied = copiedId === item.id;
+                        const isExecutable = !!item.isExecutable;
+                        const hasDesc = !!item.description;
 
-                      return (
+                        return (
                           <div
-                          key={item.id}
-                          onClick={() => handleCopy(item)}
-                          onMouseEnter={() => setSelectedIndex(index)}
-                          className={cn(
-                              "relative px-4 py-3 rounded-lg flex items-start gap-4 cursor-pointer transition-all duration-150 group",
-                              isActive ? "bg-primary text-primary-foreground shadow-sm scale-[0.99]" : "text-foreground hover:bg-secondary/40",
-                              isCopied && "bg-green-500 text-white"
-                          )}
+                            key={item.id}
+                            onClick={() => handleEnterAction(item)}
+                            onMouseEnter={() => setSelectedIndex(index)}
+                            className={cn(
+                                "relative px-4 py-3 rounded-lg flex items-start gap-4 cursor-pointer transition-all duration-150 group",
+                                isActive ? (isExecutable ? "bg-indigo-600 text-white shadow-sm scale-[0.99]" : "bg-primary text-primary-foreground shadow-sm scale-[0.99]") : "text-foreground hover:bg-secondary/40",
+                                isCopied && "bg-green-500 text-white"
+                            )}
                           >
-                              <div className={cn(
-                                  "w-9 h-9 mt-0.5 rounded-md flex items-center justify-center shrink-0 transition-colors",
-                                  isActive ? "bg-white/20 text-white" : "bg-secondary text-muted-foreground",
-                                  isCopied && "bg-white/20"
-                              )}>
-                                  {isCopied ? <Check size={18} /> : (isCommand(item) ? <Terminal size={18} /> : <Sparkles size={18} />)}
-                              </div>
-                              
-                              <div className="flex-1 min-w-0 flex flex-col gap-1">
-                                  <div className="flex items-center justify-between">
-                                      <span className={cn("font-semibold truncate text-sm tracking-tight", isActive ? "text-white" : "text-foreground")}>
-                                          {item.title}
-                                      </span>
-                                      {isActive && !isCopied && (
-                                          <span className="text-[10px] opacity-70 flex items-center gap-1 font-medium bg-black/10 px-1.5 rounded whitespace-nowrap">
-                                              <CornerDownLeft size={10} /> {getText('spotlight', 'enter', language)}
-                                          </span>
-                                      )}
-                                  </div>
-                                  
-                                  {hasDesc && (
-                                      <div className={cn(
-                                          "text-xs transition-all", 
-                                          isActive ? "opacity-90 text-white/90 whitespace-pre-wrap" : "text-muted-foreground opacity-70 truncate"
-                                      )}>
-                                          {item.description}
-                                      </div>
-                                  )}
-
-                                  <div className={cn(
-                                      "text-xs font-mono transition-all duration-200",
-                                      isActive ? "mt-1 bg-black/20 rounded p-2 text-white/95 whitespace-pre-wrap break-all line-clamp-6" : (hasDesc ? "hidden" : "text-muted-foreground opacity-50 truncate")
-                                  )}>
-                                      {item.content}
-                                  </div>
-                              </div>
+                            <div className={cn( "w-9 h-9 mt-0.5 rounded-md flex items-center justify-center shrink-0 transition-colors", isActive ? "bg-white/20 text-white" : "bg-secondary text-muted-foreground", isCopied && "bg-white/20" )}>
+                                {isCopied ? <Check size={18} /> : (isExecutable ? <Zap size={18} /> : (isCommand(item) ? <Terminal size={18} /> : <Sparkles size={18} />))}
+                            </div>
+                            <div className="flex-1 min-w-0 flex flex-col gap-1">
+                                <div className="flex items-center justify-between">
+                                    <span className={cn("font-semibold truncate text-sm tracking-tight", isActive ? "text-white" : "text-foreground")}>
+                                        {item.title}
+                                    </span>
+                                    {isActive && !isCopied && (
+                                        <span className="text-[10px] opacity-70 flex items-center gap-1 font-medium bg-black/10 px-1.5 rounded whitespace-nowrap">
+                                            <CornerDownLeft size={10} /> {isExecutable ? "Run" : getText('spotlight', 'copy', language)}
+                                        </span>
+                                    )}
+                                </div>
+                                {hasDesc && ( <div className={cn("text-xs transition-all", isActive ? "opacity-90 text-white/90 whitespace-pre-wrap" : "text-muted-foreground opacity-70 truncate")}>{item.description}</div> )}
+                                <div className={cn("text-xs font-mono transition-all duration-200", isActive ? "mt-1 bg-black/20 rounded p-2 text-white/95 whitespace-pre-wrap break-all line-clamp-6" : (hasDesc ? "hidden" : "text-muted-foreground opacity-50 truncate"))}>
+                                    {item.content}
+                                </div>
+                            </div>
                           </div>
-                      );
+                        );
                       })
                   )}
                   </div>
               ) : (
-                  // --- Chat Mode (Fixed) ---
                   <div className="flex-1 p-4 overflow-y-auto custom-scrollbar flex flex-col gap-4">
-                      
                       {messages.length === 0 ? (
-                           // 空状态 (Empty State)
                            <div className="flex-1 flex flex-col items-center justify-start text-muted-foreground animate-in fade-in slide-in-from-bottom-2 duration-500">
                                <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-4 text-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.15)] animate-pulse">
                                    <Sparkles size={24} />
@@ -581,41 +484,16 @@ export default function SpotlightApp() {
                                </div>
                            </div>
                       ) : (
-                          // 消息列表 (Message List)
                           <div className="space-y-4 pb-2">
                                {messages.map((msg, idx) => (
-                                   <div key={idx} className={cn(
-                                       "flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300 group", 
-                                       msg.role === 'user' ? "flex-row-reverse" : "flex-row"
-                                   )}>
-                                       {/* 头像 */}
-                                       <div className={cn(
-                                           "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm",
-                                           msg.role === 'user' 
-                                              ? "bg-secondary/80 border-border text-foreground" 
-                                              : "bg-purple-500/10 border-purple-500/20 text-purple-500"
-                                       )}>
+                                   <div key={idx} className={cn("flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300 group", msg.role === 'user' ? "flex-row-reverse" : "flex-row")}>
+                                       <div className={cn("w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm", msg.role === 'user' ? "bg-secondary/80 border-border text-foreground" : "bg-purple-500/10 border-purple-500/20 text-purple-500")}>
                                            {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
                                        </div>
-
-                                       {/* 气泡 */}
-                                       <div className={cn(
-                                           "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm border relative",
-                                           msg.role === 'user'
-                                              ? "bg-primary text-primary-foreground border-primary/50 rounded-tr-sm"
-                                              : "bg-secondary/50 border-border/50 text-foreground rounded-tl-sm markdown-body" // ✨ 修改：移除了 pr-8，允许内容占据更多宽度
-                                       )}>
-                                           
-                                           {/* AI 消息右上角的复制菜单 (只对 Assistant 显示) */}
-                                           {msg.role === 'assistant' && !isStreaming && (
-                                               <MessageCopyMenu content={msg.content} />
-                                           )}
-
-                                           {msg.role === 'user' ? (
-                                               <div className="whitespace-pre-wrap">{msg.content}</div>
-                                           ) : (
+                                       <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm border relative", msg.role === 'user' ? "bg-primary text-primary-foreground border-primary/50 rounded-tr-sm" : "bg-secondary/50 border-border/50 text-foreground rounded-tl-sm markdown-body")}>
+                                           {msg.role === 'assistant' && !isStreaming && ( <MessageCopyMenu content={msg.content} /> )}
+                                           {msg.role === 'user' ? ( <div className="whitespace-pre-wrap">{msg.content}</div> ) : (
                                               <>
-                                                  {/* 1. 思考过程模块 */}
                                                   {msg.reasoning && (
                                                       <details className="mb-2 group/reasoning" open={isStreaming && idx === messages.length - 1}>
                                                           <summary className="flex items-center gap-1.5 text-[10px] uppercase font-bold text-muted-foreground/60 cursor-pointer hover:text-purple-400 transition-colors select-none list-none outline-none">
@@ -625,32 +503,19 @@ export default function SpotlightApp() {
                                                           </summary>
                                                           <div className="mt-2 pl-2 border-l-2 border-purple-500/20 text-xs font-mono text-muted-foreground/80 whitespace-pre-wrap leading-relaxed opacity-80">
                                                               {msg.reasoning}
-                                                              {isStreaming && idx === messages.length - 1 && !msg.content && (
-                                                                  <span className="inline-block w-1.5 h-3 ml-1 bg-purple-500/50 align-middle animate-pulse" />
-                                                              )}
+                                                              {isStreaming && idx === messages.length - 1 && !msg.content && ( <span className="inline-block w-1.5 h-3 ml-1 bg-purple-500/50 align-middle animate-pulse" /> )}
                                                           </div>
                                                       </details>
                                                   )}
-
-                                                  {/* 2. Markdown 回复 */}
                                                   <ReactMarkdown
                                                       remarkPlugins={[remarkGfm]}
                                                       components={{
                                                           code({node, inline, className, children, ...props}: any) {
                                                               const match = /language-(\w+)/.exec(className || '')
-                                                              return !inline && match ? (
-                                                                  <CodeBlock language={match[1]} className="text-sm">
-                                                                      {String(children).replace(/\n$/, '')}
-                                                                  </CodeBlock>
-                                                              ) : (
-                                                                  <code className={cn("bg-black/20 px-1 py-0.5 rounded font-mono", className)} {...props}>
-                                                                      {children}
-                                                                  </code>
-                                                              )
+                                                              return !inline && match ? ( <CodeBlock language={match[1]} className="text-sm">{String(children).replace(/\n$/, '')}</CodeBlock> ) : ( <code className={cn("bg-black/20 px-1 py-0.5 rounded font-mono", className)} {...props}>{children}</code> )
                                                           }
                                                       }}
                                                   >
-                                                      {/* 如果正在流式传输且正文为空（正在思考），显示省略号占位 */}
                                                       {msg.content || (isStreaming && idx === messages.length - 1 && !msg.reasoning ? "..." : "")}
                                                   </ReactMarkdown>
                                               </>
@@ -658,7 +523,6 @@ export default function SpotlightApp() {
                                        </div>
                                    </div>
                                ))}
-                               {/* 底部锚点 */}
                                <div ref={chatEndRef} />
                           </div>
                       )}
@@ -666,11 +530,7 @@ export default function SpotlightApp() {
               )}
           </div>
           
-          {/* Footer */}
-          <div 
-              data-tauri-drag-region
-              className="h-8 shrink-0 bg-secondary/30 border-t border-border/40 flex items-center justify-between px-4 text-[10px] text-muted-foreground/60 select-none backdrop-blur-sm cursor-move relative z-10"
-          >
+          <div data-tauri-drag-region className="h-8 shrink-0 bg-secondary/30 border-t border-border/40 flex items-center justify-between px-4 text-[10px] text-muted-foreground/60 select-none backdrop-blur-sm cursor-move relative z-10">
               <span className="pointer-events-none flex items-center gap-2">
                   {mode === 'search' ? `${filtered.length} ${getText('spotlight', 'results', language)}` : getText('spotlight', 'console', language)}
                   {isStreaming && <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />}
@@ -679,7 +539,7 @@ export default function SpotlightApp() {
                   {mode === 'search' ? (
                       <>
                           <span>{getText('spotlight', 'nav', language)} ↑↓</span>
-                          <span>{getText('spotlight', 'copy', language)} ↵</span>
+                          <span>{filtered[selectedIndex]?.isExecutable ? "Run" : getText('spotlight', 'copy', language)} ↵</span>
                       </>
                   ) : (
                       <>
