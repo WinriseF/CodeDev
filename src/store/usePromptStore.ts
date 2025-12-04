@@ -95,15 +95,39 @@ export const usePromptStore = create<PromptState>()(
 
       // 并发加载文件，提升启动速度
       initStore: async () => {
-        console.log('[Store] Initializing prompts...');
-        const installed = get().installedPackIds; 
+        const { installedPackIds, repoPrompts, isStoreLoading, localPrompts, groups } = get();
+        // 1. 如果正在加载中，直接跳过，防止并发冲突
+        if (isStoreLoading) return;
+
+        // 2. 检查内存中是否已经存在所有已安装的包
+        // 提取当前 repoPrompts 中包含的所有 packId
+        const loadedPackIds = new Set(
+            repoPrompts
+                .map(p => p.packId)
+                .filter((id): id is string => !!id)
+        );
+
+        // 判断缓存是否有效：
+        // A. 内存中的包数量 等于 配置中的已安装数量
+        // B. 配置中的每个包 ID 都在内存中存在
+        const isCacheValid = 
+            installedPackIds.length === loadedPackIds.size &&
+            installedPackIds.every(id => loadedPackIds.has(id));
+
+        // 如果缓存有效，直接返回，不再执行后续 IO 操作
+        if (isCacheValid) {
+            // console.debug('[Store] Memory cache hit, skipping disk read.');
+            return;
+        }
+        
+        console.log('[Store] Initializing prompts from disk...');
         
         // 临时容器，用于收集有效数据
         const loadedPrompts: Prompt[] = [];
         const validIds: string[] = [];
 
         // 并发读取所有包文件
-        const loadPromises = installed.map(async (packId) => {
+        const loadPromises = installedPackIds.map(async (packId) => {
              const content = await fileStorage.packs.readPack(`${packId}.json`);
              
              // 如果读不到内容（文件不存在），直接跳过，不加入 validIds
@@ -132,19 +156,21 @@ export const usePromptStore = create<PromptState>()(
         // 等待所有读取完成
         await Promise.all(loadPromises);
 
-        // 收集所有涉及的 Group
-        const loadedGroups = new Set(get().localPrompts.map(p => p.group).filter(Boolean));
+        // 收集所有涉及的 Group (包括本地的、默认的、以及刚刚加载的)
+        const loadedGroups = new Set(localPrompts.map(p => p.group).filter(Boolean));
         loadedGroups.add(DEFAULT_GROUP);
-        get().groups.forEach(g => loadedGroups.add(g));
+        groups.forEach(g => loadedGroups.add(g));
+        
+        // 添加新加载的 Prompts 的分组
         loadedPrompts.forEach(p => { if(p.group) loadedGroups.add(p.group); });
 
         set({ 
             repoPrompts: loadedPrompts,
-            installedPackIds: validIds,
+            installedPackIds: validIds, // 更新为实际存在的有效 ID
             groups: Array.from(loadedGroups)
         });
         
-        console.log(`[Store] Sync complete. Valid packs: ${validIds.length}/${installed.length}`);
+        console.log(`[Store] Sync complete. Valid packs: ${validIds.length}/${installedPackIds.length}`);
       },
 
       addPrompt: (data) => {
