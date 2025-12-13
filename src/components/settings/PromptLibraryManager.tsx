@@ -27,7 +27,7 @@ export function PromptLibraryManager() {
           setErrorMsg(null);
           await installPack(pack);
       } catch (err: any) {
-          const msg = err.message || "Unknown error";
+          const msg = err.message || getText('library', 'unknownError', language);
           setErrorMsg(msg);
           setTimeout(() => setErrorMsg(null), 8000);
       }
@@ -73,7 +73,7 @@ export function PromptLibraryManager() {
                 <button 
                     onClick={() => open(sourceInfo.url)}
                     className="flex items-center gap-0.5 text-primary hover:underline hover:text-primary/80 transition-colors bg-primary/5 px-1.5 py-0.5 rounded cursor-pointer font-medium"
-                    title={`Open ${sourceInfo.url}`}
+                    title={getText('library', 'openSource', language, { url: sourceInfo.url })}
                 >
                     {sourceInfo.name}
                     <ExternalLink size={10} />
@@ -85,7 +85,7 @@ export function PromptLibraryManager() {
            onClick={() => { setErrorMsg(null); fetchManifest(); }} 
            disabled={isStoreLoading}
            className="p-2 hover:bg-secondary rounded-full transition-colors"
-           title="Refresh"
+           title={getText('library', 'refresh', language)}
          >
             <RefreshCw size={16} className={cn(isStoreLoading && "animate-spin")} />
          </button>

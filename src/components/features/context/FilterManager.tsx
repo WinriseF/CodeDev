@@ -52,7 +52,7 @@ export function FilterManager({ localConfig, globalConfig, onUpdate }: FilterMan
               </div>
               
               {isLocked ? (
-              <div title="Managed by Global Settings" className="cursor-not-allowed">
+              <div title={getText('common', 'managedByGlobal', language)} className="cursor-not-allowed">
                   <Lock size={10} className="text-muted-foreground opacity-50" />
               </div>
               ) : (

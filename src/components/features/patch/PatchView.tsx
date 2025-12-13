@@ -65,7 +65,7 @@ export function PatchView() {
       const selected = await openDialog({ directory: true, multiple: false });
       if (typeof selected === 'string') {
         setProjectRoot(selected);
-        showNotification("Project Loaded");
+        showNotification(getText('patch', 'projectLoaded', language));
       }
     } catch (e) {
       console.error(e);
@@ -103,7 +103,7 @@ export function PatchView() {
                         original, 
                         modified: result.modified, 
                         status: result.success ? 'success' : 'error', 
-                        errorMsg: result.success ? undefined : `Failed to match ${result.errors.length} blocks` 
+                        errorMsg: result.success ? undefined : getText('patch', 'failedToMatch', language, { count: result.errors.length.toString() })
                     };
                 } catch (err) {
                     return { 
@@ -112,7 +112,7 @@ export function PatchView() {
                         original: '', 
                         modified: '', 
                         status: 'error', 
-                        errorMsg: 'File not found on disk' 
+                        errorMsg: getText('patch', 'fileNotFound', language) 
                     };
                 }
             }));
@@ -136,7 +136,7 @@ export function PatchView() {
       if (!patchData) return;
 
       setIsFixing(true);
-      showNotification("AI repairing...");
+      showNotification(getText('patch', 'aiRepairing', language));
 
       const prompt = `
 I have a file content and a desired change (SEARCH/REPLACE block), but the SEARCH block doesn't match the file content exactly due to formatting differences.
@@ -157,7 +157,7 @@ ${patchData.operations.map(op => `<<<<<<< SEARCH\n${op.originalBlock}\n=======\n
               [{ role: 'user', content: prompt }],
               aiConfig,
               (text) => { fullResponse += text; },
-              (err) => { console.error(err); showNotification("AI Fix Failed"); },
+              (err) => { console.error(err); showNotification(getText('patch', 'aiFixFailed', language)); },
               () => {
                   const cleanCode = fullResponse.replace(/^```[\w]*\n/, '').replace(/\n```$/, '');
                   
@@ -168,7 +168,7 @@ ${patchData.operations.map(op => `<<<<<<< SEARCH\n${op.originalBlock}\n=======\n
                       return f;
                   }));
                   setIsFixing(false);
-                  showNotification("AI Fix Applied!");
+                  showNotification(getText('patch', 'aiFixApplied', language));
               }
           );
       } catch (e) {
@@ -194,7 +194,7 @@ ${patchData.operations.map(op => `<<<<<<< SEARCH\n${op.originalBlock}\n=======\n
         setConfirmDialog({ show: false, file: null });
     } catch (e) {
         console.error(e);
-        showNotification("Save Failed");
+        showNotification(getText('patch', 'saveFailed', language));
     }
   };
 
@@ -242,7 +242,7 @@ ${patchData.operations.map(op => `<<<<<<< SEARCH\n${op.originalBlock}\n=======\n
           <DiffWorkspace 
              selectedFile={currentFile || null}
              onSave={handleSaveClick}
-             onCopy={async (txt) => { await writeClipboard(txt); showNotification("Copied"); }}
+             onCopy={async (txt) => { await writeClipboard(txt); showNotification(getText('patch', 'copied', language)); }}
              onManualUpdate={handleManualUpdate}
              isSidebarOpen={isSidebarOpen}
              onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}

@@ -154,7 +154,7 @@ function PromptCardComponent({ prompt, onEdit, onDelete, onTrigger }: PromptCard
                  onClick={handleClick}
                >
                  {isExecutable ? <Zap size={12} /> : <Copy size={12} />}
-                 {isExecutable ? "Run" : getText('actions', 'copy', language)}
+                 {isExecutable ? getText('actions', 'run', language) : getText('actions', 'copy', language)}
                </button>
             </div>
           </div>

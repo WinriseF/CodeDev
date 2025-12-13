@@ -90,7 +90,37 @@ const translations = {
       cancel: "Cancel",
       toastCopied: "Result copied to clipboard!",
       toastSaved: "File saved successfully!",
-      toastSaveFailed: "Failed to save file!"
+      toastSaveFailed: "Failed to save file!",
+      aiPatch: "AI Patch",
+      manual: "Manual",
+      aiInstruction: "AI Instruction",
+      pasteAIResponse: "Paste AI response here...",
+      pasteOriginal: "Paste original text here...",
+      pasteModified: "Paste modified text here...",
+      pasteToCompare: "Paste text above to compare",
+      autoRecommended: "'Auto' is recommended. Choose a specific shell if your command requires it (e.g., PowerShell syntax).",
+      chainCommands: "Use '&&' to chain commands",
+      variableTip: "Tip: Use {{variable}} to create fillable slots",
+      commandExample: "e.g. cd {{path}} && npm install",
+      commandPlaceholder: "Enter command or prompt. Use {{variable}} for slots.",
+      hideInputs: "Hide Inputs",
+      editText: "Edit Text",
+      modified: "Modified",
+      noChangesLabel: "No Changes",
+      selectFile: "Select a file from the sidebar to view diff",
+      originalText: "Original Text",
+      modifiedText: "Modified Text",
+      promptTip: "Use this prompt to get the correct SEARCH/REPLACE format.",
+      copySystemPrompt: "Copy System Prompt",
+      copied: "Copied!",
+      aiResponseInput: "AI Response Input",
+      projectLoaded: "Project Loaded",
+      aiRepairing: "AI repairing...",
+      aiFixFailed: "AI Fix Failed",
+      aiFixApplied: "AI Fix Applied!",
+      saveFailed: "Save Failed",
+      failedToMatch: "Failed to match {count} blocks",
+      fileNotFound: "File not found on disk"
     },
     editor: {
       titleNew: "New Prompt",
@@ -145,7 +175,14 @@ const translations = {
       restReminderEnabled: "Enable Rest Reminder",
       restReminderDesc: "Get notified to take breaks at regular intervals",
       restReminderInterval: "Reminder Interval",
-      minutes: "minutes"
+      minutes: "minutes",
+      shortcutLabel: "Spotlight Shortcut",
+      shortcutPressKeys: "Press keys...",
+      shortcutNotSet: "Not set",
+      shortcutClear: "Clear shortcut",
+      shortcutTip: "Click to record. Recommended: Alt+S, Ctrl+Space.",
+      langSubLabelZh: "Chinese Simplified",
+      langSubLabelEn: "English"
     },
     library: {
       title: "Official Library",
@@ -156,7 +193,10 @@ const translations = {
       uninstall: "Uninstall",
       prompts: "prompts",
       noPacks: "No packs available for current language.",
-      loading: "Loading library..."
+      loading: "Loading library...",
+      refresh: "Refresh",
+      unknownError: "Unknown error",
+      openSource: "Open {url}"
     },
     spotlight: {
       searchPlaceholder: "Search commands...",
@@ -173,14 +213,20 @@ const translations = {
       copy: "Copy",
       clear: "Clear",
       send: "Send",
-      close: "Close"
+      close: "Close",
+      copyMessage: "Copy message",
+      toggleMode: "Toggle Mode (Tab)",
+      currentProvider: "Current: {provider}. Click to switch.",
+      actionRequired: "Action Required",
+      commandHasVariables: "This command has variables. Please use it from the main window to fill them in."
     },
     actions: {
       collapse: "Collapse Sidebar",
       expand: "Expand Sidebar",
       edit: "Edit",
       delete: "Delete",
-      copy: "Copy"
+      copy: "Copy",
+      run: "Run"
     },
     clock: {
       timeDetails: "Time Details",
@@ -196,6 +242,17 @@ const translations = {
       copyTimestamp: "Timestamp",
       copyISO: "ISO Format",
       copyFull: "Full Time"
+    },
+    common: {
+      highRiskWarning: "High risk action. Please review carefully.",
+      selectFolder: "Select folder",
+      clear: "Clear",
+      clearAll: "Clear all text",
+      hideSidebar: "Hide Sidebar",
+      showSidebar: "Show Sidebar",
+      ignoredByFilter: "Ignored by filter settings",
+      managedByGlobal: "Managed by Global Settings",
+      waitingForInputs: "Waiting for inputs..."
     }
   },
   zh: {
@@ -285,7 +342,37 @@ const translations = {
       cancel: "取消",
       toastCopied: "结果已复制到剪贴板！",
       toastSaved: "文件保存成功！",
-      toastSaveFailed: "文件保存失败！"
+      toastSaveFailed: "文件保存失败！",
+      aiPatch: "AI 补丁",
+      manual: "手动",
+      aiInstruction: "AI 指令",
+      pasteAIResponse: "在此粘贴 AI 响应...",
+      pasteOriginal: "在此粘贴原始文本...",
+      pasteModified: "在此粘贴修改后的文本...",
+      pasteToCompare: "在上方粘贴文本以进行比较",
+      autoRecommended: "推荐使用 'Auto'。如果命令需要特定 Shell（如 PowerShell 语法），请选择对应的 Shell。",
+      chainCommands: "使用 '&&' 连接多个命令",
+      variableTip: "提示：使用 {{变量名}} 创建填空位",
+      commandExample: "例如：cd {{path}} && npm install",
+      commandPlaceholder: "输入命令或 Prompt。使用 {{变量}} 创建填空位。",
+      hideInputs: "隐藏输入",
+      editText: "编辑文本",
+      modified: "已修改",
+      noChangesLabel: "无变更",
+      selectFile: "从侧边栏选择文件以查看差异",
+      originalText: "原始文本",
+      modifiedText: "修改后文本",
+      promptTip: "使用此提示词可获取正确的 SEARCH/REPLACE 格式。",
+      copySystemPrompt: "复制系统提示词",
+      copied: "已复制！",
+      aiResponseInput: "AI 响应输入",
+      projectLoaded: "项目已加载",
+      aiRepairing: "AI 正在修复...",
+      aiFixFailed: "AI 修复失败",
+      aiFixApplied: "AI 修复已应用！",
+      saveFailed: "保存失败",
+      failedToMatch: "匹配失败 {count} 个代码块",
+      fileNotFound: "文件在磁盘上未找到"
     },
     editor: {
       titleNew: "新建指令",
@@ -342,7 +429,14 @@ const translations = {
       restReminderEnabled: "启用休息提醒",
       restReminderDesc: "定期提醒您休息，保护眼睛和健康",
       restReminderInterval: "提醒间隔",
-      minutes: "分钟"
+      minutes: "分钟",
+      shortcutLabel: "Spotlight 快捷键",
+      shortcutPressKeys: "按下按键...",
+      shortcutNotSet: "未设置",
+      shortcutClear: "清除快捷键",
+      shortcutTip: "点击设置。推荐：Alt+S, Ctrl+Space。",
+      langSubLabelZh: "简体中文",
+      langSubLabelEn: "English"
     },
     library: {
       title: "官方指令库",
@@ -353,7 +447,10 @@ const translations = {
       uninstall: "卸载",
       prompts: "条指令",
       noPacks: "当前语言暂无可用数据包。",
-      loading: "正在加载商店..."
+      loading: "正在加载商店...",
+      refresh: "刷新",
+      unknownError: "未知错误",
+      openSource: "打开 {url}"
     },
     spotlight: {
       searchPlaceholder: "搜索指令...",
@@ -370,14 +467,20 @@ const translations = {
       copy: "复制",
       clear: "清空",
       send: "发送",
-      close: "关闭"
+      close: "关闭",
+      copyMessage: "复制消息",
+      toggleMode: "切换模式 (Tab)",
+      currentProvider: "当前：{provider}。点击切换。",
+      actionRequired: "需要操作",
+      commandHasVariables: "此命令包含变量。请在主窗口中使用以填充变量。"
     },
     actions: {
       collapse: "收起侧栏",
       expand: "展开侧栏",
       edit: "编辑",
       delete: "删除",
-      copy: "复制"
+      copy: "复制",
+      run: "运行"
     },
     clock: {
       timeDetails: "时间详情",
@@ -393,6 +496,17 @@ const translations = {
       copyTimestamp: "时间戳",
       copyISO: "ISO 格式",
       copyFull: "完整时间"
+    },
+    common: {
+      highRiskWarning: "高风险操作，请仔细审查。",
+      selectFolder: "选择文件夹",
+      clear: "清空",
+      clearAll: "清空所有文本",
+      hideSidebar: "隐藏侧边栏",
+      showSidebar: "显示侧边栏",
+      ignoredByFilter: "已被过滤规则忽略",
+      managedByGlobal: "由全局设置管理",
+      waitingForInputs: "等待输入..."
     }
   }
 };

@@ -1,9 +1,12 @@
 import { AlertTriangle, Info, XCircle, Check } from 'lucide-react';
 import { useConfirmStore } from '@/store/useConfirmStore';
+import { useAppStore } from '@/store/useAppStore';
 import { cn } from '@/lib/utils';
+import { getText } from '@/lib/i18n';
 
 export function GlobalConfirmDialog() {
   const { isOpen, options, handleConfirm, handleCancel } = useConfirmStore();
+  const { language } = useAppStore();
   
   // 防止不渲染
   if (!isOpen) return null;
@@ -42,7 +45,7 @@ export function GlobalConfirmDialog() {
             {/* 装饰性背景 */}
             {isDanger && (
                 <div className="mt-4 p-3 bg-red-500/5 border border-red-500/10 rounded-lg text-xs text-red-500/80">
-                    High risk action. Please review carefully.
+                    {getText('common', 'highRiskWarning', language)}
                 </div>
             )}
         </div>

@@ -105,7 +105,7 @@ export function PatchSidebar({
                mode === 'patch' ? "bg-background text-primary shadow-sm" : "text-muted-foreground hover:text-foreground"
              )}
            >
-             <Sparkles size={14} /> AI Patch
+             <Sparkles size={14} /> {getText('patch', 'aiPatch', language)}
            </button>
            <button 
              onClick={() => setMode('diff')}
@@ -114,7 +114,7 @@ export function PatchSidebar({
                mode === 'diff' ? "bg-background text-primary shadow-sm" : "text-muted-foreground hover:text-foreground"
              )}
            >
-             <ArrowRightLeft size={14} /> Manual
+             <ArrowRightLeft size={14} /> {getText('patch', 'manual', language)}
            </button>
         </div>
 
@@ -127,7 +127,7 @@ export function PatchSidebar({
                 ? "bg-background border-border text-foreground shadow-sm hover:border-primary/50" 
                 : "bg-primary/5 border-dashed border-primary/30 text-primary hover:bg-primary/10"
             )}
-            title={projectRoot || "Select folder"}
+            title={projectRoot || getText('common', 'selectFolder', language)}
           >
             <div className="flex items-center gap-2 truncate">
                 <FolderOpen size={14} className={projectRoot ? "text-blue-500" : "shrink-0"} />
@@ -148,7 +148,7 @@ export function PatchSidebar({
                     className="w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider hover:bg-secondary/50 transition-colors"
                 >
                     <span className="flex items-center gap-1.5">
-                        <Info size={12} /> AI Instruction
+                        <Info size={12} /> {getText('patch', 'aiInstruction', language)}
                     </span>
                     {isPromptOpen ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
                 </button>
@@ -157,7 +157,7 @@ export function PatchSidebar({
                     <div className="px-4 pb-3 animate-in slide-in-from-top-2 duration-200">
                         <div className="bg-secondary/30 rounded-lg border border-border p-2 space-y-2">
                             <p className="text-[10px] text-muted-foreground leading-relaxed">
-                                Use this prompt to get the correct SEARCH/REPLACE format.
+                                {getText('patch', 'promptTip', language)}
                             </p>
                             <button 
                                 onClick={handleCopyPrompt}
@@ -169,7 +169,7 @@ export function PatchSidebar({
                                 )}
                             >
                                 {isCopied ? <CheckCircle2 size={12} /> : <Copy size={12} />}
-                                {isCopied ? "Copied!" : "Copy System Prompt"}
+                                {isCopied ? getText('patch', 'copied', language) : getText('patch', 'copySystemPrompt', language)}
                             </button>
                         </div>
                     </div>
@@ -182,12 +182,12 @@ export function PatchSidebar({
             <div className="flex-1 flex flex-col min-h-0 border-b border-border bg-background">
               <div className="px-4 py-2 border-b border-border/50 flex items-center justify-between bg-secondary/5 shrink-0">
                 <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                   <FileCode size={12} /> AI Response Input
+                   <FileCode size={12} /> {getText('patch', 'aiResponseInput', language)}
                 </span>
                 <button 
                     onClick={onClearYaml}
                     className="p-1 rounded hover:bg-destructive/10 hover:text-destructive text-muted-foreground transition-colors"
-                    title="Clear"
+                    title={getText('common', 'clear', language)}
                 >
                     <Trash2 size={12} />
                 </button>
@@ -196,7 +196,7 @@ export function PatchSidebar({
                 value={yamlInput}
                 onChange={e => onYamlChange(e.target.value)}
                 onContextMenu={onContextMenu}
-                placeholder={`Paste AI response here...\n\nFile: src/App.tsx\n<<<<<<< SEARCH\n...\n=======\n...\n>>>>>>> REPLACE`}
+                placeholder={getText('patch', 'pasteAIResponse', language) + '\n\nFile: src/App.tsx\n<<<<<<< SEARCH\n...\n=======\n...\n>>>>>>> REPLACE'}
                 className="flex-1 w-full bg-transparent p-4 resize-none outline-none font-mono text-[11px] leading-relaxed custom-scrollbar placeholder:text-muted-foreground/30 text-muted-foreground focus:text-foreground transition-colors"
                 spellCheck="false"
               />

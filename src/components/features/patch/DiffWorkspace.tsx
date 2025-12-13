@@ -82,7 +82,7 @@ export function DiffWorkspace({
             <button 
                 onClick={onToggleSidebar}
                 className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors shrink-0"
-                title={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
+                title={isSidebarOpen ? getText('common', 'hideSidebar', language) : getText('common', 'showSidebar', language)}
             >
                 {isSidebarOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
             </button>
@@ -92,8 +92,8 @@ export function DiffWorkspace({
                     <h2 className="text-sm font-semibold flex items-center gap-2 truncate">
                         <span className="truncate" title={selectedFile.path}>{selectedFile.path}</span>
                         {hasChanges ? 
-                            <span className="shrink-0 text-[10px] bg-yellow-500/10 text-yellow-600 px-2 py-0.5 rounded-full border border-yellow-500/20 font-medium">Modified</span> :
-                            <span className="shrink-0 text-[10px] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full font-medium">No Changes</span>
+                            <span className="shrink-0 text-[10px] bg-yellow-500/10 text-yellow-600 px-2 py-0.5 rounded-full border border-yellow-500/20 font-medium">{getText('patch', 'modified', language)}</span> :
+                            <span className="shrink-0 text-[10px] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full font-medium">{getText('patch', 'noChangesLabel', language)}</span>
                         }
                     </h2>
                     <span className="text-[10px] text-muted-foreground/60 truncate font-mono mt-0.5">
@@ -115,14 +115,14 @@ export function DiffWorkspace({
                             showInputs ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground"
                         )}
                     >
-                        <ArrowDownUp size={14} /> {showInputs ? "Hide Inputs" : "Edit Text"}
+                        <ArrowDownUp size={14} /> {showInputs ? getText('patch', 'hideInputs', language) : getText('patch', 'editText', language)}
                     </button>
                     <button 
                         onClick={() => onManualUpdate?.('', '')}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all bg-secondary hover:bg-destructive/10 hover:text-destructive text-muted-foreground mr-2"
-                        title="Clear all text"
+                        title={getText('common', 'clearAll', language)}
                     >
-                        <Trash2 size={14} /> Clear
+                        <Trash2 size={14} /> {getText('common', 'clear', language)}
                     </button>
                 </>
             )}
@@ -159,7 +159,7 @@ export function DiffWorkspace({
              <div className="p-4 bg-secondary/30 rounded-full">
                 <PanelLeftOpen size={32} className="opacity-50" />
              </div>
-             <p className="text-xs">Select a file from the sidebar to view diff</p>
+             <p className="text-xs">{getText('patch', 'selectFile', language)}</p>
           </div>
       ) : (
           <>
@@ -167,24 +167,24 @@ export function DiffWorkspace({
             {isManual && showInputs && (
                 <div className="h-[200px] shrink-0 flex border-b border-border bg-secondary/5">
                     <div className="flex-1 flex flex-col border-r border-border">
-                        <div className="px-3 py-1 text-[10px] font-bold text-muted-foreground uppercase bg-secondary/10 border-b border-border/50">Original Text</div>
+                        <div className="px-3 py-1 text-[10px] font-bold text-muted-foreground uppercase bg-secondary/10 border-b border-border/50">{getText('patch', 'originalText', language)}</div>
                         <textarea 
                             onContextMenu={onOriginalContextMenu}
                             value={selectedFile.original}
                             onChange={(e) => onManualUpdate?.(e.target.value, selectedFile.modified)}
                             className="flex-1 bg-transparent p-3 resize-none outline-none font-mono text-xs leading-relaxed custom-scrollbar placeholder:text-muted-foreground/30"
-                            placeholder="Paste original text here..."
+                            placeholder={getText('patch', 'pasteOriginal', language)}
                             spellCheck={false}
                         />
                     </div>
                     <div className="flex-1 flex flex-col">
-                        <div className="px-3 py-1 text-[10px] font-bold text-muted-foreground uppercase bg-secondary/10 border-b border-border/50">Modified Text</div>
+                        <div className="px-3 py-1 text-[10px] font-bold text-muted-foreground uppercase bg-secondary/10 border-b border-border/50">{getText('patch', 'modifiedText', language)}</div>
                         <textarea 
                             onContextMenu={onModifiedContextMenu}
                             value={selectedFile.modified}
                             onChange={(e) => onManualUpdate?.(selectedFile.original, e.target.value)}
                             className="flex-1 bg-transparent p-3 resize-none outline-none font-mono text-xs leading-relaxed custom-scrollbar placeholder:text-muted-foreground/30"
-                            placeholder="Paste modified text here..."
+                            placeholder={getText('patch', 'pasteModified', language)}
                             spellCheck={false}
                         />
                     </div>
@@ -197,7 +197,7 @@ export function DiffWorkspace({
                   original={selectedFile.original}
                   modified={selectedFile.modified}
                   fileName={selectedFile.path}
-                  placeholder={isManual ? "Paste text above to compare" : "Waiting for inputs..."}
+                  placeholder={isManual ? getText('patch', 'pasteToCompare', language) : getText('common', 'waitingForInputs', language)}
                 />
             </div>
           </>

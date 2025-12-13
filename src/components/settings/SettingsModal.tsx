@@ -82,7 +82,7 @@ export function SettingsModal() {
                             {/* Width Slider */}
                             <div className="space-y-3">
                                 <div className="flex justify-between text-xs">
-                                    <span>Width</span>
+                                    <span>{getText('settings', 'width', language)}</span>
                                     <span className="font-mono text-muted-foreground">{useAppStore.getState().spotlightAppearance.width}px</span>
                                 </div>
                                 <input 
@@ -99,7 +99,7 @@ export function SettingsModal() {
                             {/* Height Slider */}
                             <div className="space-y-3">
                                 <div className="flex justify-between text-xs">
-                                    <span>Max Chat Height</span>
+                                    <span>{getText('settings', 'chatHeight', language)}</span>
                                     <span className="font-mono text-muted-foreground">{useAppStore.getState().spotlightAppearance.maxChatHeight}px</span>
                                 </div>
                                 <input 
@@ -185,8 +185,8 @@ export function SettingsModal() {
                             {getText('settings', 'language', language)}
                         </h3>
                         <div className="space-y-2">
-                            <LangItem active={language === 'zh'} onClick={() => setLanguage('zh')} label={getText('settings', 'langZh', language)} subLabel="Chinese Simplified" />
-                            <LangItem active={language === 'en'} onClick={() => setLanguage('en')} label={getText('settings', 'langEn', language)} subLabel="English" />
+                            <LangItem active={language === 'zh'} onClick={() => setLanguage('zh')} label={getText('settings', 'langZh', language)} subLabel={getText('settings', 'langSubLabelZh', language)} />
+                            <LangItem active={language === 'en'} onClick={() => setLanguage('en')} label={getText('settings', 'langEn', language)} subLabel={getText('settings', 'langSubLabelEn', language)} />
                         </div>
                      </div>
                 )}

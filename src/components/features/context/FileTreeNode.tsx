@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { ChevronRight, ChevronDown, Folder, FileCode, Lock } from 'lucide-react'; // 引入 Lock
 import { FileNode } from '@/types/context';
 import { cn } from '@/lib/utils';
+import { useAppStore } from '@/store/useAppStore';
+import { getText } from '@/lib/i18n';
 
 interface FileTreeNodeProps {
   node: FileNode;
@@ -11,6 +13,7 @@ interface FileTreeNodeProps {
 
 export function FileTreeNode({ node, level = 0, onToggleSelect }: FileTreeNodeProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { language } = useAppStore();
   const indent = level * 16 + 12;
 
   const handleExpandClick = (e: React.MouseEvent) => {
@@ -40,7 +43,7 @@ export function FileTreeNode({ node, level = 0, onToggleSelect }: FileTreeNodePr
         )}
         style={{ paddingLeft: `${indent}px` }}
         onClick={handleExpandClick}
-        title={node.isLocked ? "Ignored by filter settings" : node.path} // ✨ 提示
+        title={node.isLocked ? getText('common', 'ignoredByFilter', language) : node.path} // ✨ 提示
       >
         <div className="w-5 h-5 flex items-center justify-center shrink-0 text-muted-foreground">
           {Icon && <Icon size={14} />}

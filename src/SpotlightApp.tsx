@@ -75,7 +75,7 @@ function MessageCopyMenu({ content }: { content: string }) {
             "p-1.5 rounded-md bg-secondary/80 hover:bg-background border border-border/50 shadow-sm backdrop-blur-sm transition-colors",
             isCopied ? "text-green-500 border-green-500/20 bg-green-500/10" : "text-muted-foreground hover:text-foreground"
          )}
-         title="Copy message"
+         title={getText('spotlight', 'copyMessage', language)}
        >
          {isCopied ? <Check size={14} /> : <Copy size={14} />}
        </button>
@@ -232,8 +232,8 @@ export default function SpotlightApp() {
     if (prompt.isExecutable) {
       const vars = parseVariables(prompt.content);
       if (vars.length > 0) {
-        await message("This command has variables. Please use it from the main window to fill them in.", {
-          title: "Action Required",
+        await message(getText('spotlight', 'commandHasVariables', language), {
+          title: getText('spotlight', 'actionRequired', language),
           kind: 'info'
         });
         return;
@@ -389,7 +389,7 @@ export default function SpotlightApp() {
           </div>
 
           <div data-tauri-drag-region className={cn("h-16 shrink-0 flex items-center px-5 gap-4 border-b transition-colors duration-300 cursor-move relative z-10", mode === 'chat' ? "border-purple-500/20" : "border-border/40")}>
-            <button onClick={toggleMode} className="w-6 h-6 flex items-center justify-center relative outline-none group" title="Toggle Mode (Tab)">
+            <button onClick={toggleMode} className="w-6 h-6 flex items-center justify-center relative outline-none group" title={getText('spotlight', 'toggleMode', language)}>
                 <SearchIcon className={cn("absolute transition-all duration-300 text-muted-foreground/70 group-hover:text-foreground", mode === 'search' ? "scale-100 opacity-100" : "scale-50 opacity-0 rotate-90")} size={24} />
                 <Bot className={cn("absolute transition-all duration-300 text-purple-500", mode === 'chat' ? "scale-100 opacity-100 rotate-0" : "scale-50 opacity-0 -rotate-90")} size={24} />
             </button>
@@ -407,7 +407,7 @@ export default function SpotlightApp() {
             
             <div className="flex items-center gap-2 relative z-10">
                {mode === 'chat' && (
-                  <button onClick={cycleProvider} className="flex items-center gap-1.5 px-2 py-1 rounded bg-secondary/50 hover:bg-secondary text-[10px] font-medium transition-colors border border-border/50 group" title={`Current: ${aiConfig.providerId}. Click to switch.`}>
+                  <button onClick={cycleProvider} className="flex items-center gap-1.5 px-2 py-1 rounded bg-secondary/50 hover:bg-secondary text-[10px] font-medium transition-colors border border-border/50 group" title={getText('spotlight', 'currentProvider', language, { provider: aiConfig.providerId })}>
                       <Zap size={10} className={cn(aiConfig.providerId === 'deepseek' ? "text-blue-500" : aiConfig.providerId === 'openai' ? "text-green-500" : "text-orange-500")} />
                       <span className="opacity-70 group-hover:opacity-100 uppercase">{aiConfig.providerId}</span>
                   </button>
@@ -455,7 +455,7 @@ export default function SpotlightApp() {
                                     </span>
                                     {isActive && !isCopied && (
                                         <span className="text-[10px] opacity-70 flex items-center gap-1 font-medium bg-black/10 px-1.5 rounded whitespace-nowrap">
-                                            <CornerDownLeft size={10} /> {isExecutable ? "Run" : getText('spotlight', 'copy', language)}
+                                            <CornerDownLeft size={10} /> {isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language)}
                                         </span>
                                     )}
                                 </div>
@@ -540,7 +540,7 @@ export default function SpotlightApp() {
                   {mode === 'search' ? (
                       <>
                           <span>{getText('spotlight', 'nav', language)} ↑↓</span>
-                          <span>{filtered[selectedIndex]?.isExecutable ? "Run" : getText('spotlight', 'copy', language)} ↵</span>
+                          <span>{filtered[selectedIndex]?.isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language)} ↵</span>
                       </>
                   ) : (
                       <>

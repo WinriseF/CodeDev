@@ -217,7 +217,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
                           )}
                       </div>
                       
-                      <p className="text-[10px] text-muted-foreground/70"> 'Auto' is recommended. Choose a specific shell if your command requires it (e.g., PowerShell syntax). </p>
+                      <p className="text-[10px] text-muted-foreground/70"> {getText('patch', 'autoRecommended', language)} </p>
                   </div>
               )}
             </div>
@@ -227,9 +227,9 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
           <div className="space-y-2 pt-4 border-t border-border/50">
             <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5"> <FileText size={14} /> {getText('editor', 'labelContent', language)} </label>
             <div className="relative">
-              <textarea className="w-full h-48 bg-secondary/20 border border-border rounded-lg p-3 text-sm font-mono focus:ring-2 focus:ring-primary/50 focus:border-primary/50 outline-none resize-none leading-relaxed placeholder:text-muted-foreground/40" placeholder={type === 'command' && isExecutable ? "e.g. cd {{path}} && npm install" : "Enter command or prompt. Use {{variable}} for slots."} value={content} onChange={e => setContent(e.target.value)} />
+              <textarea className="w-full h-48 bg-secondary/20 border border-border rounded-lg p-3 text-sm font-mono focus:ring-2 focus:ring-primary/50 focus:border-primary/50 outline-none resize-none leading-relaxed placeholder:text-muted-foreground/40" placeholder={type === 'command' && isExecutable ? getText('patch', 'commandExample', language) : getText('patch', 'commandPlaceholder', language)} value={content} onChange={e => setContent(e.target.value)} />
               <div className="absolute bottom-3 right-3 text-xs text-muted-foreground/60 bg-background/50 px-2 py-1 rounded border border-border/50 backdrop-blur-sm">
-                {type === 'command' && isExecutable ? "Use '&&' to chain commands" : "Tip: Use {{variable}} to create fillable slots"}
+                {type === 'command' && isExecutable ? getText('patch', 'chainCommands', language) : getText('patch', 'variableTip', language)}
               </div>
             </div>
           </div>

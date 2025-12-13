@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Keyboard, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAppStore } from '@/store/useAppStore';
+import { getText } from '@/lib/i18n';
 
 interface ShortcutInputProps {
   value: string;
@@ -11,6 +13,7 @@ export function ShortcutInput({ value, onChange }: ShortcutInputProps) {
   const [isRecording, setIsRecording] = useState(false);
   const [currentKeys, setCurrentKeys] = useState<Set<string>>(new Set());
   const inputRef = useRef<HTMLDivElement>(null);
+  const { language } = useAppStore();
   useEffect(() => {
     if (!isRecording) return;
 
@@ -69,7 +72,7 @@ export function ShortcutInput({ value, onChange }: ShortcutInputProps) {
   return (
     <div className="space-y-2">
         <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-            Spotlight Shortcut
+            {getText('settings', 'shortcutLabel', language)}
         </label>
         <div className="flex gap-2">
             <div
@@ -86,13 +89,13 @@ export function ShortcutInput({ value, onChange }: ShortcutInputProps) {
                     <span className="text-primary font-medium animate-pulse">
                         {currentKeys.size > 0 
                             ? Array.from(currentKeys).join(' + ') 
-                            : "Press keys..."}
+                            : getText('settings', 'shortcutPressKeys', language)}
                     </span>
                 ) : (
                     <div className="flex items-center gap-2 w-full">
                         <Keyboard size={14} className="text-muted-foreground" />
                         <span className={cn("font-mono font-medium", !value && "text-muted-foreground italic")}>
-                            {value || "Not set"}
+                            {value || getText('settings', 'shortcutNotSet', language)}
                         </span>
                     </div>
                 )}
@@ -102,14 +105,14 @@ export function ShortcutInput({ value, onChange }: ShortcutInputProps) {
                 <button 
                     onClick={() => onChange('')}
                     className="h-9 w-9 flex items-center justify-center rounded-lg border border-border bg-secondary/30 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-colors"
-                    title="Clear shortcut"
+                    title={getText('settings', 'shortcutClear', language)}
                 >
                     <X size={14} />
                 </button>
             )}
         </div>
         <p className="text-[10px] text-muted-foreground/60">
-            Click to record. Recommended: Alt+S, Ctrl+Space.
+            {getText('settings', 'shortcutTip', language)}
         </p>
     </div>
   );
