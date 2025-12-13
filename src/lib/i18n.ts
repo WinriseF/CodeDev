@@ -350,11 +350,11 @@ const translations = {
       pasteOriginal: "在此粘贴原始文本...",
       pasteModified: "在此粘贴修改后的文本...",
       pasteToCompare: "在上方粘贴文本以进行比较",
-      autoRecommended: "推荐使用 'Auto'。如果命令需要特定 Shell（如 PowerShell 语法），请选择对应的 Shell。",
+      autoRecommended: "推荐使用 'Auto'，如果命令需要特定 Shell（如 PowerShell 语法），请选择对应的 Shell。",
       chainCommands: "使用 '&&' 连接多个命令",
       variableTip: "提示：使用 {{变量名}} 创建填空位",
       commandExample: "例如：cd {{path}} && npm install",
-      commandPlaceholder: "输入命令或 Prompt。使用 {{变量}} 创建填空位。",
+      commandPlaceholder: "输入命令或 Prompt，使用 {{变量}} 创建填空位。",
       hideInputs: "隐藏输入",
       editText: "编辑文本",
       modified: "已修改",
@@ -434,7 +434,7 @@ const translations = {
       shortcutPressKeys: "按下按键...",
       shortcutNotSet: "未设置",
       shortcutClear: "清除快捷键",
-      shortcutTip: "点击设置。推荐：Alt+S, Ctrl+Space。",
+      shortcutTip: "点击设置  推荐：Alt+S, Ctrl+Space。",
       langSubLabelZh: "简体中文",
       langSubLabelEn: "English"
     },
@@ -472,7 +472,7 @@ const translations = {
       toggleMode: "切换模式 (Tab)",
       currentProvider: "当前：{provider}。点击切换。",
       actionRequired: "需要操作",
-      commandHasVariables: "此命令包含变量。请在主窗口中使用以填充变量。"
+      commandHasVariables: "此命令包含变量，请在主窗口中使用以填充变量。"
     },
     actions: {
       collapse: "收起侧栏",
