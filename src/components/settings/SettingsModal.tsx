@@ -161,9 +161,9 @@ export function SettingsModal() {
                                         </div>
                                         <input 
                                             type="range" 
-                                            min="15" 
-                                            max="120" 
-                                            step="5"
+                                            min="1" 
+                                            max="180" 
+                                            step="1"
                                             className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
                                             value={restReminder.intervalMinutes}
                                             onChange={(e) => setRestReminder({ intervalMinutes: parseInt(e.target.value) })}
