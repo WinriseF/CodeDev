@@ -1,5 +1,5 @@
 {
-  "updated_at": 1765157006658,
+  "updated_at": 1765698453213,
   "version": "2.0.0",
   "packages": [
     {
@@ -7,9 +7,9 @@
       "language": "en",
       "platform": "llm",
       "name": "ChatGPT Prompts (English)",
-      "description": "Collection of 223 role-play prompts.",
-      "count": 223,
-      "size_kb": 188.42,
+      "description": "Collection of 319 role-play prompts.",
+      "count": 319,
+      "size_kb": 330.17,
       "url": "packs/prompts-en-roles.json",
       "category": "prompt"
     },
@@ -62,9 +62,9 @@
       "language": "zh",
       "platform": "common",
       "name": "通用工具 (Common) (ZH)",
-      "description": "Contains 3059 zh commands for common.",
-      "count": 3059,
-      "size_kb": 1486,
+      "description": "Contains 3121 zh commands for common.",
+      "count": 3121,
+      "size_kb": 1519,
       "url": "packs/zh/common.json",
       "category": "command"
     },
@@ -161,9 +161,9 @@
       "language": "en",
       "platform": "linux",
       "name": "Linux Ops (EN)",
-      "description": "Contains 7598 en commands for linux.",
-      "count": 7598,
-      "size_kb": 3588,
+      "description": "Contains 7607 en commands for linux.",
+      "count": 7607,
+      "size_kb": 3592,
       "url": "packs/en/linux.json",
       "category": "command"
     },
@@ -172,9 +172,9 @@
       "language": "en",
       "platform": "common",
       "name": "Common Tools (EN)",
-      "description": "Contains 19159 en commands for common.",
-      "count": 19159,
-      "size_kb": 9288,
+      "description": "Contains 19189 en commands for common.",
+      "count": 19189,
+      "size_kb": 9299,
       "url": "packs/en/common.json",
       "category": "command"
     },

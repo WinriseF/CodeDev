@@ -5582,10 +5582,10 @@
   {
     "id": "tldr-en-windows-rni-0",
     "type": "command",
-    "title": "rni - View documentation for original command",
+    "title": "rni - View documentation for the original command",
     "content": "tldr Rename-Item",
     "group": "Windows",
-    "description": "rni: This command is an alias of `Rename-Item`. (View documentation for original command)",
+    "description": "rni: This command is an alias of `Rename-Item`. (View documentation for the original command)",
     "tags": [
       "windows",
       "rni",
@@ -6617,10 +6617,10 @@
   {
     "id": "tldr-en-windows-ren-0",
     "type": "command",
-    "title": "ren - View documentation for original command",
+    "title": "ren - View documentation for the original command",
     "content": "tldr Rename-Item",
     "group": "Windows",
-    "description": "ren: This command is an alias of `Rename-Item`. (View documentation for original command)",
+    "description": "ren: This command is an alias of `Rename-Item`. (View documentation for the original command)",
     "tags": [
       "windows",
       "ren",

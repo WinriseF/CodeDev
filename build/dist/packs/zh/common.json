@@ -195,6 +195,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rustup-help-0",
+    "type": "command",
+    "title": "rustup-help - 显示帮助",
+    "content": "rustup help",
+    "group": "通用工具 (Common)",
+    "description": "rustup-help: 显示 `rustup` 及其子命令的帮助信息。 (显示帮助)",
+    "tags": [
+      "common",
+      "rustup-help",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-help-1",
+    "type": "command",
+    "title": "rustup-help - 显示子命令的帮助信息",
+    "content": "rustup help {{子命令}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-help: 显示 `rustup` 及其子命令的帮助信息。 (显示子命令的帮助信息)",
+    "tags": [
+      "common",
+      "rustup-help",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-..md-0",
     "type": "command",
     "title": "..md - 原命令的文档在",
@@ -2220,6 +2250,66 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rustup-component-0",
+    "type": "command",
+    "title": "rustup-component - 向工具链添加组件",
+    "content": "rustup component add --toolchain {{工具链}} {{组件}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-component: 修改已安装工具链的组件。 如果不使用 `--toolchain` 选项，`rustup` 将使用默认工具链。有关工具链的更多信息请参见 `rustup help toolchain`。 (向工具链添加组件)",
+    "tags": [
+      "common",
+      "rustup-component",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-component-1",
+    "type": "command",
+    "title": "rustup-component - 从工具链中移除组件",
+    "content": "rustup component remove --toolchain {{工具链}} {{组件}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-component: 修改已安装工具链的组件。 如果不使用 `--toolchain` 选项，`rustup` 将使用默认工具链。有关工具链的更多信息请参见 `rustup help toolchain`。 (从工具链中移除组件)",
+    "tags": [
+      "common",
+      "rustup-component",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-component-2",
+    "type": "command",
+    "title": "rustup-component - 列出工具链已安装和可用的组件",
+    "content": "rustup component list --toolchain {{工具链}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-component: 修改已安装工具链的组件。 如果不使用 `--toolchain` 选项，`rustup` 将使用默认工具链。有关工具链的更多信息请参见 `rustup help toolchain`。 (列出工具链已安装和可用的组件)",
+    "tags": [
+      "common",
+      "rustup-component",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-component-3",
+    "type": "command",
+    "title": "rustup-component - 列出工具链已安装的组件",
+    "content": "rustup component list --toolchain {{工具链}} --installed",
+    "group": "通用工具 (Common)",
+    "description": "rustup-component: 修改已安装工具链的组件。 如果不使用 `--toolchain` 选项，`rustup` 将使用默认工具链。有关工具链的更多信息请参见 `rustup help toolchain`。 (列出工具链已安装的组件)",
+    "tags": [
+      "common",
+      "rustup-component",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-jmap-0",
     "type": "command",
     "title": "jmap - 打印 Java 进程的共享对象映射（类似 pmap 的输出）",
@@ -2357,10 +2447,10 @@
   {
     "id": "tldr-zh-common-arch-0",
     "type": "command",
-    "title": "arch - 展示系统架构",
-    "content": "arch",
+    "title": "arch - 原命令的文档在",
+    "content": "tldr uname",
     "group": "通用工具 (Common)",
-    "description": "arch: 展示系统架构的名称。 另见`uname`. (展示系统架构)",
+    "description": "arch: 这是 `uname --machine` 命令的一个别名。 (原命令的文档在)",
     "tags": [
       "common",
       "arch",
@@ -2649,6 +2739,96 @@
     "tags": [
       "common",
       "arthas",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-autossh-0",
+    "type": "command",
+    "title": "autossh - 启动 SSH 会话，当监控 ([M]onitoring) 的端口无法返回数据时，自动重启",
+    "content": "autossh -M {{监控_端口}} \"{{ssh_命令}}\"",
+    "group": "通用工具 (Common)",
+    "description": "autossh: 创建，监控或重启 SSH 连接。 自动重连会确保你的端口转发隧道打开。接受所有 SSH 参数。 (启动 SSH 会话，当监控 ([M]onitoring) 的端口无法返回数据时，自动重启)",
+    "tags": [
+      "common",
+      "autossh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-autossh-1",
+    "type": "command",
+    "title": "autossh - 将本地 ([L]ocal) 端口转发到远程端口，必要时重启转发",
+    "content": "autossh -M {{监控_端口}} -L {{本地_端口}}:localhost:{{远程_端口}} {{用户名}}@{{主机名}}",
+    "group": "通用工具 (Common)",
+    "description": "autossh: 创建，监控或重启 SSH 连接。 自动重连会确保你的端口转发隧道打开。接受所有 SSH 参数。 (将本地 ([L]ocal) 端口转发到远程端口，必要时重启转发)",
+    "tags": [
+      "common",
+      "autossh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-autossh-2",
+    "type": "command",
+    "title": "autossh - 在执行 SSH 命令前，将 `autossh` 切换到后台，不 ([N]ot) 启动远程 shell",
+    "content": "autossh -f -M {{监控_端口}} -N \"{{ssh_命令}}\"",
+    "group": "通用工具 (Common)",
+    "description": "autossh: 创建，监控或重启 SSH 连接。 自动重连会确保你的端口转发隧道打开。接受所有 SSH 参数。 (在执行 SSH 命令前，将 `autossh` 切换到后台，不 ([N]ot) 启动远程 shell)",
+    "tags": [
+      "common",
+      "autossh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-autossh-3",
+    "type": "command",
+    "title": "autossh - 后台运行，不监控端口，而是每 10 秒发送 SSH 心跳包 (SSH keep-alive packet) 来检测掉线",
+    "content": "autossh -f -M 0 -N -o \"ServerAliveInterval 10\" -o \"ServerAliveCountMax 3\" \"{{ssh_命令}}\"",
+    "group": "通用工具 (Common)",
+    "description": "autossh: 创建，监控或重启 SSH 连接。 自动重连会确保你的端口转发隧道打开。接受所有 SSH 参数。 (后台运行，不监控端口，而是每 10 秒发送 SSH 心跳包 (SSH keep-alive packet) 来检测掉线)",
+    "tags": [
+      "common",
+      "autossh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-autossh-4",
+    "type": "command",
+    "title": "autossh - 后台运行，不监控端口，不启动远程 shell，当端口转发掉线时退出",
+    "content": "autossh -f -M 0 -N -o \"ServerAliveInterval 10\" -o \"ServerAliveCountMax 3\" -o ExitOnForwardFailure=yes -L {{本地_端口}}:localhost:{{远程_端口}} {{用户名}}@{{主机名}}",
+    "group": "通用工具 (Common)",
+    "description": "autossh: 创建，监控或重启 SSH 连接。 自动重连会确保你的端口转发隧道打开。接受所有 SSH 参数。 (后台运行，不监控端口，不启动远程 shell，当端口转发掉线时退出)",
+    "tags": [
+      "common",
+      "autossh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-autossh-5",
+    "type": "command",
+    "title": "autossh - 后台运行，将 `autossh` 调试输出和 SSH 详细输出写入到文件",
+    "content": "AUTOSSH_DEBUG=1 AUTOSSH_LOGFILE={{路径/到/autossh_日志_文件.log}} autossh -f -M {{监控_端口}} -v -E {{路径/到/ssh_日志_文件.log}} {{ssh_命令}}",
+    "group": "通用工具 (Common)",
+    "description": "autossh: 创建，监控或重启 SSH 连接。 自动重连会确保你的端口转发隧道打开。接受所有 SSH 参数。 (后台运行，将 `autossh` 调试输出和 SSH 详细输出写入到文件)",
+    "tags": [
+      "common",
+      "autossh",
       "tldr",
       "zh"
     ],
@@ -8205,6 +8385,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rustup-show-0",
+    "type": "command",
+    "title": "rustup-show - 显示所有信息",
+    "content": "rustup show",
+    "group": "通用工具 (Common)",
+    "description": "rustup-show: 显示已安装的工具链、目标平台以及 `rustc` 的版本信息。 (显示所有信息)",
+    "tags": [
+      "common",
+      "rustup-show",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-show-1",
+    "type": "command",
+    "title": "rustup-show - 显示当前激活的工具链",
+    "content": "rustup show active-toolchain",
+    "group": "通用工具 (Common)",
+    "description": "rustup-show: 显示已安装的工具链、目标平台以及 `rustc` 的版本信息。 (显示当前激活的工具链)",
+    "tags": [
+      "common",
+      "rustup-show",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-show-2",
+    "type": "command",
+    "title": "rustup-show - 显示 rustup 数据目录",
+    "content": "rustup show home",
+    "group": "通用工具 (Common)",
+    "description": "rustup-show: 显示已安装的工具链、目标平台以及 `rustc` 的版本信息。 (显示 rustup 数据目录)",
+    "tags": [
+      "common",
+      "rustup-show",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-banner-0",
     "type": "command",
     "title": "banner - 将文字信息打印为大横幅（引号是可选的）",
@@ -8634,6 +8859,36 @@
     "tags": [
       "common",
       "qr",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-update-0",
+    "type": "command",
+    "title": "rustup-update - 更新所有已安装的工具链和 `rustup`",
+    "content": "rustup update",
+    "group": "通用工具 (Common)",
+    "description": "rustup-update: 更新 Rust 工具链以及 `rustup` 本身（如果不是通过包管理器安装的） (更新所有已安装的工具链和 `rustup`)",
+    "tags": [
+      "common",
+      "rustup-update",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-update-1",
+    "type": "command",
+    "title": "rustup-update - 安装或更新指定工具链（有关工具链的更多信息，请参见 `rustup help toolchain`）",
+    "content": "rustup update {{工具链}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-update: 更新 Rust 工具链以及 `rustup` 本身（如果不是通过包管理器安装的） (安装或更新指定工具链（有关工具链的更多信息，请参见 `rustup help toolchain`）)",
+    "tags": [
+      "common",
+      "rustup-update",
       "tldr",
       "zh"
     ],
@@ -10560,6 +10815,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rustup-uninstall-0",
+    "type": "command",
+    "title": "rustup-uninstall - 查看原命令的文档",
+    "content": "tldr rustup toolchain",
+    "group": "通用工具 (Common)",
+    "description": "rustup-uninstall: 该命令是 `rustup toolchain uninstall` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "rustup-uninstall",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-toolchain-0",
+    "type": "command",
+    "title": "rustup-toolchain - 安装或更新指定工具链",
+    "content": "rustup toolchain install {{工具链}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-toolchain: 管理 Rust 工具链。 有关工具链的更多信息，请参见 `rustup help toolchain`。 (安装或更新指定工具链)",
+    "tags": [
+      "common",
+      "rustup-toolchain",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-toolchain-1",
+    "type": "command",
+    "title": "rustup-toolchain - 卸载工具链",
+    "content": "rustup toolchain uninstall {{工具链}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-toolchain: 管理 Rust 工具链。 有关工具链的更多信息，请参见 `rustup help toolchain`。 (卸载工具链)",
+    "tags": [
+      "common",
+      "rustup-toolchain",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-toolchain-2",
+    "type": "command",
+    "title": "rustup-toolchain - 列出已安装的工具链",
+    "content": "rustup toolchain list",
+    "group": "通用工具 (Common)",
+    "description": "rustup-toolchain: 管理 Rust 工具链。 有关工具链的更多信息，请参见 `rustup help toolchain`。 (列出已安装的工具链)",
+    "tags": [
+      "common",
+      "rustup-toolchain",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-toolchain-3",
+    "type": "command",
+    "title": "rustup-toolchain - 通过创建符号链接来创建自定义工具链",
+    "content": "rustup toolchain link {{自定义工具链名称}} {{path/to/directory}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-toolchain: 管理 Rust 工具链。 有关工具链的更多信息，请参见 `rustup help toolchain`。 (通过创建符号链接来创建自定义工具链)",
+    "tags": [
+      "common",
+      "rustup-toolchain",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-sort-0",
     "type": "command",
     "title": "sort - 以升序对文件进行排序",
@@ -10734,6 +11064,36 @@
     "tags": [
       "common",
       "yes",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-which-0",
+    "type": "command",
+    "title": "rustup-which - 显示默认工具链中命令的二进制文件路径",
+    "content": "rustup which {{命令}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-which: 显示 `rustup` 管理的命令将运行哪个二进制文件。 类似 `which` 命令，但搜索的是 Rust 工具链而不是 `$PATH`。 (显示默认工具链中命令的二进制文件路径)",
+    "tags": [
+      "common",
+      "rustup-which",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-which-1",
+    "type": "command",
+    "title": "rustup-which - 显示指定工具链中命令的二进制文件路径（有关工具链的更多信息，请参见 `rustup help toolchain`）",
+    "content": "rustup which --toolchain {{工具链}} {{命令}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-which: 显示 `rustup` 管理的命令将运行哪个二进制文件。 类似 `which` 命令，但搜索的是 Rust 工具链而不是 `$PATH`。 (显示指定工具链中命令的二进制文件路径（有关工具链的更多信息，请参见 `rustup help toolchain`）)",
+    "tags": [
+      "common",
+      "rustup-which",
       "tldr",
       "zh"
     ],
@@ -11184,6 +11544,21 @@
     "tags": [
       "common",
       "awk",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-install-0",
+    "type": "command",
+    "title": "rustup-install - 查看原命令的文档",
+    "content": "tldr rustup toolchain",
+    "group": "通用工具 (Common)",
+    "description": "rustup-install: 该命令是 `rustup toolchain install` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "rustup-install",
       "tldr",
       "zh"
     ],
@@ -13920,6 +14295,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rustup-default-0",
+    "type": "command",
+    "title": "rustup-default - 切换默认 Rust 工具链（详见 `rustup help toolchain`）",
+    "content": "rustup default {{工具链}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-default: 设置默认 Rust 工具链。 (切换默认 Rust 工具链（详见 `rustup help toolchain`）)",
+    "tags": [
+      "common",
+      "rustup-default",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-yadm-bootstrap-0",
     "type": "command",
     "title": "yadm-bootstrap - 执行 bootstrap 可执行文件",
@@ -14094,6 +14484,36 @@
     "tags": [
       "common",
       "rmdir",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-self-0",
+    "type": "command",
+    "title": "rustup-self - 更新 `rustup`",
+    "content": "rustup self update",
+    "group": "通用工具 (Common)",
+    "description": "rustup-self: 管理 `rustup` 本身的安装。 (更新 `rustup`)",
+    "tags": [
+      "common",
+      "rustup-self",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-self-1",
+    "type": "command",
+    "title": "rustup-self - 卸载 `rustup`",
+    "content": "rustup self uninstall",
+    "group": "通用工具 (Common)",
+    "description": "rustup-self: 管理 `rustup` 本身的安装。 (卸载 `rustup`)",
+    "tags": [
+      "common",
+      "rustup-self",
       "tldr",
       "zh"
     ],
@@ -15669,6 +16089,21 @@
     "tags": [
       "common",
       ",",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-run-0",
+    "type": "command",
+    "title": "rustup-run - 使用指定的 Rust 工具链运行命令（有关工具链的更多信息，请参见 `rustup help toolchain`）",
+    "content": "rustup run {{工具链}} {{命令}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-run: 在指定 Rust 工具链环境下运行命令。 注意：所有由 rustup 管理的命令都有简写形式，例如，`cargo +nightly build` 等价于 `rustup run nightly cargo build`。 (使用指定的 Rust 工具链运行命令（有关工具链的更多信息，请参见 `rustup help toolchain`）)",
+    "tags": [
+      "common",
+      "rustup-run",
       "tldr",
       "zh"
     ],
@@ -19014,6 +19449,36 @@
     "tags": [
       "common",
       "install",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-man-0",
+    "type": "command",
+    "title": "rustup-man - 查看默认工具链中某个命令的 man 手册页",
+    "content": "rustup man {{命令}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-man: 查看由 `rustup` 管理的命令的 man 手册页。 (查看默认工具链中某个命令的 man 手册页)",
+    "tags": [
+      "common",
+      "rustup-man",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-man-1",
+    "type": "command",
+    "title": "rustup-man - 查看指定工具链中某个命令的 man 手册页",
+    "content": "rustup man --toolchain {{工具链}} {{命令}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-man: 查看由 `rustup` 管理的命令的 man 手册页。 (查看指定工具链中某个命令的 man 手册页)",
+    "tags": [
+      "common",
+      "rustup-man",
       "tldr",
       "zh"
     ],
@@ -25005,6 +25470,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rustup-set-0",
+    "type": "command",
+    "title": "rustup-set - 设置默认目标平台",
+    "content": "rustup set default-host {{目标平台}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-set: 修改 `rustup` 的配置。 (设置默认目标平台)",
+    "tags": [
+      "common",
+      "rustup-set",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-set-1",
+    "type": "command",
+    "title": "rustup-set - 设置默认安装配置（`minimal` 只包含 `rustc`、`rust-std` 和 `cargo`，而 `default` 还会安装 `rust-docs`、`rustfmt` 和 `clippy`）",
+    "content": "rustup set profile {{minimal|default}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-set: 修改 `rustup` 的配置。 (设置默认安装配置（`minimal` 只包含 `rustc`、`rust-std` 和 `cargo`，而 `default` 还会安装 `rust-docs`、`rustfmt` 和 `clippy`）)",
+    "tags": [
+      "common",
+      "rustup-set",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-set-2",
+    "type": "command",
+    "title": "rustup-set - 设置在执行 `rustup update` 时是否自动更新 `rustup` 本身",
+    "content": "rustup set auto-self-update {{enable|disable|check-only}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-set: 修改 `rustup` 的配置。 (设置在执行 `rustup update` 时是否自动更新 `rustup` 本身)",
+    "tags": [
+      "common",
+      "rustup-set",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-llvm-g++-0",
     "type": "command",
     "title": "llvm-g++ - 原命令的文档在",
@@ -25350,6 +25860,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rustup-completions-0",
+    "type": "command",
+    "title": "rustup-completions - 将补全脚本输出到 `stdout`",
+    "content": "rustup completions {{bash|elvish|fish|powershell|zsh}} {{rustup|cargo}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-completions: 为 `rustup` 和 `cargo` 生成命令补全脚本。 (将补全脚本输出到 `stdout`)",
+    "tags": [
+      "common",
+      "rustup-completions",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-git-apply-0",
     "type": "command",
     "title": "git-apply - 显示补丁文件的应用详情",
@@ -25610,7 +26135,7 @@
     "title": "bash - 启动交互式 shell",
     "content": "bash",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`histexpand`（历史展开）。 (启动交互式 shell)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (启动交互式 shell)",
     "tags": [
       "common",
       "bash",
@@ -25625,7 +26150,7 @@
     "title": "bash - 启动一个不加载启动配置的交互式的 shell 会话",
     "content": "bash --norc",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`histexpand`（历史展开）。 (启动一个不加载启动配置的交互式的 shell 会话)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (启动一个不加载启动配置的交互式的 shell 会话)",
     "tags": [
       "common",
       "bash",
@@ -25640,7 +26165,7 @@
     "title": "bash - 执行命令",
     "content": "bash -c \"{{echo '已执行bash命令'}}\"",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`histexpand`（历史展开）。 (执行命令)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (执行命令)",
     "tags": [
       "common",
       "bash",
@@ -25655,7 +26180,7 @@
     "title": "bash - 执行脚本文件",
     "content": "bash {{路径/到/脚本文件.sh}}",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`histexpand`（历史展开）。 (执行脚本文件)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件)",
     "tags": [
       "common",
       "bash",
@@ -25670,7 +26195,7 @@
     "title": "bash - 执行脚本文件，并将所有执行过的命令输出到终端",
     "content": "bash -x {{路径/到/脚本文件.sh}}",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`histexpand`（历史展开）。 (执行脚本文件，并将所有执行过的命令输出到终端)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件，并将所有执行过的命令输出到终端)",
     "tags": [
       "common",
       "bash",
@@ -25685,7 +26210,7 @@
     "title": "bash - 执行脚本文件，并在第一个错误处终止",
     "content": "bash -e {{路径/到/脚本文件.sh}}",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`histexpand`（历史展开）。 (执行脚本文件，并在第一个错误处终止)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件，并在第一个错误处终止)",
     "tags": [
       "common",
       "bash",
@@ -25700,7 +26225,7 @@
     "title": "bash - 从 `stdin` 执行指定的命令",
     "content": "{{echo \"echo '已执行bash命令'\"}} | bash",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`histexpand`（历史展开）。 (从 `stdin` 执行指定的命令)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (从 `stdin` 执行指定的命令)",
     "tags": [
       "common",
       "bash",
@@ -25715,7 +26240,7 @@
     "title": "bash - 启动一个限制的 shell 会话",
     "content": "bash -r",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`histexpand`（历史展开）。 (启动一个限制的 shell 会话)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (启动一个限制的 shell 会话)",
     "tags": [
       "common",
       "bash",
@@ -26325,6 +26850,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rustup-doc-0",
+    "type": "command",
+    "title": "rustup-doc - 打开主页",
+    "content": "rustup doc",
+    "group": "通用工具 (Common)",
+    "description": "rustup-doc: 打开当前工具链的离线 Rust 文档。 这里没有列出所有文档页面。有关更多信息请参见 `rustup help doc`。 (打开主页)",
+    "tags": [
+      "common",
+      "rustup-doc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-doc-1",
+    "type": "command",
+    "title": "rustup-doc - 打开特定主题的文档（标准库中的模块、类型、关键字等）",
+    "content": "rustup doc {{std::fs|usize|fn|...}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-doc: 打开当前工具链的离线 Rust 文档。 这里没有列出所有文档页面。有关更多信息请参见 `rustup help doc`。 (打开特定主题的文档（标准库中的模块、类型、关键字等）)",
+    "tags": [
+      "common",
+      "rustup-doc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-doc-2",
+    "type": "command",
+    "title": "rustup-doc - 打开 the Rust Programming Language book",
+    "content": "rustup doc --book",
+    "group": "通用工具 (Common)",
+    "description": "rustup-doc: 打开当前工具链的离线 Rust 文档。 这里没有列出所有文档页面。有关更多信息请参见 `rustup help doc`。 (打开 the Rust Programming Language book)",
+    "tags": [
+      "common",
+      "rustup-doc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-doc-3",
+    "type": "command",
+    "title": "rustup-doc - 打开 the Cargo book",
+    "content": "rustup doc --cargo",
+    "group": "通用工具 (Common)",
+    "description": "rustup-doc: 打开当前工具链的离线 Rust 文档。 这里没有列出所有文档页面。有关更多信息请参见 `rustup help doc`。 (打开 the Cargo book)",
+    "tags": [
+      "common",
+      "rustup-doc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-doc-4",
+    "type": "command",
+    "title": "rustup-doc - 打开 the Rust Reference",
+    "content": "rustup doc --reference",
+    "group": "通用工具 (Common)",
+    "description": "rustup-doc: 打开当前工具链的离线 Rust 文档。 这里没有列出所有文档页面。有关更多信息请参见 `rustup help doc`。 (打开 the Rust Reference)",
+    "tags": [
+      "common",
+      "rustup-doc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-unimatrix-0",
     "type": "command",
     "title": "unimatrix - 模仿 `cmatrix` 的默认输出（无 Unicode，适用于 TTY）",
@@ -26394,6 +26994,21 @@
     "tags": [
       "common",
       "unimatrix",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-check-0",
+    "type": "command",
+    "title": "rustup-check - 检查所有更新",
+    "content": "rustup check",
+    "group": "通用工具 (Common)",
+    "description": "rustup-check: 检查 Rust 工具链和 `rustup` 的更新。 (检查所有更新)",
+    "tags": [
+      "common",
+      "rustup-check",
       "tldr",
       "zh"
     ],
@@ -37097,25 +37712,10 @@
   {
     "id": "tldr-zh-common-whoami-0",
     "type": "command",
-    "title": "whoami - 显示当前登录用户名",
-    "content": "whoami",
+    "title": "whoami - 原命令的文档在",
+    "content": "tldr id",
     "group": "通用工具 (Common)",
-    "description": "whoami: 打印当前有效用户 ID 的用户名。 (显示当前登录用户名)",
-    "tags": [
-      "common",
-      "whoami",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-whoami-1",
-    "type": "command",
-    "title": "whoami - 修改用户 ID 后显示当前登录用户名",
-    "content": "sudo whoami",
-    "group": "通用工具 (Common)",
-    "description": "whoami: 打印当前有效用户 ID 的用户名。 (修改用户 ID 后显示当前登录用户名)",
+    "description": "whoami: 这是 `id --user --name` 命令的一个别名。 (原命令的文档在)",
     "tags": [
       "common",
       "whoami",
@@ -37869,6 +38469,66 @@
     "tags": [
       "common",
       "ag",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-override-0",
+    "type": "command",
+    "title": "rustup-override - 列出目录的工具链覆盖设置",
+    "content": "rustup override list",
+    "group": "通用工具 (Common)",
+    "description": "rustup-override: 修改目录的工具链覆盖设置。 有关工具链的更多信息，请参见 `rustup help toolchain`。 (列出目录的工具链覆盖设置)",
+    "tags": [
+      "common",
+      "rustup-override",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-override-1",
+    "type": "command",
+    "title": "rustup-override - 为当前目录设置覆盖工具链（即在该目录中运行 `cargo`、`rustc` 等命令时使用指定工具链）",
+    "content": "rustup override set {{工具链}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-override: 修改目录的工具链覆盖设置。 有关工具链的更多信息，请参见 `rustup help toolchain`。 (为当前目录设置覆盖工具链（即在该目录中运行 `cargo`、`rustc` 等命令时使用指定工具链）)",
+    "tags": [
+      "common",
+      "rustup-override",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-override-2",
+    "type": "command",
+    "title": "rustup-override - 移除当前目录的工具链覆盖设置",
+    "content": "rustup override unset",
+    "group": "通用工具 (Common)",
+    "description": "rustup-override: 修改目录的工具链覆盖设置。 有关工具链的更多信息，请参见 `rustup help toolchain`。 (移除当前目录的工具链覆盖设置)",
+    "tags": [
+      "common",
+      "rustup-override",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-override-3",
+    "type": "command",
+    "title": "rustup-override - 移除所有指向已不存在目录的工具链覆盖设置",
+    "content": "rustup override unset --nonexistent",
+    "group": "通用工具 (Common)",
+    "description": "rustup-override: 修改目录的工具链覆盖设置。 有关工具链的更多信息，请参见 `rustup help toolchain`。 (移除所有指向已不存在目录的工具链覆盖设置)",
+    "tags": [
+      "common",
+      "rustup-override",
       "tldr",
       "zh"
     ],
@@ -38664,6 +39324,66 @@
     "tags": [
       "common",
       "git-commits-since",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-target-0",
+    "type": "command",
+    "title": "rustup-target - 为工具链添加目标平台",
+    "content": "rustup target add --toolchain {{工具链}} {{目标}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-target: 修改工具链支持的目标平台。 如果不使用 `--toolchain` 选项，`rustup` 会使用默认工具链。更多信息请参见 `rustup help toolchain`。 (为工具链添加目标平台)",
+    "tags": [
+      "common",
+      "rustup-target",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-target-1",
+    "type": "command",
+    "title": "rustup-target - 从工具链移除目标平台",
+    "content": "rustup target remove --toolchain {{工具链}} {{目标}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-target: 修改工具链支持的目标平台。 如果不使用 `--toolchain` 选项，`rustup` 会使用默认工具链。更多信息请参见 `rustup help toolchain`。 (从工具链移除目标平台)",
+    "tags": [
+      "common",
+      "rustup-target",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-target-2",
+    "type": "command",
+    "title": "rustup-target - 列出工具链的可用目标平台和已安装目标平台",
+    "content": "rustup target list --toolchain {{工具链}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-target: 修改工具链支持的目标平台。 如果不使用 `--toolchain` 选项，`rustup` 会使用默认工具链。更多信息请参见 `rustup help toolchain`。 (列出工具链的可用目标平台和已安装目标平台)",
+    "tags": [
+      "common",
+      "rustup-target",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-target-3",
+    "type": "command",
+    "title": "rustup-target - 列出工具链已安装的目标平台",
+    "content": "rustup target list --toolchain {{工具链}} --installed",
+    "group": "通用工具 (Common)",
+    "description": "rustup-target: 修改工具链支持的目标平台。 如果不使用 `--toolchain` 选项，`rustup` 会使用默认工具链。更多信息请参见 `rustup help toolchain`。 (列出工具链已安装的目标平台)",
+    "tags": [
+      "common",
+      "rustup-target",
       "tldr",
       "zh"
     ],
@@ -41079,6 +41799,111 @@
     "tags": [
       "common",
       "jcal",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-0",
+    "type": "command",
+    "title": "rustup - 为你的系统安装 nightly 工具链",
+    "content": "rustup install nightly",
+    "group": "通用工具 (Common)",
+    "description": "rustup: 安装、管理和更新 Rust 工具链。 一些子命令，如 `toolchain`、`target`、`update` 等有自己的使用文档。 (为你的系统安装 nightly 工具链)",
+    "tags": [
+      "common",
+      "rustup",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-1",
+    "type": "command",
+    "title": "rustup - 将默认工具链切换为 nightly 以便 `cargo` 和 `rustc` 命令使用它",
+    "content": "rustup default nightly",
+    "group": "通用工具 (Common)",
+    "description": "rustup: 安装、管理和更新 Rust 工具链。 一些子命令，如 `toolchain`、`target`、`update` 等有自己的使用文档。 (将默认工具链切换为 nightly 以便 `cargo` 和 `rustc` 命令使用它)",
+    "tags": [
+      "common",
+      "rustup",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-2",
+    "type": "command",
+    "title": "rustup - 在当前项目中使用 nightly 工具链，但保持全局设置不变",
+    "content": "rustup override set nightly",
+    "group": "通用工具 (Common)",
+    "description": "rustup: 安装、管理和更新 Rust 工具链。 一些子命令，如 `toolchain`、`target`、`update` 等有自己的使用文档。 (在当前项目中使用 nightly 工具链，但保持全局设置不变)",
+    "tags": [
+      "common",
+      "rustup",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-3",
+    "type": "command",
+    "title": "rustup - 更新所有工具链",
+    "content": "rustup update",
+    "group": "通用工具 (Common)",
+    "description": "rustup: 安装、管理和更新 Rust 工具链。 一些子命令，如 `toolchain`、`target`、`update` 等有自己的使用文档。 (更新所有工具链)",
+    "tags": [
+      "common",
+      "rustup",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-4",
+    "type": "command",
+    "title": "rustup - 列出已安装的工具链",
+    "content": "rustup show",
+    "group": "通用工具 (Common)",
+    "description": "rustup: 安装、管理和更新 Rust 工具链。 一些子命令，如 `toolchain`、`target`、`update` 等有自己的使用文档。 (列出已安装的工具链)",
+    "tags": [
+      "common",
+      "rustup",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-5",
+    "type": "command",
+    "title": "rustup - 使用指定工具链运行 `cargo build`",
+    "content": "rustup run {{工具链}} cargo build",
+    "group": "通用工具 (Common)",
+    "description": "rustup: 安装、管理和更新 Rust 工具链。 一些子命令，如 `toolchain`、`target`、`update` 等有自己的使用文档。 (使用指定工具链运行 `cargo build`)",
+    "tags": [
+      "common",
+      "rustup",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-6",
+    "type": "command",
+    "title": "rustup - 在默认网页浏览器中打开本地 Rust 文档",
+    "content": "rustup doc",
+    "group": "通用工具 (Common)",
+    "description": "rustup: 安装、管理和更新 Rust 工具链。 一些子命令，如 `toolchain`、`target`、`update` 等有自己的使用文档。 (在默认网页浏览器中打开本地 Rust 文档)",
+    "tags": [
+      "common",
+      "rustup",
       "tldr",
       "zh"
     ],
@@ -44229,6 +45054,111 @@
     "tags": [
       "common",
       "usql",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-init.sh-0",
+    "type": "command",
+    "title": "rustup-init.sh - 下载并运行 `rustup-init` 来安装 `rustup` 和默认 Rust 工具链",
+    "content": "curl https://sh.rustup.rs {{[-sSf|--silent --show-error --fail]}} | sh -s",
+    "group": "通用工具 (Common)",
+    "description": "rustup-init.sh: 用于安装 `rustup` 和 Rust 工具链的脚本。 (下载并运行 `rustup-init` 来安装 `rustup` 和默认 Rust 工具链)",
+    "tags": [
+      "common",
+      "rustup-init.sh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-init.sh-1",
+    "type": "command",
+    "title": "rustup-init.sh - 下载并运行 `rustup-init` 并传递参数",
+    "content": "curl https://sh.rustup.rs {{[-sSf|--silent --show-error --fail]}} | sh -s -- {{参数}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-init.sh: 用于安装 `rustup` 和 Rust 工具链的脚本。 (下载并运行 `rustup-init` 并传递参数)",
+    "tags": [
+      "common",
+      "rustup-init.sh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-init.sh-2",
+    "type": "command",
+    "title": "rustup-init.sh - 运行 `rustup-init` 并指定要安装的额外组件或目标",
+    "content": "rustup-init.sh --target {{目标}} --component {{组件}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-init.sh: 用于安装 `rustup` 和 Rust 工具链的脚本。 (运行 `rustup-init` 并指定要安装的额外组件或目标)",
+    "tags": [
+      "common",
+      "rustup-init.sh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-init.sh-3",
+    "type": "command",
+    "title": "rustup-init.sh - 运行 `rustup-init` 并指定要安装的默认工具链",
+    "content": "rustup-init.sh --default-toolchain {{工具链}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-init.sh: 用于安装 `rustup` 和 Rust 工具链的脚本。 (运行 `rustup-init` 并指定要安装的默认工具链)",
+    "tags": [
+      "common",
+      "rustup-init.sh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-init.sh-4",
+    "type": "command",
+    "title": "rustup-init.sh - 运行 `rustup-init` 并不安装任何工具链",
+    "content": "rustup-init.sh --default-toolchain {{none}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-init.sh: 用于安装 `rustup` 和 Rust 工具链的脚本。 (运行 `rustup-init` 并不安装任何工具链)",
+    "tags": [
+      "common",
+      "rustup-init.sh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-init.sh-5",
+    "type": "command",
+    "title": "rustup-init.sh - 运行 `rustup-init` 并指定安装配置文件",
+    "content": "rustup-init.sh --profile {{minimal|default|complete}}",
+    "group": "通用工具 (Common)",
+    "description": "rustup-init.sh: 用于安装 `rustup` 和 Rust 工具链的脚本。 (运行 `rustup-init` 并指定安装配置文件)",
+    "tags": [
+      "common",
+      "rustup-init.sh",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rustup-init.sh-6",
+    "type": "command",
+    "title": "rustup-init.sh - 运行 `rustup-init` 并跳过确认提示",
+    "content": "rustup-init.sh -y",
+    "group": "通用工具 (Common)",
+    "description": "rustup-init.sh: 用于安装 `rustup` 和 Rust 工具链的脚本。 (运行 `rustup-init` 并跳过确认提示)",
+    "tags": [
+      "common",
+      "rustup-init.sh",
       "tldr",
       "zh"
     ],

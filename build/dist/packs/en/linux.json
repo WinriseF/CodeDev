@@ -3813,7 +3813,7 @@
     "id": "tldr-en-linux-systemctl-list-paths-3",
     "type": "command",
     "title": "systemctl-list-paths - Show all path units, including inactive ones",
-    "content": "systemctl list-paths --all",
+    "content": "systemctl list-paths {{[-a|--all]}}",
     "group": "Linux Ops",
     "description": "systemctl-list-paths: List path units currently in memory, ordered by path. (Show all path units, including inactive ones)",
     "tags": [
@@ -5658,7 +5658,7 @@
     "id": "tldr-en-linux-mknod-3",
     "type": "command",
     "title": "mknod - Create a device file with default SELinux security context",
-    "content": "sudo mknod {{[-Z |--context=]}}{{path/to/device_file}} {{type}} {{major_device_number}} {{minor_device_number}}",
+    "content": "sudo mknod {{[-Z|--context]}} {{path/to/device_file}} {{type}} {{major_device_number}} {{minor_device_number}}",
     "group": "Linux Ops",
     "description": "mknod: Create block or character device special files. (Create a device file with default SELinux security context)",
     "tags": [
@@ -5868,7 +5868,7 @@
     "id": "tldr-en-linux-systemctl-halt-1",
     "type": "command",
     "title": "systemctl-halt - Halt the system immediately without asking services to stop gracefully",
-    "content": "systemctl halt --force",
+    "content": "systemctl halt {{[-f|--force]}}",
     "group": "Linux Ops",
     "description": "systemctl-halt: Shut down and halt the system (stop the OS kernel but keep hardware powered on). (Halt the system immediately without asking services to stop gracefully)",
     "tags": [
@@ -5883,7 +5883,7 @@
     "id": "tldr-en-linux-systemctl-halt-2",
     "type": "command",
     "title": "systemctl-halt - Halt the system immediately without sending notifications to logged-in users",
-    "content": "systemctl halt --force --no-wall",
+    "content": "systemctl halt {{[-f|--force]}} --no-wall",
     "group": "Linux Ops",
     "description": "systemctl-halt: Shut down and halt the system (stop the OS kernel but keep hardware powered on). (Halt the system immediately without sending notifications to logged-in users)",
     "tags": [
@@ -5898,7 +5898,7 @@
     "id": "tldr-en-linux-systemctl-halt-3",
     "type": "command",
     "title": "systemctl-halt - Halt the system immediately without terminating any processes or unmounting filesystems (dangerous, may cause data loss)",
-    "content": "systemctl halt --force --force",
+    "content": "systemctl halt {{[-ff|--force --force]}}",
     "group": "Linux Ops",
     "description": "systemctl-halt: Shut down and halt the system (stop the OS kernel but keep hardware powered on). (Halt the system immediately without terminating any processes or unmounting filesystems (dangerous, may cause data loss))",
     "tags": [
@@ -7967,10 +7967,10 @@
   {
     "id": "tldr-en-linux-toolbox-rm-0",
     "type": "command",
-    "title": "toolbox-rm - Remove a toolbox container",
+    "title": "toolbox-rm - Remove a Toolbx container",
     "content": "toolbox rm {{container_name}}",
     "group": "Linux Ops",
-    "description": "toolbox-rm: Remove one or more `toolbox` containers. (Remove a toolbox container)",
+    "description": "toolbox-rm: Remove one or more Toolbx containers. (Remove a Toolbx container)",
     "tags": [
       "linux",
       "toolbox-rm",
@@ -7982,10 +7982,10 @@
   {
     "id": "tldr-en-linux-toolbox-rm-1",
     "type": "command",
-    "title": "toolbox-rm - Remove all `toolbox` containers",
+    "title": "toolbox-rm - Remove all Toolbx containers",
     "content": "toolbox rm {{[-a|--all]}}",
     "group": "Linux Ops",
-    "description": "toolbox-rm: Remove one or more `toolbox` containers. (Remove all `toolbox` containers)",
+    "description": "toolbox-rm: Remove one or more Toolbx containers. (Remove all Toolbx containers)",
     "tags": [
       "linux",
       "toolbox-rm",
@@ -7997,10 +7997,10 @@
   {
     "id": "tldr-en-linux-toolbox-rm-2",
     "type": "command",
-    "title": "toolbox-rm - Force the removal of a currently active `toolbox` container",
+    "title": "toolbox-rm - Force the removal of a currently active Toolbx container",
     "content": "toolbox rm {{[-f|--force]}} {{container_name}}",
     "group": "Linux Ops",
-    "description": "toolbox-rm: Remove one or more `toolbox` containers. (Force the removal of a currently active `toolbox` container)",
+    "description": "toolbox-rm: Remove one or more Toolbx containers. (Force the removal of a currently active Toolbx container)",
     "tags": [
       "linux",
       "toolbox-rm",
@@ -11612,10 +11612,10 @@
   {
     "id": "tldr-en-linux-toolbox-run-0",
     "type": "command",
-    "title": "toolbox-run - Run a command inside a specific `toolbox` container",
+    "title": "toolbox-run - Run a command inside a specific Toolbx container",
     "content": "toolbox run {{[-c|--container]}} {{container_name}} {{command}}",
     "group": "Linux Ops",
-    "description": "toolbox-run: Run a command in an existing `toolbox` container. (Run a command inside a specific `toolbox` container)",
+    "description": "toolbox-run: Run a command in an existing Toolbx container. (Run a command inside a specific Toolbx container)",
     "tags": [
       "linux",
       "toolbox-run",
@@ -11627,10 +11627,10 @@
   {
     "id": "tldr-en-linux-toolbox-run-1",
     "type": "command",
-    "title": "toolbox-run - Run a command inside a `toolbox` container for a specific release of a distribution",
+    "title": "toolbox-run - Run a command inside a Toolbx container for a specific release of a distribution",
     "content": "toolbox run {{[-d|--distro]}} {{distribution}} {{[-r|--release]}} {{release}} {{command}}",
     "group": "Linux Ops",
-    "description": "toolbox-run: Run a command in an existing `toolbox` container. (Run a command inside a `toolbox` container for a specific release of a distribution)",
+    "description": "toolbox-run: Run a command in an existing Toolbx container. (Run a command inside a Toolbx container for a specific release of a distribution)",
     "tags": [
       "linux",
       "toolbox-run",
@@ -11642,10 +11642,10 @@
   {
     "id": "tldr-en-linux-toolbox-run-2",
     "type": "command",
-    "title": "toolbox-run - Run `emacs` inside a `toolbox` container using the default image for a specific Fedora release",
+    "title": "toolbox-run - Run `emacs` inside a Toolbx container using the default image for a specific Fedora release",
     "content": "toolbox run {{[-d|--distro]}} {{fedora}} {{[-r|--release]}} f{{version}} {{emacs}}",
     "group": "Linux Ops",
-    "description": "toolbox-run: Run a command in an existing `toolbox` container. (Run `emacs` inside a `toolbox` container using the default image for a specific Fedora release)",
+    "description": "toolbox-run: Run a command in an existing Toolbx container. (Run `emacs` inside a Toolbx container using the default image for a specific Fedora release)",
     "tags": [
       "linux",
       "toolbox-run",
@@ -13143,7 +13143,7 @@
     "id": "tldr-en-linux-fuser-2",
     "type": "command",
     "title": "fuser - Identify processes using a TCP socket",
-    "content": "fuser {{[-n|--namespace]}} tcp {{port}}",
+    "content": "fuser {{port}}/tcp",
     "group": "Linux Ops",
     "description": "fuser: Display process IDs currently using files or sockets. (Identify processes using a TCP socket)",
     "tags": [
@@ -13458,7 +13458,7 @@
     "id": "tldr-en-linux-lrztar-1",
     "type": "command",
     "title": "lrztar - Same as above, with ZPAQ - extreme compression, but very slow",
-    "content": "lrztar -z {{path/to/directory}}",
+    "content": "lrztar {{[-z|--zpaq]}} {{path/to/directory}}",
     "group": "Linux Ops",
     "description": "lrztar: A wrapper for `lrzip` to simplify compression of directories. (Same as above, with ZPAQ - extreme compression, but very slow)",
     "tags": [
@@ -13473,7 +13473,7 @@
     "id": "tldr-en-linux-lrztar-2",
     "type": "command",
     "title": "lrztar - Specify the output file",
-    "content": "lrztar -o {{path/to/file}} {{path/to/directory}}",
+    "content": "lrztar {{[-o|--outfile]}} {{path/to/file}} {{path/to/directory}}",
     "group": "Linux Ops",
     "description": "lrztar: A wrapper for `lrzip` to simplify compression of directories. (Specify the output file)",
     "tags": [
@@ -13488,7 +13488,7 @@
     "id": "tldr-en-linux-lrztar-3",
     "type": "command",
     "title": "lrztar - Override the number of processor threads to use",
-    "content": "lrztar -p {{8}} {{path/to/directory}}",
+    "content": "lrztar {{[-p|--threads]}} {{8}} {{path/to/directory}}",
     "group": "Linux Ops",
     "description": "lrztar: A wrapper for `lrzip` to simplify compression of directories. (Override the number of processor threads to use)",
     "tags": [
@@ -13503,7 +13503,7 @@
     "id": "tldr-en-linux-lrztar-4",
     "type": "command",
     "title": "lrztar - Force overwriting of existing files",
-    "content": "lrztar -f {{path/to/directory}}",
+    "content": "lrztar {{[-f|--force]}} {{path/to/directory}}",
     "group": "Linux Ops",
     "description": "lrztar: A wrapper for `lrzip` to simplify compression of directories. (Force overwriting of existing files)",
     "tags": [
@@ -13952,10 +13952,10 @@
   {
     "id": "tldr-en-linux-nl-7",
     "type": "command",
-    "title": "nl - Use a specific string to separate the line numbers from the lines (TAB by default)",
+    "title": "nl - Use a specific string to separate the line numbers from the lines (`TAB` by default)",
     "content": "nl {{[-s|--number-separator]}} {{separator}} {{path/to/file}}",
     "group": "Linux Ops",
-    "description": "nl: Number lines from a file or from `stdin`. (Use a specific string to separate the line numbers from the lines (TAB by default))",
+    "description": "nl: Number lines from a file or from `stdin`. (Use a specific string to separate the line numbers from the lines (`TAB` by default))",
     "tags": [
       "linux",
       "nl",
@@ -17447,10 +17447,10 @@
   {
     "id": "tldr-en-linux-toolbox-enter-0",
     "type": "command",
-    "title": "toolbox-enter - Enter a `toolbox` container using the default image of a specific distribution",
+    "title": "toolbox-enter - Enter a Toolbx container using the default image of a specific distribution",
     "content": "toolbox enter {{[-d|--distro]}} {{distribution}}",
     "group": "Linux Ops",
-    "description": "toolbox-enter: Enter a `toolbox` container for interactive use. (Enter a `toolbox` container using the default image of a specific distribution)",
+    "description": "toolbox-enter: Enter a Toolbx container for interactive use. (Enter a Toolbx container using the default image of a specific distribution)",
     "tags": [
       "linux",
       "toolbox-enter",
@@ -17462,10 +17462,10 @@
   {
     "id": "tldr-en-linux-toolbox-enter-1",
     "type": "command",
-    "title": "toolbox-enter - Enter a `toolbox` container using the default image of a specific release of the current distribution",
+    "title": "toolbox-enter - Enter a Toolbx container using the default image of a specific release of the current distribution",
     "content": "toolbox enter {{[-r|--release]}} {{release}}",
     "group": "Linux Ops",
-    "description": "toolbox-enter: Enter a `toolbox` container for interactive use. (Enter a `toolbox` container using the default image of a specific release of the current distribution)",
+    "description": "toolbox-enter: Enter a Toolbx container for interactive use. (Enter a Toolbx container using the default image of a specific release of the current distribution)",
     "tags": [
       "linux",
       "toolbox-enter",
@@ -17477,10 +17477,10 @@
   {
     "id": "tldr-en-linux-toolbox-enter-2",
     "type": "command",
-    "title": "toolbox-enter - Enter a toolbox container using the default image for a specific Fedora release",
+    "title": "toolbox-enter - Enter a Toolbx container using the default image for a specific Fedora release",
     "content": "toolbox enter {{[-d|--distro]}} {{fedora}} {{[-r|--release]}} f{{version}}",
     "group": "Linux Ops",
-    "description": "toolbox-enter: Enter a `toolbox` container for interactive use. (Enter a toolbox container using the default image for a specific Fedora release)",
+    "description": "toolbox-enter: Enter a Toolbx container for interactive use. (Enter a Toolbx container using the default image for a specific Fedora release)",
     "tags": [
       "linux",
       "toolbox-enter",
@@ -23028,7 +23028,7 @@
     "id": "tldr-en-linux-systemctl-is-system-running-1",
     "type": "command",
     "title": "systemctl-is-system-running - Check and print the current state quietly (no output, only exit status)",
-    "content": "systemctl is-system-running --quiet",
+    "content": "systemctl is-system-running {{[-q|--quiet]}}",
     "group": "Linux Ops",
     "description": "systemctl-is-system-running: Check the current state of the system. (Check and print the current state quietly (no output, only exit status))",
     "tags": [
@@ -26582,10 +26582,10 @@
   {
     "id": "tldr-en-linux-toolbox-0",
     "type": "command",
-    "title": "toolbox - Enter a container to use it interactively",
+    "title": "toolbox - Enter a Toolbx container to use it interactively",
     "content": "toolbox enter {{container}}",
     "group": "Linux Ops",
-    "description": "toolbox: Manage containerized command-line environments on Linux. Some subcommands such as `create` have their own usage documentation. (Enter a container to use it interactively)",
+    "description": "toolbox: Manage containerized command-line environments on Linux. Some subcommands such as `create` have their own usage documentation. (Enter a Toolbx container to use it interactively)",
     "tags": [
       "linux",
       "toolbox",
@@ -26627,10 +26627,10 @@
   {
     "id": "tldr-en-linux-toolbox-3",
     "type": "command",
-    "title": "toolbox - Display help for a specific subcommand (such as `create`, `enter`, `rm`, `rmi`, etc.)",
+    "title": "toolbox - Display help for a specific subcommand (such as `create`, `enter`, `rm`, etc.)",
     "content": "toolbox help {{subcommand}}",
     "group": "Linux Ops",
-    "description": "toolbox: Manage containerized command-line environments on Linux. Some subcommands such as `create` have their own usage documentation. (Display help for a specific subcommand (such as `create`, `enter`, `rm`, `rmi`, etc.))",
+    "description": "toolbox: Manage containerized command-line environments on Linux. Some subcommands such as `create` have their own usage documentation. (Display help for a specific subcommand (such as `create`, `enter`, `rm`, etc.))",
     "tags": [
       "linux",
       "toolbox",
@@ -29870,7 +29870,7 @@
     "title": "lrunzip - View documentation for the original command",
     "content": "tldr lrzip",
     "group": "Linux Ops",
-    "description": "lrunzip: This command is an alias of `lrzip -d`. (View documentation for the original command)",
+    "description": "lrunzip: This command is an alias of `lrzip --decompress`. (View documentation for the original command)",
     "tags": [
       "linux",
       "lrunzip",
@@ -33873,7 +33873,7 @@
     "id": "tldr-en-linux-systemctl-hybrid-sleep-1",
     "type": "command",
     "title": "systemctl-hybrid-sleep - Force hybrid sleep even if inhibitors are present",
-    "content": "systemctl hybrid-sleep --force",
+    "content": "systemctl hybrid-sleep {{[-f|--force]}}",
     "group": "Linux Ops",
     "description": "systemctl-hybrid-sleep: Put the system into hybrid sleep, which combines suspend-to-RAM and hibernate. (Force hybrid sleep even if inhibitors are present)",
     "tags": [
@@ -35778,7 +35778,7 @@
     "id": "tldr-en-linux-systemctl-switch-root-2",
     "type": "command",
     "title": "systemctl-switch-root - Switch to a new root filesystem with verbose output",
-    "content": "systemctl switch-root {{path/to/new_root}} --verbose",
+    "content": "systemctl switch-root {{path/to/new_root}} {{[-v|--verbose]}}",
     "group": "Linux Ops",
     "description": "systemctl-switch-root: Switch to a new root filesystem and execute a new system manager. (Switch to a new root filesystem with verbose output)",
     "tags": [
@@ -36738,7 +36738,7 @@
     "id": "tldr-en-linux-systemctl-soft-reboot-1",
     "type": "command",
     "title": "systemctl-soft-reboot - Force a soft reboot",
-    "content": "systemctl soft-reboot --force",
+    "content": "systemctl soft-reboot {{[-f|--force]}}",
     "group": "Linux Ops",
     "description": "systemctl-soft-reboot: Shut down and reboot userspace, leaving the kernel running. (Force a soft reboot)",
     "tags": [
@@ -43547,10 +43547,10 @@
   {
     "id": "tldr-en-linux-toolbox-init-container-0",
     "type": "command",
-    "title": "toolbox-init-container - Initialize a running toolbox",
+    "title": "toolbox-init-container - Initialize a running Toolbx container",
     "content": "toolbox init-container --gid {{gid}} --home {{home}} --home-link --media-link --mnt-link --monitor-host --shell {{shell}} --uid {{uid}} --user {{user}}",
     "group": "Linux Ops",
-    "description": "toolbox-init-container: Initialize a running `toolbox` container. This command should not be executed by the user, and cannot be run on the host. (Initialize a running toolbox)",
+    "description": "toolbox-init-container: Initialize a running Toolbx container. This command should not be executed by the user, and cannot be run on the host. (Initialize a running Toolbx container)",
     "tags": [
       "linux",
       "toolbox-init-container",
@@ -48692,10 +48692,10 @@
   {
     "id": "tldr-en-linux-tftp-3",
     "type": "command",
-    "title": "tftp - Set the transfer mode to binary or ASCIi through the tftp client",
+    "title": "tftp - Set the transfer mode to binary or ASCII through the tftp client",
     "content": "mode {{binary|ascii}}",
     "group": "Linux Ops",
-    "description": "tftp: Trivial File Transfer Protocol client. (Set the transfer mode to binary or ASCIi through the tftp client)",
+    "description": "tftp: Trivial File Transfer Protocol client. (Set the transfer mode to binary or ASCII through the tftp client)",
     "tags": [
       "linux",
       "tftp",
@@ -58937,10 +58937,10 @@
   {
     "id": "tldr-en-linux-toolbox-rmi-0",
     "type": "command",
-    "title": "toolbox-rmi - Remove one or more `toolbox` image",
+    "title": "toolbox-rmi - Remove one or more Toolbx image",
     "content": "toolbox rmi {{image_name1 image_name2 ...}}",
     "group": "Linux Ops",
-    "description": "toolbox-rmi: Remove `toolbox` images. (Remove one or more `toolbox` image)",
+    "description": "toolbox-rmi: Remove Toolbx images. (Remove one or more Toolbx image)",
     "tags": [
       "linux",
       "toolbox-rmi",
@@ -58952,10 +58952,10 @@
   {
     "id": "tldr-en-linux-toolbox-rmi-1",
     "type": "command",
-    "title": "toolbox-rmi - Remove all `toolbox` images",
+    "title": "toolbox-rmi - Remove all Toolbx images",
     "content": "toolbox rmi {{[-a|--all]}}",
     "group": "Linux Ops",
-    "description": "toolbox-rmi: Remove `toolbox` images. (Remove all `toolbox` images)",
+    "description": "toolbox-rmi: Remove Toolbx images. (Remove all Toolbx images)",
     "tags": [
       "linux",
       "toolbox-rmi",
@@ -58967,10 +58967,10 @@
   {
     "id": "tldr-en-linux-toolbox-rmi-2",
     "type": "command",
-    "title": "toolbox-rmi - Force the removal of a `toolbox` image which is currently being used by a container (the container will be removed as well)",
+    "title": "toolbox-rmi - Force the removal of a Toolbx image which is currently being used by a container (the container will be removed as well)",
     "content": "toolbox rmi {{[-f|--force]}} {{image_name}}",
     "group": "Linux Ops",
-    "description": "toolbox-rmi: Remove `toolbox` images. (Force the removal of a `toolbox` image which is currently being used by a container (the container will be removed as well))",
+    "description": "toolbox-rmi: Remove Toolbx images. (Force the removal of a Toolbx image which is currently being used by a container (the container will be removed as well))",
     "tags": [
       "linux",
       "toolbox-rmi",
@@ -59567,10 +59567,10 @@
   {
     "id": "tldr-en-linux-toolbox-create-0",
     "type": "command",
-    "title": "toolbox-create - Create a `toolbox` container for a specific distribution",
+    "title": "toolbox-create - Create a Toolbx container for a specific distribution",
     "content": "toolbox create {{[-d|--distro]}} {{distribution}}",
     "group": "Linux Ops",
-    "description": "toolbox-create: Create a new `toolbox` container. (Create a `toolbox` container for a specific distribution)",
+    "description": "toolbox-create: Create a new Toolbx container. (Create a Toolbx container for a specific distribution)",
     "tags": [
       "linux",
       "toolbox-create",
@@ -59582,10 +59582,10 @@
   {
     "id": "tldr-en-linux-toolbox-create-1",
     "type": "command",
-    "title": "toolbox-create - Create a `toolbox` container for a specific release of the current distribution",
+    "title": "toolbox-create - Create a Toolbx container for a specific release of the current distribution",
     "content": "toolbox create {{[-r|--release]}} {{release}}",
     "group": "Linux Ops",
-    "description": "toolbox-create: Create a new `toolbox` container. (Create a `toolbox` container for a specific release of the current distribution)",
+    "description": "toolbox-create: Create a new Toolbx container. (Create a Toolbx container for a specific release of the current distribution)",
     "tags": [
       "linux",
       "toolbox-create",
@@ -59597,10 +59597,10 @@
   {
     "id": "tldr-en-linux-toolbox-create-2",
     "type": "command",
-    "title": "toolbox-create - Create a `toolbox` container with a custom image",
+    "title": "toolbox-create - Create a Toolbx container with a custom image",
     "content": "toolbox create {{[-i|--image]}} {{name}}",
     "group": "Linux Ops",
-    "description": "toolbox-create: Create a new `toolbox` container. (Create a `toolbox` container with a custom image)",
+    "description": "toolbox-create: Create a new Toolbx container. (Create a Toolbx container with a custom image)",
     "tags": [
       "linux",
       "toolbox-create",
@@ -59612,10 +59612,10 @@
   {
     "id": "tldr-en-linux-toolbox-create-3",
     "type": "command",
-    "title": "toolbox-create - Create a `toolbox` container from a custom Fedora image",
+    "title": "toolbox-create - Create a Toolbx container from a custom Fedora image",
     "content": "toolbox create {{[-i|--image]}} {{quay.io/fedora/fedora:tag}}",
     "group": "Linux Ops",
-    "description": "toolbox-create: Create a new `toolbox` container. (Create a `toolbox` container from a custom Fedora image)",
+    "description": "toolbox-create: Create a new Toolbx container. (Create a Toolbx container from a custom Fedora image)",
     "tags": [
       "linux",
       "toolbox-create",
@@ -59627,10 +59627,10 @@
   {
     "id": "tldr-en-linux-toolbox-create-4",
     "type": "command",
-    "title": "toolbox-create - Create a `toolbox` container using the default image for a specific Fedora release",
+    "title": "toolbox-create - Create a Toolbx container using the default image for a specific Fedora release",
     "content": "toolbox create {{[-d|--distro]}} {{fedora}} {{[-r|--release]}} f{{version}}",
     "group": "Linux Ops",
-    "description": "toolbox-create: Create a new `toolbox` container. (Create a `toolbox` container using the default image for a specific Fedora release)",
+    "description": "toolbox-create: Create a new Toolbx container. (Create a Toolbx container using the default image for a specific Fedora release)",
     "tags": [
       "linux",
       "toolbox-create",
@@ -65237,10 +65237,10 @@
   {
     "id": "tldr-en-linux-systemctl-mount-image-1",
     "type": "command",
-    "title": "systemctl-mount-image - Mount the image’s `root` partition with read-only and no-setuid options",
+    "title": "systemctl-mount-image - Mount the image's `root` partition with read-only and no-setuid options",
     "content": "systemctl mount-image {{unit}} /{{path/to/image}} /{{path/to/directory_inside_unit}} root:ro,nosuid",
     "group": "Linux Ops",
-    "description": "systemctl-mount-image: Mount an image file into a unit's mount namespace. Only supported for the units that run within a mountspace ie, with `RootImage=`, `PrivateMounts=`, etc. (Mount the image’s `root` partition with read-only and no-setuid options)",
+    "description": "systemctl-mount-image: Mount an image file into a unit's mount namespace. Only supported for the units that run within a mountspace ie, with `RootImage=`, `PrivateMounts=`, etc. (Mount the image's `root` partition with read-only and no-setuid options)",
     "tags": [
       "linux",
       "systemctl-mount-image",
@@ -68418,7 +68418,7 @@
     "id": "tldr-en-linux-ncat-2",
     "type": "command",
     "title": "ncat - Write output of specified file to the specified host on the specified port",
-    "content": "ncat {{address}} {{port}} < {{path/to/file}}",
+    "content": "ncat < {{path/to/file}} {{address}} {{port}}",
     "group": "Linux Ops",
     "description": "ncat: Read, write, redirect, and encrypt data across a network. An alternative implementation of a similar utility called `netcat`/`nc`. (Write output of specified file to the specified host on the specified port)",
     "tags": [
@@ -68553,7 +68553,7 @@
     "id": "tldr-en-linux-gs-2",
     "type": "command",
     "title": "gs - Convert PDF file (pages 1 through 3) to an image with 150 dpi resolution",
-    "content": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=jpeg -r150 -dFirstPage={{1}} -dLastPage={{3}} -sOutputFile={{output_%d.jpg}} {{input.pdf}}",
+    "content": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=jpeg -r150 -dFirstPage=1 -dLastPage=3 -sOutputFile={{output_%d.jpg}} {{input.pdf}}",
     "group": "Linux Ops",
     "description": "gs: GhostScript, a PDF and PostScript interpreter. (Convert PDF file (pages 1 through 3) to an image with 150 dpi resolution)",
     "tags": [
@@ -70668,7 +70668,7 @@
     "id": "tldr-en-linux-systemctl-poweroff-1",
     "type": "command",
     "title": "systemctl-poweroff - Power off the system immediately without asking services to stop gracefully",
-    "content": "systemctl poweroff --force",
+    "content": "systemctl poweroff {{[-f|--force]}}",
     "group": "Linux Ops",
     "description": "systemctl-poweroff: Power off the system. (Power off the system immediately without asking services to stop gracefully)",
     "tags": [
@@ -70683,7 +70683,7 @@
     "id": "tldr-en-linux-systemctl-poweroff-2",
     "type": "command",
     "title": "systemctl-poweroff - Power off the system immediately without sending notifications to logged-in users",
-    "content": "systemctl poweroff --force --no-wall",
+    "content": "systemctl poweroff {{[-f|--force]}} --no-wall",
     "group": "Linux Ops",
     "description": "systemctl-poweroff: Power off the system. (Power off the system immediately without sending notifications to logged-in users)",
     "tags": [
@@ -71688,7 +71688,7 @@
     "id": "tldr-en-linux-lrzip-1",
     "type": "command",
     "title": "lrzip - Compress a file with BZIP2 - good middle ground for compression/speed",
-    "content": "lrzip -b {{path/to/file}}",
+    "content": "lrzip {{[-b|--bzip2]}} {{path/to/file}}",
     "group": "Linux Ops",
     "description": "lrzip: A large file compression program. (Compress a file with BZIP2 - good middle ground for compression/speed)",
     "tags": [
@@ -71703,7 +71703,7 @@
     "id": "tldr-en-linux-lrzip-2",
     "type": "command",
     "title": "lrzip - Compress with ZPAQ - extreme compression, but very slow",
-    "content": "lrzip -z {{path/to/file}}",
+    "content": "lrzip {{[-z|--zpaq]}} {{path/to/file}}",
     "group": "Linux Ops",
     "description": "lrzip: A large file compression program. (Compress with ZPAQ - extreme compression, but very slow)",
     "tags": [
@@ -71718,7 +71718,7 @@
     "id": "tldr-en-linux-lrzip-3",
     "type": "command",
     "title": "lrzip - Compress with LZO - light compression, extremely fast decompression",
-    "content": "lrzip -l {{path/to/file}}",
+    "content": "lrzip {{[-l|--lzo]}} {{path/to/file}}",
     "group": "Linux Ops",
     "description": "lrzip: A large file compression program. (Compress with LZO - light compression, extremely fast decompression)",
     "tags": [
@@ -71733,7 +71733,7 @@
     "id": "tldr-en-linux-lrzip-4",
     "type": "command",
     "title": "lrzip - Compress a file and password protect/encrypt it",
-    "content": "lrzip -e {{path/to/file}}",
+    "content": "lrzip {{[-e|--encrypt]}} {{path/to/file}}",
     "group": "Linux Ops",
     "description": "lrzip: A large file compression program. (Compress a file and password protect/encrypt it)",
     "tags": [
@@ -71748,7 +71748,7 @@
     "id": "tldr-en-linux-lrzip-5",
     "type": "command",
     "title": "lrzip - Override the number of processor threads to use",
-    "content": "lrzip -p {{8}} {{path/to/file}}",
+    "content": "lrzip {{[-p|--threads]}} {{8}} {{path/to/file}}",
     "group": "Linux Ops",
     "description": "lrzip: A large file compression program. (Override the number of processor threads to use)",
     "tags": [
@@ -72062,10 +72062,10 @@
   {
     "id": "tldr-en-linux-toolbox-list-0",
     "type": "command",
-    "title": "toolbox-list - List all `toolbox` containers and images",
+    "title": "toolbox-list - List all Toolbx containers and images",
     "content": "toolbox list",
     "group": "Linux Ops",
-    "description": "toolbox-list: List existing `toolbox` containers and images. (List all `toolbox` containers and images)",
+    "description": "toolbox-list: List existing Toolbx containers and images. (List all Toolbx containers and images)",
     "tags": [
       "linux",
       "toolbox-list",
@@ -72077,10 +72077,10 @@
   {
     "id": "tldr-en-linux-toolbox-list-1",
     "type": "command",
-    "title": "toolbox-list - List only `toolbox` containers",
+    "title": "toolbox-list - List only Toolbx containers",
     "content": "toolbox list {{[-c|--containers]}}",
     "group": "Linux Ops",
-    "description": "toolbox-list: List existing `toolbox` containers and images. (List only `toolbox` containers)",
+    "description": "toolbox-list: List existing Toolbx containers and images. (List only Toolbx containers)",
     "tags": [
       "linux",
       "toolbox-list",
@@ -72092,10 +72092,10 @@
   {
     "id": "tldr-en-linux-toolbox-list-2",
     "type": "command",
-    "title": "toolbox-list - List only `toolbox` images",
+    "title": "toolbox-list - List only Toolbx images",
     "content": "toolbox list {{[-i|--images]}}",
     "group": "Linux Ops",
-    "description": "toolbox-list: List existing `toolbox` containers and images. (List only `toolbox` images)",
+    "description": "toolbox-list: List existing Toolbx containers and images. (List only Toolbx images)",
     "tags": [
       "linux",
       "toolbox-list",
@@ -76038,7 +76038,7 @@
     "id": "tldr-en-linux-systemctl-hibernate-1",
     "type": "command",
     "title": "systemctl-hibernate - Force hibernation even if inhibitors are present",
-    "content": "systemctl hibernate --force",
+    "content": "systemctl hibernate {{[-f|--force]}}",
     "group": "Linux Ops",
     "description": "systemctl-hibernate: Hibernate the system by saving the current state to disk and powering off. (Force hibernation even if inhibitors are present)",
     "tags": [
@@ -77784,6 +77784,96 @@
     "tags": [
       "linux",
       "mkfs.bcachefs",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgstats-0",
+    "type": "command",
+    "title": "pkgstats - Send installed package data",
+    "content": "pkgstats submit",
+    "group": "Linux Ops",
+    "description": "pkgstats: Submit and view Arch Linux package popularity statistics. (Send installed package data)",
+    "tags": [
+      "linux",
+      "pkgstats",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgstats-1",
+    "type": "command",
+    "title": "pkgstats - View the sent data",
+    "content": "pkgstats submit {{[-d|--dump-json]}}",
+    "group": "Linux Ops",
+    "description": "pkgstats: Submit and view Arch Linux package popularity statistics. (View the sent data)",
+    "tags": [
+      "linux",
+      "pkgstats",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgstats-2",
+    "type": "command",
+    "title": "pkgstats - Search for packages",
+    "content": "pkgstats search {{search_term}}",
+    "group": "Linux Ops",
+    "description": "pkgstats: Submit and view Arch Linux package popularity statistics. (Search for packages)",
+    "tags": [
+      "linux",
+      "pkgstats",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgstats-3",
+    "type": "command",
+    "title": "pkgstats - Limit search result count (10 by default)",
+    "content": "pkgstats search {{search_term}} {{[-l|--limit]}} {{count}}",
+    "group": "Linux Ops",
+    "description": "pkgstats: Submit and view Arch Linux package popularity statistics. (Limit search result count (10 by default))",
+    "tags": [
+      "linux",
+      "pkgstats",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgstats-4",
+    "type": "command",
+    "title": "pkgstats - Pick packages for comparison",
+    "content": "pkgstats show {{package1 package2 ...}}",
+    "group": "Linux Ops",
+    "description": "pkgstats: Submit and view Arch Linux package popularity statistics. (Pick packages for comparison)",
+    "tags": [
+      "linux",
+      "pkgstats",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgstats-5",
+    "type": "command",
+    "title": "pkgstats - Display help",
+    "content": "pkgstats {{[-h|--help]}}",
+    "group": "Linux Ops",
+    "description": "pkgstats: Submit and view Arch Linux package popularity statistics. (Display help)",
+    "tags": [
+      "linux",
+      "pkgstats",
       "tldr",
       "en"
     ],
@@ -85803,7 +85893,7 @@
     "id": "tldr-en-linux-systemctl-is-enabled-1",
     "type": "command",
     "title": "systemctl-is-enabled - Suppress output and return only the exit code",
-    "content": "systemctl is-enabled {{unit}} --quiet",
+    "content": "systemctl is-enabled {{unit}} {{[-q|--quiet]}}",
     "group": "Linux Ops",
     "description": "systemctl-is-enabled: Check whether unit files are enabled. (Suppress output and return only the exit code)",
     "tags": [
@@ -85818,7 +85908,7 @@
     "id": "tldr-en-linux-systemctl-is-enabled-2",
     "type": "command",
     "title": "systemctl-is-enabled - Show installation targets and symlink paths",
-    "content": "systemctl is-enabled {{unit}} --full",
+    "content": "systemctl is-enabled {{unit}} {{[-l|--full]}}",
     "group": "Linux Ops",
     "description": "systemctl-is-enabled: Check whether unit files are enabled. (Show installation targets and symlink paths)",
     "tags": [
@@ -94533,7 +94623,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-6",
     "type": "command",
     "title": "ark-survival-ascended - Enable specific mods by their ID (comma-separated)",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}} -mods={{mod_id1, mod_id2, ...}}",
+    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}} -mods={{mod_id1,mod_id2,...}}",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Enable specific mods by their ID (comma-separated))",
     "tags": [
@@ -98013,7 +98103,7 @@
     "id": "tldr-en-linux-semanage-fcontext-1",
     "type": "command",
     "title": "semanage-fcontext - List all user-defined file labelling rules without headings",
-    "content": "sudo semanage fcontext {{[-l|--list]}} {{[-C|--locallist]}} {{[-n|--noheading]}}",
+    "content": "sudo semanage fcontext {{[-lCn|--list --locallist --noheading]}}",
     "group": "Linux Ops",
     "description": "semanage-fcontext: Manage persistent SELinux security context rules on files/directories. (List all user-defined file labelling rules without headings)",
     "tags": [
@@ -98042,6 +98132,21 @@
   {
     "id": "tldr-en-linux-semanage-fcontext-3",
     "type": "command",
+    "title": "semanage-fcontext - Add a user-defined rule that creates a labeling equivalence between two subpaths",
+    "content": "sudo semanage fcontext {{[-a|--add]}} {{[-e|--equal]}} /{{path/to/ref}} /{{path/to/target}}",
+    "group": "Linux Ops",
+    "description": "semanage-fcontext: Manage persistent SELinux security context rules on files/directories. (Add a user-defined rule that creates a labeling equivalence between two subpaths)",
+    "tags": [
+      "linux",
+      "semanage-fcontext",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-semanage-fcontext-4",
+    "type": "command",
     "title": "semanage-fcontext - Delete a user-defined rule using its PCRE `regex`",
     "content": "sudo semanage fcontext {{[-d|--delete]}} '{{/mnt/share(/.*)?}}'",
     "group": "Linux Ops",
@@ -98055,10 +98160,10 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-semanage-fcontext-4",
+    "id": "tldr-en-linux-semanage-fcontext-5",
     "type": "command",
     "title": "semanage-fcontext - Relabel a directory recursively by applying the new rules",
-    "content": "restorecon -R -v {{path/to/directory}}",
+    "content": "restorecon -Rv {{path/to/directory}}",
     "group": "Linux Ops",
     "description": "semanage-fcontext: Manage persistent SELinux security context rules on files/directories. (Relabel a directory recursively by applying the new rules)",
     "tags": [
@@ -100025,7 +100130,7 @@
     "title": "lrzuntar - View documentation for the original command",
     "content": "tldr lrztar",
     "group": "Linux Ops",
-    "description": "lrzuntar: This command is an alias of `lrztar -d`. (View documentation for the original command)",
+    "description": "lrzuntar: This command is an alias of `lrztar --decompress`. (View documentation for the original command)",
     "tags": [
       "linux",
       "lrzuntar",
@@ -102677,10 +102782,10 @@
   {
     "id": "tldr-en-linux-toolbox-help-0",
     "type": "command",
-    "title": "toolbox-help - Display the `toolbox` manual",
+    "title": "toolbox-help - Display the Toolbx manual",
     "content": "toolbox help",
     "group": "Linux Ops",
-    "description": "toolbox-help: Display help information about `toolbox`. (Display the `toolbox` manual)",
+    "description": "toolbox-help: Display help information about Toolbx. (Display the Toolbx manual)",
     "tags": [
       "linux",
       "toolbox-help",
@@ -102692,10 +102797,10 @@
   {
     "id": "tldr-en-linux-toolbox-help-1",
     "type": "command",
-    "title": "toolbox-help - Display the `toolbox` manual for a specific subcommand",
+    "title": "toolbox-help - Display the Toolbx manual for a specific subcommand",
     "content": "toolbox help {{subcommand}}",
     "group": "Linux Ops",
-    "description": "toolbox-help: Display help information about `toolbox`. (Display the `toolbox` manual for a specific subcommand)",
+    "description": "toolbox-help: Display help information about Toolbx. (Display the Toolbx manual for a specific subcommand)",
     "tags": [
       "linux",
       "toolbox-help",
@@ -112653,7 +112758,7 @@
     "id": "tldr-en-linux-systemctl-status-3",
     "type": "command",
     "title": "systemctl-status - List all units in the system",
-    "content": "systemctl status --all",
+    "content": "systemctl status {{[-a|--all]}}",
     "group": "Linux Ops",
     "description": "systemctl-status: Display the status of systemd units. (List all units in the system)",
     "tags": [
@@ -112668,7 +112773,7 @@
     "id": "tldr-en-linux-systemctl-status-4",
     "type": "command",
     "title": "systemctl-status - List all units of a specific type",
-    "content": "systemctl status --type {{service|timer|socket|target|...}}",
+    "content": "systemctl status {{[-t|--type]}} {{service|timer|socket|target|...}}",
     "group": "Linux Ops",
     "description": "systemctl-status: Display the status of systemd units. (List all units of a specific type)",
     "tags": [
@@ -113280,6 +113385,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-pivot_root-0",
+    "type": "command",
+    "title": "pivot_root - Make `/new_root` the new root (`/`) and move current root to a subdirectory of it",
+    "content": "sudo pivot_root {{path/to/new_root}} {{path/to/new_root/old_root}}",
+    "group": "Linux Ops",
+    "description": "pivot_root: Change the root filesystem to a new directory and move the current root to a subdirectory of the new root. Commonly used during system initialization (e.g., in `initramfs`) to switch from a temporary root to the real root filesystem. (Make `/new_root` the new root (`/`) and move current root to a subdirectory of it)",
+    "tags": [
+      "linux",
+      "pivot_root",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pivot_root-1",
+    "type": "command",
+    "title": "pivot_root - Display help",
+    "content": "pivot_root {{[-h|--help]}}",
+    "group": "Linux Ops",
+    "description": "pivot_root: Change the root filesystem to a new directory and move the current root to a subdirectory of the new root. Commonly used during system initialization (e.g., in `initramfs`) to switch from a temporary root to the real root filesystem. (Display help)",
+    "tags": [
+      "linux",
+      "pivot_root",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-zic-0",
     "type": "command",
     "title": "zic - Compile a timezone file from a directory",
@@ -113613,7 +113748,7 @@
     "id": "tldr-en-linux-systemctl-suspend-then-hibernate-1",
     "type": "command",
     "title": "systemctl-suspend-then-hibernate - Force suspend-then-hibernate (bypass inhibitor locks)",
-    "content": "systemctl suspend-then-hibernate --force",
+    "content": "systemctl suspend-then-hibernate {{[-f|--force]}}",
     "group": "Linux Ops",
     "description": "systemctl-suspend-then-hibernate: Suspend the system, then automatically hibernate after a period of inactivity. (Force suspend-then-hibernate (bypass inhibitor locks))",
     "tags": [
