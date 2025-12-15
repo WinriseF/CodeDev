@@ -117,7 +117,7 @@ export function PromptDetailTooltip({ prompt, anchorRect, isOpen, onMouseEnter, 
                 <span>Prompt Template</span>
                 <span className="text-[10px] opacity-60">{prompt.content.length} chars</span>
                 </div>
-                <pre className="bg-secondary/50 border border-border/50 rounded-lg p-3 font-mono text-xs whitespace-pre-wrap break-all leading-relaxed text-foreground/90">
+                <pre className="bg-secondary/50 border border-border/50 rounded-lg p-3 font-mono text-xs whitespace-pre-wrap break-all leading-relaxed text-foreground/90 select-text cursor-text">
                 {prompt.content.split(/(\{\{.*?\}\})/).map((part, i) => 
                     part.startsWith('{{') ? <span key={i} className="text-orange-500 font-bold">{part}</span> : part
                 )}

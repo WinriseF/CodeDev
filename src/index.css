@@ -37,7 +37,7 @@
   }
  
   .dark {
-    /* === 🌙 深色模式 (Dark Mode) - 这里的颜色就是我们之前一直用的 === */
+    /* === 🌙 深色模式 (Dark Mode) === */
     --background: 222.2 84% 4.9%; /* slate-950 */
     --foreground: 210 40% 98%;    /* slate-50 */
  
@@ -95,10 +95,19 @@
     @apply border-border;
   }
   body {
-    @apply text-foreground transition-colors duration-300;
+    @apply text-foreground transition-colors duration-300 select-none cursor-default;
     font-feature-settings: "rlig" 1, "calt" 1;
     background-color: transparent; 
     border: none;
+  }
+  /* 强制所有输入框和文本域可以选中 */
+  input, textarea {
+    @apply select-text cursor-text;
+  }
+
+  /* 定义一个辅助类，用于某些特定的非输入框但需要复制的文本区域 */
+  .allow-select {
+    @apply select-text cursor-text;
   }
 }
 

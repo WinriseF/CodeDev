@@ -493,7 +493,7 @@ export default function SpotlightApp() {
                                        <div className={cn("w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm", msg.role === 'user' ? "bg-secondary/80 border-border text-foreground" : "bg-purple-500/10 border-purple-500/20 text-purple-500")}>
                                            {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
                                        </div>
-                                       <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm border relative", msg.role === 'user' ? "bg-primary text-primary-foreground border-primary/50 rounded-tr-sm" : "bg-secondary/50 border-border/50 text-foreground rounded-tl-sm markdown-body")}>
+                                       <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm border relative", msg.role === 'user' ? "bg-primary text-primary-foreground border-primary/50 rounded-tr-sm" : "bg-secondary/50 border-border/50 text-foreground rounded-tl-sm markdown-body", "select-text cursor-text")}>
                                            {msg.role === 'assistant' && !isStreaming && ( <MessageCopyMenu content={msg.content} /> )}
                                            {msg.role === 'user' ? ( <div className="whitespace-pre-wrap">{msg.content}</div> ) : (
                                               <>
