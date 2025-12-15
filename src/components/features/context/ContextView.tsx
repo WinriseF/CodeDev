@@ -40,7 +40,6 @@ export function ContextView() {
   const [showFilters, setShowFilters] = useState(false); 
   const [rightViewMode, setRightViewMode] = useState<'dashboard' | 'preview'>('dashboard');
 
-  // 2. Toast 状态管理优化
   const [toastState, setToastState] = useState<{ show: boolean; msg: string; type: ToastType }>({
       show: false,
       msg: '',
@@ -63,8 +62,6 @@ export function ContextView() {
     return calculateStats(fileTree);
   }, [fileTree]);
 
-  // --- Actions ---
-  // 3. 更新触发函数
   const triggerToast = (msg: string, type: ToastType = 'success') => {
     setToastState({ show: true, msg, type });
   };
@@ -168,7 +165,7 @@ export function ContextView() {
   return (
     <div className="h-full flex flex-col bg-background relative">
       
-      {/* Header Toolbar */}
+      {/* Top Bar */}
       <div className="h-14 border-b border-border flex items-center px-4 gap-3 shrink-0 bg-background/80 backdrop-blur z-10">
         <button 
           onClick={() => setContextSidebarOpen(!isContextSidebarOpen)} 
@@ -260,7 +257,7 @@ export function ContextView() {
                </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto custom-scrollbar pt-20 pb-10 h-full"> 
+            <div className="flex-1 overflow-y-auto custom-scrollbar pb-10 h-full"> 
                 {rightViewMode === 'dashboard' ? (
                    <TokenDashboard 
                      stats={stats}
@@ -279,7 +276,6 @@ export function ContextView() {
         </div>
       </div>
 
-      {/* 4. 替换旧 Toast 为新组件 */}
       <Toast 
         message={toastState.msg} 
         type={toastState.type} 
