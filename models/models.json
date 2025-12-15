@@ -16,6 +16,14 @@
     "color": "bg-green-500"
   },
   {
+    "id": "GPT-5-2",
+    "name": "GPT-5.2",
+    "provider": "OpenAI",
+    "contextLimit": 400000,
+    "inputPricePerMillion": 1.75,
+    "color": "bg-green-600"
+  },
+  {
     "id": "GPT-5.1",
     "name": "GPT-5.1",
     "provider": "OpenAI",
