@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { 
   CheckCircle2, AlertCircle, FileText, Database, Cpu, Save, 
-  DollarSign, PieChart, TrendingUp, AlertTriangle, Eraser} from 'lucide-react';
+  DollarSign, PieChart, TrendingUp, AlertTriangle, Eraser, X 
+} from 'lucide-react';
 import { ContextStats } from '@/lib/context_assembler';
 import { analyzeContext } from '@/lib/context_analytics';
 import { FileNode } from '@/types/context';
@@ -29,8 +30,7 @@ export function TokenDashboard({
   isGenerating 
 }: TokenDashboardProps) {
   const { language } = useAppStore();
-  // 获取状态和修改器
-  const { removeComments, setRemoveComments } = useContextStore();
+  const { removeComments, setRemoveComments, toggleSelect } = useContextStore();
 
   const analytics = useMemo(() => {
     return analyzeContext(fileTree, stats.estimatedTokens, models);
@@ -154,21 +154,40 @@ export function TokenDashboard({
                </div>
            </div>
 
-           {/* Top Files */}
+           {/* Largest Files (Interactive) */}
            <div className="bg-card border border-border rounded-xl p-5 shadow-sm space-y-3">
               <div className="flex items-center justify-between mb-2">
                  <h3 className="text-sm font-semibold flex items-center gap-2"><AlertTriangle size={16} /> {getText('context', 'topFiles', language)}</h3>
                  <span className="text-xs text-muted-foreground">{getText('context', 'largestFiles', language)}</span>
               </div>
-              <div className="space-y-2">
-                 {analytics.topFiles.length === 0 && <span className="text-xs text-muted-foreground">No files selected</span>}
+              <div className="space-y-1">
+                 {analytics.topFiles.length === 0 && <span className="text-xs text-muted-foreground px-1">No files selected</span>}
                  {analytics.topFiles.map((f, i) => (
-                   <div key={f.id} className="flex items-center justify-between text-xs group">
+                   <div 
+                     key={f.id} 
+                     className="group/item relative flex items-center justify-between text-xs p-1.5 -mx-1.5 rounded-md hover:bg-secondary/50 transition-colors cursor-default"
+                   >
                       <div className="flex items-center gap-2 truncate max-w-[70%]">
-                         <span className="font-mono text-muted-foreground w-4">{i+1}.</span>
-                         <span className="truncate text-foreground group-hover:text-primary transition-colors" title={f.path}>{f.name}</span>
+                         <span className="font-mono text-muted-foreground w-4 opacity-70">{i+1}.</span>
+                         <span className="truncate text-foreground font-medium" title={f.path}>{f.name}</span>
                       </div>
-                      <span className="font-mono text-muted-foreground">{formatSize(f.size || 0)}</span>
+                      
+                      {/* Normal State: Show Size */}
+                      <span className="font-mono text-muted-foreground transition-opacity duration-200 group-hover/item:opacity-0">
+                          {formatSize(f.size || 0)}
+                      </span>
+
+                      {/* Hover State: Show Remove Button */}
+                      <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            toggleSelect(f.id, false);
+                        }}
+                        className="absolute right-1.5 opacity-0 group-hover/item:opacity-100 transition-all duration-200 p-1 hover:bg-destructive/10 hover:text-destructive text-muted-foreground rounded-sm scale-90 group-hover/item:scale-100"
+                        title="Remove from context"
+                      >
+                        <X size={14} />
+                      </button>
                    </div>
                  ))}
               </div>
