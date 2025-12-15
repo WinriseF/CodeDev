@@ -195,6 +195,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-pulumi-stack-hist-0",
+    "type": "command",
+    "title": "pulumi-stack-hist - 查看原命令的文档",
+    "content": "tldr pulumi stack history",
+    "group": "通用工具 (Common)",
+    "description": "pulumi-stack-hist: 此命令为 `pulumi stack history` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "pulumi-stack-hist",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-rustup-help-0",
     "type": "command",
     "title": "rustup-help - 显示帮助",
@@ -225,12 +240,42 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-docker-container-rm-0",
+    "type": "command",
+    "title": "docker-container-rm - 查看原命令的文档",
+    "content": "tldr docker rm",
+    "group": "通用工具 (Common)",
+    "description": "docker-container-rm: 此命令为 `docker rm` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-container-rm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-brew-remove-0",
+    "type": "command",
+    "title": "brew-remove - 查看原命令的文档",
+    "content": "tldr brew uninstall",
+    "group": "通用工具 (Common)",
+    "description": "brew-remove: 此命令为 `brew uninstall` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "brew-remove",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-..md-0",
     "type": "command",
-    "title": "..md - 原命令的文档在",
+    "title": "..md - 查看原命令的文档",
     "content": "tldr source",
     "group": "通用工具 (Common)",
-    "description": "..md: 这是 `source` 命令的一个别名。 (原命令的文档在)",
+    "description": "..md: 此命令为 `source` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "..md",
@@ -264,6 +309,51 @@
     "tags": [
       "common",
       "runsv",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-fgrep-0",
+    "type": "command",
+    "title": "fgrep - 查看原命令的文档",
+    "content": "tldr grep",
+    "group": "通用工具 (Common)",
+    "description": "fgrep: 此命令为 `grep --fixed-strings` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "fgrep",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-pnmtopnm-0",
+    "type": "command",
+    "title": "pnmtopnm - 查看原命令的文档",
+    "content": "tldr pamtopnm",
+    "group": "通用工具 (Common)",
+    "description": "pnmtopnm: 此命令为 `pamtopnm` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "pnmtopnm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-psexec-0",
+    "type": "command",
+    "title": "impacket-psexec - 查看原命令的文档",
+    "content": "tldr psexec.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-psexec: 此命令为 `psexec.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-psexec",
       "tldr",
       "zh"
     ],
@@ -630,6 +720,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-xzfgrep-0",
+    "type": "command",
+    "title": "xzfgrep - 查看原命令的文档",
+    "content": "tldr xzgrep",
+    "group": "通用工具 (Common)",
+    "description": "xzfgrep: 此命令为 `xzgrep --fixed-strings` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "xzfgrep",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-conda-activate-0",
     "type": "command",
     "title": "conda-activate - 激活现存名为 `myenv` 的环境",
@@ -714,6 +819,21 @@
     "tags": [
       "common",
       "git-coauthor",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-xml-c14n-0",
+    "type": "command",
+    "title": "xml-c14n - 查看原命令的文档",
+    "content": "tldr xml canonic",
+    "group": "通用工具 (Common)",
+    "description": "xml-c14n: 此命令为 `xml canonic` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "xml-c14n",
       "tldr",
       "zh"
     ],
@@ -834,6 +954,21 @@
     "tags": [
       "common",
       "base32",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-rpcdump-0",
+    "type": "command",
+    "title": "impacket-rpcdump - 查看原命令的文档",
+    "content": "tldr rpcdump.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-rpcdump: 此命令为 `rpcdump.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-rpcdump",
       "tldr",
       "zh"
     ],
@@ -1164,6 +1299,21 @@
     "tags": [
       "common",
       "quarto",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-jira-browse-0",
+    "type": "command",
+    "title": "jira-browse - 查看原命令的文档",
+    "content": "tldr jira open",
+    "group": "通用工具 (Common)",
+    "description": "jira-browse: 此命令为 `jira open` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jira-browse",
       "tldr",
       "zh"
     ],
@@ -1832,13 +1982,28 @@
   {
     "id": "tldr-zh-common-zstdcat-0",
     "type": "command",
-    "title": "zstdcat - 查看原始命令的文档",
+    "title": "zstdcat - 查看原命令的文档",
     "content": "tldr zstd",
     "group": "通用工具 (Common)",
-    "description": "zstdcat: 这是 `zstd --decompress --stdout` 命令的一个别名。 (查看原始命令的文档)",
+    "description": "zstdcat: 此命令为 `zstd --decompress --stdout --force` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "zstdcat",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-docker-rmi-0",
+    "type": "command",
+    "title": "docker-rmi - 查看原命令的文档",
+    "content": "tldr docker image rm",
+    "group": "通用工具 (Common)",
+    "description": "docker-rmi: 此命令为 `docker image rm` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-rmi",
       "tldr",
       "zh"
     ],
@@ -2310,6 +2475,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-bun-list-0",
+    "type": "command",
+    "title": "bun-list - 查看原命令的文档",
+    "content": "tldr bun pm ls",
+    "group": "通用工具 (Common)",
+    "description": "bun-list: 此命令为 `bun pm ls` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bun-list",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-jmap-0",
     "type": "command",
     "title": "jmap - 打印 Java 进程的共享对象映射（类似 pmap 的输出）",
@@ -2447,10 +2627,10 @@
   {
     "id": "tldr-zh-common-arch-0",
     "type": "command",
-    "title": "arch - 原命令的文档在",
+    "title": "arch - 查看原命令的文档",
     "content": "tldr uname",
     "group": "通用工具 (Common)",
-    "description": "arch: 这是 `uname --machine` 命令的一个别名。 (原命令的文档在)",
+    "description": "arch: 此命令为 `uname --machine` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "arch",
@@ -3660,6 +3840,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zeditor-0",
+    "type": "command",
+    "title": "zeditor - 查看原命令的文档",
+    "content": "tldr zed",
+    "group": "通用工具 (Common)",
+    "description": "zeditor: 此命令为 `zed` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "zeditor",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-cargo-metadata-0",
     "type": "command",
     "title": "cargo-metadata - 打印当前包的工作空间成员和已解析的依赖关系",
@@ -4020,6 +4215,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-gh-rs-0",
+    "type": "command",
+    "title": "gh-rs - 查看原命令的文档",
+    "content": "tldr gh ruleset",
+    "group": "通用工具 (Common)",
+    "description": "gh-rs: 此命令为 `gh ruleset` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "gh-rs",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-cargo-build-0",
     "type": "command",
     "title": "cargo-build - 在本地路径中构建由 `Cargo.toml` 清单文件定义的一个或多个包",
@@ -4119,6 +4329,21 @@
     "tags": [
       "common",
       "cargo-build",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-todoman-0",
+    "type": "command",
+    "title": "todoman - 查看原命令的文档",
+    "content": "tldr todo",
+    "group": "通用工具 (Common)",
+    "description": "todoman: 此命令为 `todo` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "todoman",
       "tldr",
       "zh"
     ],
@@ -4830,6 +5055,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-typeset-0",
+    "type": "command",
+    "title": "typeset - 查看原命令的文档",
+    "content": "tldr declare",
+    "group": "通用工具 (Common)",
+    "description": "typeset: 此命令为 `declare` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "typeset",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-cargo-uninstall-0",
     "type": "command",
     "title": "cargo-uninstall - 移除一个已安装的二进制文件",
@@ -5289,6 +5529,21 @@
     "tags": [
       "common",
       "git-alias",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-lzcmp-0",
+    "type": "command",
+    "title": "lzcmp - 查看原命令的文档",
+    "content": "tldr xzcmp",
+    "group": "通用工具 (Common)",
+    "description": "lzcmp: 此命令为 `xzcmp` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "lzcmp",
       "tldr",
       "zh"
     ],
@@ -6054,6 +6309,21 @@
     "tags": [
       "common",
       "du",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-git-stage-0",
+    "type": "command",
+    "title": "git-stage - 查看原命令的文档",
+    "content": "tldr git add",
+    "group": "通用工具 (Common)",
+    "description": "git-stage: 此命令为 `git add` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "git-stage",
       "tldr",
       "zh"
     ],
@@ -6840,6 +7110,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-gh-at-0",
+    "type": "command",
+    "title": "gh-at - 查看原命令的文档",
+    "content": "tldr gh attestation",
+    "group": "通用工具 (Common)",
+    "description": "gh-at: 此命令为 `gh attestation` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "gh-at",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-ufraw-batch-0",
     "type": "command",
     "title": "ufraw-batch - 简单地将 RAW 文件转换为 JPEG",
@@ -7307,10 +7592,10 @@
   {
     "id": "tldr-zh-common-gnmic-sub-0",
     "type": "command",
-    "title": "gnmic-sub - 原命令的文档在",
+    "title": "gnmic-sub - 查看原命令的文档",
     "content": "tldr gnmic subscribe",
     "group": "通用工具 (Common)",
-    "description": "gnmic-sub: 这是 `gnmic subscribe` 命令的一个别名。 (原命令的文档在)",
+    "description": "gnmic-sub: 此命令为 `gnmic subscribe` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "gnmic-sub",
@@ -8237,10 +8522,10 @@
   {
     "id": "tldr-zh-common-jfrog-0",
     "type": "command",
-    "title": "jfrog - 查看原始命令的文档",
+    "title": "jfrog - 查看原命令的文档",
     "content": "tldr jf",
     "group": "通用工具 (Common)",
-    "description": "jfrog: 这是 `jf` 命令的一个别名。 (查看原始命令的文档)",
+    "description": "jfrog: 此命令为 `jf` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "jfrog",
@@ -8385,6 +8670,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-import-0",
+    "type": "command",
+    "title": "import - 查看原命令的文档",
+    "content": "tldr magick import",
+    "group": "通用工具 (Common)",
+    "description": "import: 此命令为 `magick import` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "import",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-rustup-show-0",
     "type": "command",
     "title": "rustup-show - 显示所有信息",
@@ -8469,6 +8769,66 @@
     "tags": [
       "common",
       "banner",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-npm-restart-0",
+    "type": "command",
+    "title": "npm-restart - 查看原命令的文档",
+    "content": "tldr npm run",
+    "group": "通用工具 (Common)",
+    "description": "npm-restart: 此命令为 `npm run restart` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-restart",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-npm-stop-0",
+    "type": "command",
+    "title": "npm-stop - 查看原命令的文档",
+    "content": "tldr npm run",
+    "group": "通用工具 (Common)",
+    "description": "npm-stop: 此命令为 `npm run stop` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-stop",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-libreoffice-0",
+    "type": "command",
+    "title": "libreoffice - 查看原命令的文档",
+    "content": "tldr soffice",
+    "group": "通用工具 (Common)",
+    "description": "libreoffice: 此命令为 `soffice` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "libreoffice",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-egrep-0",
+    "type": "command",
+    "title": "egrep - 查看原命令的文档",
+    "content": "tldr grep",
+    "group": "通用工具 (Common)",
+    "description": "egrep: 此命令为 `grep --extended-regexp` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "egrep",
       "tldr",
       "zh"
     ],
@@ -8835,6 +9195,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-https-0",
+    "type": "command",
+    "title": "https - 查看原命令的文档",
+    "content": "tldr http",
+    "group": "通用工具 (Common)",
+    "description": "https: 此命令为 `http` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "https",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-qr-0",
     "type": "command",
     "title": "qr - 生成一个二维码",
@@ -8970,6 +9345,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-bunzip2-0",
+    "type": "command",
+    "title": "bunzip2 - 查看原命令的文档",
+    "content": "tldr bzip2",
+    "group": "通用工具 (Common)",
+    "description": "bunzip2: 此命令为 `bzip2 --decompress` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bunzip2",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-git-merge-0",
     "type": "command",
     "title": "git-merge - 将指定分支合并到当前分支",
@@ -9069,6 +9459,36 @@
     "tags": [
       "common",
       "jpegtopnm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-kite-0",
+    "type": "command",
+    "title": "kite - 查看原命令的文档",
+    "content": "tldr kiterunner",
+    "group": "通用工具 (Common)",
+    "description": "kite: 此命令为 `kiterunner` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "kite",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-copr-0",
+    "type": "command",
+    "title": "copr - 查看原命令的文档",
+    "content": "tldr copr-cli",
+    "group": "通用工具 (Common)",
+    "description": "copr: 此命令为 `copr-cli` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "copr",
       "tldr",
       "zh"
     ],
@@ -9422,10 +9842,10 @@
   {
     "id": "tldr-zh-common-unxz-0",
     "type": "command",
-    "title": "unxz - 原命令的文档在",
+    "title": "unxz - 查看原命令的文档",
     "content": "tldr xz",
     "group": "通用工具 (Common)",
-    "description": "unxz: 这是 `xz` 命令的一个别名。 (原命令的文档在)",
+    "description": "unxz: 此命令为 `xz --decompress` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "unxz",
@@ -9437,10 +9857,10 @@
   {
     "id": "tldr-zh-common-mscore-0",
     "type": "command",
-    "title": "mscore - 原命令的文档在",
+    "title": "mscore - 查看原命令的文档",
     "content": "tldr musescore",
     "group": "通用工具 (Common)",
-    "description": "mscore: 这是 `musescore` 命令的一个别名。 (原命令的文档在)",
+    "description": "mscore: 此命令为 `musescore` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "mscore",
@@ -10022,13 +10442,28 @@
   {
     "id": "tldr-zh-common-fossil-ci-0",
     "type": "command",
-    "title": "fossil-ci - 原命令的文档在",
+    "title": "fossil-ci - 查看原命令的文档",
     "content": "tldr fossil commit",
     "group": "通用工具 (Common)",
-    "description": "fossil-ci: 这是 `fossil commit`.命令的一个别名。 (原命令的文档在)",
+    "description": "fossil-ci: 此命令为 `fossil commit` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "fossil-ci",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-crane-cp-0",
+    "type": "command",
+    "title": "crane-cp - 查看原命令的文档",
+    "content": "tldr crane copy",
+    "group": "通用工具 (Common)",
+    "description": "crane-cp: 此命令为 `crane copy` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "crane-cp",
       "tldr",
       "zh"
     ],
@@ -10179,6 +10614,21 @@
     "tags": [
       "common",
       "oathtool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-lzfgrep-0",
+    "type": "command",
+    "title": "lzfgrep - 查看原命令的文档",
+    "content": "tldr xzgrep",
+    "group": "通用工具 (Common)",
+    "description": "lzfgrep: 此命令为 `xzgrep --fixed-strings` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "lzfgrep",
       "tldr",
       "zh"
     ],
@@ -10515,6 +10965,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-bzegrep-0",
+    "type": "command",
+    "title": "bzegrep - 查看原命令的文档",
+    "content": "tldr bzgrep",
+    "group": "通用工具 (Common)",
+    "description": "bzegrep: 此命令为 `bzgrep --extended-regexp` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bzegrep",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-xzegrep-0",
+    "type": "command",
+    "title": "xzegrep - 查看原命令的文档",
+    "content": "tldr xzgrep",
+    "group": "通用工具 (Common)",
+    "description": "xzegrep: 此命令为 `xzgrep --extended-regexp` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "xzegrep",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-gcc-0",
     "type": "command",
     "title": "gcc - 将一组源文件编译为二进制文件",
@@ -10820,7 +11300,7 @@
     "title": "rustup-uninstall - 查看原命令的文档",
     "content": "tldr rustup toolchain",
     "group": "通用工具 (Common)",
-    "description": "rustup-uninstall: 该命令是 `rustup toolchain uninstall` 的别名。 (查看原命令的文档)",
+    "description": "rustup-uninstall: 此命令为 `rustup toolchain uninstall` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "rustup-uninstall",
@@ -11004,6 +11484,21 @@
     "tags": [
       "common",
       "sort",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-docker-images-0",
+    "type": "command",
+    "title": "docker-images - 查看原命令的文档",
+    "content": "tldr docker image ls",
+    "group": "通用工具 (Common)",
+    "description": "docker-images: 此命令为 `docker image ls` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-images",
       "tldr",
       "zh"
     ],
@@ -11295,12 +11790,27 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-npm-rb-0",
+    "type": "command",
+    "title": "npm-rb - 查看原命令的文档",
+    "content": "tldr npm-rebuild",
+    "group": "通用工具 (Common)",
+    "description": "npm-rb: 此命令为 `npm-rebuild` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-rb",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-fossil-rm-0",
     "type": "command",
-    "title": "fossil-rm - 原命令的文档在",
+    "title": "fossil-rm - 查看原命令的文档",
     "content": "tldr fossil delete",
     "group": "通用工具 (Common)",
-    "description": "fossil-rm: 这是 `fossil delete` 命令的一个别名。 (原命令的文档在)",
+    "description": "fossil-rm: 此命令为 `fossil delete` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "fossil-rm",
@@ -11555,10 +12065,25 @@
     "title": "rustup-install - 查看原命令的文档",
     "content": "tldr rustup toolchain",
     "group": "通用工具 (Common)",
-    "description": "rustup-install: 该命令是 `rustup toolchain install` 的别名。 (查看原命令的文档)",
+    "description": "rustup-install: 此命令为 `rustup toolchain install` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "rustup-install",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-gdm-binary-0",
+    "type": "command",
+    "title": "gdm-binary - 查看原命令的文档",
+    "content": "tldr gdm",
+    "group": "通用工具 (Common)",
+    "description": "gdm-binary: 此命令为 `gdm` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "gdm-binary",
       "tldr",
       "zh"
     ],
@@ -11745,6 +12270,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-lzmore-0",
+    "type": "command",
+    "title": "lzmore - 查看原命令的文档",
+    "content": "tldr xzmore",
+    "group": "通用工具 (Common)",
+    "description": "lzmore: 此命令为 `xzmore` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "lzmore",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-yt-dlp-0",
     "type": "command",
     "title": "yt-dlp - 下载视频或播放列表（使用下面命令的默认选项）",
@@ -11859,6 +12399,21 @@
     "tags": [
       "common",
       "yt-dlp",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-docker-slim-0",
+    "type": "command",
+    "title": "docker-slim - 查看原命令的文档",
+    "content": "tldr slim",
+    "group": "通用工具 (Common)",
+    "description": "docker-slim: 此命令为 `slim` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-slim",
       "tldr",
       "zh"
     ],
@@ -12300,6 +12855,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-impacket-rpcmap-0",
+    "type": "command",
+    "title": "impacket-rpcmap - 查看原命令的文档",
+    "content": "tldr rpcmap.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-rpcmap: 此命令为 `rpcmap.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-rpcmap",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-getuserspns-0",
+    "type": "command",
+    "title": "impacket-getuserspns - 查看原命令的文档",
+    "content": "tldr GetUserSPNs.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-getuserspns: 此命令为 `GetUserSPNs.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-getuserspns",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-ybacklight-0",
     "type": "command",
     "title": "ybacklight - 打印当前亮度和最大亮度，缩写并使用斜杠分隔",
@@ -12534,6 +13119,21 @@
     "tags": [
       "common",
       "ssh-add",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-npm-author-0",
+    "type": "command",
+    "title": "npm-author - 查看原命令的文档",
+    "content": "tldr npm owner",
+    "group": "通用工具 (Common)",
+    "description": "npm-author: 此命令为 `npm owner` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-author",
       "tldr",
       "zh"
     ],
@@ -12894,6 +13494,21 @@
     "tags": [
       "common",
       "pnpm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-hd-0",
+    "type": "command",
+    "title": "hd - 查看原命令的文档",
+    "content": "tldr hexdump",
+    "group": "通用工具 (Common)",
+    "description": "hd: 此命令为 `hexdump` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "hd",
       "tldr",
       "zh"
     ],
@@ -13425,6 +14040,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-impacket-getarch-0",
+    "type": "command",
+    "title": "impacket-getarch - 查看原命令的文档",
+    "content": "tldr getArch.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-getarch: 此命令为 `getArch.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-getarch",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-zipnote-0",
     "type": "command",
     "title": "zipnote - 查看 Zip 压缩包中的注释",
@@ -13880,7 +14510,7 @@
     "title": "jupyterlab - 查看原命令的文档",
     "content": "tldr jupyter lab",
     "group": "通用工具 (Common)",
-    "description": "jupyterlab: 这是 `jupyter lab` 命令的一个别名。 (查看原命令的文档)",
+    "description": "jupyterlab: 此命令为 `jupyter lab` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "jupyterlab",
@@ -13982,10 +14612,10 @@
   {
     "id": "tldr-zh-common-tlmgr-arch-0",
     "type": "command",
-    "title": "tlmgr-arch - 原命令的文档在",
+    "title": "tlmgr-arch - 查看原命令的文档",
     "content": "tldr tlmgr platform",
     "group": "通用工具 (Common)",
-    "description": "tlmgr-arch: 这是 `tlmgr platform` 命令的一个别名。 (原命令的文档在)",
+    "description": "tlmgr-arch: 此命令为 `tlmgr platform` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "tlmgr-arch",
@@ -14490,6 +15120,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-vc-0",
+    "type": "command",
+    "title": "vc - 查看原命令的文档",
+    "content": "tldr vercel",
+    "group": "通用工具 (Common)",
+    "description": "vc: 此命令为 `vercel` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "vc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-rustup-self-0",
     "type": "command",
     "title": "rustup-self - 更新 `rustup`",
@@ -14619,6 +15264,21 @@
     "tags": [
       "common",
       "pyenv",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-sr-0",
+    "type": "command",
+    "title": "sr - 查看原命令的文档",
+    "content": "tldr surfraw",
+    "group": "通用工具 (Common)",
+    "description": "sr: 此命令为 `surfraw` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "sr",
       "tldr",
       "zh"
     ],
@@ -14792,10 +15452,10 @@
   {
     "id": "tldr-zh-common-vi-0",
     "type": "command",
-    "title": "vi - 原命令的文档在",
+    "title": "vi - 查看原命令的文档",
     "content": "tldr vim",
     "group": "通用工具 (Common)",
-    "description": "vi: 这是 `vim` 命令的一个别名。 (原命令的文档在)",
+    "description": "vi: 此命令为 `vim` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "vi",
@@ -16320,6 +16980,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-impacket-getnpusers-0",
+    "type": "command",
+    "title": "impacket-getnpusers - 查看原命令的文档",
+    "content": "tldr GetNPUsers.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-getnpusers: 此命令为 `GetNPUsers.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-getnpusers",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-go-0",
     "type": "command",
     "title": "go - 下载并安装由其路径指定的包",
@@ -16620,6 +17295,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-brew-abv-0",
+    "type": "command",
+    "title": "brew-abv - 查看原命令的文档",
+    "content": "tldr brew info",
+    "group": "通用工具 (Common)",
+    "description": "brew-abv: 此命令为 `brew info` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "brew-abv",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-j-0",
+    "type": "command",
+    "title": "j - 查看原命令的文档",
+    "content": "tldr autojump",
+    "group": "通用工具 (Common)",
+    "description": "j: 此命令为 `autojump` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "j",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-magick-compare-0",
     "type": "command",
     "title": "magick-compare - 比较两个图片",
@@ -16824,6 +17529,21 @@
     "tags": [
       "common",
       "quota",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-smbserver-0",
+    "type": "command",
+    "title": "impacket-smbserver - 查看原命令的文档",
+    "content": "tldr smbserver.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-smbserver: 此命令为 `smbserver.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-smbserver",
       "tldr",
       "zh"
     ],
@@ -17085,6 +17805,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-c++-0",
+    "type": "command",
+    "title": "c++ - 查看原命令的文档",
+    "content": "tldr g++",
+    "group": "通用工具 (Common)",
+    "description": "c++: 此命令为 `g++` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "c++",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-nop-0",
     "type": "command",
     "title": "nop - 漂亮地打印一个或多个规范格式的图形",
@@ -17132,10 +17867,10 @@
   {
     "id": "tldr-zh-common-platformio-0",
     "type": "command",
-    "title": "platformio - 原命令的文档在",
+    "title": "platformio - 查看原命令的文档",
     "content": "tldr pio",
     "group": "通用工具 (Common)",
-    "description": "platformio: 这是 `pio` 命令的一个别名。 (原命令的文档在)",
+    "description": "platformio: 此命令为 `pio` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "platformio",
@@ -17415,6 +18150,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-docker-container-rename-0",
+    "type": "command",
+    "title": "docker-container-rename - 查看原命令的文档",
+    "content": "tldr docker rename",
+    "group": "通用工具 (Common)",
+    "description": "docker-container-rename: 此命令为 `docker rename` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-container-rename",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-buku-0",
     "type": "command",
     "title": "buku - 根据关键词和标签“隐私”查找书签",
@@ -17514,6 +18264,21 @@
     "tags": [
       "common",
       "cargo-package",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-lzless-0",
+    "type": "command",
+    "title": "lzless - 查看原命令的文档",
+    "content": "tldr xzless",
+    "group": "通用工具 (Common)",
+    "description": "lzless: 此命令为 `xzless` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "lzless",
       "tldr",
       "zh"
     ],
@@ -17940,6 +18705,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-impacket-smbclient-0",
+    "type": "command",
+    "title": "impacket-smbclient - 查看原命令的文档",
+    "content": "tldr smbclient.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-smbclient: 此命令为 `smbclient.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-smbclient",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-updog-0",
     "type": "command",
     "title": "updog - 为当前目录启动 HTTP 服务器",
@@ -18195,6 +18975,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-rgrep-0",
+    "type": "command",
+    "title": "rgrep - 查看原命令的文档",
+    "content": "tldr grep",
+    "group": "通用工具 (Common)",
+    "description": "rgrep: 此命令为 `grep --recursive` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "rgrep",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-jekyll-0",
     "type": "command",
     "title": "jekyll - 生成一个将在 http://localhost:4000/ 上运行的开发服务器",
@@ -18347,10 +19142,10 @@
   {
     "id": "tldr-zh-common-piodebuggdb-0",
     "type": "command",
-    "title": "piodebuggdb - 原命令的文档在",
+    "title": "piodebuggdb - 查看原命令的文档",
     "content": "tldr pio debug",
     "group": "通用工具 (Common)",
-    "description": "piodebuggdb: 这是 `pio debug` 命令的一个别名。 (原命令的文档在)",
+    "description": "piodebuggdb: 此命令为 `pio debug --interface gdb` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "piodebuggdb",
@@ -18594,6 +19389,21 @@
     "tags": [
       "common",
       "npm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-addcomputer-0",
+    "type": "command",
+    "title": "impacket-addcomputer - 查看原命令的文档",
+    "content": "tldr addcomputer.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-addcomputer: 此命令为 `addcomputer.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-addcomputer",
       "tldr",
       "zh"
     ],
@@ -18947,10 +19757,10 @@
   {
     "id": "tldr-zh-common-kafkacat-0",
     "type": "command",
-    "title": "kafkacat - 原命令的文档在",
+    "title": "kafkacat - 查看原命令的文档",
     "content": "tldr kcat",
     "group": "通用工具 (Common)",
-    "description": "kafkacat: 这是 `kcat` 命令的一个别名。 (原命令的文档在)",
+    "description": "kafkacat: 此命令为 `kcat` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "kafkacat",
@@ -18962,10 +19772,10 @@
   {
     "id": "tldr-zh-common-r2-0",
     "type": "command",
-    "title": "r2 - 原命令的文档在",
+    "title": "r2 - 查看原命令的文档",
     "content": "tldr radare2",
     "group": "通用工具 (Common)",
-    "description": "r2: 这是 `radare2` 命令的一个别名。 (原命令的文档在)",
+    "description": "r2: 此命令为 `radare2` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "r2",
@@ -20235,6 +21045,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-kr-0",
+    "type": "command",
+    "title": "kr - 查看原命令的文档",
+    "content": "tldr kiterunner",
+    "group": "通用工具 (Common)",
+    "description": "kr: 此命令为 `kiterunner` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "kr",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-jtbl-0",
     "type": "command",
     "title": "jtbl - 从 JSON 或 JSON Lines 输入中打印表格",
@@ -20687,10 +21512,10 @@
   {
     "id": "tldr-zh-common-xzcat-0",
     "type": "command",
-    "title": "xzcat - 原命令的文档在",
+    "title": "xzcat - 查看原命令的文档",
     "content": "tldr xz",
     "group": "通用工具 (Common)",
-    "description": "xzcat: 这是 `xz` 命令的一个别名。 (原命令的文档在)",
+    "description": "xzcat: 此命令为 `xz --decompress --stdout` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "xzcat",
@@ -21000,6 +21825,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-identify-0",
+    "type": "command",
+    "title": "identify - 查看原命令的文档",
+    "content": "tldr magick identify",
+    "group": "通用工具 (Common)",
+    "description": "identify: 此命令为 `magick identify` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "identify",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-ffmpeg-0",
     "type": "command",
     "title": "ffmpeg - 从视频中提取音频并保存为 MP3 格式",
@@ -21114,6 +21954,21 @@
     "tags": [
       "common",
       "ffmpeg",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-fdfind-0",
+    "type": "command",
+    "title": "fdfind - 查看原命令的文档",
+    "content": "tldr fd",
+    "group": "通用工具 (Common)",
+    "description": "fdfind: 此命令为 `fd` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "fdfind",
       "tldr",
       "zh"
     ],
@@ -21324,6 +22179,21 @@
     "tags": [
       "common",
       "qdbus",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-pamnoraw-0",
+    "type": "command",
+    "title": "pamnoraw - 查看原命令的文档",
+    "content": "tldr pamtopnm",
+    "group": "通用工具 (Common)",
+    "description": "pamnoraw: 此命令为 `pamtopnm -plain` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "pamnoraw",
       "tldr",
       "zh"
     ],
@@ -21602,85 +22472,10 @@
   {
     "id": "tldr-zh-common-zegrep-0",
     "type": "command",
-    "title": "zegrep - 在压缩文件中搜索扩展正则表达式（支持 `?`, `+`, `{}`, `()` 和 `|`），区分大小写",
-    "content": "zegrep \"{{搜索模式}}\" {{路径/到/文件}}",
+    "title": "zegrep - 查看原命令的文档",
+    "content": "tldr zgrep",
     "group": "通用工具 (Common)",
-    "description": "zegrep: 使用 `egrep` 在压缩文件中查找扩展正则表达式模式。 (在压缩文件中搜索扩展正则表达式（支持 `?`, `+`, `{}`, `()` 和 `|`），区分大小写)",
-    "tags": [
-      "common",
-      "zegrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zegrep-1",
-    "type": "command",
-    "title": "zegrep - 在压缩文件中搜索扩展正则表达式（支持 `?`, `+`, `{}`, `()` 和 `|`），忽略大小写",
-    "content": "zegrep --ignore-case \"{{搜索模式}}\" {{路径/到/文件}}",
-    "group": "通用工具 (Common)",
-    "description": "zegrep: 使用 `egrep` 在压缩文件中查找扩展正则表达式模式。 (在压缩文件中搜索扩展正则表达式（支持 `?`, `+`, `{}`, `()` 和 `|`），忽略大小写)",
-    "tags": [
-      "common",
-      "zegrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zegrep-2",
-    "type": "command",
-    "title": "zegrep - 搜索不匹配模式的行",
-    "content": "zegrep --invert-match \"{{搜索模式}}\" {{路径/到/文件}}",
-    "group": "通用工具 (Common)",
-    "description": "zegrep: 使用 `egrep` 在压缩文件中查找扩展正则表达式模式。 (搜索不匹配模式的行)",
-    "tags": [
-      "common",
-      "zegrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zegrep-3",
-    "type": "command",
-    "title": "zegrep - 打印每个匹配项的文件名和行号",
-    "content": "zegrep --with-filename --line-number \"{{搜索模式}}\" {{路径/到/文件}}",
-    "group": "通用工具 (Common)",
-    "description": "zegrep: 使用 `egrep` 在压缩文件中查找扩展正则表达式模式。 (打印每个匹配项的文件名和行号)",
-    "tags": [
-      "common",
-      "zegrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zegrep-4",
-    "type": "command",
-    "title": "zegrep - 搜索匹配模式的行，仅打印匹配的文本",
-    "content": "zegrep --only-matching \"{{搜索模式}}\" {{路径/到/文件}}",
-    "group": "通用工具 (Common)",
-    "description": "zegrep: 使用 `egrep` 在压缩文件中查找扩展正则表达式模式。 (搜索匹配模式的行，仅打印匹配的文本)",
-    "tags": [
-      "common",
-      "zegrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zegrep-5",
-    "type": "command",
-    "title": "zegrep - 在压缩文件中递归搜索文件中的模式",
-    "content": "zegrep --recursive \"{{搜索模式}}\" {{路径/到/文件}}",
-    "group": "通用工具 (Common)",
-    "description": "zegrep: 使用 `egrep` 在压缩文件中查找扩展正则表达式模式。 (在压缩文件中递归搜索文件中的模式)",
+    "description": "zegrep: 此命令为 `zgrep --extended-regexp` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "zegrep",
@@ -21795,6 +22590,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-bun-rm-0",
+    "type": "command",
+    "title": "bun-rm - 查看原命令的文档",
+    "content": "tldr bun remove",
+    "group": "通用工具 (Common)",
+    "description": "bun-rm: 此命令为 `bun remove` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bun-rm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-adb-pair-0",
     "type": "command",
     "title": "adb-pair - 查看 `adb pair` 的文档",
@@ -21812,10 +22622,10 @@
   {
     "id": "tldr-zh-common-clojure-0",
     "type": "command",
-    "title": "clojure - 原命令的文档在",
+    "title": "clojure - 查看原命令的文档",
     "content": "tldr clj",
     "group": "通用工具 (Common)",
-    "description": "clojure: 这是 `clj` 命令的一个别名。 (原命令的文档在)",
+    "description": "clojure: 此命令为 `clj` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "clojure",
@@ -21945,12 +22755,27 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-impacket-ping6-0",
+    "type": "command",
+    "title": "impacket-ping6 - 查看原命令的文档",
+    "content": "tldr ping6.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-ping6: 此命令为 `ping6.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-ping6",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-gh-cs-0",
     "type": "command",
-    "title": "gh-cs - 原命令的文档在",
+    "title": "gh-cs - 查看原命令的文档",
     "content": "tldr gh codespace",
     "group": "通用工具 (Common)",
-    "description": "gh-cs: 这是 `gh codespace`.命令的一个别名。 (原命令的文档在)",
+    "description": "gh-cs: 此命令为 `gh codespace` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "gh-cs",
@@ -22059,6 +22884,21 @@
     "tags": [
       "common",
       "bower",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-bzcat-0",
+    "type": "command",
+    "title": "bzcat - 查看原命令的文档",
+    "content": "tldr bzip2",
+    "group": "通用工具 (Common)",
+    "description": "bzcat: 此命令为 `bzip2 --decompress --stdout` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bzcat",
       "tldr",
       "zh"
     ],
@@ -22344,6 +23184,21 @@
     "tags": [
       "common",
       "docker-compose",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-montage-0",
+    "type": "command",
+    "title": "montage - 查看原命令的文档",
+    "content": "tldr magick montage",
+    "group": "通用工具 (Common)",
+    "description": "montage: 此命令为 `magick montage` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "montage",
       "tldr",
       "zh"
     ],
@@ -23160,6 +24015,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-gh-a11y-0",
+    "type": "command",
+    "title": "gh-a11y - 查看原命令的文档",
+    "content": "tldr gh accessibility",
+    "group": "通用工具 (Common)",
+    "description": "gh-a11y: 此命令为 `gh accessibility` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "gh-a11y",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-yard-0",
     "type": "command",
     "title": "yard - 创建文档",
@@ -23910,6 +24780,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-impacket-sniff-0",
+    "type": "command",
+    "title": "impacket-sniff - 查看原命令的文档",
+    "content": "tldr sniff.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-sniff: 此命令为 `sniff.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-sniff",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-yuvsplittoppm-0",
     "type": "command",
     "title": "yuvsplittoppm - 从以基名开始的三个文件中读取 Akebas YUV 字节，将它们合并为一个单一的 PPM 图像，并将其存储到指定的输出文件中",
@@ -24047,10 +24932,10 @@
   {
     "id": "tldr-zh-common-cola-0",
     "type": "command",
-    "title": "cola - 原命令的文档在",
+    "title": "cola - 查看原命令的文档",
     "content": "tldr git-cola",
     "group": "通用工具 (Common)",
-    "description": "cola: 这是 `git-cola` 命令的一个别名。 (原命令的文档在)",
+    "description": "cola: 此命令为 `git-cola` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "cola",
@@ -24555,6 +25440,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-compare-0",
+    "type": "command",
+    "title": "compare - 查看原命令的文档",
+    "content": "tldr magick compare",
+    "group": "通用工具 (Common)",
+    "description": "compare: 此命令为 `magick compare` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "compare",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-sudo-0",
     "type": "command",
     "title": "sudo - 以超级用户身份运行命令",
@@ -24797,13 +25697,28 @@
   {
     "id": "tldr-zh-common-clang-cpp-0",
     "type": "command",
-    "title": "clang-cpp - 原命令的文档在",
+    "title": "clang-cpp - 查看原命令的文档",
     "content": "tldr clang++",
     "group": "通用工具 (Common)",
-    "description": "clang-cpp: 这是 `clang++` 命令的一个别名。 (原命令的文档在)",
+    "description": "clang-cpp: 此命令为 `clang++` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "clang-cpp",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-bun-x-0",
+    "type": "command",
+    "title": "bun-x - 查看原命令的文档",
+    "content": "tldr bunx",
+    "group": "通用工具 (Common)",
+    "description": "bun-x: 此命令为 `bunx` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bun-x",
       "tldr",
       "zh"
     ],
@@ -25005,6 +25920,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-npm-list-0",
+    "type": "command",
+    "title": "npm-list - 查看原命令的文档",
+    "content": "tldr npm ls",
+    "group": "通用工具 (Common)",
+    "description": "npm-list: 此命令为 `npm ls` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-list",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-pnmtoplainpnm-0",
+    "type": "command",
+    "title": "pnmtoplainpnm - 查看原命令的文档",
+    "content": "tldr pamtopnm",
+    "group": "通用工具 (Common)",
+    "description": "pnmtoplainpnm: 此命令为 `pamtopnm -plain` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "pnmtoplainpnm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-git-help-0",
     "type": "command",
     "title": "git-help - 显示指定 Git 子命令的帮助信息",
@@ -25074,6 +26019,21 @@
     "tags": [
       "common",
       "git-help",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-bzfgrep-0",
+    "type": "command",
+    "title": "bzfgrep - 查看原命令的文档",
+    "content": "tldr bzgrep",
+    "group": "通用工具 (Common)",
+    "description": "bzfgrep: 此命令为 `bzgrep --fixed-strings` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bzfgrep",
       "tldr",
       "zh"
     ],
@@ -25457,10 +26417,10 @@
   {
     "id": "tldr-zh-common-fossil-new-0",
     "type": "command",
-    "title": "fossil-new - 原命令的文档在",
+    "title": "fossil-new - 查看原命令的文档",
     "content": "tldr fossil init",
     "group": "通用工具 (Common)",
-    "description": "fossil-new: 这是 `fossil init`.命令的一个别名。 (原命令的文档在)",
+    "description": "fossil-new: 此命令为 `fossil init` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "fossil-new",
@@ -25517,10 +26477,10 @@
   {
     "id": "tldr-zh-common-llvm-g++-0",
     "type": "command",
-    "title": "llvm-g++ - 原命令的文档在",
+    "title": "llvm-g++ - 查看原命令的文档",
     "content": "tldr clang++",
     "group": "通用工具 (Common)",
-    "description": "llvm-g++: 这是 `clang++` 命令的一个别名。 (原命令的文档在)",
+    "description": "llvm-g++: 此命令为 `clang++` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "llvm-g++",
@@ -25659,6 +26619,21 @@
     "tags": [
       "common",
       "yapf",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-gpg2-0",
+    "type": "command",
+    "title": "gpg2 - 查看原命令的文档",
+    "content": "tldr gpg",
+    "group": "通用工具 (Common)",
+    "description": "gpg2: 此命令为 `gpg` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "gpg2",
       "tldr",
       "zh"
     ],
@@ -25967,10 +26942,10 @@
   {
     "id": "tldr-zh-common-nm-classic-0",
     "type": "command",
-    "title": "nm-classic - 原命令的文档在",
+    "title": "nm-classic - 查看原命令的文档",
     "content": "tldr nm",
     "group": "通用工具 (Common)",
-    "description": "nm-classic: 这是 `nm` 命令的一个别名。 (原命令的文档在)",
+    "description": "nm-classic: 此命令为 `nm` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "nm-classic",
@@ -26057,70 +27032,10 @@
   {
     "id": "tldr-zh-common-zfgrep-0",
     "type": "command",
-    "title": "zfgrep - 在文件中搜索一个确切的字符串",
-    "content": "zfgrep {{搜索字符串}} {{路径/到/文件}}",
+    "title": "zfgrep - 查看原命令的文档",
+    "content": "tldr zgrep",
     "group": "通用工具 (Common)",
-    "description": "zfgrep: 在可能压缩的文件中匹配固定字符串。 相当于 `grep -F`，如果必要，将先解压输入。 (在文件中搜索一个确切的字符串)",
-    "tags": [
-      "common",
-      "zfgrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zfgrep-1",
-    "type": "command",
-    "title": "zfgrep - 计算在文件中匹配给定字符串的行数",
-    "content": "zfgrep --count {{搜索字符串}} {{路径/到/文件}}",
-    "group": "通用工具 (Common)",
-    "description": "zfgrep: 在可能压缩的文件中匹配固定字符串。 相当于 `grep -F`，如果必要，将先解压输入。 (计算在文件中匹配给定字符串的行数)",
-    "tags": [
-      "common",
-      "zfgrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zfgrep-2",
-    "type": "command",
-    "title": "zfgrep - 显示文件中匹配行的行号",
-    "content": "zfgrep --line-number {{搜索字符串}} {{路径/到/文件}}",
-    "group": "通用工具 (Common)",
-    "description": "zfgrep: 在可能压缩的文件中匹配固定字符串。 相当于 `grep -F`，如果必要，将先解压输入。 (显示文件中匹配行的行号)",
-    "tags": [
-      "common",
-      "zfgrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zfgrep-3",
-    "type": "command",
-    "title": "zfgrep - 显示所有不包含搜索字符串的行",
-    "content": "zfgrep --invert-match {{搜索字符串}} {{路径/到/文件}}",
-    "group": "通用工具 (Common)",
-    "description": "zfgrep: 在可能压缩的文件中匹配固定字符串。 相当于 `grep -F`，如果必要，将先解压输入。 (显示所有不包含搜索字符串的行)",
-    "tags": [
-      "common",
-      "zfgrep",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zfgrep-4",
-    "type": "command",
-    "title": "zfgrep - 仅列出内容至少匹配搜索字符串一次的文件名",
-    "content": "zfgrep --files-with-matches {{搜索字符串}} {{路径/到/文件1 路径/到/文件2 ...}}",
-    "group": "通用工具 (Common)",
-    "description": "zfgrep: 在可能压缩的文件中匹配固定字符串。 相当于 `grep -F`，如果必要，将先解压输入。 (仅列出内容至少匹配搜索字符串一次的文件名)",
+    "description": "zfgrep: 此命令为 `zgrep --fixed-strings` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "zfgrep",
@@ -26252,13 +27167,28 @@
   {
     "id": "tldr-zh-common-llvm-strings-0",
     "type": "command",
-    "title": "llvm-strings - 原命令的文档在",
+    "title": "llvm-strings - 查看原命令的文档",
     "content": "tldr strings",
     "group": "通用工具 (Common)",
-    "description": "llvm-strings: 这是 `strings` 命令的一个别名。 (原命令的文档在)",
+    "description": "llvm-strings: 此命令为 `strings` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "llvm-strings",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-npm-test-0",
+    "type": "command",
+    "title": "npm-test - 查看原命令的文档",
+    "content": "tldr npm run",
+    "group": "通用工具 (Common)",
+    "description": "npm-test: 此命令为 `npm run test` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-test",
       "tldr",
       "zh"
     ],
@@ -26610,6 +27540,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-impacket-secretsdump-0",
+    "type": "command",
+    "title": "impacket-secretsdump - 查看原命令的文档",
+    "content": "tldr secretsdump.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-secretsdump: 此命令为 `secretsdump.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-secretsdump",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-%-0",
     "type": "command",
     "title": "% - 将当前作业切换到前台",
@@ -26790,6 +27735,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-npm-it-0",
+    "type": "command",
+    "title": "npm-it - 查看原命令的文档",
+    "content": "tldr npm install-test",
+    "group": "通用工具 (Common)",
+    "description": "npm-it: 此命令为 `npm install-test` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-it",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-aircrack-ng-0",
     "type": "command",
     "title": "aircrack-ng - 使用字典文件破解捕获文件中的密钥",
@@ -26844,6 +27804,21 @@
     "tags": [
       "common",
       "aircrack-ng",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-netcat-0",
+    "type": "command",
+    "title": "netcat - 查看原命令的文档",
+    "content": "tldr nc",
+    "group": "通用工具 (Common)",
+    "description": "netcat: 此命令为 `nc` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "netcat",
       "tldr",
       "zh"
     ],
@@ -27090,6 +28065,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-impacket-mssqlclient-0",
+    "type": "command",
+    "title": "impacket-mssqlclient - 查看原命令的文档",
+    "content": "tldr mssqlclient.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-mssqlclient: 此命令为 `mssqlclient.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-mssqlclient",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-cargo-check-0",
     "type": "command",
     "title": "cargo-check - 检查当前包",
@@ -27212,10 +28202,10 @@
   {
     "id": "tldr-zh-common-lzcat-0",
     "type": "command",
-    "title": "lzcat - 原命令的文档在",
+    "title": "lzcat - 查看原命令的文档",
     "content": "tldr xz",
     "group": "通用工具 (Common)",
-    "description": "lzcat: 这是 `xz` 命令的一个别名。 (原命令的文档在)",
+    "description": "lzcat: 此命令为 `xz --format lzma --decompress --stdout` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "lzcat",
@@ -27660,12 +28650,42 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-npm-start-0",
+    "type": "command",
+    "title": "npm-start - 查看原命令的文档",
+    "content": "tldr npm run",
+    "group": "通用工具 (Common)",
+    "description": "npm-start: 此命令为 `npm run start` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-start",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-prename-0",
+    "type": "command",
+    "title": "prename - 查看原命令的文档",
+    "content": "tldr {{[-p|--platform]}} common rename",
+    "group": "通用工具 (Common)",
+    "description": "prename: 此命令为 `rename` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "prename",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-python3-0",
     "type": "command",
-    "title": "python3 - 原命令的文档在",
+    "title": "python3 - 查看原命令的文档",
     "content": "tldr python",
     "group": "通用工具 (Common)",
-    "description": "python3: 这是 `python` 命令的一个别名。 (原命令的文档在)",
+    "description": "python3: 此命令为 `python` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "python3",
@@ -28455,6 +29475,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-perl-rename-0",
+    "type": "command",
+    "title": "perl-rename - 查看原命令的文档",
+    "content": "tldr {{[-p|--platform]}} common rename",
+    "group": "通用工具 (Common)",
+    "description": "perl-rename: 此命令为 `rename` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "perl-rename",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-git-am-0",
     "type": "command",
     "title": "git-am - 应用本地补丁文件并提交更改",
@@ -28515,6 +29550,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-mpiexec-0",
+    "type": "command",
+    "title": "mpiexec - 查看原命令的文档",
+    "content": "tldr mpirun",
+    "group": "通用工具 (Common)",
+    "description": "mpiexec: 此命令为 `mpirun` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "mpiexec",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-git-blame-someone-else-0",
     "type": "command",
     "title": "git-blame-someone-else - 更改提交的提交者和作者",
@@ -28524,6 +29574,21 @@
     "tags": [
       "common",
       "git-blame-someone-else",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-hping-0",
+    "type": "command",
+    "title": "hping - 查看原命令的文档",
+    "content": "tldr hping3",
+    "group": "通用工具 (Common)",
+    "description": "hping: 此命令为 `hping3` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "hping",
       "tldr",
       "zh"
     ],
@@ -29280,6 +30345,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-mapfile-0",
+    "type": "command",
+    "title": "mapfile - 查看原命令的文档",
+    "content": "tldr readarray",
+    "group": "通用工具 (Common)",
+    "description": "mapfile: 此命令为 `readarray` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "mapfile",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-airdecap-ng-0",
     "type": "command",
     "title": "airdecap-ng - 从开放网络捕获文件中移除无线头，并使用接入点的 MAC 地址进行过滤",
@@ -29927,10 +31007,10 @@
   {
     "id": "tldr-zh-common-llvm-objdump-0",
     "type": "command",
-    "title": "llvm-objdump - 原命令的文档在",
+    "title": "llvm-objdump - 查看原命令的文档",
     "content": "tldr objdump",
     "group": "通用工具 (Common)",
-    "description": "llvm-objdump: 这是 `objdump` 命令的一个别名。 (原命令的文档在)",
+    "description": "llvm-objdump: 此命令为 `objdump` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "llvm-objdump",
@@ -30105,12 +31185,27 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-azure-cli-0",
+    "type": "command",
+    "title": "azure-cli - 查看原命令的文档",
+    "content": "tldr az",
+    "group": "通用工具 (Common)",
+    "description": "azure-cli: 此命令为 `az` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "azure-cli",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-lzma-0",
     "type": "command",
-    "title": "lzma - 原命令的文档在",
+    "title": "lzma - 查看原命令的文档",
     "content": "tldr xz",
     "group": "通用工具 (Common)",
-    "description": "lzma: 这是 `xz` 命令的一个别名。 (原命令的文档在)",
+    "description": "lzma: 此命令为 `xz --format lzma` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "lzma",
@@ -30395,7 +31490,7 @@
     "title": "unzstd - 查看原命令的文档",
     "content": "tldr zstd",
     "group": "通用工具 (Common)",
-    "description": "unzstd: 这是 `zstd --decompress` 命令的一个别名。 (查看原命令的文档)",
+    "description": "unzstd: 此命令为 `zstd --decompress` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "unzstd",
@@ -30840,6 +31935,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-netexec-0",
+    "type": "command",
+    "title": "netexec - 查看原命令的文档",
+    "content": "tldr nxc",
+    "group": "通用工具 (Common)",
+    "description": "netexec: 此命令为 `nxc` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "netexec",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-yadm-transcrypt-0",
     "type": "command",
     "title": "yadm-transcrypt - 设置用于加密的对称加密算法",
@@ -31277,10 +32387,10 @@
   {
     "id": "tldr-zh-common-ptpython3-0",
     "type": "command",
-    "title": "ptpython3 - 原命令的文档在",
+    "title": "ptpython3 - 查看原命令的文档",
     "content": "tldr ptpython",
     "group": "通用工具 (Common)",
-    "description": "ptpython3: 这是 `ptpython` 命令的一个别名。 (原命令的文档在)",
+    "description": "ptpython3: 此命令为 `ptpython` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "ptpython3",
@@ -31440,12 +32550,27 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-mpicxx-0",
+    "type": "command",
+    "title": "mpicxx - 查看原命令的文档",
+    "content": "tldr mpic++",
+    "group": "通用工具 (Common)",
+    "description": "mpicxx: 此命令为 `mpic++` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "mpicxx",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-pio-init-0",
     "type": "command",
-    "title": "pio-init - 原命令的文档在",
+    "title": "pio-init - 查看原命令的文档",
     "content": "tldr pio project",
     "group": "通用工具 (Common)",
-    "description": "pio-init: 这是 `pio project` 命令的一个别名。 (原命令的文档在)",
+    "description": "pio-init: 此命令为 `pio project init` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "pio-init",
@@ -31457,10 +32582,10 @@
   {
     "id": "tldr-zh-common-hx-0",
     "type": "command",
-    "title": "hx - 原命令的文档在",
+    "title": "hx - 查看原命令的文档",
     "content": "tldr helix",
     "group": "通用工具 (Common)",
-    "description": "hx: 这是 `helix` 命令的一个别名。 (原命令的文档在)",
+    "description": "hx: 此命令为 `helix` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "hx",
@@ -31884,6 +33009,21 @@
     "tags": [
       "common",
       "tree",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-pulumi-down-0",
+    "type": "command",
+    "title": "pulumi-down - 查看原命令的文档",
+    "content": "tldr pulumi destroy",
+    "group": "通用工具 (Common)",
+    "description": "pulumi-down: 此命令为 `pulumi destroy` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "pulumi-down",
       "tldr",
       "zh"
     ],
@@ -32520,6 +33660,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-docker-container-top-0",
+    "type": "command",
+    "title": "docker-container-top - 查看原命令的文档",
+    "content": "tldr docker top",
+    "group": "通用工具 (Common)",
+    "description": "docker-container-top: 此命令为 `docker top` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-container-top",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-autojump-0",
     "type": "command",
     "title": "autojump - 跳转到包含指定通配符的目录",
@@ -32940,6 +34095,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-file-rename-0",
+    "type": "command",
+    "title": "file-rename - 查看原命令的文档",
+    "content": "tldr {{[-p|--platform]}} common rename",
+    "group": "通用工具 (Common)",
+    "description": "file-rename: 此命令为 `rename` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "file-rename",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-curl-0",
     "type": "command",
     "title": "curl - 将指定 URL 的内容下载到文件",
@@ -33240,6 +34410,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-brew-rm-0",
+    "type": "command",
+    "title": "brew-rm - 查看原命令的文档",
+    "content": "tldr brew uninstall",
+    "group": "通用工具 (Common)",
+    "description": "brew-rm: 此命令为 `brew uninstall` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "brew-rm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-glances-0",
     "type": "command",
     "title": "glances - 在终端中运行",
@@ -33495,6 +34680,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-jira-navigate-0",
+    "type": "command",
+    "title": "jira-navigate - 查看原命令的文档",
+    "content": "tldr jira open",
+    "group": "通用工具 (Common)",
+    "description": "jira-navigate: 此命令为 `jira open` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jira-navigate",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-ar-0",
     "type": "command",
     "title": "ar - 从库文件中提取全部成员",
@@ -33564,6 +34764,21 @@
     "tags": [
       "common",
       "ar",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-docker-container-diff-0",
+    "type": "command",
+    "title": "docker-container-diff - 查看原命令的文档",
+    "content": "tldr docker diff",
+    "group": "通用工具 (Common)",
+    "description": "docker-container-diff: 此命令为 `docker diff` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-container-diff",
       "tldr",
       "zh"
     ],
@@ -34680,6 +35895,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-jco-0",
+    "type": "command",
+    "title": "jco - 查看原命令的文档",
+    "content": "tldr autojump",
+    "group": "通用工具 (Common)",
+    "description": "jco: 此命令为 `autojump` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jco",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-ic-0",
+    "type": "command",
+    "title": "ic - 查看原命令的文档",
+    "content": "tldr ibmcloud",
+    "group": "通用工具 (Common)",
+    "description": "ic: 此命令为 `ibmcloud` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "ic",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-kill-0",
     "type": "command",
     "title": "kill - 使用默认的 SIGTERM（终止）信号来结束一个程序",
@@ -35220,6 +36465,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-jira-projects-0",
+    "type": "command",
+    "title": "jira-projects - 查看原命令的文档",
+    "content": "tldr jira project",
+    "group": "通用工具 (Common)",
+    "description": "jira-projects: 此命令为 `jira project` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jira-projects",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-tldr-0",
     "type": "command",
     "title": "tldr - 打印指定命令的 tldr 页面（提示：这就是你来到这里的方式！）",
@@ -35334,6 +36594,36 @@
     "tags": [
       "common",
       "tldr",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-ping-0",
+    "type": "command",
+    "title": "impacket-ping - 查看原命令的文档",
+    "content": "tldr ping.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-ping: 此命令为 `ping.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-ping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-npm-run-script-0",
+    "type": "command",
+    "title": "npm-run-script - 查看原命令的文档",
+    "content": "tldr npm run",
+    "group": "通用工具 (Common)",
+    "description": "npm-run-script: 此命令为 `npm run` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npm-run-script",
       "tldr",
       "zh"
     ],
@@ -35670,6 +36960,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-bun-i-0",
+    "type": "command",
+    "title": "bun-i - 查看原命令的文档",
+    "content": "tldr bun install",
+    "group": "通用工具 (Common)",
+    "description": "bun-i: 此命令为 `bun install` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bun-i",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-amass-0",
     "type": "command",
     "title": "amass - 执行 Amass 子命令",
@@ -35732,10 +37037,10 @@
   {
     "id": "tldr-zh-common-llvm-nm-0",
     "type": "command",
-    "title": "llvm-nm - 原命令的文档在",
+    "title": "llvm-nm - 查看原命令的文档",
     "content": "tldr nm",
     "group": "通用工具 (Common)",
-    "description": "llvm-nm: 这是 `nm` 命令的一个别名。 (原命令的文档在)",
+    "description": "llvm-nm: 此命令为 `nm` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "llvm-nm",
@@ -36369,6 +37674,21 @@
     "tags": [
       "common",
       "file",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-mogrify-0",
+    "type": "command",
+    "title": "mogrify - 查看原命令的文档",
+    "content": "tldr magick mogrify",
+    "group": "通用工具 (Common)",
+    "description": "mogrify: 此命令为 `magick mogrify` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "mogrify",
       "tldr",
       "zh"
     ],
@@ -37065,6 +38385,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-sudoedit-0",
+    "type": "command",
+    "title": "sudoedit - 查看原命令的文档",
+    "content": "tldr sudo",
+    "group": "通用工具 (Common)",
+    "description": "sudoedit: 此命令为 `sudo --edit` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "sudoedit",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-xml-p2x-0",
+    "type": "command",
+    "title": "xml-p2x - 查看原命令的文档",
+    "content": "tldr xml depyx",
+    "group": "通用工具 (Common)",
+    "description": "xml-p2x: 此命令为 `xml depyx` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "xml-p2x",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-ykinfo-0",
     "type": "command",
     "title": "ykinfo - 显示 YubiKey 的所有信息",
@@ -37329,6 +38679,21 @@
     "tags": [
       "common",
       "rubocop",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-sniffer-0",
+    "type": "command",
+    "title": "impacket-sniffer - 查看原命令的文档",
+    "content": "tldr sniffer.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-sniffer: 此命令为 `sniffer.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-sniffer",
       "tldr",
       "zh"
     ],
@@ -37635,6 +39000,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-lzgrep-0",
+    "type": "command",
+    "title": "lzgrep - 查看原命令的文档",
+    "content": "tldr xzgrep",
+    "group": "通用工具 (Common)",
+    "description": "lzgrep: 此命令为 `xzgrep` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "lzgrep",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-git-bisect-0",
     "type": "command",
     "title": "git-bisect - 在已知有问题提交和已知正常提交（通常较旧）之间开始二分查找会话",
@@ -37712,10 +39092,10 @@
   {
     "id": "tldr-zh-common-whoami-0",
     "type": "command",
-    "title": "whoami - 原命令的文档在",
+    "title": "whoami - 查看原命令的文档",
     "content": "tldr id",
     "group": "通用工具 (Common)",
-    "description": "whoami: 这是 `id --user --name` 命令的一个别名。 (原命令的文档在)",
+    "description": "whoami: 此命令为 `id --user --name` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "whoami",
@@ -38535,6 +39915,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-docker-container-remove-0",
+    "type": "command",
+    "title": "docker-container-remove - 查看原命令的文档",
+    "content": "tldr docker rm",
+    "group": "通用工具 (Common)",
+    "description": "docker-container-remove: 此命令为 `docker rm` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-container-remove",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-nano-0",
     "type": "command",
     "title": "nano - 启动编辑器",
@@ -38649,6 +40044,21 @@
     "tags": [
       "common",
       "nano",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-getadusers-0",
+    "type": "command",
+    "title": "impacket-getadusers - 查看原命令的文档",
+    "content": "tldr GetADUsers.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-getadusers: 此命令为 `GetADUsers.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-getadusers",
       "tldr",
       "zh"
     ],
@@ -38979,6 +40389,21 @@
     "tags": [
       "common",
       "uv-python",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-pip3-0",
+    "type": "command",
+    "title": "pip3 - 查看原命令的文档",
+    "content": "tldr pip",
+    "group": "通用工具 (Common)",
+    "description": "pip3: 此命令为 `pip` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "pip3",
       "tldr",
       "zh"
     ],
@@ -40260,6 +41685,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-trash-cli-0",
+    "type": "command",
+    "title": "trash-cli - 查看原命令的文档",
+    "content": "tldr trash",
+    "group": "通用工具 (Common)",
+    "description": "trash-cli: 此命令为 `trash` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "trash-cli",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-zapier-convert-0",
     "type": "command",
     "title": "zapier-convert - 转换一个可视化构建器集成",
@@ -40299,6 +41739,21 @@
     "tags": [
       "common",
       "zapier-convert",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-sambapipe-0",
+    "type": "command",
+    "title": "impacket-sambapipe - 查看原命令的文档",
+    "content": "tldr sambaPipe.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-sambapipe: 此命令为 `sambaPipe.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-sambapipe",
       "tldr",
       "zh"
     ],
@@ -40599,6 +42054,21 @@
     "tags": [
       "common",
       "ab",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-npx-0",
+    "type": "command",
+    "title": "npx - 查看原命令的文档",
+    "content": "tldr npm exec",
+    "group": "通用工具 (Common)",
+    "description": "npx: 此命令为 `npm exec` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "npx",
       "tldr",
       "zh"
     ],
@@ -41385,6 +42855,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-pulumi-update-0",
+    "type": "command",
+    "title": "pulumi-update - 查看原命令的文档",
+    "content": "tldr pulumi up",
+    "group": "通用工具 (Common)",
+    "description": "pulumi-update: 此命令为 `pulumi up` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "pulumi-update",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-lzegrep-0",
+    "type": "command",
+    "title": "lzegrep - 查看原命令的文档",
+    "content": "tldr xzgrep",
+    "group": "通用工具 (Common)",
+    "description": "lzegrep: 此命令为 `xzgrep --extended-regexp` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "lzegrep",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-cargo-vendor-0",
     "type": "command",
     "title": "cargo-vendor - 将依赖项存储到指定目录，并配置在当前项目中使用这些存储的源代码",
@@ -41640,6 +43140,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-comma-0",
+    "type": "command",
+    "title": "comma - 查看原命令的文档",
+    "content": "tldr ,",
+    "group": "通用工具 (Common)",
+    "description": "comma: 此命令为 `,` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "comma",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-z-0",
     "type": "command",
     "title": "z - 跳转到一个名字带有 \"foo\" 的文件夹",
@@ -41739,6 +43254,21 @@
     "tags": [
       "common",
       "z",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-ntfs-read-0",
+    "type": "command",
+    "title": "impacket-ntfs-read - 查看原命令的文档",
+    "content": "tldr ntfs-read.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-ntfs-read: 此命令为 `ntfs-read.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-ntfs-read",
       "tldr",
       "zh"
     ],
@@ -42182,10 +43712,10 @@
   {
     "id": "tldr-zh-common-llvm-gcc-0",
     "type": "command",
-    "title": "llvm-gcc - 原命令的文档在",
+    "title": "llvm-gcc - 查看原命令的文档",
     "content": "tldr clang",
     "group": "通用工具 (Common)",
-    "description": "llvm-gcc: 这是 `clang` 命令的一个别名。 (原命令的文档在)",
+    "description": "llvm-gcc: 此命令为 `clang` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "llvm-gcc",
@@ -42197,10 +43727,10 @@
   {
     "id": "tldr-zh-common-zstdmt-0",
     "type": "command",
-    "title": "zstdmt - 查看原始命令的文档",
+    "title": "zstdmt - 查看原命令的文档",
     "content": "tldr zstd",
     "group": "通用工具 (Common)",
-    "description": "zstdmt: 这是 `zstd --threads 0` 命令的一个别名（该命令将工作线程数设置为物理 CPU 核心数）。 (查看原始命令的文档)",
+    "description": "zstdmt: 此命令为 `zstd --threads 0` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "zstdmt",
@@ -42977,10 +44507,10 @@
   {
     "id": "tldr-zh-common-rcat-0",
     "type": "command",
-    "title": "rcat - 原命令的文档在",
+    "title": "rcat - 查看原命令的文档",
     "content": "tldr rc",
     "group": "通用工具 (Common)",
-    "description": "rcat: 这是 `rc` 命令的一个别名。 (原命令的文档在)",
+    "description": "rcat: 此命令为 `rc` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "rcat",
@@ -43485,6 +45015,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-xml-xmln-0",
+    "type": "command",
+    "title": "xml-xmln - 查看原命令的文档",
+    "content": "tldr xml pyx",
+    "group": "通用工具 (Common)",
+    "description": "xml-xmln: 此命令为 `xml pyx` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "xml-xmln",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-jc-0",
     "type": "command",
     "title": "jc - 通过管道将命令输出转换为 JSON",
@@ -43614,6 +45159,36 @@
     "tags": [
       "common",
       "killall",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-impacket-mqtt_check-0",
+    "type": "command",
+    "title": "impacket-mqtt_check - 查看原命令的文档",
+    "content": "tldr mqtt_check.py",
+    "group": "通用工具 (Common)",
+    "description": "impacket-mqtt_check: 此命令为 `mqtt_check.py` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "impacket-mqtt_check",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-gh-agent-0",
+    "type": "command",
+    "title": "gh-agent - 查看原命令的文档",
+    "content": "tldr gh agent-task",
+    "group": "通用工具 (Common)",
+    "description": "gh-agent: 此命令为 `gh agent-task` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "gh-agent",
       "tldr",
       "zh"
     ],
@@ -44672,10 +46247,10 @@
   {
     "id": "tldr-zh-common-llvm-ar-0",
     "type": "command",
-    "title": "llvm-ar - 原命令的文档在",
+    "title": "llvm-ar - 查看原命令的文档",
     "content": "tldr ar",
     "group": "通用工具 (Common)",
-    "description": "llvm-ar: 这是 `ar` 命令的一个别名。 (原命令的文档在)",
+    "description": "llvm-ar: 此命令为 `ar` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "llvm-ar",
@@ -45332,13 +46907,28 @@
   {
     "id": "tldr-zh-common-ntl-0",
     "type": "command",
-    "title": "ntl - 原命令的文档在",
+    "title": "ntl - 查看原命令的文档",
     "content": "tldr netlify",
     "group": "通用工具 (Common)",
-    "description": "ntl: 这是 `netlify` 命令的一个别名。 (原命令的文档在)",
+    "description": "ntl: 此命令为 `netlify` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "ntl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-bun-c-0",
+    "type": "command",
+    "title": "bun-c - 查看原命令的文档",
+    "content": "tldr bun create",
+    "group": "通用工具 (Common)",
+    "description": "bun-c: 此命令为 `bun create` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "bun-c",
       "tldr",
       "zh"
     ],
@@ -45407,10 +46997,10 @@
   {
     "id": "tldr-zh-common-unlzma-0",
     "type": "command",
-    "title": "unlzma - 原命令的文档在",
+    "title": "unlzma - 查看原命令的文档",
     "content": "tldr xz",
     "group": "通用工具 (Common)",
-    "description": "unlzma: 这是 `xz` 命令的一个别名。 (原命令的文档在)",
+    "description": "unlzma: 此命令为 `xz --format lzma --decompress` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "unlzma",
@@ -45555,6 +47145,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-pnmdepth-0",
+    "type": "command",
+    "title": "pnmdepth - 查看原命令的文档",
+    "content": "tldr pamdepth",
+    "group": "通用工具 (Common)",
+    "description": "pnmdepth: 此命令为 `pamdepth` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "pnmdepth",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-base64-0",
     "type": "command",
     "title": "base64 - 编码一个文件",
@@ -45624,6 +47229,21 @@
     "tags": [
       "common",
       "base64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-uvx-0",
+    "type": "command",
+    "title": "uvx - 查看原命令的文档",
+    "content": "tldr uv tool",
+    "group": "通用工具 (Common)",
+    "description": "uvx: 此命令为 `uv tool run` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "uvx",
       "tldr",
       "zh"
     ],
@@ -46614,6 +48234,21 @@
     "tags": [
       "common",
       "g++",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-jo-0",
+    "type": "command",
+    "title": "jo - 查看原命令的文档",
+    "content": "tldr autojump",
+    "group": "通用工具 (Common)",
+    "description": "jo: 此命令为 `autojump` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jo",
       "tldr",
       "zh"
     ],

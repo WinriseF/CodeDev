@@ -75017,10 +75017,10 @@
   {
     "id": "tldr-en-linux-coredumpctl-2",
     "type": "command",
-    "title": "coredumpctl - Show information about the core dumps matching a program with `PID`",
+    "title": "coredumpctl - Show information about the core dumps matching a program with PID",
     "content": "coredumpctl info {{PID}}",
     "group": "Linux Ops",
-    "description": "coredumpctl: Retrieve and process saved core dumps and metadata. (Show information about the core dumps matching a program with `PID`)",
+    "description": "coredumpctl: Retrieve and process saved core dumps and metadata. (Show information about the core dumps matching a program with PID)",
     "tags": [
       "linux",
       "coredumpctl",

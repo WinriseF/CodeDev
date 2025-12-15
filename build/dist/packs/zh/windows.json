@@ -405,6 +405,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-windows-sal-0",
+    "type": "command",
+    "title": "sal - 查看原命令的文档",
+    "content": "tldr set-alias",
+    "group": "Windows",
+    "description": "sal: 此命令为 `Set-Alias` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "sal",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-windows-pathping-0",
     "type": "command",
     "title": "pathping - Ping 并追踪主机的路由",
@@ -870,6 +885,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-windows-scb-0",
+    "type": "command",
+    "title": "scb - 查看原命令的文档",
+    "content": "tldr Set-Clipboard",
+    "group": "Windows",
+    "description": "scb: 此命令为 `Set-Clipboard` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "scb",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-windows-wsl-0",
     "type": "command",
     "title": "wsl - 启动 Linux Shell（在默认发行版中）",
@@ -1074,6 +1104,21 @@
     "tags": [
       "windows",
       "iwr",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-windows-ghy-0",
+    "type": "command",
+    "title": "ghy - 查看原命令的文档",
+    "content": "tldr Get-History",
+    "group": "Windows",
+    "description": "ghy: 此命令为 `Get-History` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "ghy",
       "tldr",
       "zh"
     ],
@@ -1412,10 +1457,10 @@
   {
     "id": "tldr-zh-windows-sls-0",
     "type": "command",
-    "title": "sls - 原命令的文档在",
+    "title": "sls - 查看原命令的文档",
     "content": "tldr select-string",
     "group": "Windows",
-    "description": "sls: 这是 `Select-String` 命令的一个别名。 (原命令的文档在)",
+    "description": "sls: 此命令为 `Select-String` 的别名。 (查看原命令的文档)",
     "tags": [
       "windows",
       "sls",
@@ -1800,6 +1845,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-windows-h-0",
+    "type": "command",
+    "title": "h - 查看原命令的文档",
+    "content": "tldr Get-History",
+    "group": "Windows",
+    "description": "h: 此命令为 `Get-History` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "h",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-windows-rni-0",
+    "type": "command",
+    "title": "rni - 查看原命令的文档",
+    "content": "tldr Rename-Item",
+    "group": "Windows",
+    "description": "rni: 此命令为 `Rename-Item` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "rni",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-windows-cls-0",
     "type": "command",
     "title": "cls - 清屏",
@@ -1929,6 +2004,36 @@
     "tags": [
       "windows",
       "del",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-windows-history-0",
+    "type": "command",
+    "title": "history - 查看原命令的文档",
+    "content": "tldr Get-History",
+    "group": "Windows",
+    "description": "history: 此命令为 `Get-History` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "history",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-windows-gcb-0",
+    "type": "command",
+    "title": "gcb - 查看原命令的文档",
+    "content": "tldr get-clipboard",
+    "group": "Windows",
+    "description": "gcb: 此命令为 `Get-Clipboard` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "gcb",
       "tldr",
       "zh"
     ],
@@ -2355,6 +2460,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-windows-ren-0",
+    "type": "command",
+    "title": "ren - 查看原命令的文档",
+    "content": "tldr Rename-Item",
+    "group": "Windows",
+    "description": "ren: 此命令为 `Rename-Item` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "ren",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-windows-print.win-0",
     "type": "command",
     "title": "print.win - 将文本文件打印到默认的打印机",
@@ -2565,12 +2685,27 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-windows-clhy-0",
+    "type": "command",
+    "title": "clhy - 查看原命令的文档",
+    "content": "tldr Clear-History",
+    "group": "Windows",
+    "description": "clhy: 此命令为 `Clear-History` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "clhy",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-windows-clist-0",
     "type": "command",
-    "title": "clist - 原命令的文档在",
+    "title": "clist - 查看原命令的文档",
     "content": "tldr choco list",
     "group": "Windows",
-    "description": "clist: 这是 `choco list` 命令的一个别名。 (原命令的文档在)",
+    "description": "clist: 此命令为 `choco list` 的别名。 (查看原命令的文档)",
     "tags": [
       "windows",
       "clist",
@@ -3405,6 +3540,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-windows-slmgr-0",
+    "type": "command",
+    "title": "slmgr - 查看原命令的文档",
+    "content": "tldr slmgr.vbs",
+    "group": "Windows",
+    "description": "slmgr: 此命令为 `slmgr.vbs` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "slmgr",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-windows-mkdir-0",
     "type": "command",
     "title": "mkdir - 创建一个目录",
@@ -3557,10 +3707,10 @@
   {
     "id": "tldr-zh-windows-pwsh-where-0",
     "type": "command",
-    "title": "pwsh-where - 原命令的文档在",
+    "title": "pwsh-where - 查看原命令的文档",
     "content": "tldr Where-Object",
     "group": "Windows",
-    "description": "pwsh-where: 这是 `Where-Object` 命令的一个别名。 (原命令的文档在)",
+    "description": "pwsh-where: 此命令为 `Where-Object` 的别名。 (查看原命令的文档)",
     "tags": [
       "windows",
       "pwsh-where",
@@ -3894,6 +4044,21 @@
     "tags": [
       "windows",
       "reg-add",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-windows-bleachbit-0",
+    "type": "command",
+    "title": "bleachbit - 查看原命令的文档",
+    "content": "tldr bleachbit_console",
+    "group": "Windows",
+    "description": "bleachbit: 此命令为 `bleachbit_console` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "bleachbit",
       "tldr",
       "zh"
     ],
@@ -4547,10 +4712,10 @@
   {
     "id": "tldr-zh-windows-cpush-0",
     "type": "command",
-    "title": "cpush - 原命令的文档在",
+    "title": "cpush - 查看原命令的文档",
     "content": "tldr choco push",
     "group": "Windows",
-    "description": "cpush: 这是 `choco push` 命令的一个别名。 (原命令的文档在)",
+    "description": "cpush: 此命令为 `choco push` 的别名。 (查看原命令的文档)",
     "tags": [
       "windows",
       "cpush",
@@ -5475,6 +5640,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-windows-ventoy-0",
+    "type": "command",
+    "title": "ventoy - 查看原命令的文档",
+    "content": "tldr ventoy2disk",
+    "group": "Windows",
+    "description": "ventoy: 此命令为 `Ventoy2Disk` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "windows",
+      "ventoy",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-windows-takeown-0",
     "type": "command",
     "title": "takeown - 取得指定文件的所有权",
@@ -5537,10 +5717,10 @@
   {
     "id": "tldr-zh-windows-cuninst-0",
     "type": "command",
-    "title": "cuninst - 原命令的文档在",
+    "title": "cuninst - 查看原命令的文档",
     "content": "tldr choco uninstall",
     "group": "Windows",
-    "description": "cuninst: 这是 `choco uninstall` 命令的一个别名。 (原命令的文档在)",
+    "description": "cuninst: 此命令为 `choco uninstall` 的别名。 (查看原命令的文档)",
     "tags": [
       "windows",
       "cuninst",
@@ -6002,10 +6182,10 @@
   {
     "id": "tldr-zh-windows-cinst-0",
     "type": "command",
-    "title": "cinst - 原命令的文档在",
+    "title": "cinst - 查看原命令的文档",
     "content": "tldr choco install",
     "group": "Windows",
-    "description": "cinst: 这是 `choco install` 命令的一个别名。 (原命令的文档在)",
+    "description": "cinst: 此命令为 `choco install` 的别名。 (查看原命令的文档)",
     "tags": [
       "windows",
       "cinst",

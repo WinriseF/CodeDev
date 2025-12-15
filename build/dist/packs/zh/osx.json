@@ -2535,6 +2535,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-osx-llvm-lipo-0",
+    "type": "command",
+    "title": "llvm-lipo - 查看原命令的文档",
+    "content": "tldr lipo",
+    "group": "macOS",
+    "description": "llvm-lipo: 此命令为 `lipo` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "osx",
+      "llvm-lipo",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-osx-gshuf-0",
     "type": "command",
     "title": "gshuf - 原命令的文档在",
@@ -6152,10 +6167,10 @@
   {
     "id": "tldr-zh-osx-aa-0",
     "type": "command",
-    "title": "aa - 原命令的文档在",
+    "title": "aa - 查看原命令的文档",
     "content": "tldr yaa",
     "group": "macOS",
-    "description": "aa: 这是 `yaa` 命令的一个别名。 (原命令的文档在)",
+    "description": "aa: 此命令为 `yaa` 的别名。 (查看原命令的文档)",
     "tags": [
       "osx",
       "aa",

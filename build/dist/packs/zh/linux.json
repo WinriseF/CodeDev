@@ -45,6 +45,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-systemctl-force-reload-0",
+    "type": "command",
+    "title": "systemctl-force-reload - 查看原命令的文档",
+    "content": "tldr systemctl try-reload-or-restart",
+    "group": "Linux 运维",
+    "description": "systemctl-force-reload: 此命令为 `systemctl try-reload-or-restart` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "systemctl-force-reload",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-archinstall-0",
     "type": "command",
     "title": "archinstall - 启动交互式的安装程序",
@@ -705,12 +720,27 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-systemctl-condreload-0",
+    "type": "command",
+    "title": "systemctl-condreload - 查看原命令的文档",
+    "content": "tldr systemctl try-reload-or-restart",
+    "group": "Linux 运维",
+    "description": "systemctl-condreload: 此命令为 `systemctl try-reload-or-restart` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "systemctl-condreload",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-cc-0",
     "type": "command",
-    "title": "cc - 原命令的文档在",
+    "title": "cc - 查看原命令的文档",
     "content": "tldr gcc",
     "group": "Linux 运维",
-    "description": "cc: 这是 `gcc` 命令的一个别名。 (原命令的文档在)",
+    "description": "cc: 此命令为 `gcc` 的别名。 (查看原命令的文档)",
     "tags": [
       "linux",
       "cc",
@@ -1035,6 +1065,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-pacman-q-0",
+    "type": "command",
+    "title": "pacman-q - 查看原命令的文档",
+    "content": "tldr pacman query",
+    "group": "Linux 运维",
+    "description": "pacman-q: 此命令为 `pacman --query` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacman-q",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-debuild-0",
     "type": "command",
     "title": "debuild - 在当前目录中生成软件包",
@@ -1074,6 +1119,21 @@
     "tags": [
       "linux",
       "debuild",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-pacman-r-0",
+    "type": "command",
+    "title": "pacman-r - 查看原命令的文档",
+    "content": "tldr pacman remove",
+    "group": "Linux 运维",
+    "description": "pacman-r: 此命令为 `pacman --remove` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacman-r",
       "tldr",
       "zh"
     ],
@@ -1284,6 +1344,21 @@
     "tags": [
       "linux",
       "bitwise",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-cs2-0",
+    "type": "command",
+    "title": "cs2 - 查看原命令的文档",
+    "content": "tldr counter strike 2",
+    "group": "Linux 运维",
+    "description": "cs2: 此命令为 `counter strike 2` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "cs2",
       "tldr",
       "zh"
     ],
@@ -1967,10 +2042,10 @@
   {
     "id": "tldr-zh-linux-ubuntu-bug-0",
     "type": "command",
-    "title": "ubuntu-bug - 原命令的文档在",
+    "title": "ubuntu-bug - 查看原命令的文档",
     "content": "tldr apport-bug",
     "group": "Linux 运维",
-    "description": "ubuntu-bug: 这是 `apport-bug` 命令的一个别名。 (原命令的文档在)",
+    "description": "ubuntu-bug: 此命令为 `apport-bug` 的别名。 (查看原命令的文档)",
     "tags": [
       "linux",
       "ubuntu-bug",
@@ -2070,6 +2145,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-limine-scan-0",
+    "type": "command",
+    "title": "limine-scan - 查看原命令的文档",
+    "content": "tldr limine-entry-tool",
+    "group": "Linux 运维",
+    "description": "limine-scan: 此命令为 `limine-entry-tool --scan` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "limine-scan",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-a2dissite-0",
     "type": "command",
     "title": "a2dissite - 禁用虚拟主机",
@@ -2102,10 +2192,10 @@
   {
     "id": "tldr-zh-linux-apt-add-repository-0",
     "type": "command",
-    "title": "apt-add-repository - 原命令的文档在",
+    "title": "apt-add-repository - 查看原命令的文档",
     "content": "tldr add-apt-repository",
     "group": "Linux 运维",
-    "description": "apt-add-repository: 这是 `add-apt-repository` 命令的一个别名。 (原命令的文档在)",
+    "description": "apt-add-repository: 此命令为 `add-apt-repository` 的别名。 (查看原命令的文档)",
     "tags": [
       "linux",
       "apt-add-repository",
@@ -2319,6 +2409,36 @@
     "tags": [
       "linux",
       "oma",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-ip-route-show-0",
+    "type": "command",
+    "title": "ip-route-show - 查看原命令的文档",
+    "content": "tldr ip route list",
+    "group": "Linux 运维",
+    "description": "ip-route-show: 此命令为 `ip route list` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "ip-route-show",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-abrt-0",
+    "type": "command",
+    "title": "abrt - 查看原命令的文档",
+    "content": "tldr abrt-cli",
+    "group": "Linux 运维",
+    "description": "abrt: 此命令为 `abrt-cli` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "abrt",
       "tldr",
       "zh"
     ],
@@ -2685,6 +2805,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-yum-config-manager-0",
+    "type": "command",
+    "title": "yum-config-manager - 查看原命令的文档",
+    "content": "tldr dnf config-manager",
+    "group": "Linux 运维",
+    "description": "yum-config-manager: 此命令为 `dnf config-manager` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "yum-config-manager",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-unix2mac-0",
     "type": "command",
     "title": "unix2mac - 更改文件的行尾",
@@ -2754,6 +2889,21 @@
     "tags": [
       "linux",
       "mkfs.btrfs",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-hwloc-ls-0",
+    "type": "command",
+    "title": "hwloc-ls - 查看原命令的文档",
+    "content": "tldr lstopo-no-graphics",
+    "group": "Linux 运维",
+    "description": "hwloc-ls: 此命令为 `lstopo-no-graphics` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "hwloc-ls",
       "tldr",
       "zh"
     ],
@@ -2874,6 +3024,21 @@
     "tags": [
       "linux",
       "paru",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-uname26-0",
+    "type": "command",
+    "title": "uname26 - 查看原命令的文档",
+    "content": "tldr setarch",
+    "group": "Linux 运维",
+    "description": "uname26: 此命令为 `setarch uname26` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "uname26",
       "tldr",
       "zh"
     ],
@@ -3129,6 +3294,21 @@
     "tags": [
       "linux",
       "cryptsetup-luksformat",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-shntool-split-0",
+    "type": "command",
+    "title": "shntool-split - 查看原命令的文档",
+    "content": "tldr shnsplit",
+    "group": "Linux 运维",
+    "description": "shntool-split: 此命令为 `shnsplit` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "shntool-split",
       "tldr",
       "zh"
     ],
@@ -3414,6 +3594,21 @@
     "tags": [
       "linux",
       "apt-clone",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-lrunzip-0",
+    "type": "command",
+    "title": "lrunzip - 查看原命令的文档",
+    "content": "tldr lrzip",
+    "group": "Linux 运维",
+    "description": "lrunzip: 此命令为 `lrzip --decompress` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "lrunzip",
       "tldr",
       "zh"
     ],
@@ -3720,6 +3915,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-pacman-u-0",
+    "type": "command",
+    "title": "pacman-u - 查看原命令的文档",
+    "content": "tldr pacman upgrade",
+    "group": "Linux 运维",
+    "description": "pacman-u: 此命令为 `pacman --upgrade` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacman-u",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-i386-0",
+    "type": "command",
+    "title": "i386 - 查看原命令的文档",
+    "content": "tldr setarch",
+    "group": "Linux 运维",
+    "description": "i386: 此命令为 `setarch i386` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "i386",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-iwctl-0",
     "type": "command",
     "title": "iwctl - 启动交互模式，在此模式您可以直接输入命令并带有自动补全",
@@ -3810,6 +4035,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-systemd-umount-0",
+    "type": "command",
+    "title": "systemd-umount - 查看原命令的文档",
+    "content": "tldr systemd-mount",
+    "group": "Linux 运维",
+    "description": "systemd-umount: 此命令为 `systemd-mount --umount` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "systemd-umount",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-add-apt-repository-0",
     "type": "command",
     "title": "add-apt-repository - 添加一个新的 APT 仓库",
@@ -3864,6 +4104,21 @@
     "tags": [
       "linux",
       "add-apt-repository",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-nmtui-edit-0",
+    "type": "command",
+    "title": "nmtui-edit - 查看原命令的文档",
+    "content": "tldr nmtui",
+    "group": "Linux 运维",
+    "description": "nmtui-edit: 此命令为 `nmtui edit` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "nmtui-edit",
       "tldr",
       "zh"
     ],
@@ -4245,6 +4500,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-pacman-s-0",
+    "type": "command",
+    "title": "pacman-s - 查看原命令的文档",
+    "content": "tldr pacman sync",
+    "group": "Linux 运维",
+    "description": "pacman-s: 此命令为 `pacman --sync` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacman-s",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-qm-unlink-0",
+    "type": "command",
+    "title": "qm-unlink - 查看原命令的文档",
+    "content": "tldr qm disk unlink",
+    "group": "Linux 运维",
+    "description": "qm-unlink: 此命令为 `qm disk unlink` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "qm-unlink",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-sacctmgr-0",
     "type": "command",
     "title": "sacctmgr - 显示现有配置",
@@ -4314,6 +4599,51 @@
     "tags": [
       "linux",
       "line",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-linux64-0",
+    "type": "command",
+    "title": "linux64 - 查看原命令的文档",
+    "content": "tldr setarch",
+    "group": "Linux 运维",
+    "description": "linux64: 此命令为 `setarch linux64` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "linux64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-avahi-resolve-host-name-0",
+    "type": "command",
+    "title": "avahi-resolve-host-name - 查看原命令的文档",
+    "content": "tldr avahi-resolve",
+    "group": "Linux 运维",
+    "description": "avahi-resolve-host-name: 此命令为 `avahi-resolve --name` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "avahi-resolve-host-name",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-steamos-boot-install-0",
+    "type": "command",
+    "title": "steamos-boot-install - 查看原命令的文档",
+    "content": "tldr steamos-finalize-install",
+    "group": "Linux 运维",
+    "description": "steamos-boot-install: 此命令为 `steamos-finalize-install` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "steamos-boot-install",
       "tldr",
       "zh"
     ],
@@ -4710,6 +5040,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-nmtui-connect-0",
+    "type": "command",
+    "title": "nmtui-connect - 查看原命令的文档",
+    "content": "tldr nmtui",
+    "group": "Linux 运维",
+    "description": "nmtui-connect: 此命令为 `nmtui connect` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "nmtui-connect",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-dnf-deplist-0",
+    "type": "command",
+    "title": "dnf-deplist - 查看原命令的文档",
+    "content": "tldr dnf repoquery",
+    "group": "Linux 运维",
+    "description": "dnf-deplist: 此命令为 `dnf repoquery --deplist` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "dnf-deplist",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-lsblk-0",
     "type": "command",
     "title": "lsblk - 以树状格式列出所有存储设备",
@@ -4965,6 +5325,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-trash-put-0",
+    "type": "command",
+    "title": "trash-put - 查看原命令的文档",
+    "content": "tldr trash",
+    "group": "Linux 运维",
+    "description": "trash-put: 此命令为 `trash` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "trash-put",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-btrfs-0",
     "type": "command",
     "title": "btrfs - 创建子卷",
@@ -5079,6 +5454,21 @@
     "tags": [
       "linux",
       "aplay",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-libuser-lid-0",
+    "type": "command",
+    "title": "libuser-lid - 查看原命令的文档",
+    "content": "tldr lid.libuser",
+    "group": "Linux 运维",
+    "description": "libuser-lid: 此命令为 `lid` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "libuser-lid",
       "tldr",
       "zh"
     ],
@@ -5370,6 +5760,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-avahi-resolve-address-0",
+    "type": "command",
+    "title": "avahi-resolve-address - 查看原命令的文档",
+    "content": "tldr avahi-resolve",
+    "group": "Linux 运维",
+    "description": "avahi-resolve-address: 此命令为 `avahi-resolve --address` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "avahi-resolve-address",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-deluser-0",
     "type": "command",
     "title": "deluser - 删除用户",
@@ -5484,6 +5889,21 @@
     "tags": [
       "linux",
       "arch-chroot",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-x86_64-0",
+    "type": "command",
+    "title": "x86_64 - 查看原命令的文档",
+    "content": "tldr setarch",
+    "group": "Linux 运维",
+    "description": "x86_64: 此命令为 `setarch x86_64` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "x86_64",
       "tldr",
       "zh"
     ],
@@ -5610,15 +6030,45 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-qm-importdisk-0",
+    "type": "command",
+    "title": "qm-importdisk - 查看原命令的文档",
+    "content": "tldr qm disk import",
+    "group": "Linux 运维",
+    "description": "qm-importdisk: 此命令为 `qm disk import` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "qm-importdisk",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-megadl-0",
     "type": "command",
-    "title": "megadl - 原命令的文档在",
+    "title": "megadl - 查看原命令的文档",
     "content": "tldr megatools-dl",
     "group": "Linux 运维",
-    "description": "megadl: 这是 `megatools-dl` 命令的一个别名。 (原命令的文档在)",
+    "description": "megadl: 此命令为 `megatools-dl` 的别名。 (查看原命令的文档)",
     "tags": [
       "linux",
       "megadl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-linux32-0",
+    "type": "command",
+    "title": "linux32 - 查看原命令的文档",
+    "content": "tldr setarch",
+    "group": "Linux 运维",
+    "description": "linux32: 此命令为 `setarch linux32` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "linux32",
       "tldr",
       "zh"
     ],
@@ -6165,6 +6615,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-apparmor_status-0",
+    "type": "command",
+    "title": "apparmor_status - 查看原命令的文档",
+    "content": "tldr aa-status",
+    "group": "Linux 运维",
+    "description": "apparmor_status: 此命令为 `aa-status` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "apparmor_status",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-auracle-0",
     "type": "command",
     "title": "auracle - 显示符合一个正则表达式的 AUR 包",
@@ -6227,13 +6692,28 @@
   {
     "id": "tldr-zh-linux-ncal-0",
     "type": "command",
-    "title": "ncal - 原命令的文档在",
+    "title": "ncal - 查看原命令的文档",
     "content": "tldr cal",
     "group": "Linux 运维",
-    "description": "ncal: 这是 `cal` 命令的一个别名。 (原命令的文档在)",
+    "description": "ncal: 此命令为 `cal` 的别名。 (查看原命令的文档)",
     "tags": [
       "linux",
       "ncal",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-lookandfeeltool-0",
+    "type": "command",
+    "title": "lookandfeeltool - 查看原命令的文档",
+    "content": "tldr plasma-apply-lookandfeel",
+    "group": "Linux 运维",
+    "description": "lookandfeeltool: 此命令为 `plasma-apply-lookandfeel` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "lookandfeeltool",
       "tldr",
       "zh"
     ],
@@ -6339,6 +6819,21 @@
     "tags": [
       "linux",
       "at",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-pacman-t-0",
+    "type": "command",
+    "title": "pacman-t - 查看原命令的文档",
+    "content": "tldr pacman deptest",
+    "group": "Linux 运维",
+    "description": "pacman-t: 此命令为 `pacman --deptest` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacman-t",
       "tldr",
       "zh"
     ],
@@ -6624,6 +7119,21 @@
     "tags": [
       "linux",
       "atop",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-systemctl-condstop-0",
+    "type": "command",
+    "title": "systemctl-condstop - 查看原命令的文档",
+    "content": "tldr systemctl stop",
+    "group": "Linux 运维",
+    "description": "systemctl-condstop: 此命令为 `systemctl stop` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "systemctl-condstop",
       "tldr",
       "zh"
     ],
@@ -7155,6 +7665,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-pacman-d-0",
+    "type": "command",
+    "title": "pacman-d - 查看原命令的文档",
+    "content": "tldr pacman database",
+    "group": "Linux 运维",
+    "description": "pacman-d: 此命令为 `pacman --database` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacman-d",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-minicom-0",
     "type": "command",
     "title": "minicom - 打开给定的串行端口",
@@ -7545,6 +8070,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-pw-record-0",
+    "type": "command",
+    "title": "pw-record - 查看原命令的文档",
+    "content": "tldr pw-cat",
+    "group": "Linux 运维",
+    "description": "pw-record: 此命令为 `pw-cat --record` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pw-record",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-bluetoothd-0",
     "type": "command",
     "title": "bluetoothd - 启动守护进程",
@@ -7620,6 +8160,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-update-grub-0",
+    "type": "command",
+    "title": "update-grub - 查看原命令的文档",
+    "content": "tldr grub-mkconfig",
+    "group": "Linux 运维",
+    "description": "update-grub: 此命令为 `grub-mkconfig --output /boot/grub/grub.cfg` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "update-grub",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-a2enconf-0",
     "type": "command",
     "title": "a2enconf - 启用配置文件",
@@ -7644,6 +8199,51 @@
     "tags": [
       "linux",
       "a2enconf",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-pct-move_volume-0",
+    "type": "command",
+    "title": "pct-move_volume - 查看原命令的文档",
+    "content": "tldr pct move-volume",
+    "group": "Linux 运维",
+    "description": "pct-move_volume: 此命令为 `pct move-volume` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pct-move_volume",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-pacremove-0",
+    "type": "command",
+    "title": "pacremove - 查看原命令的文档",
+    "content": "tldr pactrans",
+    "group": "Linux 运维",
+    "description": "pacremove: 此命令为 `pactrans --remove` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacremove",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-qm-move-disk-0",
+    "type": "command",
+    "title": "qm-move-disk - 查看原命令的文档",
+    "content": "tldr qm disk move",
+    "group": "Linux 运维",
+    "description": "qm-move-disk: 此命令为 `qm disk move` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "qm-move-disk",
       "tldr",
       "zh"
     ],
@@ -8775,6 +9375,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-pacman-f-0",
+    "type": "command",
+    "title": "pacman-f - 查看原命令的文档",
+    "content": "tldr pacman files",
+    "group": "Linux 运维",
+    "description": "pacman-f: 此命令为 `pacman --files` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacman-f",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-qm-resize-0",
+    "type": "command",
+    "title": "qm-resize - 查看原命令的文档",
+    "content": "tldr qm disk resize",
+    "group": "Linux 运维",
+    "description": "qm-resize: 此命令为 `qm disk resize` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "qm-resize",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-nmtui-hostname-0",
+    "type": "command",
+    "title": "nmtui-hostname - 查看原命令的文档",
+    "content": "tldr nmtui",
+    "group": "Linux 运维",
+    "description": "nmtui-hostname: 此命令为 `nmtui hostname` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "nmtui-hostname",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-as-0",
     "type": "command",
     "title": "as - 汇编一个文件，输出为 a.out",
@@ -8904,6 +9549,21 @@
     "tags": [
       "linux",
       "apt-mark",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-lex-0",
+    "type": "command",
+    "title": "lex - 查看原命令的文档",
+    "content": "tldr flex",
+    "group": "Linux 运维",
+    "description": "lex: 此命令为 `flex` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "lex",
       "tldr",
       "zh"
     ],
@@ -9212,13 +9872,28 @@
   {
     "id": "tldr-zh-linux-alternatives-0",
     "type": "command",
-    "title": "alternatives - 原命令的文档在",
+    "title": "alternatives - 查看原命令的文档",
     "content": "tldr update-alternatives",
     "group": "Linux 运维",
-    "description": "alternatives: 这是 `update-alternatives` 命令的一个别名。 (原命令的文档在)",
+    "description": "alternatives: 此命令为 `update-alternatives` 的别名。 (查看原命令的文档)",
     "tags": [
       "linux",
       "alternatives",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-qm-move_disk-0",
+    "type": "command",
+    "title": "qm-move_disk - 查看原命令的文档",
+    "content": "tldr qm disk move",
+    "group": "Linux 运维",
+    "description": "qm-move_disk: 此命令为 `qm disk move` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "qm-move_disk",
       "tldr",
       "zh"
     ],
@@ -9294,6 +9969,51 @@
     "tags": [
       "linux",
       "betterlockscreen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-mkfs.vfat-0",
+    "type": "command",
+    "title": "mkfs.vfat - 查看原命令的文档",
+    "content": "tldr mkfs.fat",
+    "group": "Linux 运维",
+    "description": "mkfs.vfat: 此命令为 `mkfs.fat` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "mkfs.vfat",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-lrzuntar-0",
+    "type": "command",
+    "title": "lrzuntar - 查看原命令的文档",
+    "content": "tldr lrztar",
+    "group": "Linux 运维",
+    "description": "lrzuntar: 此命令为 `lrztar --decompress` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "lrzuntar",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-systemctl-reload-or-try-restart-0",
+    "type": "command",
+    "title": "systemctl-reload-or-try-restart - 查看原命令的文档",
+    "content": "tldr systemctl try-reload-or-restart",
+    "group": "Linux 运维",
+    "description": "systemctl-reload-or-try-restart: 此命令为 `systemctl try-reload-or-restart` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "systemctl-reload-or-try-restart",
       "tldr",
       "zh"
     ],
@@ -9947,13 +10667,58 @@
   {
     "id": "tldr-zh-linux-batcat-0",
     "type": "command",
-    "title": "batcat - 原命令的文档在",
+    "title": "batcat - 查看原命令的文档",
     "content": "tldr bat",
     "group": "Linux 运维",
-    "description": "batcat: 这是 `bat` 命令的一个别名。 (原命令的文档在)",
+    "description": "batcat: 此命令为 `bat` 的别名。 (查看原命令的文档)",
     "tags": [
       "linux",
       "batcat",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-qm-rescan-0",
+    "type": "command",
+    "title": "qm-rescan - 查看原命令的文档",
+    "content": "tldr qm disk rescan",
+    "group": "Linux 运维",
+    "description": "qm-rescan: 此命令为 `qm disk rescan` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "qm-rescan",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-pw-play-0",
+    "type": "command",
+    "title": "pw-play - 查看原命令的文档",
+    "content": "tldr pw-cat",
+    "group": "Linux 运维",
+    "description": "pw-play: 此命令为 `pw-cat --playback` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pw-play",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-pacinstall-0",
+    "type": "command",
+    "title": "pacinstall - 查看原命令的文档",
+    "content": "tldr pactrans",
+    "group": "Linux 运维",
+    "description": "pacinstall: 此命令为 `pactrans --install` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "pacinstall",
       "tldr",
       "zh"
     ],
@@ -10014,6 +10779,21 @@
     "tags": [
       "linux",
       "head",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-br-0",
+    "type": "command",
+    "title": "br - 查看原命令的文档",
+    "content": "tldr broot",
+    "group": "Linux 运维",
+    "description": "br: 此命令为 `broot` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "br",
       "tldr",
       "zh"
     ],
@@ -10215,6 +10995,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-linux-qm-agent-0",
+    "type": "command",
+    "title": "qm-agent - 查看原命令的文档",
+    "content": "tldr qm guest cmd",
+    "group": "Linux 运维",
+    "description": "qm-agent: 此命令为 `qm guest cmd` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "qm-agent",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-linux-dex-0",
     "type": "command",
     "title": "dex - 执行自动启动文件夹中的所有程序",
@@ -10314,6 +11109,21 @@
     "tags": [
       "linux",
       "dex",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-linux-systemctl-condrestart-0",
+    "type": "command",
+    "title": "systemctl-condrestart - 查看原命令的文档",
+    "content": "tldr systemctl try-restart",
+    "group": "Linux 运维",
+    "description": "systemctl-condrestart: 此命令为 `systemctl try-restart` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "linux",
+      "systemctl-condrestart",
       "tldr",
       "zh"
     ],

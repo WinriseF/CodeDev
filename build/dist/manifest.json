@@ -1,5 +1,5 @@
 {
-  "updated_at": 1765698453213,
+  "updated_at": 1765762057848,
   "version": "2.0.0",
   "packages": [
     {
@@ -7,9 +7,9 @@
       "language": "en",
       "platform": "llm",
       "name": "ChatGPT Prompts (English)",
-      "description": "Collection of 319 role-play prompts.",
-      "count": 319,
-      "size_kb": 330.17,
+      "description": "Collection of 346 role-play prompts.",
+      "count": 346,
+      "size_kb": 377.25,
       "url": "packs/prompts-en-roles.json",
       "category": "prompt"
     },
@@ -40,10 +40,54 @@
       "language": "zh",
       "platform": "windows",
       "name": "Windows (ZH)",
-      "description": "Contains 406 zh commands for windows.",
-      "count": 406,
-      "size_kb": 175,
+      "description": "Contains 418 zh commands for windows.",
+      "count": 418,
+      "size_kb": 179,
       "url": "packs/zh/windows.json",
+      "category": "command"
+    },
+    {
+      "id": "zh-dos",
+      "language": "zh",
+      "platform": "dos",
+      "name": "Dos (ZH)",
+      "description": "Contains 1 zh commands for dos.",
+      "count": 1,
+      "size_kb": 0,
+      "url": "packs/zh/dos.json",
+      "category": "command"
+    },
+    {
+      "id": "zh-openbsd",
+      "language": "zh",
+      "platform": "openbsd",
+      "name": "Openbsd (ZH)",
+      "description": "Contains 2 zh commands for openbsd.",
+      "count": 2,
+      "size_kb": 1,
+      "url": "packs/zh/openbsd.json",
+      "category": "command"
+    },
+    {
+      "id": "zh-netbsd",
+      "language": "zh",
+      "platform": "netbsd",
+      "name": "Netbsd (ZH)",
+      "description": "Contains 2 zh commands for netbsd.",
+      "count": 2,
+      "size_kb": 1,
+      "url": "packs/zh/netbsd.json",
+      "category": "command"
+    },
+    {
+      "id": "zh-freebsd",
+      "language": "zh",
+      "platform": "freebsd",
+      "name": "Freebsd (ZH)",
+      "description": "Contains 5 zh commands for freebsd.",
+      "count": 5,
+      "size_kb": 2,
+      "url": "packs/zh/freebsd.json",
       "category": "command"
     },
     {
@@ -51,9 +95,9 @@
       "language": "zh",
       "platform": "linux",
       "name": "Linux 运维 (ZH)",
-      "description": "Contains 704 zh commands for linux.",
-      "count": 704,
-      "size_kb": 316,
+      "description": "Contains 758 zh commands for linux.",
+      "count": 758,
+      "size_kb": 338,
       "url": "packs/zh/linux.json",
       "category": "command"
     },
@@ -62,9 +106,9 @@
       "language": "zh",
       "platform": "common",
       "name": "通用工具 (Common) (ZH)",
-      "description": "Contains 3121 zh commands for common.",
-      "count": 3121,
-      "size_kb": 1519,
+      "description": "Contains 3230 zh commands for common.",
+      "count": 3230,
+      "size_kb": 1561,
       "url": "packs/zh/common.json",
       "category": "command"
     },
@@ -73,8 +117,8 @@
       "language": "zh",
       "platform": "osx",
       "name": "macOS (ZH)",
-      "description": "Contains 462 zh commands for osx.",
-      "count": 462,
+      "description": "Contains 463 zh commands for osx.",
+      "count": 463,
       "size_kb": 193,
       "url": "packs/zh/osx.json",
       "category": "command"
@@ -172,9 +216,9 @@
       "language": "en",
       "platform": "common",
       "name": "Common Tools (EN)",
-      "description": "Contains 19189 en commands for common.",
-      "count": 19189,
-      "size_kb": 9299,
+      "description": "Contains 19200 en commands for common.",
+      "count": 19200,
+      "size_kb": 9305,
       "url": "packs/en/common.json",
       "category": "command"
     },
