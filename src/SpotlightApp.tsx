@@ -317,7 +317,11 @@ export default function SpotlightApp() {
   useEffect(() => {
     const handleGlobalKeyDown = async (e: KeyboardEvent) => {
       if (e.isComposing) return;
-
+      
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+          e.preventDefault();
+          return;
+      }
       if (e.key === 'Tab') {
           e.preventDefault();
           toggleMode();

@@ -94,6 +94,9 @@ function App() {
         if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
             e.preventDefault();
         }
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+            e.preventDefault();
+        }
     };
 
     document.addEventListener('contextmenu', handleContextMenu);
