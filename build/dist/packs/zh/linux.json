@@ -9575,7 +9575,7 @@
     "title": "apt - 更新可用软件包及其版本列表（推荐在运行其他 APT 命令前首先运行该命令）",
     "content": "sudo apt update",
     "group": "Linux 运维",
-    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get` 。 (更新可用软件包及其版本列表（推荐在运行其他 APT 命令前首先运行该命令）)",
+    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get`。 (更新可用软件包及其版本列表（推荐在运行其他 APT 命令前首先运行该命令）)",
     "tags": [
       "linux",
       "apt",
@@ -9590,7 +9590,7 @@
     "title": "apt - 查找指定软件包",
     "content": "apt search {{软件包}}",
     "group": "Linux 运维",
-    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get` 。 (查找指定软件包)",
+    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get`。 (查找指定软件包)",
     "tags": [
       "linux",
       "apt",
@@ -9605,7 +9605,7 @@
     "title": "apt - 显示关于指定软件包的信息",
     "content": "apt show {{软件包}}",
     "group": "Linux 运维",
-    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get` 。 (显示关于指定软件包的信息)",
+    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get`。 (显示关于指定软件包的信息)",
     "tags": [
       "linux",
       "apt",
@@ -9620,7 +9620,7 @@
     "title": "apt - 安装指定软件包或将指定软件包更新到最新版本",
     "content": "sudo apt install {{软件包}}",
     "group": "Linux 运维",
-    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get` 。 (安装指定软件包或将指定软件包更新到最新版本)",
+    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get`。 (安装指定软件包或将指定软件包更新到最新版本)",
     "tags": [
       "linux",
       "apt",
@@ -9635,7 +9635,7 @@
     "title": "apt - 移除指定软件包（使用 `purge` 同时移除其配置文件）",
     "content": "sudo apt remove {{软件包}}",
     "group": "Linux 运维",
-    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get` 。 (移除指定软件包（使用 `purge` 同时移除其配置文件）)",
+    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get`。 (移除指定软件包（使用 `purge` 同时移除其配置文件）)",
     "tags": [
       "linux",
       "apt",
@@ -9650,7 +9650,7 @@
     "title": "apt - 将所有已安装软件包更新到最新可用版本",
     "content": "sudo apt upgrade",
     "group": "Linux 运维",
-    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get` 。 (将所有已安装软件包更新到最新可用版本)",
+    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get`。 (将所有已安装软件包更新到最新可用版本)",
     "tags": [
       "linux",
       "apt",
@@ -9665,7 +9665,7 @@
     "title": "apt - 列出所有软件包",
     "content": "apt list",
     "group": "Linux 运维",
-    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get` 。 (列出所有软件包)",
+    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get`。 (列出所有软件包)",
     "tags": [
       "linux",
       "apt",
@@ -9680,7 +9680,7 @@
     "title": "apt - 列出已安装的软件包",
     "content": "apt list {{[-i|--installed]}}",
     "group": "Linux 运维",
-    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get` 。 (列出已安装的软件包)",
+    "description": "apt: 基于 Debian 的发行版上的软件包管理工具。 在 Ubuntu 16.04 及之后版本推荐用它代替 `apt-get`。 (列出已安装的软件包)",
     "tags": [
       "linux",
       "apt",
