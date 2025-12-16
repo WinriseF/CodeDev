@@ -1,10 +1,11 @@
 {
   "identifier": "migrated",
-  "description": "Permissions for CodeForge AI (v2)",
+  "description": "Permissions for CodeForge AI (v3)",
   "local": true,
   "windows": [
     "main",
-    "spotlight"
+    "spotlight",
+    "screenshot"
   ],
   "permissions": [
     "core:default",

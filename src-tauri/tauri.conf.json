@@ -76,6 +76,23 @@
         "skipTaskbar": true,
         "focus": true,
         "useHttpsScheme": true
+      },
+      {
+        "label": "screenshot",
+        "title": "Screenshot Overlay",
+        "width": 800, 
+        "height": 600,
+        "fullscreen": false, 
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "visible": false, 
+        "skipTaskbar": true,
+        "center": true,
+        "focus": true,
+        "useHttpsScheme": true,
+        "url": "/screenshot.html" 
       }
     ],
     "security": {

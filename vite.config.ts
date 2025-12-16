@@ -16,4 +16,12 @@ export default defineConfig({
       ignored: ["**/src-tauri/**"],
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        screenshot: path.resolve(__dirname, 'screenshot.html'), // 注册新入口
+      },
+    },
+  },
 });
