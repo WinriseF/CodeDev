@@ -77,7 +77,8 @@ interface AppState {
   language: AppLang;
   spotlightAppearance: SpotlightAppearance;
   //快捷键
-  spotlightShortcut: string; 
+  spotlightShortcut: string;
+  screenshotShortcut: string; 
   // Filters
   globalIgnore: IgnoreConfig;
   // Rest Reminder
@@ -102,6 +103,7 @@ interface AppState {
   updateGlobalIgnore: (type: keyof IgnoreConfig, action: 'add' | 'remove', value: string) => void;
   setAIConfig: (config: Partial<AIProviderConfig>) => void;
   setSpotlightShortcut: (shortcut: string) => void;
+  setScreenshotShortcut: (shortcut: string) => void;
   setRestReminder: (config: Partial<RestReminderConfig>) => void;
   // Async Actions
   syncModels: () => Promise<void>;
@@ -122,7 +124,8 @@ export const useAppStore = create<AppState>()(
       contextSidebarWidth: 300,
       theme: 'dark',
       language: 'zh',
-      spotlightShortcut: 'Alt+S', 
+      spotlightShortcut: 'Alt+S',
+      screenshotShortcut: 'Alt+A',
       aiConfig: DEFAULT_AI_CONFIG,
       savedProviderSettings: DEFAULT_PROVIDER_SETTINGS,
       globalIgnore: DEFAULT_GLOBAL_IGNORE,
@@ -156,6 +159,7 @@ export const useAppStore = create<AppState>()(
         return { theme };
       }),
       setSpotlightShortcut: (shortcut) => set({ spotlightShortcut: shortcut }),
+      setScreenshotShortcut: (shortcut) => set({ screenshotShortcut: shortcut }),
       setRestReminder: (config) => set((state) => ({
         restReminder: { ...state.restReminder, ...config }
       })),
@@ -257,6 +261,7 @@ export const useAppStore = create<AppState>()(
         theme: state.theme,
         language: state.language,
         spotlightShortcut: state.spotlightShortcut,
+        screenshotShortcut: state.screenshotShortcut,
         isSidebarOpen: state.isSidebarOpen,
         isPromptSidebarOpen: state.isPromptSidebarOpen,
         isContextSidebarOpen: state.isContextSidebarOpen,

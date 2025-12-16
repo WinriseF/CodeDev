@@ -12,6 +12,13 @@ use tauri::{
     Manager, State, WindowEvent,
 };
 
+mod modules {
+    pub mod screenshot;
+}
+
+use modules::screenshot::ScreenshotState;
+use modules::screenshot::capture::{capture_screen, get_current_screenshot};
+
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
@@ -89,8 +96,9 @@ fn main() {
                 let _ = window.set_focus();
             }
         }))
-        .invoke_handler(tauri::generate_handler![greet, get_file_size, get_system_info])
+        .invoke_handler(tauri::generate_handler![greet, get_file_size, get_system_info, capture_screen, get_current_screenshot])
         .setup(|app| {
+            app.manage(ScreenshotState::default());
             // 初始化系统信息收集器
             let mut system = System::new();
             system.refresh_all();

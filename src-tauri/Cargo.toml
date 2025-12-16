@@ -6,7 +6,7 @@ authors = ["you"]
 license = ""
 repository = ""
 edition = "2021"
-rust-version = "1.57"
+rust-version = "1.79"
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
@@ -25,8 +25,22 @@ tauri-plugin-os = "2"
 tauri-plugin-notification = "2"
 sysinfo = "0.31"
 
+xcap = "0.7.1"
+image = "0.25"
+base64 = "0.22"
+
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-global-shortcut = "2"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.58", features = [
+    "Media_Ocr",
+    "Globalization",
+    "Graphics_Imaging",
+    "Storage_Streams",
+    "Foundation",
+    "Foundation_Collections",
+] }
 
 [features]
 default = [ "custom-protocol" ]
