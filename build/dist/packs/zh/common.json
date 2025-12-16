@@ -4925,7 +4925,7 @@
     "title": "] - 查看 `[` 关键字的文档",
     "content": "tldr [",
     "group": "通用工具 (Common)",
-    "description": "]: 这个 shell 关键字用于结束 `[` 。 (查看 `[` 关键字的文档)",
+    "description": "]: 这个 shell 关键字用于结束 `[`。 (查看 `[` 关键字的文档)",
     "tags": [
       "common",
       "]",
@@ -23730,6 +23730,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-jira-sprints-0",
+    "type": "command",
+    "title": "jira-sprints - 查看原命令的文档",
+    "content": "tldr jira sprint",
+    "group": "通用工具 (Common)",
+    "description": "jira-sprints: 此命令为 `jira sprint` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jira-sprints",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-scp-0",
     "type": "command",
     "title": "scp - 将本地文件复制到远程主机",
@@ -25455,6 +25470,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-minetest-0",
+    "type": "command",
+    "title": "minetest - 查看原命令的文档",
+    "content": "tldr luanti",
+    "group": "通用工具 (Common)",
+    "description": "minetest: 此命令为 `luanti` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "minetest",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-sudo-0",
     "type": "command",
     "title": "sudo - 以超级用户身份运行命令",
@@ -26132,25 +26162,10 @@
   {
     "id": "tldr-zh-common-zcat-0",
     "type": "command",
-    "title": "zcat - 将 `gzip` 压缩档案的解压缩内容打印到 `stdout`",
-    "content": "zcat {{文件.txt.gz}}",
+    "title": "zcat - 查看原命令的文档",
+    "content": "tldr gzip",
     "group": "通用工具 (Common)",
-    "description": "zcat: 打印 `gzip` 压缩文件中的数据。 (将 `gzip` 压缩档案的解压缩内容打印到 `stdout`)",
-    "tags": [
-      "common",
-      "zcat",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zcat-1",
-    "type": "command",
-    "title": "zcat - 将 `gzip` 压缩档案的压缩详细信息打印到 `stdout`",
-    "content": "zcat -l {{文件.txt.gz}}",
-    "group": "通用工具 (Common)",
-    "description": "zcat: 打印 `gzip` 压缩文件中的数据。 (将 `gzip` 压缩档案的压缩详细信息打印到 `stdout`)",
+    "description": "zcat: 此命令为 `gzip --stdout --decompress` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "zcat",
@@ -34689,6 +34704,21 @@
     "tags": [
       "common",
       "jira-navigate",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-jira-issues-0",
+    "type": "command",
+    "title": "jira-issues - 查看原命令的文档",
+    "content": "tldr jira issue",
+    "group": "通用工具 (Common)",
+    "description": "jira-issues: 此命令为 `jira issue` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jira-issues",
       "tldr",
       "zh"
     ],
@@ -43815,6 +43845,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-minetestserver-0",
+    "type": "command",
+    "title": "minetestserver - 查看原命令的文档",
+    "content": "tldr luantiserver",
+    "group": "通用工具 (Common)",
+    "description": "minetestserver: 此命令为 `luantiserver` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "minetestserver",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-zola-0",
     "type": "command",
     "title": "zola - 在指定目录下创建 Zola 使用的目录结构",
@@ -45999,6 +46044,21 @@
     "tags": [
       "common",
       "jupytext",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-gunzip-0",
+    "type": "command",
+    "title": "gunzip - 查看原命令的文档",
+    "content": "tldr gzip",
+    "group": "通用工具 (Common)",
+    "description": "gunzip: 此命令为 `gzip --decompress` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "gunzip",
       "tldr",
       "zh"
     ],

@@ -6767,10 +6767,10 @@
   {
     "id": "tldr-en-linux-whiptail-2",
     "type": "command",
-    "title": "whiptail - Customise the text on the yes/no buttons",
+    "title": "whiptail - Customize the text on the yes/no buttons",
     "content": "whiptail --title \"{{title}}\" --yes-button \"{{text}}\" --no-button \"{{text}}\" --yesno \"{{message}}\" {{height_in_chars}} {{width_in_chars}}",
     "group": "Linux Ops",
-    "description": "whiptail: Display text-based dialog boxes from shell scripts. (Customise the text on the yes/no buttons)",
+    "description": "whiptail: Display text-based dialog boxes from shell scripts. (Customize the text on the yes/no buttons)",
     "tags": [
       "linux",
       "whiptail",
@@ -15665,7 +15665,7 @@
     "title": "img2txt - Set output column count to a specific value",
     "content": "img2txt {{[-W|--width]}} {{10}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set output column count to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set output column count to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -15680,7 +15680,7 @@
     "title": "img2txt - Set output line count to a specific value",
     "content": "img2txt {{[-H|--height]}} {{5}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set output line count to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set output line count to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -15695,7 +15695,7 @@
     "title": "img2txt - Set output font width to a specific value",
     "content": "img2txt {{[-x|--font-width]}} {{12}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set output font width to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set output font width to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -15710,7 +15710,7 @@
     "title": "img2txt - Set output font height to a specific value",
     "content": "img2txt {{[-y|--font-height]}} {{14}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set output font height to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set output font height to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -15725,7 +15725,7 @@
     "title": "img2txt - Set image brightness to a specific value",
     "content": "img2txt {{[-b|--brightness]}} {{2}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set image brightness to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set image brightness to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -50985,6 +50985,111 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-imhex-0",
+    "type": "command",
+    "title": "imhex - Open a file in ImHex",
+    "content": "imhex {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Open a file in ImHex)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-1",
+    "type": "command",
+    "title": "imhex - Create a new empty file",
+    "content": "imhex --new",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Create a new empty file)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-2",
+    "type": "command",
+    "title": "imhex - Open a file in the currently running ImHex instance and select a range of bytes (offsets in hexadecimal)",
+    "content": "imhex --open {{path/to/file}} --select {{0xstart_offset}} {{0xend_offset}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Open a file in the currently running ImHex instance and select a range of bytes (offsets in hexadecimal))",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-3",
+    "type": "command",
+    "title": "imhex - Display information about a file",
+    "content": "imhex --file-info {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Display information about a file)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-4",
+    "type": "command",
+    "title": "imhex - Calculate the hash of a file using a specific algorithm (`md5`, `sha1`, `sha224`, `sha256`, `sha384`, `sha512`)",
+    "content": "imhex --hash {{algorithm}} {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Calculate the hash of a file using a specific algorithm (`md5`, `sha1`, `sha224`, `sha256`, `sha384`, `sha512`))",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-5",
+    "type": "command",
+    "title": "imhex - Generate a hex dump of a file",
+    "content": "imhex --hexdump {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Generate a hex dump of a file)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-6",
+    "type": "command",
+    "title": "imhex - Display version",
+    "content": "imhex --version",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Display version)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-yumdownloader-0",
     "type": "command",
     "title": "yumdownloader - View documentation for the original command",
@@ -72410,7 +72515,7 @@
     "title": "koji-resubmit - Resubmit a task",
     "content": "koji resubmit {{task_id}}",
     "group": "Linux Ops",
-    "description": "koji-resubmit: Retry a canceled or failed task, using the same parameter as the original task. (Resubmit a task)",
+    "description": "koji-resubmit: Retry a cancelled or failed task, using the same parameter as the original task. (Resubmit a task)",
     "tags": [
       "linux",
       "koji-resubmit",
@@ -72425,7 +72530,7 @@
     "title": "koji-resubmit - Resubmit a task without waiting for it to finish",
     "content": "koji resubmit {{task_id}} --nowait",
     "group": "Linux Ops",
-    "description": "koji-resubmit: Retry a canceled or failed task, using the same parameter as the original task. (Resubmit a task without waiting for it to finish)",
+    "description": "koji-resubmit: Retry a cancelled or failed task, using the same parameter as the original task. (Resubmit a task without waiting for it to finish)",
     "tags": [
       "linux",
       "koji-resubmit",
@@ -72440,7 +72545,7 @@
     "title": "koji-resubmit - Resubmit a task without printing task information",
     "content": "koji resubmit {{task_id}} --quiet",
     "group": "Linux Ops",
-    "description": "koji-resubmit: Retry a canceled or failed task, using the same parameter as the original task. (Resubmit a task without printing task information)",
+    "description": "koji-resubmit: Retry a cancelled or failed task, using the same parameter as the original task. (Resubmit a task without printing task information)",
     "tags": [
       "linux",
       "koji-resubmit",
@@ -72455,7 +72560,7 @@
     "title": "koji-resubmit - Display help",
     "content": "koji resubmit {{[-h|--help]}}",
     "group": "Linux Ops",
-    "description": "koji-resubmit: Retry a canceled or failed task, using the same parameter as the original task. (Display help)",
+    "description": "koji-resubmit: Retry a cancelled or failed task, using the same parameter as the original task. (Display help)",
     "tags": [
       "linux",
       "koji-resubmit",
@@ -87018,7 +87123,7 @@
     "id": "tldr-en-linux-gamescope-2",
     "type": "command",
     "title": "gamescope - Upscale a 720p game to 1440p with integer scaling",
-    "content": "gamescope {{[-h|--nested-height]}} 720 {{[-H|--output-height]}} 1440 {{[-S|--scaler]}} integer -- %command%",
+    "content": "gamescope {{[-h|--nested-height]}} 720 {{[-H|--output-height]}} 1440 {{[-S|--scaler]}} integer -- {{command}}",
     "group": "Linux Ops",
     "description": "gamescope: A micro-compositor used as a game layer. (Upscale a 720p game to 1440p with integer scaling)",
     "tags": [
@@ -87033,7 +87138,7 @@
     "id": "tldr-en-linux-gamescope-3",
     "type": "command",
     "title": "gamescope - Limit a vsynced game to 30 FPS",
-    "content": "gamescope {{[-r|--nested-refresh]}} 30 -- %command%",
+    "content": "gamescope {{[-r|--nested-refresh]}} 30 -- {{command}}",
     "group": "Linux Ops",
     "description": "gamescope: A micro-compositor used as a game layer. (Limit a vsynced game to 30 FPS)",
     "tags": [
@@ -100007,10 +100112,10 @@
   {
     "id": "tldr-en-linux-rspamc-1",
     "type": "command",
-    "title": "rspamc - Train the bayesian filter to recognise an email as ham",
+    "title": "rspamc - Train the bayesian filter to recognize an email as ham",
     "content": "rspamc learn_ham {{path/to/email_file}}",
     "group": "Linux Ops",
-    "description": "rspamc: Client for `rspamd` servers. (Train the bayesian filter to recognise an email as ham)",
+    "description": "rspamc: Client for `rspamd` servers. (Train the bayesian filter to recognize an email as ham)",
     "tags": [
       "linux",
       "rspamc",
@@ -103322,10 +103427,10 @@
   {
     "id": "tldr-en-linux-compseq-5",
     "type": "command",
-    "title": "compseq - Count amino acid triplets in a FASTA file and compare to a previous run of `compseq` to calculate expected and normalised frequency values",
+    "title": "compseq - Count amino acid triplets in a FASTA file and compare to a previous run of `compseq` to calculate expected and normalized frequency values",
     "content": "compseq -sequence {{path/to/human_proteome.fasta}} -word 3 {{path/to/output_file1.comp}} -nozero -infile {{path/to/output_file2.comp}}",
     "group": "Linux Ops",
-    "description": "compseq: Calculate the composition of unique words in sequences. (Count amino acid triplets in a FASTA file and compare to a previous run of `compseq` to calculate expected and normalised frequency values)",
+    "description": "compseq: Calculate the composition of unique words in sequences. (Count amino acid triplets in a FASTA file and compare to a previous run of `compseq` to calculate expected and normalized frequency values)",
     "tags": [
       "linux",
       "compseq",
