@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- 🟢 新增：强制允许 upload: 协议和 blob: data: -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' ipc: http: https: ws: wss:; img-src 'self' asset: upload: blob: data: *;">
+    
     <title>CodeForge Screenshot</title>
     <style>
-      /* 确保截图窗口默认没有任何边距，且背景透明 */
       html, body, #root {
         margin: 0;
         padding: 0;

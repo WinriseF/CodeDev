@@ -7,6 +7,7 @@ use std::fs;
 use std::sync::{Arc, Mutex};
 use sysinfo::System;
 use tauri::{
+    http::{Response, StatusCode},
     menu::{Menu, MenuItem},
     tray::{MouseButton, TrayIconBuilder, TrayIconEvent},
     Manager, State, WindowEvent,
@@ -17,7 +18,7 @@ mod modules {
 }
 
 use modules::screenshot::ScreenshotState;
-use modules::screenshot::capture::{capture_screen, get_current_screenshot};
+use modules::screenshot::capture::{capture_screen, get_current_screenshot, init_screenshot};
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -34,11 +35,11 @@ fn get_file_size(path: String) -> u64 {
 
 #[derive(serde::Serialize)]
 struct SystemInfo {
-    cpu_usage: f64,           // 系统整体 CPU 使用率（所有核心的平均值）
-    memory_usage: u64,       // 系统已用内存
-    memory_total: u64,       // 系统总内存
-    memory_available: u64,   // 系统可用内存
-    uptime: u64,             // 系统运行时间（秒）
+    cpu_usage: f64,
+    memory_usage: u64,
+    memory_total: u64,
+    memory_available: u64,
+    uptime: u64,
 }
 
 #[tauri::command]
@@ -46,12 +47,9 @@ fn get_system_info(
     system: State<'_, Arc<Mutex<System>>>,
 ) -> SystemInfo {
     let mut sys = system.lock().unwrap();
-    
-    // 刷新系统信息（CPU 使用率需要两次刷新才能准确计算）
     sys.refresh_cpu_all();
     sys.refresh_memory();
     
-    // 获取系统整体 CPU 使用率（所有 CPU 核心的平均值）
     let cpu_usage = {
         let cpus = sys.cpus();
         if !cpus.is_empty() {
@@ -62,12 +60,9 @@ fn get_system_info(
         }
     };
     
-    // 获取系统整体内存信息
     let memory_total = sys.total_memory();
     let memory_used = sys.used_memory();
     let memory_available = sys.available_memory();
-    
-    // 系统运行时间（秒）
     let uptime = System::uptime();
     
     SystemInfo {
@@ -96,10 +91,50 @@ fn main() {
                 let _ = window.set_focus();
             }
         }))
-        .invoke_handler(tauri::generate_handler![greet, get_file_size, get_system_info, capture_screen, get_current_screenshot])
+        // --- 核心修复：更安全的内存数据提取方式 ---
+        .register_uri_scheme_protocol("upload", |ctx, request| {
+            let url = request.uri().to_string();
+            println!("🚀 [Protocol] Request: {}", url); // 必须看到这个打印！
+
+            let state = ctx.app_handle().state::<ScreenshotState>();
+            
+            // 🟢 修改点：逻辑简化，只要协议头对，或者包含 screenshot 关键字就放行
+            // 这样无论前端发 upload://screenshot 还是 upload://localhost/screenshot 都能通
+            if url.starts_with("upload:") {
+                let image_data = {
+                    let lock = state.current_image.lock().unwrap();
+                    lock.clone()
+                };
+
+                if let Some(bytes) = image_data {
+                    println!("✅ [Protocol] Sending {} bytes", bytes.len());
+                    return Response::builder()
+                        .header("Content-Type", "image/bmp")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .body(bytes)
+                        .unwrap();
+                } else {
+                    println!("❌ [Protocol] Memory empty");
+                }
+            }
+            
+            Response::builder()
+                .status(StatusCode::NOT_FOUND)
+                .body(Vec::new())
+                .unwrap()
+        })
+        // ----------------------------------------
+        .invoke_handler(tauri::generate_handler![
+            greet, 
+            get_file_size, 
+            get_system_info, 
+            capture_screen, 
+            get_current_screenshot, 
+            init_screenshot 
+        ])
         .setup(|app| {
             app.manage(ScreenshotState::default());
-            // 初始化系统信息收集器
+            
             let mut system = System::new();
             system.refresh_all();
             app.manage(Arc::new(Mutex::new(system)));
@@ -124,16 +159,12 @@ fn main() {
                     _ => {}
                 })
                 .on_tray_icon_event(|tray, event| match event {
-                    TrayIconEvent::Click {
-                        button: MouseButton::Left, ..
-                    } => {
+                    TrayIconEvent::Click { button: MouseButton::Left, .. } => {
                         let app = tray.app_handle();
                         if let Some(window) = app.get_webview_window("main") {
-                            // 1. 如果窗口最小化了，先还原
                             if window.is_minimized().unwrap_or(false) {
                                 let _ = window.unminimize();
                             }
-                            // 这会强制将窗口带到最顶层
                             let _ = window.show();
                             let _ = window.set_focus();
                         }

@@ -74,10 +74,11 @@ function App() {
         if (screenshotShortcut) {
           await register(screenshotShortcut, async (event) => {
             if (event.state === 'Pressed') {
-              console.log('[Shortcut] Screenshot triggered');
               try {
-                // 调用 Rust 后端插件命令：plugin:screenshot|capture_screen
-                await invoke('capture_screen');
+                // 1. 窗口秒开（透明状态）
+                await invoke('init_screenshot');
+                // 2. 后台并行截图 -> 写内存 -> 触发事件 -> 前端加载
+                invoke('capture_screen'); 
               } catch (err) {
                 console.error('Failed to trigger screenshot:', err);
               }

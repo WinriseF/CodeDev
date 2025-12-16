@@ -1,10 +1,10 @@
 use std::sync::Mutex;
 
-// 1. 声明子模块
 pub mod capture;
 
-// 截图状态管理
 pub struct ScreenshotState {
+    // 使用 Mutex 在内存中安全地存储图片二进制数据
+    // Option<Vec<u8>>: Some(data) 表示有截图，None 表示无
     pub current_image: Mutex<Option<Vec<u8>>>, 
 }
 

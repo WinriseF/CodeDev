@@ -6,14 +6,6 @@ import { CanvasLayer } from '@/components/screenshot/CanvasLayer';
 
 const appWindow = getCurrentWebviewWindow();
 
-// 修改接口定义
-interface CaptureResult {
-  width: number;
-  height: number;
-  image_bytes: number[]; // Rust Vec<u8> 在 JS 里是数字数组
-  scale_factor: number;
-}
-
 export default function ScreenshotApp() {
   const { setImage, reset } = useScreenshotStore();
   const [loading, setLoading] = useState(true);
@@ -30,21 +22,30 @@ export default function ScreenshotApp() {
     };
     window.addEventListener('keydown', handleKeyDown);
 
-    // 监听二进制数据推送
-    const unlistenPromise = listen<CaptureResult>('capture-taken', (event) => {
-        console.log('Binary screenshot received, size:', event.payload.image_bytes.length);
+    const unlistenPromise = listen('capture-taken', (_event) => {
+        console.log('✅ [Event] Capture received');
         
-        // 1. 将普通数组转换为 Uint8Array
-        const uint8Array = new Uint8Array(event.payload.image_bytes);
+        // 🔴 核心修复：适配 Windows 的标准协议格式
+        // 使用 https://<scheme_name>.localhost/path
+        // 这种格式会被浏览器视为安全的 Web 请求，不会被拦截
+        const memoryUrl = `https://upload.localhost/screenshot?t=${Date.now()}`;
         
-        // 2. 创建 Blob 对象 (指定类型为 jpeg)
-        const blob = new Blob([uint8Array], { type: 'image/bmp' });
+        console.log('🔗 [Url] Loading:', memoryUrl);
         
-        // 3. 生成内存 URL (速度极快，无需 Base64 解码)
-        const url = URL.createObjectURL(blob);
-        
-        setImage(url);
-        setLoading(false);
+        // 预加载一下，确保图片有效再显示
+        const img = new Image();
+        img.onload = () => {
+            console.log("🖼️ Image preloaded success");
+            setImage(memoryUrl);
+            setLoading(false);
+        };
+        img.onerror = (err) => {
+            console.error("❌ Image load failed:", err);
+            // 如果 https 失败，尝试回退到原始协议（双保险）
+            setImage(`upload://screenshot?t=${Date.now()}`);
+            setLoading(false);
+        };
+        img.src = memoryUrl;
     });
 
     return () => {
@@ -54,12 +55,8 @@ export default function ScreenshotApp() {
   }, []);
 
   return (
-    <div 
-        className="w-screen h-screen relative overflow-hidden select-none"
-        style={{ background: 'transparent' }}
-    >
-       <CanvasLayer />
-       {loading && <div className="absolute inset-0 bg-transparent" />}
+    <div className="w-screen h-screen relative overflow-hidden select-none bg-transparent">
+       {!loading && <CanvasLayer />}
     </div>
   );
 }

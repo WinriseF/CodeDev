@@ -96,7 +96,7 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self' ipc: http: https: ws: wss:; img-src 'self' asset: upload: blob: data:;"
     }
   }
 }
