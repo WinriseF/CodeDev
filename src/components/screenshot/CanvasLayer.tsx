@@ -7,20 +7,22 @@ export function CanvasLayer() {
   const fabricRef = useRef<fabric.Canvas | null>(null);
   const { imageSrc, setMode } = useScreenshotStore();
 
-  // 1. 初始化 Fabric Canvas
   useEffect(() => {
     if (!canvasEl.current) return;
+
+    // 修复：删除未使用的 dpr 变量声明
+    // const dpr = window.devicePixelRatio || 1; 
 
     const canvas = new fabric.Canvas(canvasEl.current, {
       width: window.innerWidth,
       height: window.innerHeight,
-      selection: false, // 暂时关闭多选框，由我们自己接管交互
+      selection: false,
       renderOnAddRemove: true,
+      enableRetinaScaling: true, // Fabric 会自动获取 dpr
     });
 
     fabricRef.current = canvas;
 
-    // 窗口大小改变时重置画布 (防止多屏切换问题)
     const handleResize = () => {
       canvas.setDimensions({
         width: window.innerWidth,
@@ -35,25 +37,30 @@ export function CanvasLayer() {
     };
   }, []);
 
-  // 2. 监听图片变化，加载背景图
   useEffect(() => {
     const canvas = fabricRef.current;
     if (!canvas || !imageSrc) return;
 
     fabric.FabricImage.fromURL(imageSrc).then((img) => {
-      // 适配高分屏 DPI，确保图片清晰
-      // 注意：xcap 返回的是物理像素，Web 是逻辑像素，通常不需要手动缩放，
-      // 除非我们后续处理 scale_factor。这里先按 1:1 铺满。
+      const dpr = window.devicePixelRatio || 1;
       
-      // 强制图片铺满窗口
-      img.scaleToWidth(window.innerWidth);
-      img.scaleToHeight(window.innerHeight);
+      // 缩放比例 = 1 / dpr
+      const scale = 1 / dpr;
+
+      img.scaleX = scale;
+      img.scaleY = scale;
       
-      canvas.backgroundImage = img;
+      img.left = 0;
+      img.top = 0;
+      
+      img.selectable = false;
+      img.evented = false;
+
+      canvas.add(img);
+      canvas.sendObjectToBack(img);
       canvas.requestRenderAll();
       
-      console.log('Screenshot loaded to canvas');
-      setMode('SELECTING'); // 图片加载完，进入选区模式
+      setMode('SELECTING'); 
     });
 
   }, [imageSrc, setMode]);
