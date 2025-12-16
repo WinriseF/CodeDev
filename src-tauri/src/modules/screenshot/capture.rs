@@ -1,15 +1,15 @@
 use crate::modules::screenshot::ScreenshotState;
-use base64::Engine;
-use image::{DynamicImage, ImageFormat}; // <--- 新增引入 DynamicImage
+use image::ImageFormat; 
 use std::io::Cursor;
-use tauri::{AppHandle, Manager, Runtime};
+use tauri::{AppHandle, Emitter, Manager, Runtime};
 use xcap::Monitor;
+use std::time::Instant;
 
 #[derive(serde::Serialize, Clone)]
 pub struct CaptureResult {
     pub width: u32,
     pub height: u32,
-    pub base64: String,
+    pub image_bytes: Vec<u8>,
     pub scale_factor: f64,
 }
 
@@ -17,61 +17,61 @@ pub struct CaptureResult {
 pub async fn capture_screen<R: Runtime>(
     app: AppHandle<R>,
     state: tauri::State<'_, ScreenshotState>,
-) -> Result<CaptureResult, String> {
-    let start = std::time::Instant::now();
+) -> Result<(), String> {
+    let start = Instant::now();
 
-    let monitors = Monitor::all().map_err(|e| e.to_string())?;
-    if monitors.is_empty() {
-        return Err("No monitors found".to_string());
-    }
+    // --- 关键修复：所有 Monitor 操作都必须在 spawn_blocking 内部 ---
+    let payload = tauri::async_runtime::spawn_blocking(move || {
+        let capture_start = Instant::now();
+        
+        // 1. 在后台线程获取屏幕列表
+        let monitors = Monitor::all().map_err(|e| e.to_string())?;
+        if monitors.is_empty() { return Err("No monitors found".to_string()); }
+        let monitor = monitors.first().unwrap();
+        
+        // 2. 获取属性
+        let width = monitor.width().map_err(|e| e.to_string())?;
+        let height = monitor.height().map_err(|e| e.to_string())?;
+        let scale_factor = monitor.scale_factor().map_err(|e| e.to_string())?;
 
-    let monitor = monitors.first().unwrap();
-    let width = monitor.width().map_err(|e| e.to_string())?;
-    let height = monitor.height().map_err(|e| e.to_string())?;
-    let scale_factor = monitor.scale_factor().map_err(|e| e.to_string())?;
+        // 3. 截屏 (获取 RGBA 原始数据)
+        let image_rgba = monitor.capture_image().map_err(|e| e.to_string())?;
+        
+        // 4. 直接存为 BMP (极速编码，支持透明通道，无需颜色转换)
+        let mut bytes: Vec<u8> = Vec::new();
+        let mut cursor = Cursor::new(&mut bytes);
+        
+        image_rgba
+            .write_to(&mut cursor, ImageFormat::Bmp)
+            .map_err(|e| e.to_string())?;
 
-    // 1. 获取原始 RGBA 图像
-    let image_rgba = monitor.capture_image().map_err(|e| e.to_string())?;
+        println!("Capture & BMP Encode took: {:?}", capture_start.elapsed());
 
-    // 2. 关键修复：转换为 RGB8 (去除 Alpha 通道)
-    // JPEG 不支持 RGBA，必须转为 RGB
-    let image_rgb = DynamicImage::ImageRgba8(image_rgba).to_rgb8();
+        Ok::<CaptureResult, String>(CaptureResult {
+            width,
+            height,
+            image_bytes: bytes,
+            scale_factor: scale_factor as f64,
+        })
+    }).await.map_err(|e| e.to_string())??;
 
-    // 3. 编码为 JPEG
-    let mut bytes: Vec<u8> = Vec::new();
-    let mut cursor = Cursor::new(&mut bytes);
-    
-    // 这里使用 image_rgb 进行写入
-    image_rgb
-        .write_to(&mut cursor, ImageFormat::Jpeg)
-        .map_err(|e| e.to_string())?;
-
-    // 4. 存入内存 (存原始字节流即可，这里存的是 JPEG 编码后的流)
-    // 注意：为了后续处理方便，如果后续需要再次编辑，可能需要重新解码
-    // 但为了传输速度，目前存 JPEG 流没问题
+    // 5. 存入内存
     {
         let mut current_image = state.current_image.lock().unwrap();
-        *current_image = Some(bytes.clone());
+        *current_image = Some(payload.image_bytes.clone());
     }
 
-    let base64_str = base64::engine::general_purpose::STANDARD.encode(&bytes);
-    let base64_img = format!("data:image/jpeg;base64,{}", base64_str);
-
+    // 6. 推送数据
     if let Some(window) = app.get_webview_window("screenshot") {
+        window.emit("capture-taken", payload).map_err(|e| e.to_string())?;
+        
         let _ = window.set_fullscreen(true);
         let _ = window.set_always_on_top(true);
-        let _ = window.set_focus();
-        let _ = window.show();
     }
 
-    println!("Screenshot captured in {:?}", start.elapsed());
+    println!("Total command time: {:?}", start.elapsed());
 
-    Ok(CaptureResult {
-        width,
-        height,
-        base64: base64_img,
-        scale_factor: scale_factor as f64,
-    })
+    Ok(())
 }
 
 #[tauri::command]
@@ -79,18 +79,12 @@ pub async fn get_current_screenshot(
     state: tauri::State<'_, ScreenshotState>,
 ) -> Result<CaptureResult, String> {
     let current_image = state.current_image.lock().unwrap();
-    
     if let Some(bytes) = &*current_image {
-        // 解码获取尺寸
         let img = image::load_from_memory(bytes).map_err(|e| e.to_string())?;
-        
-        let base64_str = base64::engine::general_purpose::STANDARD.encode(bytes);
-        let base64_img = format!("data:image/jpeg;base64,{}", base64_str);
-
         Ok(CaptureResult {
             width: img.width(),
             height: img.height(),
-            base64: base64_img,
+            image_bytes: bytes.clone(),
             scale_factor: 1.0,
         })
     } else {
