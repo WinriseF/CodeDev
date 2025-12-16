@@ -91,15 +91,11 @@ fn main() {
                 let _ = window.set_focus();
             }
         }))
-        // --- 核心修复：更安全的内存数据提取方式 ---
+        // --- 更安全的内存数据提取方式 ---
         .register_uri_scheme_protocol("upload", |ctx, request| {
             let url = request.uri().to_string();
-            println!("🚀 [Protocol] Request: {}", url); // 必须看到这个打印！
-
             let state = ctx.app_handle().state::<ScreenshotState>();
             
-            // 🟢 修改点：逻辑简化，只要协议头对，或者包含 screenshot 关键字就放行
-            // 这样无论前端发 upload://screenshot 还是 upload://localhost/screenshot 都能通
             if url.starts_with("upload:") {
                 let image_data = {
                     let lock = state.current_image.lock().unwrap();
@@ -107,14 +103,11 @@ fn main() {
                 };
 
                 if let Some(bytes) = image_data {
-                    println!("✅ [Protocol] Sending {} bytes", bytes.len());
                     return Response::builder()
                         .header("Content-Type", "image/bmp")
                         .header("Access-Control-Allow-Origin", "*")
                         .body(bytes)
                         .unwrap();
-                } else {
-                    println!("❌ [Protocol] Memory empty");
                 }
             }
             
@@ -123,7 +116,6 @@ fn main() {
                 .body(Vec::new())
                 .unwrap()
         })
-        // ----------------------------------------
         .invoke_handler(tauri::generate_handler![
             greet, 
             get_file_size, 

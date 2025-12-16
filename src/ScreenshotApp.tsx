@@ -25,9 +25,6 @@ export default function ScreenshotApp() {
     const unlistenPromise = listen('capture-taken', (_event) => {
         console.log('✅ [Event] Capture received');
         
-        // 🔴 核心修复：适配 Windows 的标准协议格式
-        // 使用 https://<scheme_name>.localhost/path
-        // 这种格式会被浏览器视为安全的 Web 请求，不会被拦截
         const memoryUrl = `https://upload.localhost/screenshot?t=${Date.now()}`;
         
         console.log('🔗 [Url] Loading:', memoryUrl);
@@ -41,7 +38,6 @@ export default function ScreenshotApp() {
         };
         img.onerror = (err) => {
             console.error("❌ Image load failed:", err);
-            // 如果 https 失败，尝试回退到原始协议（双保险）
             setImage(`upload://screenshot?t=${Date.now()}`);
             setLoading(false);
         };

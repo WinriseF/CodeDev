@@ -20,12 +20,12 @@ export function CanvasLayer() {
       selection: false, // 初始不启用框选，等逻辑处理好
       renderOnAddRemove: true,
       enableRetinaScaling: true,
-      backgroundColor: 'transparent', // 关键：背景透明，让底下的 img 透出来
+      backgroundColor: 'transparent', // 背景透明，让底下的 img 透出来
     });
 
     fabricRef.current = canvas;
 
-    // 创建一个全屏半透明黑色遮罩 (模拟微信截图的暗色背景)
+    // 创建一个全屏半透明黑色遮罩
     const overlay = new fabric.Rect({
         left: 0,
         top: 0,
@@ -53,20 +53,14 @@ export function CanvasLayer() {
     };
   }, []);
 
-  // 监听图片源变化（实际上我们是用 img 标签展示图片，这里主要是为了重置状态）
+  // 监听图片源变化
   useEffect(() => {
     const canvas = fabricRef.current;
     if (!canvas || !imageSrc) return;
 
-    // 这里不再需要 fabric.Image.fromURL 加载背景图了！
-    // 只需要重置遮罩和工具即可
-    
     // 确保遮罩在最底层
     if (overlayRef.current) {
-        canvas.bringObjectToFront(overlayRef.current); // 或者根据层级管理
-        // 实际上因为背景是 img 标签，canvas 里只有 UI 元素
-        // 这里我们可以开始监听鼠标事件来实现"画框擦除遮罩"的效果
-        // (为了代码简洁，这里暂不展开具体的画框逻辑代码，只保留架构优化)
+        canvas.bringObjectToFront(overlayRef.current);
     }
 
     setMode('SELECTING');

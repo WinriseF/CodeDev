@@ -14,7 +14,6 @@ pub struct CaptureResult {
 
 #[tauri::command]
 pub async fn init_screenshot<R: Runtime>(app: AppHandle<R>) -> Result<(), String> {
-    println!("[Capture] Init screenshot window...");
     if let Some(window) = app.get_webview_window("screenshot") {
         window.show().map_err(|e| e.to_string())?;
         window.set_focus().map_err(|e| e.to_string())?;
@@ -29,7 +28,6 @@ pub async fn capture_screen<R: Runtime>(
     app: AppHandle<R>,
     state: tauri::State<'_, ScreenshotState>,
 ) -> Result<(), String> {
-    println!("[Capture] Starting capture...");
     let start = Instant::now();
 
     let (metadata, buffer) = tauri::async_runtime::spawn_blocking(move || {
@@ -66,15 +64,11 @@ pub async fn capture_screen<R: Runtime>(
     {
         let mut current_image = state.current_image.lock().unwrap();
         *current_image = Some(buffer.clone());
-        println!("[Capture] Image saved to memory: {} bytes", buffer.len());
     }
 
     if let Some(window) = app.get_webview_window("screenshot") {
-        println!("[Capture] Emitting event to frontend...");
         window.emit("capture-taken", metadata).map_err(|e| e.to_string())?;
     }
-
-    println!("Capture cycle took: {:?}", start.elapsed());
     Ok(())
 }
 
