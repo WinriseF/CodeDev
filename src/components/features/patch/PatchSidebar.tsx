@@ -1,5 +1,3 @@
-// ----------------- src/components/features/patch/PatchSidebar.tsx -----------------
-
 import { useState } from 'react';
 import { 
   FolderOpen, FileText, Sparkles, FileCode, 
@@ -55,19 +53,16 @@ interface PatchSidebarProps {
   mode: PatchMode;
   setMode: (m: PatchMode) => void;
   
-  // AI Patch props
   projectRoot: string | null;
   onLoadProject: () => void;
   yamlInput: string;
   onYamlChange: (val: string) => void;
   onClearYaml: () => void;
   
-  // File list props
   files: PatchFileItem[];
   selectedFileId: string | null;
   onSelectFile: (id: string) => void;
 
-  // Git props (已添加)
   gitProjectRoot: string | null;
   onBrowseGitProject: () => void;
   commits: GitCommit[];

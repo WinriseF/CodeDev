@@ -1,5 +1,3 @@
-// ----------------- src/components/features/patch/CommitSelector.tsx (New File) -----------------
-
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Check, ChevronsUpDown, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';

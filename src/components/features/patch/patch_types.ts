@@ -1,5 +1,3 @@
-// ----------------- src/components/features/patch/patch_types.ts -----------------
-
 export type PatchMode = 'patch' | 'diff';
 
 export interface PatchOperation {

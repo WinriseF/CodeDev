@@ -1,12 +1,11 @@
-// ----------------- src-tauri/src/main.rs -----------------
-
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
 
 use std::fs;
-use std::process::Command; // <-- 新增: 用于执行外部命令
+use std::process::Command;
+use std::path::Path;
 use std::sync::{Arc, Mutex};
 use sysinfo::System;
 use tauri::{
@@ -16,7 +15,7 @@ use tauri::{
 };
 
 // =================================================================
-// 1. 新增用于和前端交互的数据结构
+// 用于和前端交互的数据结构
 // =================================================================
 #[derive(serde::Serialize, Clone)]
 struct GitCommit {
@@ -29,12 +28,11 @@ struct GitCommit {
 #[derive(serde::Serialize, Clone)]
 struct GitDiffFile {
   path: String,
-  status: String, // "Added", "Modified", "Deleted", "Renamed"
-  old_path: Option<String>, // For renames
+  status: String,
+  old_path: Option<String>,
   original_content: String,
   modified_content: String,
 }
-// =================================================================
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -91,13 +89,13 @@ fn get_system_info(
 }
 
 // =================================================================
-// 2. 新增的 Tauri 命令
+// Tauri 命令
 // =================================================================
 #[tauri::command]
 fn get_git_commits(project_path: String) -> Result<Vec<GitCommit>, String> {
     let output = Command::new("git")
         .arg("log")
-        .arg("--pretty=format:%H|%an|%ar|%s") // 使用 | 分隔，便于解析
+        .arg("--pretty=format:%H|%an|%ar|%s")
         .current_dir(&project_path)
         .output()
         .map_err(|e| format!("Failed to execute git log: {}", e))?;
@@ -122,75 +120,102 @@ fn get_git_commits(project_path: String) -> Result<Vec<GitCommit>, String> {
 
 #[tauri::command]
 fn get_git_diff(project_path: String, old_hash: String, new_hash: String) -> Result<Vec<GitDiffFile>, String> {
-    // 1. 获取变更文件列表
-    let diff_output = Command::new("git")
+    // 只执行一次 git diff --patch 命令
+    let output = Command::new("git")
         .arg("diff")
-        .arg("--name-status")
+        .arg("--patch")
+        .arg("--no-color")
         .arg(&old_hash)
         .arg(&new_hash)
         .current_dir(&project_path)
         .output()
         .map_err(|e| format!("Failed to execute git diff: {}", e))?;
 
-    if !diff_output.status.success() {
-        return Err(String::from_utf8_lossy(&diff_output.stderr).to_string());
+    if !output.status.success() {
+        return Err(String::from_utf8_lossy(&output.stderr).to_string());
     }
 
-    let diff_summary = String::from_utf8_lossy(&diff_output.stdout);
-    let mut diff_files = Vec::new();
+    let diff_text = String::from_utf8_lossy(&output.stdout);
+    let mut files: Vec<GitDiffFile> = Vec::new();
 
-    // 2. 遍历列表，获取每个文件的内容
-    for line in diff_summary.lines() {
-        if line.is_empty() { continue; }
-        let parts: Vec<&str> = line.split('\t').collect();
-        let status_char = parts[0];
-        
-        let (status, path, old_path) = match status_char {
-            "A" => ("Added", parts[1].to_string(), None),
-            "M" => ("Modified", parts[1].to_string(), None),
-            "D" => ("Deleted", parts[1].to_string(), None),
-            s if s.starts_with('R') => ("Renamed", parts[2].to_string(), Some(parts[1].to_string())),
-            _ => continue,
-        };
+    // 在 Rust 端解析 diff 输出
+    let mut current_file: Option<GitDiffFile> = None;
 
-        // 辅助函数：获取文件在特定 commit 的内容
-        let get_content = |hash: &str, file_path: &str| -> String {
-            if hash.is_empty() || file_path.is_empty() { return "".to_string(); }
-            let content_output = Command::new("git")
-                .arg("show")
-                .arg(format!("{}:{}", hash, file_path))
-                .current_dir(&project_path)
-                .output();
-            
-            match content_output {
-                Ok(output) if output.status.success() => {
-                    String::from_utf8_lossy(&output.stdout).to_string()
-                }
-                _ => "".to_string(), // 如果文件不存在或出错，返回空字符串
+    for line in diff_text.lines() {
+        if line.starts_with("diff --git a/") {
+            // 当遇到新的文件 diff 时，保存上一个文件并开始新的
+            if let Some(file) = current_file.take() {
+                files.push(file);
             }
-        };
+            
+            // 解析文件名
+            let parts: Vec<&str> = line.split_whitespace().collect();
+            let path = Path::new(parts[3].strip_prefix("b/").unwrap_or(parts[3]))
+                .to_string_lossy()
+                .to_string();
 
-        let (original_content, modified_content) = match status {
-            "Added" => ("".to_string(), get_content(&new_hash, &path)),
-            "Deleted" => (get_content(&old_hash, &path), "".to_string()),
-            "Modified" => (get_content(&old_hash, &path), get_content(&new_hash, &path)),
-            "Renamed" => (get_content(&old_hash, old_path.as_ref().unwrap()), get_content(&new_hash, &path)),
-            _ => ("".to_string(), "".to_string()),
-        };
-
-        diff_files.push(GitDiffFile {
-            path: path.clone(),
-            status: status.to_string(),
-            old_path,
-            original_content,
-            modified_content,
-        });
+            current_file = Some(GitDiffFile {
+                path,
+                status: "Modified".to_string(), // 默认为 Modified
+                old_path: None,
+                original_content: String::new(),
+                modified_content: String::new(),
+            });
+        } else if let Some(file) = &mut current_file {
+            if line.starts_with("new file mode") {
+                file.status = "Added".to_string();
+            } else if line.starts_with("deleted file mode") {
+                file.status = "Deleted".to_string();
+            } else if line.starts_with("--- a/") {
+                // '--- /dev/null' 表示是新文件
+                if line.ends_with("/dev/null") {
+                    file.status = "Added".to_string();
+                }
+            } else if line.starts_with("+++ b/") {
+                // '+++ /dev/null' 表示是删除文件
+                 if line.ends_with("/dev/null") {
+                    file.status = "Deleted".to_string();
+                }
+            } else if line.starts_with('+') && !line.starts_with("+++") {
+                file.modified_content.push_str(&line[1..]);
+                file.modified_content.push('\n');
+            } else if line.starts_with('-') && !line.starts_with("---") {
+                file.original_content.push_str(&line[1..]);
+                file.original_content.push('\n');
+            } else if line.starts_with(' ') {
+                file.original_content.push_str(&line[1..]);
+                file.original_content.push('\n');
+                file.modified_content.push_str(&line[1..]);
+                file.modified_content.push('\n');
+            }
+        }
+    }
+    
+    if let Some(file) = current_file.take() {
+        files.push(file);
     }
 
-    Ok(diff_files)
+    Ok(files)
 }
 
-// =================================================================
+#[tauri::command]
+fn get_git_diff_text(project_path: String, old_hash: String, new_hash: String) -> Result<String, String> {
+    let output = Command::new("git")
+        .arg("diff")
+        .arg("--patch")
+        .arg("--no-color")
+        .arg(&old_hash)
+        .arg(&new_hash)
+        .current_dir(&project_path)
+        .output()
+        .map_err(|e| format!("Failed to execute git diff: {}", e))?;
+
+    if !output.status.success() {
+        return Err(String::from_utf8_lossy(&output.stderr).to_string());
+    }
+    
+    Ok(String::from_utf8_lossy(&output.stdout).to_string())
+}
 
 fn main() {
     tauri::Builder::default()
@@ -210,14 +235,15 @@ fn main() {
             }
         }))
         // =================================================================
-        // 3. 注册新的 Tauri 命令
+        // 注册 Tauri 命令
         // =================================================================
         .invoke_handler(tauri::generate_handler![
             greet, 
             get_file_size, 
             get_system_info,
             get_git_commits,
-            get_git_diff
+            get_git_diff,
+            get_git_diff_text
         ])
         // =================================================================
         .setup(|app| {

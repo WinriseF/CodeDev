@@ -40,7 +40,7 @@ export function DiffWorkspace({
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizingRef.current) return;
       
-      // 新高度：鼠标Y坐标 - 顶部偏移量 (标题栏 + 工具栏 ≈ 88px)
+      // 鼠标Y坐标 - 顶部偏移量 (标题栏 + 工具栏 ≈ 88px)
       const newHeight = e.clientY - 88;
       
       // 限制最小和最大高度

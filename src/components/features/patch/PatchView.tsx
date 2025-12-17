@@ -1,5 +1,3 @@
-// ----------------- src/components/features/patch/PatchView.tsx (Final & Complete) -----------------
-
 import { useState, useEffect } from 'react';
 import { open as openDialog, save } from '@tauri-apps/plugin-dialog';
 import { readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
@@ -102,7 +100,7 @@ export function PatchView() {
   }, [mode]);
 
   // =================================================================
-  // 原有功能逻辑 (已完整保留)
+  // 原功能逻辑
   // =================================================================
 
   const handleLoadPatchProject = async () => {
@@ -223,7 +221,7 @@ export function PatchView() {
   };
 
   // =================================================================
-  // 新增 Git 相关逻辑函数 (已完整实现)
+  // Git 相关逻辑函数
   // =================================================================
 
   const handleBrowseGitProject = async () => {
@@ -284,7 +282,6 @@ export function PatchView() {
   const [_isExporting, setIsExporting] = useState(false);
 
   const handleExport = async () => {
-    // 简单实现，后续可以替换为带选项的模态框
     if (!gitProjectRoot || !baseHash || !compareHash) return;
 
     const filesToExport = files.filter(f => f.gitStatus);
@@ -295,7 +292,6 @@ export function PatchView() {
 
     setIsExporting(true);
     try {
-        // 调用 Rust 生成标准 diff 文本
         const diffText = await invoke<string>('get_git_diff_text', {
             projectPath: gitProjectRoot,
             oldHash: baseHash,
