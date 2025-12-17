@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Save, Copy, ArrowDownUp, PanelLeftClose, PanelLeftOpen, Trash2 } from 'lucide-react';
+import { Save, Copy, ArrowDownUp, PanelLeftClose, PanelLeftOpen, Trash2, FileDown } from 'lucide-react';
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { DiffViewer } from './DiffViewer';
 import { PatchFileItem } from './patch_types';
@@ -15,11 +15,13 @@ interface DiffWorkspaceProps {
   onManualUpdate?: (original: string, modified: string) => void;
   isSidebarOpen?: boolean;
   onToggleSidebar?: () => void;
+  isReadOnly?: boolean;
+  onExport?: () => void;
 }
 
 export function DiffWorkspace({ 
     selectedFile, onSave, onCopy, onManualUpdate, 
-    isSidebarOpen, onToggleSidebar 
+    isSidebarOpen, onToggleSidebar, isReadOnly, onExport
 }: DiffWorkspaceProps) {
   
   const { language } = useAppStore();
@@ -167,17 +169,17 @@ export function DiffWorkspace({
                 </button>
             )}
             
-            {selectedFile && !isManual && (
-                <button 
-                    onClick={() => onSave(selectedFile)}
-                    disabled={!hasChanges}
-                    className={cn(
-                        "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all shadow-sm active:scale-95",
-                        hasChanges 
-                            ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                            : "bg-secondary text-muted-foreground opacity-50 cursor-not-allowed"
-                    )}
-                >
+            {onExport && (
+              <button 
+                  onClick={onExport}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-secondary hover:bg-secondary/80 text-foreground transition-colors active:scale-95"
+              >
+                  <FileDown size={14} /> Export
+              </button>
+            )}
+            
+            {selectedFile && !isManual && !isReadOnly && (
+                <button onClick={() => onSave(selectedFile)} disabled={!hasChanges} className={cn("flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all shadow-sm active:scale-95", hasChanges ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-secondary text-muted-foreground opacity-50 cursor-not-allowed")}>
                     <Save size={14} /> {getText('patch', 'saveChanges', language)}
                 </button>
             )}

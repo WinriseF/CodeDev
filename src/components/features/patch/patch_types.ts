@@ -1,3 +1,5 @@
+// ----------------- src/components/features/patch/patch_types.ts -----------------
+
 export type PatchMode = 'patch' | 'diff';
 
 export interface PatchOperation {
@@ -16,8 +18,9 @@ export interface PatchFileItem {
   original: string;
   modified: string;
   status: 'pending' | 'success' | 'error';
-  // 如果 status 是 error，这里存储具体的失败原因
+  
   errorMsg?: string;
-  // 标记是否为手动模式
   isManual?: boolean;
+
+  gitStatus?: 'Added' | 'Modified' | 'Deleted' | 'Renamed'; 
 }

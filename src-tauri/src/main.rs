@@ -1,9 +1,12 @@
+// ----------------- src-tauri/src/main.rs -----------------
+
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
 
 use std::fs;
+use std::process::Command; // <-- 新增: 用于执行外部命令
 use std::sync::{Arc, Mutex};
 use sysinfo::System;
 use tauri::{
@@ -11,6 +14,27 @@ use tauri::{
     tray::{MouseButton, TrayIconBuilder, TrayIconEvent},
     Manager, State, WindowEvent,
 };
+
+// =================================================================
+// 1. 新增用于和前端交互的数据结构
+// =================================================================
+#[derive(serde::Serialize, Clone)]
+struct GitCommit {
+  hash: String,
+  author: String,
+  date: String,
+  message: String,
+}
+
+#[derive(serde::Serialize, Clone)]
+struct GitDiffFile {
+  path: String,
+  status: String, // "Added", "Modified", "Deleted", "Renamed"
+  old_path: Option<String>, // For renames
+  original_content: String,
+  modified_content: String,
+}
+// =================================================================
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -27,11 +51,11 @@ fn get_file_size(path: String) -> u64 {
 
 #[derive(serde::Serialize)]
 struct SystemInfo {
-    cpu_usage: f64,           // 系统整体 CPU 使用率（所有核心的平均值）
-    memory_usage: u64,       // 系统已用内存
-    memory_total: u64,       // 系统总内存
-    memory_available: u64,   // 系统可用内存
-    uptime: u64,             // 系统运行时间（秒）
+    cpu_usage: f64,
+    memory_usage: u64,
+    memory_total: u64,
+    memory_available: u64,
+    uptime: u64,
 }
 
 #[tauri::command]
@@ -39,12 +63,9 @@ fn get_system_info(
     system: State<'_, Arc<Mutex<System>>>,
 ) -> SystemInfo {
     let mut sys = system.lock().unwrap();
-    
-    // 刷新系统信息（CPU 使用率需要两次刷新才能准确计算）
     sys.refresh_cpu_all();
     sys.refresh_memory();
     
-    // 获取系统整体 CPU 使用率（所有 CPU 核心的平均值）
     let cpu_usage = {
         let cpus = sys.cpus();
         if !cpus.is_empty() {
@@ -55,12 +76,9 @@ fn get_system_info(
         }
     };
     
-    // 获取系统整体内存信息
     let memory_total = sys.total_memory();
     let memory_used = sys.used_memory();
     let memory_available = sys.available_memory();
-    
-    // 系统运行时间（秒）
     let uptime = System::uptime();
     
     SystemInfo {
@@ -71,6 +89,108 @@ fn get_system_info(
         uptime,
     }
 }
+
+// =================================================================
+// 2. 新增的 Tauri 命令
+// =================================================================
+#[tauri::command]
+fn get_git_commits(project_path: String) -> Result<Vec<GitCommit>, String> {
+    let output = Command::new("git")
+        .arg("log")
+        .arg("--pretty=format:%H|%an|%ar|%s") // 使用 | 分隔，便于解析
+        .current_dir(&project_path)
+        .output()
+        .map_err(|e| format!("Failed to execute git log: {}", e))?;
+
+    if !output.status.success() {
+        return Err(String::from_utf8_lossy(&output.stderr).to_string());
+    }
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    let commits = stdout.lines().filter(|line| !line.is_empty()).map(|line| {
+        let parts: Vec<&str> = line.splitn(4, '|').collect();
+        GitCommit {
+            hash: parts.get(0).unwrap_or(&"").to_string(),
+            author: parts.get(1).unwrap_or(&"").to_string(),
+            date: parts.get(2).unwrap_or(&"").to_string(),
+            message: parts.get(3).unwrap_or(&"").to_string(),
+        }
+    }).collect();
+
+    Ok(commits)
+}
+
+#[tauri::command]
+fn get_git_diff(project_path: String, old_hash: String, new_hash: String) -> Result<Vec<GitDiffFile>, String> {
+    // 1. 获取变更文件列表
+    let diff_output = Command::new("git")
+        .arg("diff")
+        .arg("--name-status")
+        .arg(&old_hash)
+        .arg(&new_hash)
+        .current_dir(&project_path)
+        .output()
+        .map_err(|e| format!("Failed to execute git diff: {}", e))?;
+
+    if !diff_output.status.success() {
+        return Err(String::from_utf8_lossy(&diff_output.stderr).to_string());
+    }
+
+    let diff_summary = String::from_utf8_lossy(&diff_output.stdout);
+    let mut diff_files = Vec::new();
+
+    // 2. 遍历列表，获取每个文件的内容
+    for line in diff_summary.lines() {
+        if line.is_empty() { continue; }
+        let parts: Vec<&str> = line.split('\t').collect();
+        let status_char = parts[0];
+        
+        let (status, path, old_path) = match status_char {
+            "A" => ("Added", parts[1].to_string(), None),
+            "M" => ("Modified", parts[1].to_string(), None),
+            "D" => ("Deleted", parts[1].to_string(), None),
+            s if s.starts_with('R') => ("Renamed", parts[2].to_string(), Some(parts[1].to_string())),
+            _ => continue,
+        };
+
+        // 辅助函数：获取文件在特定 commit 的内容
+        let get_content = |hash: &str, file_path: &str| -> String {
+            if hash.is_empty() || file_path.is_empty() { return "".to_string(); }
+            let content_output = Command::new("git")
+                .arg("show")
+                .arg(format!("{}:{}", hash, file_path))
+                .current_dir(&project_path)
+                .output();
+            
+            match content_output {
+                Ok(output) if output.status.success() => {
+                    String::from_utf8_lossy(&output.stdout).to_string()
+                }
+                _ => "".to_string(), // 如果文件不存在或出错，返回空字符串
+            }
+        };
+
+        let (original_content, modified_content) = match status {
+            "Added" => ("".to_string(), get_content(&new_hash, &path)),
+            "Deleted" => (get_content(&old_hash, &path), "".to_string()),
+            "Modified" => (get_content(&old_hash, &path), get_content(&new_hash, &path)),
+            "Renamed" => (get_content(&old_hash, old_path.as_ref().unwrap()), get_content(&new_hash, &path)),
+            _ => ("".to_string(), "".to_string()),
+        };
+
+        diff_files.push(GitDiffFile {
+            path: path.clone(),
+            status: status.to_string(),
+            old_path,
+            original_content,
+            modified_content,
+        });
+    }
+
+    Ok(diff_files)
+}
+
+// =================================================================
 
 fn main() {
     tauri::Builder::default()
@@ -89,9 +209,18 @@ fn main() {
                 let _ = window.set_focus();
             }
         }))
-        .invoke_handler(tauri::generate_handler![greet, get_file_size, get_system_info])
+        // =================================================================
+        // 3. 注册新的 Tauri 命令
+        // =================================================================
+        .invoke_handler(tauri::generate_handler![
+            greet, 
+            get_file_size, 
+            get_system_info,
+            get_git_commits,
+            get_git_diff
+        ])
+        // =================================================================
         .setup(|app| {
-            // 初始化系统信息收集器
             let mut system = System::new();
             system.refresh_all();
             app.manage(Arc::new(Mutex::new(system)));
@@ -121,11 +250,9 @@ fn main() {
                     } => {
                         let app = tray.app_handle();
                         if let Some(window) = app.get_webview_window("main") {
-                            // 1. 如果窗口最小化了，先还原
                             if window.is_minimized().unwrap_or(false) {
                                 let _ = window.unminimize();
                             }
-                            // 这会强制将窗口带到最顶层
                             let _ = window.show();
                             let _ = window.set_focus();
                         }
