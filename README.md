@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/WinriseF/Code-Forge-AI">
-    <img src="images/icon.png" alt="CodeForge AI Logo" width="120" height="120">
+    <img src="images/logo.png" alt="CodeForge AI Logo" width="120" height="120">
   </a>
 
   <h1 align="center">CodeForge AI</h1>
@@ -8,7 +8,7 @@
   <p align="center">
     <strong>Forge your code with intelligence.</strong>
     <br />
-    专为开发者打造的 AI 辅助生产力工具：上下文组装 · 提示词管理 · 全局 AI 对话 · 代码对比
+    为开发者打造的 AI 辅助生产力工具：上下文组装 · 提示词管理 · 全局 AI 对话 · 代码对比
   </p>
 
   <p align="center">
@@ -32,7 +32,7 @@
 
 <br />
 
-**CodeForge AI** 是一款专为开发者打造的 AI 辅助生产力工具。它集成了代码上下文组装、提示词管理以及一个随时待命的全局 AI 终端，旨在无缝连接你的 IDE 与大语言模型（LLM）。
+**CodeForge AI** 是一款专为开发者打造的 AI 辅助生产力工具。它集成了代码上下文组装、代码对比、提示词管理以及一个随时待命的全局 AI 终端，旨在无缝连接你的 IDE 与大语言模型（LLM）。
 
 ![alt text](images/ScreenShot_2025-11-28_185818_533.png)
 
@@ -56,7 +56,7 @@
 
 ## 核心功能指南
 
-### 1. Context Forge (上下文锻造)
+### 1. Context Forge (文件整合)
 **解决痛点：** 快速将项目文件打包成 LLM (ChatGPT/Claude/DeepSeek) 易读的格式。
 
 *   **文件选择**：在左侧文件树中勾选你需要让 AI 理解的代码文件或文件夹。
@@ -67,7 +67,7 @@
 *   **一键输出（建议下载为txt）**：点击 **Copy**，软件会将项目结构树和文件内容生成为结构化的 XML 文本，直接粘贴给 AI 即可。
 
 ### 2. Spotlight (全局 AI 终端)
-**快捷键：** `Alt + S` (Windows/Linux) 或 `Option + S` (macOS)，可以自由设置快捷键
+**快捷键：** `Alt + S` (Windows/Linux，实际上Linux无法注册快捷键) 或 `Option + S` (macOS)，可以自由设置快捷键
 
 Spotlight 是一个始终置顶的悬浮窗，拥有两种模式，按 **`Tab`** 键切换，按**`ESC`**退出：
 
