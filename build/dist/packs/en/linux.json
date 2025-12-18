@@ -6348,7 +6348,7 @@
     "id": "tldr-en-linux-ark-survival-evolved-0",
     "type": "command",
     "title": "ark-survival-evolved - Start the server with a specific map",
-    "content": "{{path/to/ShooterGameServer}} {{TheIsland}}",
+    "content": "{{path/to}}/ShooterGameServer {{TheIsland}}",
     "group": "Linux Ops",
     "description": "ark-survival-evolved: Create and start a headless ARK: Survival Evolved server. (Start the server with a specific map)",
     "tags": [
@@ -6363,7 +6363,7 @@
     "id": "tldr-en-linux-ark-survival-evolved-1",
     "type": "command",
     "title": "ark-survival-evolved - Start the server with a specific session name, server password, and admin password",
-    "content": "{{path/to/ShooterGameServer}} {{TheIsland}}?SessionName={{session_name}}?ServerPassword={{server_password}}?ServerAdminPassword={{admin_password}}",
+    "content": "{{path/to}}/ShooterGameServer {{TheIsland}}?SessionName={{session_name}}?ServerPassword={{server_password}}?ServerAdminPassword={{admin_password}}",
     "group": "Linux Ops",
     "description": "ark-survival-evolved: Create and start a headless ARK: Survival Evolved server. (Start the server with a specific session name, server password, and admin password)",
     "tags": [
@@ -6378,7 +6378,7 @@
     "id": "tldr-en-linux-ark-survival-evolved-2",
     "type": "command",
     "title": "ark-survival-evolved - Start the server with a specific port and set a maximum player count",
-    "content": "{{path/to/ShooterGameServer}} {{TheIsland}}?Port={{7777}}?MaxPlayers={{1..70}}",
+    "content": "{{path/to}}/ShooterGameServer {{TheIsland}}?Port={{7777}}?MaxPlayers={{1..70}}",
     "group": "Linux Ops",
     "description": "ark-survival-evolved: Create and start a headless ARK: Survival Evolved server. (Start the server with a specific port and set a maximum player count)",
     "tags": [
@@ -6393,7 +6393,7 @@
     "id": "tldr-en-linux-ark-survival-evolved-3",
     "type": "command",
     "title": "ark-survival-evolved - Enable PvE and disabling PvP",
-    "content": "{{path/to/ShooterGameServer}} {{TheIsland}}?ServerPVE=true",
+    "content": "{{path/to}}/ShooterGameServer {{TheIsland}}?ServerPVE=true",
     "group": "Linux Ops",
     "description": "ark-survival-evolved: Create and start a headless ARK: Survival Evolved server. (Enable PvE and disabling PvP)",
     "tags": [
@@ -6408,7 +6408,7 @@
     "id": "tldr-en-linux-ark-survival-evolved-4",
     "type": "command",
     "title": "ark-survival-evolved - Set a multiplier to scale the server difficulty, affecting the maximum level of wild creatures",
-    "content": "{{path/to/ShooterGameServer}} {{TheIsland}}?DifficultyOffset={{1.0}}",
+    "content": "{{path/to}}/ShooterGameServer {{TheIsland}}?DifficultyOffset={{1.0}}",
     "group": "Linux Ops",
     "description": "ark-survival-evolved: Create and start a headless ARK: Survival Evolved server. (Set a multiplier to scale the server difficulty, affecting the maximum level of wild creatures)",
     "tags": [
@@ -6423,7 +6423,7 @@
     "id": "tldr-en-linux-ark-survival-evolved-5",
     "type": "command",
     "title": "ark-survival-evolved - Enable a specific event",
-    "content": "{{path/to/ShooterGameServer}} {{TheIsland}} -ActiveEvent={{Summer}}",
+    "content": "{{path/to}}/ShooterGameServer {{TheIsland}} -ActiveEvent={{Summer}}",
     "group": "Linux Ops",
     "description": "ark-survival-evolved: Create and start a headless ARK: Survival Evolved server. (Enable a specific event)",
     "tags": [
@@ -6438,7 +6438,7 @@
     "id": "tldr-en-linux-ark-survival-evolved-6",
     "type": "command",
     "title": "ark-survival-evolved - Enable automatic mod downloading, installation, and updating (Steam only)",
-    "content": "{{path/to/ShooterGameServer}} {{TheIsland}} -automanagedmods",
+    "content": "{{path/to}}/ShooterGameServer {{TheIsland}} -automanagedmods",
     "group": "Linux Ops",
     "description": "ark-survival-evolved: Create and start a headless ARK: Survival Evolved server. (Enable automatic mod downloading, installation, and updating (Steam only))",
     "tags": [
@@ -6453,7 +6453,7 @@
     "id": "tldr-en-linux-ark-survival-evolved-7",
     "type": "command",
     "title": "ark-survival-evolved - Enable crossplay between Steam and Epic Games Store",
-    "content": "{{path/to/ShooterGameServer}} {{TheIsland}} -crossplay -PublicIPForEpic={{ip_address}}",
+    "content": "{{path/to}}/ShooterGameServer {{TheIsland}} -crossplay -PublicIPForEpic={{ip_address}}",
     "group": "Linux Ops",
     "description": "ark-survival-evolved: Create and start a headless ARK: Survival Evolved server. (Enable crossplay between Steam and Epic Games Store)",
     "tags": [
@@ -6767,10 +6767,10 @@
   {
     "id": "tldr-en-linux-whiptail-2",
     "type": "command",
-    "title": "whiptail - Customise the text on the yes/no buttons",
+    "title": "whiptail - Customize the text on the yes/no buttons",
     "content": "whiptail --title \"{{title}}\" --yes-button \"{{text}}\" --no-button \"{{text}}\" --yesno \"{{message}}\" {{height_in_chars}} {{width_in_chars}}",
     "group": "Linux Ops",
-    "description": "whiptail: Display text-based dialog boxes from shell scripts. (Customise the text on the yes/no buttons)",
+    "description": "whiptail: Display text-based dialog boxes from shell scripts. (Customize the text on the yes/no buttons)",
     "tags": [
       "linux",
       "whiptail",
@@ -8718,12 +8718,42 @@
     "id": "tldr-en-linux-barotrauma-0",
     "type": "command",
     "title": "barotrauma - Start the server",
-    "content": "{{path/to/DedicatedServer}}",
+    "content": "{{path/to}}/DedicatedServer",
     "group": "Linux Ops",
     "description": "barotrauma: Start a headless Barotrauma server. Note: The server is configured by editing the `serversettings.xml` file in the game directory. (Start the server)",
     "tags": [
       "linux",
       "barotrauma",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-explodepkg-0",
+    "type": "command",
+    "title": "explodepkg - Extract a package to the current directory",
+    "content": "explodepkg {{path/to/package.tgz}}",
+    "group": "Linux Ops",
+    "description": "explodepkg: Extract the contents of a Slackware package to the current directory. (Extract a package to the current directory)",
+    "tags": [
+      "linux",
+      "explodepkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-explodepkg-1",
+    "type": "command",
+    "title": "explodepkg - Extract multiple packages to the current directory",
+    "content": "explodepkg {{path/to/package1.tgz}} {{path/to/package2.tgz}}",
+    "group": "Linux Ops",
+    "description": "explodepkg: Extract the contents of a Slackware package to the current directory. (Extract multiple packages to the current directory)",
+    "tags": [
+      "linux",
+      "explodepkg",
       "tldr",
       "en"
     ],
@@ -10442,10 +10472,10 @@
   {
     "id": "tldr-en-linux-systemd-analyze-2",
     "type": "command",
-    "title": "systemd-analyze - Print a tree of the time-critical chain of units",
+    "title": "systemd-analyze - Print a tree of the time-critical chain of bootup units",
     "content": "systemd-analyze critical-chain",
     "group": "Linux Ops",
-    "description": "systemd-analyze: Analyze and debug system manager. Show timing details about the boot process of units (services, mount points, devices, sockets). (Print a tree of the time-critical chain of units)",
+    "description": "systemd-analyze: Analyze and debug system manager. Show timing details about the boot process of units (services, mount points, devices, sockets). (Print a tree of the time-critical chain of bootup units)",
     "tags": [
       "linux",
       "systemd-analyze",
@@ -10502,10 +10532,10 @@
   {
     "id": "tldr-en-linux-systemd-analyze-6",
     "type": "command",
-    "title": "systemd-analyze - View all udev rules together",
-    "content": "systemd-analyze cat-config udev/rules.d",
+    "title": "systemd-analyze - View all udev rules together without showing comments",
+    "content": "systemd-analyze cat-config udev/rules.d --tldr",
     "group": "Linux Ops",
-    "description": "systemd-analyze: Analyze and debug system manager. Show timing details about the boot process of units (services, mount points, devices, sockets). (View all udev rules together)",
+    "description": "systemd-analyze: Analyze and debug system manager. Show timing details about the boot process of units (services, mount points, devices, sockets). (View all udev rules together without showing comments)",
     "tags": [
       "linux",
       "systemd-analyze",
@@ -15665,7 +15695,7 @@
     "title": "img2txt - Set output column count to a specific value",
     "content": "img2txt {{[-W|--width]}} {{10}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set output column count to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set output column count to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -15680,7 +15710,7 @@
     "title": "img2txt - Set output line count to a specific value",
     "content": "img2txt {{[-H|--height]}} {{5}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set output line count to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set output line count to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -15695,7 +15725,7 @@
     "title": "img2txt - Set output font width to a specific value",
     "content": "img2txt {{[-x|--font-width]}} {{12}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set output font width to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set output font width to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -15710,7 +15740,7 @@
     "title": "img2txt - Set output font height to a specific value",
     "content": "img2txt {{[-y|--font-height]}} {{14}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set output font height to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set output font height to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -15725,7 +15755,7 @@
     "title": "img2txt - Set image brightness to a specific value",
     "content": "img2txt {{[-b|--brightness]}} {{2}} {{path/to/image}}",
     "group": "Linux Ops",
-    "description": "img2txt: Convert images to colour ASCII characters and output them to text-based coloured files. (Set image brightness to a specific value)",
+    "description": "img2txt: Convert images to color ASCII characters and output them to text-based colored files. (Set image brightness to a specific value)",
     "tags": [
       "linux",
       "img2txt",
@@ -17619,6 +17649,51 @@
     "tags": [
       "linux",
       "abrt-action-analyze-backtrace",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgdiff-0",
+    "type": "command",
+    "title": "pkgdiff - Compare two packages and display differences",
+    "content": "pkgdiff {{path/to/package1.txz}} {{path/to/package2.txz}}",
+    "group": "Linux Ops",
+    "description": "pkgdiff: Compare the file contents of two Slackware packages. (Compare two packages and display differences)",
+    "tags": [
+      "linux",
+      "pkgdiff",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgdiff-1",
+    "type": "command",
+    "title": "pkgdiff - Compare two packages with colorized output",
+    "content": "pkgdiff -c {{path/to/package1.txz}} {{path/to/package2.txz}}",
+    "group": "Linux Ops",
+    "description": "pkgdiff: Compare the file contents of two Slackware packages. (Compare two packages with colorized output)",
+    "tags": [
+      "linux",
+      "pkgdiff",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgdiff-2",
+    "type": "command",
+    "title": "pkgdiff - Compare two packages and output a simple unified diff",
+    "content": "pkgdiff -a {{path/to/package1.txz}} {{path/to/package2.txz}}",
+    "group": "Linux Ops",
+    "description": "pkgdiff: Compare the file contents of two Slackware packages. (Compare two packages and output a simple unified diff)",
+    "tags": [
+      "linux",
+      "pkgdiff",
       "tldr",
       "en"
     ],
@@ -40983,7 +41058,7 @@
     "id": "tldr-en-linux-unzipsfx-0",
     "type": "command",
     "title": "unzipsfx - Create a self-extracting binary file of a Zip archive",
-    "content": "cat unzipsfx {{path/to/archive.zip}} > {{filename}} && chmod 755 {{filename}}",
+    "content": "cat $(which unzipsfx) {{path/to/archive.zip}} > {{filename}} && chmod 755 {{filename}}",
     "group": "Linux Ops",
     "description": "unzipsfx: Create a self-extracting compressed binary file by prepending self-extracting stubs on a Zip file. (Create a self-extracting binary file of a Zip archive)",
     "tags": [
@@ -41327,70 +41402,10 @@
   {
     "id": "tldr-en-linux-dir-0",
     "type": "command",
-    "title": "dir - List all files, including hidden files",
-    "content": "dir {{[-a|--all]}}",
+    "title": "dir - View documentation for the original command",
+    "content": "tldr ls",
     "group": "Linux Ops",
-    "description": "dir: List directory contents using one line per file, special characters are represented by backslash escape sequences. Works as `ls -C --escape`. (List all files, including hidden files)",
-    "tags": [
-      "linux",
-      "dir",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dir-1",
-    "type": "command",
-    "title": "dir - List files including their author (`-l` is required)",
-    "content": "dir -l --author",
-    "group": "Linux Ops",
-    "description": "dir: List directory contents using one line per file, special characters are represented by backslash escape sequences. Works as `ls -C --escape`. (List files including their author (`-l` is required))",
-    "tags": [
-      "linux",
-      "dir",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dir-2",
-    "type": "command",
-    "title": "dir - List files excluding those that match a specified blob pattern",
-    "content": "dir --hide {{pattern}}",
-    "group": "Linux Ops",
-    "description": "dir: List directory contents using one line per file, special characters are represented by backslash escape sequences. Works as `ls -C --escape`. (List files excluding those that match a specified blob pattern)",
-    "tags": [
-      "linux",
-      "dir",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dir-3",
-    "type": "command",
-    "title": "dir - List subdirectories recursively",
-    "content": "dir {{[-R|--recursive]}}",
-    "group": "Linux Ops",
-    "description": "dir: List directory contents using one line per file, special characters are represented by backslash escape sequences. Works as `ls -C --escape`. (List subdirectories recursively)",
-    "tags": [
-      "linux",
-      "dir",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dir-4",
-    "type": "command",
-    "title": "dir - Display help",
-    "content": "dir --help",
-    "group": "Linux Ops",
-    "description": "dir: List directory contents using one line per file, special characters are represented by backslash escape sequences. Works as `ls -C --escape`. (Display help)",
+    "description": "dir: This command is an alias of `ls -C --escape`. (View documentation for the original command)",
     "tags": [
       "linux",
       "dir",
@@ -44658,7 +44673,7 @@
     "id": "tldr-en-linux-counter-strike-2-0",
     "type": "command",
     "title": "counter-strike-2 - Run a game with one map",
-    "content": "{{path/to/cs2}} -dedicated +map {{de_dust2}}",
+    "content": "{{path/to}}/cs2 -dedicated +map {{de_dust2}}",
     "group": "Linux Ops",
     "description": "counter-strike-2: Host a headless Counter Strike 2 server. (Run a game with one map)",
     "tags": [
@@ -44673,7 +44688,7 @@
     "id": "tldr-en-linux-counter-strike-2-1",
     "type": "command",
     "title": "counter-strike-2 - Run a game with specified maximum number of players",
-    "content": "{{path/to/cs2}} -dedicated +map {{de_dust2}} -maxplayers {{64}}",
+    "content": "{{path/to}}/cs2 -dedicated +map {{de_dust2}} -maxplayers {{64}}",
     "group": "Linux Ops",
     "description": "counter-strike-2: Host a headless Counter Strike 2 server. (Run a game with specified maximum number of players)",
     "tags": [
@@ -44688,7 +44703,7 @@
     "id": "tldr-en-linux-counter-strike-2-2",
     "type": "command",
     "title": "counter-strike-2 - Run a game with specified server IP and port",
-    "content": "{{path/to/cs2}} -dedicated +map {{de_dust2}} -ip {{1.2.3.4}} -port {{27015}}",
+    "content": "{{path/to}}/cs2 -dedicated +map {{de_dust2}} -ip {{1.2.3.4}} -port {{27015}}",
     "group": "Linux Ops",
     "description": "counter-strike-2: Host a headless Counter Strike 2 server. (Run a game with specified server IP and port)",
     "tags": [
@@ -50979,6 +50994,111 @@
     "tags": [
       "linux",
       "phar",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-0",
+    "type": "command",
+    "title": "imhex - Open a file in ImHex",
+    "content": "imhex {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Open a file in ImHex)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-1",
+    "type": "command",
+    "title": "imhex - Create a new empty file",
+    "content": "imhex --new",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Create a new empty file)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-2",
+    "type": "command",
+    "title": "imhex - Open a file in the currently running ImHex instance and select a range of bytes (offsets in hexadecimal)",
+    "content": "imhex --open {{path/to/file}} --select {{0xstart_offset}} {{0xend_offset}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Open a file in the currently running ImHex instance and select a range of bytes (offsets in hexadecimal))",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-3",
+    "type": "command",
+    "title": "imhex - Display information about a file",
+    "content": "imhex --file-info {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Display information about a file)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-4",
+    "type": "command",
+    "title": "imhex - Calculate the hash of a file using a specific algorithm (`md5`, `sha1`, `sha224`, `sha256`, `sha384`, `sha512`)",
+    "content": "imhex --hash {{algorithm}} {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Calculate the hash of a file using a specific algorithm (`md5`, `sha1`, `sha224`, `sha256`, `sha384`, `sha512`))",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-5",
+    "type": "command",
+    "title": "imhex - Generate a hex dump of a file",
+    "content": "imhex --hexdump {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Generate a hex dump of a file)",
+    "tags": [
+      "linux",
+      "imhex",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-imhex-6",
+    "type": "command",
+    "title": "imhex - Display version",
+    "content": "imhex --version",
+    "group": "Linux Ops",
+    "description": "imhex: Hex editor for reverse engineers and programmers. (Display version)",
+    "tags": [
+      "linux",
+      "imhex",
       "tldr",
       "en"
     ],
@@ -59387,10 +59507,10 @@
   {
     "id": "tldr-en-linux-sed-0",
     "type": "command",
-    "title": "sed - Replace `apple` with `mango` on all lines using basic `regex`, print to `stdout`",
+    "title": "sed - Replace \"apple\" with \"mango\" on all lines using basic `regex`, print to `stdout`",
     "content": "{{command}} | sed 's/apple/mango/g'",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. (Replace `apple` with `mango` on all lines using basic `regex`, print to `stdout`)",
+    "description": "sed: GNU stream editor for filtering and transforming text. (Replace \"apple\" with \"mango\" on all lines using basic `regex`, print to `stdout`)",
     "tags": [
       "linux",
       "sed",
@@ -59402,10 +59522,10 @@
   {
     "id": "tldr-en-linux-sed-1",
     "type": "command",
-    "title": "sed - Replace `apple` with `APPLE` on all lines using extended `regex`, print to `stdout`",
+    "title": "sed - Replace \"apple\" with \"APPLE\" on all lines using extended `regex`, print to `stdout`",
     "content": "{{command}} | sed {{[-E|--regexp-extended]}} 's/(apple)/\\U\\1/g'",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. (Replace `apple` with `APPLE` on all lines using extended `regex`, print to `stdout`)",
+    "description": "sed: GNU stream editor for filtering and transforming text. (Replace \"apple\" with \"APPLE\" on all lines using extended `regex`, print to `stdout`)",
     "tags": [
       "linux",
       "sed",
@@ -59417,10 +59537,10 @@
   {
     "id": "tldr-en-linux-sed-2",
     "type": "command",
-    "title": "sed - Use basic `regex` to replace `apple` with `mango` and `orange` with `lime` in-place in a file (overwriting original file)",
+    "title": "sed - Use basic `regex` to replace \"apple\" with \"mango\" and \"orange\" with \"lime\" in-place in a file (overwriting original file)",
     "content": "sed {{[-i|--in-place]}} -e 's/apple/mango/g' -e 's/orange/lime/g' {{path/to/file}}",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. (Use basic `regex` to replace `apple` with `mango` and `orange` with `lime` in-place in a file (overwriting original file))",
+    "description": "sed: GNU stream editor for filtering and transforming text. (Use basic `regex` to replace \"apple\" with \"mango\" and \"orange\" with \"lime\" in-place in a file (overwriting original file))",
     "tags": [
       "linux",
       "sed",
@@ -60483,7 +60603,7 @@
     "id": "tldr-en-linux-factorio-0",
     "type": "command",
     "title": "factorio - Create a new save file",
-    "content": "{{path/to/factorio}} --create {{path/to/save_file.zip}}",
+    "content": "{{path/to}}/factorio --create {{path/to/save_file.zip}}",
     "group": "Linux Ops",
     "description": "factorio: Create and start a headless Factorio server. (Create a new save file)",
     "tags": [
@@ -60498,7 +60618,7 @@
     "id": "tldr-en-linux-factorio-1",
     "type": "command",
     "title": "factorio - Start a Factorio server",
-    "content": "{{path/to/factorio}} --start-server {{path/to/save_file.zip}}",
+    "content": "{{path/to}}/factorio --start-server {{path/to/save_file.zip}}",
     "group": "Linux Ops",
     "description": "factorio: Create and start a headless Factorio server. (Start a Factorio server)",
     "tags": [
@@ -60513,7 +60633,7 @@
     "id": "tldr-en-linux-factorio-2",
     "type": "command",
     "title": "factorio - Create a new save file with specific settings",
-    "content": "{{path/to/factorio}} --create {{path/to/save.zip}} --map-gen-settings {{path/to/map-gen-settings.json}} --map-settings {{path/to/map-settings.json}}",
+    "content": "{{path/to}}/factorio --create {{path/to/save.zip}} --map-gen-settings {{path/to/map-gen-settings.json}} --map-settings {{path/to/map-settings.json}}",
     "group": "Linux Ops",
     "description": "factorio: Create and start a headless Factorio server. (Create a new save file with specific settings)",
     "tags": [
@@ -60543,7 +60663,7 @@
     "id": "tldr-en-linux-factorio-4",
     "type": "command",
     "title": "factorio - Display help",
-    "content": "{{path/to/factorio}} {{[-h|--help]}}",
+    "content": "{{path/to}}/factorio {{[-h|--help]}}",
     "group": "Linux Ops",
     "description": "factorio: Create and start a headless Factorio server. (Display help)",
     "tags": [
@@ -60918,7 +61038,7 @@
     "id": "tldr-en-linux-valheim-0",
     "type": "command",
     "title": "valheim - Start the server",
-    "content": "{{path/to/start_server.sh}}",
+    "content": "{{path/to}}/start_server.sh",
     "group": "Linux Ops",
     "description": "valheim: Create and start a headless Valheim server. Note: Configure the server by editing a copy of the `start_server.sh` script. (Start the server)",
     "tags": [
@@ -63063,7 +63183,7 @@
     "id": "tldr-en-linux-palworld-0",
     "type": "command",
     "title": "palworld - Start the server with default settings",
-    "content": "{{path/to/PalServer.sh}}",
+    "content": "{{path/to}}/PalServer.sh",
     "group": "Linux Ops",
     "description": "palworld: Create and start a headless Palworld server. (Start the server with default settings)",
     "tags": [
@@ -63078,7 +63198,7 @@
     "id": "tldr-en-linux-palworld-1",
     "type": "command",
     "title": "palworld - Start the server with a specific port and set a maximum player count",
-    "content": "{{path/to/PalServer.sh}} -port={{8211}} -players={{1..32}}",
+    "content": "{{path/to}}/PalServer.sh -port={{8211}} -players={{1..32}}",
     "group": "Linux Ops",
     "description": "palworld: Create and start a headless Palworld server. (Start the server with a specific port and set a maximum player count)",
     "tags": [
@@ -63093,7 +63213,7 @@
     "id": "tldr-en-linux-palworld-2",
     "type": "command",
     "title": "palworld - Start a public lobby server",
-    "content": "{{path/to/PalServer.sh}} -publiclobby",
+    "content": "{{path/to}}/PalServer.sh -publiclobby",
     "group": "Linux Ops",
     "description": "palworld: Create and start a headless Palworld server. (Start a public lobby server)",
     "tags": [
@@ -63108,7 +63228,7 @@
     "id": "tldr-en-linux-palworld-3",
     "type": "command",
     "title": "palworld - Start the server with performance optimizations for multi-threaded CPUs",
-    "content": "{{path/to/PalServer.sh}} -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS",
+    "content": "{{path/to}}/PalServer.sh -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS",
     "group": "Linux Ops",
     "description": "palworld: Create and start a headless Palworld server. (Start the server with performance optimizations for multi-threaded CPUs)",
     "tags": [
@@ -63123,7 +63243,7 @@
     "id": "tldr-en-linux-palworld-4",
     "type": "command",
     "title": "palworld - Start the server with a specific public IP and port for community servers",
-    "content": "{{path/to/PalServer.sh}} -publicip={{ip_address}} -publicport={{port}}",
+    "content": "{{path/to}}/PalServer.sh -publicip={{ip_address}} -publicport={{port}}",
     "group": "Linux Ops",
     "description": "palworld: Create and start a headless Palworld server. (Start the server with a specific public IP and port for community servers)",
     "tags": [
@@ -69767,10 +69887,40 @@
   {
     "id": "tldr-en-linux-fatrace-1",
     "type": "command",
-    "title": "fatrace - Print file access events on the mount of the current directory, with timestamps, to `stdout`",
-    "content": "sudo fatrace {{[-c|--current-mount]}} {{[-t|--timestamp]}}",
+    "title": "fatrace - Limit output to a program with a specific name",
+    "content": "sudo fatrace {{[-C|--command]}} {{program_name}}",
     "group": "Linux Ops",
-    "description": "fatrace: Report file access events. (Print file access events on the mount of the current directory, with timestamps, to `stdout`)",
+    "description": "fatrace: Report file access events. (Limit output to a program with a specific name)",
+    "tags": [
+      "linux",
+      "fatrace",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-fatrace-2",
+    "type": "command",
+    "title": "fatrace - Print file access events on the mount of the current directory to `stdout`",
+    "content": "sudo fatrace {{[-c|--current-mount]}}",
+    "group": "Linux Ops",
+    "description": "fatrace: Report file access events. (Print file access events on the mount of the current directory to `stdout`)",
+    "tags": [
+      "linux",
+      "fatrace",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-fatrace-3",
+    "type": "command",
+    "title": "fatrace - Add timestamps to the printout",
+    "content": "sudo fatrace {{[-t|--timestamp]}}",
+    "group": "Linux Ops",
+    "description": "fatrace: Report file access events. (Add timestamps to the printout)",
     "tags": [
       "linux",
       "fatrace",
@@ -72410,7 +72560,7 @@
     "title": "koji-resubmit - Resubmit a task",
     "content": "koji resubmit {{task_id}}",
     "group": "Linux Ops",
-    "description": "koji-resubmit: Retry a canceled or failed task, using the same parameter as the original task. (Resubmit a task)",
+    "description": "koji-resubmit: Retry a cancelled or failed task, using the same parameter as the original task. (Resubmit a task)",
     "tags": [
       "linux",
       "koji-resubmit",
@@ -72425,7 +72575,7 @@
     "title": "koji-resubmit - Resubmit a task without waiting for it to finish",
     "content": "koji resubmit {{task_id}} --nowait",
     "group": "Linux Ops",
-    "description": "koji-resubmit: Retry a canceled or failed task, using the same parameter as the original task. (Resubmit a task without waiting for it to finish)",
+    "description": "koji-resubmit: Retry a cancelled or failed task, using the same parameter as the original task. (Resubmit a task without waiting for it to finish)",
     "tags": [
       "linux",
       "koji-resubmit",
@@ -72440,7 +72590,7 @@
     "title": "koji-resubmit - Resubmit a task without printing task information",
     "content": "koji resubmit {{task_id}} --quiet",
     "group": "Linux Ops",
-    "description": "koji-resubmit: Retry a canceled or failed task, using the same parameter as the original task. (Resubmit a task without printing task information)",
+    "description": "koji-resubmit: Retry a cancelled or failed task, using the same parameter as the original task. (Resubmit a task without printing task information)",
     "tags": [
       "linux",
       "koji-resubmit",
@@ -72455,7 +72605,7 @@
     "title": "koji-resubmit - Display help",
     "content": "koji resubmit {{[-h|--help]}}",
     "group": "Linux Ops",
-    "description": "koji-resubmit: Retry a canceled or failed task, using the same parameter as the original task. (Display help)",
+    "description": "koji-resubmit: Retry a cancelled or failed task, using the same parameter as the original task. (Display help)",
     "tags": [
       "linux",
       "koji-resubmit",
@@ -76323,7 +76473,7 @@
     "id": "tldr-en-linux-natural-selection-2-0",
     "type": "command",
     "title": "natural-selection-2 - Start a server with the default settings",
-    "content": "{{path/to/server_linux}}",
+    "content": "{{path/to}}/server_linux",
     "group": "Linux Ops",
     "description": "natural-selection-2: Start a headless Natural Selection 2 server. (Start a server with the default settings)",
     "tags": [
@@ -76338,7 +76488,7 @@
     "id": "tldr-en-linux-natural-selection-2-1",
     "type": "command",
     "title": "natural-selection-2 - Give a server a custom name that shows in the server browser",
-    "content": "{{path/to/server_linux}} -name '{{server_name}}'",
+    "content": "{{path/to}}/server_linux -name '{{server_name}}'",
     "group": "Linux Ops",
     "description": "natural-selection-2: Start a headless Natural Selection 2 server. (Give a server a custom name that shows in the server browser)",
     "tags": [
@@ -76353,7 +76503,7 @@
     "id": "tldr-en-linux-natural-selection-2-2",
     "type": "command",
     "title": "natural-selection-2 - Specify a connection port for the server",
-    "content": "{{path/to/server_linux}} -port {{27015}}",
+    "content": "{{path/to}}/server_linux -port {{27015}}",
     "group": "Linux Ops",
     "description": "natural-selection-2: Start a headless Natural Selection 2 server. (Specify a connection port for the server)",
     "tags": [
@@ -76368,7 +76518,7 @@
     "id": "tldr-en-linux-natural-selection-2-3",
     "type": "command",
     "title": "natural-selection-2 - Specify maximum player count",
-    "content": "{{path/to/server_linux}} -limit {{2..24}}",
+    "content": "{{path/to}}/server_linux -limit {{2..24}}",
     "group": "Linux Ops",
     "description": "natural-selection-2: Start a headless Natural Selection 2 server. (Specify maximum player count)",
     "tags": [
@@ -76383,7 +76533,7 @@
     "id": "tldr-en-linux-natural-selection-2-4",
     "type": "command",
     "title": "natural-selection-2 - Specify the initial map the server starts on",
-    "content": "{{path/to/server_linux}} -map {{ns2_summit}}",
+    "content": "{{path/to}}/server_linux -map {{ns2_summit}}",
     "group": "Linux Ops",
     "description": "natural-selection-2: Start a headless Natural Selection 2 server. (Specify the initial map the server starts on)",
     "tags": [
@@ -76398,7 +76548,7 @@
     "id": "tldr-en-linux-natural-selection-2-5",
     "type": "command",
     "title": "natural-selection-2 - Limit access to the server with a password",
-    "content": "{{path/to/server_linux}} -password {{password}}",
+    "content": "{{path/to}}/server_linux -password {{password}}",
     "group": "Linux Ops",
     "description": "natural-selection-2: Start a headless Natural Selection 2 server. (Limit access to the server with a password)",
     "tags": [
@@ -76413,7 +76563,7 @@
     "id": "tldr-en-linux-natural-selection-2-6",
     "type": "command",
     "title": "natural-selection-2 - Start a server with webui admin interface",
-    "content": "{{path/to/server_linux}} -webadmin -webport {{8080}}",
+    "content": "{{path/to}}/server_linux -webadmin -webport {{8080}}",
     "group": "Linux Ops",
     "description": "natural-selection-2: Start a headless Natural Selection 2 server. (Start a server with webui admin interface)",
     "tags": [
@@ -80508,7 +80658,7 @@
     "id": "tldr-en-linux-terraria-0",
     "type": "command",
     "title": "terraria - Start an interactive server setup",
-    "content": "{{path/to/TerrariaServer}}",
+    "content": "{{path/to}}/TerrariaServer",
     "group": "Linux Ops",
     "description": "terraria: Create and start a headless Terraria server. (Start an interactive server setup)",
     "tags": [
@@ -80523,7 +80673,7 @@
     "id": "tldr-en-linux-terraria-1",
     "type": "command",
     "title": "terraria - Start a Terraria server",
-    "content": "{{path/to/TerrariaServer}} -world {{path/to/world.wld}}",
+    "content": "{{path/to}}/TerrariaServer -world {{path/to/world.wld}}",
     "group": "Linux Ops",
     "description": "terraria: Create and start a headless Terraria server. (Start a Terraria server)",
     "tags": [
@@ -80960,7 +81110,7 @@
     "title": "pkgctl-release - Release a build artifact",
     "content": "pkgctl release --repo {{repository}} --message {{commit_message}}",
     "group": "Linux Ops",
-    "description": "pkgctl-release: Release step to commit, tag and upload build artifacts. (Release a build artifact)",
+    "description": "pkgctl-release: Release step to commit, tag, and upload build artifacts. (Release a build artifact)",
     "tags": [
       "linux",
       "pkgctl-release",
@@ -85455,6 +85605,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-upgradepkg-0",
+    "type": "command",
+    "title": "upgradepkg - Upgrade a package",
+    "content": "sudo upgradepkg {{path/to/package.tgz}}",
+    "group": "Linux Ops",
+    "description": "upgradepkg: Upgrade Slackware packages by replacing existing packages with new versions. (Upgrade a package)",
+    "tags": [
+      "linux",
+      "upgradepkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-upgradepkg-1",
+    "type": "command",
+    "title": "upgradepkg - Upgrade a package, installing it if not already present",
+    "content": "sudo upgradepkg --install-new {{path/to/package.tgz}}",
+    "group": "Linux Ops",
+    "description": "upgradepkg: Upgrade Slackware packages by replacing existing packages with new versions. (Upgrade a package, installing it if not already present)",
+    "tags": [
+      "linux",
+      "upgradepkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-upgradepkg-2",
+    "type": "command",
+    "title": "upgradepkg - Reinstall a package (even if the same version is already installed)",
+    "content": "sudo upgradepkg --reinstall {{path/to/package.tgz}}",
+    "group": "Linux Ops",
+    "description": "upgradepkg: Upgrade Slackware packages by replacing existing packages with new versions. (Reinstall a package (even if the same version is already installed))",
+    "tags": [
+      "linux",
+      "upgradepkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-upgradepkg-3",
+    "type": "command",
+    "title": "upgradepkg - Preview what would happen without actually upgrading",
+    "content": "upgradepkg --dry-run {{path/to/package.tgz}}",
+    "group": "Linux Ops",
+    "description": "upgradepkg: Upgrade Slackware packages by replacing existing packages with new versions. (Preview what would happen without actually upgrading)",
+    "tags": [
+      "linux",
+      "upgradepkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-upgradepkg-4",
+    "type": "command",
+    "title": "upgradepkg - Upgrade a package and show detailed progress",
+    "content": "sudo upgradepkg --verbose {{path/to/package.tgz}}",
+    "group": "Linux Ops",
+    "description": "upgradepkg: Upgrade Slackware packages by replacing existing packages with new versions. (Upgrade a package and show detailed progress)",
+    "tags": [
+      "linux",
+      "upgradepkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-resolveip-0",
     "type": "command",
     "title": "resolveip - Resolve a hostname to an IP address",
@@ -87018,7 +87243,7 @@
     "id": "tldr-en-linux-gamescope-2",
     "type": "command",
     "title": "gamescope - Upscale a 720p game to 1440p with integer scaling",
-    "content": "gamescope {{[-h|--nested-height]}} 720 {{[-H|--output-height]}} 1440 {{[-S|--scaler]}} integer -- %command%",
+    "content": "gamescope {{[-h|--nested-height]}} 720 {{[-H|--output-height]}} 1440 {{[-S|--scaler]}} integer -- {{command}}",
     "group": "Linux Ops",
     "description": "gamescope: A micro-compositor used as a game layer. (Upscale a 720p game to 1440p with integer scaling)",
     "tags": [
@@ -87033,7 +87258,7 @@
     "id": "tldr-en-linux-gamescope-3",
     "type": "command",
     "title": "gamescope - Limit a vsynced game to 30 FPS",
-    "content": "gamescope {{[-r|--nested-refresh]}} 30 -- %command%",
+    "content": "gamescope {{[-r|--nested-refresh]}} 30 -- {{command}}",
     "group": "Linux Ops",
     "description": "gamescope: A micro-compositor used as a game layer. (Limit a vsynced game to 30 FPS)",
     "tags": [
@@ -94533,7 +94758,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-0",
     "type": "command",
     "title": "ark-survival-ascended - Start the server with a specific map",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}}",
+    "content": "{{path/to}}/ArkAscendedServer {{TheIsland_WP}}",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Start the server with a specific map)",
     "tags": [
@@ -94548,7 +94773,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-1",
     "type": "command",
     "title": "ark-survival-ascended - Start the server with a specific session name, server password, and admin password",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}}?SessionName={{session_name}}?ServerPassword={{server_password}}?ServerAdminPassword={{admin_password}}",
+    "content": "{{path/to}}/ArkAscendedServer {{TheIsland_WP}}?SessionName={{session_name}}?ServerPassword={{server_password}}?ServerAdminPassword={{admin_password}}",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Start the server with a specific session name, server password, and admin password)",
     "tags": [
@@ -94563,7 +94788,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-2",
     "type": "command",
     "title": "ark-survival-ascended - Start the server with a specific port and set a maximum player count",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}} -port={{7777}} -WinLiveMaxPlayers={{1..70}}",
+    "content": "{{path/to}}/ArkAscendedServer {{TheIsland_WP}} -port={{7777}} -WinLiveMaxPlayers={{1..70}}",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Start the server with a specific port and set a maximum player count)",
     "tags": [
@@ -94578,7 +94803,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-3",
     "type": "command",
     "title": "ark-survival-ascended - Enable PvE and disabling PvP",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}}?ServerPVE=true",
+    "content": "{{path/to}}/ArkAscendedServer {{TheIsland_WP}}?ServerPVE=true",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Enable PvE and disabling PvP)",
     "tags": [
@@ -94593,7 +94818,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-4",
     "type": "command",
     "title": "ark-survival-ascended - Set a multiplier to scale the server difficulty, affecting the maximum level of wild creatures",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}}?DifficultyOffset={{1.0}}",
+    "content": "{{path/to}}/ArkAscendedServer {{TheIsland_WP}}?DifficultyOffset={{1.0}}",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Set a multiplier to scale the server difficulty, affecting the maximum level of wild creatures)",
     "tags": [
@@ -94608,7 +94833,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-5",
     "type": "command",
     "title": "ark-survival-ascended - Disable creature animation optimization to prevent collision issues",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}} -AlwaysTickDedicatedSkeletalMeshes",
+    "content": "{{path/to}}/ArkAscendedServer {{TheIsland_WP}} -AlwaysTickDedicatedSkeletalMeshes",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Disable creature animation optimization to prevent collision issues)",
     "tags": [
@@ -94623,7 +94848,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-6",
     "type": "command",
     "title": "ark-survival-ascended - Enable specific mods by their ID (comma-separated)",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}} -mods={{mod_id1,mod_id2,...}}",
+    "content": "{{path/to}}/ArkAscendedServer {{TheIsland_WP}} -mods={{mod_id1,mod_id2,...}}",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Enable specific mods by their ID (comma-separated))",
     "tags": [
@@ -94638,7 +94863,7 @@
     "id": "tldr-en-linux-ark-survival-ascended-7",
     "type": "command",
     "title": "ark-survival-ascended - Allow connections from specific platforms",
-    "content": "{{path/to/ArkAscendedServer}} {{TheIsland_WP}} -ServerPlatform={{PC+XSX+PS5}}",
+    "content": "{{path/to}}/ArkAscendedServer {{TheIsland_WP}} -ServerPlatform={{PC+XSX+PS5}}",
     "group": "Linux Ops",
     "description": "ark-survival-ascended: Create and start a headless ARK: Survival Ascended server. (Allow connections from specific platforms)",
     "tags": [
@@ -97335,6 +97560,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-pkgtool-0",
+    "type": "command",
+    "title": "pkgtool - Launch the interactive package tool",
+    "content": "sudo pkgtool",
+    "group": "Linux Ops",
+    "description": "pkgtool: Interactive menu-driven tool for managing Slackware packages. (Launch the interactive package tool)",
+    "tags": [
+      "linux",
+      "pkgtool",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgtool-1",
+    "type": "command",
+    "title": "pkgtool - Remove packages interactively",
+    "content": "sudo pkgtool --remove_menu",
+    "group": "Linux Ops",
+    "description": "pkgtool: Interactive menu-driven tool for managing Slackware packages. (Remove packages interactively)",
+    "tags": [
+      "linux",
+      "pkgtool",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgtool-2",
+    "type": "command",
+    "title": "pkgtool - View installed packages",
+    "content": "pkgtool --view_menu",
+    "group": "Linux Ops",
+    "description": "pkgtool: Interactive menu-driven tool for managing Slackware packages. (View installed packages)",
+    "tags": [
+      "linux",
+      "pkgtool",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgtool-3",
+    "type": "command",
+    "title": "pkgtool - Install packages from the current directory",
+    "content": "sudo pkgtool --install_menu",
+    "group": "Linux Ops",
+    "description": "pkgtool: Interactive menu-driven tool for managing Slackware packages. (Install packages from the current directory)",
+    "tags": [
+      "linux",
+      "pkgtool",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-pkgtool-4",
+    "type": "command",
+    "title": "pkgtool - Set up packages interactively (run doinst.sh scripts)",
+    "content": "sudo pkgtool --setup_menu",
+    "group": "Linux Ops",
+    "description": "pkgtool: Interactive menu-driven tool for managing Slackware packages. (Set up packages interactively (run doinst.sh scripts))",
+    "tags": [
+      "linux",
+      "pkgtool",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-ubuntu-security-status-0",
     "type": "command",
     "title": "ubuntu-security-status - Display the number of unsupported packages",
@@ -100007,10 +100307,10 @@
   {
     "id": "tldr-en-linux-rspamc-1",
     "type": "command",
-    "title": "rspamc - Train the bayesian filter to recognise an email as ham",
+    "title": "rspamc - Train the bayesian filter to recognize an email as ham",
     "content": "rspamc learn_ham {{path/to/email_file}}",
     "group": "Linux Ops",
-    "description": "rspamc: Client for `rspamd` servers. (Train the bayesian filter to recognise an email as ham)",
+    "description": "rspamc: Client for `rspamd` servers. (Train the bayesian filter to recognize an email as ham)",
     "tags": [
       "linux",
       "rspamc",
@@ -102753,7 +103053,7 @@
     "id": "tldr-en-linux-project-zomboid-0",
     "type": "command",
     "title": "project-zomboid - Start the server",
-    "content": "{{path/to/start-server.sh}}",
+    "content": "{{path/to}}/start-server.sh",
     "group": "Linux Ops",
     "description": "project-zomboid: Start a headless Project Zomboid server. (Start the server)",
     "tags": [
@@ -102768,7 +103068,7 @@
     "id": "tldr-en-linux-project-zomboid-1",
     "type": "command",
     "title": "project-zomboid - Start a server with a specific name",
-    "content": "{{path/to/start-server.sh}} -servername {{server_name}}",
+    "content": "{{path/to}}/start-server.sh -servername {{server_name}}",
     "group": "Linux Ops",
     "description": "project-zomboid: Start a headless Project Zomboid server. (Start a server with a specific name)",
     "tags": [
@@ -103322,10 +103622,10 @@
   {
     "id": "tldr-en-linux-compseq-5",
     "type": "command",
-    "title": "compseq - Count amino acid triplets in a FASTA file and compare to a previous run of `compseq` to calculate expected and normalised frequency values",
+    "title": "compseq - Count amino acid triplets in a FASTA file and compare to a previous run of `compseq` to calculate expected and normalized frequency values",
     "content": "compseq -sequence {{path/to/human_proteome.fasta}} -word 3 {{path/to/output_file1.comp}} -nozero -infile {{path/to/output_file2.comp}}",
     "group": "Linux Ops",
-    "description": "compseq: Calculate the composition of unique words in sequences. (Count amino acid triplets in a FASTA file and compare to a previous run of `compseq` to calculate expected and normalised frequency values)",
+    "description": "compseq: Calculate the composition of unique words in sequences. (Count amino acid triplets in a FASTA file and compare to a previous run of `compseq` to calculate expected and normalized frequency values)",
     "tags": [
       "linux",
       "compseq",

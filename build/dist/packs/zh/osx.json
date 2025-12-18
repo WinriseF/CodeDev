@@ -170,7 +170,7 @@
     "title": "pbcopy - 将文件的内容放入剪贴板",
     "content": "pbcopy < {{路径/到/文件}}",
     "group": "macOS",
-    "description": "pbcopy: 将来自标准输入的数据放入剪贴板。 相当于在键盘上按下 ``. (将文件的内容放入剪贴板)",
+    "description": "pbcopy: 将来自标准输入的数据放入剪贴板。 相当于在键盘上按下 ``。 (将文件的内容放入剪贴板)",
     "tags": [
       "osx",
       "pbcopy",
@@ -185,7 +185,7 @@
     "title": "pbcopy - 将命令的执行结果放入剪贴板",
     "content": "find . -type t -name \"*.png\" | pbcopy",
     "group": "macOS",
-    "description": "pbcopy: 将来自标准输入的数据放入剪贴板。 相当于在键盘上按下 ``. (将命令的执行结果放入剪贴板)",
+    "description": "pbcopy: 将来自标准输入的数据放入剪贴板。 相当于在键盘上按下 ``。 (将命令的执行结果放入剪贴板)",
     "tags": [
       "osx",
       "pbcopy",
@@ -605,7 +605,7 @@
     "title": "arch - 显示系统的架构",
     "content": "arch",
     "group": "macOS",
-    "description": "arch: 显示系统架构的名称，或者在不同的架构下运行命令。 另见: `uname`. (显示系统的架构)",
+    "description": "arch: 显示系统架构的名称，或者在不同的架构下运行命令。 另请参阅：`uname`。 (显示系统的架构)",
     "tags": [
       "osx",
       "arch",
@@ -620,7 +620,7 @@
     "title": "arch - 使用 x86_64 来运行一个命令",
     "content": "arch -x86_64 {{命令}}",
     "group": "macOS",
-    "description": "arch: 显示系统架构的名称，或者在不同的架构下运行命令。 另见: `uname`. (使用 x86_64 来运行一个命令)",
+    "description": "arch: 显示系统架构的名称，或者在不同的架构下运行命令。 另请参阅：`uname`。 (使用 x86_64 来运行一个命令)",
     "tags": [
       "osx",
       "arch",
@@ -1055,7 +1055,7 @@
     "title": "pbpaste - 将剪贴板的内容写入文件",
     "content": "pbpaste > {{路径/到/文件}}",
     "group": "macOS",
-    "description": "pbpaste: 将剪贴板的内容发送到标准输出。 相当于在键盘上按下 ``. (将剪贴板的内容写入文件)",
+    "description": "pbpaste: 将剪贴板的内容发送到标准输出。 相当于在键盘上按下 ``。 (将剪贴板的内容写入文件)",
     "tags": [
       "osx",
       "pbpaste",
@@ -1070,7 +1070,7 @@
     "title": "pbpaste - 将剪贴板的内容用作命令的输入",
     "content": "pbpaste | grep foo",
     "group": "macOS",
-    "description": "pbpaste: 将剪贴板的内容发送到标准输出。 相当于在键盘上按下 ``. (将剪贴板的内容用作命令的输入)",
+    "description": "pbpaste: 将剪贴板的内容发送到标准输出。 相当于在键盘上按下 ``。 (将剪贴板的内容用作命令的输入)",
     "tags": [
       "osx",
       "pbpaste",
@@ -2720,7 +2720,7 @@
     "title": "ipconfig - 列出所有的网卡",
     "content": "ipconfig getiflist",
     "group": "macOS",
-    "description": "ipconfig: 查看和编辑网卡信息. (列出所有的网卡)",
+    "description": "ipconfig: 查看和编辑网卡信息。 (列出所有的网卡)",
     "tags": [
       "osx",
       "ipconfig",
@@ -2735,7 +2735,7 @@
     "title": "ipconfig - 获取特定网卡的地址信息",
     "content": "ipconfig getifaddr {{接口名称}}",
     "group": "macOS",
-    "description": "ipconfig: 查看和编辑网卡信息. (获取特定网卡的地址信息)",
+    "description": "ipconfig: 查看和编辑网卡信息。 (获取特定网卡的地址信息)",
     "tags": [
       "osx",
       "ipconfig",

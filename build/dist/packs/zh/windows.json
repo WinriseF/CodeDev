@@ -5,7 +5,7 @@
     "title": "reg-load - 将备份文件加载到指定的键中",
     "content": "reg load {{键名}} {{文件的路径}}",
     "group": "Windows",
-    "description": "reg-load: 将保存的子键加载到不同的子键中。 This is intended for troubleshooting and temporary keys. (将备份文件加载到指定的键中)",
+    "description": "reg-load: 将保存的子键加载到不同的子键中。 This is intended for troubleshooting and temporary keys。 (将备份文件加载到指定的键中)",
     "tags": [
       "windows",
       "reg-load",
@@ -275,7 +275,7 @@
     "title": "reg-restore - 使用备份文件中的数据覆盖指定的键",
     "content": "reg restore {{键名}} {{文件路径}}",
     "group": "Windows",
-    "description": "reg-restore: 从备份文件中恢复键和值。 参见 `reg-save` 来获取更多的信息。 (使用备份文件中的数据覆盖指定的键)",
+    "description": "reg-restore: 从备份文件中恢复键和值。 另请参阅：`reg-save` 来获取更多的信息。 (使用备份文件中的数据覆盖指定的键)",
     "tags": [
       "windows",
       "reg-restore",
@@ -365,7 +365,7 @@
     "title": "reg - 执行注册表命令",
     "content": "reg {{命令}}",
     "group": "Windows",
-    "description": "reg: 用于在 Windows 注册表中管理键及其值的命令行界面。 此命令也有关于其子命令的文件，例如：`add`. (执行注册表命令)",
+    "description": "reg: 用于在 Windows 注册表中管理键及其值的命令行界面。 此命令也有关于其子命令的文件，例如：`add`。 (执行注册表命令)",
     "tags": [
       "windows",
       "reg",
@@ -380,7 +380,7 @@
     "title": "reg - 显示常规信息并列出所有可用命令",
     "content": "reg /?",
     "group": "Windows",
-    "description": "reg: 用于在 Windows 注册表中管理键及其值的命令行界面。 此命令也有关于其子命令的文件，例如：`add`. (显示常规信息并列出所有可用命令)",
+    "description": "reg: 用于在 Windows 注册表中管理键及其值的命令行界面。 此命令也有关于其子命令的文件，例如：`add`。 (显示常规信息并列出所有可用命令)",
     "tags": [
       "windows",
       "reg",
@@ -395,7 +395,7 @@
     "title": "reg - 显示指定命令的帮助信息",
     "content": "reg {{命令}} /?",
     "group": "Windows",
-    "description": "reg: 用于在 Windows 注册表中管理键及其值的命令行界面。 此命令也有关于其子命令的文件，例如：`add`. (显示指定命令的帮助信息)",
+    "description": "reg: 用于在 Windows 注册表中管理键及其值的命令行界面。 此命令也有关于其子命令的文件，例如：`add`。 (显示指定命令的帮助信息)",
     "tags": [
       "windows",
       "reg",
@@ -4070,7 +4070,7 @@
     "title": "choco-pack - 将 nuspec 打包到已编译的 nupkg",
     "content": "choco pack {{nuspec 的路径}}",
     "group": "Windows",
-    "description": "choco-pack: 将 nuspec 打包到已编译的 nupkg. (将 nuspec 打包到已编译的 nupkg)",
+    "description": "choco-pack: 将 nuspec 打包到已编译的 nupkg。 (将 nuspec 打包到已编译的 nupkg)",
     "tags": [
       "windows",
       "choco-pack",
@@ -4085,7 +4085,7 @@
     "title": "choco-pack - 将 nuspec 打包到已编译的 nupkg, 并指定生成的版本",
     "content": "choco pack {{nuspec 的路径}} --version {{版本号}}",
     "group": "Windows",
-    "description": "choco-pack: 将 nuspec 打包到已编译的 nupkg. (将 nuspec 打包到已编译的 nupkg, 并指定生成的版本)",
+    "description": "choco-pack: 将 nuspec 打包到已编译的 nupkg。 (将 nuspec 打包到已编译的 nupkg, 并指定生成的版本)",
     "tags": [
       "windows",
       "choco-pack",
@@ -4100,7 +4100,7 @@
     "title": "choco-pack - 将 nuspec 打包到已编译的 nupkg, 并输出到指定的目录",
     "content": "choco pack {{nuspec 的路径}} --output-directory {{输出目录的路径}}",
     "group": "Windows",
-    "description": "choco-pack: 将 nuspec 打包到已编译的 nupkg. (将 nuspec 打包到已编译的 nupkg, 并输出到指定的目录)",
+    "description": "choco-pack: 将 nuspec 打包到已编译的 nupkg。 (将 nuspec 打包到已编译的 nupkg, 并输出到指定的目录)",
     "tags": [
       "windows",
       "choco-pack",
@@ -5555,7 +5555,7 @@
     "title": "choco - 执行 Chocolatey 命令",
     "content": "choco {{命令}}",
     "group": "Windows",
-    "description": "choco: Chocolatey 包管理器的命令行界面。 此命令也有关于其子命令的文件，例如：`install`. (执行 Chocolatey 命令)",
+    "description": "choco: Chocolatey 包管理器的命令行界面。 此命令也有关于其子命令的文件，例如：`install`。 (执行 Chocolatey 命令)",
     "tags": [
       "windows",
       "choco",
@@ -5570,7 +5570,7 @@
     "title": "choco - 显示基本的帮助页面",
     "content": "choco -?",
     "group": "Windows",
-    "description": "choco: Chocolatey 包管理器的命令行界面。 此命令也有关于其子命令的文件，例如：`install`. (显示基本的帮助页面)",
+    "description": "choco: Chocolatey 包管理器的命令行界面。 此命令也有关于其子命令的文件，例如：`install`。 (显示基本的帮助页面)",
     "tags": [
       "windows",
       "choco",
@@ -5585,7 +5585,7 @@
     "title": "choco - 显示指定命令的帮助页面",
     "content": "choco {{命令}} -?",
     "group": "Windows",
-    "description": "choco: Chocolatey 包管理器的命令行界面。 此命令也有关于其子命令的文件，例如：`install`. (显示指定命令的帮助页面)",
+    "description": "choco: Chocolatey 包管理器的命令行界面。 此命令也有关于其子命令的文件，例如：`install`。 (显示指定命令的帮助页面)",
     "tags": [
       "windows",
       "choco",
@@ -5600,7 +5600,7 @@
     "title": "choco - 显示 Chocolatey 的版本",
     "content": "choco --version",
     "group": "Windows",
-    "description": "choco: Chocolatey 包管理器的命令行界面。 此命令也有关于其子命令的文件，例如：`install`. (显示 Chocolatey 的版本)",
+    "description": "choco: Chocolatey 包管理器的命令行界面。 此命令也有关于其子命令的文件，例如：`install`。 (显示 Chocolatey 的版本)",
     "tags": [
       "windows",
       "choco",
@@ -6215,7 +6215,7 @@
     "title": "py - 启动一个 REPL（交互式命令行），可以选择使用 `python` 支持的参数（如 `-c`、`-m` 等）",
     "content": "py {{python 参数}}",
     "group": "Windows",
-    "description": "py: 用于 Windows 的 Python 启动器，可运行指定的 Python 版本。 另见： `python`. (启动一个 REPL（交互式命令行），可以选择使用 `python` 支持的参数（如 `-c`、`-m` 等）)",
+    "description": "py: 用于 Windows 的 Python 启动器，可运行指定的 Python 版本。 另请参阅：`python`。 (启动一个 REPL（交互式命令行），可以选择使用 `python` 支持的参数（如 `-c`、`-m` 等）)",
     "tags": [
       "windows",
       "py",
@@ -6230,7 +6230,7 @@
     "title": "py - 执行指定的 Python 文件",
     "content": "py {{路径/到/文件.py}}",
     "group": "Windows",
-    "description": "py: 用于 Windows 的 Python 启动器，可运行指定的 Python 版本。 另见： `python`. (执行指定的 Python 文件)",
+    "description": "py: 用于 Windows 的 Python 启动器，可运行指定的 Python 版本。 另请参阅：`python`。 (执行指定的 Python 文件)",
     "tags": [
       "windows",
       "py",
@@ -6245,7 +6245,7 @@
     "title": "py - 运行指定版本的 Python. 若缺少该版本且设置了 `PYLAUNCHER_ALLOW_INSTALL` 环境变量，则通过 Microsoft Store 或 Winget 自动安装",
     "content": "py {{-2|-3.7|...}}",
     "group": "Windows",
-    "description": "py: 用于 Windows 的 Python 启动器，可运行指定的 Python 版本。 另见： `python`. (运行指定版本的 Python. 若缺少该版本且设置了 `PYLAUNCHER_ALLOW_INSTALL` 环境变量，则通过 Microsoft Store 或 Winget 自动安装)",
+    "description": "py: 用于 Windows 的 Python 启动器，可运行指定的 Python 版本。 另请参阅：`python`。 (运行指定版本的 Python. 若缺少该版本且设置了 `PYLAUNCHER_ALLOW_INSTALL` 环境变量，则通过 Microsoft Store 或 Winget 自动安装)",
     "tags": [
       "windows",
       "py",
@@ -6260,7 +6260,7 @@
     "title": "py - 列出已安装的 Python 版本",
     "content": "py --list",
     "group": "Windows",
-    "description": "py: 用于 Windows 的 Python 启动器，可运行指定的 Python 版本。 另见： `python`. (列出已安装的 Python 版本)",
+    "description": "py: 用于 Windows 的 Python 启动器，可运行指定的 Python 版本。 另请参阅：`python`。 (列出已安装的 Python 版本)",
     "tags": [
       "windows",
       "py",
