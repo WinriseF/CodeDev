@@ -620,7 +620,7 @@
     "title": "open - Open a file with the associated application",
     "content": "open {{file.ext}}",
     "group": "macOS",
-    "description": "open: Open files, directories and applications. (Open a file with the associated application)",
+    "description": "open: Open files, directories, and applications. (Open a file with the associated application)",
     "tags": [
       "osx",
       "open",
@@ -635,7 +635,7 @@
     "title": "open - Run a graphical macOS [a]pplication",
     "content": "open -a \"{{Application}}\"",
     "group": "macOS",
-    "description": "open: Open files, directories and applications. (Run a graphical macOS [a]pplication)",
+    "description": "open: Open files, directories, and applications. (Run a graphical macOS [a]pplication)",
     "tags": [
       "osx",
       "open",
@@ -650,7 +650,7 @@
     "title": "open - Run a graphical macOS app based on the [b]undle identifier (refer to `osascript` for an easy way to get this)",
     "content": "open -b {{com.domain.application}}",
     "group": "macOS",
-    "description": "open: Open files, directories and applications. (Run a graphical macOS app based on the [b]undle identifier (refer to `osascript` for an easy way to get this))",
+    "description": "open: Open files, directories, and applications. (Run a graphical macOS app based on the [b]undle identifier (refer to `osascript` for an easy way to get this))",
     "tags": [
       "osx",
       "open",
@@ -665,7 +665,7 @@
     "title": "open - Open the current directory in Finder",
     "content": "open .",
     "group": "macOS",
-    "description": "open: Open files, directories and applications. (Open the current directory in Finder)",
+    "description": "open: Open files, directories, and applications. (Open the current directory in Finder)",
     "tags": [
       "osx",
       "open",
@@ -680,7 +680,7 @@
     "title": "open - [R]eveal a file in Finder",
     "content": "open -R {{path/to/file}}",
     "group": "macOS",
-    "description": "open: Open files, directories and applications. ([R]eveal a file in Finder)",
+    "description": "open: Open files, directories, and applications. ([R]eveal a file in Finder)",
     "tags": [
       "osx",
       "open",
@@ -695,7 +695,7 @@
     "title": "open - Open all the files of a given extension in the current directory with the associated application",
     "content": "open {{*.ext}}",
     "group": "macOS",
-    "description": "open: Open files, directories and applications. (Open all the files of a given extension in the current directory with the associated application)",
+    "description": "open: Open files, directories, and applications. (Open all the files of a given extension in the current directory with the associated application)",
     "tags": [
       "osx",
       "open",
@@ -710,7 +710,7 @@
     "title": "open - Open a [n]ew instance of an application specified via [b]undle identifier",
     "content": "open -n -b {{com.domain.application}}",
     "group": "macOS",
-    "description": "open: Open files, directories and applications. (Open a [n]ew instance of an application specified via [b]undle identifier)",
+    "description": "open: Open files, directories, and applications. (Open a [n]ew instance of an application specified via [b]undle identifier)",
     "tags": [
       "osx",
       "open",
@@ -4055,7 +4055,7 @@
     "title": "mysides - List sidebar favorites",
     "content": "mysides list",
     "group": "macOS",
-    "description": "mysides: Add, list and remove finder favorites. (List sidebar favorites)",
+    "description": "mysides: Add, list, and remove finder favorites. (List sidebar favorites)",
     "tags": [
       "osx",
       "mysides",
@@ -4070,7 +4070,7 @@
     "title": "mysides - Add a new item to the end of the sidebar favorites",
     "content": "mysides add {{example}} {{file:///Users/Shared/example}}",
     "group": "macOS",
-    "description": "mysides: Add, list and remove finder favorites. (Add a new item to the end of the sidebar favorites)",
+    "description": "mysides: Add, list, and remove finder favorites. (Add a new item to the end of the sidebar favorites)",
     "tags": [
       "osx",
       "mysides",
@@ -4085,7 +4085,7 @@
     "title": "mysides - Remove an item by name",
     "content": "mysides remove {{example}}",
     "group": "macOS",
-    "description": "mysides: Add, list and remove finder favorites. (Remove an item by name)",
+    "description": "mysides: Add, list, and remove finder favorites. (Remove an item by name)",
     "tags": [
       "osx",
       "mysides",
@@ -4100,7 +4100,7 @@
     "title": "mysides - Add the current directory to the sidebar",
     "content": "mysides add $(basename $(pwd)) file:///$(pwd)",
     "group": "macOS",
-    "description": "mysides: Add, list and remove finder favorites. (Add the current directory to the sidebar)",
+    "description": "mysides: Add, list, and remove finder favorites. (Add the current directory to the sidebar)",
     "tags": [
       "osx",
       "mysides",
@@ -4115,7 +4115,7 @@
     "title": "mysides - Remove the current directory from the sidebar",
     "content": "mysides remove $(basename $(pwd))",
     "group": "macOS",
-    "description": "mysides: Add, list and remove finder favorites. (Remove the current directory from the sidebar)",
+    "description": "mysides: Add, list, and remove finder favorites. (Remove the current directory from the sidebar)",
     "tags": [
       "osx",
       "mysides",
@@ -5540,7 +5540,7 @@
     "title": "xcodes - List all installed Xcode versions",
     "content": "xcodes installed",
     "group": "macOS",
-    "description": "xcodes: Download, install and manage multiple Xcode versions. (List all installed Xcode versions)",
+    "description": "xcodes: Download, install, and manage multiple Xcode versions. (List all installed Xcode versions)",
     "tags": [
       "osx",
       "xcodes",
@@ -5555,7 +5555,7 @@
     "title": "xcodes - List all available Xcode versions",
     "content": "xcodes list",
     "group": "macOS",
-    "description": "xcodes: Download, install and manage multiple Xcode versions. (List all available Xcode versions)",
+    "description": "xcodes: Download, install, and manage multiple Xcode versions. (List all available Xcode versions)",
     "tags": [
       "osx",
       "xcodes",
@@ -5570,7 +5570,7 @@
     "title": "xcodes - Select an Xcode version by specifying a version number or a path",
     "content": "xcodes select {{xcode_version|path/to/Xcode.app}}",
     "group": "macOS",
-    "description": "xcodes: Download, install and manage multiple Xcode versions. (Select an Xcode version by specifying a version number or a path)",
+    "description": "xcodes: Download, install, and manage multiple Xcode versions. (Select an Xcode version by specifying a version number or a path)",
     "tags": [
       "osx",
       "xcodes",
@@ -5585,7 +5585,7 @@
     "title": "xcodes - Download and install a specific Xcode version",
     "content": "xcodes install {{xcode_version}}",
     "group": "macOS",
-    "description": "xcodes: Download, install and manage multiple Xcode versions. (Download and install a specific Xcode version)",
+    "description": "xcodes: Download, install, and manage multiple Xcode versions. (Download and install a specific Xcode version)",
     "tags": [
       "osx",
       "xcodes",
@@ -5600,7 +5600,7 @@
     "title": "xcodes - Install the latest Xcode release and select it",
     "content": "xcodes install --latest --select",
     "group": "macOS",
-    "description": "xcodes: Download, install and manage multiple Xcode versions. (Install the latest Xcode release and select it)",
+    "description": "xcodes: Download, install, and manage multiple Xcode versions. (Install the latest Xcode release and select it)",
     "tags": [
       "osx",
       "xcodes",
@@ -5615,7 +5615,7 @@
     "title": "xcodes - Download a specific Xcode version archive to a given directory without installing it",
     "content": "xcodes download {{xcode_version}} --directory {{path/to/directory}}",
     "group": "macOS",
-    "description": "xcodes: Download, install and manage multiple Xcode versions. (Download a specific Xcode version archive to a given directory without installing it)",
+    "description": "xcodes: Download, install, and manage multiple Xcode versions. (Download a specific Xcode version archive to a given directory without installing it)",
     "tags": [
       "osx",
       "xcodes",
@@ -7115,7 +7115,7 @@
     "title": "tart - Pull a remote VM image",
     "content": "tart pull {{acme.io/org/name:tag}}",
     "group": "macOS",
-    "description": "tart: Build, run and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Pull a remote VM image)",
+    "description": "tart: Build, run, and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Pull a remote VM image)",
     "tags": [
       "osx",
       "tart",
@@ -7130,7 +7130,7 @@
     "title": "tart - Clone a VM from a local or remote image source",
     "content": "tart clone {{source-vm}} {{vm-name}}",
     "group": "macOS",
-    "description": "tart: Build, run and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Clone a VM from a local or remote image source)",
+    "description": "tart: Build, run, and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Clone a VM from a local or remote image source)",
     "tags": [
       "osx",
       "tart",
@@ -7145,7 +7145,7 @@
     "title": "tart - Create a new Mac VM from a specific ipsw file",
     "content": "tart create --from-ipsw {{latest|path/to/file.ipsw}} {{vm-name}}",
     "group": "macOS",
-    "description": "tart: Build, run and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Create a new Mac VM from a specific ipsw file)",
+    "description": "tart: Build, run, and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Create a new Mac VM from a specific ipsw file)",
     "tags": [
       "osx",
       "tart",
@@ -7160,7 +7160,7 @@
     "title": "tart - Run an existing VM",
     "content": "tart run {{vm-name}}",
     "group": "macOS",
-    "description": "tart: Build, run and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Run an existing VM)",
+    "description": "tart: Build, run, and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Run an existing VM)",
     "tags": [
       "osx",
       "tart",
@@ -7175,7 +7175,7 @@
     "title": "tart - Run an existing VM with a specific mounted directory",
     "content": "tart run --dir {{path/to/directory}}:/{{path/to/local_directory}} {{vm-name}}",
     "group": "macOS",
-    "description": "tart: Build, run and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Run an existing VM with a specific mounted directory)",
+    "description": "tart: Build, run, and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Run an existing VM with a specific mounted directory)",
     "tags": [
       "osx",
       "tart",
@@ -7190,7 +7190,7 @@
     "title": "tart - List VMs",
     "content": "tart list",
     "group": "macOS",
-    "description": "tart: Build, run and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (List VMs)",
+    "description": "tart: Build, run, and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (List VMs)",
     "tags": [
       "osx",
       "tart",
@@ -7205,7 +7205,7 @@
     "title": "tart - Get IP address of a running VM",
     "content": "tart ip {{vm-name}}",
     "group": "macOS",
-    "description": "tart: Build, run and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Get IP address of a running VM)",
+    "description": "tart: Build, run, and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Get IP address of a running VM)",
     "tags": [
       "osx",
       "tart",
@@ -7220,7 +7220,7 @@
     "title": "tart - Change a VM's display resolution",
     "content": "tart set {{vm-name}} --display {{640}}x{{400}}",
     "group": "macOS",
-    "description": "tart: Build, run and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Change a VM's display resolution)",
+    "description": "tart: Build, run, and manage macOS and Linux virtual machines (VMs) on Apple Silicon. (Change a VM's display resolution)",
     "tags": [
       "osx",
       "tart",
@@ -8207,10 +8207,10 @@
   {
     "id": "tldr-en-osx-systemsetup-1",
     "type": "command",
-    "title": "systemsetup - Specify timezone, NTP Server and enable network time",
+    "title": "systemsetup - Specify timezone, NTP Server, and enable network time",
     "content": "systemsetup -settimezone \"{{US/Pacific}}\" -setnetworktimeserver {{us.pool.ntp.org}} -setusingnetworktime on",
     "group": "macOS",
-    "description": "systemsetup: Configure System Preferences machine settings. (Specify timezone, NTP Server and enable network time)",
+    "description": "systemsetup: Configure System Preferences machine settings. (Specify timezone, NTP Server, and enable network time)",
     "tags": [
       "osx",
       "systemsetup",
@@ -11882,10 +11882,10 @@
   {
     "id": "tldr-en-osx-wc-4",
     "type": "command",
-    "title": "wc - Use `stdin` to count lines, words and characters (bytes) in that order",
+    "title": "wc - Use `stdin` to count lines, words, and characters (bytes) in that order",
     "content": "{{find .}} | wc",
     "group": "macOS",
-    "description": "wc: Count lines, words, or bytes. (Use `stdin` to count lines, words and characters (bytes) in that order)",
+    "description": "wc: Count lines, words, or bytes. (Use `stdin` to count lines, words, and characters (bytes) in that order)",
     "tags": [
       "osx",
       "wc",
@@ -12422,10 +12422,10 @@
   {
     "id": "tldr-en-osx-uptime-0",
     "type": "command",
-    "title": "uptime - Print current time, uptime, number of logged-in users and other information",
+    "title": "uptime - Print current time, uptime, number of logged-in users, and other information",
     "content": "uptime",
     "group": "macOS",
-    "description": "uptime: Tell how long the system has been running and other information. (Print current time, uptime, number of logged-in users and other information)",
+    "description": "uptime: Tell how long the system has been running and other information. (Print current time, uptime, number of logged-in users, and other information)",
     "tags": [
       "osx",
       "uptime",

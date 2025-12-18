@@ -9752,10 +9752,10 @@
   {
     "id": "tldr-en-windows-rdpsign-3",
     "type": "command",
-    "title": "rdpsign - Display verbose warnings, messages and statuses",
+    "title": "rdpsign - Display verbose warnings, messages, and statuses",
     "content": "rdpsign {{path\\to\\file.rdp}} /v",
     "group": "Windows",
-    "description": "rdpsign: A tool for signing Remote Desktop Protocol (RDP) files. (Display verbose warnings, messages and statuses)",
+    "description": "rdpsign: A tool for signing Remote Desktop Protocol (RDP) files. (Display verbose warnings, messages, and statuses)",
     "tags": [
       "windows",
       "rdpsign",

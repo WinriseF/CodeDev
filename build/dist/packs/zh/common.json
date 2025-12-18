@@ -65,7 +65,7 @@
     "title": "asciinema - 将本地安装的 `asciinema` 与 asciinema.org 账号关联",
     "content": "asciinema auth",
     "group": "通用工具 (Common)",
-    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另见：`terminalizer`。 (将本地安装的 `asciinema` 与 asciinema.org 账号关联)",
+    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另请参阅：`terminalizer`。 (将本地安装的 `asciinema` 与 asciinema.org 账号关联)",
     "tags": [
       "common",
       "asciinema",
@@ -80,7 +80,7 @@
     "title": "asciinema - 新建录制并保存到本地文件（按 `<Ctrl d>` 或输入 `exit` 结束）",
     "content": "asciinema rec {{路径/到/录制文件.cast}}",
     "group": "通用工具 (Common)",
-    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另见：`terminalizer`。 (新建录制并保存到本地文件（按 `<Ctrl d>` 或输入 `exit` 结束）)",
+    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另请参阅：`terminalizer`。 (新建录制并保存到本地文件（按 `<Ctrl d>` 或输入 `exit` 结束）)",
     "tags": [
       "common",
       "asciinema",
@@ -95,7 +95,7 @@
     "title": "asciinema - 从本地文件回放终端录制",
     "content": "asciinema play {{路径/到/录制文件.cast}}",
     "group": "通用工具 (Common)",
-    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另见：`terminalizer`。 (从本地文件回放终端录制)",
+    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另请参阅：`terminalizer`。 (从本地文件回放终端录制)",
     "tags": [
       "common",
       "asciinema",
@@ -110,7 +110,7 @@
     "title": "asciinema - 回放托管在 <https://asciinema.org> 的终端录制",
     "content": "asciinema play https://asciinema.org/a/{{文件 ID}}",
     "group": "通用工具 (Common)",
-    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另见：`terminalizer`。 (回放托管在 <https://asciinema.org> 的终端录制)",
+    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另请参阅：`terminalizer`。 (回放托管在 <https://asciinema.org> 的终端录制)",
     "tags": [
       "common",
       "asciinema",
@@ -125,7 +125,7 @@
     "title": "asciinema - 新建录制，限制空闲时间最多 2.5 秒",
     "content": "asciinema rec {{[-i|--idle-time-limit]}} 2.5",
     "group": "通用工具 (Common)",
-    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另见：`terminalizer`。 (新建录制，限制空闲时间最多 2.5 秒)",
+    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另请参阅：`terminalizer`。 (新建录制，限制空闲时间最多 2.5 秒)",
     "tags": [
       "common",
       "asciinema",
@@ -140,7 +140,7 @@
     "title": "asciinema - 打印本地保存录制的完整输出",
     "content": "asciinema cat {{路径/到/录制文件.cast}}",
     "group": "通用工具 (Common)",
-    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另见：`terminalizer`。 (打印本地保存录制的完整输出)",
+    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另请参阅：`terminalizer`。 (打印本地保存录制的完整输出)",
     "tags": [
       "common",
       "asciinema",
@@ -155,7 +155,7 @@
     "title": "asciinema - 上传本地保存的终端录制到 asciinema.org",
     "content": "asciinema upload {{路径/到/录制文件.cast}}",
     "group": "通用工具 (Common)",
-    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另见：`terminalizer`。 (上传本地保存的终端录制到 asciinema.org)",
+    "description": "asciinema: 录制和回放终端会话，并可选分享到 。 另请参阅：`terminalizer`。 (上传本地保存的终端录制到 asciinema.org)",
     "tags": [
       "common",
       "asciinema",
@@ -575,7 +575,7 @@
     "title": "brew - 安装最新稳定版本的软件包或安装包",
     "content": "brew install {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`. (安装最新稳定版本的软件包或安装包)",
+    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`。 (安装最新稳定版本的软件包或安装包)",
     "tags": [
       "common",
       "brew",
@@ -590,7 +590,7 @@
     "title": "brew - 列出所有已安装的软件包和安装包",
     "content": "brew list",
     "group": "通用工具 (Common)",
-    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`. (列出所有已安装的软件包和安装包)",
+    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`。 (列出所有已安装的软件包和安装包)",
     "tags": [
       "common",
       "brew",
@@ -605,7 +605,7 @@
     "title": "brew - 升级已安装的软件包或安装包（如果未指定，则升级所有已安装的软件包或安装包）",
     "content": "brew upgrade {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`. (升级已安装的软件包或安装包（如果未指定，则升级所有已安装的软件包或安装包）)",
+    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`。 (升级已安装的软件包或安装包（如果未指定，则升级所有已安装的软件包或安装包）)",
     "tags": [
       "common",
       "brew",
@@ -620,7 +620,7 @@
     "title": "brew - 从 Homebrew 源代码仓库中获取 Homebrew 和所有软件包及安装包的最新版本",
     "content": "brew update",
     "group": "通用工具 (Common)",
-    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`. (从 Homebrew 源代码仓库中获取 Homebrew 和所有软件包及安装包的最新版本)",
+    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`。 (从 Homebrew 源代码仓库中获取 Homebrew 和所有软件包及安装包的最新版本)",
     "tags": [
       "common",
       "brew",
@@ -635,7 +635,7 @@
     "title": "brew - 显示有更新版本可用的软件包和安装包",
     "content": "brew outdated",
     "group": "通用工具 (Common)",
-    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`. (显示有更新版本可用的软件包和安装包)",
+    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`。 (显示有更新版本可用的软件包和安装包)",
     "tags": [
       "common",
       "brew",
@@ -650,7 +650,7 @@
     "title": "brew - 搜索可用的软件包（即包）和安装包（即本地 macOS `.app` 包）",
     "content": "brew search {{软件包名称}}",
     "group": "通用工具 (Common)",
-    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`. (搜索可用的软件包（即包）和安装包（即本地 macOS `.app` 包）)",
+    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`。 (搜索可用的软件包（即包）和安装包（即本地 macOS `.app` 包）)",
     "tags": [
       "common",
       "brew",
@@ -665,7 +665,7 @@
     "title": "brew - 显示有关软件包或安装包的信息（版本、安装路径、依赖项等）",
     "content": "brew info {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`. (显示有关软件包或安装包的信息（版本、安装路径、依赖项等）)",
+    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`。 (显示有关软件包或安装包的信息（版本、安装路径、依赖项等）)",
     "tags": [
       "common",
       "brew",
@@ -680,7 +680,7 @@
     "title": "brew - 检查本地的 Homebrew 安装中的潜在问题",
     "content": "brew doctor",
     "group": "通用工具 (Common)",
-    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`. (检查本地的 Homebrew 安装中的潜在问题)",
+    "description": "brew: Homebrew - 一个 macOS 和 Linux 的包管理器。 此命令也有关于其子命令的文件，例如：`install`。 (检查本地的 Homebrew 安装中的潜在问题)",
     "tags": [
       "common",
       "brew",
@@ -2615,7 +2615,7 @@
     "title": "adb-disconnect - 查看 `adb disconnect` 的文档",
     "content": "tldr adb connect",
     "group": "通用工具 (Common)",
-    "description": "adb-disconnect: 该命令已移动到 `adb connect`. (查看 `adb disconnect` 的文档)",
+    "description": "adb-disconnect: 该命令已移动到 `adb connect`。 (查看 `adb disconnect` 的文档)",
     "tags": [
       "common",
       "adb-disconnect",
@@ -2870,7 +2870,7 @@
     "title": "arthas - 启动 arthas",
     "content": "java -jar {{路径/到/arthas-boot.jar}}",
     "group": "通用工具 (Common)",
-    "description": "arthas: Java 应用诊断利器。 另见 `arthas-watch`, `arthas-trace`. (启动 arthas)",
+    "description": "arthas: Java 应用诊断利器。 另请参阅：`arthas-watch`，`arthas-trace`。 (启动 arthas)",
     "tags": [
       "common",
       "arthas",
@@ -2885,7 +2885,7 @@
     "title": "arthas - 重连 arthas （默认 3658 端口）",
     "content": "telnet localhost {{端口号}}",
     "group": "通用工具 (Common)",
-    "description": "arthas: Java 应用诊断利器。 另见 `arthas-watch`, `arthas-trace`. (重连 arthas （默认 3658 端口）)",
+    "description": "arthas: Java 应用诊断利器。 另请参阅：`arthas-watch`，`arthas-trace`。 (重连 arthas （默认 3658 端口）)",
     "tags": [
       "common",
       "arthas",
@@ -2900,7 +2900,7 @@
     "title": "arthas - 退出当前 arthas 客户端的连接，但不停止 arthas 服务",
     "content": "exit|quit|logout|q",
     "group": "通用工具 (Common)",
-    "description": "arthas: Java 应用诊断利器。 另见 `arthas-watch`, `arthas-trace`. (退出当前 arthas 客户端的连接，但不停止 arthas 服务)",
+    "description": "arthas: Java 应用诊断利器。 另请参阅：`arthas-watch`，`arthas-trace`。 (退出当前 arthas 客户端的连接，但不停止 arthas 服务)",
     "tags": [
       "common",
       "arthas",
@@ -2915,7 +2915,7 @@
     "title": "arthas - 停止 arthas 服务，断开所有 arthas 客户端的连接",
     "content": "stop",
     "group": "通用工具 (Common)",
-    "description": "arthas: Java 应用诊断利器。 另见 `arthas-watch`, `arthas-trace`. (停止 arthas 服务，断开所有 arthas 客户端的连接)",
+    "description": "arthas: Java 应用诊断利器。 另请参阅：`arthas-watch`，`arthas-trace`。 (停止 arthas 服务，断开所有 arthas 客户端的连接)",
     "tags": [
       "common",
       "arthas",
@@ -3320,7 +3320,7 @@
     "title": "view - 打开文件",
     "content": "view {{file}}",
     "group": "通用工具 (Common)",
-    "description": "view: `vim` 的只读版本。 等效于 `vim -R`. (打开文件)",
+    "description": "view: `vim` 的只读版本。 等效于 `vim -R`。 (打开文件)",
     "tags": [
       "common",
       "view",
@@ -4475,7 +4475,7 @@
     "title": "print - 查看 Zsh 内置命令的文档",
     "content": "tldr print.zsh",
     "group": "通用工具 (Common)",
-    "description": "print: `print` 可以引用具有相同名称的多个命令. (查看 Zsh 内置命令的文档)",
+    "description": "print: `print` 可以引用具有相同名称的多个命令。 (查看 Zsh 内置命令的文档)",
     "tags": [
       "common",
       "print",
@@ -4490,7 +4490,7 @@
     "title": "print - 查看 `run-mailcap` 的 `print` 别名的文档",
     "content": "tldr --platform linux print.runmailcap",
     "group": "通用工具 (Common)",
-    "description": "print: `print` 可以引用具有相同名称的多个命令. (查看 `run-mailcap` 的 `print` 别名的文档)",
+    "description": "print: `print` 可以引用具有相同名称的多个命令。 (查看 `run-mailcap` 的 `print` 别名的文档)",
     "tags": [
       "common",
       "print",
@@ -4505,7 +4505,7 @@
     "title": "print - 查看在 Windows 上打印文本文件的文档",
     "content": "tldr --platform windows print.win",
     "group": "通用工具 (Common)",
-    "description": "print: `print` 可以引用具有相同名称的多个命令. (查看在 Windows 上打印文本文件的文档)",
+    "description": "print: `print` 可以引用具有相同名称的多个命令。 (查看在 Windows 上打印文本文件的文档)",
     "tags": [
       "common",
       "print",
@@ -4925,7 +4925,7 @@
     "title": "] - 查看 `[` 关键字的文档",
     "content": "tldr [",
     "group": "通用工具 (Common)",
-    "description": "]: 这个 shell 关键字用于结束 `[` 。 (查看 `[` 关键字的文档)",
+    "description": "]: 这个 shell 关键字用于结束 `[`。 (查看 `[` 关键字的文档)",
     "tags": [
       "common",
       "]",
@@ -4940,7 +4940,7 @@
     "title": "rsync - 复制文件",
     "content": "rsync {{路径/到/来源}} {{路径/到/目标}}",
     "group": "通用工具 (Common)",
-    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`. (复制文件)",
+    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`。 (复制文件)",
     "tags": [
       "common",
       "rsync",
@@ -4955,7 +4955,7 @@
     "title": "rsync - 使用归档模式递归拷贝文件，并保留所有属性，不解析软链接",
     "content": "rsync {{[-a|--archive]}} {{路径/到/来源}} {{路径/到/目标}}",
     "group": "通用工具 (Common)",
-    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`. (使用归档模式递归拷贝文件，并保留所有属性，不解析软链接)",
+    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`。 (使用归档模式递归拷贝文件，并保留所有属性，不解析软链接)",
     "tags": [
       "common",
       "rsync",
@@ -4970,7 +4970,7 @@
     "title": "rsync - 将文件以归档模式并保留几乎所有属性进行传输，并以人类可读方式输出详细信息和进度条，中断时保留部分信息",
     "content": "rsync {{[-zvhP|--compress --verbose --human-readable --partial --progress]}} {{路径/到/来源}} {{路径/到/目标}}",
     "group": "通用工具 (Common)",
-    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`. (将文件以归档模式并保留几乎所有属性进行传输，并以人类可读方式输出详细信息和进度条，中断时保留部分信息)",
+    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`。 (将文件以归档模式并保留几乎所有属性进行传输，并以人类可读方式输出详细信息和进度条，中断时保留部分信息)",
     "tags": [
       "common",
       "rsync",
@@ -4985,7 +4985,7 @@
     "title": "rsync - 以递归模式传输文件",
     "content": "rsync {{[-r|--recursive]}} {{路径/到/来源}} {{路径/到/目标}}",
     "group": "通用工具 (Common)",
-    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`. (以递归模式传输文件)",
+    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`。 (以递归模式传输文件)",
     "tags": [
       "common",
       "rsync",
@@ -5000,7 +5000,7 @@
     "title": "rsync - 将目录下的所有内容（不包含该目录），以递归方式传输",
     "content": "rsync {{[-r|--recursive]}} {{路径/到/来源/}} {{路径/到/目标}}",
     "group": "通用工具 (Common)",
-    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`. (将目录下的所有内容（不包含该目录），以递归方式传输)",
+    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`。 (将目录下的所有内容（不包含该目录），以递归方式传输)",
     "tags": [
       "common",
       "rsync",
@@ -5015,7 +5015,7 @@
     "title": "rsync - 归档方式传输目录，保留几乎所有属性，解析软连接，并忽略已传输的文件",
     "content": "rsync {{[-auL|--archive --update --copy-links]}} {{路径/到/来源}} {{路径/到/目标}}",
     "group": "通用工具 (Common)",
-    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`. (归档方式传输目录，保留几乎所有属性，解析软连接，并忽略已传输的文件)",
+    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`。 (归档方式传输目录，保留几乎所有属性，解析软连接，并忽略已传输的文件)",
     "tags": [
       "common",
       "rsync",
@@ -5030,7 +5030,7 @@
     "title": "rsync - 传输目录到运行 `rsyncd` 的远端，并删除目标目录中源目录中不存在的文件",
     "content": "rsync {{[-r|--recursive]}} --delete rsync://{{host}}:{{路径/到/来源}} {{路径/到/目标}}",
     "group": "通用工具 (Common)",
-    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`. (传输目录到运行 `rsyncd` 的远端，并删除目标目录中源目录中不存在的文件)",
+    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`。 (传输目录到运行 `rsyncd` 的远端，并删除目标目录中源目录中不存在的文件)",
     "tags": [
       "common",
       "rsync",
@@ -5045,7 +5045,7 @@
     "title": "rsync - 指定本地和远程之间通信方式，使用指定端口，并显示进度条",
     "content": "rsync {{[-e|--rsh]}} 'ssh -p {{端口}}' --info=progress2 {{host}}:{{路径/到/来源}} {{路径/到/目标}}",
     "group": "通用工具 (Common)",
-    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`. (指定本地和远程之间通信方式，使用指定端口，并显示进度条)",
+    "description": "rsync: 一种快速，通用，远程（和本地）文件复制工具，默认使用 SSH。 如果要指定远程路径，请使用 `user@host:path/to/file_or_directory`。 (指定本地和远程之间通信方式，使用指定端口，并显示进度条)",
     "tags": [
       "common",
       "rsync",
@@ -5375,7 +5375,7 @@
     "title": "uv-sync - 将项目环境与锁文件同步",
     "content": "uv sync",
     "group": "通用工具 (Common)",
-    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile). (将项目环境与锁文件同步)",
+    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile)。 (将项目环境与锁文件同步)",
     "tags": [
       "common",
       "uv-sync",
@@ -5390,7 +5390,7 @@
     "title": "uv-sync - 同步，并且包含所有的可选依赖",
     "content": "uv sync --all-extras",
     "group": "通用工具 (Common)",
-    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile). (同步，并且包含所有的可选依赖)",
+    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile)。 (同步，并且包含所有的可选依赖)",
     "tags": [
       "common",
       "uv-sync",
@@ -5405,7 +5405,7 @@
     "title": "uv-sync - 同步，包含特定的可选依赖",
     "content": "uv sync --extra {{可选依赖_名称}}",
     "group": "通用工具 (Common)",
-    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile). (同步，包含特定的可选依赖)",
+    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile)。 (同步，包含特定的可选依赖)",
     "tags": [
       "common",
       "uv-sync",
@@ -5420,7 +5420,7 @@
     "title": "uv-sync - 仅同步开发环境依赖",
     "content": "uv sync --only-dev",
     "group": "通用工具 (Common)",
-    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile). (仅同步开发环境依赖)",
+    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile)。 (仅同步开发环境依赖)",
     "tags": [
       "common",
       "uv-sync",
@@ -5435,7 +5435,7 @@
     "title": "uv-sync - 同步，但排除开发环境依赖",
     "content": "uv sync --no-dev",
     "group": "通用工具 (Common)",
-    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile). (同步，但排除开发环境依赖)",
+    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile)。 (同步，但排除开发环境依赖)",
     "tags": [
       "common",
       "uv-sync",
@@ -5450,7 +5450,7 @@
     "title": "uv-sync - 同步特定的依赖组",
     "content": "uv sync --group {{依赖组_名称}}",
     "group": "通用工具 (Common)",
-    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile). (同步特定的依赖组)",
+    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile)。 (同步特定的依赖组)",
     "tags": [
       "common",
       "uv-sync",
@@ -5465,7 +5465,7 @@
     "title": "uv-sync - 检查环境是否已经同步（不会做出更改）",
     "content": "uv sync --check",
     "group": "通用工具 (Common)",
-    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile). (检查环境是否已经同步（不会做出更改）)",
+    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile)。 (检查环境是否已经同步（不会做出更改）)",
     "tags": [
       "common",
       "uv-sync",
@@ -5480,7 +5480,7 @@
     "title": "uv-sync - 预览同步会做出的更改，但是不执行",
     "content": "uv sync --dry-run",
     "group": "通用工具 (Common)",
-    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile). (预览同步会做出的更改，但是不执行)",
+    "description": "uv-sync: 更新项目环境，来匹配锁文件 (lockfile)。 (预览同步会做出的更改，但是不执行)",
     "tags": [
       "common",
       "uv-sync",
@@ -7730,7 +7730,7 @@
     "title": "act - 列出可用的 actions 清单",
     "content": "act -l",
     "group": "通用工具 (Common)",
-    "description": "act: 使用 Docker 本地运行 GitHub Actions. (列出可用的 actions 清单)",
+    "description": "act: 使用 Docker 本地运行 GitHub Actions。 (列出可用的 actions 清单)",
     "tags": [
       "common",
       "act",
@@ -7745,7 +7745,7 @@
     "title": "act - 运行默认 event",
     "content": "act",
     "group": "通用工具 (Common)",
-    "description": "act: 使用 Docker 本地运行 GitHub Actions. (运行默认 event)",
+    "description": "act: 使用 Docker 本地运行 GitHub Actions。 (运行默认 event)",
     "tags": [
       "common",
       "act",
@@ -7760,7 +7760,7 @@
     "title": "act - 运行指定 event",
     "content": "act {{event_type}}",
     "group": "通用工具 (Common)",
-    "description": "act: 使用 Docker 本地运行 GitHub Actions. (运行指定 event)",
+    "description": "act: 使用 Docker 本地运行 GitHub Actions。 (运行指定 event)",
     "tags": [
       "common",
       "act",
@@ -7775,7 +7775,7 @@
     "title": "act - 运行指定 action",
     "content": "act -a {{action_id}}",
     "group": "通用工具 (Common)",
-    "description": "act: 使用 Docker 本地运行 GitHub Actions. (运行指定 action)",
+    "description": "act: 使用 Docker 本地运行 GitHub Actions。 (运行指定 action)",
     "tags": [
       "common",
       "act",
@@ -7790,7 +7790,7 @@
     "title": "act - 非实际运行 actions（也就是 dry-run 模式）",
     "content": "act -n",
     "group": "通用工具 (Common)",
-    "description": "act: 使用 Docker 本地运行 GitHub Actions. (非实际运行 actions（也就是 dry-run 模式）)",
+    "description": "act: 使用 Docker 本地运行 GitHub Actions。 (非实际运行 actions（也就是 dry-run 模式）)",
     "tags": [
       "common",
       "act",
@@ -7805,7 +7805,7 @@
     "title": "act - 展示详细记录",
     "content": "act -v",
     "group": "通用工具 (Common)",
-    "description": "act: 使用 Docker 本地运行 GitHub Actions. (展示详细记录)",
+    "description": "act: 使用 Docker 本地运行 GitHub Actions。 (展示详细记录)",
     "tags": [
       "common",
       "act",
@@ -7820,7 +7820,7 @@
     "title": "act - 运行指定 workflow",
     "content": "act push -W {{workflow 的路径}}",
     "group": "通用工具 (Common)",
-    "description": "act: 使用 Docker 本地运行 GitHub Actions. (运行指定 workflow)",
+    "description": "act: 使用 Docker 本地运行 GitHub Actions。 (运行指定 workflow)",
     "tags": [
       "common",
       "act",
@@ -7998,7 +7998,7 @@
     "id": "tldr-zh-common-atom-1",
     "type": "command",
     "title": "atom - 在新窗口中打开文件或目录",
-    "content": "atom -n {{路径/到/文件或目录}}",
+    "content": "atom {{[-n|--new-window]}} {{路径/到/文件或目录}}",
     "group": "通用工具 (Common)",
     "description": "atom: 一个跨平台的可扩展文本编辑器。 插件由 `apm` 管理。 注意：Atom 已经停止更新并且不再积极维护。 (在新窗口中打开文件或目录)",
     "tags": [
@@ -8013,7 +8013,7 @@
     "id": "tldr-zh-common-atom-2",
     "type": "command",
     "title": "atom - 在已有窗口中打开文件或目录",
-    "content": "atom --add {{路径/到/文件或目录}}",
+    "content": "atom {{[-a|--add]}} {{路径/到/文件或目录}}",
     "group": "通用工具 (Common)",
     "description": "atom: 一个跨平台的可扩展文本编辑器。 插件由 `apm` 管理。 注意：Atom 已经停止更新并且不再积极维护。 (在已有窗口中打开文件或目录)",
     "tags": [
@@ -8043,7 +8043,7 @@
     "id": "tldr-zh-common-atom-4",
     "type": "command",
     "title": "atom - 阻止 Atom 分叉到后台，保持 Atom 与终端连接",
-    "content": "atom --foreground",
+    "content": "atom {{[-f|--foreground]}}",
     "group": "通用工具 (Common)",
     "description": "atom: 一个跨平台的可扩展文本编辑器。 插件由 `apm` 管理。 注意：Atom 已经停止更新并且不再积极维护。 (阻止 Atom 分叉到后台，保持 Atom 与终端连接)",
     "tags": [
@@ -8058,7 +8058,7 @@
     "id": "tldr-zh-common-atom-5",
     "type": "command",
     "title": "atom - 等待 Atom 窗口关闭后再返回（对于 Git 提交编辑器很有用）",
-    "content": "atom --wait",
+    "content": "atom {{[-w|--wait]}}",
     "group": "通用工具 (Common)",
     "description": "atom: 一个跨平台的可扩展文本编辑器。 插件由 `apm` 管理。 注意：Atom 已经停止更新并且不再积极维护。 (等待 Atom 窗口关闭后再返回（对于 Git 提交编辑器很有用）)",
     "tags": [
@@ -8075,7 +8075,7 @@
     "title": "man - 展示一条命令的使用手册分页",
     "content": "man {{command}}",
     "group": "通用工具 (Common)",
-    "description": "man: 展示手册分页 (manual page). (展示一条命令的使用手册分页)",
+    "description": "man: 展示手册分页 (manual page)。 (展示一条命令的使用手册分页)",
     "tags": [
       "common",
       "man",
@@ -8090,7 +8090,7 @@
     "title": "man - 在浏览器中打开一条命令的使用手册分页 (`BROWSER` 环境变量可以替换 `=browser_name`)",
     "content": "man {{[-Hbrowser_name|--html=browser_name]}} {{command}}",
     "group": "通用工具 (Common)",
-    "description": "man: 展示手册分页 (manual page). (在浏览器中打开一条命令的使用手册分页 (`BROWSER` 环境变量可以替换 `=browser_name`))",
+    "description": "man: 展示手册分页 (manual page)。 (在浏览器中打开一条命令的使用手册分页 (`BROWSER` 环境变量可以替换 `=browser_name`))",
     "tags": [
       "common",
       "man",
@@ -8105,7 +8105,7 @@
     "title": "man - 从第七章节展示一条命令的使用手册分页",
     "content": "man {{7}} {{command}}",
     "group": "通用工具 (Common)",
-    "description": "man: 展示手册分页 (manual page). (从第七章节展示一条命令的使用手册分页)",
+    "description": "man: 展示手册分页 (manual page)。 (从第七章节展示一条命令的使用手册分页)",
     "tags": [
       "common",
       "man",
@@ -8120,7 +8120,7 @@
     "title": "man - 列表展示一条命令的所有可用章节",
     "content": "man {{[-f|--whatis]}} {{command}}",
     "group": "通用工具 (Common)",
-    "description": "man: 展示手册分页 (manual page). (列表展示一条命令的所有可用章节)",
+    "description": "man: 展示手册分页 (manual page)。 (列表展示一条命令的所有可用章节)",
     "tags": [
       "common",
       "man",
@@ -8135,7 +8135,7 @@
     "title": "man - 展示搜索手册分页的路径",
     "content": "man {{[-w|--path]}}",
     "group": "通用工具 (Common)",
-    "description": "man: 展示手册分页 (manual page). (展示搜索手册分页的路径)",
+    "description": "man: 展示手册分页 (manual page)。 (展示搜索手册分页的路径)",
     "tags": [
       "common",
       "man",
@@ -8150,7 +8150,7 @@
     "title": "man - 展示使用手册分页的位置, 而不是手册分页本身",
     "content": "man {{[-w|--where]}} {{command}}",
     "group": "通用工具 (Common)",
-    "description": "man: 展示手册分页 (manual page). (展示使用手册分页的位置, 而不是手册分页本身)",
+    "description": "man: 展示手册分页 (manual page)。 (展示使用手册分页的位置, 而不是手册分页本身)",
     "tags": [
       "common",
       "man",
@@ -8165,7 +8165,7 @@
     "title": "man - 使用特定的语言来展示使用手册分页",
     "content": "man {{[-L|--locale]}} {{locale}} {{command}}",
     "group": "通用工具 (Common)",
-    "description": "man: 展示手册分页 (manual page). (使用特定的语言来展示使用手册分页)",
+    "description": "man: 展示手册分页 (manual page)。 (使用特定的语言来展示使用手册分页)",
     "tags": [
       "common",
       "man",
@@ -8180,7 +8180,7 @@
     "title": "man - 搜索包含搜索字符串的手册页",
     "content": "man {{[-k|--apropos]}} \"{{search_string}}\"",
     "group": "通用工具 (Common)",
-    "description": "man: 展示手册分页 (manual page). (搜索包含搜索字符串的手册页)",
+    "description": "man: 展示手册分页 (manual page)。 (搜索包含搜索字符串的手册页)",
     "tags": [
       "common",
       "man",
@@ -8405,7 +8405,7 @@
     "title": "upt - 更新可用软件包的列表",
     "content": "upt update",
     "group": "通用工具 (Common)",
-    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`. (更新可用软件包的列表)",
+    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 另请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`。 (更新可用软件包的列表)",
     "tags": [
       "common",
       "upt",
@@ -8420,7 +8420,7 @@
     "title": "upt - 搜索指定的软件包",
     "content": "upt search {{搜索软件包关键词}}",
     "group": "通用工具 (Common)",
-    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`. (搜索指定的软件包)",
+    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 另请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`。 (搜索指定的软件包)",
     "tags": [
       "common",
       "upt",
@@ -8435,7 +8435,7 @@
     "title": "upt - 显示某个软件包的信息",
     "content": "upt info {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`. (显示某个软件包的信息)",
+    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 另请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`。 (显示某个软件包的信息)",
     "tags": [
       "common",
       "upt",
@@ -8450,7 +8450,7 @@
     "title": "upt - 安装指定的软件包",
     "content": "upt install {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`. (安装指定的软件包)",
+    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 另请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`。 (安装指定的软件包)",
     "tags": [
       "common",
       "upt",
@@ -8465,7 +8465,7 @@
     "title": "upt - 移除指定的软件包",
     "content": "upt {{remove|uninstall}} {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`. (移除指定的软件包)",
+    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 另请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`。 (移除指定的软件包)",
     "tags": [
       "common",
       "upt",
@@ -8480,7 +8480,7 @@
     "title": "upt - 升级所有已安装的软件包",
     "content": "upt upgrade",
     "group": "通用工具 (Common)",
-    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`. (升级所有已安装的软件包)",
+    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 另请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`。 (升级所有已安装的软件包)",
     "tags": [
       "common",
       "upt",
@@ -8495,7 +8495,7 @@
     "title": "upt - 升级指定的软件包",
     "content": "upt upgrade {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`. (升级指定的软件包)",
+    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 另请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`。 (升级指定的软件包)",
     "tags": [
       "common",
       "upt",
@@ -8510,7 +8510,7 @@
     "title": "upt - 列出已安装的软件包",
     "content": "upt list",
     "group": "通用工具 (Common)",
-    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`. (列出已安装的软件包)",
+    "description": "upt: 统一的界面，用于管理各种操作系统上的软件包，例如 Windows、许多 Linux 发行版、macOS、FreeBSD，甚至 Haiku。 它需要安装本机操作系统的软件包管理器。 另请参阅：`flatpak`、`brew`、`scoop`、`apt`、`dnf`。 (列出已安装的软件包)",
     "tags": [
       "common",
       "upt",
@@ -8900,7 +8900,7 @@
     "title": "glow - 运行 glow 并选择文件查看",
     "content": "glow",
     "group": "通用工具 (Common)",
-    "description": "glow: 在终端渲染 Markdown. (运行 glow 并选择文件查看)",
+    "description": "glow: 在终端渲染 Markdown。 (运行 glow 并选择文件查看)",
     "tags": [
       "common",
       "glow",
@@ -8915,7 +8915,7 @@
     "title": "glow - 渲染 Markdown 文件到终端",
     "content": "glow {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "glow: 在终端渲染 Markdown. (渲染 Markdown 文件到终端)",
+    "description": "glow: 在终端渲染 Markdown。 (渲染 Markdown 文件到终端)",
     "tags": [
       "common",
       "glow",
@@ -8930,7 +8930,7 @@
     "title": "glow - 使用分页器查看 Markdown 文件",
     "content": "glow -p {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "glow: 在终端渲染 Markdown. (使用分页器查看 Markdown 文件)",
+    "description": "glow: 在终端渲染 Markdown。 (使用分页器查看 Markdown 文件)",
     "tags": [
       "common",
       "glow",
@@ -8945,7 +8945,7 @@
     "title": "glow - 从 URL 查看文件",
     "content": "glow {{https://example.com/file.md}}",
     "group": "通用工具 (Common)",
-    "description": "glow: 在终端渲染 Markdown. (从 URL 查看文件)",
+    "description": "glow: 在终端渲染 Markdown。 (从 URL 查看文件)",
     "tags": [
       "common",
       "glow",
@@ -8960,7 +8960,7 @@
     "title": "glow - 查看 GitHub 或 GitLab 的 README",
     "content": "glow {{github.com/owner/repository}}",
     "group": "通用工具 (Common)",
-    "description": "glow: 在终端渲染 Markdown. (查看 GitHub 或 GitLab 的 README)",
+    "description": "glow: 在终端渲染 Markdown。 (查看 GitHub 或 GitLab 的 README)",
     "tags": [
       "common",
       "glow",
@@ -10190,7 +10190,7 @@
     "title": "arthas-trace - 追踪方法调用链",
     "content": "trace {{class-pattern}} {{method-pattern}}",
     "group": "通用工具 (Common)",
-    "description": "arthas-trace: 方法内部调用路径，并输出方法路径上的每个节点上耗时。 另见 `arthas`, `arthas-watch`. (追踪方法调用链)",
+    "description": "arthas-trace: 方法内部调用路径，并输出方法路径上的每个节点上耗时。 另请参阅：`arthas`，`arthas-watch`。 (追踪方法调用链)",
     "tags": [
       "common",
       "arthas-trace",
@@ -10205,7 +10205,7 @@
     "title": "arthas-trace - 追踪方法调用链，仅显示大于 10 毫秒的调用",
     "content": "trace {{class-pattern}} {{method-pattern}} '#cost > {{10}}'",
     "group": "通用工具 (Common)",
-    "description": "arthas-trace: 方法内部调用路径，并输出方法路径上的每个节点上耗时。 另见 `arthas`, `arthas-watch`. (追踪方法调用链，仅显示大于 10 毫秒的调用)",
+    "description": "arthas-trace: 方法内部调用路径，并输出方法路径上的每个节点上耗时。 另请参阅：`arthas`，`arthas-watch`。 (追踪方法调用链，仅显示大于 10 毫秒的调用)",
     "tags": [
       "common",
       "arthas-trace",
@@ -10220,7 +10220,7 @@
     "title": "arthas-trace - 追踪多个类和方法的调用",
     "content": "trace -E {{class-pattern1|class-patter2}} {{method-pattern1|method-pattern2|method-pattern3}}",
     "group": "通用工具 (Common)",
-    "description": "arthas-trace: 方法内部调用路径，并输出方法路径上的每个节点上耗时。 另见 `arthas`, `arthas-watch`. (追踪多个类和方法的调用)",
+    "description": "arthas-trace: 方法内部调用路径，并输出方法路径上的每个节点上耗时。 另请参阅：`arthas`，`arthas-watch`。 (追踪多个类和方法的调用)",
     "tags": [
       "common",
       "arthas-trace",
@@ -10235,7 +10235,7 @@
     "title": "arthas-trace - 仅显示大于 10 毫秒的调用链，观测 10 次",
     "content": "trace {{class-pattern}} {{method-pattern}} '#cost > {{10}}' -n 5",
     "group": "通用工具 (Common)",
-    "description": "arthas-trace: 方法内部调用路径，并输出方法路径上的每个节点上耗时。 另见 `arthas`, `arthas-watch`. (仅显示大于 10 毫秒的调用链，观测 10 次)",
+    "description": "arthas-trace: 方法内部调用路径，并输出方法路径上的每个节点上耗时。 另请参阅：`arthas`，`arthas-watch`。 (仅显示大于 10 毫秒的调用链，观测 10 次)",
     "tags": [
       "common",
       "arthas-trace",
@@ -10640,7 +10640,7 @@
     "title": "arthas-watch - 在方法调用后观察，显示第一个参数和返回值，展开嵌套对象的 4 层",
     "content": "watch {{class-pattern}} {{method-pattern}} {{'{ params[0],returnObj }'}} -x 4",
     "group": "通用工具 (Common)",
-    "description": "arthas-watch: 函数执行数据观测。 另见 `arthas`, `arthas-trace`. (在方法调用后观察，显示第一个参数和返回值，展开嵌套对象的 4 层)",
+    "description": "arthas-watch: 函数执行数据观测。 另请参阅：`arthas`，`arthas-trace`。 (在方法调用后观察，显示第一个参数和返回值，展开嵌套对象的 4 层)",
     "tags": [
       "common",
       "arthas-watch",
@@ -10655,7 +10655,7 @@
     "title": "arthas-watch - 在方法调用后观测，当第一个参数的值是 5 时，显示第二个参数和返回值，展开嵌套对象的 4 层",
     "content": "watch {{class-pattern}} {{method-pattern}} {{'{ params[1],returnObj }'}} {{'\"5\".equals(params[0])'}} -x 4",
     "group": "通用工具 (Common)",
-    "description": "arthas-watch: 函数执行数据观测。 另见 `arthas`, `arthas-trace`. (在方法调用后观测，当第一个参数的值是 5 时，显示第二个参数和返回值，展开嵌套对象的 4 层)",
+    "description": "arthas-watch: 函数执行数据观测。 另请参阅：`arthas`，`arthas-trace`。 (在方法调用后观测，当第一个参数的值是 5 时，显示第二个参数和返回值，展开嵌套对象的 4 层)",
     "tags": [
       "common",
       "arthas-watch",
@@ -10670,7 +10670,7 @@
     "title": "arthas-watch - 在方法返回和异常后观测，显示第二个参数的 count 属性",
     "content": "watch {{class-pattern}} {{method-pattern}} {{'{ params[1].count }'}} -e -s",
     "group": "通用工具 (Common)",
-    "description": "arthas-watch: 函数执行数据观测。 另见 `arthas`, `arthas-trace`. (在方法返回和异常后观测，显示第二个参数的 count 属性)",
+    "description": "arthas-watch: 函数执行数据观测。 另请参阅：`arthas`，`arthas-trace`。 (在方法返回和异常后观测，显示第二个参数的 count 属性)",
     "tags": [
       "common",
       "arthas-watch",
@@ -13022,10 +13022,10 @@
   {
     "id": "tldr-zh-common-git-credential-store-0",
     "type": "command",
-    "title": "git-credential-store - ​​指定凭证存储文件路径​​",
+    "title": "git-credential-store - 指定凭证存储文件路径",
     "content": "git config credential.helper 'store --file={{路径/到/文件}}'",
     "group": "通用工具 (Common)",
-    "description": "git-credential-store: Git 凭证存储助手，用于将密码存储在磁盘上。 (​​指定凭证存储文件路径​​)",
+    "description": "git-credential-store: Git 凭证存储助手，用于将密码存储在磁盘上。 (指定凭证存储文件路径)",
     "tags": [
       "common",
       "git-credential-store",
@@ -13520,7 +13520,7 @@
     "title": "popd - 从堆栈中删除顶部目录，并用 `cd` 跳转到该目录",
     "content": "popd",
     "group": "通用工具 (Common)",
-    "description": "popd: 通过 pushd shell 内置程序删除目录堆栈中的目录。 另见 `pushd` 将目录放入堆栈和 `dirs` 显示目录堆栈内容。 (从堆栈中删除顶部目录，并用 `cd` 跳转到该目录)",
+    "description": "popd: 通过 pushd shell 内置程序删除目录堆栈中的目录。 另请参阅：`pushd` 将目录放入堆栈和 `dirs` 显示目录堆栈内容。 (从堆栈中删除顶部目录，并用 `cd` 跳转到该目录)",
     "tags": [
       "common",
       "popd",
@@ -13535,7 +13535,7 @@
     "title": "popd - 删除第 N 个目录（从零开始，以用 `dirs` 打印的列表左侧开始）",
     "content": "popd +N",
     "group": "通用工具 (Common)",
-    "description": "popd: 通过 pushd shell 内置程序删除目录堆栈中的目录。 另见 `pushd` 将目录放入堆栈和 `dirs` 显示目录堆栈内容。 (删除第 N 个目录（从零开始，以用 `dirs` 打印的列表左侧开始）)",
+    "description": "popd: 通过 pushd shell 内置程序删除目录堆栈中的目录。 另请参阅：`pushd` 将目录放入堆栈和 `dirs` 显示目录堆栈内容。 (删除第 N 个目录（从零开始，以用 `dirs` 打印的列表左侧开始）)",
     "tags": [
       "common",
       "popd",
@@ -13550,7 +13550,7 @@
     "title": "popd - 删除第 N 个目录（从零开始，以用 `dirs` 打印的列表右侧开始）",
     "content": "popd -N",
     "group": "通用工具 (Common)",
-    "description": "popd: 通过 pushd shell 内置程序删除目录堆栈中的目录。 另见 `pushd` 将目录放入堆栈和 `dirs` 显示目录堆栈内容。 (删除第 N 个目录（从零开始，以用 `dirs` 打印的列表右侧开始）)",
+    "description": "popd: 通过 pushd shell 内置程序删除目录堆栈中的目录。 另请参阅：`pushd` 将目录放入堆栈和 `dirs` 显示目录堆栈内容。 (删除第 N 个目录（从零开始，以用 `dirs` 打印的列表右侧开始）)",
     "tags": [
       "common",
       "popd",
@@ -13565,7 +13565,7 @@
     "title": "popd - 删除第 1 个目录（从零开始，以用 `dirs` 打印的列表左侧开始）",
     "content": "popd -n",
     "group": "通用工具 (Common)",
-    "description": "popd: 通过 pushd shell 内置程序删除目录堆栈中的目录。 另见 `pushd` 将目录放入堆栈和 `dirs` 显示目录堆栈内容。 (删除第 1 个目录（从零开始，以用 `dirs` 打印的列表左侧开始）)",
+    "description": "popd: 通过 pushd shell 内置程序删除目录堆栈中的目录。 另请参阅：`pushd` 将目录放入堆栈和 `dirs` 显示目录堆栈内容。 (删除第 1 个目录（从零开始，以用 `dirs` 打印的列表左侧开始）)",
     "tags": [
       "common",
       "popd",
@@ -15785,7 +15785,7 @@
     "title": "uv - 在当前目录中创建一个新的 Python 项目",
     "content": "uv init",
     "group": "通用工具 (Common)",
-    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`. (在当前目录中创建一个新的 Python 项目)",
+    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`。 (在当前目录中创建一个新的 Python 项目)",
     "tags": [
       "common",
       "uv",
@@ -15800,7 +15800,7 @@
     "title": "uv - 在具有指定名称的目录中创建一个新的 Python 项目",
     "content": "uv init {{项目名称}}",
     "group": "通用工具 (Common)",
-    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`. (在具有指定名称的目录中创建一个新的 Python 项目)",
+    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`。 (在具有指定名称的目录中创建一个新的 Python 项目)",
     "tags": [
       "common",
       "uv",
@@ -15815,7 +15815,7 @@
     "title": "uv - 向项目中添加一个新的软件包",
     "content": "uv add {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`. (向项目中添加一个新的软件包)",
+    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`。 (向项目中添加一个新的软件包)",
     "tags": [
       "common",
       "uv",
@@ -15830,7 +15830,7 @@
     "title": "uv - 从项目中移除一个软件包",
     "content": "uv remove {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`. (从项目中移除一个软件包)",
+    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`。 (从项目中移除一个软件包)",
     "tags": [
       "common",
       "uv",
@@ -15845,7 +15845,7 @@
     "title": "uv - 在项目的环境中运行一个脚本",
     "content": "uv run {{路径/到/脚本.py}}",
     "group": "通用工具 (Common)",
-    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`. (在项目的环境中运行一个脚本)",
+    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`。 (在项目的环境中运行一个脚本)",
     "tags": [
       "common",
       "uv",
@@ -15860,7 +15860,7 @@
     "title": "uv - 在项目的环境中运行一个命令",
     "content": "uv run {{命令}}",
     "group": "通用工具 (Common)",
-    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`. (在项目的环境中运行一个命令)",
+    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`。 (在项目的环境中运行一个命令)",
     "tags": [
       "common",
       "uv",
@@ -15875,7 +15875,7 @@
     "title": "uv - 从 `pyproject.toml` 更新项目的环境",
     "content": "uv sync",
     "group": "通用工具 (Common)",
-    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`. (从 `pyproject.toml` 更新项目的环境)",
+    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`。 (从 `pyproject.toml` 更新项目的环境)",
     "tags": [
       "common",
       "uv",
@@ -15890,7 +15890,7 @@
     "title": "uv - 为项目的依赖项创建一个锁定文件",
     "content": "uv lock",
     "group": "通用工具 (Common)",
-    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`. (为项目的依赖项创建一个锁定文件)",
+    "description": "uv: 一个快速的 Python 软件包和项目管理器。 此命令也有关于其子命令的文件，例如：`tool` 和 `python`。 (为项目的依赖项创建一个锁定文件)",
     "tags": [
       "common",
       "uv",
@@ -17000,7 +17000,7 @@
     "title": "go - 下载并安装由其路径指定的包",
     "content": "go get {{路径/到/包}}",
     "group": "通用工具 (Common)",
-    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`. (下载并安装由其路径指定的包)",
+    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`。 (下载并安装由其路径指定的包)",
     "tags": [
       "common",
       "go",
@@ -17015,7 +17015,7 @@
     "title": "go - 编译并运行一个源文件（它必须包含一个 `main` 包）",
     "content": "go run {{文件}}.go",
     "group": "通用工具 (Common)",
-    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`. (编译并运行一个源文件（它必须包含一个 `main` 包）)",
+    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`。 (编译并运行一个源文件（它必须包含一个 `main` 包）)",
     "tags": [
       "common",
       "go",
@@ -17030,7 +17030,7 @@
     "title": "go - 将源文件编译为当前命名的可执行文件",
     "content": "go build -o {{可执行文件}} {{文件}}.go",
     "group": "通用工具 (Common)",
-    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`. (将源文件编译为当前命名的可执行文件)",
+    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`。 (将源文件编译为当前命名的可执行文件)",
     "tags": [
       "common",
       "go",
@@ -17045,7 +17045,7 @@
     "title": "go - 编译当前目录中的包",
     "content": "go build",
     "group": "通用工具 (Common)",
-    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`. (编译当前目录中的包)",
+    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`。 (编译当前目录中的包)",
     "tags": [
       "common",
       "go",
@@ -17060,7 +17060,7 @@
     "title": "go - 执行当前包中的所有测试用例（文件必须以 `_test.go` 结尾）",
     "content": "go test",
     "group": "通用工具 (Common)",
-    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`. (执行当前包中的所有测试用例（文件必须以 `_test.go` 结尾）)",
+    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`。 (执行当前包中的所有测试用例（文件必须以 `_test.go` 结尾）)",
     "tags": [
       "common",
       "go",
@@ -17075,7 +17075,7 @@
     "title": "go - 编译并安装当前包",
     "content": "go install",
     "group": "通用工具 (Common)",
-    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`. (编译并安装当前包)",
+    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`。 (编译并安装当前包)",
     "tags": [
       "common",
       "go",
@@ -17090,7 +17090,7 @@
     "title": "go - 在当前目录下初始化一个新模块",
     "content": "go mod init {{模块}}",
     "group": "通用工具 (Common)",
-    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`. (在当前目录下初始化一个新模块)",
+    "description": "go: 管理 Go 源代码的工具。 此命令也有关于其子命令的文件，例如：`build`。 (在当前目录下初始化一个新模块)",
     "tags": [
       "common",
       "go",
@@ -17330,7 +17330,7 @@
     "title": "magick-compare - 比较两个图片",
     "content": "magick compare {{路径/到/图片1.png}} {{路径/到/图片2.png}} {{路径/到/比较图片.png}}",
     "group": "通用工具 (Common)",
-    "description": "magick-compare: 创建一个比较文件，可视化地标注出两个图片之间的差异。 另见：`magick`。 (比较两个图片)",
+    "description": "magick-compare: 创建一个比较文件，可视化地标注出两个图片之间的差异。 另请参阅：`magick`。 (比较两个图片)",
     "tags": [
       "common",
       "magick-compare",
@@ -17345,7 +17345,7 @@
     "title": "magick-compare - 使用特定的算法比较两个图片",
     "content": "magick compare -verbose -metric {{PSNR}} {{路径/到/图片1.png}} {{路径/到/图片2.png}} {{路径/到/比较图片.png}}",
     "group": "通用工具 (Common)",
-    "description": "magick-compare: 创建一个比较文件，可视化地标注出两个图片之间的差异。 另见：`magick`。 (使用特定的算法比较两个图片)",
+    "description": "magick-compare: 创建一个比较文件，可视化地标注出两个图片之间的差异。 另请参阅：`magick`。 (使用特定的算法比较两个图片)",
     "tags": [
       "common",
       "magick-compare",
@@ -17360,7 +17360,7 @@
     "title": "netstat - 列出所有端口",
     "content": "netstat --all",
     "group": "通用工具 (Common)",
-    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另见：`ss`。 (列出所有端口)",
+    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另请参阅：`ss`。 (列出所有端口)",
     "tags": [
       "common",
       "netstat",
@@ -17375,7 +17375,7 @@
     "title": "netstat - 列出所有被监听端口",
     "content": "netstat --listening",
     "group": "通用工具 (Common)",
-    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另见：`ss`。 (列出所有被监听端口)",
+    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另请参阅：`ss`。 (列出所有被监听端口)",
     "tags": [
       "common",
       "netstat",
@@ -17390,7 +17390,7 @@
     "title": "netstat - 列出监听的 TCP 端口",
     "content": "netstat --tcp",
     "group": "通用工具 (Common)",
-    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另见：`ss`。 (列出监听的 TCP 端口)",
+    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另请参阅：`ss`。 (列出监听的 TCP 端口)",
     "tags": [
       "common",
       "netstat",
@@ -17405,7 +17405,7 @@
     "title": "netstat - 显示 PID 和程序名",
     "content": "netstat --program",
     "group": "通用工具 (Common)",
-    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另见：`ss`。 (显示 PID 和程序名)",
+    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另请参阅：`ss`。 (显示 PID 和程序名)",
     "tags": [
       "common",
       "netstat",
@@ -17420,7 +17420,7 @@
     "title": "netstat - 持续列出信息",
     "content": "netstat --continuous",
     "group": "通用工具 (Common)",
-    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另见：`ss`。 (持续列出信息)",
+    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另请参阅：`ss`。 (持续列出信息)",
     "tags": [
       "common",
       "netstat",
@@ -17435,7 +17435,7 @@
     "title": "netstat - 列出路由并且不解析 IP 到主机名",
     "content": "netstat --route --numeric",
     "group": "通用工具 (Common)",
-    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另见：`ss`。 (列出路由并且不解析 IP 到主机名)",
+    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另请参阅：`ss`。 (列出路由并且不解析 IP 到主机名)",
     "tags": [
       "common",
       "netstat",
@@ -17450,7 +17450,7 @@
     "title": "netstat - 列出正在监听的 TCP 和 UDP 端口（如果你是 root 用户，还会显示用户和进程）",
     "content": "netstat --listening --program --numeric --tcp --udp --extend",
     "group": "通用工具 (Common)",
-    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另见：`ss`。 (列出正在监听的 TCP 和 UDP 端口（如果你是 root 用户，还会显示用户和进程）)",
+    "description": "netstat: 显示与网络相关的信息，如打开的连接、打开的套接字端口等。 另请参阅：`ss`。 (列出正在监听的 TCP 和 UDP 端口（如果你是 root 用户，还会显示用户和进程）)",
     "tags": [
       "common",
       "netstat",
@@ -18005,7 +18005,7 @@
     "title": "unzip - 将指定压缩包中的所有文件和目录提取到当前目录下",
     "content": "unzip {{路径/到/压缩文件1.zip 路径/到/压缩文件2.zip ...}}",
     "group": "通用工具 (Common)",
-    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 (将指定压缩包中的所有文件和目录提取到当前目录下)",
+    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 另请参阅：`zip`。 (将指定压缩包中的所有文件和目录提取到当前目录下)",
     "tags": [
       "common",
       "unzip",
@@ -18020,7 +18020,7 @@
     "title": "unzip - 将压缩包中的所有文件和目录提取到指定目录下",
     "content": "unzip {{路径/到/压缩文件1.zip 路径/到/压缩文件2.zip ...}} -d {{路径/到/输出目录}}",
     "group": "通用工具 (Common)",
-    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 (将压缩包中的所有文件和目录提取到指定目录下)",
+    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 另请参阅：`zip`。 (将压缩包中的所有文件和目录提取到指定目录下)",
     "tags": [
       "common",
       "unzip",
@@ -18035,7 +18035,7 @@
     "title": "unzip - 从压缩包中提取文件或目录到 `stdout`（标准输出），并附带文件名",
     "content": "unzip -c {{路径/到/压缩文件1.zip 路径/到/压缩文件2.zip ...}}",
     "group": "通用工具 (Common)",
-    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 (从压缩包中提取文件或目录到 `stdout`（标准输出），并附带文件名)",
+    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 另请参阅：`zip`。 (从压缩包中提取文件或目录到 `stdout`（标准输出），并附带文件名)",
     "tags": [
       "common",
       "unzip",
@@ -18050,7 +18050,7 @@
     "title": "unzip - 提取在 Windows 上创建的压缩包，其中包含非 ASCII（例如中文或日文字符）命名的文件",
     "content": "unzip -O {{gbk}} {{路径/到/压缩文件1.zip 路径/到/压缩文件2.zip ...}}",
     "group": "通用工具 (Common)",
-    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 (提取在 Windows 上创建的压缩包，其中包含非 ASCII（例如中文或日文字符）命名的文件)",
+    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 另请参阅：`zip`。 (提取在 Windows 上创建的压缩包，其中包含非 ASCII（例如中文或日文字符）命名的文件)",
     "tags": [
       "common",
       "unzip",
@@ -18065,7 +18065,7 @@
     "title": "unzip - 在不进行解压缩的情况下，列出指定压缩包中的内容",
     "content": "unzip -l {{路径/到/压缩文件.zip}}",
     "group": "通用工具 (Common)",
-    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 (在不进行解压缩的情况下，列出指定压缩包中的内容)",
+    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 另请参阅：`zip`。 (在不进行解压缩的情况下，列出指定压缩包中的内容)",
     "tags": [
       "common",
       "unzip",
@@ -18080,7 +18080,7 @@
     "title": "unzip - 从指定压缩包中提取特定文件",
     "content": "unzip -j {{路径/到/压缩文件.zip}} {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 (从指定压缩包中提取特定文件)",
+    "description": "unzip: 从 Zip 压缩包中提取文件或目录。 另请参阅：`zip`。 (从指定压缩包中提取特定文件)",
     "tags": [
       "common",
       "unzip",
@@ -19685,7 +19685,7 @@
     "title": "axel - 链接下载",
     "content": "axel {{超链接}}",
     "group": "通用工具 (Common)",
-    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP. (链接下载)",
+    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP。 (链接下载)",
     "tags": [
       "common",
       "axel",
@@ -19700,7 +19700,7 @@
     "title": "axel - 链接下载，指定文件名",
     "content": "axel {{超链接}} -o {{文件名称}}",
     "group": "通用工具 (Common)",
-    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP. (链接下载，指定文件名)",
+    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP。 (链接下载，指定文件名)",
     "tags": [
       "common",
       "axel",
@@ -19715,7 +19715,7 @@
     "title": "axel - 多连接数下载",
     "content": "axel -n {{连接数量}} {{超链接}}",
     "group": "通用工具 (Common)",
-    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP. (多连接数下载)",
+    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP。 (多连接数下载)",
     "tags": [
       "common",
       "axel",
@@ -19730,7 +19730,7 @@
     "title": "axel - 查询镜像",
     "content": "axel -S {{镜像数量}} {{超链接}}",
     "group": "通用工具 (Common)",
-    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP. (查询镜像)",
+    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP。 (查询镜像)",
     "tags": [
       "common",
       "axel",
@@ -19745,7 +19745,7 @@
     "title": "axel - 限制下载速度（字节 bite 每秒）",
     "content": "axel -s {{字节数}} {{超链接}}",
     "group": "通用工具 (Common)",
-    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP. (限制下载速度（字节 bite 每秒）)",
+    "description": "axel: 一款下载加速器。 支持 HTTP、HTTPS 和 FTP。 (限制下载速度（字节 bite 每秒）)",
     "tags": [
       "common",
       "axel",
@@ -19790,7 +19790,7 @@
     "title": "gh-gist - 从一个以空格分隔的文件列表中创建一个新的 Gist",
     "content": "gh gist create {{路径/文件}}",
     "group": "通用工具 (Common)",
-    "description": "gh-gist: 在命令行上使用 GitHub Gists. (从一个以空格分隔的文件列表中创建一个新的 Gist)",
+    "description": "gh-gist: 在命令行上使用 GitHub Gists。 (从一个以空格分隔的文件列表中创建一个新的 Gist)",
     "tags": [
       "common",
       "gh-gist",
@@ -19805,7 +19805,7 @@
     "title": "gh-gist - 创建一个带有描述的新 Gist",
     "content": "gh gist create {{文件名}} --desc \"{{描述}}\"",
     "group": "通用工具 (Common)",
-    "description": "gh-gist: 在命令行上使用 GitHub Gists. (创建一个带有描述的新 Gist)",
+    "description": "gh-gist: 在命令行上使用 GitHub Gists。 (创建一个带有描述的新 Gist)",
     "tags": [
       "common",
       "gh-gist",
@@ -19820,7 +19820,7 @@
     "title": "gh-gist - 编辑一个 Gist",
     "content": "gh gist edit {{id_或_url}}",
     "group": "通用工具 (Common)",
-    "description": "gh-gist: 在命令行上使用 GitHub Gists. (编辑一个 Gist)",
+    "description": "gh-gist: 在命令行上使用 GitHub Gists。 (编辑一个 Gist)",
     "tags": [
       "common",
       "gh-gist",
@@ -19835,7 +19835,7 @@
     "title": "gh-gist - 列出当前登录用户所拥有的 Gist",
     "content": "gh gist list --limit {{int}}",
     "group": "通用工具 (Common)",
-    "description": "gh-gist: 在命令行上使用 GitHub Gists. (列出当前登录用户所拥有的 Gist)",
+    "description": "gh-gist: 在命令行上使用 GitHub Gists。 (列出当前登录用户所拥有的 Gist)",
     "tags": [
       "common",
       "gh-gist",
@@ -19850,7 +19850,7 @@
     "title": "gh-gist - 在默认浏览器中查看 Gist，且不渲染 Markdown",
     "content": "gh gist view {{id_或_url}} --web --raw",
     "group": "通用工具 (Common)",
-    "description": "gh-gist: 在命令行上使用 GitHub Gists. (在默认浏览器中查看 Gist，且不渲染 Markdown)",
+    "description": "gh-gist: 在命令行上使用 GitHub Gists。 (在默认浏览器中查看 Gist，且不渲染 Markdown)",
     "tags": [
       "common",
       "gh-gist",
@@ -20645,7 +20645,7 @@
     "title": "apm - 下载包：<http://atom.io/packages> 和主题 <http://atom.io/themes>",
     "content": "apm install {{包名}}",
     "group": "通用工具 (Common)",
-    "description": "apm: Atom 编辑器的包管理工具。 参见 `atom`. (下载包：<http://atom.io/packages> 和主题 <http://atom.io/themes>)",
+    "description": "apm: Atom 编辑器的包管理工具。 另请参阅：`atom`。 (下载包：<http://atom.io/packages> 和主题 <http://atom.io/themes>)",
     "tags": [
       "common",
       "apm",
@@ -20660,7 +20660,7 @@
     "title": "apm - 移除包 / 主题",
     "content": "apm remove {{包名}}",
     "group": "通用工具 (Common)",
-    "description": "apm: Atom 编辑器的包管理工具。 参见 `atom`. (移除包 / 主题)",
+    "description": "apm: Atom 编辑器的包管理工具。 另请参阅：`atom`。 (移除包 / 主题)",
     "tags": [
       "common",
       "apm",
@@ -20675,7 +20675,7 @@
     "title": "apm - 升级包 / 主题",
     "content": "apm upgrade {{包名}}",
     "group": "通用工具 (Common)",
-    "description": "apm: Atom 编辑器的包管理工具。 参见 `atom`. (升级包 / 主题)",
+    "description": "apm: Atom 编辑器的包管理工具。 另请参阅：`atom`。 (升级包 / 主题)",
     "tags": [
       "common",
       "apm",
@@ -21227,10 +21227,10 @@
   {
     "id": "tldr-zh-common-git-check-attr-1",
     "type": "command",
-    "title": "git-check-attr - Check the value of a specific attribute on a file",
+    "title": "git-check-attr - 查看文件的某个特定属性值",
     "content": "git check-attr {{属性}} {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "git-check-attr: 检查每个路径的文件属性状态（未指定/已设置/未设置）。 (Check the value of a specific attribute on a file)",
+    "description": "git-check-attr: 检查每个路径的文件属性状态（未指定/已设置/未设置）。 (查看文件的某个特定属性值)",
     "tags": [
       "common",
       "git-check-attr",
@@ -21242,10 +21242,10 @@
   {
     "id": "tldr-zh-common-git-check-attr-2",
     "type": "command",
-    "title": "git-check-attr - Check the values of all attributes on specific files",
+    "title": "git-check-attr - 查看指定文件的所有属性值",
     "content": "git check-attr --all {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "git-check-attr: 检查每个路径的文件属性状态（未指定/已设置/未设置）。 (Check the values of all attributes on specific files)",
+    "description": "git-check-attr: 检查每个路径的文件属性状态（未指定/已设置/未设置）。 (查看指定文件的所有属性值)",
     "tags": [
       "common",
       "git-check-attr",
@@ -21257,10 +21257,10 @@
   {
     "id": "tldr-zh-common-git-check-attr-3",
     "type": "command",
-    "title": "git-check-attr - Check the value of a specific attribute on one or more files",
+    "title": "git-check-attr - 在一或多个文件上查看特定的属性值",
     "content": "git check-attr {{属性}} {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "git-check-attr: 检查每个路径的文件属性状态（未指定/已设置/未设置）。 (Check the value of a specific attribute on one or more files)",
+    "description": "git-check-attr: 检查每个路径的文件属性状态（未指定/已设置/未设置）。 (在一或多个文件上查看特定的属性值)",
     "tags": [
       "common",
       "git-check-attr",
@@ -21425,7 +21425,7 @@
     "title": "more - 打开一个文件",
     "content": "more {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "more: 交互式地显示文件，允许滚动和搜索。 请参阅：`less`. (打开一个文件)",
+    "description": "more: 交互式地显示文件，允许滚动和搜索。 另请参阅：`less`。 (打开一个文件)",
     "tags": [
       "common",
       "more",
@@ -21440,7 +21440,7 @@
     "title": "more - 打开一个文件，从特定行开始显示",
     "content": "more +{{行号}} {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "more: 交互式地显示文件，允许滚动和搜索。 请参阅：`less`. (打开一个文件，从特定行开始显示)",
+    "description": "more: 交互式地显示文件，允许滚动和搜索。 另请参阅：`less`。 (打开一个文件，从特定行开始显示)",
     "tags": [
       "common",
       "more",
@@ -21455,7 +21455,7 @@
     "title": "more - 转到下一页",
     "content": "<空格>",
     "group": "通用工具 (Common)",
-    "description": "more: 交互式地显示文件，允许滚动和搜索。 请参阅：`less`. (转到下一页)",
+    "description": "more: 交互式地显示文件，允许滚动和搜索。 另请参阅：`less`。 (转到下一页)",
     "tags": [
       "common",
       "more",
@@ -21470,7 +21470,7 @@
     "title": "more - 搜索一个字符串（按 `<n>` 键跳转到下一个匹配）",
     "content": "</>{{字符串}}<Enter>",
     "group": "通用工具 (Common)",
-    "description": "more: 交互式地显示文件，允许滚动和搜索。 请参阅：`less`. (搜索一个字符串（按 `<n>` 键跳转到下一个匹配）)",
+    "description": "more: 交互式地显示文件，允许滚动和搜索。 另请参阅：`less`。 (搜索一个字符串（按 `<n>` 键跳转到下一个匹配）)",
     "tags": [
       "common",
       "more",
@@ -21485,7 +21485,7 @@
     "title": "more - 退出",
     "content": "<q>",
     "group": "通用工具 (Common)",
-    "description": "more: 交互式地显示文件，允许滚动和搜索。 请参阅：`less`. (退出)",
+    "description": "more: 交互式地显示文件，允许滚动和搜索。 另请参阅：`less`。 (退出)",
     "tags": [
       "common",
       "more",
@@ -21500,7 +21500,7 @@
     "title": "more - 显示关于交互式命令的帮助",
     "content": "<h>",
     "group": "通用工具 (Common)",
-    "description": "more: 交互式地显示文件，允许滚动和搜索。 请参阅：`less`. (显示关于交互式命令的帮助)",
+    "description": "more: 交互式地显示文件，允许滚动和搜索。 另请参阅：`less`。 (显示关于交互式命令的帮助)",
     "tags": [
       "common",
       "more",
@@ -21530,7 +21530,7 @@
     "title": "who - 显示用户名，终端线路，和所有当前登录会话的时间",
     "content": "who",
     "group": "通用工具 (Common)",
-    "description": "who: 显示当前登录用户和相关信息（进程，启动时间）。 (显示用户名，终端线路，和所有当前登录会话的时间)",
+    "description": "who: 显示当前登录用户和相关信息（进程，启动时间）。 另请参阅：`whoami`。 (显示用户名，终端线路，和所有当前登录会话的时间)",
     "tags": [
       "common",
       "who",
@@ -21545,7 +21545,7 @@
     "title": "who - 显示所有可用信息",
     "content": "who {{[-a|--all]}}",
     "group": "通用工具 (Common)",
-    "description": "who: 显示当前登录用户和相关信息（进程，启动时间）。 (显示所有可用信息)",
+    "description": "who: 显示当前登录用户和相关信息（进程，启动时间）。 另请参阅：`whoami`。 (显示所有可用信息)",
     "tags": [
       "common",
       "who",
@@ -21560,7 +21560,7 @@
     "title": "who - 显示所有可用信息，包含表格首部名称",
     "content": "who {{[-aH|--all --heading]}}",
     "group": "通用工具 (Common)",
-    "description": "who: 显示当前登录用户和相关信息（进程，启动时间）。 (显示所有可用信息，包含表格首部名称)",
+    "description": "who: 显示当前登录用户和相关信息（进程，启动时间）。 另请参阅：`whoami`。 (显示所有可用信息，包含表格首部名称)",
     "tags": [
       "common",
       "who",
@@ -21980,7 +21980,7 @@
     "title": "fzf - 对指定目录中的所有文件启动 `fzf`",
     "content": "find {{路径/到/目录}} -type f | fzf",
     "group": "通用工具 (Common)",
-    "description": "fzf: 命令行模糊查找器。 类似于 `sk`. (对指定目录中的所有文件启动 `fzf`)",
+    "description": "fzf: 命令行模糊查找器。 类似于 `sk`。 (对指定目录中的所有文件启动 `fzf`)",
     "tags": [
       "common",
       "fzf",
@@ -21995,7 +21995,7 @@
     "title": "fzf - 为正在运行的进程启动 `fzf`",
     "content": "ps aux | fzf",
     "group": "通用工具 (Common)",
-    "description": "fzf: 命令行模糊查找器。 类似于 `sk`. (为正在运行的进程启动 `fzf`)",
+    "description": "fzf: 命令行模糊查找器。 类似于 `sk`。 (为正在运行的进程启动 `fzf`)",
     "tags": [
       "common",
       "fzf",
@@ -22010,7 +22010,7 @@
     "title": "fzf - 使用 `<Shift Tab>` 选择多个文件并将结果写入文件",
     "content": "find {{路径/到/目录}} -type f | fzf {{[-m|--multi]}} > {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "fzf: 命令行模糊查找器。 类似于 `sk`. (使用 `<Shift Tab>` 选择多个文件并将结果写入文件)",
+    "description": "fzf: 命令行模糊查找器。 类似于 `sk`。 (使用 `<Shift Tab>` 选择多个文件并将结果写入文件)",
     "tags": [
       "common",
       "fzf",
@@ -22025,7 +22025,7 @@
     "title": "fzf - 使用指定查询词启动 `fzf`",
     "content": "fzf {{[-q|--query]}} \"{{查询词}}\"",
     "group": "通用工具 (Common)",
-    "description": "fzf: 命令行模糊查找器。 类似于 `sk`. (使用指定查询词启动 `fzf`)",
+    "description": "fzf: 命令行模糊查找器。 类似于 `sk`。 (使用指定查询词启动 `fzf`)",
     "tags": [
       "common",
       "fzf",
@@ -22040,7 +22040,7 @@
     "title": "fzf - 对以 core 开头、以 go, rb 或 py 结尾的条目启动 `fzf`",
     "content": "fzf {{[-q|--query]}} \"^core go$ | rb$ | py$\"",
     "group": "通用工具 (Common)",
-    "description": "fzf: 命令行模糊查找器。 类似于 `sk`. (对以 core 开头、以 go, rb 或 py 结尾的条目启动 `fzf`)",
+    "description": "fzf: 命令行模糊查找器。 类似于 `sk`。 (对以 core 开头、以 go, rb 或 py 结尾的条目启动 `fzf`)",
     "tags": [
       "common",
       "fzf",
@@ -22055,7 +22055,7 @@
     "title": "fzf - 对不匹配 pyc 且完全匹配 travis 的条目启动 `fzf`",
     "content": "fzf {{[-q|--query]}} \"!pyc 'travis\"",
     "group": "通用工具 (Common)",
-    "description": "fzf: 命令行模糊查找器。 类似于 `sk`. (对不匹配 pyc 且完全匹配 travis 的条目启动 `fzf`)",
+    "description": "fzf: 命令行模糊查找器。 类似于 `sk`。 (对不匹配 pyc 且完全匹配 travis 的条目启动 `fzf`)",
     "tags": [
       "common",
       "fzf",
@@ -22610,7 +22610,7 @@
     "title": "adb-pair - 查看 `adb pair` 的文档",
     "content": "tldr adb connect",
     "group": "通用工具 (Common)",
-    "description": "adb-pair: 该命令已移动到 `adb connect`. (查看 `adb pair` 的文档)",
+    "description": "adb-pair: 该命令已移动到 `adb connect`。 (查看 `adb pair` 的文档)",
     "tags": [
       "common",
       "adb-pair",
@@ -22712,10 +22712,10 @@
   {
     "id": "tldr-zh-common-git-create-branch-0",
     "type": "command",
-    "title": "git-create-branch - ​​创建本地分支​​",
+    "title": "git-create-branch - 创建本地分支",
     "content": "git create-branch {{分支名}}",
     "group": "通用工具 (Common)",
-    "description": "git-create-branch: 在 Git 仓库中创建分支。 属于 `git-extras` 一部分。 (​​创建本地分支​​)",
+    "description": "git-create-branch: 在 Git 仓库中创建分支。 属于 `git-extras` 一部分。 (创建本地分支)",
     "tags": [
       "common",
       "git-create-branch",
@@ -22727,10 +22727,10 @@
   {
     "id": "tldr-zh-common-git-create-branch-1",
     "type": "command",
-    "title": "git-create-branch - ​​创建本地分支并推送到 origin 远程​​",
+    "title": "git-create-branch - 创建本地分支并推送到 origin 远程",
     "content": "git create-branch --remote {{分支名}}",
     "group": "通用工具 (Common)",
-    "description": "git-create-branch: 在 Git 仓库中创建分支。 属于 `git-extras` 一部分。 (​​创建本地分支并推送到 origin 远程​​)",
+    "description": "git-create-branch: 在 Git 仓库中创建分支。 属于 `git-extras` 一部分。 (创建本地分支并推送到 origin 远程)",
     "tags": [
       "common",
       "git-create-branch",
@@ -22742,10 +22742,10 @@
   {
     "id": "tldr-zh-common-git-create-branch-2",
     "type": "command",
-    "title": "git-create-branch - ​​创建本地分支并推送到 upstream 远程（常用于 fork 的工作流）​​",
+    "title": "git-create-branch - 创建本地分支并推送到 upstream 远程（常用于 fork 的工作流）",
     "content": "git create-branch --remote upstream {{分支名}}",
     "group": "通用工具 (Common)",
-    "description": "git-create-branch: 在 Git 仓库中创建分支。 属于 `git-extras` 一部分。 (​​创建本地分支并推送到 upstream 远程（常用于 fork 的工作流）​​)",
+    "description": "git-create-branch: 在 Git 仓库中创建分支。 属于 `git-extras` 一部分。 (创建本地分支并推送到 upstream 远程（常用于 fork 的工作流）)",
     "tags": [
       "common",
       "git-create-branch",
@@ -23270,7 +23270,7 @@
     "title": "imgcat - 在命令行上显示图像",
     "content": "imgcat {{文件名}}",
     "group": "通用工具 (Common)",
-    "description": "imgcat: 直接在命令行上显示图像的实用程序。 需要兼容的终端软件，如 iTerm2. (在命令行上显示图像)",
+    "description": "imgcat: 直接在命令行上显示图像的实用程序。 需要兼容的终端软件，如 iTerm2。 (在命令行上显示图像)",
     "tags": [
       "common",
       "imgcat",
@@ -23285,7 +23285,7 @@
     "title": "cron - 查看管理 `cron` 条目的文档",
     "content": "tldr crontab",
     "group": "通用工具 (Common)",
-    "description": "cron: 一个系统任务计划程序，用于无人值守运行工作或任务。 提交、修改或删除 `cron` 任务条目的命令，是 `crontab`. (查看管理 `cron` 条目的文档)",
+    "description": "cron: 一个系统任务计划程序，用于无人值守运行工作或任务。 提交、修改或删除 `cron` 任务条目的命令，是 `crontab`。 (查看管理 `cron` 条目的文档)",
     "tags": [
       "common",
       "cron",
@@ -23724,6 +23724,21 @@
     "tags": [
       "common",
       "screen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-jira-sprints-0",
+    "type": "command",
+    "title": "jira-sprints - 查看原命令的文档",
+    "content": "tldr jira sprint",
+    "group": "通用工具 (Common)",
+    "description": "jira-sprints: 此命令为 `jira sprint` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jira-sprints",
       "tldr",
       "zh"
     ],
@@ -24455,7 +24470,7 @@
     "title": "uname - 打印内核名称",
     "content": "uname",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另见 `lsb_release`。 (打印内核名称)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (打印内核名称)",
     "tags": [
       "common",
       "uname",
@@ -24470,7 +24485,7 @@
     "title": "uname - 打印所有可用的系统信息",
     "content": "uname {{[-a|--all]}}",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另见 `lsb_release`。 (打印所有可用的系统信息)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (打印所有可用的系统信息)",
     "tags": [
       "common",
       "uname",
@@ -24485,7 +24500,7 @@
     "title": "uname - 打印系统架构和处理器信息",
     "content": "uname {{[-mp|--machine --processor]}}",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另见 `lsb_release`。 (打印系统架构和处理器信息)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (打印系统架构和处理器信息)",
     "tags": [
       "common",
       "uname",
@@ -24500,7 +24515,7 @@
     "title": "uname - 打印内核名称、内核版本号和内核版本",
     "content": "uname {{[-srv|--kernel-name --kernel-release --kernel-version]}}",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另见 `lsb_release`。 (打印内核名称、内核版本号和内核版本)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (打印内核名称、内核版本号和内核版本)",
     "tags": [
       "common",
       "uname",
@@ -24515,7 +24530,7 @@
     "title": "uname - 打印系统主机名",
     "content": "uname {{[-n|--nodename]}}",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另见 `lsb_release`。 (打印系统主机名)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (打印系统主机名)",
     "tags": [
       "common",
       "uname",
@@ -24530,7 +24545,7 @@
     "title": "uname - 打印当前操作系统名称",
     "content": "uname {{[-o|--operating-system]}}",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另见 `lsb_release`。 (打印当前操作系统名称)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (打印当前操作系统名称)",
     "tags": [
       "common",
       "uname",
@@ -24545,7 +24560,7 @@
     "title": "uname - 打印当前网络节点主机名",
     "content": "uname {{[-n|--nodename]}}",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另见 `lsb_release`。 (打印当前网络节点主机名)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (打印当前网络节点主机名)",
     "tags": [
       "common",
       "uname",
@@ -24560,7 +24575,7 @@
     "title": "uname - 显示帮助信息",
     "content": "uname --help",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另见 `lsb_release`。 (显示帮助信息)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (显示帮助信息)",
     "tags": [
       "common",
       "uname",
@@ -24815,7 +24830,7 @@
     "title": "zsh - 启动交互式解释器",
     "content": "zsh",
     "group": "通用工具 (Common)",
-    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 (启动交互式解释器)",
+    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 另请参阅：`bash`，`!`。 (启动交互式解释器)",
     "tags": [
       "common",
       "zsh",
@@ -24830,7 +24845,7 @@
     "title": "zsh - 执行指定的命令",
     "content": "zsh -c \"{{echo Hello world}}\"",
     "group": "通用工具 (Common)",
-    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 (执行指定的命令)",
+    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 另请参阅：`bash`，`!`。 (执行指定的命令)",
     "tags": [
       "common",
       "zsh",
@@ -24845,7 +24860,7 @@
     "title": "zsh - 执行指定的脚本",
     "content": "zsh {{路径/到/脚本.zsh}}",
     "group": "通用工具 (Common)",
-    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 (执行指定的脚本)",
+    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 另请参阅：`bash`，`!`。 (执行指定的脚本)",
     "tags": [
       "common",
       "zsh",
@@ -24860,7 +24875,7 @@
     "title": "zsh - 不执行指定的脚本，只检查其语法错误",
     "content": "zsh --no-exec {{路径/到/脚本.zsh}}",
     "group": "通用工具 (Common)",
-    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 (不执行指定的脚本，只检查其语法错误)",
+    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 另请参阅：`bash`，`!`。 (不执行指定的脚本，只检查其语法错误)",
     "tags": [
       "common",
       "zsh",
@@ -24875,7 +24890,7 @@
     "title": "zsh - 执行来自 `stdin` 的命令",
     "content": "{{echo Hello world}} | zsh",
     "group": "通用工具 (Common)",
-    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 (执行来自 `stdin` 的命令)",
+    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 另请参阅：`bash`，`!`。 (执行来自 `stdin` 的命令)",
     "tags": [
       "common",
       "zsh",
@@ -24890,7 +24905,7 @@
     "title": "zsh - 执行指定的脚本，并打印出每一个将要执行的命令",
     "content": "zsh --xtrace {{路径/到/脚本.zsh}}",
     "group": "通用工具 (Common)",
-    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 (执行指定的脚本，并打印出每一个将要执行的命令)",
+    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 另请参阅：`bash`，`!`。 (执行指定的脚本，并打印出每一个将要执行的命令)",
     "tags": [
       "common",
       "zsh",
@@ -24905,7 +24920,7 @@
     "title": "zsh - 启动详细模式的交互式解释器，会打印出每一个将要执行的命令",
     "content": "zsh --verbose",
     "group": "通用工具 (Common)",
-    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 (启动详细模式的交互式解释器，会打印出每一个将要执行的命令)",
+    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 另请参阅：`bash`，`!`。 (启动详细模式的交互式解释器，会打印出每一个将要执行的命令)",
     "tags": [
       "common",
       "zsh",
@@ -24920,7 +24935,7 @@
     "title": "zsh - 在 `zsh` 里执行指定的命令，但禁用 glob 模式",
     "content": "noglob {{命令}}",
     "group": "通用工具 (Common)",
-    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 (在 `zsh` 里执行指定的命令，但禁用 glob 模式)",
+    "description": "zsh: Z SHell，一个兼容 Bash 的命令行解释器。 另请参阅：`bash`，`!`。 (在 `zsh` 里执行指定的命令，但禁用 glob 模式)",
     "tags": [
       "common",
       "zsh",
@@ -25070,7 +25085,7 @@
     "title": "pushd - 切换到目录并将其添加到堆栈上",
     "content": "pushd {{路径/到/目录}}",
     "group": "通用工具 (Common)",
-    "description": "pushd: 将目录放在堆栈上，以便以后访问。 另见 `popd` 切换回原始目录和 `dirs` 显示目录堆栈内容。 (切换到目录并将其添加到堆栈上)",
+    "description": "pushd: 将目录放在堆栈上，以便以后访问。 另请参阅：`popd` 切换回原始目录和 `dirs` 显示目录堆栈内容。 (切换到目录并将其添加到堆栈上)",
     "tags": [
       "common",
       "pushd",
@@ -25085,7 +25100,7 @@
     "title": "pushd - 切换堆栈上的第一个和第二个目录",
     "content": "pushd",
     "group": "通用工具 (Common)",
-    "description": "pushd: 将目录放在堆栈上，以便以后访问。 另见 `popd` 切换回原始目录和 `dirs` 显示目录堆栈内容。 (切换堆栈上的第一个和第二个目录)",
+    "description": "pushd: 将目录放在堆栈上，以便以后访问。 另请参阅：`popd` 切换回原始目录和 `dirs` 显示目录堆栈内容。 (切换堆栈上的第一个和第二个目录)",
     "tags": [
       "common",
       "pushd",
@@ -25100,7 +25115,7 @@
     "title": "pushd - 通过使第 5 个元素成为堆栈的顶部来旋转堆栈",
     "content": "pushd +4",
     "group": "通用工具 (Common)",
-    "description": "pushd: 将目录放在堆栈上，以便以后访问。 另见 `popd` 切换回原始目录和 `dirs` 显示目录堆栈内容。 (通过使第 5 个元素成为堆栈的顶部来旋转堆栈)",
+    "description": "pushd: 将目录放在堆栈上，以便以后访问。 另请参阅：`popd` 切换回原始目录和 `dirs` 显示目录堆栈内容。 (通过使第 5 个元素成为堆栈的顶部来旋转堆栈)",
     "tags": [
       "common",
       "pushd",
@@ -25115,7 +25130,7 @@
     "title": "pushd - 将堆栈向左旋转 4 次（当前目录通过替换第 5 个元素保持在顶部）",
     "content": "pushd -n +4",
     "group": "通用工具 (Common)",
-    "description": "pushd: 将目录放在堆栈上，以便以后访问。 另见 `popd` 切换回原始目录和 `dirs` 显示目录堆栈内容。 (将堆栈向左旋转 4 次（当前目录通过替换第 5 个元素保持在顶部）)",
+    "description": "pushd: 将目录放在堆栈上，以便以后访问。 另请参阅：`popd` 切换回原始目录和 `dirs` 显示目录堆栈内容。 (将堆栈向左旋转 4 次（当前目录通过替换第 5 个元素保持在顶部）)",
     "tags": [
       "common",
       "pushd",
@@ -25455,6 +25470,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-minetest-0",
+    "type": "command",
+    "title": "minetest - 查看原命令的文档",
+    "content": "tldr luanti",
+    "group": "通用工具 (Common)",
+    "description": "minetest: 此命令为 `luanti` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "minetest",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-sudo-0",
     "type": "command",
     "title": "sudo - 以超级用户身份运行命令",
@@ -25580,7 +25610,7 @@
     "title": "tar - 创建存档并将其写入文件",
     "content": "tar cf {{目标文件.tar}} {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`. (创建存档并将其写入文件)",
+    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`。 (创建存档并将其写入文件)",
     "tags": [
       "common",
       "tar",
@@ -25595,7 +25625,7 @@
     "title": "tar - 创建一个 gzip 压缩文件并将其写入文件",
     "content": "tar czf {{目标文件.tar.gz}} {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`. (创建一个 gzip 压缩文件并将其写入文件)",
+    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`。 (创建一个 gzip 压缩文件并将其写入文件)",
     "tags": [
       "common",
       "tar",
@@ -25610,7 +25640,7 @@
     "title": "tar - 使用相对路径从目录创建一个 gzip 压缩文件",
     "content": "tar czf {{目标文件.tar.gz}} {{[-C|--directory]}} {{路径/到/目录}} .",
     "group": "通用工具 (Common)",
-    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`. (使用相对路径从目录创建一个 gzip 压缩文件)",
+    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`。 (使用相对路径从目录创建一个 gzip 压缩文件)",
     "tags": [
       "common",
       "tar",
@@ -25625,7 +25655,7 @@
     "title": "tar - 详细地将（压缩的）存档文件提取到当前目录中",
     "content": "tar xvf {{源文件.tar[.gz|.bz2|.xz]}}",
     "group": "通用工具 (Common)",
-    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`. (详细地将（压缩的）存档文件提取到当前目录中)",
+    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`。 (详细地将（压缩的）存档文件提取到当前目录中)",
     "tags": [
       "common",
       "tar",
@@ -25640,7 +25670,7 @@
     "title": "tar - 将（压缩的）存档文件解压缩到目标目录中",
     "content": "tar xf {{源文件.tar[.gz|.bz2|.xz]}} {{[-C|--directory]}} {{目标目录}}",
     "group": "通用工具 (Common)",
-    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`. (将（压缩的）存档文件解压缩到目标目录中)",
+    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`。 (将（压缩的）存档文件解压缩到目标目录中)",
     "tags": [
       "common",
       "tar",
@@ -25655,7 +25685,7 @@
     "title": "tar - 创建压缩存档并将其写入文件，使用文件扩展名自动确定压缩程序",
     "content": "tar caf {{目标文件.tar.xz}} {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`. (创建压缩存档并将其写入文件，使用文件扩展名自动确定压缩程序)",
+    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`。 (创建压缩存档并将其写入文件，使用文件扩展名自动确定压缩程序)",
     "tags": [
       "common",
       "tar",
@@ -25670,7 +25700,7 @@
     "title": "tar - 详细列出 tar 文件的内容",
     "content": "tar tvf {{源文件.tar}}",
     "group": "通用工具 (Common)",
-    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`. (详细列出 tar 文件的内容)",
+    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`。 (详细列出 tar 文件的内容)",
     "tags": [
       "common",
       "tar",
@@ -25685,7 +25715,7 @@
     "title": "tar - 从存档文件中提取与模式匹配的文件",
     "content": "tar xf {{源文件.tar}} --wildcards \"{{*.html}}\"",
     "group": "通用工具 (Common)",
-    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`. (从存档文件中提取与模式匹配的文件)",
+    "description": "tar: 归档实用程序。 通常与压缩方法结合使用，例如 `gzip` 或 `bzip2`。 (从存档文件中提取与模式匹配的文件)",
     "tags": [
       "common",
       "tar",
@@ -26132,25 +26162,10 @@
   {
     "id": "tldr-zh-common-zcat-0",
     "type": "command",
-    "title": "zcat - 将 `gzip` 压缩档案的解压缩内容打印到 `stdout`",
-    "content": "zcat {{文件.txt.gz}}",
+    "title": "zcat - 查看原命令的文档",
+    "content": "tldr gzip",
     "group": "通用工具 (Common)",
-    "description": "zcat: 打印 `gzip` 压缩文件中的数据。 (将 `gzip` 压缩档案的解压缩内容打印到 `stdout`)",
-    "tags": [
-      "common",
-      "zcat",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-zh-common-zcat-1",
-    "type": "command",
-    "title": "zcat - 将 `gzip` 压缩档案的压缩详细信息打印到 `stdout`",
-    "content": "zcat -l {{文件.txt.gz}}",
-    "group": "通用工具 (Common)",
-    "description": "zcat: 打印 `gzip` 压缩文件中的数据。 (将 `gzip` 压缩档案的压缩详细信息打印到 `stdout`)",
+    "description": "zcat: 此命令为 `gzip --stdout --decompress` 的别名。 (查看原命令的文档)",
     "tags": [
       "common",
       "zcat",
@@ -29300,7 +29315,7 @@
     "title": "ansible - 列出给定组下的所有主机",
     "content": "ansible {{组}} --list-hosts",
     "group": "通用工具 (Common)",
-    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`. (列出给定组下的所有主机)",
+    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`。 (列出给定组下的所有主机)",
     "tags": [
       "common",
       "ansible",
@@ -29315,7 +29330,7 @@
     "title": "ansible - 调用 ping 模块来 ping 一组主机",
     "content": "ansible {{组}} {{[-m|--module-name]}} ping",
     "group": "通用工具 (Common)",
-    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`. (调用 ping 模块来 ping 一组主机)",
+    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`。 (调用 ping 模块来 ping 一组主机)",
     "tags": [
       "common",
       "ansible",
@@ -29330,7 +29345,7 @@
     "title": "ansible - 通过调用安装模块来显示关于一组主机的信息",
     "content": "ansible {{组}} {{[-m|--module-name]}} setup",
     "group": "通用工具 (Common)",
-    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`. (通过调用安装模块来显示关于一组主机的信息)",
+    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`。 (通过调用安装模块来显示关于一组主机的信息)",
     "tags": [
       "common",
       "ansible",
@@ -29345,7 +29360,7 @@
     "title": "ansible - 调用命令模块并使用给定的参数来对一组主机执行命令",
     "content": "ansible {{组}} {{[-m|--module-name]}} command {{[-a|--args]}} '{{命令}}'",
     "group": "通用工具 (Common)",
-    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`. (调用命令模块并使用给定的参数来对一组主机执行命令)",
+    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`。 (调用命令模块并使用给定的参数来对一组主机执行命令)",
     "tags": [
       "common",
       "ansible",
@@ -29360,7 +29375,7 @@
     "title": "ansible - 以管理员权限执行一个命令",
     "content": "ansible {{组}} {{[-b|--become]}} --ask-become-pass {{[-m|--module-name]}} command {{[-a|--args]}} '{{命令}}'",
     "group": "通用工具 (Common)",
-    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`. (以管理员权限执行一个命令)",
+    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`。 (以管理员权限执行一个命令)",
     "tags": [
       "common",
       "ansible",
@@ -29375,7 +29390,7 @@
     "title": "ansible - 使用自定义的清单文件执行一个命令",
     "content": "ansible {{组}} {{[-i|--inventory]}} {{清单文件}} {{[-m|--module-name]}} command {{[-a|--args]}} '{{命令}}'",
     "group": "通用工具 (Common)",
-    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`. (使用自定义的清单文件执行一个命令)",
+    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`。 (使用自定义的清单文件执行一个命令)",
     "tags": [
       "common",
       "ansible",
@@ -29390,7 +29405,7 @@
     "title": "ansible - 列出清单中的组",
     "content": "ansible localhost {{[-m|--module-name]}} debug {{[-a|--args]}} '{{var=groups.keys()}}'",
     "group": "通用工具 (Common)",
-    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`. (列出清单中的组)",
+    "description": "ansible: 通过 SSH 协议远程管理计算机组。使用 `/etc/ansible/hosts` 文件来添加组 / 主机。 此命令也有关于其子命令的文件，例如：`galaxy`。 (列出清单中的组)",
     "tags": [
       "common",
       "ansible",
@@ -30695,7 +30710,7 @@
     "title": "magick-montage - 平铺图片，尺寸大于格子的图片将会被自动缩小",
     "content": "magick montage {{路径/到/图片1.jpg 路径/到/图片2.jpg ...}} {{路径/到/拼图图片.jpg}}",
     "group": "通用工具 (Common)",
-    "description": "magick-montage: 在可自定义的网格内平铺图片。 另见：`magick`。 (平铺图片，尺寸大于格子的图片将会被自动缩小)",
+    "description": "magick-montage: 在可自定义的网格内平铺图片。 另请参阅：`magick`。 (平铺图片，尺寸大于格子的图片将会被自动缩小)",
     "tags": [
       "common",
       "magick-montage",
@@ -30710,7 +30725,7 @@
     "title": "magick-montage - 平铺图片，根据最大的图片来计算格子大小",
     "content": "magick montage {{路径/到/图片1.jpg 路径/到/图片2.jpg ...}} -geometry {{+0+0}} {{路径/到/拼图图片.jpg}}",
     "group": "通用工具 (Common)",
-    "description": "magick-montage: 在可自定义的网格内平铺图片。 另见：`magick`。 (平铺图片，根据最大的图片来计算格子大小)",
+    "description": "magick-montage: 在可自定义的网格内平铺图片。 另请参阅：`magick`。 (平铺图片，根据最大的图片来计算格子大小)",
     "tags": [
       "common",
       "magick-montage",
@@ -30725,7 +30740,7 @@
     "title": "magick-montage - 平铺图片，根据指定的格子大小调整图片尺寸",
     "content": "magick montage {{路径/到/图片1.jpg 路径/到/图片2.jpg ...}} -geometry {{640x480+0+0}} {{路径/到/拼图图片.jpg}}",
     "group": "通用工具 (Common)",
-    "description": "magick-montage: 在可自定义的网格内平铺图片。 另见：`magick`。 (平铺图片，根据指定的格子大小调整图片尺寸)",
+    "description": "magick-montage: 在可自定义的网格内平铺图片。 另请参阅：`magick`。 (平铺图片，根据指定的格子大小调整图片尺寸)",
     "tags": [
       "common",
       "magick-montage",
@@ -30740,7 +30755,7 @@
     "title": "magick-montage - 指定格子的行列数，如果图片数量超出格子数，则会输出复数张图片",
     "content": "magick montage {{路径/到/图片1.jpg 路径/到/图片2.jpg ...}} -geometry {{+0+0}} -tile {{2x3}} {{montage_%d.jpg}}",
     "group": "通用工具 (Common)",
-    "description": "magick-montage: 在可自定义的网格内平铺图片。 另见：`magick`。 (指定格子的行列数，如果图片数量超出格子数，则会输出复数张图片)",
+    "description": "magick-montage: 在可自定义的网格内平铺图片。 另请参阅：`magick`。 (指定格子的行列数，如果图片数量超出格子数，则会输出复数张图片)",
     "tags": [
       "common",
       "magick-montage",
@@ -30755,7 +30770,7 @@
     "title": "magick-montage - 平铺图片，裁剪图片以充满格子",
     "content": "magick montage {{路径/到/图片1.jpg 路径/到/图片2.jpg ...}} -geometry {{+0+0}} -resize {{640x480^}} -gravity {{center}} -crop {{640x480+0+0}} {{路径/到/拼图图片.jpg}}",
     "group": "通用工具 (Common)",
-    "description": "magick-montage: 在可自定义的网格内平铺图片。 另见：`magick`。 (平铺图片，裁剪图片以充满格子)",
+    "description": "magick-montage: 在可自定义的网格内平铺图片。 另请参阅：`magick`。 (平铺图片，裁剪图片以充满格子)",
     "tags": [
       "common",
       "magick-montage",
@@ -30890,7 +30905,7 @@
     "title": "adb - 检查 adb server 进程的是否在运行，并开启它",
     "content": "adb start-server",
     "group": "通用工具 (Common)",
-    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`. (检查 adb server 进程的是否在运行，并开启它)",
+    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`。 (检查 adb server 进程的是否在运行，并开启它)",
     "tags": [
       "common",
       "adb",
@@ -30905,7 +30920,7 @@
     "title": "adb - 终止 adb server 进程",
     "content": "adb kill-server",
     "group": "通用工具 (Common)",
-    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`. (终止 adb server 进程)",
+    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`。 (终止 adb server 进程)",
     "tags": [
       "common",
       "adb",
@@ -30920,7 +30935,7 @@
     "title": "adb - 在目标模拟器 / 设备实例上开启一个远程 shell",
     "content": "adb shell",
     "group": "通用工具 (Common)",
-    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`. (在目标模拟器 / 设备实例上开启一个远程 shell)",
+    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`。 (在目标模拟器 / 设备实例上开启一个远程 shell)",
     "tags": [
       "common",
       "adb",
@@ -30935,7 +30950,7 @@
     "title": "adb - 将 Android 应用程序推送到模拟器 / 设备",
     "content": "adb install -r {{路径/到/应用.apk}}",
     "group": "通用工具 (Common)",
-    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`. (将 Android 应用程序推送到模拟器 / 设备)",
+    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`。 (将 Android 应用程序推送到模拟器 / 设备)",
     "tags": [
       "common",
       "adb",
@@ -30950,7 +30965,7 @@
     "title": "adb - 从目标设备上拷贝一个文件 / 目录到本地",
     "content": "adb pull {{路径/到/设备的文件或目录}} {{路径/到/本地目录}}",
     "group": "通用工具 (Common)",
-    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`. (从目标设备上拷贝一个文件 / 目录到本地)",
+    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`。 (从目标设备上拷贝一个文件 / 目录到本地)",
     "tags": [
       "common",
       "adb",
@@ -30965,7 +30980,7 @@
     "title": "adb - 从本地拷贝一个文件 / 目录到目标设备",
     "content": "adb push {{路径/到/本地文件或目录}} {{路径/到/设备目录}}",
     "group": "通用工具 (Common)",
-    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`. (从本地拷贝一个文件 / 目录到目标设备)",
+    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`。 (从本地拷贝一个文件 / 目录到目标设备)",
     "tags": [
       "common",
       "adb",
@@ -30980,7 +30995,7 @@
     "title": "adb - 列出已连接的设备",
     "content": "adb devices",
     "group": "通用工具 (Common)",
-    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`. (列出已连接的设备)",
+    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`。 (列出已连接的设备)",
     "tags": [
       "common",
       "adb",
@@ -30995,7 +31010,7 @@
     "title": "adb - 当有多个设备连接时，指定目标设备执行命令",
     "content": "adb -s {{设备_ID}} {{shell}}",
     "group": "通用工具 (Common)",
-    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`. (当有多个设备连接时，指定目标设备执行命令)",
+    "description": "adb: 安卓调试桥：与 Android 模拟器或已连接的 Android 设备通信。 此命令也有关于其子命令的文件，例如：`shell`。 (当有多个设备连接时，指定目标设备执行命令)",
     "tags": [
       "common",
       "adb",
@@ -31565,7 +31580,7 @@
     "title": "magick-mogrify - 将当前目录下所有 JPEG 图片的尺寸都调整至原尺寸的 50%",
     "content": "magick mogrify -resize {{50%}} {{*.jpg}}",
     "group": "通用工具 (Common)",
-    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另见：`magick`。 (将当前目录下所有 JPEG 图片的尺寸都调整至原尺寸的 50%)",
+    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (将当前目录下所有 JPEG 图片的尺寸都调整至原尺寸的 50%)",
     "tags": [
       "common",
       "magick-mogrify",
@@ -31580,7 +31595,7 @@
     "title": "magick-mogrify - 将当前目录下所有以 DSC 开头的图片尺寸都调整至 800x600",
     "content": "magick mogrify -resize {{800x600}} {{DSC*}}",
     "group": "通用工具 (Common)",
-    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另见：`magick`。 (将当前目录下所有以 DSC 开头的图片尺寸都调整至 800x600)",
+    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (将当前目录下所有以 DSC 开头的图片尺寸都调整至 800x600)",
     "tags": [
       "common",
       "magick-mogrify",
@@ -31595,7 +31610,7 @@
     "title": "magick-mogrify - 将当前目录下所有 PNG 图片都转换为 JPEG 图片",
     "content": "magick mogrify -format {{jpg}} {{*.png}}",
     "group": "通用工具 (Common)",
-    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另见：`magick`。 (将当前目录下所有 PNG 图片都转换为 JPEG 图片)",
+    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (将当前目录下所有 PNG 图片都转换为 JPEG 图片)",
     "tags": [
       "common",
       "magick-mogrify",
@@ -31610,7 +31625,7 @@
     "title": "magick-mogrify - 将当前目录下所有图片文件的饱和度都减半",
     "content": "magick mogrify -modulate {{100,50}} {{*}}",
     "group": "通用工具 (Common)",
-    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另见：`magick`。 (将当前目录下所有图片文件的饱和度都减半)",
+    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (将当前目录下所有图片文件的饱和度都减半)",
     "tags": [
       "common",
       "magick-mogrify",
@@ -31625,7 +31640,7 @@
     "title": "magick-mogrify - 将当前目录下所有图片文件的亮度都加倍",
     "content": "magick mogrify -modulate {{200}} {{*}}",
     "group": "通用工具 (Common)",
-    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另见：`magick`。 (将当前目录下所有图片文件的亮度都加倍)",
+    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (将当前目录下所有图片文件的亮度都加倍)",
     "tags": [
       "common",
       "magick-mogrify",
@@ -31640,7 +31655,7 @@
     "title": "magick-mogrify - 通过降低图像品质，缩小当前目录下所有 GIF 动图的文件大小",
     "content": "magick mogrify -layers 'optimize' -fuzz {{7%}} {{*.gif}}",
     "group": "通用工具 (Common)",
-    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另见：`magick`。 (通过降低图像品质，缩小当前目录下所有 GIF 动图的文件大小)",
+    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (通过降低图像品质，缩小当前目录下所有 GIF 动图的文件大小)",
     "tags": [
       "common",
       "magick-mogrify",
@@ -31655,7 +31670,7 @@
     "title": "magick-mogrify - 查看帮助",
     "content": "magick mogrify -help",
     "group": "通用工具 (Common)",
-    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另见：`magick`。 (查看帮助)",
+    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (查看帮助)",
     "tags": [
       "common",
       "magick-mogrify",
@@ -31700,7 +31715,7 @@
     "title": "nvim - 打开文件",
     "content": "nvim {{path/to/file}}",
     "group": "通用工具 (Common)",
-    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另见：`vim`，`vimtutor`，`vimdiff`。 (打开文件)",
+    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另请参阅：`vim`，`vimtutor`，`vimdiff`。 (打开文件)",
     "tags": [
       "common",
       "nvim",
@@ -31715,7 +31730,7 @@
     "title": "nvim - 进入文本编辑模式（insert mode）",
     "content": "<Esc><i>",
     "group": "通用工具 (Common)",
-    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另见：`vim`，`vimtutor`，`vimdiff`。 (进入文本编辑模式（insert mode）)",
+    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另请参阅：`vim`，`vimtutor`，`vimdiff`。 (进入文本编辑模式（insert mode）)",
     "tags": [
       "common",
       "nvim",
@@ -31730,7 +31745,7 @@
     "title": "nvim - 复制（\"yank\"）或剪切（\"delete\"）当前行（使用 `<p>` 粘贴）",
     "content": "<Esc>{{<y><y>|<d><d>}}",
     "group": "通用工具 (Common)",
-    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另见：`vim`，`vimtutor`，`vimdiff`。 (复制（\"yank\"）或剪切（\"delete\"）当前行（使用 `<p>` 粘贴）)",
+    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另请参阅：`vim`，`vimtutor`，`vimdiff`。 (复制（\"yank\"）或剪切（\"delete\"）当前行（使用 `<p>` 粘贴）)",
     "tags": [
       "common",
       "nvim",
@@ -31745,7 +31760,7 @@
     "title": "nvim - 进入普通模式并撤消上次操作",
     "content": "<Esc><u>",
     "group": "通用工具 (Common)",
-    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另见：`vim`，`vimtutor`，`vimdiff`。 (进入普通模式并撤消上次操作)",
+    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另请参阅：`vim`，`vimtutor`，`vimdiff`。 (进入普通模式并撤消上次操作)",
     "tags": [
       "common",
       "nvim",
@@ -31760,7 +31775,7 @@
     "title": "nvim - 在当前文件中使用正则表达式搜索（使用 `<n>`/`<N>` 查看上一个/下一个搜索结果）",
     "content": "<Esc></>{{search_pattern}}<Enter>",
     "group": "通用工具 (Common)",
-    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另见：`vim`，`vimtutor`，`vimdiff`。 (在当前文件中使用正则表达式搜索（使用 `<n>`/`<N>` 查看上一个/下一个搜索结果）)",
+    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另请参阅：`vim`，`vimtutor`，`vimdiff`。 (在当前文件中使用正则表达式搜索（使用 `<n>`/`<N>` 查看上一个/下一个搜索结果）)",
     "tags": [
       "common",
       "nvim",
@@ -31775,7 +31790,7 @@
     "title": "nvim - 在当前文件中使用正则表达式进行全局替换",
     "content": "<Esc><:>%s/{{regular_expression}}/{{replacement}}/g<Enter>",
     "group": "通用工具 (Common)",
-    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另见：`vim`，`vimtutor`，`vimdiff`。 (在当前文件中使用正则表达式进行全局替换)",
+    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另请参阅：`vim`，`vimtutor`，`vimdiff`。 (在当前文件中使用正则表达式进行全局替换)",
     "tags": [
       "common",
       "nvim",
@@ -31790,7 +31805,7 @@
     "title": "nvim - 进入普通模式，保存文件并退出",
     "content": "{{<Esc><Z><Z>|<Esc><:>x<Enter>|<Esc><:>wq<Enter>}}",
     "group": "通用工具 (Common)",
-    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另见：`vim`，`vimtutor`，`vimdiff`。 (进入普通模式，保存文件并退出)",
+    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另请参阅：`vim`，`vimtutor`，`vimdiff`。 (进入普通模式，保存文件并退出)",
     "tags": [
       "common",
       "nvim",
@@ -31805,7 +31820,7 @@
     "title": "nvim - 退出并不保存更改",
     "content": "<Esc><:>q!<Enter>",
     "group": "通用工具 (Common)",
-    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另见：`vim`，`vimtutor`，`vimdiff`。 (退出并不保存更改)",
+    "description": "nvim: Neovim，基于 Vim 的代码编辑器，使用多种不同的模式来修改文本。 在普通模式（normal mode）下，按下 `` 键以进入插入模式（insert mode）。通过 `` 或 `` 返回普通模式。普通模式下不支持一般的文本输入。 另请参阅：`vim`，`vimtutor`，`vimdiff`。 (退出并不保存更改)",
     "tags": [
       "common",
       "nvim",
@@ -31820,7 +31835,7 @@
     "title": "gpg - 交互地创建 GPG 公钥和私钥",
     "content": "gpg {{[--full-gen-key|--full-generate-key]}}",
     "group": "通用工具 (Common)",
-    "description": "gpg: GNU Privacy Guard. (交互地创建 GPG 公钥和私钥)",
+    "description": "gpg: GNU Privacy Guard。 (交互地创建 GPG 公钥和私钥)",
     "tags": [
       "common",
       "gpg",
@@ -31835,7 +31850,7 @@
     "title": "gpg - 不加密，仅对 `doc.txt` 进行签名（生成 `doc.txt.asc`，格式为 ASCII 码形式）",
     "content": "gpg --clearsign {{doc.txt}}",
     "group": "通用工具 (Common)",
-    "description": "gpg: GNU Privacy Guard. (不加密，仅对 `doc.txt` 进行签名（生成 `doc.txt.asc`，格式为 ASCII 码形式）)",
+    "description": "gpg: GNU Privacy Guard。 (不加密，仅对 `doc.txt` 进行签名（生成 `doc.txt.asc`，格式为 ASCII 码形式）)",
     "tags": [
       "common",
       "gpg",
@@ -31850,7 +31865,7 @@
     "title": "gpg - 为接收者 alice@example.com 和 bob@example.com 签名并加密 `doc.txt`（生成 `doc.txt.gpg`）",
     "content": "gpg {{[-es|--encrypt --sign]}} {{[-r|--recipient]}} {{alice@example.com}} {{[-r|--recipient]}} {{bob@example.com}} {{doc.txt}}",
     "group": "通用工具 (Common)",
-    "description": "gpg: GNU Privacy Guard. (为接收者 alice@example.com 和 bob@example.com 签名并加密 `doc.txt`（生成 `doc.txt.gpg`）)",
+    "description": "gpg: GNU Privacy Guard。 (为接收者 alice@example.com 和 bob@example.com 签名并加密 `doc.txt`（生成 `doc.txt.gpg`）)",
     "tags": [
       "common",
       "gpg",
@@ -31865,7 +31880,7 @@
     "title": "gpg - 只用密码加密 `doc.txt`（生成 `doc.txt.gpg`）",
     "content": "gpg {{[-c|--symmetric]}} {{doc.txt}}",
     "group": "通用工具 (Common)",
-    "description": "gpg: GNU Privacy Guard. (只用密码加密 `doc.txt`（生成 `doc.txt.gpg`）)",
+    "description": "gpg: GNU Privacy Guard。 (只用密码加密 `doc.txt`（生成 `doc.txt.gpg`）)",
     "tags": [
       "common",
       "gpg",
@@ -31880,7 +31895,7 @@
     "title": "gpg - 解密 `doc.txt.gpg`（输出到标准输出）",
     "content": "gpg {{[-d|--decrypt]}} {{doc.txt.gpg}}",
     "group": "通用工具 (Common)",
-    "description": "gpg: GNU Privacy Guard. (解密 `doc.txt.gpg`（输出到标准输出）)",
+    "description": "gpg: GNU Privacy Guard。 (解密 `doc.txt.gpg`（输出到标准输出）)",
     "tags": [
       "common",
       "gpg",
@@ -31895,7 +31910,7 @@
     "title": "gpg - 导入一个公钥",
     "content": "gpg --import {{public.gpg}}",
     "group": "通用工具 (Common)",
-    "description": "gpg: GNU Privacy Guard. (导入一个公钥)",
+    "description": "gpg: GNU Privacy Guard。 (导入一个公钥)",
     "tags": [
       "common",
       "gpg",
@@ -31910,7 +31925,7 @@
     "title": "gpg - 导出 alice@example.com 的公钥（输出到标准输出）",
     "content": "gpg --export {{[-a|--armor]}} {{alice@example.com}}",
     "group": "通用工具 (Common)",
-    "description": "gpg: GNU Privacy Guard. (导出 alice@example.com 的公钥（输出到标准输出）)",
+    "description": "gpg: GNU Privacy Guard。 (导出 alice@example.com 的公钥（输出到标准输出）)",
     "tags": [
       "common",
       "gpg",
@@ -31925,7 +31940,7 @@
     "title": "gpg - 导出 alice@example.com 的私钥（输出到标准输出）",
     "content": "gpg --export-secret-keys {{[-a|--armor]}} {{alice@example.com}}",
     "group": "通用工具 (Common)",
-    "description": "gpg: GNU Privacy Guard. (导出 alice@example.com 的私钥（输出到标准输出）)",
+    "description": "gpg: GNU Privacy Guard。 (导出 alice@example.com 的私钥（输出到标准输出）)",
     "tags": [
       "common",
       "gpg",
@@ -32150,7 +32165,7 @@
     "title": "qc - 配置代码片段管理器，例如设置来自 QOwnNotes 的安全令牌",
     "content": "qc configure",
     "group": "通用工具 (Common)",
-    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 请参阅：`qownnotes`. (配置代码片段管理器，例如设置来自 QOwnNotes 的安全令牌)",
+    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 另请参阅：`qownnotes`。 (配置代码片段管理器，例如设置来自 QOwnNotes 的安全令牌)",
     "tags": [
       "common",
       "qc",
@@ -32165,7 +32180,7 @@
     "title": "qc - 搜索并打印存储在 `Commands.md` 笔记中的命令片段以及所有标记为 `commands` 的笔记",
     "content": "qc search",
     "group": "通用工具 (Common)",
-    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 请参阅：`qownnotes`. (搜索并打印存储在 `Commands.md` 笔记中的命令片段以及所有标记为 `commands` 的笔记)",
+    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 另请参阅：`qownnotes`。 (搜索并打印存储在 `Commands.md` 笔记中的命令片段以及所有标记为 `commands` 的笔记)",
     "tags": [
       "common",
       "qc",
@@ -32180,7 +32195,7 @@
     "title": "qc - 执行一个片段并在执行前显示命令",
     "content": "qc exec --command",
     "group": "通用工具 (Common)",
-    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 请参阅：`qownnotes`. (执行一个片段并在执行前显示命令)",
+    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 另请参阅：`qownnotes`。 (执行一个片段并在执行前显示命令)",
     "tags": [
       "common",
       "qc",
@@ -32195,7 +32210,7 @@
     "title": "qc - 执行上一个片段并在执行前显示命令",
     "content": "qc exec --command --last",
     "group": "通用工具 (Common)",
-    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 请参阅：`qownnotes`. (执行上一个片段并在执行前显示命令)",
+    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 另请参阅：`qownnotes`。 (执行上一个片段并在执行前显示命令)",
     "tags": [
       "common",
       "qc",
@@ -32210,7 +32225,7 @@
     "title": "qc - 在 QOwnNotes 中切换笔记文件夹",
     "content": "qc switch",
     "group": "通用工具 (Common)",
-    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 请参阅：`qownnotes`. (在 QOwnNotes 中切换笔记文件夹)",
+    "description": "qc: 管理和执行存储在 QOwnNotes 笔记中的命令片段。 另请参阅：`qownnotes`。 (在 QOwnNotes 中切换笔记文件夹)",
     "tags": [
       "common",
       "qc",
@@ -32600,7 +32615,7 @@
     "title": "age - 生成一个可以用密码短语（passphrase）解密的加密文件",
     "content": "age --passphrase --output {{路径/到/已加密文件}} {{路径/到/未加密文件}}",
     "group": "通用工具 (Common)",
-    "description": "age: 一个简单、现代、安全的文件加密工具。 (生成一个可以用密码短语（passphrase）解密的加密文件)",
+    "description": "age: 一个简单、现代、安全的文件加密工具。 另请参阅：`age-keygen` 用于生成密钥对。 (生成一个可以用密码短语（passphrase）解密的加密文件)",
     "tags": [
       "common",
       "age",
@@ -32615,7 +32630,7 @@
     "title": "age - 用一个或多个公钥加密一个文件，这些公钥以字面形式输入",
     "content": "age --recipient {{公钥}} --output {{路径/到/已加密文件}} {{路径/到/未加密文件}}",
     "group": "通用工具 (Common)",
-    "description": "age: 一个简单、现代、安全的文件加密工具。 (用一个或多个公钥加密一个文件，这些公钥以字面形式输入)",
+    "description": "age: 一个简单、现代、安全的文件加密工具。 另请参阅：`age-keygen` 用于生成密钥对。 (用一个或多个公钥加密一个文件，这些公钥以字面形式输入)",
     "tags": [
       "common",
       "age",
@@ -32630,7 +32645,7 @@
     "title": "age - 用收件人文件中指定的一个或多个公钥来加密一个文件",
     "content": "age --recipients-file {{路径/到/收件人文件}} --output {{路径/到/已加密文件}} {{路径/到/未加密文件}}",
     "group": "通用工具 (Common)",
-    "description": "age: 一个简单、现代、安全的文件加密工具。 (用收件人文件中指定的一个或多个公钥来加密一个文件)",
+    "description": "age: 一个简单、现代、安全的文件加密工具。 另请参阅：`age-keygen` 用于生成密钥对。 (用收件人文件中指定的一个或多个公钥来加密一个文件)",
     "tags": [
       "common",
       "age",
@@ -32645,7 +32660,7 @@
     "title": "age - 用密码短语解密一个文件",
     "content": "age --decrypt --output {{路径/到/已解密文件}} {{路径/到/已加密文件}}",
     "group": "通用工具 (Common)",
-    "description": "age: 一个简单、现代、安全的文件加密工具。 (用密码短语解密一个文件)",
+    "description": "age: 一个简单、现代、安全的文件加密工具。 另请参阅：`age-keygen` 用于生成密钥对。 (用密码短语解密一个文件)",
     "tags": [
       "common",
       "age",
@@ -32660,7 +32675,7 @@
     "title": "age - 用私钥文件解密一个文件",
     "content": "age --decrypt --identity {{路径/到/私钥文件}} --output {{路径/到/已解密文件}} {{路径/到/已加密文件}}",
     "group": "通用工具 (Common)",
-    "description": "age: 一个简单、现代、安全的文件加密工具。 (用私钥文件解密一个文件)",
+    "description": "age: 一个简单、现代、安全的文件加密工具。 另请参阅：`age-keygen` 用于生成密钥对。 (用私钥文件解密一个文件)",
     "tags": [
       "common",
       "age",
@@ -33905,7 +33920,7 @@
     "title": "git-commit-tree - 创建带有指定提交信息的提交对象",
     "content": "git commit-tree {{树对象哈希}} -m \"{{提交信息}}\"",
     "group": "通用工具 (Common)",
-    "description": "git-commit-tree: 用于创建提交对象的底层工具。 参考： `git commit`. (创建带有指定提交信息的提交对象)",
+    "description": "git-commit-tree: 用于创建提交对象的底层工具。 另请参阅：`git commit`。 (创建带有指定提交信息的提交对象)",
     "tags": [
       "common",
       "git-commit-tree",
@@ -33920,7 +33935,7 @@
     "title": "git-commit-tree - 从文件读取提交信息创建提交对象（使用 `-` 表示从标准输入读取）",
     "content": "git commit-tree {{树对象哈希}} -F {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "git-commit-tree: 用于创建提交对象的底层工具。 参考： `git commit`. (从文件读取提交信息创建提交对象（使用 `-` 表示从标准输入读取）)",
+    "description": "git-commit-tree: 用于创建提交对象的底层工具。 另请参阅：`git commit`。 (从文件读取提交信息创建提交对象（使用 `-` 表示从标准输入读取）)",
     "tags": [
       "common",
       "git-commit-tree",
@@ -33935,7 +33950,7 @@
     "title": "git-commit-tree - 创建 GPG 签名过的提交对象",
     "content": "git commit-tree {{树对象哈希}} -m \"{{提交信息}}\" {{[-S|--gpg-sign]}}",
     "group": "通用工具 (Common)",
-    "description": "git-commit-tree: 用于创建提交对象的底层工具。 参考： `git commit`. (创建 GPG 签名过的提交对象)",
+    "description": "git-commit-tree: 用于创建提交对象的底层工具。 另请参阅：`git commit`。 (创建 GPG 签名过的提交对象)",
     "tags": [
       "common",
       "git-commit-tree",
@@ -33950,7 +33965,7 @@
     "title": "git-commit-tree - 创建指定父提交的提交对象",
     "content": "git commit-tree {{树对象哈希}} -m \"{{提交信息}}\" -p {{父提交哈希}}",
     "group": "通用工具 (Common)",
-    "description": "git-commit-tree: 用于创建提交对象的底层工具。 参考： `git commit`. (创建指定父提交的提交对象)",
+    "description": "git-commit-tree: 用于创建提交对象的底层工具。 另请参阅：`git commit`。 (创建指定父提交的提交对象)",
     "tags": [
       "common",
       "git-commit-tree",
@@ -34115,7 +34130,7 @@
     "title": "curl - 将指定 URL 的内容下载到文件",
     "content": "curl {{http://example.com}} {{[-o|--output]}} {{文件名}}",
     "group": "通用工具 (Common)",
-    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3. (将指定 URL 的内容下载到文件)",
+    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3。 (将指定 URL 的内容下载到文件)",
     "tags": [
       "common",
       "curl",
@@ -34130,7 +34145,7 @@
     "title": "curl - 将文件从 URL 保存到由 URL 指示的文件名中",
     "content": "curl {{[-O|--remote-name]}} {{http://example.com/filename}}",
     "group": "通用工具 (Common)",
-    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3. (将文件从 URL 保存到由 URL 指示的文件名中)",
+    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3。 (将文件从 URL 保存到由 URL 指示的文件名中)",
     "tags": [
       "common",
       "curl",
@@ -34145,7 +34160,7 @@
     "title": "curl - 下载文件，跟随 重定向，并且自动 续传（恢复）前序文件传输",
     "content": "curl {{[-f|--fail]}} {{[-O|--remote-name]}} {{[-L|--location]}} {{[-C|--continue-at]}} - {{http://example.com/filename}}",
     "group": "通用工具 (Common)",
-    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3. (下载文件，跟随 重定向，并且自动 续传（恢复）前序文件传输)",
+    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3。 (下载文件，跟随 重定向，并且自动 续传（恢复）前序文件传输)",
     "tags": [
       "common",
       "curl",
@@ -34160,7 +34175,7 @@
     "title": "curl - 发送表单编码数据（`application/x-www-form-urlencoded` 的 POST 请求）",
     "content": "curl {{[-d|--data]}} {{'name=bob'}} {{http://example.com/form}}",
     "group": "通用工具 (Common)",
-    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3. (发送表单编码数据（`application/x-www-form-urlencoded` 的 POST 请求）)",
+    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3。 (发送表单编码数据（`application/x-www-form-urlencoded` 的 POST 请求）)",
     "tags": [
       "common",
       "curl",
@@ -34175,7 +34190,7 @@
     "title": "curl - 发送带有额外请求头，使用自定义请求方法的请求",
     "content": "curl {{[-H|--header]}} {{'X-My-Header: 123'}} {{[-X|--request]}} {{PUT}} {{http://example.com}}",
     "group": "通用工具 (Common)",
-    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3. (发送带有额外请求头，使用自定义请求方法的请求)",
+    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3。 (发送带有额外请求头，使用自定义请求方法的请求)",
     "tags": [
       "common",
       "curl",
@@ -34190,7 +34205,7 @@
     "title": "curl - 发送 JSON 格式的数据，并附加正确的 `Content-Type` 请求头",
     "content": "curl {{[-d|--data]}} {{'{\"name\":\"bob\"}'}} {{[-H|--header]}} {{'Content-Type: application/json'}} {{http://example.com/users/1234}}",
     "group": "通用工具 (Common)",
-    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3. (发送 JSON 格式的数据，并附加正确的 `Content-Type` 请求头)",
+    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3。 (发送 JSON 格式的数据，并附加正确的 `Content-Type` 请求头)",
     "tags": [
       "common",
       "curl",
@@ -34205,7 +34220,7 @@
     "title": "curl - 使用用户名和密码，授权访问服务器",
     "content": "curl {{[-u|--user]}} {{用户名}} {{http://example.com}}",
     "group": "通用工具 (Common)",
-    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3. (使用用户名和密码，授权访问服务器)",
+    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3。 (使用用户名和密码，授权访问服务器)",
     "tags": [
       "common",
       "curl",
@@ -34220,7 +34235,7 @@
     "title": "curl - 为指定资源使用客户端证书和密钥，并且跳过证书验证",
     "content": "curl {{[-E|--cert]}} {{client.pem}} --key {{key.pem}} {{[-k|--insecure]}} {{https://example.com}}",
     "group": "通用工具 (Common)",
-    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3. (为指定资源使用客户端证书和密钥，并且跳过证书验证)",
+    "description": "curl: 向 / 从一个服务器传输数据。 支持大多数协议，包括 HTTP, FTP, 和 POP3。 (为指定资源使用客户端证书和密钥，并且跳过证书验证)",
     "tags": [
       "common",
       "curl",
@@ -34695,6 +34710,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-jira-issues-0",
+    "type": "command",
+    "title": "jira-issues - 查看原命令的文档",
+    "content": "tldr jira issue",
+    "group": "通用工具 (Common)",
+    "description": "jira-issues: 此命令为 `jira issue` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "jira-issues",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-ar-0",
     "type": "command",
     "title": "ar - 从库文件中提取全部成员",
@@ -34820,7 +34850,7 @@
     "title": "magick-import - 捕获整个 X server 屏幕，保存为 PostScript 文件",
     "content": "magick import -window root {{路径/到/输出文件.ps}}",
     "group": "通用工具 (Common)",
-    "description": "magick-import: 捕获某些或全部 X server 屏幕上的内容，并保存至图片文件当中。 另见：`magick`。 (捕获整个 X server 屏幕，保存为 PostScript 文件)",
+    "description": "magick-import: 捕获某些或全部 X server 屏幕上的内容，并保存至图片文件当中。 另请参阅：`magick`。 (捕获整个 X server 屏幕，保存为 PostScript 文件)",
     "tags": [
       "common",
       "magick-import",
@@ -34835,7 +34865,7 @@
     "title": "magick-import - 捕获远程 X server 屏幕，保存为 PNG 图片",
     "content": "magick import -window root -display {{remote_host}}:{{screen}}.{{display}} {{路径/到/输出文件.png}}",
     "group": "通用工具 (Common)",
-    "description": "magick-import: 捕获某些或全部 X server 屏幕上的内容，并保存至图片文件当中。 另见：`magick`。 (捕获远程 X server 屏幕，保存为 PNG 图片)",
+    "description": "magick-import: 捕获某些或全部 X server 屏幕上的内容，并保存至图片文件当中。 另请参阅：`magick`。 (捕获远程 X server 屏幕，保存为 PNG 图片)",
     "tags": [
       "common",
       "magick-import",
@@ -34850,7 +34880,7 @@
     "title": "magick-import - 用 `xwininfo` 中列出的窗口 ID 对特定窗口进行捕获，保存为 JPEG 图片",
     "content": "magick import -window {{窗口 ID}} {{路径/到/输出图片.jpg}}",
     "group": "通用工具 (Common)",
-    "description": "magick-import: 捕获某些或全部 X server 屏幕上的内容，并保存至图片文件当中。 另见：`magick`。 (用 `xwininfo` 中列出的窗口 ID 对特定窗口进行捕获，保存为 JPEG 图片)",
+    "description": "magick-import: 捕获某些或全部 X server 屏幕上的内容，并保存至图片文件当中。 另请参阅：`magick`。 (用 `xwininfo` 中列出的窗口 ID 对特定窗口进行捕获，保存为 JPEG 图片)",
     "tags": [
       "common",
       "magick-import",
@@ -36347,10 +36377,10 @@
   {
     "id": "tldr-zh-common-git-credential-0",
     "type": "command",
-    "title": "git-credential - ​​获取凭证信息​​（从配置文件中读取用户名和密码）",
+    "title": "git-credential - 获取凭证信息（从配置文件中读取用户名和密码）",
     "content": "echo \"{{url=http://example.com}}\" | git credential fill",
     "group": "通用工具 (Common)",
-    "description": "git-credential: 用于管理和存储 Git 用户凭证（如用户名和密码）。 (​​获取凭证信息​​（从配置文件中读取用户名和密码）)",
+    "description": "git-credential: 用于管理和存储 Git 用户凭证（如用户名和密码）。 (获取凭证信息（从配置文件中读取用户名和密码）)",
     "tags": [
       "common",
       "git-credential",
@@ -36362,10 +36392,10 @@
   {
     "id": "tldr-zh-common-git-credential-1",
     "type": "command",
-    "title": "git-credential - 存储凭证信息​​（保存到配置的凭证助手中）",
+    "title": "git-credential - 存储凭证信息（保存到配置的凭证助手中）",
     "content": "echo \"{{url=http://example.com}}\" | git credential approve",
     "group": "通用工具 (Common)",
-    "description": "git-credential: 用于管理和存储 Git 用户凭证（如用户名和密码）。 (存储凭证信息​​（保存到配置的凭证助手中）)",
+    "description": "git-credential: 用于管理和存储 Git 用户凭证（如用户名和密码）。 (存储凭证信息（保存到配置的凭证助手中）)",
     "tags": [
       "common",
       "git-credential",
@@ -36377,10 +36407,10 @@
   {
     "id": "tldr-zh-common-git-credential-2",
     "type": "command",
-    "title": "git-credential - 删除凭证信息​​（从所有配置的凭证助手中清除）",
+    "title": "git-credential - 删除凭证信息（从所有配置的凭证助手中清除）",
     "content": "echo \"{{url=http://example.com}}\" | git credential reject",
     "group": "通用工具 (Common)",
-    "description": "git-credential: 用于管理和存储 Git 用户凭证（如用户名和密码）。 (删除凭证信息​​（从所有配置的凭证助手中清除）)",
+    "description": "git-credential: 用于管理和存储 Git 用户凭证（如用户名和密码）。 (删除凭证信息（从所有配置的凭证助手中清除）)",
     "tags": [
       "common",
       "git-credential",
@@ -36815,7 +36845,7 @@
     "title": "2to3 - 显示将执行的变动但不执行（dry-run）",
     "content": "2to3 {{路径/到/文件.py}}",
     "group": "通用工具 (Common)",
-    "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (显示将执行的变动但不执行（dry-run）)",
+    "description": "2to3: 自动将 Python 2 代码转换成 Python 3。 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：。 (显示将执行的变动但不执行（dry-run）)",
     "tags": [
       "common",
       "2to3",
@@ -36830,7 +36860,7 @@
     "title": "2to3 - 将 Python 2 文件转化为 Python 3",
     "content": "2to3 {{[-w|--write]}} {{路径/到/文件.py}}",
     "group": "通用工具 (Common)",
-    "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (将 Python 2 文件转化为 Python 3)",
+    "description": "2to3: 自动将 Python 2 代码转换成 Python 3。 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：。 (将 Python 2 文件转化为 Python 3)",
     "tags": [
       "common",
       "2to3",
@@ -36845,7 +36875,7 @@
     "title": "2to3 - 将 Python 2 语言特性转化为 Python 3",
     "content": "2to3 {{[-w|--write]}} {{路径/到/文件.py}} {{[-f|--fix]}} {{raw_input}} {{[-f|--fix]}} {{print}}",
     "group": "通用工具 (Common)",
-    "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (将 Python 2 语言特性转化为 Python 3)",
+    "description": "2to3: 自动将 Python 2 代码转换成 Python 3。 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：。 (将 Python 2 语言特性转化为 Python 3)",
     "tags": [
       "common",
       "2to3",
@@ -36860,7 +36890,7 @@
     "title": "2to3 - 除了某个语言特性外将所有其他的 Python 2 语言特性转化为 Python 3",
     "content": "2to3 {{[-w|--write]}} {{路径/到/文件.py}} {{[-x|--nofix]}} {{has_key}} {{[-x|--nofix]}} {{isinstance}}",
     "group": "通用工具 (Common)",
-    "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (除了某个语言特性外将所有其他的 Python 2 语言特性转化为 Python 3)",
+    "description": "2to3: 自动将 Python 2 代码转换成 Python 3。 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：。 (除了某个语言特性外将所有其他的 Python 2 语言特性转化为 Python 3)",
     "tags": [
       "common",
       "2to3",
@@ -36875,7 +36905,7 @@
     "title": "2to3 - 列出 Python 2 所有可转化为 Python 3 的语言特性",
     "content": "2to3 {{[-l|--list-fixes]}}",
     "group": "通用工具 (Common)",
-    "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (列出 Python 2 所有可转化为 Python 3 的语言特性)",
+    "description": "2to3: 自动将 Python 2 代码转换成 Python 3。 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：。 (列出 Python 2 所有可转化为 Python 3 的语言特性)",
     "tags": [
       "common",
       "2to3",
@@ -36890,7 +36920,7 @@
     "title": "2to3 - 将某一文件夹的所有 Python 2 文件转化为 Python 3",
     "content": "2to3 {{[-o|--output-dir]}} {{路径/到/Python 3 目录}} {{[-W|--write-unchanged-files]}} {{[-n|--nobackups]}} {{路径/到/Python 2 目录}}",
     "group": "通用工具 (Common)",
-    "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (将某一文件夹的所有 Python 2 文件转化为 Python 3)",
+    "description": "2to3: 自动将 Python 2 代码转换成 Python 3。 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：。 (将某一文件夹的所有 Python 2 文件转化为 Python 3)",
     "tags": [
       "common",
       "2to3",
@@ -36905,7 +36935,7 @@
     "title": "2to3 - 使用多线程运行 2to3",
     "content": "2to3 {{[-j|--processes]}} {{4}} {{[-o|--output-dir]}} {{路径/到/Python 3 目录}} {{[-w|--write]}} {{[-n|--nobackups]}} --no-diffs {{路径/到/Python 2 目录}}",
     "group": "通用工具 (Common)",
-    "description": "2to3: 自动将 Python 2 代码转换成 Python 3. 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：. (使用多线程运行 2to3)",
+    "description": "2to3: 自动将 Python 2 代码转换成 Python 3。 自 3.11 起，该模块已被弃用，并自 3.13 起被移除。 参考请见：。 (使用多线程运行 2to3)",
     "tags": [
       "common",
       "2to3",
@@ -36980,7 +37010,7 @@
     "title": "amass - 执行 Amass 子命令",
     "content": "amass {{intel|enum}} {{options}}",
     "group": "通用工具 (Common)",
-    "description": "amass: 深度攻击面探测与资产发现工具。 此命令也有关于其子命令的文件，例如：`intel`. (执行 Amass 子命令)",
+    "description": "amass: 深度攻击面探测与资产发现工具。 此命令也有关于其子命令的文件，例如：`intel`。 (执行 Amass 子命令)",
     "tags": [
       "common",
       "amass",
@@ -36995,7 +37025,7 @@
     "title": "amass - 展示帮助信息",
     "content": "amass -help",
     "group": "通用工具 (Common)",
-    "description": "amass: 深度攻击面探测与资产发现工具。 此命令也有关于其子命令的文件，例如：`intel`. (展示帮助信息)",
+    "description": "amass: 深度攻击面探测与资产发现工具。 此命令也有关于其子命令的文件，例如：`intel`。 (展示帮助信息)",
     "tags": [
       "common",
       "amass",
@@ -37010,7 +37040,7 @@
     "title": "amass - 展示子命令帮助信息",
     "content": "amass {{intel|enum}} -help",
     "group": "通用工具 (Common)",
-    "description": "amass: 深度攻击面探测与资产发现工具。 此命令也有关于其子命令的文件，例如：`intel`. (展示子命令帮助信息)",
+    "description": "amass: 深度攻击面探测与资产发现工具。 此命令也有关于其子命令的文件，例如：`intel`。 (展示子命令帮助信息)",
     "tags": [
       "common",
       "amass",
@@ -37025,7 +37055,7 @@
     "title": "amass - 查看 Amass 版本",
     "content": "amass -version",
     "group": "通用工具 (Common)",
-    "description": "amass: 深度攻击面探测与资产发现工具。 此命令也有关于其子命令的文件，例如：`intel`. (查看 Amass 版本)",
+    "description": "amass: 深度攻击面探测与资产发现工具。 此命令也有关于其子命令的文件，例如：`intel`。 (查看 Amass 版本)",
     "tags": [
       "common",
       "amass",
@@ -37310,7 +37340,7 @@
     "title": "write - 向指定的终端 ID 上的指定用户写入信息",
     "content": "write {{username}} {{terminal_id}}",
     "group": "通用工具 (Common)",
-    "description": "write: 向某个终端上的特定用户的屏幕写入信息（`` 来停止写入）。 使用 `who` 命令来获取所有活动用户的终端 id. 参见 `mesg`. (向指定的终端 ID 上的指定用户写入信息)",
+    "description": "write: 向某个终端上的特定用户的屏幕写入信息（`` 来停止写入）。 使用 `who` 命令来获取所有活动用户的终端 id。 另请参阅：`mesg`。 (向指定的终端 ID 上的指定用户写入信息)",
     "tags": [
       "common",
       "write",
@@ -37325,7 +37355,7 @@
     "title": "write - 向终端 \"/dev/tty/5\" 上的用户 \"testuser\" 发送信息",
     "content": "write {{testuser}} {{tty/5}}",
     "group": "通用工具 (Common)",
-    "description": "write: 向某个终端上的特定用户的屏幕写入信息（`` 来停止写入）。 使用 `who` 命令来获取所有活动用户的终端 id. 参见 `mesg`. (向终端 \"/dev/tty/5\" 上的用户 \"testuser\" 发送信息)",
+    "description": "write: 向某个终端上的特定用户的屏幕写入信息（`` 来停止写入）。 使用 `who` 命令来获取所有活动用户的终端 id。 另请参阅：`mesg`。 (向终端 \"/dev/tty/5\" 上的用户 \"testuser\" 发送信息)",
     "tags": [
       "common",
       "write",
@@ -37340,7 +37370,7 @@
     "title": "write - 向伪终端 \"/dev/pts/5\" 上的用户 \"johndoe\" 发送信息",
     "content": "write {{johndoe}} {{pts/5}}",
     "group": "通用工具 (Common)",
-    "description": "write: 向某个终端上的特定用户的屏幕写入信息（`` 来停止写入）。 使用 `who` 命令来获取所有活动用户的终端 id. 参见 `mesg`. (向伪终端 \"/dev/pts/5\" 上的用户 \"johndoe\" 发送信息)",
+    "description": "write: 向某个终端上的特定用户的屏幕写入信息（`` 来停止写入）。 使用 `who` 命令来获取所有活动用户的终端 id。 另请参阅：`mesg`。 (向伪终端 \"/dev/pts/5\" 上的用户 \"johndoe\" 发送信息)",
     "tags": [
       "common",
       "write",
@@ -37355,7 +37385,7 @@
     "title": "docker-image - 列出本地的 Docker 镜像",
     "content": "docker image ls",
     "group": "通用工具 (Common)",
-    "description": "docker-image: 管理 Docker 镜像。 也请参阅：`docker build`, `docker import`, `docker pull`. (列出本地的 Docker 镜像)",
+    "description": "docker-image: 管理 Docker 镜像。 另请参阅：`docker build`，`docker import`，`docker pull`。 (列出本地的 Docker 镜像)",
     "tags": [
       "common",
       "docker-image",
@@ -37370,7 +37400,7 @@
     "title": "docker-image - 删除未使用的 Docker 镜像",
     "content": "docker image prune",
     "group": "通用工具 (Common)",
-    "description": "docker-image: 管理 Docker 镜像。 也请参阅：`docker build`, `docker import`, `docker pull`. (删除未使用的 Docker 镜像)",
+    "description": "docker-image: 管理 Docker 镜像。 另请参阅：`docker build`，`docker import`，`docker pull`。 (删除未使用的 Docker 镜像)",
     "tags": [
       "common",
       "docker-image",
@@ -37385,7 +37415,7 @@
     "title": "docker-image - 删除全部的未使用镜像（而不仅仅是那些没有打上标签的镜像）",
     "content": "docker image prune {{[-a|--all]}}",
     "group": "通用工具 (Common)",
-    "description": "docker-image: 管理 Docker 镜像。 也请参阅：`docker build`, `docker import`, `docker pull`. (删除全部的未使用镜像（而不仅仅是那些没有打上标签的镜像）)",
+    "description": "docker-image: 管理 Docker 镜像。 另请参阅：`docker build`，`docker import`，`docker pull`。 (删除全部的未使用镜像（而不仅仅是那些没有打上标签的镜像）)",
     "tags": [
       "common",
       "docker-image",
@@ -37400,7 +37430,7 @@
     "title": "docker-image - 展示本地 Docker 镜像的历史",
     "content": "docker image history {{镜像}}",
     "group": "通用工具 (Common)",
-    "description": "docker-image: 管理 Docker 镜像。 也请参阅：`docker build`, `docker import`, `docker pull`. (展示本地 Docker 镜像的历史)",
+    "description": "docker-image: 管理 Docker 镜像。 另请参阅：`docker build`，`docker import`，`docker pull`。 (展示本地 Docker 镜像的历史)",
     "tags": [
       "common",
       "docker-image",
@@ -37415,7 +37445,7 @@
     "title": "docker-image - 查看 `docker image rm` 的文档",
     "content": "tldr docker rmi",
     "group": "通用工具 (Common)",
-    "description": "docker-image: 管理 Docker 镜像。 也请参阅：`docker build`, `docker import`, `docker pull`. (查看 `docker image rm` 的文档)",
+    "description": "docker-image: 管理 Docker 镜像。 另请参阅：`docker build`，`docker import`，`docker pull`。 (查看 `docker image rm` 的文档)",
     "tags": [
       "common",
       "docker-image",
@@ -37565,7 +37595,7 @@
     "title": "brew-install - 安装软件包/安装包",
     "content": "brew install {{软件包|安装包}}",
     "group": "通用工具 (Common)",
-    "description": "brew-install: 安装一个 Homebrew 软件包 (formula)，或安装包 (cask). (安装软件包/安装包)",
+    "description": "brew-install: 安装一个 Homebrew 软件包 (formula)，或安装包 (cask)。 (安装软件包/安装包)",
     "tags": [
       "common",
       "brew-install",
@@ -37580,7 +37610,7 @@
     "title": "brew-install - 从源码构建，并安装软件包（依赖仍然会以二进制文件的形式安装）",
     "content": "brew install {{[-s|--build-from-source]}} {{软件包}}",
     "group": "通用工具 (Common)",
-    "description": "brew-install: 安装一个 Homebrew 软件包 (formula)，或安装包 (cask). (从源码构建，并安装软件包（依赖仍然会以二进制文件的形式安装）)",
+    "description": "brew-install: 安装一个 Homebrew 软件包 (formula)，或安装包 (cask)。 (从源码构建，并安装软件包（依赖仍然会以二进制文件的形式安装）)",
     "tags": [
       "common",
       "brew-install",
@@ -37595,7 +37625,7 @@
     "title": "brew-install - 下载应用清单，输出将要安装的内容（但实际并不会安装任何包）",
     "content": "brew install {{[-n|--dry-run]}} {{软件包|安装包}}",
     "group": "通用工具 (Common)",
-    "description": "brew-install: 安装一个 Homebrew 软件包 (formula)，或安装包 (cask). (下载应用清单，输出将要安装的内容（但实际并不会安装任何包）)",
+    "description": "brew-install: 安装一个 Homebrew 软件包 (formula)，或安装包 (cask)。 (下载应用清单，输出将要安装的内容（但实际并不会安装任何包）)",
     "tags": [
       "common",
       "brew-install",
@@ -38300,7 +38330,7 @@
     "title": "rm - 删除指定文件",
     "content": "rm {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "rm: 删除文件或目录。 另见：`rmdir`。 (删除指定文件)",
+    "description": "rm: 删除文件或目录。 另请参阅：`rmdir`。 (删除指定文件)",
     "tags": [
       "common",
       "rm",
@@ -38315,7 +38345,7 @@
     "title": "rm - 删除指定文件，忽略不存在的文件",
     "content": "rm {{[-f|--force]}} {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "rm: 删除文件或目录。 另见：`rmdir`。 (删除指定文件，忽略不存在的文件)",
+    "description": "rm: 删除文件或目录。 另请参阅：`rmdir`。 (删除指定文件，忽略不存在的文件)",
     "tags": [
       "common",
       "rm",
@@ -38330,7 +38360,7 @@
     "title": "rm - 交互式地删除多个文件，每次删除前都会有提示",
     "content": "rm {{[-i|--interactive]}} {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "rm: 删除文件或目录。 另见：`rmdir`。 (交互式地删除多个文件，每次删除前都会有提示)",
+    "description": "rm: 删除文件或目录。 另请参阅：`rmdir`。 (交互式地删除多个文件，每次删除前都会有提示)",
     "tags": [
       "common",
       "rm",
@@ -38345,7 +38375,7 @@
     "title": "rm - 删除文件并打印删除信息",
     "content": "rm {{[-v|--verbose]}} {{路径/到/文件1 路径/到/文件2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "rm: 删除文件或目录。 另见：`rmdir`。 (删除文件并打印删除信息)",
+    "description": "rm: 删除文件或目录。 另请参阅：`rmdir`。 (删除文件并打印删除信息)",
     "tags": [
       "common",
       "rm",
@@ -38360,7 +38390,7 @@
     "title": "rm - 递归删除指定文件和目录",
     "content": "rm {{[-r|--recursive]}} {{路径/到/文件或目录1 路径/到/文件或目录2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "rm: 删除文件或目录。 另见：`rmdir`。 (递归删除指定文件和目录)",
+    "description": "rm: 删除文件或目录。 另请参阅：`rmdir`。 (递归删除指定文件和目录)",
     "tags": [
       "common",
       "rm",
@@ -38375,7 +38405,7 @@
     "title": "rm - 删除空目录（这被认为是安全的方法）",
     "content": "rm {{[-d|--dir]}} {{路径/到/目录}}",
     "group": "通用工具 (Common)",
-    "description": "rm: 删除文件或目录。 另见：`rmdir`。 (删除空目录（这被认为是安全的方法）)",
+    "description": "rm: 删除文件或目录。 另请参阅：`rmdir`。 (删除空目录（这被认为是安全的方法）)",
     "tags": [
       "common",
       "rm",
@@ -39110,7 +39140,7 @@
     "title": "age-keygen - 生成密钥对，将其保存到未加密文件，并将公钥打印到标准输出",
     "content": "age-keygen --output {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "age-keygen: 生成 `age` 密钥对。 (生成密钥对，将其保存到未加密文件，并将公钥打印到标准输出)",
+    "description": "age-keygen: 生成 `age` 密钥对。 另请参阅：`age` 用于加密/解密文件。 (生成密钥对，将其保存到未加密文件，并将公钥打印到标准输出)",
     "tags": [
       "common",
       "age-keygen",
@@ -39125,7 +39155,7 @@
     "title": "age-keygen - 将身份转换为接收者，并将公钥打印到标准输出",
     "content": "age-keygen -y {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "age-keygen: 生成 `age` 密钥对。 (将身份转换为接收者，并将公钥打印到标准输出)",
+    "description": "age-keygen: 生成 `age` 密钥对。 另请参阅：`age` 用于加密/解密文件。 (将身份转换为接收者，并将公钥打印到标准输出)",
     "tags": [
       "common",
       "age-keygen",
@@ -40985,7 +41015,7 @@
     "title": "magick-identify - 输出图片的格式以及一些基本属性",
     "content": "magick identify {{路径/到/图片}}",
     "group": "通用工具 (Common)",
-    "description": "magick-identify: 输出图片文件的格式与属性。 另见：`magick`。 (输出图片的格式以及一些基本属性)",
+    "description": "magick-identify: 输出图片文件的格式与属性。 另请参阅：`magick`。 (输出图片的格式以及一些基本属性)",
     "tags": [
       "common",
       "magick-identify",
@@ -41000,7 +41030,7 @@
     "title": "magick-identify - 输出图片的格式及其详细属性",
     "content": "magick identify -verbose {{路径/到/图片}}",
     "group": "通用工具 (Common)",
-    "description": "magick-identify: 输出图片文件的格式与属性。 另见：`magick`。 (输出图片的格式及其详细属性)",
+    "description": "magick-identify: 输出图片文件的格式与属性。 另请参阅：`magick`。 (输出图片的格式及其详细属性)",
     "tags": [
       "common",
       "magick-identify",
@@ -41015,7 +41045,7 @@
     "title": "magick-identify - 将当前目录下的所有 JPEG 图片的尺寸属性",
     "content": "magick identify -format \"{{%f,%w,%h\\n}}\" {{*.jpg}} > {{路径/到/文件列表.csv}}",
     "group": "通用工具 (Common)",
-    "description": "magick-identify: 输出图片文件的格式与属性。 另见：`magick`。 (将当前目录下的所有 JPEG 图片的尺寸属性)",
+    "description": "magick-identify: 输出图片文件的格式与属性。 另请参阅：`magick`。 (将当前目录下的所有 JPEG 图片的尺寸属性)",
     "tags": [
       "common",
       "magick-identify",
@@ -41030,7 +41060,7 @@
     "title": "distcc - 使用类似 `gcc` 的编译器编译源文件",
     "content": "distcc {{gcc}} -c {{路径/到/源文件.c}} -o {{路径/到/输出文件.o}}",
     "group": "通用工具 (Common)",
-    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端. (使用类似 `gcc` 的编译器编译源文件)",
+    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端。 (使用类似 `gcc` 的编译器编译源文件)",
     "tags": [
       "common",
       "distcc",
@@ -41045,7 +41075,7 @@
     "title": "distcc - 设置用于分布式编译的远程主机",
     "content": "export DISTCC_HOSTS=\"localhost {{主机IP1 主机IP2 ...}}\"",
     "group": "通用工具 (Common)",
-    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端. (设置用于分布式编译的远程主机)",
+    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端。 (设置用于分布式编译的远程主机)",
     "tags": [
       "common",
       "distcc",
@@ -41060,7 +41090,7 @@
     "title": "distcc - 使用 `distcc` 和 `make` 并行编译项目",
     "content": "make {{[-j|--jobs]}} {{并行任务数}} CC=\"distcc {{gcc}}\"",
     "group": "通用工具 (Common)",
-    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端. (使用 `distcc` 和 `make` 并行编译项目)",
+    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端。 (使用 `distcc` 和 `make` 并行编译项目)",
     "tags": [
       "common",
       "distcc",
@@ -41075,7 +41105,7 @@
     "title": "distcc - 显示当前配置的 `distcc` 主机列表",
     "content": "distcc --show-hosts",
     "group": "通用工具 (Common)",
-    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端. (显示当前配置的 `distcc` 主机列表)",
+    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端。 (显示当前配置的 `distcc` 主机列表)",
     "tags": [
       "common",
       "distcc",
@@ -41090,7 +41120,7 @@
     "title": "distcc - 显示帮助",
     "content": "distcc --help",
     "group": "通用工具 (Common)",
-    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端. (显示帮助)",
+    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端。 (显示帮助)",
     "tags": [
       "common",
       "distcc",
@@ -41105,7 +41135,7 @@
     "title": "distcc - 显示版本",
     "content": "distcc --version",
     "group": "通用工具 (Common)",
-    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端. (显示版本)",
+    "description": "distcc: 与 `distccd` 搭配使用的分布式 C/C++/ObjC 编译客户端。 (显示版本)",
     "tags": [
       "common",
       "distcc",
@@ -42740,7 +42770,7 @@
     "title": "wget - 将该 URL 的内容下载到文件中（在这个例子中文件名为 \"foo\"）",
     "content": "wget {{https://example.com/foo}}",
     "group": "通用工具 (Common)",
-    "description": "wget: 从网络上下载文件。 支持 HTTP, HTTPS, 和 FTP. (将该 URL 的内容下载到文件中（在这个例子中文件名为 \"foo\"）)",
+    "description": "wget: 从网络上下载文件。 支持 HTTP，HTTPS 和 FTP。 (将该 URL 的内容下载到文件中（在这个例子中文件名为 \"foo\"）)",
     "tags": [
       "common",
       "wget",
@@ -42755,7 +42785,7 @@
     "title": "wget - 将该 URL 的内容下载到文件中（在这个例子中文件名为 \"bar\"）",
     "content": "wget {{[-O|--output-document]}} {{bar}} {{https://example.com/foo}}",
     "group": "通用工具 (Common)",
-    "description": "wget: 从网络上下载文件。 支持 HTTP, HTTPS, 和 FTP. (将该 URL 的内容下载到文件中（在这个例子中文件名为 \"bar\"）)",
+    "description": "wget: 从网络上下载文件。 支持 HTTP，HTTPS 和 FTP。 (将该 URL 的内容下载到文件中（在这个例子中文件名为 \"bar\"）)",
     "tags": [
       "common",
       "wget",
@@ -42770,7 +42800,7 @@
     "title": "wget - 以每三秒一个请求的速度下载一个网页和其所有资源（脚本，样式表，图片等等）",
     "content": "wget {{[-p|--page-requisites]}} {{[-k|--convert-links]}} {{[-w|--wait]}} 3 {{https://example.com/somepage.html}}",
     "group": "通用工具 (Common)",
-    "description": "wget: 从网络上下载文件。 支持 HTTP, HTTPS, 和 FTP. (以每三秒一个请求的速度下载一个网页和其所有资源（脚本，样式表，图片等等）)",
+    "description": "wget: 从网络上下载文件。 支持 HTTP，HTTPS 和 FTP。 (以每三秒一个请求的速度下载一个网页和其所有资源（脚本，样式表，图片等等）)",
     "tags": [
       "common",
       "wget",
@@ -42785,7 +42815,7 @@
     "title": "wget - 从一个目录中下载所有列出的文件和其所有子文件夹（不下载内嵌网页）",
     "content": "wget {{[-m|--mirror]}} {{[-np|--no-parent]}} {{https://example.com/somepath/}}",
     "group": "通用工具 (Common)",
-    "description": "wget: 从网络上下载文件。 支持 HTTP, HTTPS, 和 FTP. (从一个目录中下载所有列出的文件和其所有子文件夹（不下载内嵌网页）)",
+    "description": "wget: 从网络上下载文件。 支持 HTTP，HTTPS 和 FTP。 (从一个目录中下载所有列出的文件和其所有子文件夹（不下载内嵌网页）)",
     "tags": [
       "common",
       "wget",
@@ -42800,7 +42830,7 @@
     "title": "wget - 限制下载速度和重试次数",
     "content": "wget --limit-rate {{300k}} {{[-t|--tries]}} {{100}} {{https://example.com/somepath/}}",
     "group": "通用工具 (Common)",
-    "description": "wget: 从网络上下载文件。 支持 HTTP, HTTPS, 和 FTP. (限制下载速度和重试次数)",
+    "description": "wget: 从网络上下载文件。 支持 HTTP，HTTPS 和 FTP。 (限制下载速度和重试次数)",
     "tags": [
       "common",
       "wget",
@@ -42815,7 +42845,7 @@
     "title": "wget - 使用基本授权来从 HTTP/FTP 服务器中下载文件",
     "content": "wget --user {{username}} --password {{password}} {{https://example.com}}",
     "group": "通用工具 (Common)",
-    "description": "wget: 从网络上下载文件。 支持 HTTP, HTTPS, 和 FTP. (使用基本授权来从 HTTP/FTP 服务器中下载文件)",
+    "description": "wget: 从网络上下载文件。 支持 HTTP，HTTPS 和 FTP。 (使用基本授权来从 HTTP/FTP 服务器中下载文件)",
     "tags": [
       "common",
       "wget",
@@ -42830,7 +42860,7 @@
     "title": "wget - 继续一个未完成的下载任务",
     "content": "wget {{[-c|--continue]}} {{https://example.com}}",
     "group": "通用工具 (Common)",
-    "description": "wget: 从网络上下载文件。 支持 HTTP, HTTPS, 和 FTP. (继续一个未完成的下载任务)",
+    "description": "wget: 从网络上下载文件。 支持 HTTP，HTTPS 和 FTP。 (继续一个未完成的下载任务)",
     "tags": [
       "common",
       "wget",
@@ -42845,7 +42875,7 @@
     "title": "wget - 将指定文件中所有列出的 URL 下载到一个目录中",
     "content": "wget {{[-P|--directory-prefix]}} {{path/to/directory}} {{[-i|--input-file]}} {{URLs.txt}}",
     "group": "通用工具 (Common)",
-    "description": "wget: 从网络上下载文件。 支持 HTTP, HTTPS, 和 FTP. (将指定文件中所有列出的 URL 下载到一个目录中)",
+    "description": "wget: 从网络上下载文件。 支持 HTTP，HTTPS 和 FTP。 (将指定文件中所有列出的 URL 下载到一个目录中)",
     "tags": [
       "common",
       "wget",
@@ -43040,7 +43070,7 @@
     "title": "zip - 将文件/目录添加到指定存档中",
     "content": "zip {{[-r|--recurse-paths]}} {{路径/到/压缩文件.zip}} {{路径/到/文件或目录1 路径/到/文件或目录2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另见：`unzip`。 (将文件/目录添加到指定存档中)",
+    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另请参阅：`unzip`。 (将文件/目录添加到指定存档中)",
     "tags": [
       "common",
       "zip",
@@ -43055,7 +43085,7 @@
     "title": "zip - 从指定存档中删除文件/目录",
     "content": "zip {{[-d|--delete]}} {{路径/到/压缩文件.zip}} {{路径/到/文件或目录1 路径/到/文件或目录2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另见：`unzip`。 (从指定存档中删除文件/目录)",
+    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另请参阅：`unzip`。 (从指定存档中删除文件/目录)",
     "tags": [
       "common",
       "zip",
@@ -43070,7 +43100,7 @@
     "title": "zip - 存档文件/目录，排除指定的文件/目录",
     "content": "zip {{[-r|--recurse-paths]}} {{路径/到/压缩文件.zip}} {{路径/到/文件或目录1 路径/到/文件或目录2 ...}} {{[-x|--exclude]}} {{路径/到/排除的文件或目录}}",
     "group": "通用工具 (Common)",
-    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另见：`unzip`。 (存档文件/目录，排除指定的文件/目录)",
+    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另请参阅：`unzip`。 (存档文件/目录，排除指定的文件/目录)",
     "tags": [
       "common",
       "zip",
@@ -43085,7 +43115,7 @@
     "title": "zip - 以指定的压缩级别存档文件/目录（`0` - 最低，`9` - 最高）",
     "content": "zip {{[-r|--recurse-paths]}} -{{0..9}} {{路径/到/压缩文件.zip}} {{路径/到/文件或目录1 路径/到/文件或目录2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另见：`unzip`。 (以指定的压缩级别存档文件/目录（`0` - 最低，`9` - 最高）)",
+    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另请参阅：`unzip`。 (以指定的压缩级别存档文件/目录（`0` - 最低，`9` - 最高）)",
     "tags": [
       "common",
       "zip",
@@ -43100,7 +43130,7 @@
     "title": "zip - 创建一个加密的存档",
     "content": "zip {{[-re|--recurse-paths --encrypt]}} {{路径/到/压缩文件.zip}} {{路径/到/文件或目录1 路径/到/文件或目录2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另见：`unzip`。 (创建一个加密的存档)",
+    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另请参阅：`unzip`。 (创建一个加密的存档)",
     "tags": [
       "common",
       "zip",
@@ -43115,7 +43145,7 @@
     "title": "zip - 将文件/目录存档为多段分割的 zip 存档（例如每部分 3 GB）",
     "content": "zip {{[-rs|--recurse-paths --split-size]}} {{3g}} {{路径/到/压缩文件.zip}} {{路径/到/文件或目录1 路径/到/文件或目录2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另见：`unzip`。 (将文件/目录存档为多段分割的 zip 存档（例如每部分 3 GB）)",
+    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另请参阅：`unzip`。 (将文件/目录存档为多段分割的 zip 存档（例如每部分 3 GB）)",
     "tags": [
       "common",
       "zip",
@@ -43130,7 +43160,7 @@
     "title": "zip - 打印指定存档的内容",
     "content": "zip {{[-sf|--split-size --freshen]}} {{路径/到/压缩文件.zip}}",
     "group": "通用工具 (Common)",
-    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另见：`unzip`。 (打印指定存档的内容)",
+    "description": "zip: 将文件打包并压缩（存档）为 zip 文件。 另请参阅：`unzip`。 (打印指定存档的内容)",
     "tags": [
       "common",
       "zip",
@@ -43815,6 +43845,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-minetestserver-0",
+    "type": "command",
+    "title": "minetestserver - 查看原命令的文档",
+    "content": "tldr luantiserver",
+    "group": "通用工具 (Common)",
+    "description": "minetestserver: 此命令为 `luantiserver` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "minetestserver",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-zola-0",
     "type": "command",
     "title": "zola - 在指定目录下创建 Zola 使用的目录结构",
@@ -44120,7 +44165,7 @@
     "title": "ack - 在当前目录下递归地搜索包含一个字符串或正则表达式的文件",
     "content": "ack \"{{search_pattern}}\"",
     "group": "通用工具 (Common)",
-    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另见 `rg`，它要快得多。 (在当前目录下递归地搜索包含一个字符串或正则表达式的文件)",
+    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另请参阅：`rg`，它要快得多。 (在当前目录下递归地搜索包含一个字符串或正则表达式的文件)",
     "tags": [
       "common",
       "ack",
@@ -44135,7 +44180,7 @@
     "title": "ack - 不区分大小写搜索",
     "content": "ack {{[-i|--ignore-case]}} \"{{search_pattern}}\"",
     "group": "通用工具 (Common)",
-    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另见 `rg`，它要快得多。 (不区分大小写搜索)",
+    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另请参阅：`rg`，它要快得多。 (不区分大小写搜索)",
     "tags": [
       "common",
       "ack",
@@ -44150,7 +44195,7 @@
     "title": "ack - 搜索匹配模式的行，只打印匹配的文本，而不打印行的其他部分",
     "content": "ack {{[-o|--output '$&']}} \"{{search_pattern}}\"",
     "group": "通用工具 (Common)",
-    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另见 `rg`，它要快得多。 (搜索匹配模式的行，只打印匹配的文本，而不打印行的其他部分)",
+    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另请参阅：`rg`，它要快得多。 (搜索匹配模式的行，只打印匹配的文本，而不打印行的其他部分)",
     "tags": [
       "common",
       "ack",
@@ -44165,7 +44210,7 @@
     "title": "ack - 限制搜索特定类型的文件",
     "content": "ack {{[-t|--type]}} {{ruby}} \"{{search_pattern}}\"",
     "group": "通用工具 (Common)",
-    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另见 `rg`，它要快得多。 (限制搜索特定类型的文件)",
+    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另请参阅：`rg`，它要快得多。 (限制搜索特定类型的文件)",
     "tags": [
       "common",
       "ack",
@@ -44180,7 +44225,7 @@
     "title": "ack - 不在特定类型的文件中搜索",
     "content": "ack {{[-t|--type]}} no{{ruby}} \"{{search_pattern}}\"",
     "group": "通用工具 (Common)",
-    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另见 `rg`，它要快得多。 (不在特定类型的文件中搜索)",
+    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另请参阅：`rg`，它要快得多。 (不在特定类型的文件中搜索)",
     "tags": [
       "common",
       "ack",
@@ -44195,7 +44240,7 @@
     "title": "ack - 计算找到的匹配文件的总数",
     "content": "ack {{[-c|--count]}} {{[-h|--no-filename]}} \"{{search_pattern}}\"",
     "group": "通用工具 (Common)",
-    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另见 `rg`，它要快得多。 (计算找到的匹配文件的总数)",
+    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另请参阅：`rg`，它要快得多。 (计算找到的匹配文件的总数)",
     "tags": [
       "common",
       "ack",
@@ -44210,7 +44255,7 @@
     "title": "ack - 只打印文件名和每个文件的匹配数",
     "content": "ack {{[-c|--count]}} {{[-l|--files-with-matches]}} \"{{search_pattern}}\"",
     "group": "通用工具 (Common)",
-    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另见 `rg`，它要快得多。 (只打印文件名和每个文件的匹配数)",
+    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另请参阅：`rg`，它要快得多。 (只打印文件名和每个文件的匹配数)",
     "tags": [
       "common",
       "ack",
@@ -44225,7 +44270,7 @@
     "title": "ack - 列出所有可与 `--type` 一起使用的值",
     "content": "ack --help-types",
     "group": "通用工具 (Common)",
-    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另见 `rg`，它要快得多。 (列出所有可与 `--type` 一起使用的值)",
+    "description": "ack: 一个类似 grep 的搜索工具，为程序员优化。 另请参阅：`rg`，它要快得多。 (列出所有可与 `--type` 一起使用的值)",
     "tags": [
       "common",
       "ack",
@@ -44330,7 +44375,7 @@
     "title": "eim - 在默认位置（Windows 上为 `C:\\esp`，POSIX 系统上为 `~/.espressif`）安装默认（最新）的 ESP-IDF 版本",
     "content": "eim install",
     "group": "通用工具 (Common)",
-    "description": "eim: 安装和管理 ESP-IDF. (在默认位置（Windows 上为 `C:\\esp`，POSIX 系统上为 `~/.espressif`）安装默认（最新）的 ESP-IDF 版本)",
+    "description": "eim: 安装和管理 ESP-IDF。 (在默认位置（Windows 上为 `C:\\esp`，POSIX 系统上为 `~/.espressif`）安装默认（最新）的 ESP-IDF 版本)",
     "tags": [
       "common",
       "eim",
@@ -44345,7 +44390,7 @@
     "title": "eim - 非交互式安装特定 ESP-IDF 版本",
     "content": "eim install {{[-i|--idf-versions]}} {{v5.3.2}}",
     "group": "通用工具 (Common)",
-    "description": "eim: 安装和管理 ESP-IDF. (非交互式安装特定 ESP-IDF 版本)",
+    "description": "eim: 安装和管理 ESP-IDF。 (非交互式安装特定 ESP-IDF 版本)",
     "tags": [
       "common",
       "eim",
@@ -44360,7 +44405,7 @@
     "title": "eim - 运行交互式、指导性的安装向导",
     "content": "eim wizard",
     "group": "通用工具 (Common)",
-    "description": "eim: 安装和管理 ESP-IDF. (运行交互式、指导性的安装向导)",
+    "description": "eim: 安装和管理 ESP-IDF。 (运行交互式、指导性的安装向导)",
     "tags": [
       "common",
       "eim",
@@ -44375,7 +44420,7 @@
     "title": "eim - 安装特定版本到自定义路径，并强制进入交互模式（以提示选择）",
     "content": "eim install {{[-i|--idf-versions]}} {{v5.3.2}} {{[-p|--path]}} {{/opt/esp-idf}} {{[-n|--non-interactive]}} false",
     "group": "通用工具 (Common)",
-    "description": "eim: 安装和管理 ESP-IDF. (安装特定版本到自定义路径，并强制进入交互模式（以提示选择）)",
+    "description": "eim: 安装和管理 ESP-IDF。 (安装特定版本到自定义路径，并强制进入交互模式（以提示选择）)",
     "tags": [
       "common",
       "eim",
@@ -44390,7 +44435,7 @@
     "title": "eim - 列出所有当前已安装的 ESP-IDF 版本",
     "content": "eim list",
     "group": "通用工具 (Common)",
-    "description": "eim: 安装和管理 ESP-IDF. (列出所有当前已安装的 ESP-IDF 版本)",
+    "description": "eim: 安装和管理 ESP-IDF。 (列出所有当前已安装的 ESP-IDF 版本)",
     "tags": [
       "common",
       "eim",
@@ -44405,7 +44450,7 @@
     "title": "eim - 移除一个特定已安装的 ESP-IDF 版本",
     "content": "eim remove {{v5.3.2}}",
     "group": "通用工具 (Common)",
-    "description": "eim: 安装和管理 ESP-IDF. (移除一个特定已安装的 ESP-IDF 版本)",
+    "description": "eim: 安装和管理 ESP-IDF。 (移除一个特定已安装的 ESP-IDF 版本)",
     "tags": [
       "common",
       "eim",
@@ -44420,7 +44465,7 @@
     "title": "eim - 使用 TOML 配置文件中定义的所有选项以无头模式安装",
     "content": "eim install {{[-c|--config]}} {{path/to/config.toml}}",
     "group": "通用工具 (Common)",
-    "description": "eim: 安装和管理 ESP-IDF. (使用 TOML 配置文件中定义的所有选项以无头模式安装)",
+    "description": "eim: 安装和管理 ESP-IDF。 (使用 TOML 配置文件中定义的所有选项以无头模式安装)",
     "tags": [
       "common",
       "eim",
@@ -44435,7 +44480,7 @@
     "title": "eim - 使用预先下载的归档文件进行离线安装",
     "content": "eim install --use-local-archive {{path/to/archive.zst}}",
     "group": "通用工具 (Common)",
-    "description": "eim: 安装和管理 ESP-IDF. (使用预先下载的归档文件进行离线安装)",
+    "description": "eim: 安装和管理 ESP-IDF。 (使用预先下载的归档文件进行离线安装)",
     "tags": [
       "common",
       "eim",
@@ -45515,7 +45560,7 @@
     "title": "docker - 列出所有 Docker 容器（包括停止的容器）",
     "content": "docker ps {{[-a|--all]}}",
     "group": "通用工具 (Common)",
-    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`. (列出所有 Docker 容器（包括停止的容器）)",
+    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`。 (列出所有 Docker 容器（包括停止的容器）)",
     "tags": [
       "common",
       "docker",
@@ -45530,7 +45575,7 @@
     "title": "docker - 透过镜像启动容器，并为容器命名",
     "content": "docker run --name {{容器名称}} {{镜像}}",
     "group": "通用工具 (Common)",
-    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`. (透过镜像启动容器，并为容器命名)",
+    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`。 (透过镜像启动容器，并为容器命名)",
     "tags": [
       "common",
       "docker",
@@ -45545,7 +45590,7 @@
     "title": "docker - 启动或停止现有容器",
     "content": "docker {{start|stop}} {{容器名称}}",
     "group": "通用工具 (Common)",
-    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`. (启动或停止现有容器)",
+    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`。 (启动或停止现有容器)",
     "tags": [
       "common",
       "docker",
@@ -45560,7 +45605,7 @@
     "title": "docker - 从 Docker registry 中拉取镜像",
     "content": "docker pull {{镜像}}",
     "group": "通用工具 (Common)",
-    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`. (从 Docker registry 中拉取镜像)",
+    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`。 (从 Docker registry 中拉取镜像)",
     "tags": [
       "common",
       "docker",
@@ -45575,7 +45620,7 @@
     "title": "docker - 显示已下载的镜像清单",
     "content": "docker images",
     "group": "通用工具 (Common)",
-    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`. (显示已下载的镜像清单)",
+    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`。 (显示已下载的镜像清单)",
     "tags": [
       "common",
       "docker",
@@ -45590,7 +45635,7 @@
     "title": "docker - 从正在运行的容器内打开一个交互式 ([i]nteractive) 终端 ([t]ty) shell (`sh`)",
     "content": "docker exec {{[-it|--interactive --tty]}} {{容器名称}} {{sh}}",
     "group": "通用工具 (Common)",
-    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`. (从正在运行的容器内打开一个交互式 ([i]nteractive) 终端 ([t]ty) shell (`sh`))",
+    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`。 (从正在运行的容器内打开一个交互式 ([i]nteractive) 终端 ([t]ty) shell (`sh`))",
     "tags": [
       "common",
       "docker",
@@ -45605,7 +45650,7 @@
     "title": "docker - 删除一个停止的容器",
     "content": "docker rm {{容器名称}}",
     "group": "通用工具 (Common)",
-    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`. (删除一个停止的容器)",
+    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`。 (删除一个停止的容器)",
     "tags": [
       "common",
       "docker",
@@ -45620,7 +45665,7 @@
     "title": "docker - 获取并查看容器的日志",
     "content": "docker logs {{[-f|--follow]}} {{容器名称}}",
     "group": "通用工具 (Common)",
-    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`. (获取并查看容器的日志)",
+    "description": "docker: 管理 Docker 容器和镜像。 此命令也有关于其子命令的文件，例如：`run`。 (获取并查看容器的日志)",
     "tags": [
       "common",
       "docker",
@@ -45710,7 +45755,7 @@
     "title": "acme.sh - 使用网站根目录模式签发证书",
     "content": "acme.sh --issue --domain {{example.com}} --webroot {{/路径/到/网站根目录}}",
     "group": "通用工具 (Common)",
-    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另见 `acme.sh dns`。 (使用网站根目录模式签发证书)",
+    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另请参阅：`acme.sh dns`。 (使用网站根目录模式签发证书)",
     "tags": [
       "common",
       "acme.sh",
@@ -45725,7 +45770,7 @@
     "title": "acme.sh - 使用独立模式和 80 端口为多个域名签发证书",
     "content": "acme.sh --issue --standalone --domain {{example.com}} --domain {{www.example.com}}",
     "group": "通用工具 (Common)",
-    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另见 `acme.sh dns`。 (使用独立模式和 80 端口为多个域名签发证书)",
+    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另请参阅：`acme.sh dns`。 (使用独立模式和 80 端口为多个域名签发证书)",
     "tags": [
       "common",
       "acme.sh",
@@ -45740,7 +45785,7 @@
     "title": "acme.sh - 使用独立 TLS 模式和 443 端口签发证书",
     "content": "acme.sh --issue --alpn --domain {{example.com}}",
     "group": "通用工具 (Common)",
-    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另见 `acme.sh dns`。 (使用独立 TLS 模式和 443 端口签发证书)",
+    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另请参阅：`acme.sh dns`。 (使用独立 TLS 模式和 443 端口签发证书)",
     "tags": [
       "common",
       "acme.sh",
@@ -45755,7 +45800,7 @@
     "title": "acme.sh - 使用运行中的 Nginx 的配置来签发证书",
     "content": "acme.sh --issue --nginx --domain {{example.com}}",
     "group": "通用工具 (Common)",
-    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另见 `acme.sh dns`。 (使用运行中的 Nginx 的配置来签发证书)",
+    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另请参阅：`acme.sh dns`。 (使用运行中的 Nginx 的配置来签发证书)",
     "tags": [
       "common",
       "acme.sh",
@@ -45770,7 +45815,7 @@
     "title": "acme.sh - 使用运行中的 Apache 的配置来签发证书",
     "content": "acme.sh --issue --apache --domain {{example.com}}",
     "group": "通用工具 (Common)",
-    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另见 `acme.sh dns`。 (使用运行中的 Apache 的配置来签发证书)",
+    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另请参阅：`acme.sh dns`。 (使用运行中的 Apache 的配置来签发证书)",
     "tags": [
       "common",
       "acme.sh",
@@ -45785,7 +45830,7 @@
     "title": "acme.sh - 使用自动 DNS API 模式签发一个通配符（\\*）证书",
     "content": "acme.sh --issue --dns {{dns_cf}} --domain {{*.example.com}}",
     "group": "通用工具 (Common)",
-    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另见 `acme.sh dns`。 (使用自动 DNS API 模式签发一个通配符（\\*）证书)",
+    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另请参阅：`acme.sh dns`。 (使用自动 DNS API 模式签发一个通配符（\\*）证书)",
     "tags": [
       "common",
       "acme.sh",
@@ -45800,7 +45845,7 @@
     "title": "acme.sh - 将证书文件安装到指定位置（对自动更新证书很有用）",
     "content": "acme.sh --install-cert -d {{example.com}} --key-file {{/路径/到/example.com.key}} --fullchain-file {{/路径/到/example.com.cer}} --reloadcmd \"{{systemctl force-reload nginx}}\"",
     "group": "通用工具 (Common)",
-    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另见 `acme.sh dns`。 (将证书文件安装到指定位置（对自动更新证书很有用）)",
+    "description": "acme.sh: 实现了 ACME 客户端协议的 shell 脚本，是 `certbot` 的替代品。 另请参阅：`acme.sh dns`。 (将证书文件安装到指定位置（对自动更新证书很有用）)",
     "tags": [
       "common",
       "acme.sh",
@@ -45999,6 +46044,21 @@
     "tags": [
       "common",
       "jupytext",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-gunzip-0",
+    "type": "command",
+    "title": "gunzip - 查看原命令的文档",
+    "content": "tldr gzip",
+    "group": "通用工具 (Common)",
+    "description": "gunzip: 此命令为 `gzip --decompress` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "gunzip",
       "tldr",
       "zh"
     ],
@@ -47990,7 +48050,7 @@
     "title": "jbang - 初始化一个简单的 Java 类",
     "content": "jbang init {{路径/到/文件.java}}",
     "group": "通用工具 (Common)",
-    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 此命令也有关于其子命令的文件，例如：`java`. (初始化一个简单的 Java 类)",
+    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 另请参阅：`java`。 (初始化一个简单的 Java 类)",
     "tags": [
       "common",
       "jbang",
@@ -48005,7 +48065,7 @@
     "title": "jbang - 初始化一个 Java 类（用于脚本编写）",
     "content": "jbang init --template={{cli}} {{路径/到/文件.java}}",
     "group": "通用工具 (Common)",
-    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 此命令也有关于其子命令的文件，例如：`java`. (初始化一个 Java 类（用于脚本编写）)",
+    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 另请参阅：`java`。 (初始化一个 Java 类（用于脚本编写）)",
     "tags": [
       "common",
       "jbang",
@@ -48020,7 +48080,7 @@
     "title": "jbang - 使用 `jshell` 在 REPL 编辑器中探索和使用脚本及其任何依赖项",
     "content": "jbang run --interactive",
     "group": "通用工具 (Common)",
-    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 此命令也有关于其子命令的文件，例如：`java`. (使用 `jshell` 在 REPL 编辑器中探索和使用脚本及其任何依赖项)",
+    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 另请参阅：`java`。 (使用 `jshell` 在 REPL 编辑器中探索和使用脚本及其任何依赖项)",
     "tags": [
       "common",
       "jbang",
@@ -48035,7 +48095,7 @@
     "title": "jbang - 设置一个临时项目以在 IDE 中编辑脚本",
     "content": "jbang edit --open={{codium|code|eclipse|idea|netbeans|gitpod}} {{路径/到/脚本.java}}",
     "group": "通用工具 (Common)",
-    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 此命令也有关于其子命令的文件，例如：`java`. (设置一个临时项目以在 IDE 中编辑脚本)",
+    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 另请参阅：`java`。 (设置一个临时项目以在 IDE 中编辑脚本)",
     "tags": [
       "common",
       "jbang",
@@ -48050,7 +48110,7 @@
     "title": "jbang - 运行 Java 代码片段（Java 9 及以后版本）",
     "content": "{{echo 'Files.list(Paths.get(\"/etc\")).forEach(System.out::println);'}} | jbang -",
     "group": "通用工具 (Common)",
-    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 此命令也有关于其子命令的文件，例如：`java`. (运行 Java 代码片段（Java 9 及以后版本）)",
+    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 另请参阅：`java`。 (运行 Java 代码片段（Java 9 及以后版本）)",
     "tags": [
       "common",
       "jbang",
@@ -48065,7 +48125,7 @@
     "title": "jbang - 运行命令行应用程序",
     "content": "jbang {{路径/到/文件.java}} {{命令}} {{参数1 参数2 ...}}",
     "group": "通用工具 (Common)",
-    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 此命令也有关于其子命令的文件，例如：`java`. (运行命令行应用程序)",
+    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 另请参阅：`java`。 (运行命令行应用程序)",
     "tags": [
       "common",
       "jbang",
@@ -48080,7 +48140,7 @@
     "title": "jbang - 在用户的 `$PATH` 中安装一个脚本",
     "content": "jbang app install --name {{命令名称}} {{路径/到/脚本.java}}",
     "group": "通用工具 (Common)",
-    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 此命令也有关于其子命令的文件，例如：`java`. (在用户的 `$PATH` 中安装一个脚本)",
+    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 另请参阅：`java`。 (在用户的 `$PATH` 中安装一个脚本)",
     "tags": [
       "common",
       "jbang",
@@ -48095,7 +48155,7 @@
     "title": "jbang - 安装一个特定版本的 JDK 以与 `jbang` 一起使用",
     "content": "jbang jdk install {{版本}}",
     "group": "通用工具 (Common)",
-    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 此命令也有关于其子命令的文件，例如：`java`. (安装一个特定版本的 JDK 以与 `jbang` 一起使用)",
+    "description": "jbang: 简便地创建、编辑和运行仅包含源代码的自包含 Java 程序。 另请参阅：`java`。 (安装一个特定版本的 JDK 以与 `jbang` 一起使用)",
     "tags": [
       "common",
       "jbang",

@@ -555,6 +555,111 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-sunos-zoneadm-0",
+    "type": "command",
+    "title": "zoneadm - List all zones and their current status",
+    "content": "zoneadm list -cv",
+    "group": "SunOS",
+    "description": "zoneadm: Administer Oracle Solaris zones. (List all zones and their current status)",
+    "tags": [
+      "sunos",
+      "zoneadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-sunos-zoneadm-1",
+    "type": "command",
+    "title": "zoneadm - Verify the configuration of a specific zone",
+    "content": "sudo zoneadm -z {{zone_name}} verify",
+    "group": "SunOS",
+    "description": "zoneadm: Administer Oracle Solaris zones. (Verify the configuration of a specific zone)",
+    "tags": [
+      "sunos",
+      "zoneadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-sunos-zoneadm-2",
+    "type": "command",
+    "title": "zoneadm - Install a zone",
+    "content": "sudo zoneadm -z {{zone_name}} install",
+    "group": "SunOS",
+    "description": "zoneadm: Administer Oracle Solaris zones. (Install a zone)",
+    "tags": [
+      "sunos",
+      "zoneadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-sunos-zoneadm-3",
+    "type": "command",
+    "title": "zoneadm - Boot (start) a zone",
+    "content": "sudo zoneadm -z {{zone_name}} boot",
+    "group": "SunOS",
+    "description": "zoneadm: Administer Oracle Solaris zones. (Boot (start) a zone)",
+    "tags": [
+      "sunos",
+      "zoneadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-sunos-zoneadm-4",
+    "type": "command",
+    "title": "zoneadm - Reboot a zone",
+    "content": "sudo zoneadm -z {{zone_name}} reboot",
+    "group": "SunOS",
+    "description": "zoneadm: Administer Oracle Solaris zones. (Reboot a zone)",
+    "tags": [
+      "sunos",
+      "zoneadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-sunos-zoneadm-5",
+    "type": "command",
+    "title": "zoneadm - Halt (stop) a zone, bypassing any shutdown scripts inside the zone",
+    "content": "sudo zoneadm -z {{zone_name}} halt",
+    "group": "SunOS",
+    "description": "zoneadm: Administer Oracle Solaris zones. (Halt (stop) a zone, bypassing any shutdown scripts inside the zone)",
+    "tags": [
+      "sunos",
+      "zoneadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-sunos-zoneadm-6",
+    "type": "command",
+    "title": "zoneadm - Uninstall a zone",
+    "content": "sudo zoneadm -z {{zone_name}} uninstall",
+    "group": "SunOS",
+    "description": "zoneadm: Administer Oracle Solaris zones. (Uninstall a zone)",
+    "tags": [
+      "sunos",
+      "zoneadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-sunos-truss-0",
     "type": "command",
     "title": "truss - Start tracing a program by executing it, following all child processes",
