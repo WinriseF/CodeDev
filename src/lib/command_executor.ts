@@ -5,6 +5,8 @@ import { writeTextFile } from '@tauri-apps/plugin-fs';
 import { join, tempDir } from '@tauri-apps/api/path';
 import { ShellType } from '@/types/prompt';
 import { useConfirmStore } from '@/store/useConfirmStore';
+import { useAppStore } from '@/store/useAppStore';
+import { getText } from '@/lib/i18n';
 
 // 定义高风险命令关键词
 const DANGEROUS_KEYWORDS = [
@@ -31,14 +33,15 @@ const showNotification = async (msg: string, type: 'info' | 'error' = 'info') =>
  * @param cwd 指定工作目录 (可选，默认为临时目录)
  */
 export async function executeCommand(commandStr: string, _shell: ShellType = 'auto', cwd?: string | null) {
+  const language = useAppStore.getState().language;
   // 1. 安全审查 (使用自定义 UI 组件)
   if (checkCommandRisk(commandStr)) {
     const confirmed = await useConfirmStore.getState().ask({
-        title: 'High Risk Action',
-        message: `This command contains potentially dangerous operations (delete, move, overwrite, etc.).\n\nCommand:\n${commandStr}`,
+        title: getText('executor', 'riskTitle', language),
+        message: getText('executor', 'riskMsg', language, { command: commandStr }),
         type: 'danger',
-        confirmText: 'Execute',
-        cancelText: 'Cancel'
+        confirmText: getText('executor', 'btnExecute', language),
+        cancelText: getText('prompts', 'cancel', language)
     });
     
     if (!confirmed) return;
@@ -140,7 +143,7 @@ rm "$0"
       await cmd.spawn();
 
     } else {
-      await showNotification("Unsupported OS", "error");
+      await showNotification(getText('executor', 'unsupported', language), "error");
     }
 
   } catch (e: any) {

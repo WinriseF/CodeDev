@@ -180,7 +180,7 @@ export function ContextPreview({ fileTree }: ContextPreviewProps) {
           <span>{getText('context', 'previewTitle', language)}</span>
           <span className="text-xs text-muted-foreground font-normal ml-2">
             ({getText('context', 'chars', language, { count: content.length.toLocaleString() })})
-            {removeComments && <span className="ml-2 px-1.5 py-0.5 bg-green-500/10 text-green-600 text-[10px] rounded border border-green-500/20">No Comments</span>}
+            {removeComments && <span className="ml-2 px-1.5 py-0.5 bg-green-500/10 text-green-600 text-[10px] rounded border border-green-500/20">{getText('common', 'noComments', language)}</span>}
           </span>
         </div>
         
@@ -189,7 +189,7 @@ export function ContextPreview({ fileTree }: ContextPreviewProps) {
             onClick={triggerSearch}
             className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground border border-transparent hover:border-border/50"
           >
-            <Search size={14} /> Search
+            <Search size={14} />{getText('common', 'search', language)}
           </button>
 
           <button

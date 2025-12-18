@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { X, FileText, FileJson, FileCode, FileType, Columns, List, GitMerge } from 'lucide-react';
 import { ExportFormat, ExportLayout } from '../patch_types';
 import { cn } from '@/lib/utils';
+import { useAppStore } from '@/store/useAppStore';
+import { getText } from '@/lib/i18n';
 
 interface ExportDialogProps {
   isOpen: boolean;
@@ -13,6 +15,7 @@ interface ExportDialogProps {
 export function ExportDialog({ isOpen, onClose, onConfirm, count }: ExportDialogProps) {
   const [format, setFormat] = useState<ExportFormat>('Markdown');
   const [layout, setLayout] = useState<ExportLayout>('Split');
+  const { language } = useAppStore();
 
   if (!isOpen) return null;
 
@@ -20,11 +23,12 @@ export function ExportDialog({ isOpen, onClose, onConfirm, count }: ExportDialog
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-200">
       <div className="w-[500px] bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
         
-        {/* Header */}
         <div className="px-6 py-4 border-b border-border bg-secondary/10 flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold">Export Changes</h3>
-            <p className="text-xs text-muted-foreground mt-0.5">{count} files selected</p>
+            <h3 className="text-lg font-semibold">{getText('export', 'title', language)}</h3>
+            <p className="text-xs text-muted-foreground mt-0.5">
+                {getText('export', 'selected', language, { count: count.toString() })}
+            </p>
           </div>
           <button onClick={onClose} className="p-1 rounded-full hover:bg-secondary text-muted-foreground transition-colors">
             <X size={18} />
@@ -32,55 +36,51 @@ export function ExportDialog({ isOpen, onClose, onConfirm, count }: ExportDialog
         </div>
 
         <div className="p-6 space-y-6">
-            
-            {/* 1. Layout Selection */}
             <div className="space-y-3">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Content Layout</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('export', 'layout', language)}</label>
                 <div className="grid grid-cols-3 gap-3">
                     <LayoutOption 
                         active={layout === 'Split'} 
                         onClick={() => setLayout('Split')}
                         icon={Columns}
-                        title="Split Mode"
-                        desc="Full content side-by-side"
+                        title={getText('export', 'split', language)}
+                        desc={getText('export', 'splitDesc', language)}
                     />
                     <LayoutOption 
                         active={layout === 'Unified'} 
                         onClick={() => setLayout('Unified')}
                         icon={List}
-                        title="Editor Mode"
-                        desc="Full content with +/- markers"
+                        title={getText('export', 'unified', language)}
+                        desc={getText('export', 'unifiedDesc', language)}
                     />
                     <LayoutOption 
                         active={layout === 'GitPatch'} 
                         onClick={() => setLayout('GitPatch')}
                         icon={GitMerge}
-                        title="Git Patch"
-                        desc="Standard diff (minimal context)"
+                        title={getText('export', 'gitPatch', language)}
+                        desc={getText('export', 'gitPatchDesc', language)}
                     />
                 </div>
             </div>
 
-            {/* 2. Format Selection */}
             <div className="space-y-3">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">File Format</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('export', 'format', language)}</label>
                 <div className="grid grid-cols-2 gap-2">
-                    <FormatOption active={format === 'Markdown'} onClick={() => setFormat('Markdown')} icon={FileText} label="Markdown (Recommended)" />
-                    <FormatOption active={format === 'Json'} onClick={() => setFormat('Json')} icon={FileJson} label="JSON" />
-                    <FormatOption active={format === 'Xml'} onClick={() => setFormat('Xml')} icon={FileCode} label="XML" />
-                    <FormatOption active={format === 'Txt'} onClick={() => setFormat('Txt')} icon={FileType} label="Plain Text" />
+                    <FormatOption active={format === 'Markdown'} onClick={() => setFormat('Markdown')} icon={FileText} label={getText('export', 'markdown', language)} />
+                    <FormatOption active={format === 'Json'} onClick={() => setFormat('Json')} icon={FileJson} label={getText('export', 'json', language)} />
+                    <FormatOption active={format === 'Xml'} onClick={() => setFormat('Xml')} icon={FileCode} label={getText('export', 'xml', language)} />
+                    <FormatOption active={format === 'Txt'} onClick={() => setFormat('Txt')} icon={FileType} label={getText('export', 'txt', language)} />
                 </div>
             </div>
         </div>
 
-        {/* Footer */}
         <div className="p-4 border-t border-border bg-secondary/5 flex justify-end gap-3">
-            <button onClick={onClose} className="px-4 py-2 text-sm font-medium rounded-lg hover:bg-secondary text-muted-foreground transition-colors">Cancel</button>
+            <button onClick={onClose} className="px-4 py-2 text-sm font-medium rounded-lg hover:bg-secondary text-muted-foreground transition-colors">{getText('export', 'btnCancel', language)}</button>
             <button 
                 onClick={() => onConfirm(format, layout)}
                 className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm transition-colors"
             >
-                Export
+                {getText('export', 'btnExport', language)}
             </button>
         </div>
       </div>

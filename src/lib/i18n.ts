@@ -120,7 +120,23 @@ const translations = {
       aiFixApplied: "AI Fix Applied!",
       saveFailed: "Save Failed",
       failedToMatch: "Failed to match {count} blocks",
-      fileNotFound: "File not found on disk"
+      fileNotFound: "File not found on disk",
+      browseProject: "Browse Project...",
+      browseGit: "Browse Git Project...",
+      baseVersion: "Base Version",
+      compareVersion: "Compare Version",
+      comparing: "Comparing...",
+      generateDiff: "Generate Diff",
+      gitTip: "Browse a Git project to automatically compare versions, or click 'Manual Comparison' to paste code manually.",
+      binaryFile: "Binary File",
+      largeFile: "Large File",
+      export: "Export",
+      exportSuccess: "Exported successfully!",
+      selectOne: "Please select at least one file.",
+      noDiff: "No differences found between the selected commits.",
+      fixAI: "Fix with AI",
+      aiFixing: "AI is fixing...",
+      forceSave: "Force Save"
     },
     editor: {
       titleNew: "New Prompt",
@@ -134,7 +150,13 @@ const translations = {
       tip: "Tip: Use {{variable}} to create fillable slots",
       btnSave: "Save Prompt",
       btnCancel: "Cancel",
-      btnNewGroup: "New Group"
+      btnNewGroup: "New Group",
+      typePrompt: "Prompt",
+      typeCommand: "Command",
+      executable: "Executable Command",
+      executableDesc: "Run this in the system terminal instead of copying.",
+      execShell: "Execution Shell",
+      autoDetect: "Auto Detect"
     },
     filler: {
       title: "Fill Variables",
@@ -252,7 +274,37 @@ const translations = {
       showSidebar: "Show Sidebar",
       ignoredByFilter: "Ignored by filter settings",
       managedByGlobal: "Managed by Global Settings",
-      waitingForInputs: "Waiting for inputs..."
+      waitingForInputs: "Waiting for inputs...",
+      search: "Search",
+      loading: "Loading...",
+      noComments: "No Comments",
+      unsaved: "Unsaved Draft",
+      split: "Split",
+      unified: "Unified"
+    },
+    export: {
+      title: "Export Changes",
+      selected: "{count} files selected",
+      layout: "Content Layout",
+      format: "File Format",
+      split: "Split Mode",
+      splitDesc: "Full content side-by-side",
+      unified: "Editor Mode",
+      unifiedDesc: "Full content with +/- markers",
+      gitPatch: "Git Patch",
+      gitPatchDesc: "Standard diff (minimal context)",
+      markdown: "Markdown (Recommended)",
+      json: "JSON",
+      xml: "XML",
+      txt: "Plain Text",
+      btnCancel: "Cancel",
+      btnExport: "Export"
+    },
+    executor: {
+      riskTitle: "High Risk Action",
+      riskMsg: "This command contains potentially dangerous operations (delete, move, overwrite, etc.).\n\nCommand:\n{command}",
+      btnExecute: "Execute",
+      unsupported: "Unsupported OS"
     }
   },
   zh: {
@@ -372,7 +424,23 @@ const translations = {
       aiFixApplied: "AI 修复已应用！",
       saveFailed: "保存失败",
       failedToMatch: "匹配失败 {count} 个代码块",
-      fileNotFound: "文件在磁盘上未找到"
+      fileNotFound: "文件在磁盘上未找到",
+      browseProject: "浏览项目...",
+      browseGit: "浏览 Git 仓库...",
+      baseVersion: "基准版本",
+      compareVersion: "比较版本",
+      comparing: "对比中...",
+      generateDiff: "生成差异",
+      gitTip: "浏览 Git 项目以自动比较版本，或点击“手动”进行手动代码粘贴。",
+      binaryFile: "二进制文件",
+      largeFile: "大文件",
+      export: "导出",
+      exportSuccess: "导出成功！",
+      selectOne: "请至少选择一个文件。",
+      noDiff: "所选提交之间没有差异。",
+      fixAI: "AI 修复",
+      aiFixing: "AI 正在修复...",
+      forceSave: "强制保存"
     },
     editor: {
       titleNew: "新建指令",
@@ -386,7 +454,13 @@ const translations = {
       tip: "提示: 使用 {{变量名}} 创建填空位",
       btnSave: "保存指令",
       btnCancel: "取消",
-      btnNewGroup: "新建"
+      btnNewGroup: "新建",
+      typePrompt: "提示词 (Prompt)",
+      typeCommand: "命令 (Command)",
+      executable: "可执行命令",
+      executableDesc: "直接在系统终端中运行，而不是复制到剪贴板。",
+      execShell: "执行 Shell",
+      autoDetect: "自动检测"
     },
     filler: {
       title: "填充变量",
@@ -506,7 +580,37 @@ const translations = {
       showSidebar: "显示侧边栏",
       ignoredByFilter: "已被过滤规则忽略",
       managedByGlobal: "由全局设置管理",
-      waitingForInputs: "等待输入..."
+      waitingForInputs: "等待输入...",
+      search: "搜索",
+      loading: "加载中...",
+      noComments: "无注释",
+      unsaved: "未保存草稿",
+      split: "分栏",
+      unified: "合并"
+    },
+    export: {
+      title: "导出变更",
+      selected: "已选 {count} 个文件",
+      layout: "内容布局",
+      format: "文件格式",
+      split: "分栏模式",
+      splitDesc: "左右并排显示完整内容",
+      unified: "编辑器模式",
+      unifiedDesc: "包含 +/- 标记的完整内容",
+      gitPatch: "Git 补丁",
+      gitPatchDesc: "标准 Diff 格式 (最小上下文)",
+      markdown: "Markdown (推荐)",
+      json: "JSON",
+      xml: "XML",
+      txt: "纯文本",
+      btnCancel: "取消",
+      btnExport: "导出"
+    },
+    executor: {
+      riskTitle: "高风险操作",
+      riskMsg: "此命令包含潜在的危险操作（删除、移动、覆盖等）。\n\n命令内容：\n{command}",
+      btnExecute: "确认执行",
+      unsupported: "不支持的操作系统"
     }
   }
 };

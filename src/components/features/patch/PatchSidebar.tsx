@@ -191,24 +191,24 @@ export function PatchSidebar({
               <div className="p-4 border-b border-border bg-background/80 space-y-3 shrink-0">
                 <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5"><GitMerge size={12}/> Git Snapshot Compare</h3>
                 
-                <button onClick={onBrowseGitProject} className={cn("w-full flex items-center justify-between px-3 py-2 rounded-lg border text-xs transition-all", gitProjectRoot ? "bg-background border-border text-foreground shadow-sm hover:border-primary/50" : "bg-primary/5 border-dashed border-primary/30 text-primary hover:bg-primary/10")} title={gitProjectRoot || "Select Git repository"}>
-                  <div className="flex items-center gap-2 truncate"><FolderOpen size={14} className={gitProjectRoot ? "text-blue-500" : ""} /> <span className="truncate font-medium">{gitProjectRoot || "Browse Git Project..."}</span></div>
+                <button onClick={onBrowseGitProject} className={cn("...")} title={gitProjectRoot || getText('patch', 'browseGit', language)}>
+                  <div className="flex items-center gap-2 truncate"><FolderOpen size={14} className={gitProjectRoot ? "text-blue-500" : ""} /> <span className="truncate font-medium">{gitProjectRoot || getText('patch', 'browseGit', language)}</span></div>
                   {gitProjectRoot && <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />}
                 </button>
 
                 {gitProjectRoot && (
                   <div className="space-y-3 animate-in fade-in duration-300">
                     <div className="space-y-1">
-                      <label className="text-[10px] font-medium text-muted-foreground">Base Version</label>
+                      <label className="text-[10px] font-medium text-muted-foreground">{getText('patch', 'baseVersion', language)}</label>
                       <CommitSelector commits={commits} selectedValue={baseHash} onSelect={setBaseHash} disabled={isGitLoading} />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[10px] font-medium text-muted-foreground">Compare Version</label>
+                      <label className="text-[10px] font-medium text-muted-foreground">{getText('patch', 'compareVersion', language)}</label>
                       <CommitSelector commits={commits} selectedValue={compareHash} onSelect={setCompareHash} disabled={isGitLoading} />
                     </div>
-                    <button onClick={onCompare} disabled={isGitLoading || !baseHash || !compareHash} className="w-full flex items-center justify-center gap-2 py-2 rounded-md text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all disabled:opacity-50 active:scale-95 shadow-sm shadow-primary/20">
+                    <button onClick={onCompare} disabled={isGitLoading || !baseHash || !compareHash} className="...">
                       {isGitLoading ? <Loader2 size={14} className="animate-spin"/> : <GitMerge size={14}/>}
-                      {isGitLoading ? "Comparing..." : "Generate Diff"}
+                      {isGitLoading ? getText('patch', 'comparing', language) : getText('patch', 'generateDiff', language)}
                     </button>
                   </div>
                 )}
@@ -251,7 +251,7 @@ export function PatchSidebar({
                                     "pl-2 py-2 pr-1 cursor-pointer transition-opacity flex items-center justify-center",
                                     isDisabled ? "opacity-30 cursor-not-allowed" : "hover:text-primary opacity-60 hover:opacity-100"
                                 )}
-                                title={isDisabled ? "Cannot export binary or large files" : "Include in export"}
+                                title={isDisabled ? getText('patch', 'binaryFile', language) : getText('patch', 'export', language)}
                             >
                                 {isDisabled ? (
                                    <Square size={14} className="text-muted-foreground" />
@@ -273,11 +273,11 @@ export function PatchSidebar({
                                 <div className="flex items-center gap-2 min-w-0">
                                     {/* 特殊状态图标 */}
                                     {file.isBinary ? (
-                                        <div title="Binary File" className="shrink-0 text-orange-400 flex items-center">
+                                        <div title={getText('patch', 'binaryFile', language)} className="shrink-0 text-orange-400 flex items-center">
                                             <FileImage size={12} />
                                         </div>
                                     ) : file.isLarge ? (
-                                        <div title="Large File" className="shrink-0 text-red-400 flex items-center">
+                                        <div title={getText('patch', 'largeFile', language)} className="shrink-0 text-red-400 flex items-center">
                                             <AlertOctagon size={12} />
                                         </div>
                                     ) : null}
@@ -297,7 +297,7 @@ export function PatchSidebar({
 
                   {files.length <= 1 && !gitProjectRoot && (
                     <div className="text-center text-xs text-muted-foreground/60 p-4">
-                      Browse a Git project to automatically compare versions, or click 'Manual Comparison' to paste code manually.
+                      {getText('patch', 'gitTip', language)}
                     </div>
                   )}
                 </div>

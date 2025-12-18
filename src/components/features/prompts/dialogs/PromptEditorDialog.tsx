@@ -120,14 +120,14 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
                 className={cn( "flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-sm font-medium transition-all duration-200", type === 'prompt' ? "bg-background text-primary shadow-sm ring-1 ring-border" : "text-muted-foreground hover:text-foreground" )}
              >
                 <Sparkles size={16} />
-                <span>Prompt</span>
+                <span>{getText('editor', 'typePrompt', language)}</span>
              </button>
              <button
                 onClick={() => setType('command')}
                 className={cn( "flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-sm font-medium transition-all duration-200", type === 'command' ? "bg-background text-primary shadow-sm ring-1 ring-border" : "text-muted-foreground hover:text-foreground" )}
              >
                 <Terminal size={16} />
-                <span>Command</span>
+                <span>{getText('editor', 'typeCommand', language)}</span>
              </button>
           </div>
 
@@ -163,8 +163,8 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
                   <label htmlFor="executable-toggle" className="flex items-center gap-2 cursor-pointer select-none">
                       <Terminal size={14} className="text-muted-foreground" />
                       <div className="flex flex-col">
-                          <span className="font-medium text-sm text-foreground">Executable Command</span>
-                          <span className="text-xs text-muted-foreground">Run this in the system terminal instead of copying.</span>
+                          <span className="font-medium text-sm text-foreground">{getText('editor', 'executable', language)}</span>
+                          <span className="text-xs text-muted-foreground">{getText('editor', 'executableDesc', language)}</span>
                       </div>
                   </label>
                   <div onClick={() => setIsExecutable(!isExecutable)} id="executable-toggle" className={cn( "w-10 h-5 rounded-full relative transition-colors duration-300 cursor-pointer", isExecutable ? "bg-primary" : "bg-slate-300 dark:bg-slate-600" )}>
@@ -174,7 +174,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
               
               {isExecutable && (
                   <div className="space-y-2 pl-6 animate-in fade-in slide-in-from-top-2 duration-300">
-                      <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider"> Execution Shell </label>
+                      <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('editor', 'execShell', language)}</label>
                       
                       <div className="relative">
                           <button
@@ -208,7 +208,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
                                                       : "text-foreground hover:bg-secondary/50"
                                               )}
                                           >
-                                              <span>{opt.label}</span>
+                                              <span>{opt.value === 'auto' ? getText('editor', 'autoDetect', language) : opt.label}</span>
                                               {shellType === opt.value && <Check size={14} />}
                                           </button>
                                       ))}
