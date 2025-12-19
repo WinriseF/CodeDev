@@ -1,127 +1,106 @@
 use anyhow::{Context, Result};
-use arrow_array::{Float32Array, RecordBatch, StringArray};
-use lancedb::{connect, Connection};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::sync::Arc;
-use futures::TryStreamExt;
+use text_splitter::{ChunkConfig, TextSplitter};
+use tokio::fs;
+use uuid::Uuid;
 
-/// Represents a single piece of indexed content (a "chunk").
-#[derive(Debug, Clone)]
-pub struct DocumentChunk {
-    pub id: String,          // Unique ID for the chunk
-    pub file_path: String,   // Source file path
-    pub content: String,     // The actual text content of the chunk
-    pub vector: Vec<f32>,    // The embedding vector
+use crate::ai::traits::Embedder;
+use super::database::{DocumentChunk, VectorDB};
+
+pub struct Indexer {
+    vector_db: Arc<VectorDB>,
+    embedder: Arc<dyn Embedder>,
+    chunk_config: ChunkConfig,
 }
 
-/// A search result returned from the vector database.
-#[derive(Debug, Clone)]
-pub struct SearchResult {
-    pub file_path: String,
-    pub content: String,
-    pub score: f32, // Similarity score
-}
+impl Indexer {
+    pub fn new(vector_db: Arc<VectorDB>, embedder: Arc<dyn Embedder>) -> Self {
+        let chunk_config = ChunkConfig::new(256)?
+            .with_overlap(32)
+            .with_trim(true);
 
-/// Manages the connection and operations for the LanceDB vector store.
-pub struct VectorDB {
-    conn: Connection,
-}
-
-impl VectorDB {
-    /// Creates a new connection to the LanceDB database.
-    /// The database will be stored in the app's local data directory.
-    pub async fn new(db_path: PathBuf) -> Result<Self> {
-        let conn = connect(&db_path.to_string_lossy())
-            .execute()
-            .await
-            .context("Failed to connect to LanceDB database")?;
-        Ok(Self { conn })
-    }
-
-    /// Ensures a table exists for a given model, creating it if necessary.
-    /// Table names are namespaced by model ID to prevent dimension conflicts.
-    async fn get_or_create_table(&self, table_name: &str, vector_dim: usize) -> Result<lancedb::Table> {
-        let table_names = self.conn.table_names().await?;
-        if table_names.iter().any(|name| name == table_name) {
-            self.conn.open_table(table_name).await.context(format!("Failed to open existing table '{}'", table_name))
-        } else {
-            // Define the schema for our table
-            let schema = Arc::new(arrow_schema::Schema::new(vec![
-                arrow_schema::Field::new("file_path", arrow_schema::DataType::Utf8, false),
-                arrow_schema::Field::new("content", arrow_schema::DataType::Utf8, false),
-                arrow_schema::Field::new(
-                    "vector",
-                    arrow_schema::DataType::FixedSizeList(
-                        Arc::new(arrow_schema::Field::new("item", arrow_schema::DataType::Float32, true)),
-                        vector_dim as i32,
-                    ),
-                    true,
-                ),
-            ]));
-            
-            self.conn.create_table(table_name, schema).await.context(format!("Failed to create new table '{}'", table_name))
+        Self {
+            vector_db,
+            embedder,
+            chunk_config,
         }
     }
 
-    /// Inserts or updates a batch of document chunks into the specified table.
-    pub async fn insert_chunks(&self, table_name: &str, chunks: Vec<DocumentChunk>, vector_dim: usize) -> Result<()> {
-        if chunks.is_empty() {
-            return Ok(());
-        }
+    pub async fn index_directory(&self, root_path: &Path, table_name: &str) -> Result<usize> {
+        let mut file_paths = Vec::new();
+        self.collect_files(root_path, &mut file_paths).await?;
 
-        let table = self.get_or_create_table(table_name, vector_dim).await?;
+        let mut total_chunks_indexed = 0;
 
-        // Convert our DocumentChunk struct into an Arrow RecordBatch for LanceDB
-        let file_paths = StringArray::from(chunks.iter().map(|c| c.file_path.clone()).collect::<Vec<_>>());
-        let contents = StringArray::from(chunks.iter().map(|c| c.content.clone()).collect::<Vec<_>>());
-        let vectors_flat: Vec<f32> = chunks.into_iter().flat_map(|c| c.vector).collect();
-        let vectors = Float32Array::from(vectors_flat);
+        let batch_size = self.embedder.batch_size(); // 可从 config 取，或默认 16
 
-        let batch = RecordBatch::try_new(
-            table.schema().await?,
-            vec![
-                Arc::new(file_paths),
-                Arc::new(contents),
-                Arc::new(arrow_array::FixedSizeListArray::try_new_from_values(vectors, vector_dim as i32)?),
-            ],
-        )?;
-
-        table.add(vec![batch]).await.context("Failed to insert chunks into table")?;
-        Ok(())
-    }
-
-    /// Searches the specified table for chunks similar to the query vector.
-    pub async fn search(&self, table_name: &str, query_vector: Vec<f32>, limit: usize) -> Result<Vec<SearchResult>> {
-        let table = self.conn.open_table(table_name).await.context(format!("Table '{}' not found for searching", table_name))?;
-
-        let mut stream = table
-            .search(&query_vector)
-            .limit(limit)
-            .execute_stream()
-            .await
-            .context("Failed to execute search query")?;
-
-        let mut results = Vec::new();
-        while let Some(batch) = stream.try_next().await? {
-            let file_path_col = batch.column_by_name("file_path").unwrap().as_any().downcast_ref::<StringArray>().unwrap();
-            let content_col = batch.column_by_name("content").unwrap().as_any().downcast_ref::<StringArray>().unwrap();
-            let score_col = batch.column_by_name("_score").unwrap().as_any().downcast_ref::<Float32Array>().unwrap();
-
-            for i in 0..batch.num_rows() {
-                results.push(SearchResult {
-                    file_path: file_path_col.value(i).to_string(),
-                    content: content_col.value(i).to_string(),
-                    score: score_col.value(i),
-                });
+        for file_batch in file_paths.chunks(batch_size) {
+            let chunks = self.process_file_batch(file_batch).await?;
+            if !chunks.is_empty() {
+                let num_chunks = chunks.len();
+                self.vector_db
+                    .insert_chunks(table_name, chunks, self.embedder.dimension())
+                    .await?;
+                total_chunks_indexed += num_chunks;
             }
         }
 
-        Ok(results)
+        Ok(total_chunks_indexed)
     }
 
-    /// Deletes all data associated with a specific project/model combination.
-    pub async fn clear_collection(&self, table_name: &str) -> Result<()> {
-        self.conn.drop_table(table_name).await.context(format!("Failed to drop table '{}'", table_name))?;
+    async fn collect_files(&self, path: &Path, file_list: &mut Vec<PathBuf>) -> Result<()> {
+        let mut entries = fs::read_dir(path).await?;
+        while let Some(entry) = entries.next_entry().await? {
+            let entry_path = entry.path();
+            if entry.file_name().to_string_lossy().starts_with('.') {
+                continue;
+            }
+            if entry.file_type().await?.is_dir() {
+                self.collect_files(&entry_path, file_list).await?;
+            } else {
+                file_list.push(entry_path);
+            }
+        }
         Ok(())
+    }
+
+    async fn process_file_batch(&self, file_paths: &[PathBuf]) -> Result<Vec<DocumentChunk>> {
+        let mut all_chunks = Vec::new();
+        let mut texts_to_embed = Vec::new();
+        let mut chunk_metadata = Vec::new();
+
+        for path in file_paths {
+            if let Ok(content) = tokio::fs::read_to_string(path).await {
+                let splitter = TextSplitter::new(self.chunk_config.clone());
+
+                let path_str = path.to_string_lossy().to_string();
+                for chunk_text in splitter.chunks(&content) {
+                    texts_to_embed.push(chunk_text.to_string());
+                    chunk_metadata.push(path_str.clone());
+                }
+            }
+        }
+
+        if texts_to_embed.is_empty() {
+            return Ok(all_chunks);
+        }
+
+        let vectors = self
+            .embedder
+            .embed(texts_to_embed.clone())
+            .await
+            .context("为文件批次生成 Embedding 失败")?;
+
+        for ((text, file_path), vector) in texts_to_embed.into_iter().zip(chunk_metadata).zip(vectors) {
+            all_chunks.push(DocumentChunk {
+                id: Uuid::new_v4().to_string(),
+                file_path,
+                content: text,
+                vector,
+            });
+        }
+
+        Ok(all_chunks)
     }
 }
