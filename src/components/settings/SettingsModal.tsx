@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell } from 'lucide-react';
+import { 
+  X, Monitor, Moon, Sun, Languages, Check, Filter, 
+  DownloadCloud, Bot, Bell, Database
+} from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { getText } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import { FilterManager } from '../features/context/FilterManager';
 import { PromptLibraryManager } from './PromptLibraryManager';
+import { KnowledgeBaseManager } from './KnowledgeBaseManager'; // 引入新组件
 import { ShortcutInput } from '@/components/ui/ShortcutInput';
 
 export function SettingsModal() {
@@ -18,49 +22,41 @@ export function SettingsModal() {
     restReminder, setRestReminder
   } = useAppStore();
 
-  const [activeSection, setActiveSection] = useState<'appearance' | 'language' | 'filters' | 'library' | 'ai'>('appearance');
+  const [activeSection, setActiveSection] = useState<'appearance' | 'language' | 'filters' | 'library' | 'ai' | 'kb'>('appearance');
 
   if (!isSettingsOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-200 p-4">
-      
-      {/* 
-          - w-[600px] -> w-full max-w-[600px]: 尝试占满，但最大不超过 600
-          - h-[500px] -> h-full max-h-[500px]: 尝试占满，但最大不超过 500
-      */}
-      <div className="w-full max-w-[600px] h-full max-h-[500px] bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+      <div className="w-full max-w-[650px] h-full max-h-[550px] bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
         
-        {/* Header */}
+        {/* Title Bar */}
         <div className="h-14 px-6 border-b border-border flex items-center justify-between bg-secondary/10 shrink-0">
           <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
             <SettingsIcon />
             {getText('settings', 'title', language)}
           </h2>
-          <button 
-            onClick={() => setSettingsOpen(false)}
-            className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-secondary text-muted-foreground transition-colors"
-          >
+          <button onClick={() => setSettingsOpen(false)} className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-secondary text-muted-foreground transition-colors">
             <X size={18} />
           </button>
         </div>
 
-        {/* Content Body */}
         <div className="flex flex-1 overflow-hidden min-h-0">
             {/* Sidebar Navigation */}
-            <div className="w-40 bg-secondary/5 border-r border-border p-2 space-y-1 overflow-y-auto custom-scrollbar shrink-0">
+            <div className="w-44 bg-secondary/5 border-r border-border p-2 space-y-1 overflow-y-auto custom-scrollbar shrink-0">
                 <NavBtn active={activeSection === 'appearance'} onClick={() => setActiveSection('appearance')} icon={<Monitor size={14} />} label={getText('settings', 'navAppearance', language)}  />
                 <NavBtn active={activeSection === 'language'} onClick={() => setActiveSection('language')} icon={<Languages size={14} />} label={getText('settings', 'navLanguage', language)} />
+                <NavBtn active={activeSection === 'ai'} onClick={() => setActiveSection('ai')} icon={<Bot size={14} />} label={getText('settings', 'navAI', language)} />
+                <NavBtn active={activeSection === 'kb'} onClick={() => setActiveSection('kb')} icon={<Database size={14} />} label="知识库管理" />
                 <NavBtn active={activeSection === 'filters'} onClick={() => setActiveSection('filters')} icon={<Filter size={14} />} label={getText('settings', 'navFilters', language)} />
                 <NavBtn active={activeSection === 'library'} onClick={() => setActiveSection('library')} icon={<DownloadCloud size={14} />} label={getText('settings', 'navLibrary', language)} />
-                <NavBtn active={activeSection === 'ai'} onClick={() => setActiveSection('ai')} icon={<Bot size={14} />} label={getText('settings', 'navAI', language)} />
             </div>
 
-            {/* Main Content Area */}
-            <div className="flex-1 p-6 overflow-y-auto custom-scrollbar min-w-0">
+            {/* Content Area */}
+            <div className="flex-1 p-6 overflow-y-auto custom-scrollbar min-w-0 bg-background">
                 
                 {activeSection === 'appearance' && (
-                    <div className="space-y-4">
+                    <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-200">
                         <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                             {getText('settings', 'appearance', language)}
                         </h3>
@@ -68,18 +64,13 @@ export function SettingsModal() {
                             <ThemeCard active={theme === 'dark'} onClick={() => setTheme('dark')} icon={<Moon size={24} />} label={getText('settings', 'themeDark', language)} />
                             <ThemeCard active={theme === 'light'} onClick={() => setTheme('light')} icon={<Sun size={24} />} label={getText('settings', 'themeLight', language)} />
                         </div>
-                        
                         <div className="w-full h-px bg-border/50 my-4" />
-                        
-                        {/* 快捷键设置 */}
                         <ShortcutInput value={spotlightShortcut} onChange={setSpotlightShortcut} />
-
+                        
                         <div className="space-y-4 pt-4 border-t border-border/50">
                             <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                                 {getText('settings', 'spotlightSize', language)}
                             </h3>
-                            
-                            {/* Width Slider */}
                             <div className="space-y-3">
                                 <div className="flex justify-between text-xs">
                                     <span>{getText('settings', 'width', language)}</span>
@@ -95,8 +86,6 @@ export function SettingsModal() {
                                     onChange={(e) => useAppStore.getState().setSpotlightAppearance({ width: parseInt(e.target.value) })}
                                 />
                             </div>
-
-                            {/* Height Slider */}
                             <div className="space-y-3">
                                 <div className="flex justify-between text-xs">
                                     <span>{getText('settings', 'chatHeight', language)}</span>
@@ -116,15 +105,12 @@ export function SettingsModal() {
 
                         <div className="w-full h-px bg-border/50 my-4" />
 
-                        {/* 休息提醒设置 */}
                         <div className="space-y-4">
                             <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
                                 <Bell size={14} />
                                 {getText('settings', 'restReminder', language)}
                             </h3>
-                            
                             <div className="space-y-3">
-                                {/* 启用开关 */}
                                 <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/30 border border-border">
                                     <div>
                                         <div className="text-sm font-medium text-foreground">
@@ -147,8 +133,6 @@ export function SettingsModal() {
                                         )} />
                                     </button>
                                 </div>
-
-                                {/* 间隔时间设置 */}
                                 {restReminder.enabled && (
                                     <div className="space-y-3 p-3 rounded-lg bg-secondary/10 border border-border">
                                         <div className="flex justify-between text-xs">
@@ -168,10 +152,6 @@ export function SettingsModal() {
                                             value={restReminder.intervalMinutes}
                                             onChange={(e) => setRestReminder({ intervalMinutes: parseInt(e.target.value) })}
                                         />
-                                        <div className="flex justify-between text-[10px] text-muted-foreground">
-                                            <span>1 {getText('settings', 'minutes', language)}</span>
-                                            <span>180 {getText('settings', 'minutes', language)}</span>
-                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -180,7 +160,7 @@ export function SettingsModal() {
                 )}
                 
                 {activeSection === 'language' && (
-                     <div className="space-y-4">
+                     <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-200">
                         <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                             {getText('settings', 'language', language)}
                         </h3>
@@ -191,29 +171,11 @@ export function SettingsModal() {
                      </div>
                 )}
 
-                {activeSection === 'filters' && (
-                    <div className="h-full flex flex-col">
-                        <div className="mb-4">
-                            <h3 className="text-sm font-medium text-foreground">{getText('settings', 'filtersTitle', language)}</h3>
-                            <p className="text-xs text-muted-foreground mt-1">
-                                {getText('settings', 'filtersDesc', language)}
-                            </p>
-                        </div>
-                        <div className="flex-1 border border-border rounded-lg p-4 bg-secondary/5 overflow-hidden flex flex-col min-h-[200px]">
-                            <FilterManager 
-                                localConfig={globalIgnore} 
-                                onUpdate={updateGlobalIgnore}
-                            />
-                        </div>
-                    </div>
+                {/* 使用组件引用 */}
+                {activeSection === 'kb' && (
+                    <KnowledgeBaseManager />
                 )}
 
-                {/*  Content */}
-                {activeSection === 'library' && (
-                    <PromptLibraryManager />
-                )}
-
-                {/*  AI 设置面板 */}
                 {activeSection === 'ai' && (
                     <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-200">
                         <div>
@@ -222,7 +184,6 @@ export function SettingsModal() {
                         </div>
                         
                         <div className="space-y-4">
-                            {/* Provider Select */}
                             <div className="space-y-1.5">
                                 <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('settings', 'provider', language)}</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -243,7 +204,6 @@ export function SettingsModal() {
                                 </div>
                             </div>
 
-                            {/* API Key */}
                             <div className="space-y-1.5">
                                 <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('settings', 'apiKey', language)}</label>
                                 <input 
@@ -275,7 +235,6 @@ export function SettingsModal() {
                                 </p>
                             </div>
                             
-                            {/* Base URL & Model */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('settings', 'baseUrl', language)}</label>
@@ -301,6 +260,29 @@ export function SettingsModal() {
                         </div>
                     </div>
                 )}
+
+                {activeSection === 'filters' && (
+                    <div className="h-full flex flex-col animate-in fade-in slide-in-from-right-4 duration-200">
+                        <div className="mb-4">
+                            <h3 className="text-sm font-medium text-foreground">{getText('settings', 'filtersTitle', language)}</h3>
+                            <p className="text-xs text-muted-foreground mt-1">
+                                {getText('settings', 'filtersDesc', language)}
+                            </p>
+                        </div>
+                        <div className="flex-1 border border-border rounded-lg p-4 bg-secondary/5 overflow-hidden flex flex-col min-h-[200px]">
+                            <FilterManager 
+                                localConfig={globalIgnore} 
+                                onUpdate={updateGlobalIgnore}
+                            />
+                        </div>
+                    </div>
+                )}
+
+                {activeSection === 'library' && (
+                    <div className="h-full animate-in fade-in slide-in-from-right-4 duration-200">
+                        <PromptLibraryManager />
+                    </div>
+                )}
             </div>
         </div>
       </div>
@@ -316,25 +298,25 @@ function ThemeCard({ active, onClick, icon, label }: any) {
         <span className="font-medium text-sm">{label}</span>
       </button>
     );
-  }
+}
   
-  function LangItem({ active, onClick, label, subLabel }: any) {
+function LangItem({ active, onClick, label, subLabel }: any) {
     return (
       <button onClick={onClick} className={cn("w-full flex items-center justify-between px-4 py-3 rounded-lg border transition-all duration-200", active ? "border-primary bg-primary/5 text-primary" : "border-border bg-background text-foreground hover:bg-secondary/40")}>
         <div className="flex flex-col items-start"><span className="font-medium text-sm">{label}</span><span className="text-xs text-muted-foreground opacity-70">{subLabel}</span></div>
         {active && <Check size={18} strokeWidth={2.5} />}
       </button>
     );
-  }
+}
   
-  function NavBtn({ active, onClick, icon, label }: any) {
-      return (
-          <button onClick={onClick} className={cn("w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors whitespace-nowrap overflow-hidden text-ellipsis", active ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-secondary hover:text-foreground")}>
-              <div className="shrink-0">{icon}</div> {label}
-          </button>
-      )
-  }
+function NavBtn({ active, onClick, icon, label }: any) {
+    return (
+        <button onClick={onClick} className={cn("w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors whitespace-nowrap overflow-hidden text-ellipsis", active ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-secondary hover:text-foreground")}>
+            <div className="shrink-0">{icon}</div> {label}
+        </button>
+    )
+}
   
-  function SettingsIcon() {
+function SettingsIcon() {
     return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-  }
+}

@@ -3,69 +3,72 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { fileStorage } from '@/lib/storage';
 import { IgnoreConfig, DEFAULT_PROJECT_IGNORE, FileNode } from '@/types/context';
 
-// --- 辅助函数：递归处理勾选逻辑 ---
+// --- 递归设置选中状态 ---
+const setSelectionByPaths = (nodes: FileNode[], paths: Set<string>, mode: 'add' | 'replace'): FileNode[] => {
+  return nodes.map(node => {
+    let newSelected = node.isSelected;
+    
+    if (node.kind === 'file') {
+        if (paths.has(node.path)) {
+            // 如果在目标列表中，强制选中
+            newSelected = true;
+        } else if (mode === 'replace') {
+            // 如果是替换模式，且不在列表中，强制取消选中
+            newSelected = false;
+        }
+    }
 
-/**
- * 将指定节点及其所有子孙节点的 isSelected 状态强制设为目标值
- */
+    let newChildren = node.children;
+    if (node.children) {
+        newChildren = setSelectionByPaths(node.children, paths, mode);
+    }
+
+    // 这里稍微简化：我们只控制文件的选中状态，文件夹的选中状态在 UI 渲染时通常由子节点决定，
+    // 或者如果你的逻辑是文件夹也有独立的 isSelected，这里可能需要根据子节点反推，
+    // 但为了 RAG 的目的，主要是为了选中文件。
+    return { ...node, isSelected: newSelected, children: newChildren };
+  });
+};
+
 const setAllChildren = (node: FileNode, isSelected: boolean): FileNode => {
-  // 创建节点副本
   const newNode = { ...node, isSelected };
-  
-  // 如果有子节点，递归处理
   if (newNode.children) {
     newNode.children = newNode.children.map(child => setAllChildren(child, isSelected));
   }
   return newNode;
 };
 
-/**
- * 在树中查找目标 ID，并更新其状态（向下级联）
- */
 const updateNodeState = (nodes: FileNode[], targetId: string, isSelected: boolean): FileNode[] => {
   return nodes.map(node => {
-    // 1. 找到目标节点：应用级联更新
     if (node.id === targetId) {
       return setAllChildren(node, isSelected);
     }
-    
-    // 2. 未找到目标，但当前节点有子节点：递归向下查找
     if (node.children) {
       return {
         ...node,
         children: updateNodeState(node.children, targetId, isSelected)
       };
     }
-    
-    // 3. 无关节点：保持原样
     return node;
   });
 };
 
 const applyLockState = (nodes: FileNode[], fullConfig: IgnoreConfig): FileNode[] => {
   return nodes.map(node => {
-    // 1. 检查当前节点是否匹配黑名单
     let shouldLock = false;
-    
-    // 检查文件夹名
     if (node.kind === 'dir' && fullConfig.dirs.includes(node.name)) shouldLock = true;
-    // 检查文件名
     if (node.kind === 'file' && fullConfig.files.includes(node.name)) shouldLock = true;
-    // 检查后缀
     if (node.kind === 'file') {
       const ext = node.name.split('.').pop()?.toLowerCase();
       if (ext && fullConfig.extensions.includes(ext)) shouldLock = true;
     }
 
-    // 2. 如果匹配，强制不选中 + 锁定
-    // 3. 如果不匹配，解锁 (isLocked = false)，但保持原有的 isSelected 状态
     const newNode: FileNode = {
       ...node,
       isSelected: shouldLock ? false : node.isSelected,
       isLocked: shouldLock
     };
 
-    // 4. 递归处理子节点
     if (newNode.children) {
       newNode.children = applyLockState(newNode.children, fullConfig);
     }
@@ -74,31 +77,24 @@ const applyLockState = (nodes: FileNode[], fullConfig: IgnoreConfig): FileNode[]
   });
 };
 
-// --- Store 定义 ---
-
 interface ContextState {
-  // --- 持久化设置 ---
-  // 这里只存项目特有的配置，不再包含默认值
   projectIgnore: IgnoreConfig;
   removeComments: boolean;
-  
-  // --- 运行时状态 (不持久化) ---
   projectRoot: string | null;
   fileTree: FileNode[]; 
   isScanning: boolean;
 
-  // --- Actions ---
   setProjectRoot: (path: string) => void;
   setFileTree: (tree: FileNode[]) => void;
   setIsScanning: (status: boolean) => void;
-  
-  // 修改项目配置
   updateProjectIgnore: (type: keyof IgnoreConfig, action: 'add' | 'remove', value: string) => void;
   resetProjectIgnore: () => void;
   refreshTreeStatus: (globalConfig: IgnoreConfig) => void;
-  // 树操作
   toggleSelect: (nodeId: string, checked: boolean) => void;
   setRemoveComments: (enable: boolean) => void;
+
+  // --- Action ---
+  smartSelectFiles: (paths: string[], mode?: 'add' | 'replace') => void;
 }
 
 export const useContextStore = create<ContextState>()(
@@ -123,25 +119,19 @@ export const useContextStore = create<ContextState>()(
           } else if (action === 'remove') {
             newList = currentList.filter(item => item !== value);
           }
-          
           const newProjectIgnore = { ...state.projectIgnore, [type]: newList };
-          
           return { projectIgnore: newProjectIgnore };
         });
       },
       
       resetProjectIgnore: () => set({ projectIgnore: DEFAULT_PROJECT_IGNORE }),
 
-      // 刷新树状态（应用黑名单）
       refreshTreeStatus: (globalConfig) => set((state) => {
-        // 合并配置
         const effectiveConfig = {
           dirs: [...globalConfig.dirs, ...state.projectIgnore.dirs],
           files: [...globalConfig.files, ...state.projectIgnore.files],
           extensions: [...globalConfig.extensions, ...state.projectIgnore.extensions],
         };
-
-        // 应用锁定逻辑
         const newTree = applyLockState(state.fileTree, effectiveConfig);
         return { fileTree: newTree };
       }),
@@ -151,6 +141,13 @@ export const useContextStore = create<ContextState>()(
       })),
 
       setRemoveComments: (enable) => set({ removeComments: enable }),
+
+      smartSelectFiles: (paths, mode = 'add') => {
+        const pathSet = new Set(paths);
+        set((state) => ({
+            fileTree: setSelectionByPaths(state.fileTree, pathSet, mode)
+        }));
+      }
     }),
     {
       name: 'context-config',

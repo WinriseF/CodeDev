@@ -5,7 +5,7 @@ import { writeText as writeClipboard } from '@tauri-apps/plugin-clipboard-manage
 import { 
   FolderOpen, RefreshCw, Loader2, FileJson, 
   PanelLeft, Search, ArrowRight, SlidersHorizontal, ChevronUp,
-  LayoutDashboard, FileText 
+  LayoutDashboard, FileText, Bot, Database
 } from 'lucide-react';
 import { useContextStore } from '@/store/useContextStore';
 import { useAppStore, DEFAULT_MODELS } from '@/store/useAppStore'; 
@@ -16,9 +16,11 @@ import { FileTreeNode } from './FileTreeNode';
 import { TokenDashboard } from './TokenDashboard';
 import { FilterManager } from './FilterManager';
 import { ContextPreview } from './ContextPreview';
+import { AIContextAgent } from './AIContextAgent'; // 新引入
 import { cn } from '@/lib/utils';
 import { getText } from '@/lib/i18n';
 import { Toast, ToastType } from '@/components/ui/Toast';
+import { invoke } from '@tauri-apps/api/core'; // 新引入
 
 export function ContextView() {
   const { 
@@ -38,13 +40,14 @@ export function ContextView() {
   const [pathInput, setPathInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [showFilters, setShowFilters] = useState(false); 
-  const [rightViewMode, setRightViewMode] = useState<'dashboard' | 'preview'>('dashboard');
+  const [rightViewMode, setRightViewMode] = useState<'dashboard' | 'preview' | 'agent'>('dashboard');
 
   const [toastState, setToastState] = useState<{ show: boolean; msg: string; type: ToastType }>({
       show: false,
       msg: '',
       type: 'success'
   });
+  const [isIndexingProject, setIsIndexingProject] = useState(false);
 
   const activeModels = (models && models.length > 0) ? models : DEFAULT_MODELS;
 
@@ -162,6 +165,25 @@ export function ContextView() {
     };
   }, [setContextSidebarWidth]);
 
+  const handleBuildIndex = async () => {
+    if (!projectRoot) return;
+    setIsIndexingProject(true);
+    try {
+        triggerToast("正在构建向量索引，这可能需要几分钟...", "info");
+        const count = await invoke<number>('index_project', {
+            paths: [projectRoot],
+            collectionName: "default_project",
+            modelId: "jina-v3-base-zh"
+        });
+        triggerToast(`索引构建完成！共处理 ${count} 个代码块。`, "success");
+    } catch (e) {
+        console.error(e);
+        triggerToast(`索引失败: ${e}`, "error");
+    } finally {
+        setIsIndexingProject(false);
+    }
+  };
+
   return (
     <div className="h-full flex flex-col bg-background relative">
       
@@ -188,16 +210,34 @@ export function ContextView() {
           )}
         </div>
 
-        <button onClick={handleBrowse} className="flex items-center gap-2 px-3 py-1.5 bg-secondary hover:bg-secondary/80 border border-border rounded-md text-sm font-medium transition-colors whitespace-nowrap">
-          <FolderOpen size={16} /><span>{getText('context', 'browse', language)}</span>
-        </button>
-        <button onClick={() => performScan(projectRoot || '')} disabled={!projectRoot || isScanning} className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-md transition-colors disabled:opacity-50">
-          <RefreshCw size={16} className={cn(isScanning && "animate-spin")} />
-        </button>
+
+        {/* 顶部操作按钮组 */}
+        <div className="flex items-center gap-2">
+            <button 
+                onClick={handleBuildIndex}
+                disabled={!projectRoot || isIndexingProject || isScanning}
+                className={cn(
+                    "flex items-center gap-2 px-3 py-1.5 border border-border rounded-md text-xs font-medium transition-colors whitespace-nowrap",
+                    isIndexingProject ? "bg-primary/5 text-primary border-primary/20" : "bg-secondary hover:bg-secondary/80"
+                )}
+                title="构建向量索引以启用 AI 智能选择"
+            >
+                {isIndexingProject ? <Loader2 size={14} className="animate-spin" /> : <Database size={14} />}
+                <span>{isIndexingProject ? "索引中..." : "构建索引"}</span>
+            </button>
+
+            <button onClick={handleBrowse} className="flex items-center gap-2 px-3 py-1.5 bg-secondary hover:bg-secondary/80 border border-border rounded-md text-xs font-medium transition-colors whitespace-nowrap">
+              <FolderOpen size={14} /><span>{getText('context', 'browse', language)}</span>
+            </button>
+            <button onClick={() => performScan(projectRoot || '')} disabled={!projectRoot || isScanning} className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-md transition-colors disabled:opacity-50">
+              <RefreshCw size={16} className={cn(isScanning && "animate-spin")} />
+            </button>
+        </div>
       </div>
 
       {/* Main Split View */}
       <div className="flex-1 flex overflow-hidden relative">
+        {/* Left Sidebar (Explorer) */}
         <div 
           className={cn("flex flex-col bg-secondary/5 border-r border-border transition-all duration-75 ease-linear overflow-hidden relative group/sidebar", !isContextSidebarOpen && "w-0 border-none opacity-0")}
           style={{ width: isContextSidebarOpen ? `${contextSidebarWidth}px` : 0 }}
@@ -237,33 +277,46 @@ export function ContextView() {
           {isContextSidebarOpen && <div onMouseDown={startResizing} className="absolute top-0 right-0 bottom-0 w-1 cursor-col-resize hover:bg-primary/50 active:bg-primary transition-colors z-20" />}
         </div>
 
+        {/* Right Content Area */}
         <div className="flex-1 bg-background min-w-0 flex flex-col relative">
             <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] [mask-image:linear-gradient(to_bottom,transparent,black)] pointer-events-none" />
             
-            {/* 视图切换按钮 */}
+            {/* View Switcher (Floating) */}
             <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
                <div className={cn(
-                  "pointer-events-auto bg-background/80 backdrop-blur-md border border-border p-1 rounded-xl flex items-center shadow-sm",
-                  "transition-all duration-300 ease-out", // 动画设置
-                  "opacity-10 hover:opacity-100 hover:shadow-md hover:scale-[1.02]" // 核心交互逻辑
+                  "pointer-events-auto bg-background/80 backdrop-blur-md border border-border p-1 rounded-full flex items-center shadow-lg shadow-black/5",
+                  "transition-all duration-300 ease-out", 
+                  "opacity-10 hover:opacity-100 hover:shadow-xl hover:scale-[1.02]" 
                )}>
                   <ViewToggleBtn 
                     active={rightViewMode === 'dashboard'} 
                     onClick={() => setRightViewMode('dashboard')}
                     icon={<LayoutDashboard size={14} />} 
-                    label={getText('context', 'tabDashboard', language)}
+                    label="仪表盘"
                   />
+                  <div className="w-px h-4 bg-border/50 mx-1" />
+                  
+                  {/* 新增：AI 助手 Tab */}
+                  <ViewToggleBtn 
+                    active={rightViewMode === 'agent'} 
+                    onClick={() => setRightViewMode('agent')}
+                    icon={<Bot size={14} />} 
+                    label="AI 助手"
+                    isSpecial
+                  />
+                  
+                  <div className="w-px h-4 bg-border/50 mx-1" />
                   <ViewToggleBtn 
                     active={rightViewMode === 'preview'} 
                     onClick={() => setRightViewMode('preview')}
                     icon={<FileText size={14} />} 
-                    label={getText('context', 'tabPreview', language)}
+                    label="预览"
                   />
                </div>
             </div>
 
-            {/* 内容区域 */}
-            <div className="flex-1 overflow-y-auto custom-scrollbar pb-10 h-full"> 
+            {/* Content Rendering */}
+            <div className="flex-1 overflow-y-auto custom-scrollbar h-full relative z-0"> 
                 {rightViewMode === 'dashboard' ? (
                    <TokenDashboard 
                      stats={stats}
@@ -273,6 +326,8 @@ export function ContextView() {
                      onSave={handleSaveToFile}
                      isGenerating={isGenerating}
                    />
+                ) : rightViewMode === 'agent' ? (
+                   <AIContextAgent />
                 ) : (
                    <div className="h-full">
                       <ContextPreview fileTree={fileTree} />
@@ -292,15 +347,15 @@ export function ContextView() {
   );
 }
 
-function ViewToggleBtn({ active, onClick, icon, label }: any) {
+function ViewToggleBtn({ active, onClick, icon, label, isSpecial }: any) {
   return (
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-all duration-200",
+        "flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200",
         active 
-          ? "bg-background text-foreground shadow-sm ring-1 ring-black/5 dark:ring-white/10" 
-          : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+          ? (isSpecial ? "bg-purple-500/10 text-purple-600 shadow-sm ring-1 ring-purple-500/20" : "bg-primary/10 text-primary shadow-sm ring-1 ring-primary/20")
+          : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
       )}
     >
       {icon}

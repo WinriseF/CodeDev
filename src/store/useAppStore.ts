@@ -6,12 +6,10 @@ import { fetch } from '@tauri-apps/plugin-http';
 import { emit } from '@tauri-apps/api/event'; 
 import { AIModelConfig, AIProviderConfig, AIProviderSetting, DEFAULT_AI_CONFIG, DEFAULT_PROVIDER_SETTINGS } from '@/types/model';
 
-// --- 1. 导出类型 ---
 export type AppView = 'prompts' | 'context' | 'patch';
 export type AppTheme = 'dark' | 'light';
 export type AppLang = 'en' | 'zh';
 
-// --- 2. 默认/兜底模型数据 ---
 export const DEFAULT_MODELS: AIModelConfig[] = [
   {
     "id": "Gemini-3-pro-preview",
@@ -47,26 +45,30 @@ export const DEFAULT_MODELS: AIModelConfig[] = [
   }
 ];
 
-// 配置 URL 列表 (CDN 优先 + GitHub 原站)
 const REMOTE_CONFIG_URLS = [
   'https://gitee.com/winriseF/models/raw/master/models/models.json',
-  'https://cdn.jsdelivr.net/gh/WinriseF/Code-Forge-AI@main/models/models.json', // 方案一：jsDelivr CDN
-  'https://raw.githubusercontent.com/WinriseF/Code-Forge-AI/main/models/models.json' // 方案二：GitHub 原站
+  'https://cdn.jsdelivr.net/gh/WinriseF/Code-Forge-AI@main/models/models.json', 
+  'https://raw.githubusercontent.com/WinriseF/Code-Forge-AI/main/models/models.json' 
 ];
 
 export interface SpotlightAppearance {
-  width: number;        // 默认 640
-  maxChatHeight: number; // 聊天模式最大高度，默认 600
+  width: number;        
+  maxChatHeight: number; 
 }
 
 export interface RestReminderConfig {
-  enabled: boolean;     // 是否启用
-  intervalMinutes: number; // 提醒间隔（分钟），默认 45
+  enabled: boolean;     
+  intervalMinutes: number; 
 }
 
-// --- 3. Store 接口 ---
+// --- 新增：知识库配置接口 ---
+export interface KnowledgeBaseConfig {
+    path: string;
+    name: string;
+    lastIndexed: number;
+}
+
 interface AppState {
-  // UI State
   currentView: AppView;
   isSidebarOpen: boolean;
   isSettingsOpen: boolean;
@@ -76,21 +78,19 @@ interface AppState {
   theme: AppTheme;
   language: AppLang;
   spotlightAppearance: SpotlightAppearance;
-  //快捷键
   spotlightShortcut: string; 
-  // Filters
   globalIgnore: IgnoreConfig;
-  // Rest Reminder
   restReminder: RestReminderConfig;
-
-  // Models State
+  
   models: AIModelConfig[];
   lastUpdated: number;
 
   aiConfig: AIProviderConfig;
   savedProviderSettings: Record<string, AIProviderSetting>;
 
-  // Actions
+  // --- 新增：知识库状态 ---
+  knowledgeBases: KnowledgeBaseConfig[];
+
   setView: (view: AppView) => void;
   toggleSidebar: () => void;
   setSettingsOpen: (open: boolean) => void;
@@ -103,17 +103,20 @@ interface AppState {
   setAIConfig: (config: Partial<AIProviderConfig>) => void;
   setSpotlightShortcut: (shortcut: string) => void;
   setRestReminder: (config: Partial<RestReminderConfig>) => void;
-  // Async Actions
+  
   syncModels: () => Promise<void>;
   resetModels: () => void;
   setSpotlightAppearance: (config: Partial<SpotlightAppearance>) => void;
+
+  // --- 新增：知识库 Action ---
+  addKnowledgeBase: (path: string) => void;
+  removeKnowledgeBase: (path: string) => void;
+  updateKbIndexTime: (path: string) => void;
 }
 
-// --- 4. Store 实现 ---
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
-      // 初始值
       currentView: 'prompts',
       isSidebarOpen: true,
       isSettingsOpen: false,
@@ -131,12 +134,14 @@ export const useAppStore = create<AppState>()(
         intervalMinutes: 45
       },
       
-      // 模型初始值
       models: DEFAULT_MODELS,
       lastUpdated: 0,
 
-      // Setters
       spotlightAppearance: { width: 640, maxChatHeight: 600 },
+
+      // --- 新增：知识库初始值 ---
+      knowledgeBases: [],
+
       setSpotlightAppearance: (config) => set((state) => ({
         spotlightAppearance: { ...state.spotlightAppearance, ...config }
       })),
@@ -165,7 +170,7 @@ export const useAppStore = create<AppState>()(
 
         // 情况1：切换了 Provider
         if (config.providerId && config.providerId !== state.aiConfig.providerId) {
-            // 尝试从已保存的配置中加载
+            // 尝试加载之前保存的配置
             const saved = state.savedProviderSettings[config.providerId] || DEFAULT_PROVIDER_SETTINGS[config.providerId] || {
                 apiKey: '',
                 baseUrl: '',
@@ -211,11 +216,9 @@ export const useAppStore = create<AppState>()(
         return { globalIgnore: { ...state.globalIgnore, [type]: newList } };
       }),
 
-      // 并发请求多个源，谁快用谁
       syncModels: async () => {
         console.log('[AppStore] Starting model sync...');
         
-        // 定义单个请求的逻辑
         const fetchUrl = async (url: string) => {
           console.log(`[Sync] Trying: ${url}`);
           const response = await fetch(url, {
@@ -223,7 +226,6 @@ export const useAppStore = create<AppState>()(
           });
 
           if (response.ok) {
-            // 使用 .json() 获取数据
             const data = await response.json() as AIModelConfig[];
             if (Array.isArray(data) && data.length > 0) {
               return data;
@@ -233,8 +235,6 @@ export const useAppStore = create<AppState>()(
         };
 
         try {
-          // Promise.any 会等待第一个成功的 Promise，如果全部失败则抛出 AggregateError
-          // 这实现了“赛跑”机制，CDN 通常会胜出
           const data = await Promise.any(REMOTE_CONFIG_URLS.map(url => fetchUrl(url)));
 
           set({ 
@@ -249,6 +249,19 @@ export const useAppStore = create<AppState>()(
       },
 
       resetModels: () => set({ models: DEFAULT_MODELS }),
+
+      // --- 新增：知识库 Actions 实现 ---
+      addKnowledgeBase: (path) => set(state => {
+        if(state.knowledgeBases.some(kb => kb.path === path)) return state;
+        const name = path.split(/[\\/]/).pop() || path;
+        return { knowledgeBases: [...state.knowledgeBases, { path, name, lastIndexed: 0 }] };
+      }),
+      removeKnowledgeBase: (path) => set(state => ({
+        knowledgeBases: state.knowledgeBases.filter(kb => kb.path !== path)
+      })),
+      updateKbIndexTime: (path) => set(state => ({
+        knowledgeBases: state.knowledgeBases.map(kb => kb.path === path ? { ...kb, lastIndexed: Date.now() } : kb)
+      }))
     }),
     {
       name: 'app-config',
@@ -268,7 +281,9 @@ export const useAppStore = create<AppState>()(
         aiConfig: state.aiConfig,
         savedProviderSettings: state.savedProviderSettings,
         spotlightAppearance: state.spotlightAppearance,
-        restReminder: state.restReminder
+        restReminder: state.restReminder,
+        // 新增持久化
+        knowledgeBases: state.knowledgeBases
       }),
     }
   )
