@@ -14,7 +14,10 @@ use tauri::{
 
 // 引入模块
 mod git;
-mod export; // 新增模块引入
+mod export;
+mod ai;
+mod rag;
+mod ai_engine;
 
 // =================================================================
 // 系统监控相关数据结构
@@ -144,13 +147,28 @@ fn main() {
             git::get_git_commits,
             git::get_git_diff,
             git::get_git_diff_text,
-            // 导出命令
-            export_git_diff
+            export_git_diff,
+            ai_engine::index_project,
+            ai_engine::search_code
         ])
         .setup(|app| {
             let mut system = System::new();
             system.refresh_all();
             app.manage(Arc::new(Mutex::new(system)));
+
+            // 初始化 AI 引擎
+            let app_handle = app.handle().clone();
+            tauri::async_runtime::spawn(async move {
+                match ai_engine::AIEngine::new(app_handle.clone()).await {
+                    Ok(engine) => {
+                        app_handle.manage(engine);
+                        println!("AI Engine initialized successfully.");
+                    }
+                    Err(e) => {
+                        eprintln!("Failed to initialize AI Engine: {}", e);
+                    }
+                }
+            });
             
             let quit_i = MenuItem::with_id(app, "quit", "退出 / Quit", true, None::<&str>)?;
             let show_i = MenuItem::with_id(app, "show", "显示主窗口 / Show Main Window", true, None::<&str>)?;
