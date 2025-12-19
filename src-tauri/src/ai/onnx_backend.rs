@@ -1,18 +1,12 @@
-// src/ai/onnx_backend.rs 最终完整修复版（已解决所有报错）
-
 use anyhow::{anyhow, Result};
 use hf_hub::api::sync::Api;
-use hf_hub::Repo;
-use ndarray::{Array2, Array3, Axis};
+use ndarray::{Array3, Axis};
 use ort::{
-    Environment,
-    Session,
-    session::builder::SessionBuilder,
-    Value,
-    inputs,
+    session::{Session, builder::GraphOptimizationLevel},
+    value::Value,
 };
 use std::path::PathBuf;
-use std::sync::Arc;
+use std::sync::Mutex;
 use tokenizers::Tokenizer;
 use tokio::fs;
 use tauri::Manager;
@@ -20,11 +14,12 @@ use tauri::Manager;
 use crate::ai::traits::{Embedder, ModelConfig};
 
 pub struct LocalOnnxEmbedder {
-    session: Session,
-    tokenizer: Tokenizer,
+    // Session 需要包装在 Mutex 中，因为 Session::run 需要 &mut self，
+    // 而 embed 方法只有 &self。
+    session: Mutex<Option<Session>>, 
+    tokenizer: Option<Tokenizer>,
     config: ModelConfig,
     app_data_dir: PathBuf,
-    environment: Arc<Environment>,
 }
 
 impl LocalOnnxEmbedder {
@@ -34,26 +29,11 @@ impl LocalOnnxEmbedder {
             .app_local_data_dir()
             .expect("Failed to get app local data dir");
 
-        let environment = Arc::new(
-            Environment::builder()
-                .with_name("CodeForgeAI_ONNX")
-                .build()
-                .expect("Failed to create ONNX environment"),
-        );
-
-        let session = SessionBuilder::new()
-            .unwrap()
-            .commit_from_memory(&[])
-            .unwrap();
-
-        let tokenizer = Tokenizer::new(tokenizers::models::bpe::BPE::default());
-
         Self {
-            session,
-            tokenizer,
+            session: Mutex::new(None),
+            tokenizer: None,
             config,
             app_data_dir,
-            environment,
         }
     }
 
@@ -100,17 +80,21 @@ impl LocalOnnxEmbedder {
     async fn load_session_and_tokenizer(&mut self) -> Result<()> {
         let (model_path, tokenizer_path) = self.ensure_model_files().await?;
 
-        self.session = SessionBuilder::new()
-            .unwrap()
+        let session = Session::builder()?
+            .with_optimization_level(GraphOptimizationLevel::Level3)?
+            .with_intra_threads(4)?
             .commit_from_file(&model_path)?;
+        
+        // 我们有 &mut self，所以可以直接通过 get_mut 修改 Mutex 内部的值
+        *self.session.get_mut().unwrap() = Some(session);
 
-        self.tokenizer = if tokenizer_path.exists() {
+        self.tokenizer = Some(if tokenizer_path.exists() {
             Tokenizer::from_file(&tokenizer_path)
                 .map_err(|e| anyhow!("Failed to load tokenizer from file: {e:?}"))?
         } else {
             Tokenizer::from_pretrained(&self.config.id, None)
                 .map_err(|e| anyhow!("Failed to load pretrained tokenizer: {e:?}"))?
-        };
+        });
 
         Ok(())
     }
@@ -127,11 +111,14 @@ impl Embedder for LocalOnnxEmbedder {
             return Ok(vec![]);
         }
 
+        let tokenizer = self.tokenizer.as_ref()
+            .ok_or_else(|| anyhow!("Tokenizer not initialized. Call init() first."))?;
+
         let batch_size = self.batch_size().min(texts.len());
         let mut all_embeddings = Vec::with_capacity(texts.len());
 
         for batch_texts in texts.chunks(batch_size) {
-            let encodings = self.tokenizer
+            let encodings = tokenizer
                 .encode_batch(batch_texts.to_vec(), true)
                 .map_err(|e| anyhow!("Tokenization error: {e:?}"))?;
 
@@ -156,29 +143,32 @@ impl Embedder for LocalOnnxEmbedder {
             }
 
             let batch = batch_texts.len();
+            let shape = vec![batch as i64, max_len as i64];
 
-            let input_ids_arr = Array2::<i64>::from_shape_vec((batch, max_len), input_ids)?;
-            let attention_mask_arr = Array2::<i64>::from_shape_vec((batch, max_len), attention_mask)?;
+            let input_ids_value = Value::from_array((shape.clone(), input_ids))?;
+            let attention_mask_value = Value::from_array((shape.clone(), attention_mask))?;
 
-            let inputs = inputs![
-                "input_ids" => Value::from_array(input_ids_arr)?,
-                "attention_mask" => Value::from_array(attention_mask_arr)?
-            ]?;
+            // 获取 Session 的锁以进行推理
+            let mut session_guard = self.session.lock().map_err(|_| anyhow!("Failed to lock session"))?;
+            let session = session_guard.as_mut()
+                .ok_or_else(|| anyhow!("Session not initialized. Call init() first."))?;
 
-            let outputs = self.session.run(inputs)?;
+            // 修正：移除了 ort::inputs! 宏后面的 ?
+            let outputs = session.run(ort::inputs![
+                "input_ids" => input_ids_value,
+                "attention_mask" => attention_mask_value
+            ])?;
 
             let output_value = outputs
                 .get("last_hidden_state")
-                .ok_or_else(|| anyhow!("Missing last_hidden_state in model output"))?
-                .clone();
+                .ok_or_else(|| anyhow!("Missing last_hidden_state in model output"))?;
 
-            let hidden_states: ndarray::ArrayViewD<f32> = output_value.try_extract_tensor()?;
-
-            let dim = hidden_states.shape()[2];
-
+            let (shape, data) = output_value.try_extract_tensor::<f32>()?;
+            let dim = shape[2] as usize; 
+            
             let hidden_arr = Array3::from_shape_vec(
                 (batch, max_len, dim),
-                hidden_states.to_owned().into_raw_vec_and_offset().0,
+                data.to_vec(),
             )?;
 
             let mut pooled = hidden_arr.mean_axis(Axis(1)).unwrap();

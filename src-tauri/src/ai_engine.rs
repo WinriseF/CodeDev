@@ -18,14 +18,25 @@ pub struct AIEngine {
 
 impl AIEngine {
     pub async fn new(app_handle: AppHandle) -> Result<Self> {
-        ort::init()
+        // 初始化 ONNX Runtime 环境
+        // ort 2.0 使用 init() 返回 Builder，commit() 才会真正初始化全局环境
+        if let Err(e) = ort::init()
             .with_name("CodeForgeAI_Engine")
-            .commit()?;
+            .commit() 
+        {
+            // 如果已经被初始化过，这里可能会报错，记录一下即可，不影响后续流程
+            eprintln!("ORT Environment initialization warning (or already initialized): {}", e);
+        }
 
         let db_path = app_handle
             .path()
             .app_local_data_dir()?
             .join("rag_db");
+
+        // 确保存储目录存在
+        if !db_path.exists() {
+            tokio::fs::create_dir_all(&db_path).await?;
+        }
 
         let vector_db = Arc::new(VectorDB::new(db_path).await?);
 
@@ -36,6 +47,7 @@ impl AIEngine {
         })
     }
 
+    // ... (其余部分保持不变)
     async fn get_embedder(&self, model_id: &str) -> Result<Arc<dyn Embedder>> {
         {
             let read = self.embedders.read().await;
@@ -63,6 +75,7 @@ impl AIEngine {
             }
         };
 
+        // 关键：在这里调用 init，异步加载模型
         embedder.init().await?;
         let arc_embedder: Arc<dyn Embedder> = Arc::from(embedder);
         write.insert(model_id.to_string(), arc_embedder.clone());

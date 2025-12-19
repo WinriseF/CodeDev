@@ -39,7 +39,7 @@ arrow-array = "56"
 arrow-schema = "56"
 
 # ONNX Runtime & Tokenizers (用于运行 Jina/Qwen 本地模型)
-ort = { version = "2.0.0-rc.10", features = ["download-binaries", "ndarray"] } 
+ort = { version = "2.0.0-rc.10", features = ["ndarray", "load-dynamic"] }
 
 # Tokenizers 用于将文本转换为模型输入的 ID
 tokenizers = { version = "0.22", features = ["http"] }
