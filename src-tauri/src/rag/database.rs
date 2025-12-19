@@ -1,8 +1,7 @@
-// src/rag/database.rs 完整代码
 use anyhow::{Context, Result};
 use futures::TryStreamExt;
 use lancedb::{connect, Connection, Table};
-use lancedb::query::{ExecutableQuery, QueryBase}; // 导入 trait 以启用 execute 和 limit
+use lancedb::query::{ExecutableQuery, QueryBase}; 
 use arrow_array::{
     ArrayRef, Float32Array, RecordBatch, StringArray,
 };
@@ -25,7 +24,10 @@ pub struct DocumentChunk {
 #[derive(Debug, Clone)]
 pub struct SearchResult {
     pub file_path: String,
+    // 这些字段在当前的 search_code 函数中可能暂时没用到，但未来展示详情时需要
+    #[allow(dead_code)]
     pub content: String,
+    #[allow(dead_code)]
     pub score: f32,
 }
 
@@ -132,7 +134,7 @@ impl VectorDB {
 
         let mut stream = query
             .limit(limit)
-            .execute() // 通过 ExecutableQuery trait
+            .execute() 
             .await?;
 
         let mut results = Vec::new();
@@ -154,8 +156,10 @@ impl VectorDB {
         Ok(results)
     }
 
+    // 该方法目前未被使用，加上 allow(dead_code) 避免警告
+    #[allow(dead_code)]
     pub async fn clear_collection(&self, table_name: &str) -> Result<()> {
-        match self.conn.drop_table(table_name, &[]).await { // 传空 namespace
+        match self.conn.drop_table(table_name, &[]).await { 
             Ok(_) => Ok(()),
             Err(e) => if e.to_string().contains("not found") { Ok(()) } else { Err(e.into()) },
         }

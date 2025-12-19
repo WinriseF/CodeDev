@@ -24,20 +24,25 @@ pub struct ModelConfig {
     pub description: String,
     pub dimension: usize,
     pub source: ModelSource,
-    pub batch_size: usize, // 新增：供 indexer 动态读取批次大小
+    pub batch_size: usize, 
 }
 
 #[async_trait]
 pub trait Embedder: Send + Sync {
+    /// 初始化 Embedder（例如加载模型、Tokenizer 或建立连接）
     async fn init(&mut self) -> Result<()>;
 
+    /// 生成文本的 Embeddings
     async fn embed(&self, texts: Vec<String>) -> Result<Vec<Vec<f32>>>;
 
+    /// 获取向量维度
     fn dimension(&self) -> usize;
 
+    /// 获取模型 ID (目前未被显式调用)
+    #[allow(dead_code)]
     fn model_id(&self) -> &str;
 
-    /// 返回推荐的批处理大小（可选实现，默认 16）
+    /// 获取推荐的批处理大小
     fn batch_size(&self) -> usize {
         16
     }
