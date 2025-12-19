@@ -1,8 +1,17 @@
+// src/rag/database.rs 完整代码
 use anyhow::{Context, Result};
-use arrow_array::{FixedSizeListArray, Float32Array, RecordBatch, StringArray};
-use arrow_schema::{DataType, Field, Schema};
-use futures::TryStreamExt; // 需要引入这个 trait 来处理流
+use futures::TryStreamExt;
 use lancedb::{connect, Connection, Table};
+use lancedb::query::{ExecutableQuery, QueryBase}; // 导入 trait 以启用 execute 和 limit
+use arrow_array::{
+    ArrayRef, Float32Array, RecordBatch, StringArray,
+};
+use arrow_array::builder::{
+    Float32Builder, StringBuilder,
+};
+use arrow_array::builder::FixedSizeListBuilder;
+use arrow_array::RecordBatchIterator;
+use arrow_schema::{DataType, Field, Schema};
 use std::path::PathBuf;
 use std::sync::Arc;
 
@@ -27,7 +36,6 @@ pub struct VectorDB {
 impl VectorDB {
     pub async fn new(db_path: PathBuf) -> Result<Self> {
         let db_path_str = db_path.to_string_lossy().to_string();
-        // LanceDB 0.21 connect 通常直接接受字符串
         let conn = connect(&db_path_str).execute().await?;
         Ok(Self { conn })
     }
@@ -42,7 +50,6 @@ impl VectorDB {
                 .await
                 .context("Open table failed")
         } else {
-            // 定义 Schema
             let schema = Arc::new(Schema::new(vec![
                 Field::new("file_path", DataType::Utf8, false),
                 Field::new("content", DataType::Utf8, false),
@@ -52,13 +59,14 @@ impl VectorDB {
                         Arc::new(Field::new("item", DataType::Float32, true)),
                         vector_dim as i32,
                     ),
-                    true, // nullable
+                    true,
                 ),
             ]));
 
-            // 使用 create_empty_table
+            let empty_reader = RecordBatchIterator::new(vec![].into_iter().map(Ok), schema.clone());
+
             self.conn
-                .create_empty_table(table_name, schema)
+                .create_table(table_name, Box::new(empty_reader))
                 .execute()
                 .await
                 .context("Create empty table failed")
@@ -77,101 +85,65 @@ impl VectorDB {
 
         let table = self.get_or_create_table(table_name, vector_dim).await?;
 
-        // 构建 Arrow Arrays
-        let file_paths = StringArray::from(
-            chunks
-                .iter()
-                .map(|c| c.file_path.as_str())
-                .collect::<Vec<_>>(),
-        );
-        let contents = StringArray::from(
-            chunks
-                .iter()
-                .map(|c| c.content.as_str())
-                .collect::<Vec<_>>(),
-        );
+        let mut file_path_builder = StringBuilder::new();
+        let mut content_builder = StringBuilder::new();
 
-        // 展平向量数据
-        let vectors_flat: Vec<f32> = chunks.iter().flat_map(|c| c.vector.clone()).collect();
-        let vectors_values = Float32Array::from(vectors_flat);
+        let values_builder = Float32Builder::with_capacity(chunks.len() * vector_dim);
+        let mut vector_builder = FixedSizeListBuilder::new(values_builder, vector_dim as i32);
 
-        // 构建 FixedSizeListArray
-        let vector_array = FixedSizeListArray::try_new(
-            Arc::new(Field::new("item", DataType::Float32, true)),
-            vector_dim as i32,
-            Arc::new(vectors_values),
-            None,
-        )?;
+        for chunk in &chunks {
+            file_path_builder.append_value(&chunk.file_path);
+            content_builder.append_value(&chunk.content);
+            vector_builder.values().append_slice(&chunk.vector);
+            vector_builder.append(true);
+        }
 
-        // 构建 RecordBatch
         let batch = RecordBatch::try_new(
             table.schema().await?,
             vec![
-                Arc::new(file_paths),
-                Arc::new(contents),
-                Arc::new(vector_array),
+                Arc::new(file_path_builder.finish()) as ArrayRef,
+                Arc::new(content_builder.finish()) as ArrayRef,
+                Arc::new(vector_builder.finish()) as ArrayRef,
             ],
         )?;
 
-        // 插入数据 (Box::new 以匹配迭代器类型)
+        let reader = RecordBatchIterator::new(vec![Ok(batch)], table.schema().await?);
+
         table
-            .add(Box::new(vec![batch].into_iter().map(Ok)))
+            .add(reader)
             .execute()
             .await
             .context("Insert failed")?;
-            
+
         Ok(())
     }
 
-    pub async fn search(
+    pub async fn search_table(
         &self,
         table_name: &str,
         query_vector: Vec<f32>,
         limit: usize,
     ) -> Result<Vec<SearchResult>> {
-        let table = self
-            .conn
-            .open_table(table_name)
-            .execute()
-            .await
-            .context("Open table failed")?;
+        let table = self.conn.open_table(table_name).execute().await.context("Open table failed")?;
 
-        // 修复：LanceDB 0.21+ 使用 query().nearest_to()
-        let mut stream = table
+        let query = table
             .query()
-            .nearest_to(query_vector)? // 传入查询向量
+            .nearest_to(query_vector)?;
+
+        let mut stream = query
             .limit(limit)
-            .execute()
+            .execute() // 通过 ExecutableQuery trait
             .await?;
 
-        let mut search_results = Vec::new();
+        let mut results = Vec::new();
 
-        // 处理 RecordBatch 流
         while let Some(batch) = stream.try_next().await? {
-            let file_path_col = batch
-                .column_by_name("file_path")
-                .ok_or(anyhow::anyhow!("Missing file_path column"))?
-                .as_any()
-                .downcast_ref::<StringArray>()
-                .ok_or(anyhow::anyhow!("Invalid file_path type"))?;
-
-            let content_col = batch
-                .column_by_name("content")
-                .ok_or(anyhow::anyhow!("Missing content column"))?
-                .as_any()
-                .downcast_ref::<StringArray>()
-                .ok_or(anyhow::anyhow!("Invalid content type"))?;
-
-            // _distance 是 LanceDB 自动生成的距离列
-            let distance_col = batch
-                .column_by_name("_distance")
-                .ok_or(anyhow::anyhow!("Missing _distance column"))?
-                .as_any()
-                .downcast_ref::<Float32Array>()
-                .ok_or(anyhow::anyhow!("Invalid distance type"))?;
+            let file_path_col = batch.column_by_name("file_path").unwrap().as_any().downcast_ref::<StringArray>().unwrap();
+            let content_col = batch.column_by_name("content").unwrap().as_any().downcast_ref::<StringArray>().unwrap();
+            let distance_col = batch.column_by_name("_distance").unwrap().as_any().downcast_ref::<Float32Array>().unwrap();
 
             for i in 0..batch.num_rows() {
-                search_results.push(SearchResult {
+                results.push(SearchResult {
                     file_path: file_path_col.value(i).to_string(),
                     content: content_col.value(i).to_string(),
                     score: distance_col.value(i),
@@ -179,22 +151,13 @@ impl VectorDB {
             }
         }
 
-        Ok(search_results)
+        Ok(results)
     }
 
     pub async fn clear_collection(&self, table_name: &str) -> Result<()> {
-        // LanceDB 0.21 可能不支持直接 drop_table 某些版本，
-        // 如果报错，可以尝试忽略不存在的错误
-        match self.conn.drop_table(table_name).execute().await {
+        match self.conn.drop_table(table_name, &[]).await { // 传空 namespace
             Ok(_) => Ok(()),
-            Err(e) => {
-                // 如果是“表不存在”错误，可以忽略
-                if e.to_string().contains("not found") {
-                    Ok(())
-                } else {
-                    Err(e.into())
-                }
-            }
+            Err(e) => if e.to_string().contains("not found") { Ok(()) } else { Err(e.into()) },
         }
     }
 }

@@ -1,5 +1,4 @@
-use anyhow::{anyhow, Context, Result};
-use once_cell::sync::Lazy;
+use anyhow::{anyhow, Result};
 use std::collections::HashMap;
 use std::sync::Arc;
 use tauri::{AppHandle, Manager, State};
@@ -7,20 +6,22 @@ use tokio::sync::RwLock;
 
 use crate::ai::onnx_backend::LocalOnnxEmbedder;
 use crate::ai::registry::MODEL_REGISTRY;
-use crate::ai::traits::{Embedder, ModelConfig};
+use crate::ai::traits::Embedder;
 use crate::rag::database::VectorDB;
 use crate::rag::indexer::Indexer;
-use ort::environment::Environment;
 
 pub struct AIEngine {
     embedders: RwLock<HashMap<String, Arc<dyn Embedder>>>,
     vector_db: Arc<VectorDB>,
-    ort_environment: Arc<Environment>,
     app_handle: AppHandle,
 }
 
 impl AIEngine {
     pub async fn new(app_handle: AppHandle) -> Result<Self> {
+        ort::init()
+            .with_name("CodeForgeAI_Engine")
+            .commit()?;
+
         let db_path = app_handle
             .path()
             .app_local_data_dir()?
@@ -28,32 +29,23 @@ impl AIEngine {
 
         let vector_db = Arc::new(VectorDB::new(db_path).await?);
 
-        let ort_environment = Arc::new(
-            Environment::builder()
-                .with_name("CodeForgeAI_Engine")
-                .build()?,
-        );
-
         Ok(Self {
             embedders: RwLock::new(HashMap::new()),
             vector_db,
-            ort_environment,
             app_handle,
         })
     }
 
     async fn get_embedder(&self, model_id: &str) -> Result<Arc<dyn Embedder>> {
         {
-            let reader = self.embedders.read().await;
-            if let Some(embedder) = reader.get(model_id) {
+            let read = self.embedders.read().await;
+            if let Some(embedder) = read.get(model_id) {
                 return Ok(embedder.clone());
             }
         }
 
-        let mut writer = self.embedders.write().await;
-
-        // 双检查锁
-        if let Some(embedder) = writer.get(model_id) {
+        let mut write = self.embedders.write().await;
+        if let Some(embedder) = write.get(model_id) {
             return Ok(embedder.clone());
         }
 
@@ -63,21 +55,17 @@ impl AIEngine {
             .ok_or_else(|| anyhow!("Model '{}' not found in registry", model_id))?;
 
         let mut embedder: Box<dyn Embedder> = match config.source {
-            crate::ai::traits::ModelSource::LocalOnnx { .. } => Box::new(LocalOnnxEmbedder::new(
-                config,
-                self.ort_environment.clone(),
-                self.app_handle.clone(),
-            )),
+            crate::ai::traits::ModelSource::LocalOnnx { .. } => {
+                Box::new(LocalOnnxEmbedder::new(config, self.app_handle.clone()))
+            }
             crate::ai::traits::ModelSource::RemoteAPI { .. } => {
-                return Err(anyhow!("Remote API embedder not yet implemented"));
+                return Err(anyhow!("Remote API embedder not implemented yet"));
             }
         };
 
         embedder.init().await?;
-
-        // 明确指定类型以解决类型推断问题
         let arc_embedder: Arc<dyn Embedder> = Arc::from(embedder);
-        writer.insert(model_id.to_string(), arc_embedder.clone());
+        write.insert(model_id.to_string(), arc_embedder.clone());
 
         Ok(arc_embedder)
     }
@@ -91,21 +79,17 @@ pub async fn index_project(
     engine: State<'_, AIEngine>,
 ) -> Result<usize, String> {
     let embedder = engine.get_embedder(&model_id).await.map_err(|e| e.to_string())?;
+    let table_name = format!("{}_{}", collection_name, model_id.replace('/', "_"));
 
-    let table_name = format!("{}_{}", collection_name, model_id.replace("/", "_"));
+    let indexer = Indexer::new(engine.vector_db.clone(), embedder).map_err(|e| e.to_string())?;
 
-    let indexer = Indexer::new(engine.vector_db.clone(), embedder);
-
-    let mut total_indexed_chunks = 0;
-    for path_str in paths {
-        let path = std::path::Path::new(&path_str);
-        match indexer.index_directory(path, &table_name).await {
-            Ok(count) => total_indexed_chunks += count,
-            Err(e) => return Err(format!("Failed to index directory {}: {}", path_str, e)),
-        }
+    let mut total = 0;
+    for path in paths {
+        let p = std::path::Path::new(&path);
+        total += indexer.index_directory(p, &table_name).await.map_err(|e| format!("Index {} failed: {}", path, e))?;
     }
 
-    Ok(total_indexed_chunks)
+    Ok(total)
 }
 
 #[tauri::command]
@@ -118,24 +102,31 @@ pub async fn search_code(
 ) -> Result<Vec<String>, String> {
     let embedder = engine.get_embedder(&model_id).await.map_err(|e| e.to_string())?;
 
-    let query_vector = embedder.embed(vec![query]).await.map_err(|e| e.to_string())?[0].clone();
-
-    let table_name = format!("{}_{}", collection_name, model_id.replace("/", "_"));
-
-    let search_results = engine
-        .vector_db
-        .search(&table_name, query_vector, limit * 3)
+    let embeddings = embedder
+        .embed(vec![query])
         .await
         .map_err(|e| e.to_string())?;
 
-    let mut file_paths = Vec::new();
+    let query_vector = embeddings
+        .into_iter()
+        .next()
+        .ok_or("Failed to generate embedding")?;
+
+    let table_name = format!("{}_{}", collection_name, model_id.replace('/', "_"));
+
+    let search_results = engine
+        .vector_db
+        .search_table(&table_name, query_vector, limit * 3)
+        .await
+        .map_err(|e| e.to_string())?;
+
+    let mut unique_paths = Vec::new();
     for res in search_results {
-        if !file_paths.contains(&res.file_path) {
-            file_paths.push(res.file_path);
+        if !unique_paths.contains(&res.file_path) {
+            unique_paths.push(res.file_path);
         }
     }
+    unique_paths.truncate(limit);
 
-    file_paths.truncate(limit);
-
-    Ok(file_paths)
+    Ok(unique_paths)
 }

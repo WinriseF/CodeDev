@@ -1,112 +1,118 @@
-use anyhow::{anyhow, Result};
-use async_trait::async_trait;
-use hf_hub::api::tokio::ApiBuilder;
-use ndarray::{Array2, Axis};
+// src/ai/onnx_backend.rs 完整代码
+use anyhow::{Result};
+use hf_hub::{Api, Repo, RepoType};
+use ndarray::{Array2, Array3, Axis};
 use ort::{
-    Environment, GraphOptimizationLevel, Session, SessionBuilder, Value,
+    environment::Environment,
+    session::builder::SessionBuilder,
+    value::Value,
+    inputs,
 };
+use std::path::PathBuf;
 use std::sync::Arc;
-use tauri::{AppHandle, Manager};
 use tokenizers::Tokenizer;
+use tokio::fs;
+use tauri::Manager;
 
-use super::traits::{Embedder, ModelConfig, ModelSource};
-
-const HF_MIRRORS: &[&str] = &[
-    "https://hf-mirror.com",
-    "https://huggingface.co",
-];
+use crate::ai::traits::{Embedder, ModelConfig};
 
 pub struct LocalOnnxEmbedder {
+    session: Session,
+    tokenizer: Tokenizer,
     config: ModelConfig,
-    session: Option<Session>,
-    tokenizer: Option<Tokenizer>,
+    app_data_dir: PathBuf,
     environment: Arc<Environment>,
-    app_handle: AppHandle,
 }
 
 impl LocalOnnxEmbedder {
-    pub fn new(config: ModelConfig, environment: Arc<Environment>, app_handle: AppHandle) -> Self {
+    pub fn new(config: ModelConfig, app_handle: tauri::AppHandle) -> Self {
+        let app_data_dir = app_handle.path().app_local_data_dir().expect("Failed to get app local data dir");
+
+        let environment = Arc::new(
+            Environment::builder()
+                .with_name("CodeForgeAI_ONNX")
+                .build()
+                .expect("Failed to create ONNX environment"),
+        );
+
+        let session = SessionBuilder::new(&environment)
+            .unwrap()
+            .commit_from_memory(&[])
+            .unwrap();
+
+        let tokenizer = Tokenizer::new(tokenizers::models::bpe::BPE::default());
+
         Self {
+            session,
+            tokenizer,
             config,
-            session: None,
-            tokenizer: None,
+            app_data_dir,
             environment,
-            app_handle,
         }
     }
 
-    fn mean_pool(&self, last_hidden_state: Array2<f32>, attention_mask: Array2<f32>) -> Array2<f32> {
-        let masked = last_hidden_state * attention_mask.clone().insert_axis(Axis(2)); // 注意这里维度的广播
-        let sum = masked.sum_axis(Axis(1));
-        
-        // 计算 Mask 的和，避免除以0
-        let mask_sum = attention_mask.sum_axis(Axis(1)).mapv(|x| x.max(1e-9));
-        
-        sum / mask_sum.insert_axis(Axis(1))
+    async fn ensure_model_files(&self) -> Result<(PathBuf, PathBuf)> {
+        let api = Api::new()?;
+        let repo = api.repo(Repo::with_revision(
+            match &self.config.source {
+                crate::ai::traits::ModelSource::LocalOnnx { repo_id, .. } => repo_id.clone(),
+                _ => return Err(anyhow!("Invalid source")),
+            },
+            RepoType::Model,
+            "main".to_string(),
+        ));
+
+        let model_path = self.app_data_dir.join("models").join(&self.config.id);
+        fs::create_dir_all(&model_path).await?;
+
+        let onnx_file = model_path.join("model.onnx");
+        let tokenizer_file = model_path.join("tokenizer.json");
+
+        if !onnx_file.exists() {
+            let file_name = match &self.config.source {
+                crate::ai::traits::ModelSource::LocalOnnx { file_name, .. } => file_name,
+                _ => return Err(anyhow!("Invalid source")),
+            };
+            let file = repo.get(file_name)?;
+            fs::copy(file, &onnx_file).await?;
+        }
+
+        if !tokenizer_file.exists() {
+            if let crate::ai::traits::ModelSource::LocalOnnx { tokenizer_name: Some(name), .. } = &self.config.source {
+                let tokenizer_repo = api.repo(Repo::with_revision(
+                    name.clone(),
+                    RepoType::Model,
+                    "main".to_string(),
+                ));
+                let tokenizer_src = tokenizer_repo.get("tokenizer.json")?;
+                fs::copy(tokenizer_src, &tokenizer_file).await?;
+            }
+        }
+
+        Ok((onnx_file, tokenizer_file))
     }
 
-    fn normalize_l2(&self, embeddings: &Array2<f32>) -> Array2<f32> {
-        let norms = embeddings.map_axis(Axis(1), |row| row.mapv(|v| v.powi(2)).sum().sqrt().max(1e-12));
-        embeddings / &norms.insert_axis(Axis(1))
+    async fn load_session_and_tokenizer(&mut self) -> Result<()> {
+        let (model_path, tokenizer_path) = self.ensure_model_files().await?;
+
+        self.session = SessionBuilder::new(&self.environment)
+            .unwrap()
+            .commit_from_file(&model_path)?;
+
+        self.tokenizer = if tokenizer_path.exists() {
+            Tokenizer::from_file(tokenizer_path).map_err(|e| anyhow!("Tokenizer file error: {:?}", e))?
+        } else {
+            Tokenizer::from_pretrained(&self.config.id, None).map_err(|e| anyhow!("Pretrained tokenizer error: {:?}", e))?
+        };
+
+        Ok(())
     }
 }
 
-#[async_trait]
+#[async_trait::async_trait]
 impl Embedder for LocalOnnxEmbedder {
     async fn init(&mut self) -> Result<()> {
-        let ModelSource::LocalOnnx { repo_id, file_name, tokenizer_name } = &self.config.source else {
-            return Err(anyhow!("Invalid model source"));
-        };
-
-        let cache_dir = self.app_handle.path().app_local_data_dir()?.join("models");
-
-        let mut model_path = None;
-        let mut tokenizer_path = None;
-
-        // 简单的重试逻辑
-        for endpoint in HF_MIRRORS {
-            println!("Trying to download model from {}", endpoint);
-            let api = ApiBuilder::new()
-                .with_endpoint(endpoint.to_string())
-                .with_cache_dir(cache_dir.clone())
-                .build()?;
-
-            let repo = api.repo(hf_hub::Repo::model(repo_id.clone()));
-            let tz_repo_id = tokenizer_name.as_deref().unwrap_or(repo_id);
-            let tz_repo = api.repo(hf_hub::Repo::model(tz_repo_id.to_string()));
-
-            // 尝试下载 Tokenizer
-            if tokenizer_path.is_none() {
-                if let Ok(path) = tz_repo.get("tokenizer.json").await {
-                    tokenizer_path = Some(path);
-                }
-            }
-
-            // 尝试下载 Model
-            if let Ok(path) = repo.get(file_name).await {
-                model_path = Some(path);
-                // 如果两个都找到了，就退出循环
-                if tokenizer_path.is_some() {
-                    break;
-                }
-            }
-        }
-
-        let model_path = model_path.ok_or_else(|| anyhow!("Failed to download model file: {}", file_name))?;
-        let tokenizer_path = tokenizer_path.ok_or_else(|| anyhow!("Failed to download tokenizer.json"))?;
-
-        let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| anyhow!(e))?;
-        self.tokenizer = Some(tokenizer);
-
-        // ort 2.0 session builder
-        let session = SessionBuilder::new(&self.environment)?
-            .with_optimization_level(GraphOptimizationLevel::Level3)?
-            .with_intra_threads(4)? // 适当增加线程数
-            .with_model_from_file(&model_path)?;
-
-        self.session = Some(session);
-
-        Ok(())
+        self.load_session_and_tokenizer().await
     }
 
     async fn embed(&self, texts: Vec<String>) -> Result<Vec<Vec<f32>>> {
@@ -114,68 +120,71 @@ impl Embedder for LocalOnnxEmbedder {
             return Ok(vec![]);
         }
 
-        let session = self.session.as_ref().ok_or_else(|| anyhow!("Session not initialized"))?;
-        let tokenizer = self.tokenizer.as_ref().ok_or_else(|| anyhow!("Tokenizer not initialized"))?;
+        let batch_size = self.batch_size().min(texts.len());
+        let mut all_embeddings = Vec::with_capacity(texts.len());
 
-        // 添加 query 前缀 (对于某些模型是必须的，如 e5, jina 等，这里简单处理)
-        // 注意：Jina V3 对 query 和 passage 有不同的前缀需求，这里暂时假设是 passage
-        // 生产环境应根据 task type 动态调整
-        let texts_prefixed: Vec<String> = texts; //.iter().map(|s| format!("passage: {}", s)).collect();
+        for batch_texts in texts.chunks(batch_size) {
+            let encodings = self.tokenizer.encode_batch(batch_texts.to_vec(), true)
+                .map_err(|e| anyhow!("Encode error: {:?}", e))?;
 
-        let encodings = tokenizer.encode_batch(texts_prefixed, true).map_err(|e| anyhow!(e))?;
+            let max_len = encodings.iter().map(|e| e.get_ids().len()).max().unwrap_or(0);
+            let mut input_ids: Vec<i64> = Vec::with_capacity(batch_texts.len() * max_len);
+            let mut attention_mask: Vec<i64> = Vec::with_capacity(batch_texts.len() * max_len);
 
-        let batch_size = encodings.len();
-        let seq_len = encodings[0].get_ids().len();
+            for encoding in &encodings {
+                let ids = encoding.get_ids();
+                let mask = encoding.get_attention_mask();
 
-        let input_ids: Vec<i64> = encodings.iter().flat_map(|e| e.get_ids().iter().map(|&id| id as i64)).collect();
-        let attention_mask: Vec<i64> = encodings.iter().flat_map(|e| e.get_attention_mask().iter().map(|&m| m as i64)).collect();
+                input_ids.extend(ids.iter().map(|&id| id as i64));
+                input_ids.resize(input_ids.len() + max_len - ids.len(), 0);
 
-        // 构造 ndarray
-        let input_ids_arr = ndarray::Array2::from_shape_vec((batch_size, seq_len), input_ids)?;
-        let attention_mask_arr = ndarray::Array2::from_shape_vec((batch_size, seq_len), attention_mask)?;
+                attention_mask.extend(mask.iter().map(|&m| m as i64);
+                attention_mask.resize(attention_mask.len() + max_len - mask.len(), 0);
+            }
 
-        // 创建 ORT Values
-        // 注意：ORT 2.0 中，Value::from_array 接受 &Array
-        let inputs = vec![
-            ("input_ids", Value::from_array(input_ids_arr.view())?),
-            ("attention_mask", Value::from_array(attention_mask_arr.view())?),
-        ];
+            let batch = batch_texts.len();
 
-        let outputs = session.run(inputs)?;
-        
-        // 提取输出，BERT模型通常输出是 last_hidden_state (batch, seq, hidden)
-        // 有些模型可能是 pooler_output，这里假设是 last_hidden_state (索引0)
-        let last_hidden_state = outputs[0].try_extract_tensor::<f32>()?;
-        
-        // 将 OutputTensor 转换为 ndarray 以便进行池化操作
-        // 注意：last_hidden_state 是 View，我们需要 copy 出数据或者直接操作
-        // 这里为了代码清晰，我们构建一个新的 Array2/3
-        let shape = last_hidden_state.shape(); // [batch, seq, dim]
-        let dim = shape[2];
-        
-        // 将数据复制到 ndarray 中进行计算
-        let hidden_data = last_hidden_state.view().to_slice().ok_or(anyhow!("Failed to get tensor slice"))?;
-        let hidden_arr = Array2::from_shape_vec((batch_size * seq_len, dim), hidden_data.to_vec())?
-            .into_shape((batch_size, seq_len, dim))?;
+            let input_ids_arr = Array2::<i64>::from_shape_vec((batch, max_len), input_ids)?;
+            let attention_mask_arr = Array2::<i64>::from_shape_vec((batch, max_len), attention_mask)?;
 
-        let attention_mask_f32 = attention_mask_arr.mapv(|v| v as f32);
+            let inputs = inputs![
+                "input_ids" => input_ids_arr.view().into_dyn(),
+                "attention_mask" => attention_mask_arr.view().into_dyn()
+            ]?;
 
-        // 执行 Mean Pooling
-        let mut pooled = self.mean_pool(hidden_arr, attention_mask_f32);
-        pooled = self.normalize_l2(&pooled);
+            let outputs = self.session.run(inputs)?;
 
-        Ok(pooled.outer_iter().map(|row| row.to_vec()).collect())
+            let output_value = outputs
+                .get("last_hidden_state")
+                .ok_or_else(|| anyhow!("Missing last_hidden_state"))?
+                .clone();
+
+            let hidden_states: ndarray::ArrayViewD<f32> = output_value.try_extract_tensor()?;
+
+            let dim = hidden_states.shape()[2];
+
+            let hidden_arr = Array3::from_shape_vec((batch, max_len, dim), hidden_states.to_owned().to_vec())?;
+
+            let attention_mask_f32 = attention_mask_arr.mapv(|v| v as f32);
+
+            let mut pooled = hidden_arr.mean_axis(Axis(1)).unwrap();
+
+            let norms = pooled.map_axis(Axis(1), |row| row.mapv(|v| v.powi(2)).sum().sqrt());
+            for (mut row, norm) in pooled.rows_mut().into_iter().zip(norms) {
+                if norm > 0.0 {
+                    row /= norm;
+                }
+            }
+
+            for row in pooled.outer_iter() {
+                all_embeddings.push(row.to_vec());
+            }
+        }
+
+        Ok(all_embeddings)
     }
 
-    fn dimension(&self) -> usize {
-        self.config.dimension
-    }
-
-    fn model_id(&self) -> &str {
-        &self.config.id
-    }
-
-    fn batch_size(&self) -> usize {
-        self.config.batch_size
-    }
+    fn dimension(&self) -> usize { self.config.dimension }
+    fn model_id(&self) -> &str { &self.config.id }
+    fn batch_size(&self) -> usize { self.config.batch_size }
 }
