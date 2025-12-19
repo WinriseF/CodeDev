@@ -3,12 +3,21 @@ use std::collections::HashMap;
 use std::sync::Arc;
 use tauri::{AppHandle, Manager, State};
 use tokio::sync::RwLock;
+use serde::Serialize;
 
 use crate::ai::onnx_backend::LocalOnnxEmbedder;
 use crate::ai::registry::MODEL_REGISTRY;
 use crate::ai::traits::Embedder;
 use crate::rag::database::VectorDB;
 use crate::rag::indexer::Indexer;
+
+// 定义返回给前端的数据结构
+#[derive(Serialize)]
+pub struct SearchResultDto {
+    pub path: String,
+    pub content: String,
+    pub score: f32,
+}
 
 pub struct AIEngine {
     embedders: RwLock<HashMap<String, Arc<dyn Embedder>>>,
@@ -19,13 +28,13 @@ pub struct AIEngine {
 impl AIEngine {
     pub async fn new(app_handle: AppHandle) -> Result<Self> {
         // 初始化 ONNX Runtime 环境
-        // ort 2.0 使用 init() 返回 Builder，commit() 才会真正初始化全局环境
+        // 使用 ort::init() 返回 Builder，commit() 才会真正初始化全局环境
+        // 如果环境已经被初始化过，这里可能会报错，我们捕获它但不终止程序
         if let Err(e) = ort::init()
             .with_name("CodeForgeAI_Engine")
             .commit() 
         {
-            // 如果已经被初始化过，这里可能会报错，记录一下即可，不影响后续流程
-            eprintln!("ORT Environment initialization warning (or already initialized): {}", e);
+            eprintln!("ORT Environment initialization warning (might be already initialized): {}", e);
         }
 
         let db_path = app_handle
@@ -47,7 +56,6 @@ impl AIEngine {
         })
     }
 
-    // ... (其余部分保持不变)
     async fn get_embedder(&self, model_id: &str) -> Result<Arc<dyn Embedder>> {
         {
             let read = self.embedders.read().await;
@@ -57,6 +65,7 @@ impl AIEngine {
         }
 
         let mut write = self.embedders.write().await;
+        // 双重检查，防止在获取写锁期间被其他线程写入
         if let Some(embedder) = write.get(model_id) {
             return Ok(embedder.clone());
         }
@@ -75,8 +84,9 @@ impl AIEngine {
             }
         };
 
-        // 关键：在这里调用 init，异步加载模型
+        // 关键：初始化模型（下载/加载文件）
         embedder.init().await?;
+        
         let arc_embedder: Arc<dyn Embedder> = Arc::from(embedder);
         write.insert(model_id.to_string(), arc_embedder.clone());
 
@@ -92,6 +102,8 @@ pub async fn index_project(
     engine: State<'_, AIEngine>,
 ) -> Result<usize, String> {
     let embedder = engine.get_embedder(&model_id).await.map_err(|e| e.to_string())?;
+    
+    // 表名生成策略：collection_model
     let table_name = format!("{}_{}", collection_name, model_id.replace('/', "_"));
 
     let indexer = Indexer::new(engine.vector_db.clone(), embedder).map_err(|e| e.to_string())?;
@@ -99,7 +111,11 @@ pub async fn index_project(
     let mut total = 0;
     for path in paths {
         let p = std::path::Path::new(&path);
-        total += indexer.index_directory(p, &table_name).await.map_err(|e| format!("Index {} failed: {}", path, e))?;
+        if p.exists() {
+            total += indexer.index_directory(p, &table_name).await.map_err(|e| format!("Index {} failed: {}", path, e))?;
+        } else {
+            eprintln!("Warning: Path not found during indexing: {}", path);
+        }
     }
 
     Ok(total)
@@ -111,10 +127,12 @@ pub async fn search_code(
     collection_name: String,
     model_id: String,
     limit: usize,
+    return_content: bool, // 新增参数：由前端控制是否返回代码内容
     engine: State<'_, AIEngine>,
-) -> Result<Vec<String>, String> {
+) -> Result<Vec<SearchResultDto>, String> {
     let embedder = engine.get_embedder(&model_id).await.map_err(|e| e.to_string())?;
 
+    // 1. 将查询转换为向量
     let embeddings = embedder
         .embed(vec![query])
         .await
@@ -127,19 +145,21 @@ pub async fn search_code(
 
     let table_name = format!("{}_{}", collection_name, model_id.replace('/', "_"));
 
+    // 2. 数据库检索
     let search_results = engine
         .vector_db
-        .search_table(&table_name, query_vector, limit * 3)
+        .search_table(&table_name, query_vector, limit)
         .await
         .map_err(|e| e.to_string())?;
 
-    let mut unique_paths = Vec::new();
-    for res in search_results {
-        if !unique_paths.contains(&res.file_path) {
-            unique_paths.push(res.file_path);
+    // 3. 映射结果
+    let dtos = search_results.into_iter().map(|res| {
+        SearchResultDto {
+            path: res.file_path,
+            content: if return_content { res.content } else { String::new() },
+            score: res.score,
         }
-    }
-    unique_paths.truncate(limit);
+    }).collect();
 
-    Ok(unique_paths)
+    Ok(dtos)
 }

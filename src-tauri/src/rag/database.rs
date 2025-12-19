@@ -24,10 +24,7 @@ pub struct DocumentChunk {
 #[derive(Debug, Clone)]
 pub struct SearchResult {
     pub file_path: String,
-    // 这些字段在当前的 search_code 函数中可能暂时没用到，但未来展示详情时需要
-    #[allow(dead_code)]
     pub content: String,
-    #[allow(dead_code)]
     pub score: f32,
 }
 
