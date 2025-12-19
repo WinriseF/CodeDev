@@ -14,8 +14,6 @@ use tauri::Manager;
 use crate::ai::traits::{Embedder, ModelConfig};
 
 pub struct LocalOnnxEmbedder {
-    // Session 需要包装在 Mutex 中，因为 Session::run 需要 &mut self，
-    // 而 embed 方法只有 &self。
     session: Mutex<Option<Session>>, 
     tokenizer: Option<Tokenizer>,
     config: ModelConfig,
@@ -29,6 +27,11 @@ impl LocalOnnxEmbedder {
             .app_local_data_dir()
             .expect("Failed to get app local data dir");
 
+        // --- 关键修复：设置环境变量使用国内镜像 ---
+        // 这行代码会强制 hf_hub 库走 hf-mirror.com 镜像下载，解决 10060/10054 错误
+        std::env::set_var("HF_ENDPOINT", "https://hf-mirror.com");
+        // ---------------------------------------
+
         Self {
             session: Mutex::new(None),
             tokenizer: None,
@@ -38,6 +41,7 @@ impl LocalOnnxEmbedder {
     }
 
     async fn ensure_model_files(&self) -> Result<(PathBuf, PathBuf)> {
+        // Api::new() 会自动读取上面设置的 HF_ENDPOINT 环境变量
         let api = Api::new()?;
 
         let repo_id = match &self.config.source {
@@ -53,6 +57,7 @@ impl LocalOnnxEmbedder {
         let onnx_file = model_path.join("model.onnx");
         let tokenizer_file = model_path.join("tokenizer.json");
 
+        // 这里的下载现在会走国内镜像，速度很快且稳定
         if !onnx_file.exists() {
             let file_name = match &self.config.source {
                 crate::ai::traits::ModelSource::LocalOnnx { file_name, .. } => file_name.clone(),
@@ -78,6 +83,7 @@ impl LocalOnnxEmbedder {
     }
 
     async fn load_session_and_tokenizer(&mut self) -> Result<()> {
+        // 调用 ensure_model_files 会自动处理下载
         let (model_path, tokenizer_path) = self.ensure_model_files().await?;
 
         let session = Session::builder()?
@@ -85,7 +91,6 @@ impl LocalOnnxEmbedder {
             .with_intra_threads(4)?
             .commit_from_file(&model_path)?;
         
-        // 我们有 &mut self，所以可以直接通过 get_mut 修改 Mutex 内部的值
         *self.session.get_mut().unwrap() = Some(session);
 
         self.tokenizer = Some(if tokenizer_path.exists() {
@@ -100,6 +105,7 @@ impl LocalOnnxEmbedder {
     }
 }
 
+// ... 保持 Embedder 实现代码不变
 #[async_trait::async_trait]
 impl Embedder for LocalOnnxEmbedder {
     async fn init(&mut self) -> Result<()> {
@@ -148,12 +154,10 @@ impl Embedder for LocalOnnxEmbedder {
             let input_ids_value = Value::from_array((shape.clone(), input_ids))?;
             let attention_mask_value = Value::from_array((shape.clone(), attention_mask))?;
 
-            // 获取 Session 的锁以进行推理
             let mut session_guard = self.session.lock().map_err(|_| anyhow!("Failed to lock session"))?;
             let session = session_guard.as_mut()
                 .ok_or_else(|| anyhow!("Session not initialized. Call init() first."))?;
 
-            // 修正：移除了 ort::inputs! 宏后面的 ?
             let outputs = session.run(ort::inputs![
                 "input_ids" => input_ids_value,
                 "attention_mask" => attention_mask_value
