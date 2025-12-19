@@ -6,7 +6,7 @@ authors = ["you"]
 license = ""
 repository = ""
 edition = "2021"
-rust-version = "1.57"
+rust-version = "1.75"
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
@@ -44,3 +44,29 @@ strip = true
 
 [target.'cfg(not(windows))'.dependencies]
 openssl = { version = "0.10", features = ["vendored"] }
+
+# 异步 Trait 支持，用于定义通用的 AI 接口
+async-trait = "0.1"
+futures = "0.3"
+anyhow = "1.0"
+
+# 向量数据库 (Embedded)
+lancedb = "0.21"
+arrow-array = "57.0" # LanceDB 依赖 Arrow 格式
+
+# ONNX Runtime & Tokenizers (用于运行 Jina/Qwen 本地模型)
+ort = { version = "2.0.0-rc.10", features = ["download-binaries"] }
+
+# Tokenizers 用于将文本转换为模型输入的 ID
+tokenizers = { version = "0.22", default-features = false, features = ["onig"] }
+# HuggingFace Hub 用于从 HF 自动下载模型文件
+hf-hub = { version = "0.4", features = ["tokio"] }
+# ndarray 用于处理矩阵运算 (Embedding 输出)
+ndarray = "0.17"
+
+# HTTP Client (增强现有的 reqwest，用于调用 OpenAI/DeepSeek API)
+# 确保开启 json 和 stream 特性
+reqwest = { version = "0.12", features = ["json", "stream", "multipart"] }
+
+# 文本分块工具 (用于 RAG 索引)
+text-splitter = { version = "0.27", features = ["markdown", "code"] }
