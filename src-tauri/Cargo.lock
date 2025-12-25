@@ -524,6 +524,7 @@ dependencies = [
  "chrono",
  "git2",
  "openssl",
+ "regex",
  "serde",
  "serde_json",
  "similar",

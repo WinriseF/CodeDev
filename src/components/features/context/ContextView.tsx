@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { open, save } from '@tauri-apps/plugin-dialog';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import { writeText as writeClipboard } from '@tauri-apps/plugin-clipboard-manager';
+import { invoke } from '@tauri-apps/api/core';
 import { 
   FolderOpen, RefreshCw, Loader2, FileJson, 
   PanelLeft, Search, ArrowRight, SlidersHorizontal, ChevronUp,
@@ -16,6 +17,7 @@ import { FileTreeNode } from './FileTreeNode';
 import { TokenDashboard } from './TokenDashboard';
 import { FilterManager } from './FilterManager';
 import { ContextPreview } from './ContextPreview';
+import { ScanResultDialog, SecretMatch } from './ScanResultDialog';
 import { cn } from '@/lib/utils';
 import { getText } from '@/lib/i18n';
 import { Toast, ToastType } from '@/components/ui/Toast';
@@ -25,7 +27,8 @@ export function ContextView() {
     projectRoot, fileTree, isScanning, 
     projectIgnore, updateProjectIgnore, 
     refreshTreeStatus, 
-    setProjectRoot, setFileTree, setIsScanning, toggleSelect, removeComments 
+    setProjectRoot, setFileTree, setIsScanning, toggleSelect, 
+    removeComments, detectSecrets
   } = useContextStore();
 
   const { 
@@ -44,6 +47,19 @@ export function ContextView() {
       show: false,
       msg: '',
       type: 'success'
+  });
+
+  // 扫描弹窗状态
+  const [scanState, setScanState] = useState<{
+    isOpen: boolean;
+    results: SecretMatch[];
+    pendingText: string;
+    pendingAction: 'copy' | 'save' | null;
+  }>({
+    isOpen: false,
+    results: [],
+    pendingText: '',
+    pendingAction: null
   });
 
   const activeModels = (models && models.length > 0) ? models : DEFAULT_MODELS;
@@ -66,17 +82,101 @@ export function ContextView() {
     setToastState({ show: true, msg, type });
   };
 
+  // 通用执行器：执行最终的复制或保存
+  const executeFinalAction = async (text: string, action: 'copy' | 'save') => {
+      try {
+          if (action === 'copy') {
+              await writeClipboard(text);
+              const actualTokens = Math.ceil(text.length / 4); // 简单估算用于日志
+              console.log(`Context copied! Approx tokens: ${actualTokens}`);
+              triggerToast(getText('context', 'toastCopied', language), 'success');
+          } else if (action === 'save') {
+              // 保存流程：先弹窗选路径，再写入
+              const filePath = await save({
+                  filters: [{ name: 'Text File', extensions: ['txt', 'md', 'json'] }],
+                  defaultPath: 'context.txt'
+              });
+              if (!filePath) return; // 用户取消保存
+              
+              await writeTextFile(filePath, text);
+              triggerToast(getText('context', 'toastSaved', language), 'success');
+          }
+      } catch (err) {
+          console.error("Action failed:", err);
+          triggerToast(action === 'copy' ? getText('context', 'toastCopyFail', language) : getText('context', 'toastSaveFail', language), 'error');
+      }
+  };
+
+  // 安全检查流程
+  const processWithSecurityCheck = async (text: string, action: 'copy' | 'save') => {
+      // 1. 如果开关关闭，直接执行
+      if (!detectSecrets) {
+          await executeFinalAction(text, action);
+          return;
+      }
+
+      // 2. 调用 Rust 进行扫描
+      try {
+          const results = await invoke<SecretMatch[]>('scan_for_secrets', { content: text });
+          
+          if (results && results.length > 0) {
+              setScanState({
+                  isOpen: true,
+                  results,
+                  pendingText: text,
+                  pendingAction: action
+              });
+          } else {
+              await executeFinalAction(text, action);
+          }
+      } catch (e) {
+          console.error("Security scan failed:", e);
+          triggerToast("Security scan error, proceeding anyway.", 'warning');
+          await executeFinalAction(text, action);
+      }
+  };
+
+  // 处理弹窗确认
+  const handleScanConfirm = async (strategy: 'redact' | 'raw') => {
+      const { pendingText, pendingAction, results } = scanState;
+      if (!pendingAction) return;
+
+      let finalText = pendingText;
+
+      if (strategy === 'redact') {
+          const sortedResults = [...results].sort((a, b) => b.index - a.index);
+          
+          for (const match of sortedResults) {
+              const val = match.value;
+              let maskedValue = '';
+              if (val.length <= 8) {
+                  maskedValue = '*'.repeat(val.length);
+              } else {
+                  const visiblePart = val.substring(0, 8);
+                  const maskedPart = 'X'.repeat(val.length - 8);
+                  maskedValue = visiblePart + maskedPart;
+              }
+
+              // 字符串替换：截取头部 + 替换值 + 截取尾部
+              const before = finalText.substring(0, match.index);
+              const after = finalText.substring(match.index + val.length);
+              finalText = before + maskedValue + after;
+          }
+      }
+
+      setScanState(prev => ({ ...prev, isOpen: false }));
+      await executeFinalAction(finalText, pendingAction);
+  };
+
   const handleCopyContext = async () => {
     if (isGenerating) return;
     setIsGenerating(true);
     try {
-      const { text, tokenCount } = await generateContext(fileTree, { removeComments });
-      await writeClipboard(text);
-      console.log(`Context copied! Actual tokens: ${tokenCount}`);
-      triggerToast(getText('context', 'toastCopied', language), 'success');
+      const { text } = await generateContext(fileTree, { removeComments });
+      await processWithSecurityCheck(text, 'copy');
     } catch (err) {
-      console.error("Failed to copy:", err);
-      triggerToast(getText('context', 'toastCopyFail', language), 'error');
+      console.error("Failed to generate:", err);
+      triggerToast("Generation failed", 'error');
     } finally {
       setIsGenerating(false);
     }
@@ -86,20 +186,11 @@ export function ContextView() {
     if (isGenerating) return;
     setIsGenerating(true);
     try {
-      const filePath = await save({
-        filters: [{ name: 'Text File', extensions: ['txt', 'md', 'json'] }],
-        defaultPath: 'context.txt'
-      });
-      if (!filePath) {
-        setIsGenerating(false);
-        return;
-      }
       const { text } = await generateContext(fileTree, { removeComments });
-      await writeTextFile(filePath, text);
-      triggerToast(getText('context', 'toastSaved', language), 'success');
+      await processWithSecurityCheck(text, 'save');
     } catch (err) {
-      console.error("Failed to save file:", err);
-      triggerToast(getText('context', 'toastSaveFail', language), 'error');
+      console.error("Failed to generate:", err);
+      triggerToast("Generation failed", 'error');
     } finally {
       setIsGenerating(false);
     }
@@ -244,8 +335,8 @@ export function ContextView() {
             <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
                <div className={cn(
                   "pointer-events-auto bg-background/80 backdrop-blur-md border border-border p-1 rounded-xl flex items-center shadow-sm",
-                  "transition-all duration-300 ease-out", // 动画设置
-                  "opacity-10 hover:opacity-100 hover:shadow-md hover:scale-[1.02]" // 核心交互逻辑
+                  "transition-all duration-300 ease-out", 
+                  "opacity-10 hover:opacity-100 hover:shadow-md hover:scale-[1.02]"
                )}>
                   <ViewToggleBtn 
                     active={rightViewMode === 'dashboard'} 
@@ -287,6 +378,14 @@ export function ContextView() {
         type={toastState.type} 
         show={toastState.show} 
         onDismiss={() => setToastState(prev => ({ ...prev, show: false }))} 
+      />
+
+      {/* 扫描结果弹窗 */}
+      <ScanResultDialog 
+        isOpen={scanState.isOpen}
+        results={scanState.results}
+        onConfirm={handleScanConfirm}
+        onCancel={() => setScanState(prev => ({ ...prev, isOpen: false }))}
       />
     </div>
   );

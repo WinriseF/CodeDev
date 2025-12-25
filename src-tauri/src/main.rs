@@ -14,7 +14,8 @@ use tauri::{
 
 // 引入模块
 mod git;
-mod export; // 新增模块引入
+mod export;
+mod security;
 
 // =================================================================
 // 系统监控相关数据结构
@@ -145,7 +146,8 @@ fn main() {
             git::get_git_diff,
             git::get_git_diff_text,
             // 导出命令
-            export_git_diff
+            export_git_diff,
+            security::scan_for_secrets
         ])
         .setup(|app| {
             let mut system = System::new();

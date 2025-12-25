@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { 
   CheckCircle2, AlertCircle, FileText, Database, Cpu, Save, 
-  DollarSign, PieChart, TrendingUp, AlertTriangle, Eraser, X 
+  DollarSign, PieChart, TrendingUp, AlertTriangle, Eraser, X, ShieldCheck 
 } from 'lucide-react';
 import { ContextStats } from '@/lib/context_assembler';
 import { analyzeContext } from '@/lib/context_analytics';
@@ -30,7 +30,7 @@ export function TokenDashboard({
   isGenerating 
 }: TokenDashboardProps) {
   const { language } = useAppStore();
-  const { removeComments, setRemoveComments, toggleSelect } = useContextStore();
+  const { removeComments, setRemoveComments, toggleSelect, detectSecrets, setDetectSecrets } = useContextStore();
 
   const analytics = useMemo(() => {
     return analyzeContext(fileTree, stats.estimatedTokens, models);
@@ -60,7 +60,34 @@ export function TokenDashboard({
       </div>
 
       {/* 功能开关区 */}
-      <div className="flex items-center justify-end px-2">
+      <div className="flex items-center justify-end px-2 gap-3">
+         {/* 安全检测开关 */}
+         <button 
+           onClick={() => setDetectSecrets(!detectSecrets)}
+           className={cn(
+             "flex items-center gap-3 px-4 py-2 rounded-lg border transition-all duration-200 shadow-sm",
+             detectSecrets 
+               ? "bg-orange-500/10 border-orange-500/30 text-orange-600" 
+               : "bg-card border-border text-muted-foreground hover:bg-secondary/50"
+           )}
+           title={language === 'zh' ? "复制前检测敏感信息 (API Key 等)" : "Scan for secrets before copying"}
+         >
+            <div className={cn(
+                "w-8 h-4 rounded-full relative transition-colors duration-300",
+                detectSecrets ? "bg-orange-500" : "bg-slate-300 dark:bg-slate-600"
+            )}>
+                <div className={cn(
+                    "absolute top-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-300 shadow-sm",
+                    detectSecrets ? "left-4.5 translate-x-0" : "left-0.5"
+                )} style={{ left: detectSecrets ? '18px' : '2px' }} />
+            </div>
+            <div className="flex items-center gap-2">
+                <ShieldCheck size={16} />
+                <span className="text-sm font-medium">{language === 'zh' ? "安全检测" : "Security Filter"}</span>
+            </div>
+         </button>
+
+         {/* 移除注释开关 */}
          <button 
            onClick={() => setRemoveComments(!removeComments)}
            className={cn(
