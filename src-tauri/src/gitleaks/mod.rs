@@ -20,6 +20,7 @@ use rule::get_all_rules;
 #[derive(Debug, Clone)]
 pub struct Rule {
     pub id: &'static str,
+    #[allow(dead_code)]
     pub description: &'static str,
     pub regex: Regex,
     pub entropy: Option<f64>,     
