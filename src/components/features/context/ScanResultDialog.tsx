@@ -1,9 +1,9 @@
-import { ShieldAlert, AlertTriangle, EyeOff, ShieldCheck, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ShieldAlert, AlertTriangle, Eye, EyeOff, ShieldCheck, X, CheckSquare, Square, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAppStore } from '@/store/useAppStore';
 import { getText } from '@/lib/i18n';
 
-// 与 Rust 后端 struct 对应
 export interface SecretMatch {
   kind: String;
   value: String;
@@ -14,28 +14,64 @@ export interface SecretMatch {
 interface ScanResultDialogProps {
   isOpen: boolean;
   results: SecretMatch[];
-  onConfirm: (strategy: 'redact' | 'raw') => void;
+  onConfirm: (indicesToRedact: Set<number>) => void;
   onCancel: () => void;
 }
 
 export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanResultDialogProps) {
   const { language } = useAppStore();
+  
+  // 存储被选中的 item index (用于决定是否脱敏)
+  const [selectedIndices, setSelectedIndices] = useState<Set<number>>(new Set());
+  // 存储哪些 item 被展开查看了明文
+  const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
+
+  // 初始化：默认全选
+  useEffect(() => {
+    if (isOpen && results.length > 0) {
+      const allIndices = new Set(results.map(r => r.index));
+      setSelectedIndices(allIndices);
+      setRevealedIndices(new Set());
+    }
+  }, [isOpen, results]);
 
   if (!isOpen) return null;
 
-  // 简单的脱敏预览逻辑（仅用于展示）
-  const getMaskedPreview = (val: String) => {
+  const toggleSelection = (index: number) => {
+    const newSet = new Set(selectedIndices);
+    if (newSet.has(index)) {
+      newSet.delete(index);
+    } else {
+      newSet.add(index);
+    }
+    setSelectedIndices(newSet);
+  };
+
+  const toggleReveal = (index: number) => {
+    const newSet = new Set(revealedIndices);
+    if (newSet.has(index)) {
+      newSet.delete(index);
+    } else {
+      newSet.add(index);
+    }
+    setRevealedIndices(newSet);
+  };
+
+  const getMaskedValue = (val: String) => {
     const s = val.toString();
     if (s.length <= 8) return '*'.repeat(s.length);
-    // 保留前8位，其余替换为 X
     const visiblePart = s.substring(0, 8);
-    const maskedPart = 'X'.repeat(Math.min(s.length - 8, 24)); // 限制 X 的最大长度防止溢出
+    const maskedPart = 'X'.repeat(Math.min(s.length - 8, 24)); 
     return `${visiblePart}${maskedPart}${s.length > 32 ? '...' : ''}`;
+  };
+
+  const handleConfirm = () => {
+    onConfirm(selectedIndices);
   };
 
   return (
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-200 p-4">
-      <div className="w-full max-w-[550px] bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+      <div className="w-full max-w-[650px] bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
         
         {/* Header */}
         <div className="p-6 pb-4 bg-orange-500/5 border-b border-orange-500/10">
@@ -45,14 +81,13 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
                 </div>
                 <div>
                     <h3 className="font-semibold text-lg text-foreground flex items-center gap-2">
-                        Security Alert
+                        {getText('context', 'securityAlert', language)}
                         <span className="text-xs font-normal px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-600 border border-orange-500/20">
-                            {results.length} Issues Found
+                            {getText('context', 'issuesFound', language, { count: results.length.toString() })}
                         </span>
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-                        CodeForge detected potential sensitive information in your selection. 
-                        We recommend redacting them before sharing with AI.
+                        {getText('context', 'securityMsg', language)}
                     </p>
                 </div>
                 <button onClick={onCancel} className="ml-auto text-muted-foreground hover:text-foreground">
@@ -61,58 +96,112 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
             </div>
         </div>
 
-        {/* List Body */}
-        <div className="flex-1 overflow-y-auto max-h-[40vh] p-4 custom-scrollbar bg-secondary/5 space-y-3">
-            {results.map((item, idx) => (
-                <div key={idx} className="bg-background border border-border rounded-lg p-3 shadow-sm flex flex-col gap-2">
-                    <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-foreground flex items-center gap-1.5">
-                            <AlertTriangle size={12} className="text-orange-500" />
-                            {item.kind}
-                        </span>
-                        <span className={cn(
-                            "text-[10px] px-1.5 py-0.5 rounded font-mono uppercase",
-                            item.risk_level === 'High' ? "bg-red-500/10 text-red-500" : "bg-yellow-500/10 text-yellow-500"
-                        )}>
-                            {item.risk_level} Risk
-                        </span>
-                    </div>
-                    
-                    {/* Preview Box */}
-                    <div className="flex items-center gap-3 bg-secondary/30 rounded p-2 border border-border/50">
-                        <div className="flex-1 font-mono text-xs text-muted-foreground break-all">
-                            {getMaskedPreview(item.value)}
+        {/* List */}
+        <div className="flex-1 overflow-y-auto max-h-[50vh] p-4 custom-scrollbar bg-secondary/5 space-y-3">
+            {results.map((item) => {
+                const isSelected = selectedIndices.has(item.index);
+                const isRevealed = revealedIndices.has(item.index);
+
+                return (
+                    <div 
+                        key={item.index} 
+                        className={cn(
+                            "border rounded-lg p-3 shadow-sm flex flex-col gap-2 transition-all duration-200",
+                            isSelected ? "bg-background border-border" : "bg-secondary/30 border-transparent opacity-70"
+                        )}
+                        onClick={() => toggleSelection(item.index)}
+                    >
+                        {/* Title Row */}
+                        <div className="flex items-center gap-3">
+                            <button className={cn("transition-colors", isSelected ? "text-primary" : "text-muted-foreground")}>
+                                {isSelected ? <CheckSquare size={18} /> : <Square size={18} />}
+                            </button>
+                            
+                            <span className="text-xs font-bold text-foreground flex items-center gap-1.5 flex-1">
+                                <AlertTriangle size={12} className="text-orange-500" />
+                                {item.kind}
+                            </span>
+                            
+                            <span className={cn(
+                                "text-[10px] px-1.5 py-0.5 rounded font-mono uppercase",
+                                item.risk_level === 'High' ? "bg-red-500/10 text-red-500" : "bg-yellow-500/10 text-yellow-500"
+                            )}>
+                                {isSelected ? getText('context', 'willRedact', language) : getText('context', 'keepRaw', language)}
+                            </span>
                         </div>
-                        <div className="shrink-0 text-xs text-muted-foreground whitespace-nowrap flex items-center gap-1">
-                            <EyeOff size={12} /> Masked Preview
+                        
+                        {/* Content Row */}
+                        <div className="pl-7 grid grid-cols-[1fr,auto,1fr] gap-2 items-center" onClick={e => e.stopPropagation()}>
+                            {/* Original / Raw View */}
+                            <div className="relative group">
+                                <div className={cn(
+                                    "p-2 rounded bg-secondary/50 border border-border/50 text-xs font-mono break-all min-h-[36px] flex items-center",
+                                    !isRevealed && "blur-[4px] select-none cursor-pointer hover:blur-[2px] transition-all"
+                                )} onClick={() => toggleReveal(item.index)}>
+                                    {item.value}
+                                </div>
+                                {!isRevealed && (
+                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        <EyeOff size={14} className="text-muted-foreground/50" />
+                                    </div>
+                                )}
+                            </div>
+
+                            <ArrowRight size={14} className="text-muted-foreground/30" />
+
+                            {/* Redacted Preview */}
+                            <div className={cn(
+                                "p-2 rounded border text-xs font-mono break-all min-h-[36px] flex items-center transition-colors",
+                                isSelected 
+                                    ? "bg-green-500/5 border-green-500/20 text-muted-foreground" 
+                                    : "bg-red-500/5 border-red-500/20 text-foreground decoration-destructive line-through decoration-2"
+                            )}>
+                                {isSelected ? getMaskedValue(item.value) : getText('context', 'originalKept', language)}
+                            </div>
+                        </div>
+
+                        {/* Toolbar */}
+                        <div className="pl-7 flex gap-4" onClick={e => e.stopPropagation()}>
+                            <button 
+                                onClick={() => toggleReveal(item.index)}
+                                className="text-[10px] flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+                            >
+                                {isRevealed ? <EyeOff size={10} /> : <Eye size={10} />}
+                                {isRevealed ? getText('context', 'hideOriginal', language) : getText('context', 'showOriginal', language)}
+                            </button>
                         </div>
                     </div>
-                </div>
-            ))}
+                );
+            })}
         </div>
 
-        {/* Footer Actions */}
+        {/* Footer */}
         <div className="p-4 bg-background border-t border-border flex justify-between items-center gap-3">
-            <button 
-                onClick={onCancel}
-                className="px-4 py-2 text-sm font-medium rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
-            >
-                {getText('prompts', 'cancel', language)}
-            </button>
+            <div className="text-xs text-muted-foreground flex gap-1">
+                <span dangerouslySetInnerHTML={{
+                    __html: getText('context', 'itemsSelected', language, { count: `<strong>${selectedIndices.size}</strong>` })
+                }} />
+                <span className="opacity-50">|</span>
+                <span dangerouslySetInnerHTML={{
+                    __html: getText('context', 'itemsIgnored', language, { count: `<strong>${results.length - selectedIndices.size}</strong>` })
+                }} />
+            </div>
             
             <div className="flex gap-2">
                 <button 
-                    onClick={() => onConfirm('raw')}
+                    onClick={() => onConfirm(new Set())} // 空集合 = 全部忽略
                     className="px-4 py-2 text-sm font-medium rounded-lg border border-destructive/30 text-destructive hover:bg-destructive/10 transition-colors"
                 >
-                    Ignore Risk (Unsafe)
+                    {getText('context', 'ignoreAll', language)}
                 </button>
                 <button 
-                    onClick={() => onConfirm('redact')}
+                    onClick={handleConfirm}
                     className="px-4 py-2 text-sm font-medium rounded-lg bg-green-600 text-white hover:bg-green-700 shadow-sm transition-colors flex items-center gap-2"
                 >
                     <ShieldCheck size={16} />
-                    Redact & Copy
+                    {selectedIndices.size === results.length 
+                        ? getText('context', 'redactAll', language) 
+                        : getText('context', 'redactSelected', language)}
                 </button>
             </div>
         </div>
