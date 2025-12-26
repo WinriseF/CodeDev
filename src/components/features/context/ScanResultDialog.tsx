@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShieldAlert, AlertTriangle, Eye, EyeOff, ShieldCheck, X, CheckSquare, Square, ArrowRight } from 'lucide-react';
+import { ShieldAlert, AlertTriangle, ShieldCheck, X, CheckSquare, Square, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAppStore } from '@/store/useAppStore';
 import { getText } from '@/lib/i18n';
@@ -23,15 +23,12 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
   
   // 存储被选中的 item index (用于决定是否脱敏)
   const [selectedIndices, setSelectedIndices] = useState<Set<number>>(new Set());
-  // 存储哪些 item 被展开查看了明文
-  const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
 
   // 初始化：默认全选
   useEffect(() => {
     if (isOpen && results.length > 0) {
       const allIndices = new Set(results.map(r => r.index));
       setSelectedIndices(allIndices);
-      setRevealedIndices(new Set());
     }
   }, [isOpen, results]);
 
@@ -45,16 +42,6 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
       newSet.add(index);
     }
     setSelectedIndices(newSet);
-  };
-
-  const toggleReveal = (index: number) => {
-    const newSet = new Set(revealedIndices);
-    if (newSet.has(index)) {
-      newSet.delete(index);
-    } else {
-      newSet.add(index);
-    }
-    setRevealedIndices(newSet);
   };
 
   const getMaskedValue = (val: String) => {
@@ -71,7 +58,7 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
 
   return (
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-200 p-4">
-      <div className="w-full max-w-[650px] bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+      <div className="w-full max-w-[700px] bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
         
         {/* Header */}
         <div className="p-6 pb-4 bg-orange-500/5 border-b border-orange-500/10">
@@ -100,14 +87,13 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
         <div className="flex-1 overflow-y-auto max-h-[50vh] p-4 custom-scrollbar bg-secondary/5 space-y-3">
             {results.map((item) => {
                 const isSelected = selectedIndices.has(item.index);
-                const isRevealed = revealedIndices.has(item.index);
 
                 return (
                     <div 
                         key={item.index} 
                         className={cn(
-                            "border rounded-lg p-3 shadow-sm flex flex-col gap-2 transition-all duration-200",
-                            isSelected ? "bg-background border-border" : "bg-secondary/30 border-transparent opacity-70"
+                            "border rounded-lg p-3 shadow-sm flex flex-col gap-2 transition-all duration-200 cursor-pointer",
+                            isSelected ? "bg-background border-border" : "bg-secondary/30 border-transparent opacity-70 hover:opacity-100"
                         )}
                         onClick={() => toggleSelection(item.index)}
                     >
@@ -130,45 +116,31 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
                             </span>
                         </div>
                         
-                        {/* Content Row */}
-                        <div className="pl-7 grid grid-cols-[1fr,auto,1fr] gap-2 items-center" onClick={e => e.stopPropagation()}>
-                            {/* Original / Raw View */}
-                            <div className="relative group">
-                                <div className={cn(
-                                    "p-2 rounded bg-secondary/50 border border-border/50 text-xs font-mono break-all min-h-[36px] flex items-center",
-                                    !isRevealed && "blur-[4px] select-none cursor-pointer hover:blur-[2px] transition-all"
-                                )} onClick={() => toggleReveal(item.index)}>
+                        {/* Content Row: Explicit Left (Raw) vs Right (Redacted) */}
+                        <div className="pl-7 grid grid-cols-[1fr,auto,1fr] gap-2 items-center">
+                            
+                            {/* Original / Raw View (Always Visible) */}
+                            <div className="flex flex-col gap-1 min-w-0">
+                                <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider pl-1">Original</span>
+                                <div className="p-2 rounded bg-secondary/50 border border-border/50 text-xs font-mono break-all min-h-[36px] flex items-center select-text cursor-text" onClick={e => e.stopPropagation()}>
                                     {item.value}
                                 </div>
-                                {!isRevealed && (
-                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                        <EyeOff size={14} className="text-muted-foreground/50" />
-                                    </div>
-                                )}
                             </div>
 
-                            <ArrowRight size={14} className="text-muted-foreground/30" />
+                            <ArrowRight size={14} className="text-muted-foreground/30 mt-4" />
 
                             {/* Redacted Preview */}
-                            <div className={cn(
-                                "p-2 rounded border text-xs font-mono break-all min-h-[36px] flex items-center transition-colors",
-                                isSelected 
-                                    ? "bg-green-500/5 border-green-500/20 text-muted-foreground" 
-                                    : "bg-red-500/5 border-red-500/20 text-foreground decoration-destructive line-through decoration-2"
-                            )}>
-                                {isSelected ? getMaskedValue(item.value) : getText('context', 'originalKept', language)}
+                            <div className="flex flex-col gap-1 min-w-0">
+                                <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider pl-1">Preview</span>
+                                <div className={cn(
+                                    "p-2 rounded border text-xs font-mono break-all min-h-[36px] flex items-center transition-colors",
+                                    isSelected 
+                                        ? "bg-green-500/5 border-green-500/20 text-muted-foreground" 
+                                        : "bg-red-500/5 border-red-500/20 text-foreground decoration-destructive line-through decoration-2"
+                                )}>
+                                    {isSelected ? getMaskedValue(item.value) : getText('context', 'originalKept', language)}
+                                </div>
                             </div>
-                        </div>
-
-                        {/* Toolbar */}
-                        <div className="pl-7 flex gap-4" onClick={e => e.stopPropagation()}>
-                            <button 
-                                onClick={() => toggleReveal(item.index)}
-                                className="text-[10px] flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
-                            >
-                                {isRevealed ? <EyeOff size={10} /> : <Eye size={10} />}
-                                {isRevealed ? getText('context', 'hideOriginal', language) : getText('context', 'showOriginal', language)}
-                            </button>
                         </div>
                     </div>
                 );
