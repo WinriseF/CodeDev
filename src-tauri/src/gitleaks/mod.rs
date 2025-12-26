@@ -31,12 +31,12 @@ pub struct Rule {
 pub struct SecretMatch {
     pub kind: String,        
     pub value: String,       
-    pub index: usize,        
+    pub index: usize,
     pub risk_level: String,
-    // --- 上下文信息 ---
-    pub line_number: usize,        // 敏感信息所在的行号
+    pub utf16_index: usize,        // JS 兼容索引 (关键修复)
+    pub line_number: usize,        // 行号
     pub snippet: String,           // 代码片段
-    pub snippet_start_line: usize, // 新增：代码片段的第一行是第几行
+    pub snippet_start_line: usize, // 片段起始行
 }
 
 static RULES: Lazy<&'static [Rule]> = Lazy::new(|| get_all_rules());
@@ -61,7 +61,6 @@ pub fn scan_text(text: &str) -> Vec<SecretMatch> {
     }
 
     let chunk_starts: Vec<usize> = (0..total_len).step_by(step).collect();
-
     let matches: Vec<SecretMatch> = chunk_starts.par_iter()
         .flat_map(|&start| {
             let end = std::cmp::min(start + FRAGMENT_SIZE, total_len);
@@ -99,27 +98,30 @@ pub fn scan_text(text: &str) -> Vec<SecretMatch> {
     unique_matches
 }
 
-// 填充上下文信息
 fn enrich_context(full_text: &str, m: &mut SecretMatch) {
-    // 1. 计算敏感信息所在的行号
-    let pre_match_bytes = &full_text.as_bytes()[..m.index];
-    let match_line_num = pre_match_bytes.iter().filter(|&&b| b == b'\n').count() + 1;
+    // 1. 计算 UTF-16 索引 (解决 JS 替换错位问题)
+    // 这里计算从开头到 match.index 之前的文本，在 UTF-16 编码下的长度
+    // 这与 JS 的 string.length 和 substring 逻辑完全一致
+    let prefix = &full_text[..m.index];
+    m.utf16_index = prefix.encode_utf16().count();
+
+    // 2. 计算行号
+    let match_line_num = prefix.bytes().filter(|&b| b == b'\n').count() + 1;
     m.line_number = match_line_num;
 
-    // 2. 截取上下文
-    let match_line_start = full_text[..m.index].rfind('\n').map(|i| i + 1).unwrap_or(0);
+    // 3. 截取上下文 (前2行 + 本行 + 后2行)
+    // 寻找当前行起始
+    let match_line_start = prefix.rfind('\n').map(|i| i + 1).unwrap_or(0);
     
     // 向前找2行
     let mut snippet_start = match_line_start;
-    let mut lines_back = 0; // 记录实际回溯了多少行
+    let mut lines_back = 0;
     for _ in 0..2 {
         if snippet_start == 0 { break; }
         let search_limit = snippet_start.saturating_sub(1);
         snippet_start = full_text[..search_limit].rfind('\n').map(|i| i + 1).unwrap_or(0);
         lines_back += 1;
     }
-    
-    // 计算片段起始行号
     m.snippet_start_line = match_line_num - lines_back;
 
     // 向后找2行
@@ -168,9 +170,10 @@ fn scan_fragment(fragment_str: &str, base_offset: usize, rules: &[Rule], matches
                 value: secret.to_string(),
                 index: global_index,
                 risk_level: "High".to_string(),
+                utf16_index: 0,
                 line_number: 0,
                 snippet: String::new(),
-                snippet_start_line: 0, // 初始化
+                snippet_start_line: 0,
             });
         }
     }

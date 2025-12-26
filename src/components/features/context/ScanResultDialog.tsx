@@ -9,9 +9,10 @@ export interface SecretMatch {
   value: String;
   index: number;
   risk_level: 'High' | 'Medium';
+  utf16_index: number;
   line_number: number;
   snippet: string;
-  snippet_start_line: number; // 对应后端新增字段
+  snippet_start_line: number;
 }
 
 interface ScanResultDialogProps {
@@ -62,7 +63,7 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
     return (
       <div className="bg-secondary/30 rounded-md border border-border/50 overflow-hidden text-[11px] font-mono leading-relaxed mt-2 select-text cursor-text" onClick={e => e.stopPropagation()}>
         {lines.map((line, i) => {
-          const currentLineNum = snippetStartLine + i; // 修复：使用后端传来的准确起始行号
+          const currentLineNum = snippetStartLine + i;
           const parts = line.split(valStr);
           
           return (
@@ -72,13 +73,13 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
                   {currentLineNum}
                </div>
                {/* 代码内容 */}
-               <div className="pl-3 py-0.5 whitespace-pre break-all flex-1">
+               <div className="pl-3 py-0.5 whitespace-pre break-all flex-1 text-foreground/80">
                   {parts.map((part, idx) => (
                     <span key={idx}>
                       {part}
                       {/* 高亮敏感词 */}
                       {idx < parts.length - 1 && (
-                        <span className="bg-red-500/20 text-red-600 rounded px-0.5 border border-red-500/20 font-bold">
+                        <span className="bg-red-500/10 text-red-600 rounded px-0.5 border border-red-500/20 font-bold mx-0.5">
                           {valStr}
                         </span>
                       )}
@@ -161,11 +162,10 @@ export function ScanResultDialog({ isOpen, results, onConfirm, onCancel }: ScanR
                         
                         {/* Snippet View */}
                         <div className="pl-7">
-                            {/* 传入新的 snippet_start_line 字段 */}
                             {renderSnippet(item.snippet, item.value.toString(), item.snippet_start_line)}
                         </div>
                         
-                        {/* 如果被选中脱敏，显示预览效果 */}
+                        {/* Preview changes if selected */}
                         {isSelected && (
                             <div className="pl-7 flex items-center gap-2 mt-1">
                                 <ArrowRight size={12} className="text-muted-foreground/30" />

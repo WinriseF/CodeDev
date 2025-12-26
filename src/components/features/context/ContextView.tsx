@@ -143,17 +143,14 @@ export function ContextView() {
 
       let finalText = pendingText;
 
-      // 只有当传入的集合不为空时，才执行替换逻辑
       if (indicesToRedact.size > 0) {
-          // 必须按 index 倒序排列，防止前面的替换影响后面的 index 位置
           const sortedResults = [...results].sort((a, b) => b.index - a.index);
           
           for (const match of sortedResults) {
-              // 关键判断：只有在用户勾选的列表中，才执行脱敏
               if (!indicesToRedact.has(match.index)) {
                   continue;
               }
-
+              const jsIndex = match.utf16_index; 
               const val = match.value;
               let maskedValue = '';
               if (val.length <= 8) {
@@ -163,9 +160,8 @@ export function ContextView() {
                   const maskedPart = 'X'.repeat(val.length - 8);
                   maskedValue = visiblePart + maskedPart;
               }
-
-              const before = finalText.substring(0, match.index);
-              const after = finalText.substring(match.index + val.length);
+              const before = finalText.substring(0, jsIndex);
+              const after = finalText.substring(jsIndex + val.length);
               finalText = before + maskedValue + after;
           }
       }
