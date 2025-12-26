@@ -738,7 +738,7 @@
     "id": "tldr-en-android-pkg-0",
     "type": "command",
     "title": "pkg - Upgrade all installed packages",
-    "content": "pkg upgrade",
+    "content": "pkg {{[up|upgrade]}}",
     "group": "Android Dev",
     "description": "pkg: Package management utility for Termux. (Upgrade all installed packages)",
     "tags": [
@@ -752,10 +752,10 @@
   {
     "id": "tldr-en-android-pkg-1",
     "type": "command",
-    "title": "pkg - Install a package",
-    "content": "pkg install {{package}}",
+    "title": "pkg - List currently installed packages",
+    "content": "pkg {{[list-i|list-installed]}}",
     "group": "Android Dev",
-    "description": "pkg: Package management utility for Termux. (Install a package)",
+    "description": "pkg: Package management utility for Termux. (List currently installed packages)",
     "tags": [
       "android",
       "pkg",
@@ -767,10 +767,10 @@
   {
     "id": "tldr-en-android-pkg-2",
     "type": "command",
-    "title": "pkg - Uninstall a package",
-    "content": "pkg uninstall {{package}}",
+    "title": "pkg - Install a package",
+    "content": "pkg {{[i|install]}} {{package}}",
     "group": "Android Dev",
-    "description": "pkg: Package management utility for Termux. (Uninstall a package)",
+    "description": "pkg: Package management utility for Termux. (Install a package)",
     "tags": [
       "android",
       "pkg",
@@ -782,10 +782,10 @@
   {
     "id": "tldr-en-android-pkg-3",
     "type": "command",
-    "title": "pkg - Reinstall a package",
-    "content": "pkg reinstall {{package}}",
+    "title": "pkg - Uninstall a package",
+    "content": "pkg {{[un|uninstall]}} {{package}}",
     "group": "Android Dev",
-    "description": "pkg: Package management utility for Termux. (Reinstall a package)",
+    "description": "pkg: Package management utility for Termux. (Uninstall a package)",
     "tags": [
       "android",
       "pkg",
@@ -797,10 +797,55 @@
   {
     "id": "tldr-en-android-pkg-4",
     "type": "command",
+    "title": "pkg - Reinstall a package",
+    "content": "pkg {{[rei|reinstall]}} {{package}}",
+    "group": "Android Dev",
+    "description": "pkg: Package management utility for Termux. (Reinstall a package)",
+    "tags": [
+      "android",
+      "pkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-android-pkg-5",
+    "type": "command",
     "title": "pkg - Search for a package",
-    "content": "pkg search {{package}}",
+    "content": "pkg {{[se|search]}} {{package}}",
     "group": "Android Dev",
     "description": "pkg: Package management utility for Termux. (Search for a package)",
+    "tags": [
+      "android",
+      "pkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-android-pkg-6",
+    "type": "command",
+    "title": "pkg - Show information about specific package",
+    "content": "pkg {{[sh|show]}} {{package}}",
+    "group": "Android Dev",
+    "description": "pkg: Package management utility for Termux. (Show information about specific package)",
+    "tags": [
+      "android",
+      "pkg",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-android-pkg-7",
+    "type": "command",
+    "title": "pkg - Display help",
+    "content": "pkg {{[h|help]}}",
+    "group": "Android Dev",
+    "description": "pkg: Package management utility for Termux. (Display help)",
     "tags": [
       "android",
       "pkg",

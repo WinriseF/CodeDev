@@ -1518,7 +1518,7 @@
     "id": "tldr-en-osx-csrutil-4",
     "type": "command",
     "title": "csrutil - Add an IPv4 address to the list of allowed NetBoot sources",
-    "content": "csrutil netboot add {{ip}}",
+    "content": "csrutil netboot add {{ip_address}}",
     "group": "macOS",
     "description": "csrutil: Manage the System Integrity Protection configuration. (Add an IPv4 address to the list of allowed NetBoot sources)",
     "tags": [
@@ -4794,6 +4794,66 @@
     "tags": [
       "osx",
       "airport",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-osx-trash-0",
+    "type": "command",
+    "title": "trash - Move a file to the trash",
+    "content": "trash {{path/to/file}}",
+    "group": "macOS",
+    "description": "trash: Move files and directories to the user trash folder. (Move a file to the trash)",
+    "tags": [
+      "osx",
+      "trash",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-osx-trash-1",
+    "type": "command",
+    "title": "trash - Move multiple items or directories to the trash",
+    "content": "trash {{path/to/file_or_directory1 path/to/file_or_directory2 ...}}",
+    "group": "macOS",
+    "description": "trash: Move files and directories to the user trash folder. (Move multiple items or directories to the trash)",
+    "tags": [
+      "osx",
+      "trash",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-osx-trash-2",
+    "type": "command",
+    "title": "trash - Move files to the trash with verbose output",
+    "content": "trash {{[-v|--verbose]}} {{path/to/file1 path/to/file2 ...}}",
+    "group": "macOS",
+    "description": "trash: Move files and directories to the user trash folder. (Move files to the trash with verbose output)",
+    "tags": [
+      "osx",
+      "trash",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-osx-trash-3",
+    "type": "command",
+    "title": "trash - Display help",
+    "content": "trash {{[-h|--help]}}",
+    "group": "macOS",
+    "description": "trash: Move files and directories to the user trash folder. (Display help)",
+    "tags": [
+      "osx",
+      "trash",
       "tldr",
       "en"
     ],

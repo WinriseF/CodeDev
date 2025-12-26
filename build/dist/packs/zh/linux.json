@@ -6410,7 +6410,7 @@
     "title": "dd - 从 isohybrid 文件（如 `archlinux-xxx.iso`）创建可启动 USB 驱动器并显示进度",
     "content": "sudo dd if={{路径/到/文件.iso}} of={{/dev/usb_drive}} status=progress",
     "group": "Linux 运维",
-    "description": "dd: 转换和复制文件。 参考命令：`caligula`。 (从 isohybrid 文件（如 `archlinux-xxx.iso`）创建可启动 USB 驱动器并显示进度)",
+    "description": "dd: 转换和复制文件。 另请参阅：`caligula`。 (从 isohybrid 文件（如 `archlinux-xxx.iso`）创建可启动 USB 驱动器并显示进度)",
     "tags": [
       "linux",
       "dd",
@@ -6425,7 +6425,7 @@
     "title": "dd - 以 4 MiB 块大小克隆驱动器到另一个驱动器，并在命令终止前刷新写入",
     "content": "sudo dd bs=4M conv=fsync if={{/dev/源驱动器}} of={{/dev/目标驱动器}}",
     "group": "Linux 运维",
-    "description": "dd: 转换和复制文件。 参考命令：`caligula`。 (以 4 MiB 块大小克隆驱动器到另一个驱动器，并在命令终止前刷新写入)",
+    "description": "dd: 转换和复制文件。 另请参阅：`caligula`。 (以 4 MiB 块大小克隆驱动器到另一个驱动器，并在命令终止前刷新写入)",
     "tags": [
       "linux",
       "dd",
@@ -6440,7 +6440,7 @@
     "title": "dd - 使用内核随机驱动程序生成具有指定数量随机字节的文件",
     "content": "dd bs={{100}} count={{1}} if=/dev/urandom of={{路径/到/随机文件}}",
     "group": "Linux 运维",
-    "description": "dd: 转换和复制文件。 参考命令：`caligula`。 (使用内核随机驱动程序生成具有指定数量随机字节的文件)",
+    "description": "dd: 转换和复制文件。 另请参阅：`caligula`。 (使用内核随机驱动程序生成具有指定数量随机字节的文件)",
     "tags": [
       "linux",
       "dd",
@@ -6455,7 +6455,7 @@
     "title": "dd - 测试磁盘的写入性能",
     "content": "dd bs={{1M}} count={{1024}} if=/dev/zero of={{路径/到/1GB文件}}",
     "group": "Linux 运维",
-    "description": "dd: 转换和复制文件。 参考命令：`caligula`。 (测试磁盘的写入性能)",
+    "description": "dd: 转换和复制文件。 另请参阅：`caligula`。 (测试磁盘的写入性能)",
     "tags": [
       "linux",
       "dd",
@@ -6470,7 +6470,7 @@
     "title": "dd - 创建系统备份，保存为 IMG 文件（稍后可通过交换 `if` 和 `of` 参数恢复），并显示进度",
     "content": "dd if={{/dev/驱动器设备}} of={{路径/到/文件.img}} status=progress",
     "group": "Linux 运维",
-    "description": "dd: 转换和复制文件。 参考命令：`caligula`。 (创建系统备份，保存为 IMG 文件（稍后可通过交换 `if` 和 `of` 参数恢复），并显示进度)",
+    "description": "dd: 转换和复制文件。 另请参阅：`caligula`。 (创建系统备份，保存为 IMG 文件（稍后可通过交换 `if` 和 `of` 参数恢复），并显示进度)",
     "tags": [
       "linux",
       "dd",
@@ -6485,7 +6485,7 @@
     "title": "dd - 检查正在进行的 `dd` 操作的进度（在另一个 shell 中运行此命令）",
     "content": "progress",
     "group": "Linux 运维",
-    "description": "dd: 转换和复制文件。 参考命令：`caligula`。 (检查正在进行的 `dd` 操作的进度（在另一个 shell 中运行此命令）)",
+    "description": "dd: 转换和复制文件。 另请参阅：`caligula`。 (检查正在进行的 `dd` 操作的进度（在另一个 shell 中运行此命令）)",
     "tags": [
       "linux",
       "dd",

@@ -2295,51 +2295,6 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-qm-disk-rescan-0",
-    "type": "command",
-    "title": "qm-disk-rescan - Rescan all storages and update disk sizes and unused disk images",
-    "content": "qm {{[di|disk]}} {{[resc|rescan]}}",
-    "group": "Linux Ops",
-    "description": "qm-disk-rescan: Rescan all storages and update disk sizes and unused disk images of virtual machines. (Rescan all storages and update disk sizes and unused disk images)",
-    "tags": [
-      "linux",
-      "qm-disk-rescan",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-qm-disk-rescan-1",
-    "type": "command",
-    "title": "qm-disk-rescan - Perform a dry-run of a rescan and do not write any changes to configurations",
-    "content": "qm {{[di|disk]}} {{[resc|rescan]}} --dryrun",
-    "group": "Linux Ops",
-    "description": "qm-disk-rescan: Rescan all storages and update disk sizes and unused disk images of virtual machines. (Perform a dry-run of a rescan and do not write any changes to configurations)",
-    "tags": [
-      "linux",
-      "qm-disk-rescan",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-qm-disk-rescan-2",
-    "type": "command",
-    "title": "qm-disk-rescan - Specify a virtual machine by its ID",
-    "content": "qm {{[di|disk]}} {{[resc|rescan]}} --vmid {{100}}",
-    "group": "Linux Ops",
-    "description": "qm-disk-rescan: Rescan all storages and update disk sizes and unused disk images of virtual machines. (Specify a virtual machine by its ID)",
-    "tags": [
-      "linux",
-      "qm-disk-rescan",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
     "id": "tldr-en-linux-getsebool-0",
     "type": "command",
     "title": "getsebool - Show the current setting of a boolean",
@@ -16143,7 +16098,7 @@
     "id": "tldr-en-linux-iptables-2",
     "type": "command",
     "title": "iptables - Append rule to chain policy for IP",
-    "content": "sudo iptables {{[-A|--append]}} {{chain}} {{[-s|--source]}} {{ip}} {{[-j|--jump]}} {{rule}}",
+    "content": "sudo iptables {{[-A|--append]}} {{chain}} {{[-s|--source]}} {{ip_address}} {{[-j|--jump]}} {{rule}}",
     "group": "Linux Ops",
     "description": "iptables: Configure tables, chains, and rules of the Linux kernel IPv4 firewall. Use `ip6tables` to set rules for IPv6 traffic. (Append rule to chain policy for IP)",
     "tags": [
@@ -16158,7 +16113,7 @@
     "id": "tldr-en-linux-iptables-3",
     "type": "command",
     "title": "iptables - Append rule to chain policy for IP considering protocol and port",
-    "content": "sudo iptables {{[-A|--append]}} {{chain}} {{[-s|--source]}} {{ip}} {{[-p|--protocol]}} {{tcp|udp|icmp|...}} --dport {{port}} {{[-j|--jump]}} {{rule}}",
+    "content": "sudo iptables {{[-A|--append]}} {{chain}} {{[-s|--source]}} {{ip_address}} {{[-p|--protocol]}} {{tcp|udp|icmp|...}} --dport {{port}} {{[-j|--jump]}} {{rule}}",
     "group": "Linux Ops",
     "description": "iptables: Configure tables, chains, and rules of the Linux kernel IPv4 firewall. Use `ip6tables` to set rules for IPv6 traffic. (Append rule to chain policy for IP considering protocol and port)",
     "tags": [
@@ -23130,21 +23085,6 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-qm-disk-import-0",
-    "type": "command",
-    "title": "qm-disk-import - Import a VMDK/`.qcow2`/raw disk image using a specific storage name",
-    "content": "qm {{[di|disk]}} {{[i|import]}} {{vm_id}} {{path/to/disk}} {{storage_name}} --format {{qcow2|raw|vmdk}}",
-    "group": "Linux Ops",
-    "description": "qm-disk-import: Import a disk image to a virtual machine as an unused disk. The supported image formats for `qemu-img`, such as raw, qcow2, qed, vdi, vmdk, and vhd must be used. (Import a VMDK/`.qcow2`/raw disk image using a specific storage name)",
-    "tags": [
-      "linux",
-      "qm-disk-import",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
     "id": "tldr-en-linux-aa-logprof-0",
     "type": "command",
     "title": "aa-logprof - Interactively review and update profiles based on system logs",
@@ -24498,7 +24438,7 @@
     "id": "tldr-en-linux-whatis-1",
     "type": "command",
     "title": "whatis - Don't cut the description off at the end of the line",
-    "content": "whatis --long {{command}}",
+    "content": "whatis {{[-l|--long]}} {{command}}",
     "group": "Linux Ops",
     "description": "whatis: Display one-line descriptions from manual pages. (Don't cut the description off at the end of the line)",
     "tags": [
@@ -24513,7 +24453,7 @@
     "id": "tldr-en-linux-whatis-2",
     "type": "command",
     "title": "whatis - Display descriptions for all commands matching a glob",
-    "content": "whatis --wildcard {{net*}}",
+    "content": "whatis {{[-w|--wildcard]}} {{net*}}",
     "group": "Linux Ops",
     "description": "whatis: Display one-line descriptions from manual pages. (Display descriptions for all commands matching a glob)",
     "tags": [
@@ -24528,7 +24468,7 @@
     "id": "tldr-en-linux-whatis-3",
     "type": "command",
     "title": "whatis - Search man page descriptions with a `regex`",
-    "content": "whatis --regex '{{wish[0-9]\\.[0-9]}}'",
+    "content": "whatis {{[-r|--regex]}} '{{wish[0-9]\\.[0-9]}}'",
     "group": "Linux Ops",
     "description": "whatis: Display one-line descriptions from manual pages. (Search man page descriptions with a `regex`)",
     "tags": [
@@ -24543,7 +24483,7 @@
     "id": "tldr-en-linux-whatis-4",
     "type": "command",
     "title": "whatis - Display descriptions in a specific language",
-    "content": "whatis --locale={{en}} {{command}}",
+    "content": "whatis {{[-L|--locale]}} {{en}} {{command}}",
     "group": "Linux Ops",
     "description": "whatis: Display one-line descriptions from manual pages. (Display descriptions in a specific language)",
     "tags": [
@@ -28337,6 +28277,21 @@
   {
     "id": "tldr-en-linux-qm-guest-2",
     "type": "command",
+    "title": "qm-guest - Set an already hashed password for a specific user in a virtual machine interactively",
+    "content": "qm {{[g|guest]}} {{[p|passwd]}} {{vm_id}} {{username}} --crypted 1",
+    "group": "Linux Ops",
+    "description": "qm-guest: Manage a VM guest agent. (Set an already hashed password for a specific user in a virtual machine interactively)",
+    "tags": [
+      "linux",
+      "qm-guest",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-qm-guest-3",
+    "type": "command",
     "title": "qm-guest - Execute a specific QEMU Guest Agent command",
     "content": "qm {{[g|guest]}} {{[c|cmd]}} {{virtual_machine_id}} {{fsfreeze-freeze|fsfreeze-status|fsfreeze-thaw|fstrim|get-fsinfo|...}}",
     "group": "Linux Ops",
@@ -28350,12 +28305,57 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-qm-guest-3",
+    "id": "tldr-en-linux-qm-guest-4",
     "type": "command",
     "title": "qm-guest - Execute a specific command via a guest agent",
     "content": "qm {{[g|guest]}} exec {{vm_id}} {{command}} {{argument1 argument2 ...}}",
     "group": "Linux Ops",
     "description": "qm-guest: Manage a VM guest agent. (Execute a specific command via a guest agent)",
+    "tags": [
+      "linux",
+      "qm-guest",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-qm-guest-5",
+    "type": "command",
+    "title": "qm-guest - Execute a specific command via a guest agent asynchronously",
+    "content": "qm {{[g|guest]}} exec {{vm_id}} {{argument1 argument2 ...}} --synchronous 0",
+    "group": "Linux Ops",
+    "description": "qm-guest: Manage a VM guest agent. (Execute a specific command via a guest agent asynchronously)",
+    "tags": [
+      "linux",
+      "qm-guest",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-qm-guest-6",
+    "type": "command",
+    "title": "qm-guest - Execute a specific command via a guest agent with a specified timeout of 10 seconds",
+    "content": "qm {{[g|guest]}} exec {{vm_id}} {{argument1 argument2...}} --timeout {{10}}",
+    "group": "Linux Ops",
+    "description": "qm-guest: Manage a VM guest agent. (Execute a specific command via a guest agent with a specified timeout of 10 seconds)",
+    "tags": [
+      "linux",
+      "qm-guest",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-qm-guest-7",
+    "type": "command",
+    "title": "qm-guest - Execute a specific command via a guest agent and forward input from `stdin` until EOF to the guest agent",
+    "content": "qm {{[g|guest]}} exec {{vm_id}} {{argument1 argument2 ...}} --pass-stdin 1",
+    "group": "Linux Ops",
+    "description": "qm-guest: Manage a VM guest agent. (Execute a specific command via a guest agent and forward input from `stdin` until EOF to the guest agent)",
     "tags": [
       "linux",
       "qm-guest",
@@ -30594,6 +30594,21 @@
     "tags": [
       "linux",
       "dirbuster",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-qm-cloudinit-0",
+    "type": "command",
+    "title": "qm-cloudinit - Generate a cloudinit file for a specific configuration type",
+    "content": "qm {{[clou|cloudinit]}} {{[d|dump]}} {{virtual_machine_id}} {{meta|network|user}}",
+    "group": "Linux Ops",
+    "description": "qm-cloudinit: Manage Cloud-Init settings. (Generate a cloudinit file for a specific configuration type)",
+    "tags": [
+      "linux",
+      "qm-cloudinit",
       "tldr",
       "en"
     ],
@@ -40500,36 +40515,6 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-qm-disk-move-0",
-    "type": "command",
-    "title": "qm-disk-move - Move a virtual disk",
-    "content": "qm {{[di|disk]}} {{[m|move]}} {{vm_id}} {{destination}} {{index}}",
-    "group": "Linux Ops",
-    "description": "qm-disk-move: Move a virtual disk from one storage to another within the same Proxmox cluster. (Move a virtual disk)",
-    "tags": [
-      "linux",
-      "qm-disk-move",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-qm-disk-move-1",
-    "type": "command",
-    "title": "qm-disk-move - Delete the previous copy of the virtual disk",
-    "content": "qm {{[di|disk]}} {{[m|move]}} --delete {{vm_id}} {{destination}} {{index}}",
-    "group": "Linux Ops",
-    "description": "qm-disk-move: Move a virtual disk from one storage to another within the same Proxmox cluster. (Delete the previous copy of the virtual disk)",
-    "tags": [
-      "linux",
-      "qm-disk-move",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
     "id": "tldr-en-linux-scancel-0",
     "type": "command",
     "title": "scancel - Cancel a job using its ID",
@@ -45482,10 +45467,10 @@
   {
     "id": "tldr-en-linux-xdg-user-dirs-update-0",
     "type": "command",
-    "title": "xdg-user-dirs-update - Change XDG's DESKTOP directory to the specified directory (must be absolute)",
-    "content": "xdg-user-dirs-update --set DESKTOP \"{{path/to/directory}}\"",
+    "title": "xdg-user-dirs-update - Change XDG's DESKTOP directory to the specified directory",
+    "content": "xdg-user-dirs-update --set DESKTOP \"/{{path/to/directory}}\"",
     "group": "Linux Ops",
-    "description": "xdg-user-dirs-update: Update XDG user directories. (Change XDG's DESKTOP directory to the specified directory (must be absolute))",
+    "description": "xdg-user-dirs-update: Update XDG user directories. (Change XDG's DESKTOP directory to the specified directory)",
     "tags": [
       "linux",
       "xdg-user-dirs-update",
@@ -45498,7 +45483,7 @@
     "id": "tldr-en-linux-xdg-user-dirs-update-1",
     "type": "command",
     "title": "xdg-user-dirs-update - Write the result to the specified dry-run-file instead of the `user-dirs.dirs` file",
-    "content": "xdg-user-dirs-update --dummy-output \"{{path/to/dry_run_file}}\" --set {{xdg_user_directory}} \"{{path/to/directory}}\"",
+    "content": "xdg-user-dirs-update --dummy-output \"{{path/to/dry_run_file}}\" --set {{xdg_user_directory}} \"/{{path/to/directory}}\"",
     "group": "Linux Ops",
     "description": "xdg-user-dirs-update: Update XDG user directories. (Write the result to the specified dry-run-file instead of the `user-dirs.dirs` file)",
     "tags": [
@@ -46082,10 +46067,10 @@
   {
     "id": "tldr-en-linux-lsblk-7",
     "type": "command",
-    "title": "lsblk - Display a customized summary using a comma-separated list of columns",
-    "content": "lsblk {{[-o|--output]}} {{NAME,ROTA,SERIAL,MODEL,TRAN,TYPE,SIZE,FSTYPE,MOUNTPOINT,...}}",
+    "title": "lsblk - Add extra information to the output using a comma-separated list of columns (omit the `+` sign to only display the specified columns)",
+    "content": "lsblk {{[-o|--output]}} +{{NAME,ROTA,SERIAL,MODEL,TRAN,TYPE,SIZE,FSTYPE,MOUNTPOINT,...}}",
     "group": "Linux Ops",
-    "description": "lsblk: List information about devices. (Display a customized summary using a comma-separated list of columns)",
+    "description": "lsblk: List information about devices. (Add extra information to the output using a comma-separated list of columns (omit the `+` sign to only display the specified columns))",
     "tags": [
       "linux",
       "lsblk",
@@ -59507,10 +59492,10 @@
   {
     "id": "tldr-en-linux-sed-0",
     "type": "command",
-    "title": "sed - Replace \"apple\" with \"mango\" on all lines using basic `regex`, print to `stdout`",
+    "title": "sed - [s]ubstitute all occurrences of \"apple\" with \"mango\" on all lines, print to `stdout`",
     "content": "{{command}} | sed 's/apple/mango/g'",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. (Replace \"apple\" with \"mango\" on all lines using basic `regex`, print to `stdout`)",
+    "description": "sed: GNU stream editor for filtering and transforming text. ([s]ubstitute all occurrences of \"apple\" with \"mango\" on all lines, print to `stdout`)",
     "tags": [
       "linux",
       "sed",
@@ -59522,10 +59507,10 @@
   {
     "id": "tldr-en-linux-sed-1",
     "type": "command",
-    "title": "sed - Replace \"apple\" with \"APPLE\" on all lines using extended `regex`, print to `stdout`",
-    "content": "{{command}} | sed {{[-E|--regexp-extended]}} 's/(apple)/\\U\\1/g'",
+    "title": "sed - Replace \"apple\" with \"mango\" in-place in a file (overwriting original file)",
+    "content": "sed {{[-i|--in-place]}} 's/apple/mango/g' {{path/to/file}}",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. (Replace \"apple\" with \"APPLE\" on all lines using extended `regex`, print to `stdout`)",
+    "description": "sed: GNU stream editor for filtering and transforming text. (Replace \"apple\" with \"mango\" in-place in a file (overwriting original file))",
     "tags": [
       "linux",
       "sed",
@@ -59537,10 +59522,10 @@
   {
     "id": "tldr-en-linux-sed-2",
     "type": "command",
-    "title": "sed - Use basic `regex` to replace \"apple\" with \"mango\" and \"orange\" with \"lime\" in-place in a file (overwriting original file)",
-    "content": "sed {{[-i|--in-place]}} -e 's/apple/mango/g' -e 's/orange/lime/g' {{path/to/file}}",
+    "title": "sed - Run multiple substitutions in one command",
+    "content": "{{command}} | sed -e '{{s/apple/mango/g}}' -e '{{s/orange/lime/g}}'",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. (Use basic `regex` to replace \"apple\" with \"mango\" and \"orange\" with \"lime\" in-place in a file (overwriting original file))",
+    "description": "sed: GNU stream editor for filtering and transforming text. (Run multiple substitutions in one command)",
     "tags": [
       "linux",
       "sed",
@@ -59552,10 +59537,10 @@
   {
     "id": "tldr-en-linux-sed-3",
     "type": "command",
-    "title": "sed - Execute a specific `sed` script file and print the result to `stdout`",
-    "content": "{{command}} | sed {{[-f|--file]}} {{path/to/script.sed}}",
+    "title": "sed - Use a custom delimiter (useful when the pattern contains slashes)",
+    "content": "{{command}} | sed '{{s#////#____#g}}'",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. (Execute a specific `sed` script file and print the result to `stdout`)",
+    "description": "sed: GNU stream editor for filtering and transforming text. (Use a custom delimiter (useful when the pattern contains slashes))",
     "tags": [
       "linux",
       "sed",
@@ -59566,21 +59551,6 @@
   },
   {
     "id": "tldr-en-linux-sed-4",
-    "type": "command",
-    "title": "sed - [p]rint only the first line to `stdout`",
-    "content": "{{command}} | sed {{[-n|--quiet]}} '1p'",
-    "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. ([p]rint only the first line to `stdout`)",
-    "tags": [
-      "linux",
-      "sed",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-sed-5",
     "type": "command",
     "title": "sed - [d]elete lines 1 to 5 of a file and back up the original file with a `.orig` extension",
     "content": "sed {{[-i|--in-place=]}}{{.orig}} '1,5d' {{path/to/file}}",
@@ -59595,12 +59565,27 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-sed-5",
+    "type": "command",
+    "title": "sed - [p]rint only the first line to `stdout`",
+    "content": "{{command}} | sed {{[-n|--quiet]}} '1p'",
+    "group": "Linux Ops",
+    "description": "sed: GNU stream editor for filtering and transforming text. ([p]rint only the first line to `stdout`)",
+    "tags": [
+      "linux",
+      "sed",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-sed-6",
     "type": "command",
-    "title": "sed - [i]nsert a new line at the beginning of a file, overwriting the original file in-place",
+    "title": "sed - [i]nsert a new line at the beginning of a file, overwriting the original file",
     "content": "sed {{[-i|--in-place]}} '1i\\your new line text\\' {{path/to/file}}",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. ([i]nsert a new line at the beginning of a file, overwriting the original file in-place)",
+    "description": "sed: GNU stream editor for filtering and transforming text. ([i]nsert a new line at the beginning of a file, overwriting the original file)",
     "tags": [
       "linux",
       "sed",
@@ -59612,10 +59597,10 @@
   {
     "id": "tldr-en-linux-sed-7",
     "type": "command",
-    "title": "sed - Delete blank lines (with or without spaces/tabs) from a file, overwriting the original file in-place",
+    "title": "sed - Delete blank lines (with or without spaces/tabs) from a file, overwriting the original file",
     "content": "sed {{[-i|--in-place]}} '/^[[:space:]]*$/d' {{path/to/file}}",
     "group": "Linux Ops",
-    "description": "sed: GNU stream editor for filtering and transforming text. (Delete blank lines (with or without spaces/tabs) from a file, overwriting the original file in-place)",
+    "description": "sed: GNU stream editor for filtering and transforming text. (Delete blank lines (with or without spaces/tabs) from a file, overwriting the original file)",
     "tags": [
       "linux",
       "sed",
@@ -61203,7 +61188,7 @@
     "id": "tldr-en-linux-xdg-settings-0",
     "type": "command",
     "title": "xdg-settings - Print the default web browser",
-    "content": "xdg-settings get {{default-web-browser}}",
+    "content": "xdg-settings get default-web-browser",
     "group": "Linux Ops",
     "description": "xdg-settings: Manage settings of XDG-compatible desktop environments. (Print the default web browser)",
     "tags": [
@@ -61218,7 +61203,7 @@
     "id": "tldr-en-linux-xdg-settings-1",
     "type": "command",
     "title": "xdg-settings - Set the default web browser to Firefox",
-    "content": "xdg-settings set {{default-web-browser}} {{firefox.desktop}}",
+    "content": "xdg-settings set default-web-browser {{firefox.desktop}}",
     "group": "Linux Ops",
     "description": "xdg-settings: Manage settings of XDG-compatible desktop environments. (Set the default web browser to Firefox)",
     "tags": [
@@ -61233,7 +61218,7 @@
     "id": "tldr-en-linux-xdg-settings-2",
     "type": "command",
     "title": "xdg-settings - Set the default mail URL scheme handler to Evolution",
-    "content": "xdg-settings set {{default-url-scheme-handler}} {{mailto}} {{evolution.desktop}}",
+    "content": "xdg-settings set default-url-scheme-handler mailto {{evolution.desktop}}",
     "group": "Linux Ops",
     "description": "xdg-settings: Manage settings of XDG-compatible desktop environments. (Set the default mail URL scheme handler to Evolution)",
     "tags": [
@@ -62460,6 +62445,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-beet-0",
+    "type": "command",
+    "title": "beet - Add music from a specific directory to the library, attempting to get correct tags for it from MusicBrainz",
+    "content": "beet import {{path/to/directory}}",
+    "group": "Linux Ops",
+    "description": "beet: Manage the beets media library. (Add music from a specific directory to the library, attempting to get correct tags for it from MusicBrainz)",
+    "tags": [
+      "linux",
+      "beet",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-beet-1",
+    "type": "command",
+    "title": "beet - Add a single song to the library, attempting to get correct tags for it from MusicBrainz",
+    "content": "beet import {{[-s|--singletons]}} {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "beet: Manage the beets media library. (Add a single song to the library, attempting to get correct tags for it from MusicBrainz)",
+    "tags": [
+      "linux",
+      "beet",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-beet-2",
+    "type": "command",
+    "title": "beet - Query library",
+    "content": "beet list {{query}}",
+    "group": "Linux Ops",
+    "description": "beet: Manage the beets media library. (Query library)",
+    "tags": [
+      "linux",
+      "beet",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-beet-3",
+    "type": "command",
+    "title": "beet - Show entire library statistics",
+    "content": "beet stats",
+    "group": "Linux Ops",
+    "description": "beet: Manage the beets media library. (Show entire library statistics)",
+    "tags": [
+      "linux",
+      "beet",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-beet-4",
+    "type": "command",
+    "title": "beet - Show statistics for a specific query",
+    "content": "beet stats {{query}}",
+    "group": "Linux Ops",
+    "description": "beet: Manage the beets media library. (Show statistics for a specific query)",
+    "tags": [
+      "linux",
+      "beet",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-logsave-0",
     "type": "command",
     "title": "logsave - Execute command with specified argument(s) and save its output to log file",
@@ -63453,7 +63513,7 @@
     "id": "tldr-en-linux-braa-0",
     "type": "command",
     "title": "braa - Walk the SNMP tree of host with public string querying all OIDs under `.1.3.6`",
-    "content": "braa public@{{ip}}:{{.1.3.6.*}}",
+    "content": "braa public@{{ip_address}}:{{.1.3.6.*}}",
     "group": "Linux Ops",
     "description": "braa: Ultra-fast mass SNMP scanner allowing multiple hosts simultaneously. (Walk the SNMP tree of host with public string querying all OIDs under `.1.3.6`)",
     "tags": [
@@ -63483,7 +63543,7 @@
     "id": "tldr-en-linux-braa-2",
     "type": "command",
     "title": "braa - Attempt to set the value of `system.sysLocation.0` to a specific workgroup",
-    "content": "braa private@{{ip}}:{{.1.3.6.1.2.1.1.6.0}}=s'{{workgroup}}'",
+    "content": "braa private@{{ip_address}}:{{.1.3.6.1.2.1.1.6.0}}=s'{{workgroup}}'",
     "group": "Linux Ops",
     "description": "braa: Ultra-fast mass SNMP scanner allowing multiple hosts simultaneously. (Attempt to set the value of `system.sysLocation.0` to a specific workgroup)",
     "tags": [
@@ -65628,7 +65688,7 @@
     "id": "tldr-en-linux-ip-route-add-3",
     "type": "command",
     "title": "ip-route-add - Add a route to a specific routing table",
-    "content": "sudo ip {{[r|route]}} {{[a|add]}} {{destination_ip}} dev {{ethX}} {{[t|table]}} {{ip}}",
+    "content": "sudo ip {{[r|route]}} {{[a|add]}} {{destination_ip}} dev {{ethX}} {{[t|table]}} {{ip_address}}",
     "group": "Linux Ops",
     "description": "ip-route-add: Add a new networking route. (Add a route to a specific routing table)",
     "tags": [
@@ -67503,7 +67563,7 @@
     "id": "tldr-en-linux-keyd-1",
     "type": "command",
     "title": "keyd - Display keypress information",
-    "content": "sudo keyd monitor",
+    "content": "sudo keyd {{[-m|monitor]}}",
     "group": "Linux Ops",
     "description": "keyd: Remap keys. (Display keypress information)",
     "tags": [
@@ -67546,6 +67606,21 @@
   },
   {
     "id": "tldr-en-linux-keyd-4",
+    "type": "command",
+    "title": "keyd - Check the detected configuration files for errors",
+    "content": "keyd check",
+    "group": "Linux Ops",
+    "description": "keyd: Remap keys. (Check the detected configuration files for errors)",
+    "tags": [
+      "linux",
+      "keyd",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-keyd-5",
     "type": "command",
     "title": "keyd - Create a temporary binding",
     "content": "sudo keyd bind \"{{pressed_key}} = {{output_key}}\"",
@@ -68418,7 +68493,7 @@
     "id": "tldr-en-linux-torsocks-5",
     "type": "command",
     "title": "torsocks - Connect to a Tor proxy running on a specific address and port",
-    "content": "torsocks {{[-a|--address]}} {{ip}} {{[-P|--port]}} {{port}} {{command}}",
+    "content": "torsocks {{[-a|--address]}} {{ip_address}} {{[-P|--port]}} {{port}} {{command}}",
     "group": "Linux Ops",
     "description": "torsocks: Route the traffic of any application through the Tor network. Note: `torsocks` will assume that it should connect to the Tor SOCKS proxy running at 127.0.0.1:9050 being the defaults of the Tor daemon. (Connect to a Tor proxy running on a specific address and port)",
     "tags": [
@@ -68838,7 +68913,7 @@
     "id": "tldr-en-linux-rpcclient-0",
     "type": "command",
     "title": "rpcclient - Connect to a remote host",
-    "content": "rpcclient {{[-U|--user]}} {{domain}}\\{{username}}%{{password}} {{ip}}",
+    "content": "rpcclient {{[-U|--user]}} {{domain}}\\{{username}}%{{password}} {{ip_address}}",
     "group": "Linux Ops",
     "description": "rpcclient: MS-RPC client tool (part of the samba suite). (Connect to a remote host)",
     "tags": [
@@ -68853,7 +68928,7 @@
     "id": "tldr-en-linux-rpcclient-1",
     "type": "command",
     "title": "rpcclient - Connect to a remote host on a domain without a password",
-    "content": "rpcclient {{[-U|--user]}} {{username}} {{[-W|--workgroup]}} {{domain}} {{[-N|--no-pass]}} {{ip}}",
+    "content": "rpcclient {{[-U|--user]}} {{username}} {{[-W|--workgroup]}} {{domain}} {{[-N|--no-pass]}} {{ip_address}}",
     "group": "Linux Ops",
     "description": "rpcclient: MS-RPC client tool (part of the samba suite). (Connect to a remote host on a domain without a password)",
     "tags": [
@@ -68868,7 +68943,7 @@
     "id": "tldr-en-linux-rpcclient-2",
     "type": "command",
     "title": "rpcclient - Connect to a remote host, passing the password hash",
-    "content": "rpcclient {{[-U|--user]}} {{domain}}\\{{username}} --pw-nt-hash {{ip}}",
+    "content": "rpcclient {{[-U|--user]}} {{domain}}\\{{username}} --pw-nt-hash {{ip_address}}",
     "group": "Linux Ops",
     "description": "rpcclient: MS-RPC client tool (part of the samba suite). (Connect to a remote host, passing the password hash)",
     "tags": [
@@ -68883,7 +68958,7 @@
     "id": "tldr-en-linux-rpcclient-3",
     "type": "command",
     "title": "rpcclient - Execute shell commands on a remote host",
-    "content": "rpcclient {{[-U|--user]}} {{domain}}\\{{username}}%{{password}} {{[-c|--command]}} {{semicolon_separated_commands}} {{ip}}",
+    "content": "rpcclient {{[-U|--user]}} {{domain}}\\{{username}}%{{password}} {{[-c|--command]}} {{semicolon_separated_commands}} {{ip_address}}",
     "group": "Linux Ops",
     "description": "rpcclient: MS-RPC client tool (part of the samba suite). (Execute shell commands on a remote host)",
     "tags": [
@@ -72753,7 +72828,7 @@
     "id": "tldr-en-linux-dockerd-1",
     "type": "command",
     "title": "dockerd - Run Docker daemon and configure it to listen to specific sockets (UNIX and TCP)",
-    "content": "dockerd {{[-H|--host]}} unix://{{path/to/tmp.sock}} {{[-H|--host]}} tcp://{{ip}}",
+    "content": "dockerd {{[-H|--host]}} unix://{{path/to/tmp.sock}} {{[-H|--host]}} tcp://{{ip_address}}",
     "group": "Linux Ops",
     "description": "dockerd: A persistent process to start and manage Docker containers. (Run Docker daemon and configure it to listen to specific sockets (UNIX and TCP))",
     "tags": [
@@ -78540,21 +78615,6 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-qm-cloudinit-dump-0",
-    "type": "command",
-    "title": "qm-cloudinit-dump - Generate a cloudinit file for a specific configuration type",
-    "content": "qm {{[clou|cloudinit]}} {{[d|dump]}} {{virtual_machine_id}} {{meta|network|user}}",
-    "group": "Linux Ops",
-    "description": "qm-cloudinit-dump: Generate cloudinit configuration files. (Generate a cloudinit file for a specific configuration type)",
-    "tags": [
-      "linux",
-      "qm-cloudinit-dump",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
     "id": "tldr-en-linux-wol-0",
     "type": "command",
     "title": "wol - Send a WoL packet to a device",
@@ -80880,36 +80940,6 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-qm-guest-passwd-0",
-    "type": "command",
-    "title": "qm-guest-passwd - Set a password for a specific user in a virtual machine interactively",
-    "content": "qm {{[g|guest]}} {{[p|passwd]}} {{vm_id}} {{username}}",
-    "group": "Linux Ops",
-    "description": "qm-guest-passwd: Set the password for a user on QEMU/KVM Virtual Machine Manager. (Set a password for a specific user in a virtual machine interactively)",
-    "tags": [
-      "linux",
-      "qm-guest-passwd",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-qm-guest-passwd-1",
-    "type": "command",
-    "title": "qm-guest-passwd - Set an already hashed password for a specific user in a virtual machine interactively",
-    "content": "qm {{[g|guest]}} {{[p|passwd]}} {{vm_id}} {{username}} --crypted 1",
-    "group": "Linux Ops",
-    "description": "qm-guest-passwd: Set the password for a user on QEMU/KVM Virtual Machine Manager. (Set an already hashed password for a specific user in a virtual machine interactively)",
-    "tags": [
-      "linux",
-      "qm-guest-passwd",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
     "id": "tldr-en-linux-pkexec-0",
     "type": "command",
     "title": "pkexec - Run command as root",
@@ -83139,21 +83169,6 @@
     "tags": [
       "linux",
       "xfs_repair",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-qm-guest-exec-status-0",
-    "type": "command",
-    "title": "qm-guest-exec-status - Print the status of a specific PID",
-    "content": "qm {{[g|guest]}} {{[exec-s|exec-status]}} {{vm_id}} {{pid}}",
-    "group": "Linux Ops",
-    "description": "qm-guest-exec-status: Print the status of a pid started by the guest-agent on QEMU/KVM Virtual Machine Manager. (Print the status of a specific PID)",
-    "tags": [
-      "linux",
-      "qm-guest-exec-status",
       "tldr",
       "en"
     ],
@@ -87630,21 +87645,6 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-qm-disk-resize-0",
-    "type": "command",
-    "title": "qm-disk-resize - Add `n` gigabytes to a virtual disk",
-    "content": "qm {{[di|disk]}} {{[resi|resize]}} {{vm_id}} {{disk_name}} +{{n}}G",
-    "group": "Linux Ops",
-    "description": "qm-disk-resize: Resize a virtual machine disk in the Proxmox Virtual Environment (PVE). (Add `n` gigabytes to a virtual disk)",
-    "tags": [
-      "linux",
-      "qm-disk-resize",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
     "id": "tldr-en-linux-larasail-0",
     "type": "command",
     "title": "larasail - Set up the server with Laravel dependencies using the default PHP version",
@@ -90123,7 +90123,7 @@
     "id": "tldr-en-linux-ip-6",
     "type": "command",
     "title": "ip - Add/Delete an IP address to an interface",
-    "content": "sudo ip {{[a|address]}} {{add|delete}} {{ip}}/{{mask}} dev {{ethX}}",
+    "content": "sudo ip {{[a|address]}} {{add|delete}} {{ip_address}}/{{mask}} dev {{ethX}}",
     "group": "Linux Ops",
     "description": "ip: Show/manipulate routing, devices, policy routing and tunnels. Some subcommands such as `address` have their own usage documentation. (Add/Delete an IP address to an interface)",
     "tags": [
@@ -90138,7 +90138,7 @@
     "id": "tldr-en-linux-ip-7",
     "type": "command",
     "title": "ip - Add a default route",
-    "content": "sudo ip {{[r|route]}} {{[a|add]}} default via {{ip}} dev {{ethX}}",
+    "content": "sudo ip {{[r|route]}} {{[a|add]}} default via {{ip_address}} dev {{ethX}}",
     "group": "Linux Ops",
     "description": "ip: Show/manipulate routing, devices, policy routing and tunnels. Some subcommands such as `address` have their own usage documentation. (Add a default route)",
     "tags": [
@@ -91443,7 +91443,7 @@
     "id": "tldr-en-linux-fail2ban-client-1",
     "type": "command",
     "title": "fail2ban-client - Remove the specified IP from the jail service's ban list",
-    "content": "fail2ban-client set {{jail}} unbanip {{ip}}",
+    "content": "fail2ban-client set {{jail}} unbanip {{ip_address}}",
     "group": "Linux Ops",
     "description": "fail2ban-client: Configure and control fail2ban server. (Remove the specified IP from the jail service's ban list)",
     "tags": [
@@ -98090,7 +98090,7 @@
     "title": "quickemu - Create and run a virtual machine from a configuration file",
     "content": "quickemu --vm {{path/to/file.conf}}",
     "group": "Linux Ops",
-    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. (Create and run a virtual machine from a configuration file)",
+    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. Note: Virtual machine must be in stopped state when working with snapshots. (Create and run a virtual machine from a configuration file)",
     "tags": [
       "linux",
       "quickemu",
@@ -98105,7 +98105,7 @@
     "title": "quickemu - Do not commit any changes to disk/snapshot but write any changes to temporary files",
     "content": "quickemu --status-quo --vm {{path/to/file.conf}}",
     "group": "Linux Ops",
-    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. (Do not commit any changes to disk/snapshot but write any changes to temporary files)",
+    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. Note: Virtual machine must be in stopped state when working with snapshots. (Do not commit any changes to disk/snapshot but write any changes to temporary files)",
     "tags": [
       "linux",
       "quickemu",
@@ -98120,7 +98120,7 @@
     "title": "quickemu - Start the virtual machine in full-screen mode (`<Ctrl Alt f>` to exit) and select the display backend (`sdl` by default)",
     "content": "quickemu --fullscreen --display {{sdl|gtk|spice|spice-app|none}} --vm {{path/to/file.conf}}",
     "group": "Linux Ops",
-    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. (Start the virtual machine in full-screen mode (`<Ctrl Alt f>` to exit) and select the display backend (`sdl` by default))",
+    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. Note: Virtual machine must be in stopped state when working with snapshots. (Start the virtual machine in full-screen mode (`<Ctrl Alt f>` to exit) and select the display backend (`sdl` by default))",
     "tags": [
       "linux",
       "quickemu",
@@ -98135,7 +98135,7 @@
     "title": "quickemu - Select a virtual audio device to emulate and create a desktop shortcut",
     "content": "quickemu --sound-card {{intel-hda|ac97|es1370|sb16|none}} --shortcut --vm {{path/to/file.conf}}",
     "group": "Linux Ops",
-    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. (Select a virtual audio device to emulate and create a desktop shortcut)",
+    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. Note: Virtual machine must be in stopped state when working with snapshots. (Select a virtual audio device to emulate and create a desktop shortcut)",
     "tags": [
       "linux",
       "quickemu",
@@ -98147,10 +98147,10 @@
   {
     "id": "tldr-en-linux-quickemu-4",
     "type": "command",
-    "title": "quickemu - Create a snapshot",
-    "content": "quickemu --snapshot create {{tag}} --vm {{path/to/file.conf}}",
+    "title": "quickemu - Create/restore/delete a snapshot",
+    "content": "quickemu --snapshot {{create|apply|delete}} {{tag}} --vm {{path/to/file.conf}}",
     "group": "Linux Ops",
-    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. (Create a snapshot)",
+    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. Note: Virtual machine must be in stopped state when working with snapshots. (Create/restore/delete a snapshot)",
     "tags": [
       "linux",
       "quickemu",
@@ -98162,10 +98162,10 @@
   {
     "id": "tldr-en-linux-quickemu-5",
     "type": "command",
-    "title": "quickemu - Restore a snapshot",
-    "content": "quickemu --snapshot apply {{tag}} --vm {{path/to/file.conf}}",
+    "title": "quickemu - List available snapshots",
+    "content": "quickemu --snapshot info --vm {{path/to/file.conf}}",
     "group": "Linux Ops",
-    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. (Restore a snapshot)",
+    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. Note: Virtual machine must be in stopped state when working with snapshots. (List available snapshots)",
     "tags": [
       "linux",
       "quickemu",
@@ -98177,10 +98177,25 @@
   {
     "id": "tldr-en-linux-quickemu-6",
     "type": "command",
-    "title": "quickemu - Delete a snapshot",
-    "content": "quickemu --snapshot delete {{tag}} --vm {{path/to/file.conf}}",
+    "title": "quickemu - Delete the entire virtual machine and its configuration",
+    "content": "quickemu --delete-vm --vm {{path/to/file.conf}}",
     "group": "Linux Ops",
-    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. (Delete a snapshot)",
+    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. Note: Virtual machine must be in stopped state when working with snapshots. (Delete the entire virtual machine and its configuration)",
+    "tags": [
+      "linux",
+      "quickemu",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-quickemu-7",
+    "type": "command",
+    "title": "quickemu - Delete the virtual machine's disk image and EFI variables",
+    "content": "quickemu --delete-disk --vm {{path/to/file.conf}}",
+    "group": "Linux Ops",
+    "description": "quickemu: Build and manage highly optimised desktop virtual machines quickly. Note: Virtual machine must be in stopped state when working with snapshots. (Delete the virtual machine's disk image and EFI variables)",
     "tags": [
       "linux",
       "quickemu",
@@ -107865,6 +107880,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-qm-disk-4",
+    "type": "command",
+    "title": "qm-disk - Rescan all storages and update disk sizes and unused disk images",
+    "content": "qm {{[di|disk]}} {{[resc|rescan]}}",
+    "group": "Linux Ops",
+    "description": "qm-disk: Manage disk images. (Rescan all storages and update disk sizes and unused disk images)",
+    "tags": [
+      "linux",
+      "qm-disk",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-qm-disk-5",
+    "type": "command",
+    "title": "qm-disk - Perform a dry-run of a rescan and do not write any changes to configurations",
+    "content": "qm {{[di|disk]}} {{[resc|rescan]}} --dryrun",
+    "group": "Linux Ops",
+    "description": "qm-disk: Manage disk images. (Perform a dry-run of a rescan and do not write any changes to configurations)",
+    "tags": [
+      "linux",
+      "qm-disk",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-qm-disk-6",
+    "type": "command",
+    "title": "qm-disk - Specify a virtual machine by its ID",
+    "content": "qm {{[di|disk]}} {{[resc|rescan]}} --vmid {{100}}",
+    "group": "Linux Ops",
+    "description": "qm-disk: Manage disk images. (Specify a virtual machine by its ID)",
+    "tags": [
+      "linux",
+      "qm-disk",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-switch_root-0",
     "type": "command",
     "title": "switch_root - Move `/proc`, `/dev`, `/sys`, and `/run` to the specified filesystem, use this filesystem as the new root and start the specified init process",
@@ -112989,21 +113049,6 @@
     "tags": [
       "linux",
       "fincore",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-qm-guest-cmd-0",
-    "type": "command",
-    "title": "qm-guest-cmd - Execute a specific QEMU Guest Agent command",
-    "content": "qm {{[g|guest]}} {{[c|cmd]}} {{virtual_machine_id}} {{fsfreeze-freeze|fsfreeze-status|fsfreeze-thaw|fstrim|get-fsinfo|...}}",
-    "group": "Linux Ops",
-    "description": "qm-guest-cmd: Execute QEMU Guest Agent commands. (Execute a specific QEMU Guest Agent command)",
-    "tags": [
-      "linux",
-      "qm-guest-cmd",
       "tldr",
       "en"
     ],

@@ -315,6 +315,111 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-qwen-0",
+    "type": "command",
+    "title": "qwen - 启动一个 REPL 会话以进行交互式对话",
+    "content": "qwen",
+    "group": "通用工具 (Common)",
+    "description": "qwen: 使用 Qwen3-Coder 启动一个交互式提示。 请参阅：`gemini`. (启动一个 REPL 会话以进行交互式对话)",
+    "tags": [
+      "common",
+      "qwen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qwen-1",
+    "type": "command",
+    "title": "qwen - 将另一个命令的输出发送给 Qwen 并立即退出",
+    "content": "{{echo \"总结罗马的历史\"}} | qwen {{[-p|--prompt]}}",
+    "group": "通用工具 (Common)",
+    "description": "qwen: 使用 Qwen3-Coder 启动一个交互式提示。 请参阅：`gemini`. (将另一个命令的输出发送给 Qwen 并立即退出)",
+    "tags": [
+      "common",
+      "qwen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qwen-2",
+    "type": "command",
+    "title": "qwen - 覆盖默认模型（默认值：qwen3-coder-max）",
+    "content": "qwen {{[-m|--model]}} {{model_name}}",
+    "group": "通用工具 (Common)",
+    "description": "qwen: 使用 Qwen3-Coder 启动一个交互式提示。 请参阅：`gemini`. (覆盖默认模型（默认值：qwen3-coder-max）)",
+    "tags": [
+      "common",
+      "qwen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qwen-3",
+    "type": "command",
+    "title": "qwen - 在沙盒容器中运行",
+    "content": "qwen {{[-s|--sandbox]}}",
+    "group": "通用工具 (Common)",
+    "description": "qwen: 使用 Qwen3-Coder 启动一个交互式提示。 请参阅：`gemini`. (在沙盒容器中运行)",
+    "tags": [
+      "common",
+      "qwen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qwen-4",
+    "type": "command",
+    "title": "qwen - 执行一个提示，然后保持在交互模式中",
+    "content": "qwen {{[-i|--prompt-interactive]}} \"{{给我一个 Python 中递归的示例}}\"",
+    "group": "通用工具 (Common)",
+    "description": "qwen: 使用 Qwen3-Coder 启动一个交互式提示。 请参阅：`gemini`. (执行一个提示，然后保持在交互模式中)",
+    "tags": [
+      "common",
+      "qwen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qwen-5",
+    "type": "command",
+    "title": "qwen - 在上下文中包含所有文件",
+    "content": "qwen {{[-a|--all-files]}}",
+    "group": "通用工具 (Common)",
+    "description": "qwen: 使用 Qwen3-Coder 启动一个交互式提示。 请参阅：`gemini`. (在上下文中包含所有文件)",
+    "tags": [
+      "common",
+      "qwen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qwen-6",
+    "type": "command",
+    "title": "qwen - 在状态栏中显示内存使用情况",
+    "content": "qwen --show-memory-usage",
+    "group": "通用工具 (Common)",
+    "description": "qwen: 使用 Qwen3-Coder 启动一个交互式提示。 请参阅：`gemini`. (在状态栏中显示内存使用情况)",
+    "tags": [
+      "common",
+      "qwen",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-brew-remove-0",
     "type": "command",
     "title": "brew-remove - 查看原命令的文档",
@@ -2145,6 +2250,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-docker-rmi-0",
+    "type": "command",
+    "title": "docker-rmi - 查看原命令的文档",
+    "content": "tldr docker image rm",
+    "group": "通用工具 (Common)",
+    "description": "docker-rmi: 此命令为 `docker image rm` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "docker-rmi",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-joe-0",
     "type": "command",
     "title": "joe - 在 JOE 中打开一个新文件",
@@ -2628,7 +2748,7 @@
     "id": "tldr-zh-common-docker-container-exec-0",
     "type": "command",
     "title": "docker-container-exec - 在正在运行的容器内，启动交互式 shell 会话",
-    "content": "docker exec {{[-it|--interactive --tty]}} {{容器_名称}} {{/bin/bash}}",
+    "content": "docker {{[exec|container exec]}} {{[-it|--interactive --tty]}} {{容器_名称}} {{/bin/bash}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-exec: 在一个正在运行的 Docker 容器内部，执行一个命令。 (在正在运行的容器内，启动交互式 shell 会话)",
     "tags": [
@@ -2643,7 +2763,7 @@
     "id": "tldr-zh-common-docker-container-exec-1",
     "type": "command",
     "title": "docker-container-exec - 在一个运行的容器内部，后台（分离）执行一个命令",
-    "content": "docker exec {{[-d|--detach]}} {{容器_名称}} {{命令}}",
+    "content": "docker {{[exec|container exec]}} {{[-d|--detach]}} {{容器_名称}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-exec: 在一个正在运行的 Docker 容器内部，执行一个命令。 (在一个运行的容器内部，后台（分离）执行一个命令)",
     "tags": [
@@ -2658,7 +2778,7 @@
     "id": "tldr-zh-common-docker-container-exec-2",
     "type": "command",
     "title": "docker-container-exec - 指定要运行命令的运行目录",
-    "content": "docker exec {{[-it|--interactive --tty]}} {{[-w|--workdir]}} {{路径/到/文件夹}} {{容器_名称}} {{命令}}",
+    "content": "docker {{[exec|container exec]}} {{[-it|--interactive --tty]}} {{[-w|--workdir]}} {{路径/到/文件夹}} {{容器_名称}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-exec: 在一个正在运行的 Docker 容器内部，执行一个命令。 (指定要运行命令的运行目录)",
     "tags": [
@@ -2673,7 +2793,7 @@
     "id": "tldr-zh-common-docker-container-exec-3",
     "type": "command",
     "title": "docker-container-exec - 在现存容器内部，后台执行一个命令，但是保持 `stdin` 开启",
-    "content": "docker exec {{[-i|--interactive]}} {{[-d|--detach]}} {{容器_名称}} {{命令}}",
+    "content": "docker {{[exec|container exec]}} {{[-i|--interactive]}} {{[-d|--detach]}} {{容器_名称}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-exec: 在一个正在运行的 Docker 容器内部，执行一个命令。 (在现存容器内部，后台执行一个命令，但是保持 `stdin` 开启)",
     "tags": [
@@ -2688,7 +2808,7 @@
     "id": "tldr-zh-common-docker-container-exec-4",
     "type": "command",
     "title": "docker-container-exec - 在运行中容器的 Bash 内，设置环境变量",
-    "content": "docker exec {{[-it|--interactive --tty]}} {{[-e|--env]}} {{变量_名称}}={{值}} {{容器_名称}} {{/bin/bash}}",
+    "content": "docker {{[exec|container exec]}} {{[-it|--interactive --tty]}} {{[-e|--env]}} {{变量_名称}}={{值}} {{容器_名称}} {{/bin/bash}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-exec: 在一个正在运行的 Docker 容器内部，执行一个命令。 (在运行中容器的 Bash 内，设置环境变量)",
     "tags": [
@@ -2703,7 +2823,7 @@
     "id": "tldr-zh-common-docker-container-exec-5",
     "type": "command",
     "title": "docker-container-exec - 作为特定用户执行命令",
-    "content": "docker exec {{[-u|--user]}} {{用户名}} {{容器_名称}} {{命令}}",
+    "content": "docker {{[exec|container exec]}} {{[-u|--user]}} {{用户名}} {{容器_名称}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-exec: 在一个正在运行的 Docker 容器内部，执行一个命令。 (作为特定用户执行命令)",
     "tags": [
@@ -3560,7 +3680,7 @@
     "title": "qmmp - 启动 GUI",
     "content": "qmmp",
     "group": "通用工具 (Common)",
-    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 请参阅：`clementine`，`ncmpcpp`，`cmus`。 (启动 GUI)",
+    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 另请参阅：`clementine`，`ncmpcpp`，`cmus`。 (启动 GUI)",
     "tags": [
       "common",
       "qmmp",
@@ -3575,7 +3695,7 @@
     "title": "qmmp - 开始或停止当前播放的音频",
     "content": "qmmp {{[-t|--play-pause]}}",
     "group": "通用工具 (Common)",
-    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 请参阅：`clementine`，`ncmpcpp`，`cmus`。 (开始或停止当前播放的音频)",
+    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 另请参阅：`clementine`，`ncmpcpp`，`cmus`。 (开始或停止当前播放的音频)",
     "tags": [
       "common",
       "qmmp",
@@ -3590,7 +3710,7 @@
     "title": "qmmp - 向前或向后移动指定的秒数",
     "content": "qmmp --seek-{{fwd|bwd}} {{秒数}}",
     "group": "通用工具 (Common)",
-    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 请参阅：`clementine`，`ncmpcpp`，`cmus`。 (向前或向后移动指定的秒数)",
+    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 另请参阅：`clementine`，`ncmpcpp`，`cmus`。 (向前或向后移动指定的秒数)",
     "tags": [
       "common",
       "qmmp",
@@ -3605,7 +3725,7 @@
     "title": "qmmp - 播放下一个音频文件",
     "content": "qmmp --next",
     "group": "通用工具 (Common)",
-    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 请参阅：`clementine`，`ncmpcpp`，`cmus`。 (播放下一个音频文件)",
+    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 另请参阅：`clementine`，`ncmpcpp`，`cmus`。 (播放下一个音频文件)",
     "tags": [
       "common",
       "qmmp",
@@ -3620,7 +3740,7 @@
     "title": "qmmp - 播放上一个音频文件",
     "content": "qmmp --previous",
     "group": "通用工具 (Common)",
-    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 请参阅：`clementine`，`ncmpcpp`，`cmus`。 (播放上一个音频文件)",
+    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 另请参阅：`clementine`，`ncmpcpp`，`cmus`。 (播放上一个音频文件)",
     "tags": [
       "common",
       "qmmp",
@@ -3635,7 +3755,7 @@
     "title": "qmmp - 显示当前音量",
     "content": "qmmp --volume-status",
     "group": "通用工具 (Common)",
-    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 请参阅：`clementine`，`ncmpcpp`，`cmus`。 (显示当前音量)",
+    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 另请参阅：`clementine`，`ncmpcpp`，`cmus`。 (显示当前音量)",
     "tags": [
       "common",
       "qmmp",
@@ -3650,7 +3770,7 @@
     "title": "qmmp - 增加或减少当前播放音频的音量 5%",
     "content": "qmmp --volume-{{inc|dec}}",
     "group": "通用工具 (Common)",
-    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 请参阅：`clementine`，`ncmpcpp`，`cmus`。 (增加或减少当前播放音频的音量 5%)",
+    "description": "qmmp: 具有类似于 Winamp 或 XMMS 界面的音频播放器。 另请参阅：`clementine`，`ncmpcpp`，`cmus`。 (增加或减少当前播放音频的音量 5%)",
     "tags": [
       "common",
       "qmmp",
@@ -5855,7 +5975,7 @@
     "title": "youtube-viewer - 搜索一个视频",
     "content": "youtube-viewer {{搜索关键词}}",
     "group": "通用工具 (Common)",
-    "description": "youtube-viewer: 搜索并播放 YouTube 上的视频。 请参阅：`you-get`，`ytfzf`，`yt-dlp`。 (搜索一个视频)",
+    "description": "youtube-viewer: 搜索并播放 YouTube 上的视频。 另请参阅：`you-get`，`ytfzf`，`yt-dlp`。 (搜索一个视频)",
     "tags": [
       "common",
       "youtube-viewer",
@@ -5870,7 +5990,7 @@
     "title": "youtube-viewer - 登录到你的 YouTube 账户",
     "content": "youtube-viewer --login",
     "group": "通用工具 (Common)",
-    "description": "youtube-viewer: 搜索并播放 YouTube 上的视频。 请参阅：`you-get`，`ytfzf`，`yt-dlp`。 (登录到你的 YouTube 账户)",
+    "description": "youtube-viewer: 搜索并播放 YouTube 上的视频。 另请参阅：`you-get`，`ytfzf`，`yt-dlp`。 (登录到你的 YouTube 账户)",
     "tags": [
       "common",
       "youtube-viewer",
@@ -5885,7 +6005,7 @@
     "title": "youtube-viewer - 在 VLC 中观看指定 URL 的视频",
     "content": "youtube-viewer --player={{vlc}} {{https://youtube.com/watch?v=dQw4w9WgXcQ}}",
     "group": "通用工具 (Common)",
-    "description": "youtube-viewer: 搜索并播放 YouTube 上的视频。 请参阅：`you-get`，`ytfzf`，`yt-dlp`。 (在 VLC 中观看指定 URL 的视频)",
+    "description": "youtube-viewer: 搜索并播放 YouTube 上的视频。 另请参阅：`you-get`，`ytfzf`，`yt-dlp`。 (在 VLC 中观看指定 URL 的视频)",
     "tags": [
       "common",
       "youtube-viewer",
@@ -5900,7 +6020,7 @@
     "title": "youtube-viewer - 显示一个搜索提示并以 720p 播放已选视频",
     "content": "youtube-viewer -{{7}}",
     "group": "通用工具 (Common)",
-    "description": "youtube-viewer: 搜索并播放 YouTube 上的视频。 请参阅：`you-get`，`ytfzf`，`yt-dlp`。 (显示一个搜索提示并以 720p 播放已选视频)",
+    "description": "youtube-viewer: 搜索并播放 YouTube 上的视频。 另请参阅：`you-get`，`ytfzf`，`yt-dlp`。 (显示一个搜索提示并以 720p 播放已选视频)",
     "tags": [
       "common",
       "youtube-viewer",
@@ -6260,7 +6380,7 @@
     "title": "youtube-dl - 下载一个视频或播放列表",
     "content": "youtube-dl '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'",
     "group": "通用工具 (Common)",
-    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载一个视频或播放列表)",
+    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载一个视频或播放列表)",
     "tags": [
       "common",
       "youtube-dl",
@@ -6275,7 +6395,7 @@
     "title": "youtube-dl - 列出视频或播放列表的所有可用格式",
     "content": "youtube-dl --list-formats '{{https://www.youtube.com/watch?v=Mwa0_nE9H7A}}'",
     "group": "通用工具 (Common)",
-    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (列出视频或播放列表的所有可用格式)",
+    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (列出视频或播放列表的所有可用格式)",
     "tags": [
       "common",
       "youtube-dl",
@@ -6290,7 +6410,7 @@
     "title": "youtube-dl - 以特定质量下载视频或播放列表",
     "content": "youtube-dl --format \"{{best[height<=480]}}\" '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'",
     "group": "通用工具 (Common)",
-    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (以特定质量下载视频或播放列表)",
+    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (以特定质量下载视频或播放列表)",
     "tags": [
       "common",
       "youtube-dl",
@@ -6305,7 +6425,7 @@
     "title": "youtube-dl - 下载视频的音频并将其转换为 MP3",
     "content": "youtube-dl -x --audio-format {{mp3}} '{{url}}'",
     "group": "通用工具 (Common)",
-    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载视频的音频并将其转换为 MP3)",
+    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载视频的音频并将其转换为 MP3)",
     "tags": [
       "common",
       "youtube-dl",
@@ -6320,7 +6440,7 @@
     "title": "youtube-dl - 下载最佳质量的音频和视频并合并它们",
     "content": "youtube-dl -f bestvideo+bestaudio '{{url}}'",
     "group": "通用工具 (Common)",
-    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载最佳质量的音频和视频并合并它们)",
+    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载最佳质量的音频和视频并合并它们)",
     "tags": [
       "common",
       "youtube-dl",
@@ -6335,7 +6455,7 @@
     "title": "youtube-dl - 将视频下载为 MP4 文件并自定义文件名",
     "content": "youtube-dl --format {{mp4}} -o \"{{%(playlist_index)s-%(title)s by %(uploader)s on %(upload_date)s in %(playlist)s.%(ext)s}}\" '{{url}}'",
     "group": "通用工具 (Common)",
-    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (将视频下载为 MP4 文件并自定义文件名)",
+    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (将视频下载为 MP4 文件并自定义文件名)",
     "tags": [
       "common",
       "youtube-dl",
@@ -6350,7 +6470,7 @@
     "title": "youtube-dl - 下载特定语言的字幕并与视频一起保存",
     "content": "youtube-dl --sub-lang {{en}} --write-sub '{{https://www.youtube.com/watch?v=Mwa0_nE9H7A}}'",
     "group": "通用工具 (Common)",
-    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载特定语言的字幕并与视频一起保存)",
+    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载特定语言的字幕并与视频一起保存)",
     "tags": [
       "common",
       "youtube-dl",
@@ -6365,7 +6485,7 @@
     "title": "youtube-dl - 下载一个播放列表并从中提取 MP3",
     "content": "youtube-dl -f \"bestaudio\" --continue --no-overwrites --ignore-errors --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s\" '{{url_to_playlist}}'",
     "group": "通用工具 (Common)",
-    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载一个播放列表并从中提取 MP3)",
+    "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`，`ytfzf`，`you-get`。 (下载一个播放列表并从中提取 MP3)",
     "tags": [
       "common",
       "youtube-dl",
@@ -7350,6 +7470,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-3d-ascii-viewer-0",
+    "type": "command",
+    "title": "3d-ascii-viewer - 显示一个模型",
+    "content": "3d-ascii-viewer {{路径/到/模型}}.obj",
+    "group": "通用工具 (Common)",
+    "description": "3d-ascii-viewer: 在终端中以动画 ASCII 的形式查看 3D `.obj` 模型。 (显示一个模型)",
+    "tags": [
+      "common",
+      "3d-ascii-viewer",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-3d-ascii-viewer-1",
+    "type": "command",
+    "title": "3d-ascii-viewer - 设置宽度和高度",
+    "content": "3d-ascii-viewer -w {{宽度}} -h {{高度}} {{路径/到/模型}}.obj",
+    "group": "通用工具 (Common)",
+    "description": "3d-ascii-viewer: 在终端中以动画 ASCII 的形式查看 3D `.obj` 模型。 (设置宽度和高度)",
+    "tags": [
+      "common",
+      "3d-ascii-viewer",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-3d-ascii-viewer-2",
+    "type": "command",
+    "title": "3d-ascii-viewer - 启用颜色",
+    "content": "3d-ascii-viewer --color {{路径/到/模型}}.obj",
+    "group": "通用工具 (Common)",
+    "description": "3d-ascii-viewer: 在终端中以动画 ASCII 的形式查看 3D `.obj` 模型。 (启用颜色)",
+    "tags": [
+      "common",
+      "3d-ascii-viewer",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-3d-ascii-viewer-3",
+    "type": "command",
+    "title": "3d-ascii-viewer - 设置每秒帧数",
+    "content": "3d-ascii-viewer -f {{每秒帧数}} {{路径/到/模型}}.obj",
+    "group": "通用工具 (Common)",
+    "description": "3d-ascii-viewer: 在终端中以动画 ASCII 的形式查看 3D `.obj` 模型。 (设置每秒帧数)",
+    "tags": [
+      "common",
+      "3d-ascii-viewer",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-3d-ascii-viewer-4",
+    "type": "command",
+    "title": "3d-ascii-viewer - 交互模式",
+    "content": "3d-ascii-viewer --interactive {{路径/到/模型}}.obj",
+    "group": "通用工具 (Common)",
+    "description": "3d-ascii-viewer: 在终端中以动画 ASCII 的形式查看 3D `.obj` 模型。 (交互模式)",
+    "tags": [
+      "common",
+      "3d-ascii-viewer",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-3d-ascii-viewer-5",
+    "type": "command",
+    "title": "3d-ascii-viewer - 显示帮助",
+    "content": "3d-ascii-viewer --help",
+    "group": "通用工具 (Common)",
+    "description": "3d-ascii-viewer: 在终端中以动画 ASCII 的形式查看 3D `.obj` 模型。 (显示帮助)",
+    "tags": [
+      "common",
+      "3d-ascii-viewer",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-gh-at-0",
     "type": "command",
     "title": "gh-at - 查看原命令的文档",
@@ -7580,7 +7790,7 @@
     "title": "mpv - 从 URL 或文件播放视频或音频",
     "content": "mpv {{url|路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 请参阅：`mplayer`, `vlc`。 (从 URL 或文件播放视频或音频)",
+    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 另请参阅：`mplayer`, `vlc`。 (从 URL 或文件播放视频或音频)",
     "tags": [
       "common",
       "mpv",
@@ -7595,7 +7805,7 @@
     "title": "mpv - 向后/向前跳跃 5 秒",
     "content": "{{<ArrowLeft>|<ArrowRight>}}",
     "group": "通用工具 (Common)",
-    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 请参阅：`mplayer`, `vlc`。 (向后/向前跳跃 5 秒)",
+    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 另请参阅：`mplayer`, `vlc`。 (向后/向前跳跃 5 秒)",
     "tags": [
       "common",
       "mpv",
@@ -7610,7 +7820,7 @@
     "title": "mpv - 向后/向前跳跃 1 分钟",
     "content": "{{<ArrowDown>|<ArrowUp>}}",
     "group": "通用工具 (Common)",
-    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 请参阅：`mplayer`, `vlc`。 (向后/向前跳跃 1 分钟)",
+    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 另请参阅：`mplayer`, `vlc`。 (向后/向前跳跃 1 分钟)",
     "tags": [
       "common",
       "mpv",
@@ -7625,7 +7835,7 @@
     "title": "mpv - 减少/增加 10% 播放速度",
     "content": "{{<[>|<]>}}",
     "group": "通用工具 (Common)",
-    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 请参阅：`mplayer`, `vlc`。 (减少/增加 10% 播放速度)",
+    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 另请参阅：`mplayer`, `vlc`。 (减少/增加 10% 播放速度)",
     "tags": [
       "common",
       "mpv",
@@ -7640,7 +7850,7 @@
     "title": "mpv - 对当前帧截图（默认保存到 `./mpv-shotNNNN.jpg`）",
     "content": "<s>",
     "group": "通用工具 (Common)",
-    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 请参阅：`mplayer`, `vlc`。 (对当前帧截图（默认保存到 `./mpv-shotNNNN.jpg`）)",
+    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 另请参阅：`mplayer`, `vlc`。 (对当前帧截图（默认保存到 `./mpv-shotNNNN.jpg`）)",
     "tags": [
       "common",
       "mpv",
@@ -7655,7 +7865,7 @@
     "title": "mpv - 以指定速度播放文件（0.01 到 100, 默认是 1）",
     "content": "mpv --speed {{0.01..100}} {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 请参阅：`mplayer`, `vlc`。 (以指定速度播放文件（0.01 到 100, 默认是 1）)",
+    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 另请参阅：`mplayer`, `vlc`。 (以指定速度播放文件（0.01 到 100, 默认是 1）)",
     "tags": [
       "common",
       "mpv",
@@ -7670,7 +7880,7 @@
     "title": "mpv - 用 `mpv.conf` 中指定的一个用户配制播放文件",
     "content": "mpv --profile {{配置文件名称}} {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 请参阅：`mplayer`, `vlc`。 (用 `mpv.conf` 中指定的一个用户配制播放文件)",
+    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 另请参阅：`mplayer`, `vlc`。 (用 `mpv.conf` 中指定的一个用户配制播放文件)",
     "tags": [
       "common",
       "mpv",
@@ -7685,7 +7895,7 @@
     "title": "mpv - 显示来自网络摄像头或其他视频输入设备的输出",
     "content": "mpv {{/dev/video0}}",
     "group": "通用工具 (Common)",
-    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 请参阅：`mplayer`, `vlc`。 (显示来自网络摄像头或其他视频输入设备的输出)",
+    "description": "mpv: 一个基于 MPlayer 的音频/视频播放器。 另请参阅：`mplayer`, `vlc`。 (显示来自网络摄像头或其他视频输入设备的输出)",
     "tags": [
       "common",
       "mpv",
@@ -12575,7 +12785,7 @@
     "title": "yt-dlp - 下载视频或播放列表（使用下面命令的默认选项）",
     "content": "yt-dlp \"{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}\"",
     "group": "通用工具 (Common)",
-    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`。 (下载视频或播放列表（使用下面命令的默认选项）)",
+    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 另请参阅：`ytfzf`。 (下载视频或播放列表（使用下面命令的默认选项）)",
     "tags": [
       "common",
       "yt-dlp",
@@ -12590,7 +12800,7 @@
     "title": "yt-dlp - 列出可下载的视频格式",
     "content": "yt-dlp --list-formats \"{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}\"",
     "group": "通用工具 (Common)",
-    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`。 (列出可下载的视频格式)",
+    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 另请参阅：`ytfzf`。 (列出可下载的视频格式)",
     "tags": [
       "common",
       "yt-dlp",
@@ -12605,7 +12815,7 @@
     "title": "yt-dlp - 使用最佳 MP4 视频格式下载视频或播放列表（默认为 \"bv\\*+ba/b\"）",
     "content": "yt-dlp --format \"{{bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]}}\" \"{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}\"",
     "group": "通用工具 (Common)",
-    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`。 (使用最佳 MP4 视频格式下载视频或播放列表（默认为 \"bv\\*+ba/b\"）)",
+    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 另请参阅：`ytfzf`。 (使用最佳 MP4 视频格式下载视频或播放列表（默认为 \"bv\\*+ba/b\"）)",
     "tags": [
       "common",
       "yt-dlp",
@@ -12620,7 +12830,7 @@
     "title": "yt-dlp - 从视频中提取音频（需要 ffmpeg 或 ffprobe）",
     "content": "yt-dlp --extract-audio \"{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}\"",
     "group": "通用工具 (Common)",
-    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`。 (从视频中提取音频（需要 ffmpeg 或 ffprobe）)",
+    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 另请参阅：`ytfzf`。 (从视频中提取音频（需要 ffmpeg 或 ffprobe）)",
     "tags": [
       "common",
       "yt-dlp",
@@ -12635,7 +12845,7 @@
     "title": "yt-dlp - 指定提取音频的格式和音质（0（最佳）到 10（最差），默认值为 5）",
     "content": "yt-dlp --extract-audio --audio-format {{mp3}} --audio-quality {{0}} \"{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}\"",
     "group": "通用工具 (Common)",
-    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`。 (指定提取音频的格式和音质（0（最佳）到 10（最差），默认值为 5）)",
+    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 另请参阅：`ytfzf`。 (指定提取音频的格式和音质（0（最佳）到 10（最差），默认值为 5）)",
     "tags": [
       "common",
       "yt-dlp",
@@ -12650,7 +12860,7 @@
     "title": "yt-dlp - 仅下载播放列表中的第二、第四、第五、第六和最后一项（第一项为 1，而非 0）",
     "content": "yt-dlp --playlist-items 2,4:6,-1 \"{{https://youtube.com/playlist?list=PLbzoR-pLrL6pTJfLQ3UwtB-3V4fimdqnA}}\"",
     "group": "通用工具 (Common)",
-    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`。 (仅下载播放列表中的第二、第四、第五、第六和最后一项（第一项为 1，而非 0）)",
+    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 另请参阅：`ytfzf`。 (仅下载播放列表中的第二、第四、第五、第六和最后一项（第一项为 1，而非 0）)",
     "tags": [
       "common",
       "yt-dlp",
@@ -12665,7 +12875,7 @@
     "title": "yt-dlp - 下载 YouTube 频道/用户的所有播放列表，并将每个播放列表保存在单独的目录中",
     "content": "yt-dlp -o \"{{%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s}}\" \"{{https://www.youtube.com/user/TheLinuxFoundation/playlists}}\"",
     "group": "通用工具 (Common)",
-    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`。 (下载 YouTube 频道/用户的所有播放列表，并将每个播放列表保存在单独的目录中)",
+    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 另请参阅：`ytfzf`。 (下载 YouTube 频道/用户的所有播放列表，并将每个播放列表保存在单独的目录中)",
     "tags": [
       "common",
       "yt-dlp",
@@ -12680,7 +12890,7 @@
     "title": "yt-dlp - 下载 Udemy 课程，并将每章保存在单独的目录中",
     "content": "yt-dlp -u {{用户}} -p {{密码}} -P \"{{路径/到/目录}}\" -o \"{{%(playlist)s/%(chapter_number)s - %(chapter)s/%(title)s.%(ext)s}}\" \"{{https://www.udemy.com/java-tutorial}}\"",
     "group": "通用工具 (Common)",
-    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 请参阅：`yt-dlp`，`ytfzf`。 (下载 Udemy 课程，并将每章保存在单独的目录中)",
+    "description": "yt-dlp: 一个具有额外功能和修复的 youtube-dl 分支。 从 YouTube 和其他网站下载视频。 另请参阅：`ytfzf`。 (下载 Udemy 课程，并将每章保存在单独的目录中)",
     "tags": [
       "common",
       "yt-dlp",
@@ -13175,7 +13385,7 @@
     "title": "ybacklight - 打印当前亮度和最大亮度，缩写并使用斜杠分隔",
     "content": "ybacklight Sc/Sm",
     "group": "通用工具 (Common)",
-    "description": "ybacklight: 管理屏幕背光亮度。请参阅：`xbacklight`。 (打印当前亮度和最大亮度，缩写并使用斜杠分隔)",
+    "description": "ybacklight: 管理屏幕背光亮度。 另请参阅：`xbacklight`。 (打印当前亮度和最大亮度，缩写并使用斜杠分隔)",
     "tags": [
       "common",
       "ybacklight",
@@ -13190,7 +13400,7 @@
     "title": "ybacklight - 指定亮度",
     "content": "ybacklight s{{420}}",
     "group": "通用工具 (Common)",
-    "description": "ybacklight: 管理屏幕背光亮度。请参阅：`xbacklight`。 (指定亮度)",
+    "description": "ybacklight: 管理屏幕背光亮度。 另请参阅：`xbacklight`。 (指定亮度)",
     "tags": [
       "common",
       "ybacklight",
@@ -13205,7 +13415,7 @@
     "title": "ybacklight - 增加 42 个大步的亮度（默认 4200）",
     "content": "ybacklight Si42",
     "group": "通用工具 (Common)",
-    "description": "ybacklight: 管理屏幕背光亮度。请参阅：`xbacklight`。 (增加 42 个大步的亮度（默认 4200）)",
+    "description": "ybacklight: 管理屏幕背光亮度。 另请参阅：`xbacklight`。 (增加 42 个大步的亮度（默认 4200）)",
     "tags": [
       "common",
       "ybacklight",
@@ -13220,7 +13430,7 @@
     "title": "ybacklight - 减少 300 的亮度",
     "content": "ybacklight d300",
     "group": "通用工具 (Common)",
-    "description": "ybacklight: 管理屏幕背光亮度。请参阅：`xbacklight`。 (减少 300 的亮度)",
+    "description": "ybacklight: 管理屏幕背光亮度。 另请参阅：`xbacklight`。 (减少 300 的亮度)",
     "tags": [
       "common",
       "ybacklight",
@@ -14790,6 +15000,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-ug-0",
+    "type": "command",
+    "title": "ug - 查看原命令的文档",
+    "content": "tldr ugrep",
+    "group": "通用工具 (Common)",
+    "description": "ug: 此命令为 `ugrep --config --pretty --sort` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "ug",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-jupyterlab-0",
     "type": "command",
     "title": "jupyterlab - 查看原命令的文档",
@@ -15849,6 +16074,96 @@
     "tags": [
       "common",
       "yadm",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qmake-0",
+    "type": "command",
+    "title": "qmake - 从当前目录中的项目文件生成一个 `Makefile`",
+    "content": "qmake",
+    "group": "通用工具 (Common)",
+    "description": "qmake: 从 Qt 项目文件生成 Makefile。 (从当前目录中的项目文件生成一个 `Makefile`)",
+    "tags": [
+      "common",
+      "qmake",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qmake-1",
+    "type": "command",
+    "title": "qmake - 指定 `Makefile` 和项目文件的位置",
+    "content": "qmake -o {{路径/到/Makefile}} {{路径/到/项目文件.pro}}",
+    "group": "通用工具 (Common)",
+    "description": "qmake: 从 Qt 项目文件生成 Makefile。 (指定 `Makefile` 和项目文件的位置)",
+    "tags": [
+      "common",
+      "qmake",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qmake-2",
+    "type": "command",
+    "title": "qmake - 生成一个默认的项目文件",
+    "content": "qmake -project",
+    "group": "通用工具 (Common)",
+    "description": "qmake: 从 Qt 项目文件生成 Makefile。 (生成一个默认的项目文件)",
+    "tags": [
+      "common",
+      "qmake",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qmake-3",
+    "type": "command",
+    "title": "qmake - 编译一个项目",
+    "content": "qmake && make",
+    "group": "通用工具 (Common)",
+    "description": "qmake: 从 Qt 项目文件生成 Makefile。 (编译一个项目)",
+    "tags": [
+      "common",
+      "qmake",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qmake-4",
+    "type": "command",
+    "title": "qmake - 启用调试模式",
+    "content": "qmake -d",
+    "group": "通用工具 (Common)",
+    "description": "qmake: 从 Qt 项目文件生成 Makefile。 (启用调试模式)",
+    "tags": [
+      "common",
+      "qmake",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qmake-5",
+    "type": "command",
+    "title": "qmake - 显示帮助信息",
+    "content": "qmake -help",
+    "group": "通用工具 (Common)",
+    "description": "qmake: 从 Qt 项目文件生成 Makefile。 (显示帮助信息)",
+    "tags": [
+      "common",
+      "qmake",
       "tldr",
       "zh"
     ],
@@ -17180,7 +17495,7 @@
     "title": "qalc - 以交互模式启动",
     "content": "qalc {{--interactive}}",
     "group": "通用工具 (Common)",
-    "description": "qalc: 强大且易用的命令行计算器。 请参阅：`bc`。 (以交互模式启动)",
+    "description": "qalc: 强大且易用的命令行计算器。 另请参阅：`bc`。 (以交互模式启动)",
     "tags": [
       "common",
       "qalc",
@@ -17195,7 +17510,7 @@
     "title": "qalc - 以简洁模式启动（仅输出结果）",
     "content": "qalc --terse",
     "group": "通用工具 (Common)",
-    "description": "qalc: 强大且易用的命令行计算器。 请参阅：`bc`。 (以简洁模式启动（仅输出结果）)",
+    "description": "qalc: 强大且易用的命令行计算器。 另请参阅：`bc`。 (以简洁模式启动（仅输出结果）)",
     "tags": [
       "common",
       "qalc",
@@ -17210,7 +17525,7 @@
     "title": "qalc - 更新货币兑换率",
     "content": "qalc --exrates",
     "group": "通用工具 (Common)",
-    "description": "qalc: 强大且易用的命令行计算器。 请参阅：`bc`。 (更新货币兑换率)",
+    "description": "qalc: 强大且易用的命令行计算器。 另请参阅：`bc`。 (更新货币兑换率)",
     "tags": [
       "common",
       "qalc",
@@ -17225,7 +17540,7 @@
     "title": "qalc - 非交互地执行计算",
     "content": "qalc {{66+99|2^4|6 feet to cm|1 bitcoin to USD|20 kmph to mph|...}}",
     "group": "通用工具 (Common)",
-    "description": "qalc: 强大且易用的命令行计算器。 请参阅：`bc`。 (非交互地执行计算)",
+    "description": "qalc: 强大且易用的命令行计算器。 另请参阅：`bc`。 (非交互地执行计算)",
     "tags": [
       "common",
       "qalc",
@@ -17240,7 +17555,7 @@
     "title": "qalc - 列出所有支持的函数/前缀/单位/变量",
     "content": "qalc --{{list-functions|list-prefixes|list-units|list-variables}}",
     "group": "通用工具 (Common)",
-    "description": "qalc: 强大且易用的命令行计算器。 请参阅：`bc`。 (列出所有支持的函数/前缀/单位/变量)",
+    "description": "qalc: 强大且易用的命令行计算器。 另请参阅：`bc`。 (列出所有支持的函数/前缀/单位/变量)",
     "tags": [
       "common",
       "qalc",
@@ -17255,7 +17570,7 @@
     "title": "qalc - 从文件中执行命令",
     "content": "qalc --file {{路径/到/文件}}",
     "group": "通用工具 (Common)",
-    "description": "qalc: 强大且易用的命令行计算器。 请参阅：`bc`。 (从文件中执行命令)",
+    "description": "qalc: 强大且易用的命令行计算器。 另请参阅：`bc`。 (从文件中执行命令)",
     "tags": [
       "common",
       "qalc",
@@ -17964,6 +18279,21 @@
     "tags": [
       "common",
       "qoitopam",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-rbash-0",
+    "type": "command",
+    "title": "rbash - 查看原命令的文档",
+    "content": "tldr bash",
+    "group": "通用工具 (Common)",
+    "description": "rbash: 此命令为 `bash --restricted` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "rbash",
       "tldr",
       "zh"
     ],
@@ -18950,7 +19280,7 @@
     "title": "yadm-gitconfig - 更新或设置一个 Git 配置值",
     "content": "yadm gitconfig {{键.内键}} {{值}}",
     "group": "通用工具 (Common)",
-    "description": "yadm-gitconfig: 向 `git config` 传递选项。更改由 `yadm` 管理的仓库的 `.gitconfig`。 请参阅：`git config`。 (更新或设置一个 Git 配置值)",
+    "description": "yadm-gitconfig: 向 `git config` 传递选项。更改由 `yadm` 管理的仓库的 `.gitconfig`。 另请参阅：`git config`。 (更新或设置一个 Git 配置值)",
     "tags": [
       "common",
       "yadm-gitconfig",
@@ -18965,7 +19295,7 @@
     "title": "yadm-gitconfig - 从 `yadm` 的 Git 配置中获取一个值",
     "content": "yadm gitconfig --get {{键}}",
     "group": "通用工具 (Common)",
-    "description": "yadm-gitconfig: 向 `git config` 传递选项。更改由 `yadm` 管理的仓库的 `.gitconfig`。 请参阅：`git config`。 (从 `yadm` 的 Git 配置中获取一个值)",
+    "description": "yadm-gitconfig: 向 `git config` 传递选项。更改由 `yadm` 管理的仓库的 `.gitconfig`。 另请参阅：`git config`。 (从 `yadm` 的 Git 配置中获取一个值)",
     "tags": [
       "common",
       "yadm-gitconfig",
@@ -18980,7 +19310,7 @@
     "title": "yadm-gitconfig - 在 `yadm` 的 Git 配置中取消设置一个值",
     "content": "yadm gitconfig --unset {{键}}",
     "group": "通用工具 (Common)",
-    "description": "yadm-gitconfig: 向 `git config` 传递选项。更改由 `yadm` 管理的仓库的 `.gitconfig`。 请参阅：`git config`。 (在 `yadm` 的 Git 配置中取消设置一个值)",
+    "description": "yadm-gitconfig: 向 `git config` 传递选项。更改由 `yadm` 管理的仓库的 `.gitconfig`。 另请参阅：`git config`。 (在 `yadm` 的 Git 配置中取消设置一个值)",
     "tags": [
       "common",
       "yadm-gitconfig",
@@ -18995,7 +19325,7 @@
     "title": "yadm-gitconfig - 列出 `yadm` 的 Git 配置中的所有值",
     "content": "yadm gitconfig --list",
     "group": "通用工具 (Common)",
-    "description": "yadm-gitconfig: 向 `git config` 传递选项。更改由 `yadm` 管理的仓库的 `.gitconfig`。 请参阅：`git config`。 (列出 `yadm` 的 Git 配置中的所有值)",
+    "description": "yadm-gitconfig: 向 `git config` 传递选项。更改由 `yadm` 管理的仓库的 `.gitconfig`。 另请参阅：`git config`。 (列出 `yadm` 的 Git 配置中的所有值)",
     "tags": [
       "common",
       "yadm-gitconfig",
@@ -21810,6 +22140,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-qemu-system-riscv64-0",
+    "type": "command",
+    "title": "qemu-system-riscv64 - 启动一个模拟 `riscv64` 架构的内核",
+    "content": "qemu-system-riscv64 {{[-M|-machine]}} virt -bios none -kernel {{kernel.elf}} -nographic",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-riscv64: 模拟 `riscv64` 架构。 (启动一个模拟 `riscv64` 架构的内核)",
+    "tags": [
+      "common",
+      "qemu-system-riscv64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-riscv64-1",
+    "type": "command",
+    "title": "qemu-system-riscv64 - 列出支持的机器类型",
+    "content": "qemu-system-riscv64 {{[-M|-machine]}} help",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-riscv64: 模拟 `riscv64` 架构。 (列出支持的机器类型)",
+    "tags": [
+      "common",
+      "qemu-system-riscv64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-riscv64-2",
+    "type": "command",
+    "title": "qemu-system-riscv64 - 退出无图形界面的 QEMU",
+    "content": "<Ctrl a><x>",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-riscv64: 模拟 `riscv64` 架构。 (退出无图形界面的 QEMU)",
+    "tags": [
+      "common",
+      "qemu-system-riscv64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-xzcat-0",
     "type": "command",
     "title": "xzcat - 查看原命令的文档",
@@ -22119,6 +22494,21 @@
     "tags": [
       "common",
       "qrencode",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-]]-0",
+    "type": "command",
+    "title": "]] - 查看 `[[` 关键字的文档",
+    "content": "tldr [[",
+    "group": "通用工具 (Common)",
+    "description": "]]: 这个 shell 关键字用于结束 `[[`。 (查看 `[[` 关键字的文档)",
+    "tags": [
+      "common",
+      "]]",
       "tldr",
       "zh"
     ],
@@ -23205,6 +23595,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-~-0",
+    "type": "command",
+    "title": "~ - 列出当前用户的主目录内容",
+    "content": "ls ~",
+    "group": "通用工具 (Common)",
+    "description": "~: 展开到一个目录。 (列出当前用户的主目录内容)",
+    "tags": [
+      "common",
+      "~",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-~-1",
+    "type": "command",
+    "title": "~ - 列出其他用户的主目录内容",
+    "content": "ls ~{{用户名}}",
+    "group": "通用工具 (Common)",
+    "description": "~: 展开到一个目录。 (列出其他用户的主目录内容)",
+    "tags": [
+      "common",
+      "~",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-~-2",
+    "type": "command",
+    "title": "~ - 列出你之前所在目录的内容",
+    "content": "ls ~-",
+    "group": "通用工具 (Common)",
+    "description": "~: 展开到一个目录。 (列出你之前所在目录的内容)",
+    "tags": [
+      "common",
+      "~",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-virtualenv-0",
     "type": "command",
     "title": "virtualenv - 创建新环境",
@@ -23915,7 +24350,7 @@
     "title": "screen - 启动一个新的 screen 会话",
     "content": "screen",
     "group": "通用工具 (Common)",
-    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 类似工具请参阅 `tmux` 和 `zellij`。 (启动一个新的 screen 会话)",
+    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 另请参阅：`tmux` 和 `zellij`。 (启动一个新的 screen 会话)",
     "tags": [
       "common",
       "screen",
@@ -23930,7 +24365,7 @@
     "title": "screen - 启动一个指定名称的新 screen 会话",
     "content": "screen -S {{会话名称}}",
     "group": "通用工具 (Common)",
-    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 类似工具请参阅 `tmux` 和 `zellij`。 (启动一个指定名称的新 screen 会话)",
+    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 另请参阅：`tmux` 和 `zellij`。 (启动一个指定名称的新 screen 会话)",
     "tags": [
       "common",
       "screen",
@@ -23945,7 +24380,7 @@
     "title": "screen - 启动一个后台会话，指定会话名称并执行指定命令并将日志输出到 screenlog.x",
     "content": "screen -dmLS {{会话名称}} {{命令}}",
     "group": "通用工具 (Common)",
-    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 类似工具请参阅 `tmux` 和 `zellij`。 (启动一个后台会话，指定会话名称并执行指定命令并将日志输出到 screenlog.x)",
+    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 另请参阅：`tmux` 和 `zellij`。 (启动一个后台会话，指定会话名称并执行指定命令并将日志输出到 screenlog.x)",
     "tags": [
       "common",
       "screen",
@@ -23960,7 +24395,7 @@
     "title": "screen - 显示所有打开的 screen 会话",
     "content": "screen -ls",
     "group": "通用工具 (Common)",
-    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 类似工具请参阅 `tmux` 和 `zellij`。 (显示所有打开的 screen 会话)",
+    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 另请参阅：`tmux` 和 `zellij`。 (显示所有打开的 screen 会话)",
     "tags": [
       "common",
       "screen",
@@ -23975,7 +24410,7 @@
     "title": "screen - 重新连接到一个打开的 screen 会话",
     "content": "screen -r {{会话名称}}",
     "group": "通用工具 (Common)",
-    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 类似工具请参阅 `tmux` 和 `zellij`。 (重新连接到一个打开的 screen 会话)",
+    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 另请参阅：`tmux` 和 `zellij`。 (重新连接到一个打开的 screen 会话)",
     "tags": [
       "common",
       "screen",
@@ -23990,7 +24425,7 @@
     "title": "screen - 从当前 screen 会话中分离（先按 `Ctrl + A` 然后按 `D` 分离会话）",
     "content": "<Ctrl a><d>",
     "group": "通用工具 (Common)",
-    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 类似工具请参阅 `tmux` 和 `zellij`。 (从当前 screen 会话中分离（先按 `Ctrl + A` 然后按 `D` 分离会话）)",
+    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 另请参阅：`tmux` 和 `zellij`。 (从当前 screen 会话中分离（先按 `Ctrl + A` 然后按 `D` 分离会话）)",
     "tags": [
       "common",
       "screen",
@@ -24005,7 +24440,7 @@
     "title": "screen - 关闭当前 screen 会话",
     "content": "<Ctrl a><k>",
     "group": "通用工具 (Common)",
-    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 类似工具请参阅 `tmux` 和 `zellij`。 (关闭当前 screen 会话)",
+    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 另请参阅：`tmux` 和 `zellij`。 (关闭当前 screen 会话)",
     "tags": [
       "common",
       "screen",
@@ -24020,7 +24455,7 @@
     "title": "screen - 关闭一个已经分离的 screen 会话",
     "content": "screen -X -S {{会话名称}} quit",
     "group": "通用工具 (Common)",
-    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 类似工具请参阅 `tmux` 和 `zellij`。 (关闭一个已经分离的 screen 会话)",
+    "description": "screen: 在远程服务器上保持会话打开。通过单个 SSH 连接管理多个窗口。 另请参阅：`tmux` 和 `zellij`。 (关闭一个已经分离的 screen 会话)",
     "tags": [
       "common",
       "screen",
@@ -24345,6 +24780,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-}-0",
+    "type": "command",
+    "title": "} - 查看 `{` 关键字的文档",
+    "content": "tldr {",
+    "group": "通用工具 (Common)",
+    "description": "}: 此 shell 关键字用于关闭 `{`。 (查看 `{` 关键字的文档)",
+    "tags": [
+      "common",
+      "}",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-yard-0",
     "type": "command",
     "title": "yard - 创建文档",
@@ -24515,7 +24965,7 @@
     "title": "users - 输出已登录的用户名",
     "content": "users",
     "group": "通用工具 (Common)",
-    "description": "users: 显示已登录用户的列表。 请参阅：`useradd`，`userdel`，`usermod`。 (输出已登录的用户名)",
+    "description": "users: 显示已登录用户的列表。 另请参阅：`useradd`，`userdel`，`usermod`。 (输出已登录的用户名)",
     "tags": [
       "common",
       "users",
@@ -24530,7 +24980,7 @@
     "title": "users - 根据指定的文件输出已登录的用户名",
     "content": "users {{/var/log/wmtp}}",
     "group": "通用工具 (Common)",
-    "description": "users: 显示已登录用户的列表。 请参阅：`useradd`，`userdel`，`usermod`。 (根据指定的文件输出已登录的用户名)",
+    "description": "users: 显示已登录用户的列表。 另请参阅：`useradd`，`userdel`，`usermod`。 (根据指定的文件输出已登录的用户名)",
     "tags": [
       "common",
       "users",
@@ -26475,6 +26925,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-source-0",
+    "type": "command",
+    "title": "source - 执行指定文件中的内容",
+    "content": "source {{路径/到/文件}}",
+    "group": "通用工具 (Common)",
+    "description": "source: 在当前 Shell 中执行来自文件的命令。 (执行指定文件中的内容)",
+    "tags": [
+      "common",
+      "source",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-source-1",
+    "type": "command",
+    "title": "source - 执行指定文件中的内容（也可以用`.`替代`source`）",
+    "content": ". {{路径/到/文件}}",
+    "group": "通用工具 (Common)",
+    "description": "source: 在当前 Shell 中执行来自文件的命令。 (执行指定文件中的内容（也可以用`.`替代`source`）)",
+    "tags": [
+      "common",
+      "source",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-mingle-0",
     "type": "command",
     "title": "mingle - 捆绑一个或多个已经有布局信息的图形布局的边缘",
@@ -26855,7 +27335,7 @@
     "title": "yadm-git-crypt - 初始化仓库以使用 Git Crypt",
     "content": "yadm git-crypt init",
     "group": "通用工具 (Common)",
-    "description": "yadm-git-crypt: Git Crypt 能够实现 Git 仓库中文件的透明加密和解密。 请参阅：`git-crypt`。 (初始化仓库以使用 Git Crypt)",
+    "description": "yadm-git-crypt: Git Crypt 能够实现 Git 仓库中文件的透明加密和解密。 另请参阅：`git-crypt`。 (初始化仓库以使用 Git Crypt)",
     "tags": [
       "common",
       "yadm-git-crypt",
@@ -26870,7 +27350,7 @@
     "title": "yadm-git-crypt - 使用 GPG 共享仓库",
     "content": "yadm git-crypt add-gpg-user {{用户_id}}",
     "group": "通用工具 (Common)",
-    "description": "yadm-git-crypt: Git Crypt 能够实现 Git 仓库中文件的透明加密和解密。 请参阅：`git-crypt`。 (使用 GPG 共享仓库)",
+    "description": "yadm-git-crypt: Git Crypt 能够实现 Git 仓库中文件的透明加密和解密。 另请参阅：`git-crypt`。 (使用 GPG 共享仓库)",
     "tags": [
       "common",
       "yadm-git-crypt",
@@ -26885,7 +27365,7 @@
     "title": "yadm-git-crypt - 克隆包含加密文件的仓库后，解锁它们",
     "content": "yadm git-crypt unlock",
     "group": "通用工具 (Common)",
-    "description": "yadm-git-crypt: Git Crypt 能够实现 Git 仓库中文件的透明加密和解密。 请参阅：`git-crypt`。 (克隆包含加密文件的仓库后，解锁它们)",
+    "description": "yadm-git-crypt: Git Crypt 能够实现 Git 仓库中文件的透明加密和解密。 另请参阅：`git-crypt`。 (克隆包含加密文件的仓库后，解锁它们)",
     "tags": [
       "common",
       "yadm-git-crypt",
@@ -26900,7 +27380,7 @@
     "title": "yadm-git-crypt - 导出对称密钥",
     "content": "yadm git-crypt export-key {{路径/到/密钥文件}}",
     "group": "通用工具 (Common)",
-    "description": "yadm-git-crypt: Git Crypt 能够实现 Git 仓库中文件的透明加密和解密。 请参阅：`git-crypt`。 (导出对称密钥)",
+    "description": "yadm-git-crypt: Git Crypt 能够实现 Git 仓库中文件的透明加密和解密。 另请参阅：`git-crypt`。 (导出对称密钥)",
     "tags": [
       "common",
       "yadm-git-crypt",
@@ -26912,10 +27392,10 @@
   {
     "id": "tldr-zh-common-go-build-0",
     "type": "command",
-    "title": "go-build - 编译 ‘package main’ 文件（输出为不带扩展名的文件名）",
+    "title": "go-build - 编译 'package main' 文件（输出为不带扩展名的文件名）",
     "content": "go build {{路径/到/main.go}}",
     "group": "通用工具 (Common)",
-    "description": "go-build: 编译 Go 源代码。 (编译 ‘package main’ 文件（输出为不带扩展名的文件名）)",
+    "description": "go-build: 编译 Go 源代码。 (编译 'package main' 文件（输出为不带扩展名的文件名）)",
     "tags": [
       "common",
       "go-build",
@@ -27185,7 +27665,7 @@
     "title": "zellij - 启动一个新的命名会话",
     "content": "zellij --session {{名称}}",
     "group": "通用工具 (Common)",
-    "description": "zellij: 带有内置功能的终端复用器。 请参阅：`tmux` 和 `screen`。 (启动一个新的命名会话)",
+    "description": "zellij: 带有内置功能的终端复用器。 另请参阅：`tmux` 和 `screen`。 (启动一个新的命名会话)",
     "tags": [
       "common",
       "zellij",
@@ -27200,7 +27680,7 @@
     "title": "zellij - 列出现有会话",
     "content": "zellij list-sessions",
     "group": "通用工具 (Common)",
-    "description": "zellij: 带有内置功能的终端复用器。 请参阅：`tmux` 和 `screen`。 (列出现有会话)",
+    "description": "zellij: 带有内置功能的终端复用器。 另请参阅：`tmux` 和 `screen`。 (列出现有会话)",
     "tags": [
       "common",
       "zellij",
@@ -27215,7 +27695,7 @@
     "title": "zellij - 附加到最近使用的会话",
     "content": "zellij attach",
     "group": "通用工具 (Common)",
-    "description": "zellij: 带有内置功能的终端复用器。 请参阅：`tmux` 和 `screen`。 (附加到最近使用的会话)",
+    "description": "zellij: 带有内置功能的终端复用器。 另请参阅：`tmux` 和 `screen`。 (附加到最近使用的会话)",
     "tags": [
       "common",
       "zellij",
@@ -27230,7 +27710,7 @@
     "title": "zellij - 打开一个新窗格（在 zellij 会话中）",
     "content": "<Alt n>",
     "group": "通用工具 (Common)",
-    "description": "zellij: 带有内置功能的终端复用器。 请参阅：`tmux` 和 `screen`。 (打开一个新窗格（在 zellij 会话中）)",
+    "description": "zellij: 带有内置功能的终端复用器。 另请参阅：`tmux` 和 `screen`。 (打开一个新窗格（在 zellij 会话中）)",
     "tags": [
       "common",
       "zellij",
@@ -27245,7 +27725,7 @@
     "title": "zellij - 从当前会话分离（在 zellij 会话中）",
     "content": "<Ctrl o><d>",
     "group": "通用工具 (Common)",
-    "description": "zellij: 带有内置功能的终端复用器。 请参阅：`tmux` 和 `screen`。 (从当前会话分离（在 zellij 会话中）)",
+    "description": "zellij: 带有内置功能的终端复用器。 另请参阅：`tmux` 和 `screen`。 (从当前会话分离（在 zellij 会话中）)",
     "tags": [
       "common",
       "zellij",
@@ -27275,7 +27755,7 @@
     "title": "bash - 启动交互式 shell",
     "content": "bash",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (启动交互式 shell)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 另请参阅：`zsh`，`!`（历史展开）。 (启动交互式 shell)",
     "tags": [
       "common",
       "bash",
@@ -27290,7 +27770,7 @@
     "title": "bash - 启动一个不加载启动配置的交互式的 shell 会话",
     "content": "bash --norc",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (启动一个不加载启动配置的交互式的 shell 会话)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 另请参阅：`zsh`，`!`（历史展开）。 (启动一个不加载启动配置的交互式的 shell 会话)",
     "tags": [
       "common",
       "bash",
@@ -27305,7 +27785,7 @@
     "title": "bash - 执行命令",
     "content": "bash -c \"{{echo '已执行bash命令'}}\"",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (执行命令)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 另请参阅：`zsh`，`!`（历史展开）。 (执行命令)",
     "tags": [
       "common",
       "bash",
@@ -27320,7 +27800,7 @@
     "title": "bash - 执行脚本文件",
     "content": "bash {{路径/到/脚本文件.sh}}",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 另请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件)",
     "tags": [
       "common",
       "bash",
@@ -27335,7 +27815,7 @@
     "title": "bash - 执行脚本文件，并将所有执行过的命令输出到终端",
     "content": "bash -x {{路径/到/脚本文件.sh}}",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件，并将所有执行过的命令输出到终端)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 另请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件，并将所有执行过的命令输出到终端)",
     "tags": [
       "common",
       "bash",
@@ -27350,7 +27830,7 @@
     "title": "bash - 执行脚本文件，并在第一个错误处终止",
     "content": "bash -e {{路径/到/脚本文件.sh}}",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件，并在第一个错误处终止)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 另请参阅：`zsh`，`!`（历史展开）。 (执行脚本文件，并在第一个错误处终止)",
     "tags": [
       "common",
       "bash",
@@ -27365,7 +27845,7 @@
     "title": "bash - 从 `stdin` 执行指定的命令",
     "content": "{{echo \"echo '已执行bash命令'\"}} | bash",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (从 `stdin` 执行指定的命令)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 另请参阅：`zsh`，`!`（历史展开）。 (从 `stdin` 执行指定的命令)",
     "tags": [
       "common",
       "bash",
@@ -27380,7 +27860,7 @@
     "title": "bash - 启动一个限制的 shell 会话",
     "content": "bash -r",
     "group": "通用工具 (Common)",
-    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 此外请参阅：`zsh`，`!`（历史展开）。 (启动一个限制的 shell 会话)",
+    "description": "bash: Bourne-Again SHell，兼容 `sh` 的命令行解释器。 另请参阅：`zsh`，`!`（历史展开）。 (启动一个限制的 shell 会话)",
     "tags": [
       "common",
       "bash",
@@ -28055,7 +28535,7 @@
     "title": "unimatrix - 模仿 `cmatrix` 的默认输出（无 Unicode，适用于 TTY）",
     "content": "unimatrix --no-bold --speed {{96}} --character-list {{o}}",
     "group": "通用工具 (Common)",
-    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 请参阅：`cmatrix`。 (模仿 `cmatrix` 的默认输出（无 Unicode，适用于 TTY）)",
+    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 另请参阅：`cmatrix`。 (模仿 `cmatrix` 的默认输出（无 Unicode，适用于 TTY）)",
     "tags": [
       "common",
       "unimatrix",
@@ -28070,7 +28550,7 @@
     "title": "unimatrix - 无粗体字符，缓慢地显示，使用表情符号、数字和少量符号",
     "content": "unimatrix --no-bold --speed {{50}} --character-list {{ens}}",
     "group": "通用工具 (Common)",
-    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 请参阅：`cmatrix`。 (无粗体字符，缓慢地显示，使用表情符号、数字和少量符号)",
+    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 另请参阅：`cmatrix`。 (无粗体字符，缓慢地显示，使用表情符号、数字和少量符号)",
     "tags": [
       "common",
       "unimatrix",
@@ -28085,7 +28565,7 @@
     "title": "unimatrix - 更改字符的颜色",
     "content": "unimatrix --color {{red|green|blue|white|...}}",
     "group": "通用工具 (Common)",
-    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 请参阅：`cmatrix`。 (更改字符的颜色)",
+    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 另请参阅：`cmatrix`。 (更改字符的颜色)",
     "tags": [
       "common",
       "unimatrix",
@@ -28100,7 +28580,7 @@
     "title": "unimatrix - 使用字母代码选择字符集（可用字符集请参阅 `unimatrix --help`）",
     "content": "unimatrix --character-list {{character_sets}}",
     "group": "通用工具 (Common)",
-    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 请参阅：`cmatrix`。 (使用字母代码选择字符集（可用字符集请参阅 `unimatrix --help`）)",
+    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 另请参阅：`cmatrix`。 (使用字母代码选择字符集（可用字符集请参阅 `unimatrix --help`）)",
     "tags": [
       "common",
       "unimatrix",
@@ -28115,7 +28595,7 @@
     "title": "unimatrix - 更改滚动速度",
     "content": "unimatrix --speed {{number}}",
     "group": "通用工具 (Common)",
-    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 请参阅：`cmatrix`。 (更改滚动速度)",
+    "description": "unimatrix: 使用 Unicode 字符模拟《黑客帝国》的视觉效果。 另请参阅：`cmatrix`。 (更改滚动速度)",
     "tags": [
       "common",
       "unimatrix",
@@ -29195,7 +29675,7 @@
     "title": "qownnotes - 以便携模式运行",
     "content": "QOwnNotes --portable",
     "group": "通用工具 (Common)",
-    "description": "qownnotes: Markdown 笔记应用程序。 可以选择与 Nextcloud 和 ownCloud 的笔记应用程序集成。 请参阅：`qc`，用于管理命令代码片段。 (以便携模式运行)",
+    "description": "qownnotes: Markdown 笔记应用程序。 可以选择与 Nextcloud 和 ownCloud 的笔记应用程序集成。 另请参阅：`qc`，用于管理命令代码片段。 (以便携模式运行)",
     "tags": [
       "common",
       "qownnotes",
@@ -29210,7 +29690,7 @@
     "title": "qownnotes - 在 GitHub Markdown 中转储应用程序和环境的设置信息",
     "content": "QOwnNotes --dump-settings",
     "group": "通用工具 (Common)",
-    "description": "qownnotes: Markdown 笔记应用程序。 可以选择与 Nextcloud 和 ownCloud 的笔记应用程序集成。 请参阅：`qc`，用于管理命令代码片段。 (在 GitHub Markdown 中转储应用程序和环境的设置信息)",
+    "description": "qownnotes: Markdown 笔记应用程序。 可以选择与 Nextcloud 和 ownCloud 的笔记应用程序集成。 另请参阅：`qc`，用于管理命令代码片段。 (在 GitHub Markdown 中转储应用程序和环境的设置信息)",
     "tags": [
       "common",
       "qownnotes",
@@ -29225,7 +29705,7 @@
     "title": "qownnotes - 为设置和内部文件指定不同的上下文",
     "content": "QOwnNotes --session {{test}}",
     "group": "通用工具 (Common)",
-    "description": "qownnotes: Markdown 笔记应用程序。 可以选择与 Nextcloud 和 ownCloud 的笔记应用程序集成。 请参阅：`qc`，用于管理命令代码片段。 (为设置和内部文件指定不同的上下文)",
+    "description": "qownnotes: Markdown 笔记应用程序。 可以选择与 Nextcloud 和 ownCloud 的笔记应用程序集成。 另请参阅：`qc`，用于管理命令代码片段。 (为设置和内部文件指定不同的上下文)",
     "tags": [
       "common",
       "qownnotes",
@@ -29240,7 +29720,7 @@
     "title": "qownnotes - 应用程序启动后触发一个菜单操作",
     "content": "QOwnNotes --action {{actionShow_Todo_List}}",
     "group": "通用工具 (Common)",
-    "description": "qownnotes: Markdown 笔记应用程序。 可以选择与 Nextcloud 和 ownCloud 的笔记应用程序集成。 请参阅：`qc`，用于管理命令代码片段。 (应用程序启动后触发一个菜单操作)",
+    "description": "qownnotes: Markdown 笔记应用程序。 可以选择与 Nextcloud 和 ownCloud 的笔记应用程序集成。 另请参阅：`qc`，用于管理命令代码片段。 (应用程序启动后触发一个菜单操作)",
     "tags": [
       "common",
       "qownnotes",
@@ -32673,7 +33153,7 @@
     "id": "tldr-zh-common-docker-container-run-0",
     "type": "command",
     "title": "docker-container-run - 使用打上标签的 Docker 镜像的新容器中执行命令",
-    "content": "docker run {{镜像:标签}} {{命令}}",
+    "content": "docker {{[run|container run]}} {{镜像:标签}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-run: 创建一个新的容器并运行命令。 (使用打上标签的 Docker 镜像的新容器中执行命令)",
     "tags": [
@@ -32688,7 +33168,7 @@
     "id": "tldr-zh-common-docker-container-run-1",
     "type": "command",
     "title": "docker-container-run - 在后台运行新容器中的命令，并输出其容器ID",
-    "content": "docker run {{[-d|--detach]}} {{镜像}} {{命令}}",
+    "content": "docker {{[run|container run]}} {{[-d|--detach]}} {{镜像}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-run: 创建一个新的容器并运行命令。 (在后台运行新容器中的命令，并输出其容器ID)",
     "tags": [
@@ -32703,7 +33183,7 @@
     "id": "tldr-zh-common-docker-container-run-2",
     "type": "command",
     "title": "docker-container-run - 以交互模式和伪终端启动一个容器，并执行指定的命令",
-    "content": "docker run --rm {{[-it|--interactive --tty]}} {{镜像}} {{命令}}",
+    "content": "docker {{[run|container run]}} --rm {{[-it|--interactive --tty]}} {{镜像}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-run: 创建一个新的容器并运行命令。 (以交互模式和伪终端启动一个容器，并执行指定的命令)",
     "tags": [
@@ -32718,7 +33198,7 @@
     "id": "tldr-zh-common-docker-container-run-3",
     "type": "command",
     "title": "docker-container-run - 在新容器中传入环境变量并运行指定命令",
-    "content": "docker run {{[-e|--env]}} '{{变量名}}={{变量值}}' {{[-e|--env]}} {{变量名=变量值}} {{镜像}} {{命令}}",
+    "content": "docker {{[run|container run]}} {{[-e|--env]}} '{{变量名}}={{变量值}}' {{[-e|--env]}} {{变量名=变量值}} {{镜像}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-run: 创建一个新的容器并运行命令。 (在新容器中传入环境变量并运行指定命令)",
     "tags": [
@@ -32733,7 +33213,7 @@
     "id": "tldr-zh-common-docker-container-run-4",
     "type": "command",
     "title": "docker-container-run - 在新容器中挂载目录卷并运行指定命令",
-    "content": "docker run {{[-v|--volume]}} {{宿主机路径}}:{{容器内路径}} {{镜像}} {{命令}}",
+    "content": "docker {{[run|container run]}} {{[-v|--volume]}} /{{宿主机路径}}:/{{容器内路径}} {{镜像}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-run: 创建一个新的容器并运行命令。 (在新容器中挂载目录卷并运行指定命令)",
     "tags": [
@@ -32748,7 +33228,7 @@
     "id": "tldr-zh-common-docker-container-run-5",
     "type": "command",
     "title": "docker-container-run - 在新容器中开放映射端口并运行指定命令",
-    "content": "docker run {{[-p|--publish]}} {{宿主机端口}}:{{容器内端口}} {{镜像}} {{命令}}",
+    "content": "docker {{[run|container run]}} {{[-p|--publish]}} {{宿主机端口}}:{{容器内端口}} {{镜像}} {{命令}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-run: 创建一个新的容器并运行命令。 (在新容器中开放映射端口并运行指定命令)",
     "tags": [
@@ -32763,7 +33243,7 @@
     "id": "tldr-zh-common-docker-container-run-6",
     "type": "command",
     "title": "docker-container-run - 在新容器中覆盖镜像中 ENTRYPOINT 并运行指定命令",
-    "content": "docker run --entrypoint {{命令}} {{镜像}}",
+    "content": "docker {{[run|container run]}} --entrypoint {{命令}} {{镜像}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-run: 创建一个新的容器并运行命令。 (在新容器中覆盖镜像中 ENTRYPOINT 并运行指定命令)",
     "tags": [
@@ -32778,7 +33258,7 @@
     "id": "tldr-zh-common-docker-container-run-7",
     "type": "command",
     "title": "docker-container-run - 在新容器中设定使用需使用的网络并运行指定命令",
-    "content": "docker run --network {{网络}} {{镜像}}",
+    "content": "docker {{[run|container run]}} --network {{网络}} {{镜像}}",
     "group": "通用工具 (Common)",
     "description": "docker-container-run: 创建一个新的容器并运行命令。 (在新容器中设定使用需使用的网络并运行指定命令)",
     "tags": [
@@ -34580,7 +35060,7 @@
     "title": "you-get - 打印网络上指定媒体的媒体信息",
     "content": "you-get --info {{https://example.com/video?id=value}}",
     "group": "通用工具 (Common)",
-    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (打印网络上指定媒体的媒体信息)",
+    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 另请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (打印网络上指定媒体的媒体信息)",
     "tags": [
       "common",
       "you-get",
@@ -34595,7 +35075,7 @@
     "title": "you-get - 从指定 URL 下载媒体",
     "content": "you-get {{https://example.com/video?id=value}}",
     "group": "通用工具 (Common)",
-    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (从指定 URL 下载媒体)",
+    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 另请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (从指定 URL 下载媒体)",
     "tags": [
       "common",
       "you-get",
@@ -34610,7 +35090,7 @@
     "title": "you-get - 在 Google 视频上搜索并下载",
     "content": "you-get {{关键词}}",
     "group": "通用工具 (Common)",
-    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (在 Google 视频上搜索并下载)",
+    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 另请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (在 Google 视频上搜索并下载)",
     "tags": [
       "common",
       "you-get",
@@ -34625,7 +35105,7 @@
     "title": "you-get - 将媒体下载到指定位置",
     "content": "you-get --output-dir {{路径/到/目录}} --output-filename {{文件名}} {{https://example.com/watch?v=value}}",
     "group": "通用工具 (Common)",
-    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (将媒体下载到指定位置)",
+    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 另请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (将媒体下载到指定位置)",
     "tags": [
       "common",
       "you-get",
@@ -34640,7 +35120,7 @@
     "title": "you-get - 使用代理下载媒体",
     "content": "you-get --http-proxy {{代理服务器}} {{https://example.com/watch?v=value}}",
     "group": "通用工具 (Common)",
-    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (使用代理下载媒体)",
+    "description": "you-get: 从网络下载媒体内容（视频、音频、图像）。 另请参阅：`yt-dlp`，`youtube-viewer`，`instaloader`。 (使用代理下载媒体)",
     "tags": [
       "common",
       "you-get",
@@ -38415,6 +38895,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-qemu-system-x86_64-0",
+    "type": "command",
+    "title": "qemu-system-x86_64 - 从一个模拟 `x86_64` 架构的镜像启动",
+    "content": "qemu-system-x86_64 -hda {{镜像名称.img}} -m {{4096}}",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-x86_64: 模拟 `x86_64` 架构。 (从一个模拟 `x86_64` 架构的镜像启动)",
+    "tags": [
+      "common",
+      "qemu-system-x86_64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-x86_64-1",
+    "type": "command",
+    "title": "qemu-system-x86_64 - 从一个 Live ISO 镜像启动 QEMU 实例",
+    "content": "qemu-system-x86_64 -hda {{镜像名称.img}} -m {{4096}} -cdrom {{操作系统镜像.iso}} -boot d",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-x86_64: 模拟 `x86_64` 架构。 (从一个 Live ISO 镜像启动 QEMU 实例)",
+    "tags": [
+      "common",
+      "qemu-system-x86_64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-x86_64-2",
+    "type": "command",
+    "title": "qemu-system-x86_64 - 从物理设备启动（例如：从 USB 启动以测试一个可启动介质）",
+    "content": "qemu-system-x86_64 -hda {{/dev/存储设备}} -m {{4096}}",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-x86_64: 模拟 `x86_64` 架构。 (从物理设备启动（例如：从 USB 启动以测试一个可启动介质）)",
+    "tags": [
+      "common",
+      "qemu-system-x86_64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-x86_64-3",
+    "type": "command",
+    "title": "qemu-system-x86_64 - 不启动 VNC 服务器",
+    "content": "qemu-system-x86_64 -hda {{镜像名称.img}} -m {{4096}} -nographic",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-x86_64: 模拟 `x86_64` 架构。 (不启动 VNC 服务器)",
+    "tags": [
+      "common",
+      "qemu-system-x86_64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-x86_64-4",
+    "type": "command",
+    "title": "qemu-system-x86_64 - 退出非图形界面的 QEMU",
+    "content": "<Ctrl a><x>",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-x86_64: 模拟 `x86_64` 架构。 (退出非图形界面的 QEMU)",
+    "tags": [
+      "common",
+      "qemu-system-x86_64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-x86_64-5",
+    "type": "command",
+    "title": "qemu-system-x86_64 - 列出支持的机器类型",
+    "content": "qemu-system-x86_64 {{[-M|-machine]}} help",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-x86_64: 模拟 `x86_64` 架构。 (列出支持的机器类型)",
+    "tags": [
+      "common",
+      "qemu-system-x86_64",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-go-clean-0",
     "type": "command",
     "title": "go-clean - 只打印移除命令，而不会真正移除任何东西",
@@ -41420,7 +41990,7 @@
     "title": "zstdless - 打开一个 `zstd` 压缩文件",
     "content": "zstdless {{路径/到/文件.zst}}",
     "group": "通用工具 (Common)",
-    "description": "zstdless: 打开一个 `zstd` 压缩文件进行交互式阅读，允许滚动和搜索。 请参阅：`zstd`，`less`。 (打开一个 `zstd` 压缩文件)",
+    "description": "zstdless: 打开一个 `zstd` 压缩文件进行交互式阅读，允许滚动和搜索。 另请参阅：`zstd`，`less`。 (打开一个 `zstd` 压缩文件)",
     "tags": [
       "common",
       "zstdless",
@@ -41435,7 +42005,7 @@
     "title": "yadm-clone - 克隆一个已有的仓库",
     "content": "yadm clone {{远程_仓库_位置}}",
     "group": "通用工具 (Common)",
-    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 请参阅：`git clone`。 (克隆一个已有的仓库)",
+    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 另请参阅：`git clone`。 (克隆一个已有的仓库)",
     "tags": [
       "common",
       "yadm-clone",
@@ -41450,7 +42020,7 @@
     "title": "yadm-clone - 克隆一个已有的仓库，然后执行引导文件",
     "content": "yadm clone {{远程_仓库_位置}} --bootstrap",
     "group": "通用工具 (Common)",
-    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 请参阅：`git clone`。 (克隆一个已有的仓库，然后执行引导文件)",
+    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 另请参阅：`git clone`。 (克隆一个已有的仓库，然后执行引导文件)",
     "tags": [
       "common",
       "yadm-clone",
@@ -41465,7 +42035,7 @@
     "title": "yadm-clone - 克隆一个已有的仓库，并在克隆后不执行引导文件",
     "content": "yadm clone {{远程_仓库_位置}} --no-bootstrap",
     "group": "通用工具 (Common)",
-    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 请参阅：`git clone`。 (克隆一个已有的仓库，并在克隆后不执行引导文件)",
+    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 另请参阅：`git clone`。 (克隆一个已有的仓库，并在克隆后不执行引导文件)",
     "tags": [
       "common",
       "yadm-clone",
@@ -41480,7 +42050,7 @@
     "title": "yadm-clone - 更改 `yadm` 在克隆时使用的工作树",
     "content": "yadm clone {{远程_仓库_位置}} --w {{工作树_文件}}",
     "group": "通用工具 (Common)",
-    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 请参阅：`git clone`。 (更改 `yadm` 在克隆时使用的工作树)",
+    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 另请参阅：`git clone`。 (更改 `yadm` 在克隆时使用的工作树)",
     "tags": [
       "common",
       "yadm-clone",
@@ -41495,7 +42065,7 @@
     "title": "yadm-clone - 更改 `yadm` 用于获取文件的分支",
     "content": "yadm clone {{远程_仓库_位置}} -b {{分支}}",
     "group": "通用工具 (Common)",
-    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 请参阅：`git clone`。 (更改 `yadm` 用于获取文件的分支)",
+    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 另请参阅：`git clone`。 (更改 `yadm` 用于获取文件的分支)",
     "tags": [
       "common",
       "yadm-clone",
@@ -41510,7 +42080,7 @@
     "title": "yadm-clone - 覆盖一个已有仓库的本地分支",
     "content": "yadm clone {{远程_仓库_位置}} -f",
     "group": "通用工具 (Common)",
-    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 请参阅：`git clone`。 (覆盖一个已有仓库的本地分支)",
+    "description": "yadm-clone: 功能就像 `git clone`。此外，你还可以传递额外的标志来配置你的仓库。 如果仓库中有一个引导文件，将提示你执行它。 另请参阅：`git clone`。 (覆盖一个已有仓库的本地分支)",
     "tags": [
       "common",
       "yadm-clone",
@@ -42534,6 +43104,96 @@
     "tags": [
       "common",
       "docker-logs",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-i386-0",
+    "type": "command",
+    "title": "qemu-system-i386 - 从一个模拟 `i386` 架构的镜像启动",
+    "content": "qemu-system-i386 -hda {{image_name.img}} -m {{4096}}",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-i386: 模拟 `i386` 架构。 (从一个模拟 `i386` 架构的镜像启动)",
+    "tags": [
+      "common",
+      "qemu-system-i386",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-i386-1",
+    "type": "command",
+    "title": "qemu-system-i386 - 从一个实时 ISO 镜像启动 QEMU 实例",
+    "content": "qemu-system-i386 -hda {{image_name.img}} -m {{4096}} -cdrom {{os_image.iso}} -boot d",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-i386: 模拟 `i386` 架构。 (从一个实时 ISO 镜像启动 QEMU 实例)",
+    "tags": [
+      "common",
+      "qemu-system-i386",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-i386-2",
+    "type": "command",
+    "title": "qemu-system-i386 - 从物理设备启动（例如从 USB 启动以测试可引导介质）",
+    "content": "qemu-system-i386 -hda {{/dev/storage_device}} -m {{4096}}",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-i386: 模拟 `i386` 架构。 (从物理设备启动（例如从 USB 启动以测试可引导介质）)",
+    "tags": [
+      "common",
+      "qemu-system-i386",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-i386-3",
+    "type": "command",
+    "title": "qemu-system-i386 - 不启动 VNC 服务器",
+    "content": "qemu-system-i386 -hda {{image_name.img}} -m {{4096}} -nographic",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-i386: 模拟 `i386` 架构。 (不启动 VNC 服务器)",
+    "tags": [
+      "common",
+      "qemu-system-i386",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-i386-4",
+    "type": "command",
+    "title": "qemu-system-i386 - 退出无图形界面的 QEMU",
+    "content": "<Ctrl a><x>",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-i386: 模拟 `i386` 架构。 (退出无图形界面的 QEMU)",
+    "tags": [
+      "common",
+      "qemu-system-i386",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-qemu-system-i386-5",
+    "type": "command",
+    "title": "qemu-system-i386 - 列出支持的机器类型",
+    "content": "qemu-system-i386 {{[-M|-machine]}} help",
+    "group": "通用工具 (Common)",
+    "description": "qemu-system-i386: 模拟 `i386` 架构。 (列出支持的机器类型)",
+    "tags": [
+      "common",
+      "qemu-system-i386",
       "tldr",
       "zh"
     ],
@@ -44595,6 +45255,126 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-{-0",
+    "type": "command",
+    "title": "{ - 隔离变量名",
+    "content": "echo ${{{HOME}work}}",
+    "group": "通用工具 (Common)",
+    "description": "{: 多用途 shell 语法。 (隔离变量名)",
+    "tags": [
+      "common",
+      "{",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-{-1",
+    "type": "command",
+    "title": "{ - 使用大括号展开序列",
+    "content": "echo {{{1..3}}} {{{a..c}}}{{{dir1,dir2,dir3}}}",
+    "group": "通用工具 (Common)",
+    "description": "{: 多用途 shell 语法。 (使用大括号展开序列)",
+    "tags": [
+      "common",
+      "{",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-{-2",
+    "type": "command",
+    "title": "{ - 在返回文本之前检查 `variable` 是否已设置",
+    "content": "echo ${{{variable:+variable is set and contains $variable}}}",
+    "group": "通用工具 (Common)",
+    "description": "{: 多用途 shell 语法。 (在返回文本之前检查 `variable` 是否已设置)",
+    "tags": [
+      "common",
+      "{",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-{-3",
+    "type": "command",
+    "title": "{ - 在 `variable` 未设置的情况下设置默认值",
+    "content": "echo ${{{variable:-default}}}",
+    "group": "通用工具 (Common)",
+    "description": "{: 多用途 shell 语法。 (在 `variable` 未设置的情况下设置默认值)",
+    "tags": [
+      "common",
+      "{",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-{-4",
+    "type": "command",
+    "title": "{ - 返回 `variable` 的字符长度",
+    "content": "echo ${{{#variable}}}",
+    "group": "通用工具 (Common)",
+    "description": "{: 多用途 shell 语法。 (返回 `variable` 的字符长度)",
+    "tags": [
+      "common",
+      "{",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-{-5",
+    "type": "command",
+    "title": "{ - 返回字符串切片",
+    "content": "echo ${{{variable:3:7}}}",
+    "group": "通用工具 (Common)",
+    "description": "{: 多用途 shell 语法。 (返回字符串切片)",
+    "tags": [
+      "common",
+      "{",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-{-6",
+    "type": "command",
+    "title": "{ - 递归展开一个 `variable`",
+    "content": "echo ${{{!variable}}}",
+    "group": "通用工具 (Common)",
+    "description": "{: 多用途 shell 语法。 (递归展开一个 `variable`)",
+    "tags": [
+      "common",
+      "{",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-{-7",
+    "type": "command",
+    "title": "{ - 将命令输出分组在一起",
+    "content": "{ {{command1; command2; ...}} } | {{another_command}}",
+    "group": "通用工具 (Common)",
+    "description": "{: 多用途 shell 语法。 (将命令输出分组在一起)",
+    "tags": [
+      "common",
+      "{",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-eim-0",
     "type": "command",
     "title": "eim - 在默认位置（Windows 上为 `C:\\esp`，POSIX 系统上为 `~/.espressif`）安装默认（最新）的 ESP-IDF 版本",
@@ -45045,27 +45825,12 @@
     "source": "official"
   },
   {
-    "id": "tldr-zh-common-docker-container-rmi-0",
-    "type": "command",
-    "title": "docker-container-rmi - 查看原命令的文档",
-    "content": "tldr docker image rm",
-    "group": "通用工具 (Common)",
-    "description": "docker-container-rmi: 此命令为 `docker image rm` 的别名。 (查看原命令的文档)",
-    "tags": [
-      "common",
-      "docker-container-rmi",
-      "tldr",
-      "zh"
-    ],
-    "source": "official"
-  },
-  {
     "id": "tldr-zh-common-yacc-0",
     "type": "command",
     "title": "yacc - 创建一个包含 C 语言解析器代码的文件 `y.tab.c`，并编译语法文件以及所有值所需的常量声明。（只有在使用 `-d` 选项时，才会创建常量声明文件 `y.tab.h`）",
     "content": "yacc -d {{路径/到/grammar_file.y}}",
     "group": "通用工具 (Common)",
-    "description": "yacc: 使用形式语法规范文件生成一个 LALR 解析器（使用 C 语言）。 请参阅：`bison`。 (创建一个包含 C 语言解析器代码的文件 `y.tab.c`，并编译语法文件以及所有值所需的常量声明。（只有在使用 `-d` 选项时，才会创建常量声明文件 `y.tab.h`）)",
+    "description": "yacc: 使用形式语法规范文件生成一个 LALR 解析器（使用 C 语言）。 另请参阅：`bison`。 (创建一个包含 C 语言解析器代码的文件 `y.tab.c`，并编译语法文件以及所有值所需的常量声明。（只有在使用 `-d` 选项时，才会创建常量声明文件 `y.tab.h`）)",
     "tags": [
       "common",
       "yacc",
@@ -45080,7 +45845,7 @@
     "title": "yacc - 编译一个包含解析器描述的语法文件，以及报告由于语法中的歧义导致的冲突",
     "content": "yacc -d {{路径/到/grammar_file.y}} -v",
     "group": "通用工具 (Common)",
-    "description": "yacc: 使用形式语法规范文件生成一个 LALR 解析器（使用 C 语言）。 请参阅：`bison`。 (编译一个包含解析器描述的语法文件，以及报告由于语法中的歧义导致的冲突)",
+    "description": "yacc: 使用形式语法规范文件生成一个 LALR 解析器（使用 C 语言）。 另请参阅：`bison`。 (编译一个包含解析器描述的语法文件，以及报告由于语法中的歧义导致的冲突)",
     "tags": [
       "common",
       "yacc",
@@ -45095,7 +45860,7 @@
     "title": "yacc - 编译一个语法文件，并用 `prefix` 代替 `y` 作为输出文件名前缀",
     "content": "yacc -d {{路径/到/grammar_file.y}} -v -b {{前缀}}",
     "group": "通用工具 (Common)",
-    "description": "yacc: 使用形式语法规范文件生成一个 LALR 解析器（使用 C 语言）。 请参阅：`bison`。 (编译一个语法文件，并用 `prefix` 代替 `y` 作为输出文件名前缀)",
+    "description": "yacc: 使用形式语法规范文件生成一个 LALR 解析器（使用 C 语言）。 另请参阅：`bison`。 (编译一个语法文件，并用 `prefix` 代替 `y` 作为输出文件名前缀)",
     "tags": [
       "common",
       "yacc",
@@ -46115,7 +46880,7 @@
     "title": "zmv - 使用类似正则表达式的模式移动文件",
     "content": "zmv '{{(*).log}}' '{{$1.txt}}'",
     "group": "通用工具 (Common)",
-    "description": "zmv: 移动或重命名符合指定扩展模式的文件。 请参阅：`zcp` 和 `zln`。 (使用类似正则表达式的模式移动文件)",
+    "description": "zmv: 移动或重命名符合指定扩展模式的文件。 (使用类似正则表达式的模式移动文件)",
     "tags": [
       "common",
       "zmv",
@@ -46130,7 +46895,7 @@
     "title": "zmv - 预览移动结果，但不进行任何实际更改",
     "content": "zmv -n '{{(*).log}}' '{{$1.txt}}'",
     "group": "通用工具 (Common)",
-    "description": "zmv: 移动或重命名符合指定扩展模式的文件。 请参阅：`zcp` 和 `zln`。 (预览移动结果，但不进行任何实际更改)",
+    "description": "zmv: 移动或重命名符合指定扩展模式的文件。 (预览移动结果，但不进行任何实际更改)",
     "tags": [
       "common",
       "zmv",
@@ -46145,7 +46910,7 @@
     "title": "zmv - 交互式移动文件，在每次更改之前进行提示",
     "content": "zmv -i '{{(*).log}}' '{{$1.txt}}'",
     "group": "通用工具 (Common)",
-    "description": "zmv: 移动或重命名符合指定扩展模式的文件。 请参阅：`zcp` 和 `zln`。 (交互式移动文件，在每次更改之前进行提示)",
+    "description": "zmv: 移动或重命名符合指定扩展模式的文件。 (交互式移动文件，在每次更改之前进行提示)",
     "tags": [
       "common",
       "zmv",
@@ -46160,7 +46925,7 @@
     "title": "zmv - 在执行时详细打印每个操作",
     "content": "zmv -v '{{(*).log}}' '{{$1.txt}}'",
     "group": "通用工具 (Common)",
-    "description": "zmv: 移动或重命名符合指定扩展模式的文件。 请参阅：`zcp` 和 `zln`。 (在执行时详细打印每个操作)",
+    "description": "zmv: 移动或重命名符合指定扩展模式的文件。 (在执行时详细打印每个操作)",
     "tags": [
       "common",
       "zmv",
@@ -48680,7 +49445,7 @@
     "title": "bc - 启动交互式会话",
     "content": "bc",
     "group": "通用工具 (Common)",
-    "description": "bc: 任意精度的计算器语言。 请参阅：`dc`，`qalc`。 (启动交互式会话)",
+    "description": "bc: 任意精度的计算器语言。 另请参阅：`dc`，`qalc`。 (启动交互式会话)",
     "tags": [
       "common",
       "bc",
@@ -48695,7 +49460,7 @@
     "title": "bc - 启动交互式会话并启用标准数学库",
     "content": "bc --interactive --mathlib",
     "group": "通用工具 (Common)",
-    "description": "bc: 任意精度的计算器语言。 请参阅：`dc`，`qalc`。 (启动交互式会话并启用标准数学库)",
+    "description": "bc: 任意精度的计算器语言。 另请参阅：`dc`，`qalc`。 (启动交互式会话并启用标准数学库)",
     "tags": [
       "common",
       "bc",
@@ -48710,7 +49475,7 @@
     "title": "bc - 计算表达式",
     "content": "echo '{{5 / 3}}' | bc",
     "group": "通用工具 (Common)",
-    "description": "bc: 任意精度的计算器语言。 请参阅：`dc`，`qalc`。 (计算表达式)",
+    "description": "bc: 任意精度的计算器语言。 另请参阅：`dc`，`qalc`。 (计算表达式)",
     "tags": [
       "common",
       "bc",
@@ -48725,7 +49490,7 @@
     "title": "bc - 执行脚本",
     "content": "bc {{路径/到/脚本.bc}}",
     "group": "通用工具 (Common)",
-    "description": "bc: 任意精度的计算器语言。 请参阅：`dc`，`qalc`。 (执行脚本)",
+    "description": "bc: 任意精度的计算器语言。 另请参阅：`dc`，`qalc`。 (执行脚本)",
     "tags": [
       "common",
       "bc",
@@ -48740,7 +49505,7 @@
     "title": "bc - 使用指定的小数位数计算一个表达式",
     "content": "echo 'scale = {{10}}; {{5 / 3}}' | bc",
     "group": "通用工具 (Common)",
-    "description": "bc: 任意精度的计算器语言。 请参阅：`dc`，`qalc`。 (使用指定的小数位数计算一个表达式)",
+    "description": "bc: 任意精度的计算器语言。 另请参阅：`dc`，`qalc`。 (使用指定的小数位数计算一个表达式)",
     "tags": [
       "common",
       "bc",
@@ -48755,7 +49520,7 @@
     "title": "bc - 使用 `mathlib` 计算正弦/余弦/反正切/自然对数/指数函数",
     "content": "echo '{{s|c|a|l|e}}({{1}})' | bc --mathlib",
     "group": "通用工具 (Common)",
-    "description": "bc: 任意精度的计算器语言。 请参阅：`dc`，`qalc`。 (使用 `mathlib` 计算正弦/余弦/反正切/自然对数/指数函数)",
+    "description": "bc: 任意精度的计算器语言。 另请参阅：`dc`，`qalc`。 (使用 `mathlib` 计算正弦/余弦/反正切/自然对数/指数函数)",
     "tags": [
       "common",
       "bc",
@@ -48770,7 +49535,7 @@
     "title": "bc - 执行一个内联的阶乘脚本",
     "content": "echo \"define factorial(n) { if (n <= 1) return 1; return n*factorial(n-1); }; factorial({{10}})\" | bc",
     "group": "通用工具 (Common)",
-    "description": "bc: 任意精度的计算器语言。 请参阅：`dc`，`qalc`。 (执行一个内联的阶乘脚本)",
+    "description": "bc: 任意精度的计算器语言。 另请参阅：`dc`，`qalc`。 (执行一个内联的阶乘脚本)",
     "tags": [
       "common",
       "bc",
