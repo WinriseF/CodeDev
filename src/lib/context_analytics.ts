@@ -36,7 +36,13 @@ const LANG_MAP: Record<string, { name: string; color: string }> = {
   py: { name: 'Python', color: 'bg-blue-600' },
   md: { name: 'Markdown', color: 'bg-white' },
   yml: { name: 'YAML', color: 'bg-purple-400' },
-  // ... 其他
+  java: { name: 'Java', color: 'bg-amber-600' },
+  go: { name: 'Go', color: 'bg-cyan-500' },
+  c: { name: 'C', color: 'bg-blue-800' },
+  cpp: { name: 'C++', color: 'bg-blue-700' },
+  h: { name: 'C/C++ Header', color: 'bg-blue-900' },
+  kt: { name: 'Kotlin', color: 'bg-purple-500' },
+  sql: { name: 'SQL', color: 'bg-pink-500' },
 };
 
 function getFlatSelectedFiles(nodes: FileNode[]): FileNode[] {
