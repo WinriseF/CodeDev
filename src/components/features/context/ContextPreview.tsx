@@ -47,19 +47,6 @@ export function ContextPreview({ fileTree }: ContextPreviewProps) {
   }, [fileTree, removeComments]);
 
   useEffect(() => {
-    return () => {
-      if (editorRef.current) {
-        const model = editorRef.current.getModel();
-        if (model) {
-            model.dispose();
-        }
-        editorRef.current.dispose();
-        editorRef.current = null;
-      }
-    };
-  }, []);
-
-  useEffect(() => {
     if (monacoRef.current) {
       monacoRef.current.editor.setTheme(theme === 'dark' ? 'codeforge-dark' : 'codeforge-light');
     }
@@ -255,7 +242,6 @@ export function ContextPreview({ fileTree }: ContextPreviewProps) {
             },
 
             folding: false, 
-            automaticLayout: false,
 
             find: {
                addExtraSpaceOnTop: false, 
