@@ -309,14 +309,19 @@ pub fn import_prompt_pack(
     prompts: Vec<Prompt>,
 ) -> Result<(), String> {
     let mut conn = state.conn.lock().map_err(|e| e.to_string())?;
+    
+    // 开启事务：要么全部成功，要么全部失败
     let tx = conn.transaction().map_err(|e| e.to_string())?;
 
+    // 1. 彻底清除旧数据：防止重复、防止旧数据残留
     tx.execute("DELETE FROM prompts WHERE pack_id = ?", params![pack_id])
         .map_err(|e| e.to_string())?;
 
+    // 2. 插入新数据
     {
+        // 使用 INSERT OR REPLACE 进一步防止同一批数据内有重复 ID 导致的错误
         let mut stmt = tx.prepare(
-            "INSERT INTO prompts (
+            "INSERT OR REPLACE INTO prompts (
                 id, title, content, group_name, description, tags,
                 is_favorite, created_at, updated_at, source, pack_id, original_id, type
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -331,6 +336,7 @@ pub fn import_prompt_pack(
         }
     }
 
+    // 提交事务
     tx.commit().map_err(|e| e.to_string())?;
     Ok(())
 }
