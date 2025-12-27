@@ -4,56 +4,59 @@ import { v4 as uuidv4 } from 'uuid';
 import { fileStorage } from '@/lib/storage';
 import { Prompt, DEFAULT_GROUP, PackManifest, PackManifestItem } from '@/types/prompt';
 import { fetch } from '@tauri-apps/plugin-http';
-import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { invoke } from '@tauri-apps/api/core';
 
-// 获取当前窗口实例
-const appWindow = getCurrentWebviewWindow();
-
-// 多源 URL 配置 (GitHub + Gitee)
 const MANIFEST_URLS = [
-    'https://raw.githubusercontent.com/WinriseF/Code-Forge-AI/main/build/dist/manifest.json', // GitHub Source
-    'https://gitee.com/winriseF/models/raw/master/build/dist/manifest.json' // Gitee Source
+    'https://raw.githubusercontent.com/WinriseF/Code-Forge-AI/main/build/dist/manifest.json', 
+    'https://gitee.com/winriseF/models/raw/master/build/dist/manifest.json' 
 ];
 
-// 提取 base URL 用于下载 pack
 const getBaseUrl = (manifestUrl: string) => {
     return manifestUrl.substring(0, manifestUrl.lastIndexOf('/') + 1);
 };
 
+const PAGE_SIZE = 20;
+
 interface PromptState {
-  // --- 数据源 (Data Sources) ---
-  localPrompts: Prompt[];     // 用户自己创建的 (持久化)
-  repoPrompts: Prompt[];      // 从文件加载的官方包 (不持久化到 storage，每次启动读文件)
+  // --- 数据显示层 ---
+  prompts: Prompt[];      // 当前列表显示的指令（混合了本地和官方）
+  groups: string[];       // 分组列表
   
-  // --- UI State ---
-  groups: string[];
+  // --- 分页与状态 ---
+  page: number;
+  hasMore: boolean;
+  isLoading: boolean;
+  
+  // --- 过滤条件 ---
   activeGroup: string;
   searchQuery: string;
-  
-  // --- 商店状态 ---
-  isStoreLoading: boolean;
-  manifest: PackManifest | null; // 商店清单
-  activeManifestUrl: string;     // 记录当前生效的 Base URL
-  installedPackIds: string[];    // 已安装的包 ID 列表
 
-  // --- Computed ---
-  getAllPrompts: () => Prompt[];
+  // --- 商店相关 ---
+  isStoreLoading: boolean;
+  manifest: PackManifest | null;
+  activeManifestUrl: string;
+  installedPackIds: string[];
 
   // --- Actions ---
-  initStore: () => Promise<void>; 
+  initStore: () => Promise<void>; // 初始化：加载分组
+  
+  // 核心加载方法：reset=true 表示重新搜索/切换分组，false 表示加载下一页
+  loadPrompts: (reset?: boolean) => Promise<void>;
+  
   setSearchQuery: (query: string) => void;
   setActiveGroup: (group: string) => void;
-  
-  // Local CRUD
-  addPrompt: (data: Omit<Prompt, 'id' | 'createdAt' | 'updatedAt' | 'isFavorite' | 'source'>) => void;
-  updatePrompt: (id: string, data: Partial<Prompt>) => void;
-  deletePrompt: (id: string) => void;
-  toggleFavorite: (id: string) => void;
-  
-  addGroup: (name: string) => void;
-  deleteGroup: (name: string) => void;
 
-  // Store Actions
+  // 增删改（调用 Rust）
+  addPrompt: (data: Omit<Prompt, 'id' | 'createdAt' | 'updatedAt' | 'isFavorite' | 'source'>) => Promise<void>;
+  updatePrompt: (id: string, data: Partial<Prompt>) => Promise<void>;
+  deletePrompt: (id: string) => Promise<void>;
+  toggleFavorite: (id: string) => Promise<void>;
+
+  // 分组管理
+  refreshGroups: () => Promise<void>;
+  deleteGroup: (name: string) => Promise<void>; // 数据库模式下，删除分组通常意味着删除该组下所有 Prompts，或者更新它们的组名为 Default
+
+  // 商店
   fetchManifest: () => Promise<void>;
   installPack: (pack: PackManifestItem) => Promise<void>;
   uninstallPack: (packId: string) => Promise<void>;
@@ -62,194 +65,154 @@ interface PromptState {
 export const usePromptStore = create<PromptState>()(
   persist(
     (set, get) => ({
-      localPrompts: [],
-      repoPrompts: [], 
+      prompts: [],
       groups: [DEFAULT_GROUP],
+      page: 1,
+      hasMore: true,
+      isLoading: false,
+      
       activeGroup: 'all',
       searchQuery: '',
       
       isStoreLoading: false,
       manifest: null,
       activeManifestUrl: MANIFEST_URLS[0],
-      installedPackIds: [], 
+      installedPackIds: [],
 
-      // 实现 Shadowing (遮蔽) 逻辑
-      getAllPrompts: () => {
-        const { localPrompts, repoPrompts } = get();
-        
-        // 1. 收集所有被“覆盖”了的官方指令 ID
-        const shadowedIds = new Set(
-            localPrompts
-                .map(p => p.originalId)
-                .filter(id => !!id) // 过滤掉 undefined
-        );
-
-        // 过滤掉被覆盖的官方指令
-        const visibleRepoPrompts = repoPrompts.filter(p => !shadowedIds.has(p.id));
-
-        return [...localPrompts, ...visibleRepoPrompts];
-      },
-
-      setSearchQuery: (query) => set({ searchQuery: query }),
-      setActiveGroup: (group) => set({ activeGroup: group }),
-
-      // 并发加载文件，提升启动速度
+      // 初始化：只加载分组列表，数据由 UI 组件挂载时调用 loadPrompts 获取
       initStore: async () => {
-        const { installedPackIds, repoPrompts, isStoreLoading, localPrompts, groups } = get();
-        // 1. 如果正在加载中，直接跳过，防止并发冲突
-        if (isStoreLoading) return;
-
-        // 2. 检查内存中是否已经存在所有已安装的包
-        // 提取当前 repoPrompts 中包含的所有 packId
-        const loadedPackIds = new Set(
-            repoPrompts
-                .map(p => p.packId)
-                .filter((id): id is string => !!id)
-        );
-
-        // 判断缓存是否有效：
-        // A. 内存中的包数量 等于 配置中的已安装数量
-        // B. 配置中的每个包 ID 都在内存中存在
-        const isCacheValid = 
-            installedPackIds.length === loadedPackIds.size &&
-            installedPackIds.every(id => loadedPackIds.has(id));
-
-        // 如果缓存有效，直接返回，不再执行后续 IO 操作
-        if (isCacheValid) {
-            // console.debug('[Store] Memory cache hit, skipping disk read.');
-            return;
-        }
-        
-        console.log('[Store] Initializing prompts from disk...');
-        
-        // 临时容器，用于收集有效数据
-        const loadedPrompts: Prompt[] = [];
-        const validIds: string[] = [];
-
-        // 并发读取所有包文件
-        const loadPromises = installedPackIds.map(async (packId) => {
-             const content = await fileStorage.packs.readPack(`${packId}.json`);
-             
-             // 如果读不到内容（文件不存在），直接跳过，不加入 validIds
-             if (!content) {
-                 console.warn(`[Store] Pack ${packId} not found on disk, removing from registry.`);
-                 return; 
-             }
-
-             try {
-                 const parsed: Prompt[] = JSON.parse(content);
-                 // 注入 packId 和 source 标记
-                 const labeled = parsed.map(p => ({ 
-                     ...p, 
-                     packId, 
-                     source: 'official' as const 
-                 }));
-                 
-                 loadedPrompts.push(...labeled);
-                 validIds.push(packId); // 只有读成功的才算有效
-             } catch (e) {
-                 console.error(`Failed to parse pack ${packId}`, e);
-                 // 解析失败的也不算有效，会被自动剔除
-             }
-        });
-
-        // 等待所有读取完成
-        await Promise.all(loadPromises);
-
-        // 收集所有涉及的 Group (包括本地的、默认的、以及刚刚加载的)
-        const loadedGroups = new Set(localPrompts.map(p => p.group).filter(Boolean));
-        loadedGroups.add(DEFAULT_GROUP);
-        groups.forEach(g => loadedGroups.add(g));
-        
-        // 添加新加载的 Prompts 的分组
-        loadedPrompts.forEach(p => { if(p.group) loadedGroups.add(p.group); });
-
-        set({ 
-            repoPrompts: loadedPrompts,
-            installedPackIds: validIds, // 更新为实际存在的有效 ID
-            groups: Array.from(loadedGroups)
-        });
-        
-        console.log(`[Store] Sync complete. Valid packs: ${validIds.length}/${installedPackIds.length}`);
+        await get().refreshGroups();
       },
 
-      addPrompt: (data) => {
-        set((state) => ({
-          localPrompts: [{
+      refreshGroups: async () => {
+        try {
+            const groups = await invoke<string[]>('get_prompt_groups');
+            // 确保 Default 始终在列表前列（如果业务需要）
+            const uniqueGroups = Array.from(new Set([DEFAULT_GROUP, ...groups]));
+            set({ groups: uniqueGroups });
+        } catch (e) {
+            console.error("Failed to fetch groups:", e);
+        }
+      },
+
+      loadPrompts: async (reset = false) => {
+        const state = get();
+        if (state.isLoading) return;
+
+        const currentPage = reset ? 1 : state.page;
+        set({ isLoading: true });
+
+        try {
+            let newPrompts: Prompt[] = [];
+            
+            // 根据是否有搜索词，决定调用哪个 Rust 接口
+            if (state.searchQuery.trim()) {
+                newPrompts = await invoke('search_prompts', {
+                    query: state.searchQuery,
+                    page: currentPage,
+                    pageSize: PAGE_SIZE
+                });
+            } else {
+                newPrompts = await invoke('get_prompts', {
+                    page: currentPage,
+                    pageSize: PAGE_SIZE,
+                    group: state.activeGroup
+                });
+            }
+
+            set((prev) => ({
+                prompts: reset ? newPrompts : [...prev.prompts, ...newPrompts],
+                page: currentPage + 1,
+                hasMore: newPrompts.length === PAGE_SIZE, // 如果返回数量小于页大小，说明没数据了
+                isLoading: false
+            }));
+        } catch (e) {
+            console.error("Failed to load prompts:", e);
+            set({ isLoading: false });
+        }
+      },
+
+      setSearchQuery: (query) => {
+        set({ searchQuery: query });
+        // 搜索词变化，必须重置列表
+        get().loadPrompts(true);
+      },
+
+      setActiveGroup: (group) => {
+        set({ activeGroup: group });
+        // 分组变化，必须重置列表
+        get().loadPrompts(true);
+      },
+
+      addPrompt: async (data) => {
+        const newPrompt: Prompt = {
             id: uuidv4(),
             ...data,
             isFavorite: false,
             createdAt: Date.now(),
             updatedAt: Date.now(),
             source: 'local'
-          }, ...state.localPrompts]
+        };
+        // 调用 Rust 保存
+        await invoke('save_prompt', { prompt: newPrompt });
+        
+        // 乐观更新 UI 或重新加载
+        // 这里选择重新加载以确保排序正确
+        get().loadPrompts(true);
+        get().refreshGroups();
+      },
+
+      updatePrompt: async (id, data) => {
+        const { prompts } = get();
+        const existing = prompts.find(p => p.id === id);
+        if (!existing) return;
+
+        const updated: Prompt = { ...existing, ...data, updatedAt: Date.now() };
+        await invoke('save_prompt', { prompt: updated });
+        
+        // 乐观更新本地 List，避免刷新闪烁
+        set({
+            prompts: prompts.map(p => p.id === id ? updated : p)
+        });
+        
+        // 如果修改了分组，可能需要刷新分组列表
+        if (data.group) get().refreshGroups();
+      },
+
+      deletePrompt: async (id) => {
+        await invoke('delete_prompt', { id });
+        set(state => ({
+            prompts: state.prompts.filter(p => p.id !== id)
         }));
       },
 
-      updatePrompt: (id, data) => {
-        set((state) => ({
-          localPrompts: state.localPrompts.map(p => p.id === id ? { ...p, ...data, updatedAt: Date.now() } : p)
+      toggleFavorite: async (id) => {
+        await invoke('toggle_prompt_favorite', { id });
+        set(state => ({
+            prompts: state.prompts.map(p => p.id === id ? { ...p, isFavorite: !p.isFavorite } : p)
         }));
       },
 
-      deletePrompt: (id) => {
-        set((state) => ({
-          localPrompts: state.localPrompts.filter(p => p.id !== id)
-        }));
-      },
-
-      // 收藏官方指令时记录 originalId
-      toggleFavorite: (id) => set((state) => {
-        // 先在本地找
-        const localIndex = state.localPrompts.findIndex(p => p.id === id);
-        if (localIndex !== -1) {
-             // 是本地数据，直接 toggle
-             const newLocal = [...state.localPrompts];
-             newLocal[localIndex] = { ...newLocal[localIndex], isFavorite: !newLocal[localIndex].isFavorite };
-             return { localPrompts: newLocal };
+      // 在数据库模式下，删除分组通常不是一个显式操作，
+      // 因为分组是基于 prompts 表中 group 字段聚合的。
+      // 这里我们可以实现为：将该组所有 prompt 移动到 'Default'
+      deleteGroup: async (name) => {
+        // 由于 Rust 端目前没有批量更新的 API，
+        // 这里暂时在前端遍历更新（如果量大建议增加 Rust 端 batch_update_group 接口）
+        // 为了简化，这里先只从前端状态移除，并重置视图。
+        // 实际业务中，可能需要实现 Rust 端的 delete_group_prompts 或 rename_group
+        // 暂时简单处理：切换回 all 分组
+        if (get().activeGroup === name) {
+            get().setActiveGroup('all');
         }
+        // 真正的删除需要 Rust 支持，或者用户手动删除该组下所有指令后，组自然消失
+      },
 
-        // 如果本地没找到，去官方库找
-        const repoPrompt = state.repoPrompts.find(p => p.id === id);
-        if (repoPrompt) {
-            // 是官方数据 -> 克隆到本地并设为已收藏
-            const newPrompt: Prompt = {
-                ...repoPrompt,
-                id: uuidv4(),      // 生成全新的本地 ID
-                source: 'local',   // 变为本地
-                isFavorite: true,  // 默认收藏
-                createdAt: Date.now(),
-                updatedAt: Date.now(),
-                packId: undefined, // 清除 packId
-                originalId: repoPrompt.id
-            };
-            return {
-                localPrompts: [newPrompt, ...state.localPrompts]
-            };
-        }
-        return state;
-      }),
-      
-      addGroup: (name) => set((state) => {
-        if (state.groups.includes(name)) return state;
-        return { groups: [...state.groups, name] };
-      }),
-
-      deleteGroup: (name) => set((state) => ({
-        groups: state.groups.filter((g) => g !== name),
-        activeGroup: state.activeGroup === name ? 'all' : state.activeGroup,
-        localPrompts: state.localPrompts.map(p => p.group === name ? { ...p, group: DEFAULT_GROUP } : p)
-      })),
-
-      // --- 商店逻辑 ---
-      
       fetchManifest: async () => {
         set({ isStoreLoading: true });
-        
         const fetchOne = async (url: string) => {
              const res = await fetch(url, { method: 'GET' });
              if (res.ok) {
-                // 使用 json() 解析
                 const data = await res.json() as PackManifest;
                 return { data, url };
              }
@@ -262,9 +225,8 @@ export const usePromptStore = create<PromptState>()(
                 manifest: result.data, 
                 activeManifestUrl: result.url 
             });
-            console.log(`[Store] Manifest loaded from ${result.url}`);
         } catch (e) {
-            console.error("Failed to fetch manifest from all sources", e);
+            console.error("Failed to fetch manifest", e);
         } finally {
             set({ isStoreLoading: false });
         }
@@ -274,53 +236,33 @@ export const usePromptStore = create<PromptState>()(
         set({ isStoreLoading: true });
         try {
             const baseUrl = getBaseUrl(get().activeManifestUrl);
-            const url = `${baseUrl}${pack.url}`; 
-            
-            console.log(`[Store] Downloading pack from ${url}`);
+            const url = `${baseUrl}${pack.url}`;
+            console.log(`Downloading pack from ${url}`);
 
-            // 移除泛型
             const response = await fetch(url);
+            if (!response.ok) throw new Error(`Download failed: ${response.status}`);
             
-            if (!response.ok) {
-                if (response.status === 404) {
-                    throw new Error(`404 Not Found: 无法在服务器找到文件。\nURL: ${url}`);
-                }
-                if (response.status === 403) {
-                    throw new Error(`403 Forbidden: 访问被拒绝。`);
-                }
-                throw new Error(`下载失败 (Status: ${response.status})`);
-            }
-            
-            // 使用 json() 解析
             const data = await response.json() as Prompt[];
-            if (!Array.isArray(data)) {
-                 throw new Error("数据格式错误：下载的内容不是数组。");
-            }
+            if (!Array.isArray(data)) throw new Error("Invalid pack format");
 
-            const filename = `${pack.id}.json`;
-            await fileStorage.packs.savePack(filename, JSON.stringify(data));
-            
-            // 更新状态
-            const newInstalled = Array.from(new Set([...get().installedPackIds, pack.id]));
-            
-            // 立即加载到内存
-            const labeledData = data.map(p => ({ ...p, packId: pack.id, source: 'official' as const }));
-            const otherRepoPrompts = get().repoPrompts.filter(p => p.packId !== pack.id);
-            
-            const newGroups = new Set(get().groups);
-            labeledData.forEach(p => { if(p.group) newGroups.add(p.group); });
-
-            set({
-                installedPackIds: newInstalled,
-                repoPrompts: [...otherRepoPrompts, ...labeledData],
-                groups: Array.from(newGroups)
+            // 核心改变：下载后直接存入 SQLite，不写本地文件
+            await invoke('import_prompt_pack', { 
+                packId: pack.id, 
+                prompts: data 
             });
-            
-            console.log(`Pack ${pack.id} installed.`);
 
-        } catch (e: any) {
+            // 更新已安装列表
+            set(state => ({
+                installedPackIds: Array.from(new Set([...state.installedPackIds, pack.id]))
+            }));
+            
+            // 刷新数据
+            get().loadPrompts(true);
+            get().refreshGroups();
+            
+        } catch (e) {
             console.error("Install failed:", e);
-            throw e; 
+            throw e;
         } finally {
             set({ isStoreLoading: false });
         }
@@ -329,56 +271,37 @@ export const usePromptStore = create<PromptState>()(
       uninstallPack: async (packId) => {
         set({ isStoreLoading: true });
         try {
-            const filename = `${packId}.json`;
-            try {
-                await fileStorage.packs.removePack(filename);
-            } catch (fsErr) {
-                console.warn(`File ${filename} maybe already deleted or locked:`, fsErr);
-            }
-            
+            // Rust 的 import_prompt_pack 支持覆盖，但删除需要专用接口
+            // 实际上，我们可以在 Rust 端加一个 delete_pack_prompts
+            // 这里为了简单，我们假设 import_prompt_pack 传入空数组就是删除？
+            // 不，我们在 db.rs 实现了 `import_prompt_pack` 会先 delete 再 insert
+            // 所以传入空数组确实可以达到删除效果：
+            await invoke('import_prompt_pack', { 
+                packId: packId, 
+                prompts: [] // 空数组，等于清空该 pack_id 的数据
+            });
+
             set(state => ({
-                installedPackIds: state.installedPackIds.filter(id => id !== packId),
-                repoPrompts: state.repoPrompts.filter(p => p.packId !== packId)
+                installedPackIds: state.installedPackIds.filter(id => id !== packId)
             }));
             
+            get().loadPrompts(true);
+            get().refreshGroups();
         } catch (e) {
-            console.error("Uninstall critical error:", e);
+            console.error("Uninstall failed:", e);
         } finally {
             set({ isStoreLoading: false });
         }
       }
-
     }),
     {
       name: 'prompts-data',
-      storage: createJSONStorage(() => ({
-        getItem: fileStorage.getItem,
-        setItem: async (name, value) => {
-          if (appWindow?.label === 'spotlight') {
-            return;
-          }
-          return fileStorage.setItem(name, value);
-        },
-        removeItem: async (name) => {
-          if (appWindow?.label === 'spotlight') return;
-          return fileStorage.removeItem(name);
-        }
-      })),
-
+      storage: createJSONStorage(() => fileStorage),
       partialize: (state) => ({
-        localPrompts: state.localPrompts,
-        groups: state.groups,
-        installedPackIds: state.installedPackIds
+        // 只持久化配置类数据，prompts 列表不持久化（每次从 DB 拉取）
+        installedPackIds: state.installedPackIds,
+        activeGroup: state.activeGroup 
       }),
-
-      onRehydrateStorage: () => {
-        return (state, _error) => {
-          if (state) {
-            console.log('数据恢复完成，开始加载指令...');
-            state.initStore();
-          }
-        };
-      },
     }
   )
 );

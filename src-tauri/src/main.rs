@@ -16,6 +16,7 @@ use tauri::{
 mod git;
 mod export;
 mod gitleaks;
+mod db;
 
 // =================================================================
 // 系统监控相关数据结构
@@ -156,16 +157,35 @@ fn main() {
             git::get_git_diff_text,
             // 导出命令
             export_git_diff,
-            scan_for_secrets
+            scan_for_secrets,
+            // Database Commands
+            db::get_prompts,
+            db::search_prompts,
+            db::import_prompt_pack,
+            db::get_prompt_groups,
+            db::save_prompt,
+            db::delete_prompt,
+            db::toggle_prompt_favorite
         ])
         .setup(|app| {
             let system = System::new();
             app.manage(Arc::new(Mutex::new(system)));
+
+            match db::init_db(app.handle()) {
+                Ok(conn) => {
+                    app.manage(db::DbState {
+                        conn: Mutex::new(conn),
+                    });
+                    println!("[Database] SQLite initialized successfully.");
+                }
+                Err(e) => {
+                    eprintln!("[Database] Initialization failed: {}", e);
+                }
+            }
             
-            let quit_i = MenuItem::with_id(app, "quit", "退出 / Quit", true, None::<&str>)?;
-            let show_i = MenuItem::with_id(app, "show", "主窗口", true, None::<&str>)?;
-            
-            let menu = Menu::with_items(app, &[&show_i, &quit_i])?;
+            let quit_i = MenuItem::with_id(app, "quit", "退出", true, None::<&str>)?;
+
+            let menu = Menu::with_items(app, &[&quit_i])?;
 
             let _tray = TrayIconBuilder::new()
                 .icon(app.default_window_icon().unwrap().clone())
@@ -173,12 +193,6 @@ fn main() {
                 .show_menu_on_left_click(false)
                 .on_menu_event(|app, event| match event.id().as_ref() {
                     "quit" => app.exit(0),
-                    "show" => {
-                        if let Some(window) = app.get_webview_window("main") {
-                            let _ = window.show();
-                            let _ = window.set_focus();
-                        }
-                    }
                     _ => {}
                 })
                 .on_tray_icon_event(|tray, event| match event {
