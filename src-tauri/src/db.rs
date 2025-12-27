@@ -98,6 +98,37 @@ pub fn init_db(app_handle: &AppHandle) -> Result<Connection> {
         [],
     )?;
 
+    // 4. 创建索引优化查询性能 (解决全表扫描问题)
+    // 4.1 针对分组过滤和时间排序的复合索引
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_prompts_group_created ON prompts (group_name, created_at DESC)",
+        [],
+    )?;
+
+    // 4.2 针对 type 过滤
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_prompts_type ON prompts (type)",
+        [],
+    )?;
+
+    // 4.3 针对收藏状态过滤
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_prompts_favorite ON prompts (is_favorite)",
+        [],
+    )?;
+
+    // 4.4 针对 pack_id 查询 (批量导入时使用)
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_prompts_pack_id ON prompts (pack_id)",
+        [],
+    )?;
+
+    // 4.5 针对 group_name 去重查询
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_prompts_group_name ON prompts (group_name)",
+        [],
+    )?;
+
     Ok(conn)
 }
 
