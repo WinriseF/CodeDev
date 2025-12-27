@@ -1,18 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Suspense, lazy } from 'react';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { getAllWebviewWindows } from '@tauri-apps/api/webviewWindow';
 import { listen } from '@tauri-apps/api/event';
 import { register, unregisterAll } from '@tauri-apps/plugin-global-shortcut';
 import { sendNotification } from '@tauri-apps/plugin-notification'; 
-
+import { Loader2 } from 'lucide-react';
 import { TitleBar } from "@/components/layout/TitleBar";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { SettingsModal } from "@/components/settings/SettingsModal";
 import { useAppStore, AppTheme } from "@/store/useAppStore";
-import { PromptView } from '@/components/features/prompts/PromptView';
-import { ContextView } from '@/components/features/context/ContextView';
-import { PatchView } from '@/components/features/patch/PatchView';
 import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
+const PromptView = lazy(() => import('@/components/features/prompts/PromptView').then(module => ({ default: module.PromptView })));
+const ContextView = lazy(() => import('@/components/features/context/ContextView').then(module => ({ default: module.ContextView })));
+const PatchView = lazy(() => import('@/components/features/patch/PatchView').then(module => ({ default: module.PatchView })));
 
 const appWindow = getCurrentWebviewWindow()
 
@@ -78,9 +78,6 @@ function App() {
     };
 
     setupShortcut();
-    return () => {
-      // unregisterAll(); 
-    };
   }, [spotlightShortcut]); // 当快捷键设置改变时重新执行
 
   useEffect(() => {
@@ -186,9 +183,16 @@ function App() {
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
         <main className="flex-1 min-w-0 relative transition-colors duration-300">
-          {currentView === 'prompts' && <PromptView />}
-          {currentView === 'context' && <ContextView />}
-          {currentView === 'patch' && <PatchView />}
+          <Suspense fallback={
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground gap-2 animate-in fade-in">
+                <Loader2 className="animate-spin text-primary" size={32} />
+                <span className="text-sm">Loading module...</span>
+            </div>
+          }>
+            {currentView === 'prompts' && <PromptView />}
+            {currentView === 'context' && <ContextView />}
+            {currentView === 'patch' && <PatchView />}
+          </Suspense>
         </main>
       </div>
       <SettingsModal />
