@@ -31,7 +31,7 @@ interface PromptState {
   
   // --- 过滤条件 ---
   activeGroup: string;
-  activeCategory: 'command' | 'prompt'; // 新增：类型过滤
+  activeCategory: 'command' | 'prompt'; 
   searchQuery: string;
 
   // --- 商店相关 ---
@@ -51,7 +51,7 @@ interface PromptState {
   
   setSearchQuery: (query: string) => void;
   setActiveGroup: (group: string) => void;
-  setActiveCategory: (category: 'command' | 'prompt') => void; // 新增
+  setActiveCategory: (category: 'command' | 'prompt') => void;
 
   addPrompt: (data: Omit<Prompt, 'id' | 'createdAt' | 'updatedAt' | 'isFavorite' | 'source'>) => Promise<void>;
   updatePrompt: (id: string, data: Partial<Prompt>) => Promise<void>;
@@ -76,7 +76,7 @@ export const usePromptStore = create<PromptState>()(
       isLoading: false,
       
       activeGroup: 'all',
-      activeCategory: 'prompt', // 默认显示 Prompts
+      activeCategory: 'prompt', 
       searchQuery: '',
       
       isStoreLoading: false,
@@ -118,11 +118,13 @@ export const usePromptStore = create<PromptState>()(
                         createdAt: p.createdAt || Date.now(),
                         updatedAt: p.updatedAt || Date.now(),
                         source: 'local',
-                        packId: null,
-                        originalId: null,
-                        type: p.type || null,
+                        
+                        // 修复: 将 null 改为 undefined 以通过类型检查
+                        packId: undefined, 
+                        originalId: undefined,
+                        type: p.type || undefined,
                         isExecutable: !!p.isExecutable,
-                        shellType: p.shellType || null
+                        shellType: p.shellType || undefined
                     }));
 
                     await invoke('batch_import_local_prompts', { prompts: promptsToImport });
@@ -156,20 +158,19 @@ export const usePromptStore = create<PromptState>()(
         try {
             let newPrompts: Prompt[] = [];
             
-            // 传递 category 参数给后端
             if (state.searchQuery.trim()) {
                 newPrompts = await invoke('search_prompts', {
                     query: state.searchQuery,
                     page: currentPage,
                     pageSize: PAGE_SIZE,
-                    category: state.activeCategory // 过滤类型
+                    category: state.activeCategory 
                 });
             } else {
                 newPrompts = await invoke('get_prompts', {
                     page: currentPage,
                     pageSize: PAGE_SIZE,
                     group: state.activeGroup,
-                    category: state.activeCategory // 过滤类型
+                    category: state.activeCategory 
                 });
             }
 
@@ -195,9 +196,8 @@ export const usePromptStore = create<PromptState>()(
         get().loadPrompts(true);
       },
 
-      // 切换类型 (Prompt/Command)
       setActiveCategory: (category) => {
-        set({ activeCategory: category, activeGroup: 'all' }); // 切换大类时重置分组
+        set({ activeCategory: category, activeGroup: 'all' }); 
         get().loadPrompts(true);
       },
 
@@ -351,7 +351,7 @@ export const usePromptStore = create<PromptState>()(
       partialize: (state) => ({
         installedPackIds: state.installedPackIds,
         activeGroup: state.activeGroup,
-        activeCategory: state.activeCategory, // 持久化当前选中的 Tab
+        activeCategory: state.activeCategory,
         migrationVersion: state.migrationVersion
       }),
     }

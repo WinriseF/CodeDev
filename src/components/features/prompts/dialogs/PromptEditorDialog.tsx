@@ -21,7 +21,8 @@ const SHELL_OPTIONS: { value: ShellType; label: string }[] = [
 ];
 
 export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEditorDialogProps) {
-  const { groups, addPrompt, updatePrompt, addGroup } = usePromptStore();
+  // 修复 1: 移除 addGroup
+  const { groups, addPrompt, updatePrompt } = usePromptStore();
   const { language } = useAppStore();
   
   const [title, setTitle] = useState('');
@@ -36,7 +37,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
   // UI 状态控制
   const [isGroupOpen, setIsGroupOpen] = useState(false);
   const [isShellOpen, setIsShellOpen] = useState(false);
-  const [isSaving, setIsSaving] = useState(false); // 新增保存状态
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -78,7 +79,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
     try {
         let finalGroup = group;
         if (newGroupMode && newGroupName.trim()) {
-          addGroup(newGroupName.trim());
+          // 修复 2: 移除 addGroup 调用，直接使用字符串即可
           finalGroup = newGroupName.trim();
         }
 
@@ -99,7 +100,6 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
         onClose();
     } catch (error) {
         console.error("Failed to save prompt:", error);
-        // 这里可以加一个 Toast 提示错误，暂略
     } finally {
         setIsSaving(false);
     }
