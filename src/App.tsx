@@ -46,6 +46,25 @@ function App() {
     };
   }, []); // 空依赖数组，只在组件挂载时执行一次
 
+  // 窗口失焦/焦点优化：暂停动画以减少 GPU 内存占用
+  useEffect(() => {
+    const handleBlur = () => {
+      document.body.classList.add('reduce-performance');
+    };
+    const handleFocus = () => {
+      document.body.classList.remove('reduce-performance');
+    };
+
+    // 监听窗口失焦和焦点事件
+    const unlistenBlur = listen('tauri://blur', handleBlur);
+    const unlistenFocus = listen('tauri://focus', handleFocus);
+
+    return () => {
+      unlistenBlur.then(unlisten => unlisten());
+      unlistenFocus.then(unlisten => unlisten());
+    };
+  }, []);
+
   useEffect(() => {
     // 只有在 main 窗口才执行此逻辑，避免 spotlight 窗口重复注册
     if (appWindow.label !== 'main') return;
@@ -178,7 +197,14 @@ function App() {
   }, [restReminder.enabled, restReminder.intervalMinutes, language]);
 
   return (
-    <div className="h-screen w-full bg-background text-foreground overflow-hidden flex flex-col rounded-xl border border-border transition-colors duration-300 relative shadow-2xl">
+    <>
+      <style>{`
+        /* 窗口失焦时暂停所有动画，减少 GPU 内存占用 */
+        body.reduce-performance * {
+          animation-play-state: paused !important;
+        }
+      `}</style>
+      <div className="h-screen w-full bg-background text-foreground overflow-hidden flex flex-col rounded-xl border border-border transition-colors duration-300 relative shadow-2xl">
       <TitleBar />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
@@ -196,8 +222,9 @@ function App() {
         </main>
       </div>
       <SettingsModal />
-      <GlobalConfirmDialog /> 
+      <GlobalConfirmDialog />
     </div>
+    </>
   );
 }
 
