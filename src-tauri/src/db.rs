@@ -4,12 +4,10 @@ use std::sync::Mutex;
 use tauri::State;
 use tauri::{AppHandle, Manager};
 
-// 数据库连接状态管理
 pub struct DbState {
     pub conn: Mutex<Connection>,
 }
 
-// Prompts 表结构（完整格式，Command 也存储在这里，通过 type 区分）
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Prompt {
@@ -28,12 +26,10 @@ pub struct Prompt {
     pub original_id: Option<String>,
     #[serde(rename = "type")]
     pub type_: Option<String>,
-    // ✨ 修复：添加缺失的字段
     pub is_executable: Option<bool>,
     pub shell_type: Option<String>,
 }
 
-// 初始化数据库
 pub fn init_db(app_handle: &AppHandle) -> Result<Connection> {
     let app_dir = app_handle.path().app_local_data_dir().unwrap();
     if !app_dir.exists() {
@@ -43,14 +39,11 @@ pub fn init_db(app_handle: &AppHandle) -> Result<Connection> {
 
     let conn = Connection::open(db_path)?;
 
-    // [WAL 模式] 大幅提升并发读写能力，防止界面卡死
     conn.execute_batch("
         PRAGMA journal_mode = WAL;
         PRAGMA synchronous = NORMAL;
     ")?;
 
-    // 1. 创建 prompts 表（存储提示词和指令）
-    // ✨ 修复：Schema 中添加 is_executable 和 shell_type
     conn.execute(
         "CREATE TABLE IF NOT EXISTS prompts (
             id TEXT PRIMARY KEY,
@@ -72,36 +65,43 @@ pub fn init_db(app_handle: &AppHandle) -> Result<Connection> {
         [],
     )?;
 
-    // ✨ 自动迁移：尝试添加列（如果已存在旧版本数据库）
-    // 这里忽略错误，因为如果列已存在会报错，这是预期的
     let _ = conn.execute("ALTER TABLE prompts ADD COLUMN is_executable INTEGER DEFAULT 0", []);
     let _ = conn.execute("ALTER TABLE prompts ADD COLUMN shell_type TEXT", []);
 
-    // 2. 创建 prompts FTS5 全文搜索
+    conn.execute_batch("
+        DROP TRIGGER IF EXISTS prompts_ai;
+        DROP TRIGGER IF EXISTS prompts_ad;
+        DROP TRIGGER IF EXISTS prompts_au;
+        DROP TABLE IF EXISTS prompts_fts;
+    ")?;
     conn.execute(
-        "CREATE VIRTUAL TABLE IF NOT EXISTS prompts_fts USING fts5(
+        "CREATE VIRTUAL TABLE prompts_fts USING fts5(
             id, title, content, description, tags, group_name,
-            tokenize = 'trigram'
+            tokenize = 'unicode61 remove_diacritics 2'
         )",
         [],
     )?;
-
-    // 3. 创建 prompts 触发器 (自动同步数据到 FTS 表)
     conn.execute(
-        "CREATE TRIGGER IF NOT EXISTS prompts_ai AFTER INSERT ON prompts BEGIN
+        "INSERT INTO prompts_fts(id, title, content, description, tags, group_name)
+         SELECT id, title, content, description, tags, group_name FROM prompts",
+        [],
+    )?;
+
+    conn.execute(
+        "CREATE TRIGGER prompts_ai AFTER INSERT ON prompts BEGIN
             INSERT INTO prompts_fts(id, title, content, description, tags, group_name)
             VALUES (new.id, new.title, new.content, new.description, new.tags, new.group_name);
         END;",
         [],
     )?;
     conn.execute(
-        "CREATE TRIGGER IF NOT EXISTS prompts_ad AFTER DELETE ON prompts BEGIN
+        "CREATE TRIGGER prompts_ad AFTER DELETE ON prompts BEGIN
             DELETE FROM prompts_fts WHERE id = old.id;
         END;",
         [],
     )?;
     conn.execute(
-        "CREATE TRIGGER IF NOT EXISTS prompts_au AFTER UPDATE ON prompts BEGIN
+        "CREATE TRIGGER prompts_au AFTER UPDATE ON prompts BEGIN
             DELETE FROM prompts_fts WHERE id = old.id;
             INSERT INTO prompts_fts(id, title, content, description, tags, group_name)
             VALUES (new.id, new.title, new.content, new.description, new.tags, new.group_name);
@@ -109,38 +109,14 @@ pub fn init_db(app_handle: &AppHandle) -> Result<Connection> {
         [],
     )?;
 
-    // 4. 创建索引优化查询性能 (解决全表扫描问题)
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_prompts_group_created ON prompts (group_name, created_at DESC)",
-        [],
-    )?;
-
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_prompts_type ON prompts (type)",
-        [],
-    )?;
-
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_prompts_favorite ON prompts (is_favorite)",
-        [],
-    )?;
-
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_prompts_pack_id ON prompts (pack_id)",
-        [],
-    )?;
-
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_prompts_group_name ON prompts (group_name)",
-        [],
-    )?;
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_prompts_group_created ON prompts (group_name, created_at DESC)", [])?;
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_prompts_type ON prompts (type)", [])?;
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_prompts_favorite ON prompts (is_favorite)", [])?;
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_prompts_pack_id ON prompts (pack_id)", [])?;
 
     Ok(conn)
 }
 
-// ================================= Prompts API =================================
-
-// 获取 prompts (分页 + 过滤)
 #[tauri::command]
 pub fn get_prompts(
     state: State<DbState>,
@@ -155,7 +131,6 @@ pub fn get_prompts(
     let mut query = String::from("SELECT * FROM prompts WHERE 1=1");
     let mut params: Vec<Box<dyn rusqlite::ToSql>> = Vec::new();
 
-    // 1. Group Filter
     if group == "favorite" {
         query.push_str(" AND is_favorite = 1");
     } else if group != "all" {
@@ -163,8 +138,6 @@ pub fn get_prompts(
         params.push(Box::new(group));
     }
 
-    // 2. Type/Category Filter
-    // 逻辑：如果 category 是 'prompt'，则包含 type='prompt' 和 type IS NULL (兼容旧数据)
     if let Some(cat) = category {
         if cat == "prompt" {
             query.push_str(" AND (type = 'prompt' OR type IS NULL)");
@@ -196,7 +169,6 @@ pub fn get_prompts(
             pack_id: row.get("pack_id")?,
             original_id: row.get("original_id")?,
             type_: row.get("type")?,
-            // ✨ 修复：读取新字段
             is_executable: row.get("is_executable").unwrap_or(Some(false)),
             shell_type: row.get("shell_type").unwrap_or(None),
         })
@@ -206,11 +178,9 @@ pub fn get_prompts(
     for p in prompt_iter {
         prompts.push(p.map_err(|e| e.to_string())?);
     }
-
     Ok(prompts)
 }
 
-// 搜索 prompts (使用 FTS5 加速)
 #[tauri::command]
 pub fn search_prompts(
     state: State<DbState>,
@@ -222,10 +192,18 @@ pub fn search_prompts(
     let conn = state.conn.lock().map_err(|e| e.to_string())?;
     let offset = (page - 1) * page_size;
     
-    // FTS5 搜索语法: 双引号包裹以处理空格
-    let fts_query = format!("\"{}\"", query.replace("\"", "\"\"")); 
+    let clean_query = query.replace("\"", ""); 
+    let parts: Vec<&str> = clean_query.split_whitespace().collect();
+    
+    if parts.is_empty() {
+        return Ok(Vec::new());
+    }
 
-    // 使用 JOIN 关联原始表和 FTS 表，利用 FTS 的 rowid 加速
+    let fts_query = parts.iter()
+        .map(|part| format!("\"{}\"*", part))
+        .collect::<Vec<String>>()
+        .join(" ");
+
     let mut sql = String::from(
         "SELECT p.* FROM prompts p
          JOIN prompts_fts f ON p.id = f.id
@@ -235,7 +213,6 @@ pub fn search_prompts(
     let mut params: Vec<Box<dyn rusqlite::ToSql>> = Vec::new();
     params.push(Box::new(fts_query)); 
 
-    // 应用类型过滤
     if let Some(cat) = category {
         if cat == "prompt" {
             sql.push_str(" AND (p.type = 'prompt' OR p.type IS NULL)");
@@ -270,7 +247,6 @@ pub fn search_prompts(
             pack_id: row.get("pack_id")?,
             original_id: row.get("original_id")?,
             type_: row.get("type")?,
-            // ✨ 修复：读取新字段
             is_executable: row.get("is_executable").unwrap_or(Some(false)),
             shell_type: row.get("shell_type").unwrap_or(None),
         })
@@ -284,7 +260,6 @@ pub fn search_prompts(
     Ok(prompts)
 }
 
-// 保存/更新 Prompt
 #[tauri::command]
 pub fn save_prompt(
     state: State<DbState>,
@@ -293,7 +268,6 @@ pub fn save_prompt(
     let conn = state.conn.lock().map_err(|e| e.to_string())?;
     let tags_json = serde_json::to_string(&prompt.tags).unwrap_or("[]".to_string());
 
-    // ✨ 修复：SQL 语句中添加 is_executable 和 shell_type
     conn.execute(
         "INSERT OR REPLACE INTO prompts (
             id, title, content, group_name, description, tags,
@@ -314,7 +288,6 @@ pub fn save_prompt(
             prompt.pack_id, 
             prompt.original_id, 
             prompt.type_,
-            // ✨ 参数绑定
             prompt.is_executable,
             prompt.shell_type
         ],
@@ -323,7 +296,6 @@ pub fn save_prompt(
     Ok(())
 }
 
-// 删除 Prompt
 #[tauri::command]
 pub fn delete_prompt(
     state: State<DbState>,
@@ -335,7 +307,6 @@ pub fn delete_prompt(
     Ok(())
 }
 
-// 切换收藏状态
 #[tauri::command]
 pub fn toggle_prompt_favorite(
     state: State<DbState>,
@@ -349,7 +320,6 @@ pub fn toggle_prompt_favorite(
     Ok(())
 }
 
-// 导入 prompt pack
 #[tauri::command]
 pub fn import_prompt_pack(
     state: State<DbState>,
@@ -357,17 +327,12 @@ pub fn import_prompt_pack(
     prompts: Vec<Prompt>,
 ) -> Result<(), String> {
     let mut conn = state.conn.lock().map_err(|e| e.to_string())?;
-    
-    // 开启事务：要么全部成功，要么全部失败
     let tx = conn.transaction().map_err(|e| e.to_string())?;
 
-    // 1. 彻底清除旧数据：防止重复、防止旧数据残留
     tx.execute("DELETE FROM prompts WHERE pack_id = ?", params![pack_id])
         .map_err(|e| e.to_string())?;
 
-    // 2. 插入新数据
     {
-        // ✨ 修复：SQL 语句中添加 is_executable 和 shell_type
         let mut stmt = tx.prepare(
             "INSERT OR REPLACE INTO prompts (
                 id, title, content, group_name, description, tags,
@@ -381,18 +346,16 @@ pub fn import_prompt_pack(
             stmt.execute(params![
                 p.id, p.title, p.content, p.group_name, p.description, tags_json,
                 p.is_favorite, p.created_at, p.updated_at, p.source, pack_id.clone(), p.original_id, p.type_,
-                // ✨ 参数绑定
+                // 绑定新字段
                 p.is_executable, p.shell_type
             ]).map_err(|e| e.to_string())?;
         }
     }
 
-    // 提交事务
     tx.commit().map_err(|e| e.to_string())?;
     Ok(())
 }
 
-// 批量导入本地 Prompt (用于迁移)
 #[tauri::command]
 pub fn batch_import_local_prompts(
     state: State<DbState>,
@@ -403,7 +366,6 @@ pub fn batch_import_local_prompts(
     let mut count = 0;
 
     {
-        // ✨ 修复：SQL 语句中添加 is_executable 和 shell_type
         let mut stmt = tx.prepare(
             "INSERT OR IGNORE INTO prompts (
                 id, title, content, group_name, description, tags,
@@ -417,7 +379,6 @@ pub fn batch_import_local_prompts(
             stmt.execute(params![
                 p.id, p.title, p.content, p.group_name, p.description, tags_json,
                 p.is_favorite, p.created_at, p.updated_at, p.source, p.pack_id, p.original_id, p.type_,
-                // ✨ 参数绑定
                 p.is_executable, p.shell_type
             ]).map_err(|e| e.to_string())?;
             count += 1;
@@ -428,17 +389,11 @@ pub fn batch_import_local_prompts(
     Ok(count)
 }
 
-// 获取所有 groups
 #[tauri::command]
 pub fn get_prompt_groups(state: State<DbState>) -> Result<Vec<String>, String> {
     let conn = state.conn.lock().map_err(|e| e.to_string())?;
-
-    let mut stmt = conn.prepare("
-        SELECT DISTINCT group_name FROM prompts ORDER BY group_name
-    ").map_err(|e| e.to_string())?;
-
+    let mut stmt = conn.prepare("SELECT DISTINCT group_name FROM prompts ORDER BY group_name").map_err(|e| e.to_string())?;
     let groups = stmt.query_map([], |row| row.get(0)).map_err(|e| e.to_string())?
         .collect::<Result<Vec<String>, _>>().map_err(|e| e.to_string())?;
-
     Ok(groups)
 }
