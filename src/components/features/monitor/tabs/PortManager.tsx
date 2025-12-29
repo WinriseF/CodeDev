@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { Search, Trash2, RefreshCw, AlertCircle, Network } from 'lucide-react';
+import { Search, Trash2, RefreshCw, Network } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { useConfirmStore } from '@/store/useConfirmStore';
 import { getText } from '@/lib/i18n';

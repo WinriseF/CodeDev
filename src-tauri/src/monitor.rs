@@ -1,10 +1,13 @@
 use serde::Serialize;
+use std::net::SocketAddr;
 use std::process::Command;
 use std::sync::{Arc, Mutex};
-use sysinfo::{Pid, ProcessRefreshKind, RefreshKind, System, ProcessesToUpdate, UpdateKind}; // 引入缺少的 ProcessesToUpdate, UpdateKind
-use tauri::{State, Result as TauriResult};
-use listeners::{Listener, SocketAddr}; // SockAddr -> SocketAddr
-use rayon::prelude::*;
+use sysinfo::{
+    Pid, ProcessesToUpdate, ProcessRefreshKind, RefreshKind, CpuRefreshKind, MemoryRefreshKind, System,
+};
+use tauri::State;
+use listeners::{get_all, Protocol};
+use rayon::prelude::*;  // <-- 新增：导入 rayon prelude 以启用 par_sort_unstable_by
 
 // --- 数据结构定义 ---
 
@@ -55,15 +58,13 @@ pub struct NetDiagResult {
 #[tauri::command]
 pub fn get_system_metrics(system: State<'_, Arc<Mutex<System>>>) -> Result<SystemMetrics, String> {
     let mut sys = system.lock().map_err(|e| e.to_string())?;
-    
-    // 修复: refresh_specifics 逻辑保持不变，API 兼容
+
     sys.refresh_specifics(
         RefreshKind::new()
-            .with_cpu(sysinfo::CpuRefreshKind::new().with_cpu_usage()) 
-            .with_memory(sysinfo::MemoryRefreshKind::new()) 
+            .with_cpu(CpuRefreshKind::new().with_cpu_usage())
+            .with_memory(MemoryRefreshKind::new()),
     );
 
-    // 修复: global_cpu_info().cpu_usage() -> global_cpu_usage()
     let cpu_usage = sys.global_cpu_usage();
     let memory_used = sys.used_memory();
     let memory_total = sys.total_memory();
@@ -79,26 +80,28 @@ pub fn get_system_metrics(system: State<'_, Arc<Mutex<System>>>) -> Result<Syste
 #[tauri::command]
 pub fn get_top_processes(system: State<'_, Arc<Mutex<System>>>) -> Result<Vec<ProcessInfo>, String> {
     let mut sys = system.lock().map_err(|e| e.to_string())?;
-    
-    // 修复: refresh_processes_specifics 参数变更
-    // 1. ProcessesToUpdate::All
-    // 2. true (remove_dead_processes)
-    // 3. ProcessRefreshKind (去掉不存在的 with_name)
+
+    // sysinfo 0.31 的 refresh_processes_specifics 只接受两个参数：(ProcessesToUpdate, ProcessRefreshKind)
     sys.refresh_processes_specifics(
         ProcessesToUpdate::All,
-        true,
-        ProcessRefreshKind::new().with_cpu().with_memory().with_user(),
+        ProcessRefreshKind::new().with_cpu().with_memory(),
     );
 
-    let mut processes: Vec<ProcessInfo> = sys.processes()
+    let mut processes: Vec<ProcessInfo> = sys
+        .processes()
         .iter()
         .filter_map(|(pid, process)| {
-            if pid.as_u32() == 0 { return None; }
-            
-            let name = process.name().to_string_lossy().to_string();
-            if name.is_empty() { return None; }
+            if pid.as_u32() == 0 {
+                return None;
+            }
 
-            let user = process.user_id()
+            let name = process.name().to_string_lossy().to_string();
+            if name.is_empty() {
+                return None;
+            }
+
+            let user = process
+                .user_id()
                 .map(|uid| uid.to_string())
                 .unwrap_or_else(|| "System".to_string());
 
@@ -112,8 +115,13 @@ pub fn get_top_processes(system: State<'_, Arc<Mutex<System>>>) -> Result<Vec<Pr
         })
         .collect();
 
-    processes.par_sort_unstable_by(|a, b| b.cpu_usage.partial_cmp(&a.cpu_usage).unwrap_or(std::cmp::Ordering::Equal));
-    
+    // 使用 rayon 并行排序（需导入 rayon::prelude::*）
+    processes.par_sort_unstable_by(|a, b| {
+        b.cpu_usage
+            .partial_cmp(&a.cpu_usage)
+            .unwrap_or(std::cmp::Ordering::Equal)
+    });
+
     Ok(processes.into_iter().take(30).collect())
 }
 
@@ -123,34 +131,36 @@ pub async fn get_active_ports(system: State<'_, Arc<Mutex<System>>>) -> Result<V
     let sys_state = system.inner().clone();
 
     tauri::async_runtime::spawn_blocking(move || {
-        let listeners = listeners::get_all().map_err(|e| e.to_string())?;
-        
+        let listeners = get_all().map_err(|e| e.to_string())?;
+
         let mut sys = sys_state.lock().map_err(|e| e.to_string())?;
-        sys.refresh_processes(ProcessesToUpdate::All, true); // 修复: refresh_processes 参数
+
+        // 只刷新进程名称（不移除死进程）
+        sys.refresh_processes_specifics(
+            ProcessesToUpdate::All,
+            ProcessRefreshKind::new(),
+        );
 
         let mut port_infos = Vec::new();
 
         for l in listeners {
-            // 修复: listeners 0.3 中 pid 在 process 字段里
-            let pid = l.process.pid.as_u32(); // 假设 pid 是 sysinfo::Pid 类型或类似
-            
-            let process_name = sys.process(Pid::from_u32(pid))
+            let pid = l.process.pid;
+
+            let process_name = sys
+                .process(Pid::from_u32(pid))  // <-- 使用 Pid::from_u32(pid)
                 .map(|p| p.name().to_string_lossy().to_string())
                 .unwrap_or_else(|| format!("Unknown ({})", pid));
 
-            // 修复: SockAddr -> SocketAddr
-            let local_addr = match &l.socket {
-                SocketAddr::Inet(addr) => addr.ip().to_string(),
-                SocketAddr::Inet6(addr) => addr.ip().to_string(),
-                _ => "Unknown".to_string(),
+            let local_addr = match l.socket {
+                SocketAddr::V4(v4) => v4.ip().to_string(),
+                SocketAddr::V6(v6) => v6.ip().to_string(),
             };
 
             port_infos.push(PortInfo {
                 port: l.socket.port(),
-                // 修复: 枚举 Tcp -> TCP, Udp -> UDP
                 protocol: match l.protocol {
-                    listeners::Protocol::TCP => "TCP".to_string(),
-                    listeners::Protocol::UDP => "UDP".to_string(),
+                    Protocol::TCP => "TCP".to_string(),
+                    Protocol::UDP => "UDP".to_string(),
                     _ => "Unknown".to_string(),
                 },
                 pid,
@@ -158,33 +168,35 @@ pub async fn get_active_ports(system: State<'_, Arc<Mutex<System>>>) -> Result<V
                 local_addr,
             });
         }
-        
+
         Ok(port_infos)
-    }).await.map_err(|e| e.to_string())?
+    })
+    .await
+    .map_err(|e| e.to_string())?
 }
 
-// 4. 结束进程 (保持不变，除了一些可能的优化)
+// 4. 结束进程
 #[tauri::command]
 pub fn kill_process(pid: u32) -> Result<String, String> {
     #[cfg(target_os = "windows")]
     let command_name = "taskkill";
-    
+
     #[cfg(not(target_os = "windows"))]
     let command_name = "kill";
 
     let mut args = Vec::new();
-    
+
     #[cfg(target_os = "windows")]
     {
         args.push("/F");
         args.push("/PID");
     }
-    
+
     #[cfg(not(target_os = "windows"))]
     {
         args.push("-9");
     }
-    
+
     let pid_str = pid.to_string();
     args.push(&pid_str);
 
@@ -200,7 +212,7 @@ pub fn kill_process(pid: u32) -> Result<String, String> {
     }
 }
 
-// 5. 获取环境指纹 (保持不变)
+// 5. 获取环境指纹
 #[tauri::command]
 pub async fn get_env_info() -> Vec<EnvInfo> {
     let tools = vec![
@@ -241,7 +253,6 @@ pub async fn get_env_info() -> Vec<EnvInfo> {
 // 6. 网络诊断
 #[tauri::command]
 pub async fn diagnose_network() -> Vec<NetDiagResult> {
-    // 修复: 先提取 ID 列表，避免后续 borrow moved value
     let targets = vec![
         ("github", "GitHub", "https://github.com"),
         ("google", "Google", "https://www.google.com"),
@@ -249,19 +260,17 @@ pub async fn diagnose_network() -> Vec<NetDiagResult> {
         ("npm", "NPM Registry", "https://registry.npmjs.org"),
         ("baidu", "Baidu", "https://www.baidu.com"),
     ];
-    
-    // 提前克隆一份 ID 顺序用于排序返回
+
     let target_order: Vec<String> = targets.iter().map(|t| t.0.to_string()).collect();
 
     let client = reqwest::Client::builder()
         .timeout(std::time::Duration::from_secs(5))
-        .redirect(reqwest::redirect::Policy::limited(3)) 
+        .redirect(reqwest::redirect::Policy::limited(3))
         .build()
         .unwrap_or_default();
 
     let mut handles = Vec::new();
 
-    // 修复: 循环中使用引用或克隆数据
     for (id, name, url) in targets {
         let c = client.clone();
         let id = id.to_string();
@@ -280,7 +289,6 @@ pub async fn diagnose_network() -> Vec<NetDiagResult> {
                     NetDiagResult { id, name, url, status: status.to_string(), latency: duration, status_code }
                 },
                 Err(_) => {
-                    // HEAD 失败尝试 GET
                     let start_retry = std::time::Instant::now();
                     match c.get(&url).send().await {
                         Ok(r) => {
@@ -302,14 +310,13 @@ pub async fn diagnose_network() -> Vec<NetDiagResult> {
             results.push(res);
         }
     }
-    
-    // 按原始顺序排序
+
     let mut ordered_results = Vec::new();
     for id in target_order {
         if let Some(r) = results.iter().find(|r| r.id == id) {
             ordered_results.push(r.clone());
         }
     }
-    
+
     ordered_results
 }

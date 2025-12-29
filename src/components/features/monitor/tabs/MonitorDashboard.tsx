@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { Cpu, HardDrive, Zap, RefreshCw } from 'lucide-react';
+import { Cpu, HardDrive, Zap } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { getText } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,7 @@ export function MonitorDashboard() {
   const { language } = useAppStore();
   const [metrics, setMetrics] = useState<SystemMetrics | null>(null);
   const [processes, setProcesses] = useState<ProcessInfo[]>([]);
-  const [isLoadingProcs, setIsLoadingProcs] = useState(false);
+  const [isLoadingProcs] = useState(false);
 
   // 格式化字节
   const formatBytes = (bytes: number) => {
