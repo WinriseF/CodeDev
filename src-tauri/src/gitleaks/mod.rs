@@ -99,21 +99,14 @@ pub fn scan_text(text: &str) -> Vec<SecretMatch> {
 }
 
 fn enrich_context(full_text: &str, m: &mut SecretMatch) {
-    // 1. 计算 UTF-16 索引 (解决 JS 替换错位问题)
-    // 这里计算从开头到 match.index 之前的文本，在 UTF-16 编码下的长度
-    // 这与 JS 的 string.length 和 substring 逻辑完全一致
     let prefix = &full_text[..m.index];
     m.utf16_index = prefix.encode_utf16().count();
 
-    // 2. 计算行号
     let match_line_num = prefix.bytes().filter(|&b| b == b'\n').count() + 1;
     m.line_number = match_line_num;
 
-    // 3. 截取上下文 (前2行 + 本行 + 后2行)
-    // 寻找当前行起始
     let match_line_start = prefix.rfind('\n').map(|i| i + 1).unwrap_or(0);
-    
-    // 向前找2行
+
     let mut snippet_start = match_line_start;
     let mut lines_back = 0;
     for _ in 0..2 {
@@ -124,10 +117,9 @@ fn enrich_context(full_text: &str, m: &mut SecretMatch) {
     }
     m.snippet_start_line = match_line_num - lines_back;
 
-    // 向后找2行
     let match_end = m.index + m.value.len();
     let mut snippet_end = match_end;
-    for _ in 0..3 { 
+    for _ in 0..3 {
         if let Some(next_nl) = full_text[snippet_end..].find('\n') {
             snippet_end += next_nl + 1;
         } else {

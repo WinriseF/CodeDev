@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Save, Tag, FileText, Folder, ChevronDown, Check, Plus, Sparkles, Terminal } from 'lucide-react';
+import { X, Save, Tag, FileText, Folder, ChevronDown, Check, Plus, Sparkles, Terminal, Loader2 } from 'lucide-react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore } from '@/store/useAppStore'; 
 import { Prompt, DEFAULT_GROUP, ShellType } from '@/types/prompt';
@@ -21,7 +21,8 @@ const SHELL_OPTIONS: { value: ShellType; label: string }[] = [
 ];
 
 export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEditorDialogProps) {
-  const { groups, addPrompt, updatePrompt, addGroup } = usePromptStore();
+  // 修复 1: 移除 addGroup
+  const { groups, addPrompt, updatePrompt } = usePromptStore();
   const { language } = useAppStore();
   
   const [title, setTitle] = useState('');
@@ -36,6 +37,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
   // UI 状态控制
   const [isGroupOpen, setIsGroupOpen] = useState(false);
   const [isShellOpen, setIsShellOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -57,7 +59,8 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
       setNewGroupMode(false);
       setNewGroupName('');
       setIsGroupOpen(false);
-      setIsShellOpen(false); // 重置状态
+      setIsShellOpen(false);
+      setIsSaving(false);
     }
   }, [isOpen, initialData]);
   
@@ -69,33 +72,39 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
 
   if (!isOpen) return null;
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!title.trim() || !content.trim()) return;
+    
+    setIsSaving(true);
+    try {
+        let finalGroup = group;
+        if (newGroupMode && newGroupName.trim()) {
+          // 修复 2: 移除 addGroup 调用，直接使用字符串即可
+          finalGroup = newGroupName.trim();
+        }
 
-    let finalGroup = group;
-    if (newGroupMode && newGroupName.trim()) {
-      addGroup(newGroupName.trim());
-      finalGroup = newGroupName.trim();
+        const data = { 
+            title, 
+            content, 
+            group: finalGroup,
+            type: type,
+            isExecutable: isExecutable,
+            shellType: shellType,
+        };
+
+        if (initialData) {
+          await updatePrompt(initialData.id, data);
+        } else {
+          await addPrompt(data);
+        }
+        onClose();
+    } catch (error) {
+        console.error("Failed to save prompt:", error);
+    } finally {
+        setIsSaving(false);
     }
-
-    const data = { 
-        title, 
-        content, 
-        group: finalGroup,
-        type: type,
-        isExecutable: isExecutable,
-        shellType: shellType,
-    };
-
-    if (initialData) {
-      updatePrompt(initialData.id, data);
-    } else {
-      addPrompt(data);
-    }
-    onClose();
   };
 
-  // 获取当前选中的 Shell 的显示标签
   const currentShellLabel = SHELL_OPTIONS.find(opt => opt.value === shellType)?.label || 'Auto Detect';
 
   return (
@@ -106,14 +115,14 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
           <h2 className="font-semibold text-foreground flex items-center gap-2">
             {initialData ? getText('editor', 'titleEdit', language) : getText('editor', 'titleNew', language)}
           </h2>
-          <button onClick={onClose} className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-secondary text-muted-foreground transition-colors">
+          <button onClick={onClose} disabled={isSaving} className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-secondary text-muted-foreground transition-colors disabled:opacity-50">
             <X size={18} />
           </button>
         </div>
 
         <div className="p-6 space-y-5 overflow-y-auto flex-1 pb-24 custom-scrollbar">
           
-          {/* 类型选择器 */}
+          {/* Type Selector */}
           <div className="flex gap-2 p-1 bg-secondary/30 rounded-lg border border-border/50">
              <button
                 onClick={() => setType('prompt')}
@@ -131,13 +140,13 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
              </button>
           </div>
 
-          {/* Title */}
+          {/* Title Input */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5"> <Tag size={14} /> {getText('editor', 'labelTitle', language)} </label>
-            <input  autoFocus className="w-full bg-secondary/20 border border-border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-primary/50 focus:border-primary/50 outline-none transition-all placeholder:text-muted-foreground/40" placeholder={getText('editor', 'placeholderTitle', language)} value={title} onChange={e => setTitle(e.target.value)} />
+            <input autoFocus className="w-full bg-secondary/20 border border-border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-primary/50 focus:border-primary/50 outline-none transition-all placeholder:text-muted-foreground/40" placeholder={getText('editor', 'placeholderTitle', language)} value={title} onChange={e => setTitle(e.target.value)} />
           </div>
 
-          {/* Group */}
+          {/* Group Selector */}
           <div className="space-y-2 relative">
             <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5"> <Folder size={14} /> {getText('editor', 'labelGroup', language)} </label>
             {!newGroupMode ? ( 
@@ -156,7 +165,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
             )}
           </div>
           
-          {/* --- Executable Command Settings --- */}
+          {/* Command Options */}
           {type === 'command' && (
             <div className="space-y-4 pt-4 border-t border-border/50 animate-in fade-in duration-300">
               <div className="flex items-center justify-between">
@@ -223,7 +232,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
             </div>
           )}
 
-          {/* Content */}
+          {/* Content Area */}
           <div className="space-y-2 pt-4 border-t border-border/50">
             <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5"> <FileText size={14} /> {getText('editor', 'labelContent', language)} </label>
             <div className="relative">
@@ -235,9 +244,17 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
           </div>
         </div>
 
+        {/* Footer Actions */}
         <div className="p-4 border-t border-border bg-secondary/5 flex justify-end gap-3 shrink-0">
-          <button onClick={onClose} className="px-4 py-2 text-sm font-medium rounded-lg hover:bg-secondary text-muted-foreground transition-colors"> {getText('editor', 'btnCancel', language)} </button>
-          <button onClick={handleSave} disabled={!title || !content} className="px-4 py-2 text-sm rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-primary/20" > <Save size={16} /> {getText('editor', 'btnSave', language)} </button>
+          <button onClick={onClose} disabled={isSaving} className="px-4 py-2 text-sm font-medium rounded-lg hover:bg-secondary text-muted-foreground transition-colors disabled:opacity-50"> {getText('editor', 'btnCancel', language)} </button>
+          <button 
+            onClick={handleSave} 
+            disabled={!title || !content || isSaving} 
+            className="px-4 py-2 text-sm rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-primary/20" 
+          > 
+            {isSaving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />} 
+            {isSaving ? "Saving..." : getText('editor', 'btnSave', language)} 
+          </button>
         </div>
       </div>
     </div>

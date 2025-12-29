@@ -1,7 +1,6 @@
 use once_cell::sync::Lazy;
-use super::Rule; 
+use super::Rule;
 
-// 引用兄弟模块中的函数
 use super::rules_cloud::cloud_rules;
 use super::rules_ai::ai_rules;
 use super::rules_payment::payment_rules;

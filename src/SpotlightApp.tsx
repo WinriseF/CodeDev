@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { LogicalSize } from '@tauri-apps/api/dpi';
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { listen } from '@tauri-apps/api/event';
+import { invoke } from '@tauri-apps/api/core';
 import { message } from '@tauri-apps/plugin-dialog';
 import { 
   Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, 
@@ -20,8 +21,6 @@ import { CodeBlock } from '@/components/ui/CodeBlock';
 import { useSmartContextMenu } from '@/lib/hooks';
 import { parseVariables } from '@/lib/template';
 import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
-
-// 导入核心执行模块和 store
 import { executeCommand } from './lib/command_executor';
 import { useContextStore } from './store/useContextStore';
 
@@ -30,20 +29,21 @@ const appWindow = getCurrentWebviewWindow()
 const FIXED_HEIGHT = 106; 
 const MAX_WINDOW_HEIGHT = 460;
 
-interface ScoredPrompt extends Prompt {
-  score: number;
-}
-
 type SpotlightMode = 'search' | 'chat';
 
-/**
- * 内部组件：消息复制菜单
- */
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+  return debouncedValue;
+}
+
 function MessageCopyMenu({ content }: { content: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
   const { language } = useAppStore(); 
 
   useEffect(() => {
@@ -60,7 +60,6 @@ function MessageCopyMenu({ content }: { content: string }) {
     try {
       const textToCopy = type === 'text' ? stripMarkdown(content) : content;
       await writeText(textToCopy);
-      
       setIsCopied(true);
       setIsOpen(false);
       setTimeout(() => setIsCopied(false), 2000);
@@ -106,8 +105,11 @@ function MessageCopyMenu({ content }: { content: string }) {
 
 export default function SpotlightApp() {
   const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 150);
+  
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [results, setResults] = useState<Prompt[]>([]); 
   
   const [mode, setMode] = useState<SpotlightMode>('search');
   const [chatInput, setChatInput] = useState('');
@@ -118,12 +120,9 @@ export default function SpotlightApp() {
   const listRef = useRef<HTMLDivElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null); 
   
-  const { getAllPrompts, initStore } = usePromptStore();
   const { theme, setTheme, aiConfig, setAIConfig, spotlightAppearance, language } = useAppStore(); 
   const { projectRoot } = useContextStore();
   
-  const allPrompts = getAllPrompts();
-
   const handlePaste = (pastedText: string, input: HTMLInputElement | HTMLTextAreaElement | null) => {
     if (!input || !(input instanceof HTMLInputElement)) return;
 
@@ -155,8 +154,6 @@ export default function SpotlightApp() {
     setAIConfig({ providerId: providers[nextIndex] });
   };
 
-  useEffect(() => { initStore(); }, []);
-
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
@@ -183,50 +180,59 @@ export default function SpotlightApp() {
     return () => { unlistenPromise.then(f => f()); };
   }, []);
 
-  const filtered = useMemo(() => {
-    if (mode === 'chat') return [];
-    const rawQuery = query.trim().toLowerCase();
-    if (!rawQuery) return allPrompts.slice(0, 20);
-    const terms = rawQuery.split(/\s+/).filter(t => t.length > 0);
-    const results: ScoredPrompt[] = [];
-    for (const p of allPrompts) {
-      let score = 0;
-      const title = p.title.toLowerCase();
-      const content = p.content.toLowerCase();
-      const group = p.group.toLowerCase();
-      let isMatch = true;
-      for (const term of terms) {
-        let termScore = 0;
-        if (title.includes(term)) {
-          termScore += 10;
-          if (title.startsWith(term)) termScore += 5;
-        } else if (group.includes(term)) {
-          termScore += 5;
-        } else if (content.includes(term)) {
-          termScore += 1;
-        } else {
-          isMatch = false;
-          break;
-        }
-        score += termScore;
-      }
-      if (isMatch) results.push({ ...p, score });
+  // --- 搜索逻辑 ---
+  useEffect(() => {
+    if (mode === 'chat') {
+        setResults([]);
+        return;
     }
-    return results.sort((a, b) => b.score - a.score).slice(0, 20);
-  }, [query, allPrompts, mode]);
 
+    const performSearch = async () => {
+        try {
+            let data: Prompt[] = [];
+            const q = debouncedQuery.trim();
+            if (!q) {
+                // 修复：增加 category: null 参数
+                data = await invoke('get_prompts', { 
+                    page: 1, 
+                    pageSize: 20, 
+                    group: 'all', 
+                    category: null 
+                });
+            } else {
+                // 修复：增加 category: null 参数
+                data = await invoke('search_prompts', { 
+                    query: q, 
+                    page: 1, 
+                    pageSize: 20, 
+                    category: null 
+                });
+            }
+            setResults(data);
+            setSelectedIndex(0);
+        } catch (err) {
+            console.error("Search failed:", err);
+            setResults([]);
+        }
+    };
+
+    performSearch();
+  }, [debouncedQuery, mode]);
+
+  // 窗口大小调整
   useLayoutEffect(() => {
     let finalHeight = 120;
     const targetWidth = spotlightAppearance.width;
     if (mode === 'search') {
-        const listHeight = listRef.current?.scrollHeight || 0;
-        const totalIdealHeight = FIXED_HEIGHT + listHeight;
+        const listHeight = Math.min(results.length * 60, 400); 
+        const actualListHeight = listRef.current?.scrollHeight || listHeight;
+        const totalIdealHeight = FIXED_HEIGHT + actualListHeight;
         finalHeight = Math.min(Math.max(totalIdealHeight, 120), MAX_WINDOW_HEIGHT);
     } else {
         finalHeight = messages.length > 0 ? spotlightAppearance.maxChatHeight : 300;
     }
     appWindow.setSize(new LogicalSize(targetWidth, finalHeight));
-  }, [filtered, query, selectedIndex, mode, messages.length, spotlightAppearance]);
+  }, [results, selectedIndex, mode, messages.length, spotlightAppearance]);
 
   const handleEnterAction = async (prompt: Prompt) => {
     if (!prompt) return;
@@ -347,13 +353,13 @@ export default function SpotlightApp() {
       if (mode === 'search') {
           if (e.key === 'ArrowDown') {
             e.preventDefault();
-            setSelectedIndex(prev => (prev + 1) % (filtered.length || 1));
+            setSelectedIndex(prev => (prev + 1) % (results.length || 1));
           } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            setSelectedIndex(prev => (prev - 1 + (filtered.length || 1)) % (filtered.length || 1));
+            setSelectedIndex(prev => (prev - 1 + (results.length || 1)) % (results.length || 1));
           } else if (e.key === 'Enter') {
             e.preventDefault();
-            if (filtered[selectedIndex]) handleEnterAction(filtered[selectedIndex]);
+            if (results[selectedIndex]) handleEnterAction(results[selectedIndex]);
           }
       } else {
           if (e.key === 'Enter' && !e.shiftKey) {
@@ -364,14 +370,14 @@ export default function SpotlightApp() {
     };
     document.addEventListener('keydown', handleGlobalKeyDown);
     return () => document.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [filtered, selectedIndex, query, mode, chatInput, isStreaming, messages]);
+  }, [results, selectedIndex, query, mode, chatInput, isStreaming, messages]);
 
   useEffect(() => {
-    if (mode === 'search' && listRef.current && filtered.length > 0) {
+    if (mode === 'search' && listRef.current && results.length > 0) {
         const activeItem = listRef.current.children[selectedIndex] as HTMLElement;
         if (activeItem) activeItem.scrollIntoView({ block: 'nearest' });
     }
-  }, [selectedIndex, filtered, mode]);
+  }, [selectedIndex, results, mode]);
 
   const isCommand = (p: Prompt) => p.type === 'command' || (!p.type && p.content.length < 50);
 
@@ -390,7 +396,7 @@ export default function SpotlightApp() {
         <div className="w-full h-full flex flex-col bg-background/95 backdrop-blur-2xl border border-border/50 rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 relative overflow-hidden">
           
           <div className={cn("absolute inset-0 pointer-events-none transition-opacity duration-1000 ease-in-out", mode === 'chat' ? "opacity-100" : "opacity-0")}>
-              <div className="absolute inset-0 animate-gradient-flow bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />
               <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-purple-500/5 to-transparent" />
           </div>
 
@@ -428,13 +434,13 @@ export default function SpotlightApp() {
           <div className="relative z-10 flex-1 min-h-0 flex flex-col">
               {mode === 'search' ? (
                   <div ref={listRef} className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar scroll-smooth">
-                  {filtered.length === 0 ? (
+                  {results.length === 0 ? (
                       <div className="h-full flex flex-col items-center justify-center text-muted-foreground gap-2 opacity-60 min-h-[100px]">
                           <Command size={24} strokeWidth={1.5} />
                           <span className="text-sm">{getText('spotlight', 'noCommands', language)}</span>
                       </div>
                   ) : (
-                      filtered.map((item, index) => {
+                      results.map((item, index) => {
                         const isActive = index === selectedIndex;
                         const isCopied = copiedId === item.id;
                         const isExecutable = !!item.isExecutable;
@@ -539,14 +545,14 @@ export default function SpotlightApp() {
           
           <div data-tauri-drag-region className="h-8 shrink-0 bg-secondary/30 border-t border-border/40 flex items-center justify-between px-4 text-[10px] text-muted-foreground/60 select-none backdrop-blur-sm cursor-move relative z-10">
               <span className="pointer-events-none flex items-center gap-2">
-                  {mode === 'search' ? `${filtered.length} ${getText('spotlight', 'results', language)}` : getText('spotlight', 'console', language)}
+                  {mode === 'search' ? `${results.length} ${getText('spotlight', 'results', language)}` : getText('spotlight', 'console', language)}
                   {isStreaming && <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />}
               </span>
               <div className="flex gap-4 pointer-events-none">
                   {mode === 'search' ? (
                       <>
                           <span>{getText('spotlight', 'nav', language)} ↑↓</span>
-                          <span>{filtered[selectedIndex]?.isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language)} ↵</span>
+                          <span>{results[selectedIndex]?.isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language)} ↵</span>
                       </>
                   ) : (
                       <>

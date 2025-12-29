@@ -317,6 +317,63 @@ const translations = {
       riskMsg: "This command contains potentially dangerous operations (delete, move, overwrite, etc.).\n\nCommand:\n{command}",
       btnExecute: "Execute",
       unsupported: "Unsupported OS"
+    },
+    monitor: {
+      title: "System Monitor",
+      navDashboard: "Dashboard",
+      navPorts: "Port Manager",
+      navEnv: "Environment",
+      navNetwork: "Network Analysis",
+      
+      // Dashboard
+      cpu: "CPU Usage",
+      memory: "Memory Usage",
+      diskRead: "Disk Read",
+      diskWrite: "Disk Write",
+      netUp: "Upload",
+      netDown: "Download",
+      topProcesses: "Top Processes",
+      procName: "Name",
+      procPid: "PID",
+      procCpu: "CPU%",
+      procMem: "Mem",
+      procUser: "User",
+      kill: "End Task",
+      killDenied: "Action Denied: System Process",
+      systemProcess: "System Process",
+      
+      // Ports
+      searchPorts: "Search ports (e.g. 3000, node)...",
+      port: "Port",
+      proto: "Proto",
+      localAddr: "Local Address",
+      emptyPorts: "No active ports found matching search.",
+      confirmKill: "Confirm Kill",
+      killMsg: "Are you sure you want to kill process \"{name}\" (PID: {pid})?",
+      killSuccess: "Process killed successfully.",
+      refresh: "Refresh",
+      systemPort: "System Port",
+      protected: "System Process Protected",
+      
+      // Env
+      envTool: "Tool / Runtime",
+      envToolFilter: "Filter tools...",
+      envVer: "Version",
+      envStatus: "Status",
+      envInstalled: "Installed",
+      envNotFound: "Not Found",
+      copyReport: "Copy Report",
+      
+      // Network
+      netTarget: "Service / Target",
+      netStatus: "Status",
+      netLatency: "Latency",
+      netCode: "Code",
+      diagnose: "Diagnose",
+      diagnosing: "Diagnosing...",
+      statusSuccess: "Good",
+      statusSlow: "Slow",
+      statusFail: "Failed",
     }
   },
   zh: {
@@ -635,6 +692,63 @@ const translations = {
       riskMsg: "此命令包含潜在的危险操作（删除、移动、覆盖等）。\n\n命令内容：\n{command}",
       btnExecute: "确认执行",
       unsupported: "不支持的操作系统"
+    },
+    monitor: {
+      title: "系统监视器",
+      navDashboard: "概览",
+      navPorts: "端口管理",
+      navEnv: "开发环境",
+      navNetwork: "网络诊断",
+      
+      // Dashboard
+      cpu: "CPU 使用率",
+      memory: "内存使用",
+      diskRead: "磁盘读取",
+      diskWrite: "磁盘写入",
+      netUp: "上传速率",
+      netDown: "下载速率",
+      topProcesses: "Top 进程",
+      procName: "进程名",
+      procPid: "PID",
+      procCpu: "CPU%",
+      procMem: "内存",
+      procUser: "用户",
+      kill: "结束进程",
+      killDenied: "操作拒绝：系统进程",
+      systemProcess: "系统进程",
+      
+      // Ports
+      searchPorts: "搜索端口 (如 3000, node)...",
+      port: "端口",
+      proto: "协议",
+      localAddr: "监听地址",
+      emptyPorts: "未找到匹配的活跃端口。",
+      confirmKill: "确认结束",
+      killMsg: "您确定要结束进程 “{name}” (PID: {pid}) 吗？",
+      killSuccess: "进程已结束。",
+      refresh: "刷新",
+      systemPort: "系统端口",
+      protected: "受保护的系统进程",
+      
+      // Env
+      envTool: "工具 / 运行时",
+      envToolFilter: "过滤工具...",
+      envVer: "版本号",
+      envStatus: "状态",
+      envInstalled: "已安装",
+      envNotFound: "未找到",
+      copyReport: "复制报告",
+      
+      // Network
+      netTarget: "服务 / 目标",
+      netStatus: "连通性",
+      netLatency: "延迟",
+      netCode: "状态码",
+      diagnose: "开始诊断",
+      diagnosing: "诊断中...",
+      statusSuccess: "极佳",
+      statusSlow: "缓慢",
+      statusFail: "失败",
     }
   }
 };

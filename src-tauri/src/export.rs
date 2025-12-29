@@ -33,7 +33,6 @@ pub fn generate_export_content(
     }
 }
 
-// === 核心 Diff 生成逻辑 ===
 fn generate_diff_string(original: &str, modified: &str, path: &str, layout: ExportLayout) -> String {
     let diff = TextDiff::from_lines(original, modified);
     let mut output = String::new();
@@ -74,7 +73,6 @@ fn to_markdown(files: Vec<GitDiffFile>, layout: ExportLayout) -> String {
         let _ = writeln!(output, "## File: {} ({})\n", file.path, file.status);
 
         if layout == ExportLayout::Split {
-            // --- 分离模式 ---
             if !file.original_content.is_empty() {
                 let _ = writeln!(output, "### Original Version");
                 let _ = writeln!(output, "```{}", ext);
@@ -88,8 +86,6 @@ fn to_markdown(files: Vec<GitDiffFile>, layout: ExportLayout) -> String {
                 let _ = writeln!(output, "```\n");
             }
         } else {
-            // --- Unified 或 GitPatch 模式 ---
-            // 这两种模式本质上都是一段 Diff 文本
             let diff_content = generate_diff_string(
                 &file.original_content,
                 &file.modified_content,
@@ -99,7 +95,6 @@ fn to_markdown(files: Vec<GitDiffFile>, layout: ExportLayout) -> String {
             
             let title = if layout == ExportLayout::Unified { "### Full Context Diff" } else { "### Git Patch" };
             let _ = writeln!(output, "{}", title);
-            // 使用 diff 语法高亮
             let _ = writeln!(output, "```diff");
             let _ = writeln!(output, "{}", diff_content);
             let _ = writeln!(output, "```\n");
@@ -118,7 +113,6 @@ fn to_json(files: Vec<GitDiffFile>, layout: ExportLayout) -> String {
                 "modified": f.modified_content
             })
         } else {
-            // Unified 或 GitPatch 都作为一个字符串返回
             serde_json::json!({
                 "diff": generate_diff_string(&f.original_content, &f.modified_content, &f.path, layout)
             })
@@ -127,7 +121,7 @@ fn to_json(files: Vec<GitDiffFile>, layout: ExportLayout) -> String {
         serde_json::json!({
             "path": f.path,
             "status": f.status,
-            "layout": format!("{:?}", layout), // Debug 格式输出枚举名 (需在枚举加 Debug derive，或者手动写字符串)
+            "layout": format!("{:?}", layout),
             "content": content
         })
     }).collect();

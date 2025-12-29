@@ -1,18 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Suspense, lazy } from 'react';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { getAllWebviewWindows } from '@tauri-apps/api/webviewWindow';
 import { listen } from '@tauri-apps/api/event';
 import { register, unregisterAll } from '@tauri-apps/plugin-global-shortcut';
 import { sendNotification } from '@tauri-apps/plugin-notification'; 
-
+import { Loader2 } from 'lucide-react';
 import { TitleBar } from "@/components/layout/TitleBar";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { SettingsModal } from "@/components/settings/SettingsModal";
 import { useAppStore, AppTheme } from "@/store/useAppStore";
-import { PromptView } from '@/components/features/prompts/PromptView';
-import { ContextView } from '@/components/features/context/ContextView';
-import { PatchView } from '@/components/features/patch/PatchView';
 import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
+const PromptView = lazy(() => import('@/components/features/prompts/PromptView').then(module => ({ default: module.PromptView })));
+const ContextView = lazy(() => import('@/components/features/context/ContextView').then(module => ({ default: module.ContextView })));
+const PatchView = lazy(() => import('@/components/features/patch/PatchView').then(module => ({ default: module.PatchView })));
+const SystemMonitorModal = lazy(() => import('@/components/features/monitor/SystemMonitorModal').then(module => ({ default: module.SystemMonitorModal })));
 
 const appWindow = getCurrentWebviewWindow()
 
@@ -46,6 +47,25 @@ function App() {
     };
   }, []); // 空依赖数组，只在组件挂载时执行一次
 
+  // 窗口失焦/焦点优化：暂停动画以减少 GPU 内存占用
+  useEffect(() => {
+    const handleBlur = () => {
+      document.body.classList.add('reduce-performance');
+    };
+    const handleFocus = () => {
+      document.body.classList.remove('reduce-performance');
+    };
+
+    // 监听窗口失焦和焦点事件
+    const unlistenBlur = listen('tauri://blur', handleBlur);
+    const unlistenFocus = listen('tauri://focus', handleFocus);
+
+    return () => {
+      unlistenBlur.then(unlisten => unlisten());
+      unlistenFocus.then(unlisten => unlisten());
+    };
+  }, []);
+
   useEffect(() => {
     // 只有在 main 窗口才执行此逻辑，避免 spotlight 窗口重复注册
     if (appWindow.label !== 'main') return;
@@ -78,9 +98,6 @@ function App() {
     };
 
     setupShortcut();
-    return () => {
-      // unregisterAll(); 
-    };
   }, [spotlightShortcut]); // 当快捷键设置改变时重新执行
 
   useEffect(() => {
@@ -181,19 +198,37 @@ function App() {
   }, [restReminder.enabled, restReminder.intervalMinutes, language]);
 
   return (
-    <div className="h-screen w-full bg-background text-foreground overflow-hidden flex flex-col rounded-xl border border-border transition-colors duration-300 relative shadow-2xl">
+    <>
+      <style>{`
+        /* 窗口失焦时暂停所有动画，减少 GPU 内存占用 */
+        body.reduce-performance * {
+          animation-play-state: paused !important;
+        }
+      `}</style>
+      <div className="h-screen w-full bg-background text-foreground overflow-hidden flex flex-col rounded-xl border border-border transition-colors duration-300 relative shadow-2xl">
       <TitleBar />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
         <main className="flex-1 min-w-0 relative transition-colors duration-300">
-          {currentView === 'prompts' && <PromptView />}
-          {currentView === 'context' && <ContextView />}
-          {currentView === 'patch' && <PatchView />}
+          <Suspense fallback={
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground gap-2 animate-in fade-in">
+                <Loader2 className="animate-spin text-primary" size={32} />
+                <span className="text-sm">Loading module...</span>
+            </div>
+          }>
+            {currentView === 'prompts' && <PromptView />}
+            {currentView === 'context' && <ContextView />}
+            {currentView === 'patch' && <PatchView />}
+          </Suspense>
         </main>
       </div>
       <SettingsModal />
-      <GlobalConfirmDialog /> 
+      <Suspense fallback={null}>
+        <SystemMonitorModal />
+      </Suspense>
+      <GlobalConfirmDialog />
     </div>
+    </>
   );
 }
 

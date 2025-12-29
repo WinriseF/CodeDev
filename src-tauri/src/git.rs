@@ -1,6 +1,6 @@
 use chrono::{DateTime, Local};
 use git2::{Delta, DiffFormat, DiffOptions, Oid, Repository};
-use serde::{Deserialize, Serialize}; // 添加 Deserialize
+use serde::{Deserialize, Serialize};
 
 // =================================================================
 // Git 数据结构定义
@@ -21,7 +21,6 @@ pub struct GitDiffFile {
     pub old_path: Option<String>,
     pub original_content: String,
     pub modified_content: String,
-    // === 新增字段 ===
     pub is_binary: bool,
     pub is_large: bool,
 }
@@ -169,8 +168,8 @@ pub fn get_git_diff(
             },
             original_content,
             modified_content,
-            is_binary, // 新增
-            is_large,  // 新增
+            is_binary,
+            is_large,
         });
     }
 
