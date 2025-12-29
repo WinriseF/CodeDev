@@ -16,6 +16,7 @@ mod git;
 mod export;
 mod gitleaks;
 mod db;
+mod monitor;
 
 // =================================================================
 // 系统监控相关数据结构
@@ -162,7 +163,13 @@ fn main() {
             db::get_prompt_groups,
             db::save_prompt,
             db::delete_prompt,
-            db::toggle_prompt_favorite
+            db::toggle_prompt_favorite,
+            monitor::get_system_metrics,
+            monitor::get_top_processes,
+            monitor::get_active_ports,
+            monitor::kill_process,
+            monitor::get_env_info,
+            monitor::diagnose_network
         ])
         .setup(|app| {
             let system = System::new();

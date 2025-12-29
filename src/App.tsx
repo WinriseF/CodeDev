@@ -13,6 +13,7 @@ import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
 const PromptView = lazy(() => import('@/components/features/prompts/PromptView').then(module => ({ default: module.PromptView })));
 const ContextView = lazy(() => import('@/components/features/context/ContextView').then(module => ({ default: module.ContextView })));
 const PatchView = lazy(() => import('@/components/features/patch/PatchView').then(module => ({ default: module.PatchView })));
+const SystemMonitorModal = lazy(() => import('@/components/features/monitor/SystemMonitorModal').then(module => ({ default: module.SystemMonitorModal })));
 
 const appWindow = getCurrentWebviewWindow()
 
@@ -222,6 +223,9 @@ function App() {
         </main>
       </div>
       <SettingsModal />
+      <Suspense fallback={null}>
+        <SystemMonitorModal />
+      </Suspense>
       <GlobalConfirmDialog />
     </div>
     </>

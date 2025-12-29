@@ -70,6 +70,7 @@ interface AppState {
   currentView: AppView;
   isSidebarOpen: boolean;
   isSettingsOpen: boolean;
+  isMonitorOpen: boolean;
   isPromptSidebarOpen: boolean;
   isContextSidebarOpen: boolean;
   contextSidebarWidth: number;
@@ -94,6 +95,7 @@ interface AppState {
   setView: (view: AppView) => void;
   toggleSidebar: () => void;
   setSettingsOpen: (open: boolean) => void;
+  setMonitorOpen: (open: boolean) => void;
   setPromptSidebarOpen: (open: boolean) => void;
   setContextSidebarOpen: (open: boolean) => void;
   setContextSidebarWidth: (width: number) => void;
@@ -117,6 +119,7 @@ export const useAppStore = create<AppState>()(
       currentView: 'prompts',
       isSidebarOpen: true,
       isSettingsOpen: false,
+      isMonitorOpen: false,
       isPromptSidebarOpen: true,
       isContextSidebarOpen: true,
       contextSidebarWidth: 300,
@@ -143,6 +146,7 @@ export const useAppStore = create<AppState>()(
       setView: (view) => set({ currentView: view }),
       toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
       setSettingsOpen: (open) => set({ isSettingsOpen: open }),
+      setMonitorOpen: (open) => set({ isMonitorOpen: open }),
       setPromptSidebarOpen: (open) => set({ isPromptSidebarOpen: open }),
       setContextSidebarOpen: (open) => set({ isContextSidebarOpen: open }),
       setContextSidebarWidth: (width) => set({ contextSidebarWidth: width }),

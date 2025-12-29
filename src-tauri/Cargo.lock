@@ -524,10 +524,12 @@ dependencies = [
  "chrono",
  "entropy",
  "git2",
+ "listeners",
  "once_cell",
  "openssl",
  "rayon",
  "regex",
+ "reqwest",
  "rusqlite",
  "serde",
  "serde_json",
@@ -2327,6 +2329,17 @@ name = "linux-raw-sys"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "df1d3c3b53da64cf5760482273a98e575c651a67eec7f77df96b5b642de8f039"
+
+[[package]]
+name = "listeners"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "557f908c6cb431dd2496687aa9ea326507110ee4780517a42ade2df25d31126c"
+dependencies = [
+ "byteorder",
+ "rustix 1.1.2",
+ "windows 0.61.3",
+]
 
 [[package]]
 name = "litemap"
