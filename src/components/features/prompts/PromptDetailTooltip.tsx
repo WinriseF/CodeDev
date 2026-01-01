@@ -23,7 +23,6 @@ export function PromptDetailTooltip({ prompt, anchorRect, isOpen, onMouseEnter, 
 
   const variables = parseVariables(prompt.content);
   
-  // 核心修复：对标签进行去重，防止重复 key 报错
   const uniqueTags = useMemo(() => {
       if (!prompt.tags) return [];
       return Array.from(new Set(prompt.tags));
@@ -68,22 +67,7 @@ export function PromptDetailTooltip({ prompt, anchorRect, isOpen, onMouseEnter, 
       )}
       style={{ top: position.top, left: position.left }}
     >
-      <div className="relative group rounded-xl p-[1.5px] overflow-hidden">
-        
-        <div className="absolute inset-[-50%] animate-[spin_3s_linear_infinite] blur-sm" 
-             style={{
-               backgroundImage: `conic-gradient(from 90deg at 50% 50%, 
-                 #ef4444 0%,   
-                 #eab308 20%,  
-                 #22c55e 40%,  
-                 #3b82f6 60%,  
-                 #a855f7 80%,  
-                 #ef4444 100% 
-               )`
-             }}
-        />
-        
-        <div className="relative bg-popover shadow-2xl rounded-xl overflow-hidden flex flex-col text-sm text-popover-foreground h-full">
+      <div className="relative bg-popover shadow-2xl rounded-xl overflow-hidden flex flex-col text-sm text-popover-foreground h-full ring-1 ring-primary/30">
             
             {/* Header */}
             <div className="p-4 border-b border-border/50 bg-secondary/10 flex flex-col gap-2">
@@ -148,7 +132,6 @@ export function PromptDetailTooltip({ prompt, anchorRect, isOpen, onMouseEnter, 
                 <Tag size={12} />
                 {uniqueTags.length > 0 ? (
                     <div className="flex gap-1 flex-wrap">
-                        {/* 修复：使用 uniqueTags 渲染，确保 key 唯一 */}
                         {uniqueTags.map(t => <span key={t} className="hover:text-foreground transition-colors">#{t}</span>)}
                     </div>
                 ) : (
@@ -159,11 +142,9 @@ export function PromptDetailTooltip({ prompt, anchorRect, isOpen, onMouseEnter, 
                 <Calendar size={12} />
                 <span>{formatDate(prompt.updatedAt)}</span>
             </div>
-            </div>
-
+          </div>
         </div>
-      </div>
-    </div>,
-    document.body
-  );
-}
+      </div>,
+      document.body
+    );
+  }
