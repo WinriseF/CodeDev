@@ -393,7 +393,7 @@ export default function SpotlightApp() {
       `}</style>
 
       <div className="w-screen h-screen flex flex-col items-center p-1 bg-transparent font-sans overflow-hidden">
-        <div className="w-full h-full flex flex-col bg-background/95 backdrop-blur-2xl border border-border/50 rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 relative overflow-hidden">
+        <div className="w-full h-full flex flex-col bg-background/95 backdrop-blur border border-border/50 rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 relative overflow-hidden">
           
           <div className={cn("absolute inset-0 pointer-events-none transition-opacity duration-1000 ease-in-out", mode === 'chat' ? "opacity-100" : "opacity-0")}>
               <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />

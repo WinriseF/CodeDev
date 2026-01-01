@@ -251,7 +251,7 @@ export function PromptView() {
 
                 return (
                   <GridAny
-                    className="custom-scrollbar px-2"
+                    className="custom-scrollbar"
                     columnCount={columnCount}
                     columnWidth={columnWidth}
                     height={height}
