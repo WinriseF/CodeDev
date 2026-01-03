@@ -4,12 +4,12 @@ use regex::Regex;
 use which::which;
 use wait_timeout::ChildExt;
 
-// 设定超时时间为 5 秒
+// 设定超时时间
 const TIMEOUT_SECS: u64 = 5;
 
 /// 运行命令并返回 stdout
 pub fn run_command(bin: &str, args: &[&str]) -> Result<String, String> {
-    // 针对 Windows 的特殊处理
+    // 针对 Windows 的特殊处理：参数拼接
     #[cfg(target_os = "windows")]
     let (bin, final_args) = if bin == "npm" || bin == "pnpm" || bin == "yarn" || bin == "code" {
         let mut new_args = vec!["/C", bin];
@@ -22,21 +22,31 @@ pub fn run_command(bin: &str, args: &[&str]) -> Result<String, String> {
     #[cfg(not(target_os = "windows"))]
     let (bin, final_args) = (bin, args);
 
-    // 1. 启动子进程
-    let mut child = Command::new(bin)
-        .args(final_args)
-        .stdout(Stdio::piped()) // 必须捕获管道
-        .stderr(Stdio::piped())
+    // 1. 构建命令
+    let mut command = Command::new(bin);
+    command.args(final_args);
+    command.stdout(Stdio::piped()); // 捕获输出
+    command.stderr(Stdio::piped()); // 捕获错误
+
+    #[cfg(target_os = "windows")]
+    {
+        use std::os::windows::process::CommandExt;
+        const CREATE_NO_WINDOW: u32 = 0x08000000;
+        command.creation_flags(CREATE_NO_WINDOW);
+    }
+
+    // 2. 启动子进程
+    let mut child = command
         .spawn()
         .map_err(|e| format!("Failed to spawn {}: {}", bin, e))?;
 
-    // 2. 等待超时
+    // 3. 等待超时
     let status_code = match child.wait_timeout(Duration::from_secs(TIMEOUT_SECS)).map_err(|e| e.to_string())? {
         Some(status) => status,
         None => {
-            // 3. 超时处理：杀死进程
+            // 超时处理：杀死进程
             let _ = child.kill();
-            let _ = child.wait();
+            let _ = child.wait(); 
             return Err(format!("Command '{}' timed out after {}s", bin, TIMEOUT_SECS));
         }
     };
@@ -83,7 +93,7 @@ pub fn generic_probe(name: &str, bin: &str, args: &[&str], version_regex: Option
     let version = if path.is_some() {
         match run_command(bin, args) {
             Ok(out) => find_version(&out, version_regex),
-            Err(_) => "Not Found".to_string(), // 超时或报错都归为 Not Found
+            Err(_) => "Not Found".to_string(),
         }
     } else {
         "Not Found".to_string()
