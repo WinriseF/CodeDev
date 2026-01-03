@@ -9,6 +9,7 @@ use sysinfo::{
 use tauri::State;
 use listeners::{get_all, Protocol};
 use rayon::prelude::*;
+use crate::env_probe::{self, EnvReport};
 
 // --- 数据结构定义 ---
 
@@ -290,94 +291,63 @@ pub fn kill_process(pid: u32, system: State<'_, Arc<Mutex<System>>>) -> Result<S
     }
 }
 
-// get_env_info 和 diagnose_network 保持不变
 
 #[tauri::command]
-pub async fn get_env_info() -> Vec<EnvInfo> {
-    let mut tools = vec![
-        ("Node.js", "node", vec!["-v"]),
-        ("NPM", "npm", vec!["-v"]),
-        ("Yarn", "yarn", vec!["-v"]),
-        ("PNPM", "pnpm", vec!["-v"]),
-        ("Python", "python", vec!["--version"]),
-        ("Python3", "python3", vec!["--version"]),
-        ("Go", "go", vec!["version"]),
-        ("Rust", "rustc", vec!["--version"]),
-        ("Java", "java", vec!["-version"]),
-        ("GCC", "gcc", vec!["--version"]),
-        ("Docker", "docker", vec!["--version"]),
-        ("Git", "git", vec!["--version"]),
-        ("OpenSSL", "openssl", vec!["version"]),
-    ];
+pub async fn get_env_info(
+    system: State<'_, Arc<Mutex<System>>>,
+    project_path: Option<String>, // 新增参数：当前项目路径
+) -> Result<EnvReport, String> {
+    
+    // 使用 rayon 的 join API 实现全并行探测
+    // 这种写法看起来像回调地狱，但在 Rust 中这是最高效的并行方式之一 (Fork-Join 模型)
+    let (system_info, (binaries, (browsers, (ides, (languages, (virtualization, (utilities, (managers, npm_packages)))))))) = rayon::join(
+        // Task 1: System Info (需持有锁)
+        || env_probe::system::probe_system(system.clone()),
+        || rayon::join(
+            // Task 2: Binaries
+            || env_probe::binaries::probe_by_category("Binaries"),
+            || rayon::join(
+                // Task 3: Browsers
+                || env_probe::browsers::probe_browsers(),
+                || rayon::join(
+                    // Task 4: IDEs
+                    || env_probe::ides::probe_ides(),
+                    || rayon::join(
+                        // Task 5: Languages
+                        || env_probe::binaries::probe_by_category("Languages"),
+                        || rayon::join(
+                            // Task 6: Virtualization
+                            || env_probe::binaries::probe_by_category("Virtualization"),
+                            || rayon::join(
+                                // Task 7: Utilities
+                                || env_probe::binaries::probe_by_category("Utilities"),
+                                || rayon::join(
+                                    // Task 8: Managers
+                                    || env_probe::binaries::probe_by_category("Managers"),
+                                    // Task 9: NPM Packages (IO Bound)
+                                    || env_probe::npm::probe_npm_packages(project_path.clone())
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    );
 
-    let mut handles = Vec::new();
-
-    for (name, bin, args) in tools.drain(..) {
-        let name_owned = name.to_string();
-        let bin_owned = bin.to_string();
-        let args_owned: Vec<String> = args.iter().map(|s| s.to_string()).collect();
-
-        handles.push(tauri::async_runtime::spawn_blocking(move || {
-            let mut cmd = Command::new(&bin_owned);
-            cmd.args(&args_owned);
-
-            #[cfg(unix)]
-            let output = cmd.output().or_else(|_| {
-                Command::new("bash")
-                    .arg("-l")
-                    .arg("-c")
-                    .arg(format!("{} {}", bin_owned, args_owned.join(" ")))
-                    .output()
-            });
-
-            #[cfg(windows)]
-            let output = cmd.output().or_else(|_| {
-                Command::new("powershell")
-                    .arg("-Command")
-                    .arg(format!("{} {}", bin_owned, args_owned.join(" ")))
-                    .output()
-            });
-
-            let version = match output {
-                Ok(o) => {
-                    let stdout = String::from_utf8_lossy(&o.stdout).trim().to_string();
-                    let stderr = String::from_utf8_lossy(&o.stderr).trim().to_string();
-
-                    if !stdout.is_empty() {
-                        if stdout.len() > 50 {
-                            stdout[..50].to_string() + "..."
-                        } else {
-                            stdout
-                        }
-                    } else if !stderr.is_empty() && (stderr.contains("version") || stderr.contains("build")) {
-                        if stderr.len() > 50 {
-                            stderr[..50].to_string() + "..."
-                        } else {
-                            stderr
-                        }
-                    } else {
-                        "Not Found".to_string()
-                    }
-                }
-                Err(_) => "Not Found".to_string(),
-            };
-
-            EnvInfo {
-                name: name_owned,
-                version,
-            }
-        }));
-    }
-
-    let mut results = Vec::new();
-    for handle in handles {
-        if let Ok(info) = handle.await {
-            results.push(info);
-        }
-    }
-
-    results.sort_by(|a, b| a.name.cmp(&b.name));
-    results
+    Ok(EnvReport {
+        system: Some(system_info),
+        binaries,
+        browsers,
+        ides,
+        languages,
+        virtualization,
+        utilities,
+        managers,
+        npm_packages,
+        sdks: std::collections::HashMap::new(),
+        databases: Vec::new(),
+    })
 }
 
 #[tauri::command]
