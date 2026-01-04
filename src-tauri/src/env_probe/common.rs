@@ -9,9 +9,8 @@ const TIMEOUT_SECS: u64 = 5;
 
 /// 运行命令并返回 stdout
 pub fn run_command(bin: &str, args: &[&str]) -> Result<String, String> {
-    // 针对 Windows 的特殊处理：参数拼接
     #[cfg(target_os = "windows")]
-    let (bin, final_args) = if bin == "npm" || bin == "pnpm" || bin == "yarn" || bin == "code" {
+    let (bin, final_args) = if ["npm", "pnpm", "yarn", "cnpm", "code", "mvn", "gradle", "mysql", "bun"].contains(&bin) {
         let mut new_args = vec!["/C", bin];
         new_args.extend_from_slice(args);
         ("cmd", new_args)

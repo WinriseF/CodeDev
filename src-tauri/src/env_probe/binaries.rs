@@ -62,7 +62,7 @@ const BINARY_LIST: &[BinaryConfig] = &[
     BinaryConfig { category: "Managers", name: "Gradle", bin: "gradle", args: &["-version"], regex: None },
 
     // --- Databases (数据库) ---
-    BinaryConfig { category: "Databases", name: "MySQL", bin: "mysql", args: &["--version"], regex: Some(r"Distrib ([\d\.]+)") },
+    BinaryConfig { category: "Databases", name: "MySQL", bin: "mysql", args: &["--version"], regex: Some(r"Ver ([\d\.]+)") },
     BinaryConfig { category: "Databases", name: "PostgreSQL", bin: "psql", args: &["--version"], regex: None },
     BinaryConfig { category: "Databases", name: "SQLite", bin: "sqlite3", args: &["--version"], regex: None },
     BinaryConfig { category: "Databases", name: "MongoDB", bin: "mongod", args: &["--version"], regex: None },
