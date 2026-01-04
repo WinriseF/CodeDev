@@ -3,30 +3,33 @@ import { invoke } from '@tauri-apps/api/core';
 import { 
   Terminal, Copy, RefreshCw, Check, Search, 
   Cpu, Globe, Code2, Layers, Database, Box, 
-  AppWindow, Wrench, Play
+  AppWindow, Wrench, Play, Sparkles
 } from 'lucide-react';
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { useAppStore } from '@/store/useAppStore';
-import { useContextStore } from '@/store/useContextStore'; // 获取项目路径
+import { useContextStore } from '@/store/useContextStore'; 
 import { getText } from '@/lib/i18n';
-import { EnvReport, ToolInfo } from '@/types/monitor';
+import { EnvReport, ToolInfo, AiContextReport } from '@/types/monitor';
 import { cn } from '@/lib/utils';
 
 export function EnvFingerprint() {
   const { language } = useAppStore();
-  const { projectRoot } = useContextStore(); // 获取当前项目根目录用于扫描 npm 包
+  const { projectRoot } = useContextStore(); 
   
   const [data, setData] = useState<EnvReport | null>(null);
   const [loading, setLoading] = useState(false);
-  const [hasScanned, setHasScanned] = useState(false); // 标记是否点击过检测
-  const [copied, setCopied] = useState(false);
+  const [hasScanned, setHasScanned] = useState(false);
+  const [copied, setCopied] = useState(false); // 用于普通报告复制
   const [filter, setFilter] = useState('');
+
+  // AI Context 专用状态
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [aiCopied, setAiCopied] = useState(false); // 用于 AI Context 复制反馈
 
   const fetchData = async () => {
     setLoading(true);
-    setHasScanned(true); // 标记已开始
+    setHasScanned(true); 
     try {
-      // 传入 projectPath 以便后端扫描 package.json
       const res = await invoke<EnvReport>('get_env_info', { projectPath: projectRoot });
       setData(res);
     } catch (e) {
@@ -36,17 +39,34 @@ export function EnvFingerprint() {
     }
   };
 
+  // 直接生成并复制，不弹窗
+  const handleCopyAiContext = async () => {
+      if (!projectRoot) return;
+      if (isAiLoading || aiCopied) return;
+
+      setIsAiLoading(true);
+      try {
+          const report = await invoke<AiContextReport>('get_ai_context', { projectPath: projectRoot });
+          await writeText(report.markdown);
+          
+          setAiCopied(true);
+          setTimeout(() => setAiCopied(false), 2000);
+      } catch (e) {
+          console.error("AI Context generation failed", e);
+      } finally {
+          setIsAiLoading(false);
+      }
+  };
+
   // --- 深度过滤逻辑 ---
   const filteredData = useMemo(() => {
     if (!data) return null;
     const q = filter.toLowerCase().trim();
     if (!q) return data;
 
-    // 辅助函数：过滤 ToolInfo 数组
     const filterTools = (list: ToolInfo[]) => 
       list.filter(t => t.name.toLowerCase().includes(q) || t.version.toLowerCase().includes(q));
 
-    // 辅助函数：过滤 SDK Map
     const filterSdks = (sdks: Record<string, string[]>) => {
       const res: Record<string, string[]> = {};
       Object.entries(sdks).forEach(([key, vals]) => {
@@ -58,7 +78,7 @@ export function EnvFingerprint() {
     };
 
     return {
-      system: data.system, // System 信息不过滤，保留显示上下文
+      system: data.system,
       binaries: filterTools(data.binaries),
       browsers: filterTools(data.browsers),
       ides: filterTools(data.ides),
@@ -72,7 +92,7 @@ export function EnvFingerprint() {
     };
   }, [data, filter]);
 
-  // --- 生成 Markdown 报告 ---
+  // --- 生成 Markdown 报告 (原有功能) ---
   const handleCopyReport = async () => {
     if (!data) return;
 
@@ -83,14 +103,12 @@ export function EnvFingerprint() {
 
     let report = `## ${reportTitle}\n${generatedBy} - ${new Date().toLocaleString()}\n\n`;
 
-    // System
     if (data.system) {
       report += `### ${systemLabel}\n`;
       Object.entries(data.system).forEach(([k, v]) => report += `- **${k}**: ${v}\n`);
       report += `\n`;
     }
 
-    // Helper to print lists
     const printSection = (key: string, list: ToolInfo[]) => {
       const title = getText('monitor', key, language);
       const valid = list.filter(i => i.version !== 'Not Found' && i.version !== 'Not Installed');
@@ -112,7 +130,6 @@ export function EnvFingerprint() {
     printSection('envManagers', data.managers);
     printSection('envNpmPackages', data.npm_packages);
 
-    // SDKs
     if (Object.keys(data.sdks).length > 0) {
         report += `### ${sdkLabel}\n`;
         Object.entries(data.sdks).forEach(([key, vals]) => {
@@ -137,13 +154,29 @@ export function EnvFingerprint() {
         <p className="text-muted-foreground text-center max-w-md mb-8 text-sm leading-relaxed">
            {getText('monitor', 'envScanDesc', language)}
         </p>
-        <button
-          onClick={fetchData}
-          className="group relative flex items-center gap-3 px-8 py-3 bg-primary text-primary-foreground rounded-full font-semibold shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all active:scale-95"
-        >
-           {loading ? <RefreshCw size={20} className="animate-spin" /> : <Play size={20} className="fill-current" />}
-           <span>{getText('monitor', 'envStartScan', language)}</span>
-        </button>
+        
+        <div className="flex flex-col gap-3 w-full max-w-xs">
+            <button
+              onClick={fetchData}
+              className="group relative flex items-center justify-center gap-3 px-8 py-3 bg-primary text-primary-foreground rounded-full font-semibold shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all active:scale-95"
+            >
+              {loading ? <RefreshCw size={20} className="animate-spin" /> : <Play size={20} className="fill-current" />}
+              <span>{getText('monitor', 'envStartScan', language)}</span>
+            </button>
+
+            {/* AI Context 快捷入口 */}
+            <button
+                onClick={handleCopyAiContext}
+                disabled={isAiLoading}
+                className={cn(
+                    "flex items-center justify-center gap-2 px-8 py-2.5 bg-secondary hover:bg-secondary/80 text-foreground border border-border rounded-full text-sm font-medium transition-all disabled:opacity-50",
+                    aiCopied ? "text-green-600 border-green-500/30 bg-green-500/10" : "hover:border-purple-500/30 hover:text-purple-600"
+                )}
+            >
+                {isAiLoading ? <RefreshCw size={16} className="animate-spin" /> : aiCopied ? <Check size={16} /> : <Sparkles size={16} />}
+                <span>{aiCopied ? "Context Copied!" : "Copy AI Context"}</span>
+            </button>
+        </div>
       </div>
     );
   }
@@ -193,6 +226,24 @@ export function EnvFingerprint() {
                 <span>{getText('monitor', 'envFingerprint', language)}</span>
              </div>
              <div className="flex gap-2">
+                {/* AI Context 按钮 (Toolbar 版) */}
+                <button 
+                    onClick={handleCopyAiContext}
+                    disabled={isAiLoading}
+                    className={cn(
+                        "flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 border",
+                        aiCopied 
+                            ? "bg-green-500/10 text-green-600 border-green-500/20" 
+                            : "bg-purple-500/10 text-purple-600 hover:bg-purple-500/20 border-purple-500/20"
+                    )}
+                    title="Generate and copy summarized context for AI prompts"
+                >
+                    {isAiLoading ? <RefreshCw size={14} className="animate-spin" /> : aiCopied ? <Check size={14} /> : <Sparkles size={14} />}
+                    {aiCopied ? "Copied!" : "Copy AI Context"}
+                </button>
+
+                <div className="w-px h-6 bg-border mx-1" />
+
                 <button 
                     onClick={handleCopyReport}
                     className="flex items-center gap-2 px-3 py-1.5 bg-secondary hover:bg-secondary/80 rounded-lg text-xs font-medium transition-colors border border-transparent hover:border-border"
@@ -233,7 +284,7 @@ export function EnvFingerprint() {
 
          {filteredData && (
             <div className="space-y-6">
-                {/* 1. System Info (Top Card) */}
+                {/* 1. System Info */}
                 {filteredData.system && (
                     <div className="bg-gradient-to-br from-secondary/50 to-background border border-border p-4 rounded-xl shadow-sm mb-6">
                         <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2"><Cpu size={14}/> {getText('monitor', 'envSystem', language)}</h3>
@@ -259,7 +310,7 @@ export function EnvFingerprint() {
                 <Section title={getText('monitor', 'envManagers', language)} icon={Wrench} items={filteredData.managers} />
                 <Section title={getText('monitor', 'envUtilities', language)} icon={Terminal} items={filteredData.utilities} />
 
-                {/* 3. SDKs (Special Render) */}
+                {/* 3. SDKs */}
                 {Object.keys(filteredData.sdks).length > 0 && (
                     <div className="mb-6">
                         <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2 border-b border-border/50 pb-1">

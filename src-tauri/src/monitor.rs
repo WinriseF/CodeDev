@@ -9,9 +9,8 @@ use sysinfo::{
 use tauri::State;
 use listeners::{get_all, Protocol};
 use rayon::prelude::*;
-use crate::env_probe::{self, EnvReport};
+use crate::env_probe::{self, EnvReport, AiContextReport};
 
-// --- 数据结构定义 ---
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SystemMetrics {
@@ -49,8 +48,6 @@ pub struct NetDiagResult {
     pub latency: u128,
     pub status_code: u16,
 }
-
-// --- 辅助函数：判断是否为系统进程 ---
 
 fn is_system_process(_sys: &System, process: &sysinfo::Process) -> bool {
     let name = process.name().to_string_lossy().to_lowercase();
@@ -92,8 +89,6 @@ fn is_system_process(_sys: &System, process: &sysinfo::Process) -> bool {
 
     false
 }
-
-// --- 核心命令 ---
 
 #[tauri::command]
 pub fn get_system_metrics(system: State<'_, Arc<Mutex<System>>>) -> Result<SystemMetrics, String> {
@@ -283,7 +278,6 @@ pub fn kill_process(pid: u32, system: State<'_, Arc<Mutex<System>>>) -> Result<S
     }
 }
 
-
 #[tauri::command]
 pub async fn get_env_info(
     system: State<'_, Arc<Mutex<System>>>,
@@ -338,6 +332,18 @@ pub async fn get_env_info(
         sdks,
         databases,
     })
+}
+
+#[tauri::command]
+pub async fn get_ai_context(
+    project_path: String,
+) -> Result<AiContextReport, String> {
+    // 放入 blocking thread 避免阻塞主线程
+    let report = tauri::async_runtime::spawn_blocking(move || {
+        env_probe::scan_logic::scan_ai_context(&project_path)
+    }).await.map_err(|e| e.to_string())?;
+
+    Ok(report)
 }
 
 #[tauri::command]

@@ -8,12 +8,12 @@ pub mod browsers;
 pub mod ides;
 pub mod npm;
 pub mod sdks;
+pub mod identity;
+pub mod scan_logic;
 
-/// 工具的详细信息
 #[derive(Debug, Serialize, Clone)]
 pub struct ToolInfo {
     pub name: String,
-    /// 版本号，若未找到则为 "Not Found"
     pub version: String,
     /// 安装路径
     pub path: Option<String>,
@@ -53,4 +53,25 @@ impl Default for EnvReport {
             npm_packages: Vec::new(),
         }
     }
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq)]
+pub enum ProjectType {
+    Tauri,      // 前端 + Rust 后端
+    NodeFrontend, // 纯前端
+    NodeBackend,  // Node 后端
+    Rust,       // 纯 Rust
+    Python,     // Python
+    Mixed,      // 混合/未知
+}
+
+/// AI 上下文扫描结果
+#[derive(Debug, Serialize, Clone)]
+pub struct AiContextReport {
+    pub project_type: ProjectType,
+    pub summary: String,
+    pub system_info: String, // OS, Shell
+    pub toolchain: Vec<ToolInfo>, // 筛选后的核心工具 (Node, Rustc...)
+    pub dependencies: HashMap<String, String>, // 关键依赖 (React, Tauri...)
+    pub markdown: String, // 最终生成的 Prompt
 }

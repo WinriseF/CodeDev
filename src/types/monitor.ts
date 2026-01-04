@@ -51,3 +51,14 @@ export interface EnvReport {
   npm_packages: ToolInfo[];
   sdks: Record<string, string[]>;
 }
+
+export type ProjectType = 'Tauri' | 'NodeFrontend' | 'NodeBackend' | 'Rust' | 'Python' | 'Mixed';
+
+export interface AiContextReport {
+    project_type: ProjectType;
+    summary: string;
+    system_info: string;
+    toolchain: ToolInfo[];
+    dependencies: Record<string, string>;
+    markdown: string;
+}

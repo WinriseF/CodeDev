@@ -162,7 +162,8 @@ fn main() {
             monitor::get_active_ports,
             monitor::kill_process,
             monitor::get_env_info,
-            monitor::diagnose_network
+            monitor::diagnose_network,
+            monitor::get_ai_context
         ])
         .setup(|app| {
             let system = System::new_all();
