@@ -70,7 +70,7 @@ export function TokenDashboard({
                ? "bg-orange-500/10 border-orange-500/30 text-orange-600" 
                : "bg-card border-border text-muted-foreground hover:bg-secondary/50"
            )}
-           title={language === 'zh' ? "复制前检测敏感信息 (API Key 等)" : "Scan for secrets before copying"}
+           title={getText('context', 'securityFilterTooltip', language)}
          >
             <div className={cn(
                 "w-8 h-4 rounded-full relative transition-colors duration-300",
@@ -83,7 +83,7 @@ export function TokenDashboard({
             </div>
             <div className="flex items-center gap-2">
                 <ShieldCheck size={16} />
-                <span className="text-sm font-medium">{language === 'zh' ? "安全检测" : "Security Filter"}</span>
+                <span className="text-sm font-medium">{getText('context', 'securityFilter', language)}</span>
             </div>
          </button>
 

@@ -25,7 +25,7 @@ export function PortManager() {
       setPorts(data.sort((a, b) => a.port - b.port));
     } catch (e) {
       console.error(e);
-      setToast({ show: true, msg: "Failed to scan ports", type: 'error' });
+      setToast({ show: true, msg: getText('toast', 'portScanFailed', language), type: 'error' });
     } finally {
       setIsLoading(false);
     }
@@ -47,7 +47,7 @@ export function PortManager() {
 
   const handleKill = async (portInfo: PortInfo) => {
     if (portInfo.is_system) {
-        setToast({ show: true, msg: "Cannot kill system process.", type: 'warning' });
+        setToast({ show: true, msg: getText('toast', 'cannotKillSystem', language), type: 'warning' });
         return;
     }
 
@@ -102,7 +102,7 @@ export function PortManager() {
                 <div className="col-span-3">{getText('monitor', 'localAddr', language)}</div>
                 <div className="col-span-2">{getText('monitor', 'procPid', language)}</div>
                 <div className="col-span-3">{getText('monitor', 'procName', language)}</div>
-                <div className="col-span-1 text-right">Action</div>
+                <div className="col-span-1 text-right">{getText('monitor', 'action', language)}</div>
             </div>
             
             <div className="flex-1 overflow-y-auto custom-scrollbar p-1 space-y-1">
@@ -117,7 +117,7 @@ export function PortManager() {
                             <div className="col-span-2 font-mono text-primary font-bold flex items-center gap-1.5">
                                 {p.port}
                                 {p.is_system && (
-                                    <div title="System Port">
+                                    <div title={getText('monitor', 'systemPort', language)}>
                                         <Shield size={12} className="text-green-500" />
                                     </div>
                                 )}
@@ -132,7 +132,7 @@ export function PortManager() {
                             </div>
                             <div className="col-span-1 text-right">
                                 {p.is_system ? (
-                                    <div className="flex justify-end text-muted-foreground/30 cursor-not-allowed" title="System Process Protected">
+                                    <div className="flex justify-end text-muted-foreground/30 cursor-not-allowed" title={getText('monitor', 'protected', language)}>
                                         <ShieldAlert size={14} />
                                     </div>
                                 ) : (

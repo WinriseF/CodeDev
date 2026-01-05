@@ -27,7 +27,7 @@ const translations = {
       confirmDelete: "Delete",
       cancel: "Cancel",
       official: "Official",
-      local: "Local" // Added
+      local: "Local"
     },
     context: {
       searchPlaceholder: "Paste path or browse...",
@@ -71,6 +71,8 @@ const translations = {
       btnSave: "Save to File...",
       processing: "Processing...",
       removeComments: "Remove Comments",
+      securityFilter: "Security Filter",
+      securityFilterTooltip: "Scan for secrets before copying",
       securityAlert: "Security Alert",
       issuesFound: "{count} Issues Found",
       securityMsg: "CodeForge detected potential sensitive information. Please review and uncheck any false positives (items you want to keep as-is).",
@@ -148,7 +150,9 @@ const translations = {
       noDiff: "No differences found between the selected commits.",
       fixAI: "Fix with AI",
       aiFixing: "AI is fixing...",
-      forceSave: "Force Save"
+      forceSave: "Force Save",
+      commitSelectPlaceholder: "Select a commit...",
+      commitSearchPlaceholder: "Search by message or hash..."
     },
     editor: {
       titleNew: "New Prompt",
@@ -216,7 +220,8 @@ const translations = {
       shortcutClear: "Clear shortcut",
       shortcutTip: "Click to record. Recommended: Alt+S, Ctrl+Space.",
       langSubLabelZh: "Chinese Simplified",
-      langSubLabelEn: "English"
+      langSubLabelEn: "English",
+      baseUrlPlaceholder: "https://api.example.com"
     },
     library: {
       title: "Official Library",
@@ -316,7 +321,22 @@ const translations = {
       riskTitle: "High Risk Action",
       riskMsg: "This command contains potentially dangerous operations (delete, move, overwrite, etc.).\n\nCommand:\n{command}",
       btnExecute: "Execute",
-      unsupported: "Unsupported OS"
+      unsupported: "Unsupported OS",
+      scanFailed: "Failed to scan ports",
+      cannotKillSystem: "Cannot kill system process."
+    },
+    toast: {
+      copied: "Copied!",
+      copySuccess: "Copied to clipboard!",
+      copyFailed: "Copy failed",
+      saved: "Saved successfully!",
+      saveFailed: "Save failed",
+      error: "Error: {msg}",
+      contextCopied: "Context copied!",
+      contextCopyFailed: "Failed to copy context",
+      contextSaved: "Context saved to file!",
+      portScanFailed: "Failed to scan ports",
+      cannotKillSystem: "Cannot kill system process."
     },
     monitor: {
       title: "System Monitor",
@@ -324,7 +344,6 @@ const translations = {
       navPorts: "Port Manager",
       navEnv: "Environment",
       navNetwork: "Network Analysis",
-      
       // Dashboard
       cpu: "CPU Usage",
       memory: "Memory Usage",
@@ -341,7 +360,10 @@ const translations = {
       kill: "End Task",
       killDenied: "Action Denied: System Process",
       systemProcess: "System Process",
-      
+      action: "Action",
+      autoRefresh: "Auto-refresh",
+      totalLoad: "Total Load",
+      systemProcessProtected: "System Process Protected",
       // Ports
       searchPorts: "Search ports (e.g. 3000, node)...",
       port: "Port",
@@ -354,7 +376,6 @@ const translations = {
       refresh: "Refresh",
       systemPort: "System Port",
       protected: "System Process Protected",
-      
       // Env
       envTool: "Tool / Runtime",
       envToolFilter: "Filter tools...",
@@ -380,7 +401,10 @@ const translations = {
       envUtilities: "Utilities",
       envSDKs: "SDKs",
       envNoMatches: "No matches found.",
-
+      copyAiContext: "Copy AI Context",
+      contextCopied: "Context Copied!",
+      aiContextTooltip: "Generate and copy summarized context for AI prompts",
+      removeFromContext: "Remove from context",
       // Network
       netTarget: "Service / Target",
       netStatus: "Status",
@@ -391,6 +415,10 @@ const translations = {
       statusSuccess: "Good",
       statusSlow: "Slow",
       statusFail: "Failed",
+      netCheckDesc: "Connectivity & Latency Check",
+      // Git
+      commitSelectPlaceholder: "Select a commit...",
+      commitSearchPlaceholder: "Search by message or hash...",
     }
   },
   zh: {
@@ -413,11 +441,11 @@ const translations = {
       noResults: "没有找到相关指令",
       copySuccess: "已复制到剪贴板",
       deleteTitle: "确认删除?",
-      deleteMessage: "您确定要删除指令 “{name}” 吗？此操作无法撤销。",
+      deleteMessage: '您确定要删除指令 "{name}" 吗？此操作无法撤销。',
       confirmDelete: "确认删除",
       cancel: "取消",
       official: "官方",
-      local: "本地" // Added
+      local: "本地"
     },
     context: {
       searchPlaceholder: "粘贴路径或浏览...",
@@ -472,6 +500,8 @@ const translations = {
       ignoreAll: "全部忽略 (不安全)",
       redactAll: "全部脱敏并复制",
       redactSelected: "脱敏选中项并复制",
+      securityFilter: "安全检测",
+      securityFilterTooltip: "复制前检测敏感信息 (API Key 等)",
     },
     patch: {
       loadFile: "加载源文件...",
@@ -487,7 +517,7 @@ const translations = {
       previewPlaceholder: "应用补丁后的结果将在此显示...",
       noChanges: "未检测到任何变更。",
       saveConfirmTitle: "确认保存",
-      saveConfirmMessage: "您确定要覆盖文件 “{path}” 吗？此操作无法撤销。",
+      saveConfirmMessage: '您确定要覆盖文件 "{path}" 吗？此操作无法撤销。',
       confirm: "确认",
       cancel: "取消",
       toastCopied: "结果已复制到剪贴板！",
@@ -529,7 +559,7 @@ const translations = {
       compareVersion: "比较版本",
       comparing: "对比中...",
       generateDiff: "对比差异",
-      gitTip: "浏览 Git 项目以自动比较版本，或点击“手动”进行手动代码粘贴。",
+      gitTip: "浏览 Git 项目以自动比较版本，或点击「对比」进行手动代码粘贴。",
       binaryFile: "二进制文件",
       largeFile: "大文件",
       export: "导出",
@@ -538,7 +568,9 @@ const translations = {
       noDiff: "所选提交之间没有差异。",
       fixAI: "AI 修复",
       aiFixing: "AI 正在修复...",
-      forceSave: "强制保存"
+      forceSave: "强制保存",
+      commitSelectPlaceholder: "选择一个提交...",
+      commitSearchPlaceholder: "按消息或哈希搜索..."
     },
     editor: {
       titleNew: "新建指令",
@@ -582,12 +614,10 @@ const translations = {
       filtersTitle: "全局忽略规则",
       filtersDesc: "匹配这些规则的文件将默认从所有项目中排除（如 node_modules）。",
       close: "关闭",
-      // Appearance Section Added
       spotlightSize: "Spotlight 窗口尺寸",
       width: "宽度",
       widthTip: "调整命令面板的宽度 (500px - 1000px)。",
       chatHeight: "对话最大高度",
-      // AI Section Added
       aiTitle: "AI 服务商设置",
       aiDesc: "配置您的大模型服务商以启用 Spotlight AI 对话功能。",
       provider: "服务商",
@@ -608,7 +638,8 @@ const translations = {
       shortcutClear: "清除快捷键",
       shortcutTip: "点击设置  推荐：Alt+S, Ctrl+Space。",
       langSubLabelZh: "简体中文",
-      langSubLabelEn: "English"
+      langSubLabelEn: "English",
+      baseUrlPlaceholder: "https://api.example.com"
     },
     library: {
       title: "官方指令库",
@@ -708,7 +739,22 @@ const translations = {
       riskTitle: "高风险操作",
       riskMsg: "此命令包含潜在的危险操作（删除、移动、覆盖等）。\n\n命令内容：\n{command}",
       btnExecute: "确认执行",
-      unsupported: "不支持的操作系统"
+      unsupported: "不支持的操作系统",
+      scanFailed: "端口扫描失败",
+      cannotKillSystem: "无法结束系统进程"
+    },
+    toast: {
+      copied: "已复制！",
+      copySuccess: "已复制到剪贴板！",
+      copyFailed: "复制失败",
+      saved: "保存成功！",
+      saveFailed: "保存失败",
+      error: "错误：{msg}",
+      contextCopied: "上下文已复制！",
+      contextCopyFailed: "复制上下文失败",
+      contextSaved: "上下文已保存到文件！",
+      portScanFailed: "端口扫描失败",
+      cannotKillSystem: "无法结束系统进程。"
     },
     monitor: {
       title: "系统监视器",
@@ -716,7 +762,6 @@ const translations = {
       navPorts: "端口管理",
       navEnv: "开发环境",
       navNetwork: "网络诊断",
-      
       // Dashboard
       cpu: "CPU 使用率",
       memory: "内存使用",
@@ -733,7 +778,10 @@ const translations = {
       kill: "结束进程",
       killDenied: "操作拒绝：系统进程",
       systemProcess: "系统进程",
-      
+      action: "操作",
+      autoRefresh: "自动刷新",
+      totalLoad: "总负载",
+      systemProcessProtected: "系统进程受保护",
       // Ports
       searchPorts: "搜索端口 (如 3000, node)...",
       port: "端口",
@@ -741,12 +789,11 @@ const translations = {
       localAddr: "监听地址",
       emptyPorts: "未找到匹配的活跃端口。",
       confirmKill: "确认结束",
-      killMsg: "您确定要结束进程 “{name}” (PID: {pid}) 吗？",
+      killMsg: '您确定要结束进程 "{name}" (PID: {pid}) 吗？',
       killSuccess: "进程已结束。",
       refresh: "刷新",
       systemPort: "系统端口",
       protected: "受保护的系统进程",
-      
       // Env
       envTool: "工具 / 运行时",
       envToolFilter: "过滤工具...",
@@ -772,7 +819,10 @@ const translations = {
       envUtilities: "系统工具",
       envSDKs: "SDK",
       envNoMatches: "未找到匹配项。",
-
+      copyAiContext: "复制 AI 上下文",
+      contextCopied: "上下文已复制！",
+      aiContextTooltip: "生成并复制 AI 提示词摘要上下文",
+      removeFromContext: "从上下文中移除",
       // Network
       netTarget: "服务 / 目标",
       netStatus: "连通性",
@@ -783,6 +833,10 @@ const translations = {
       statusSuccess: "极佳",
       statusSlow: "缓慢",
       statusFail: "失败",
+      netCheckDesc: "连通性与延迟检测",
+      // Git
+      commitSelectPlaceholder: "选择提交...",
+      commitSearchPlaceholder: "按消息或哈希搜索...",
     }
   }
 };
@@ -792,19 +846,19 @@ export function getMenuLabel(view: AppView, lang: LangKey): string {
 }
 
 export function getText(
-  section: keyof typeof translations['en'], 
-  key: string, 
+  section: keyof typeof translations['en'],
+  key: string,
   lang: LangKey,
   vars?: Record<string, string>
 ): string {
   // @ts-ignore
   let text = translations[lang][section]?.[key] || key;
-  
+
   if (vars) {
     Object.entries(vars).forEach(([k, v]) => {
       text = text.replace(`{${k}}`, v);
     });
   }
-  
+
   return text;
 }

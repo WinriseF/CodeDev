@@ -174,7 +174,7 @@ export function EnvFingerprint() {
                 )}
             >
                 {isAiLoading ? <RefreshCw size={16} className="animate-spin" /> : aiCopied ? <Check size={16} /> : <Sparkles size={16} />}
-                <span>{aiCopied ? "Context Copied!" : "Copy AI Context"}</span>
+                <span>{aiCopied ? getText('monitor', 'contextCopied', language) : getText('monitor', 'copyAiContext', language)}</span>
             </button>
         </div>
       </div>
@@ -227,19 +227,19 @@ export function EnvFingerprint() {
              </div>
              <div className="flex gap-2">
                 {/* AI Context 按钮 (Toolbar 版) */}
-                <button 
+                <button
                     onClick={handleCopyAiContext}
                     disabled={isAiLoading}
                     className={cn(
                         "flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 border",
-                        aiCopied 
-                            ? "bg-green-500/10 text-green-600 border-green-500/20" 
+                        aiCopied
+                            ? "bg-green-500/10 text-green-600 border-green-500/20"
                             : "bg-purple-500/10 text-purple-600 hover:bg-purple-500/20 border-purple-500/20"
                     )}
-                    title="Generate and copy summarized context for AI prompts"
+                    title={getText('monitor', 'aiContextTooltip', language)}
                 >
                     {isAiLoading ? <RefreshCw size={14} className="animate-spin" /> : aiCopied ? <Check size={14} /> : <Sparkles size={14} />}
-                    {aiCopied ? "Copied!" : "Copy AI Context"}
+                    {aiCopied ? getText('monitor', 'contextCopied', language) : getText('monitor', 'copyAiContext', language)}
                 </button>
 
                 <div className="w-px h-6 bg-border mx-1" />

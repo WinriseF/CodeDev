@@ -279,10 +279,10 @@ export function SettingsModal() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('settings', 'baseUrl', language)}</label>
-                                    <input 
+                                    <input
                                         type="text"
                                         className="w-full bg-secondary/30 border border-border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all placeholder:text-muted-foreground/30"
-                                        placeholder="https://api.example.com"
+                                        placeholder={getText('settings', 'baseUrlPlaceholder', language)}
                                         value={aiConfig.baseUrl || ''}
                                         onChange={e => setAIConfig({ baseUrl: e.target.value })}
                                     />
