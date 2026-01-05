@@ -4,6 +4,8 @@ import { LogicalSize } from '@tauri-apps/api/dpi';
 import { listen } from '@tauri-apps/api/event';
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { message } from '@tauri-apps/plugin-dialog';
+import { open } from '@tauri-apps/plugin-shell';
+import { invoke } from '@tauri-apps/api/core';
 
 import { useAppStore, AppTheme } from '@/store/useAppStore';
 import { useContextStore } from '@/store/useContextStore';
@@ -12,22 +14,21 @@ import { parseVariables } from '@/lib/template';
 import { executeCommand } from '@/lib/command_executor';
 import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
 
-// Core Architecture
 import { SpotlightProvider, useSpotlight } from '@/components/features/spotlight/core/SpotlightContext';
 import { SpotlightLayout } from '@/components/features/spotlight/core/SpotlightLayout';
 import { SearchBar } from '@/components/features/spotlight/core/SearchBar';
 
-// Modes & Hooks
 import { useSpotlightSearch } from '@/components/features/spotlight/hooks/useSpotlightSearch';
 import { useSpotlightChat } from '@/components/features/spotlight/hooks/useSpotlightChat';
 import { SearchMode } from '@/components/features/spotlight/modes/search/SearchMode';
 import { ChatMode } from '@/components/features/spotlight/modes/chat/ChatMode';
 import { SpotlightItem } from '@/types/spotlight';
+import { ShellType } from '@/types/prompt'; // [Fix] 引入 ShellType
 
 const appWindow = getCurrentWebviewWindow();
 
 function SpotlightContent() {
-  const { mode, toggleMode, focusInput } = useSpotlight();
+  const { mode, toggleMode, focusInput, setQuery } = useSpotlight();
   const { language, spotlightAppearance } = useAppStore();
   const { projectRoot } = useContextStore();
 
@@ -36,7 +37,6 @@ function SpotlightContent() {
 
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  // 监听窗口聚焦
   useEffect(() => {
     const unlisten = appWindow.onFocusChanged(({ payload: isFocused }) => {
       if (isFocused) {
@@ -61,15 +61,26 @@ function SpotlightContent() {
     }
     
     appWindow.setSize(new LogicalSize(width, finalHeight));
-  }, [
-    mode, 
-    chat.messages.length, 
-    spotlightAppearance
-  ]);
+  }, [mode, chat.messages.length, spotlightAppearance]);
 
   const handleItemSelect = async (item: SpotlightItem) => {
     if (!item) return;
 
+    // === URL 处理逻辑 ===
+    if (item.type === 'url' && item.url) {
+        try {
+            await open(item.url);
+            invoke('record_url_visit', { url: item.url }).catch(console.error);
+            await appWindow.hide();
+            setQuery(''); 
+        } catch (e) {
+            console.error("Failed to open URL:", e);
+            await message(`Failed to open URL: ${e}`, { kind: 'error' });
+        }
+        return;
+    }
+
+    // === 命令/提示词 处理逻辑 ===
     if (item.isExecutable) {
       const content = item.content || '';
       const vars = parseVariables(content);
@@ -80,8 +91,8 @@ function SpotlightContent() {
         });
         return;
       }
-      // @ts-ignore
-      await executeCommand(content, item.shellType, projectRoot);
+      
+      await executeCommand(content, item.shellType as ShellType, projectRoot);
       await appWindow.hide();
     } else {
       try {

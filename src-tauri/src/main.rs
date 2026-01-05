@@ -157,6 +157,8 @@ fn main() {
             db::save_prompt,
             db::delete_prompt,
             db::toggle_prompt_favorite,
+            db::record_url_visit,
+            db::search_url_history,
             monitor::get_system_metrics,
             monitor::get_top_processes,
             monitor::get_active_ports,

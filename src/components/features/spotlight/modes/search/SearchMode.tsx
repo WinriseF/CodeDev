@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Command, Sparkles, Terminal, CornerDownLeft, Check, Zap } from 'lucide-react';
+import { Command, Sparkles, Terminal, CornerDownLeft, Check, Zap, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAppStore } from '@/store/useAppStore';
 import { SpotlightItem } from '@/types/spotlight';
@@ -17,7 +17,6 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
   const { language } = useAppStore();
   const listRef = useRef<HTMLDivElement>(null);
 
-  // 自动滚动到选中项
   useEffect(() => {
     if (listRef.current && results.length > 0) {
       const activeItem = listRef.current.children[selectedIndex] as HTMLElement;
@@ -44,7 +43,14 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
         const isActive = index === selectedIndex;
         const isCopied = copiedId === item.id;
         const isExecutable = !!item.isExecutable;
+        const isUrl = item.type === 'url';
         const hasDesc = !!item.description;
+
+        // 图标渲染逻辑
+        let Icon = Sparkles;
+        if (isUrl) Icon = Globe;
+        else if (isExecutable) Icon = Zap;
+        else if (isCommand(item)) Icon = Terminal;
 
         return (
           <div
@@ -54,19 +60,21 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
             className={cn(
               "relative px-4 py-3 rounded-lg flex items-start gap-4 cursor-pointer transition-all duration-150 group",
               isActive 
-                ? (isExecutable ? "bg-indigo-600 text-white shadow-sm scale-[0.99]" : "bg-primary text-primary-foreground shadow-sm scale-[0.99]") 
+                ? (isExecutable ? "bg-indigo-600 text-white shadow-sm scale-[0.99]" : 
+                   isUrl ? "bg-blue-600 text-white shadow-sm scale-[0.99]" : 
+                   "bg-primary text-primary-foreground shadow-sm scale-[0.99]") 
                 : "text-foreground hover:bg-secondary/40",
               isCopied && "bg-green-500 text-white"
             )}
           >
-            {/* Icon */}
+            {/* Icon Box */}
             <div className={cn(
               "w-9 h-9 mt-0.5 rounded-md flex items-center justify-center shrink-0 transition-colors",
               isActive ? "bg-white/20 text-white" : "bg-secondary text-muted-foreground",
               isCopied && "bg-white/20"
             )}>
               {isCopied ? <Check size={18} /> : (
-                item.icon ? item.icon : (isExecutable ? <Zap size={18} /> : (isCommand(item) ? <Terminal size={18} /> : <Sparkles size={18} />))
+                item.icon && typeof item.icon === 'object' ? item.icon : <Icon size={18} />
               )}
             </div>
 
@@ -76,9 +84,12 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
                 <span className={cn("font-semibold truncate text-sm tracking-tight", isActive ? "text-white" : "text-foreground")}>
                   {item.title}
                 </span>
+                
+                {/* Action Hint (Right side) */}
                 {isActive && !isCopied && (
                   <span className="text-[10px] opacity-70 flex items-center gap-1 font-medium bg-black/10 px-1.5 rounded whitespace-nowrap">
-                    <CornerDownLeft size={10} /> {isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language)}
+                    <CornerDownLeft size={10} /> 
+                    {isUrl ? "Open Link" : (isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language))}
                   </span>
                 )}
               </div>

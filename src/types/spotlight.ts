@@ -9,16 +9,17 @@ export interface SpotlightItem {
   description?: string;
   content?: string;
   
-  // UI 属性
   icon?: ReactNode;
   group?: string;
   
   originalData?: Prompt;
   
-  // 行为标记
-  type: 'prompt' | 'command' | 'action'; 
+  type: 'prompt' | 'command' | 'action' | 'url'; 
+  
+  // 功能标志
   isExecutable?: boolean;
   shellType?: string;
+  url?: string;
 }
 
 export interface SpotlightState {
