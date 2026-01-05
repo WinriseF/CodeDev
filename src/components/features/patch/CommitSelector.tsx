@@ -1,6 +1,8 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Check, ChevronsUpDown, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAppStore } from '@/store/useAppStore';
+import { getText } from '@/lib/i18n';
 
 interface GitCommit {
   hash: string;
@@ -21,6 +23,7 @@ export function CommitSelector({ commits, selectedValue, onSelect, disabled }: C
   const [search, setSearch] = useState('');
   const triggerRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { language } = useAppStore();
 
   const selectedCommit = useMemo(() => 
     commits.find(c => c.hash === selectedValue),
@@ -78,7 +81,7 @@ export function CommitSelector({ commits, selectedValue, onSelect, disabled }: C
             <span className="text-[10px] text-muted-foreground">{selectedCommit.hash.slice(0, 7)} - {selectedCommit.author}, {selectedCommit.date}</span>
           </div>
         ) : (
-          <span className="text-muted-foreground">Select a commit...</span>
+          <span className="text-muted-foreground">{getText('patch', 'commitSelectPlaceholder', language)}</span>
         )}
         <ChevronsUpDown size={14} className="ml-2 text-muted-foreground shrink-0" />
       </button>
@@ -93,7 +96,7 @@ export function CommitSelector({ commits, selectedValue, onSelect, disabled }: C
                 autoFocus
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by message or hash..."
+                placeholder={getText('patch', 'commitSearchPlaceholder', language)}
                 className="w-full bg-background border border-border/50 rounded-md pl-8 pr-2 py-1.5 text-xs outline-none focus:ring-1 focus:ring-primary/50"
               />
             </div>

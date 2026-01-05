@@ -15,7 +15,8 @@ export function SettingsModal() {
     globalIgnore, updateGlobalIgnore,
     aiConfig, setAIConfig,
     spotlightShortcut, setSpotlightShortcut,
-    restReminder, setRestReminder
+    restReminder, setRestReminder,
+    spotlightAppearance, setSpotlightAppearance
   } = useAppStore();
 
   const [activeSection, setActiveSection] = useState<'appearance' | 'language' | 'filters' | 'library' | 'ai'>('appearance');
@@ -25,10 +26,6 @@ export function SettingsModal() {
   return (
     <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-200 p-4">
       
-      {/* 
-          - w-[600px] -> w-full max-w-[600px]: 尝试占满，但最大不超过 600
-          - h-[500px] -> h-full max-h-[500px]: 尝试占满，但最大不超过 500
-      */}
       <div className="w-full max-w-[600px] h-full max-h-[500px] bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
         
         {/* Header */}
@@ -83,7 +80,7 @@ export function SettingsModal() {
                             <div className="space-y-3">
                                 <div className="flex justify-between text-xs">
                                     <span>{getText('settings', 'width', language)}</span>
-                                    <span className="font-mono text-muted-foreground">{useAppStore.getState().spotlightAppearance.width}px</span>
+                                    <span className="font-mono text-muted-foreground">{spotlightAppearance.width}px</span>
                                 </div>
                                 <input 
                                     type="range" 
@@ -91,16 +88,33 @@ export function SettingsModal() {
                                     max="1000" 
                                     step="20"
                                     className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
-                                    value={useAppStore.getState().spotlightAppearance.width}
-                                    onChange={(e) => useAppStore.getState().setSpotlightAppearance({ width: parseInt(e.target.value) })}
+                                    value={spotlightAppearance.width}
+                                    onChange={(e) => setSpotlightAppearance({ width: parseInt(e.target.value) })}
                                 />
                             </div>
 
-                            {/* Height Slider */}
+                            {/* Default Height Slider */}
+                            <div className="space-y-3">
+                                <div className="flex justify-between text-xs">
+                                    <span>{getText('settings', 'defaultHeight', language)}</span>
+                                    <span className="font-mono text-muted-foreground">{spotlightAppearance.defaultHeight}px</span>
+                                </div>
+                                <input 
+                                    type="range" 
+                                    min="150" 
+                                    max="800" 
+                                    step="10"
+                                    className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
+                                    value={spotlightAppearance.defaultHeight}
+                                    onChange={(e) => setSpotlightAppearance({ defaultHeight: parseInt(e.target.value) })}
+                                />
+                            </div>
+
+                            {/* Max Chat Height Slider */}
                             <div className="space-y-3">
                                 <div className="flex justify-between text-xs">
                                     <span>{getText('settings', 'chatHeight', language)}</span>
-                                    <span className="font-mono text-muted-foreground">{useAppStore.getState().spotlightAppearance.maxChatHeight}px</span>
+                                    <span className="font-mono text-muted-foreground">{spotlightAppearance.maxChatHeight}px</span>
                                 </div>
                                 <input 
                                     type="range" 
@@ -108,8 +122,8 @@ export function SettingsModal() {
                                     max="900" 
                                     step="50"
                                     className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
-                                    value={useAppStore.getState().spotlightAppearance.maxChatHeight}
-                                    onChange={(e) => useAppStore.getState().setSpotlightAppearance({ maxChatHeight: parseInt(e.target.value) })}
+                                    value={spotlightAppearance.maxChatHeight}
+                                    onChange={(e) => setSpotlightAppearance({ maxChatHeight: parseInt(e.target.value) })}
                                 />
                             </div>
                         </div>
@@ -279,10 +293,10 @@ export function SettingsModal() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('settings', 'baseUrl', language)}</label>
-                                    <input 
+                                    <input
                                         type="text"
                                         className="w-full bg-secondary/30 border border-border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all placeholder:text-muted-foreground/30"
-                                        placeholder="https://api.example.com"
+                                        placeholder={getText('settings', 'baseUrlPlaceholder', language)}
                                         value={aiConfig.baseUrl || ''}
                                         onChange={e => setAIConfig({ baseUrl: e.target.value })}
                                     />

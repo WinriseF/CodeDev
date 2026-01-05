@@ -56,6 +56,7 @@ const REMOTE_CONFIG_URLS = [
 
 export interface SpotlightAppearance {
   width: number;        // 默认 640
+  defaultHeight: number; // 默认/搜索模式固定高度，默认 400
   maxChatHeight: number; // 聊天模式最大高度，默认 600
 }
 
@@ -139,7 +140,7 @@ export const useAppStore = create<AppState>()(
       lastUpdated: 0,
 
       // Setters
-      spotlightAppearance: { width: 640, maxChatHeight: 600 },
+      spotlightAppearance: { width: 640, defaultHeight: 400, maxChatHeight: 600 },
       setSpotlightAppearance: (config) => set((state) => ({
         spotlightAppearance: { ...state.spotlightAppearance, ...config }
       })),

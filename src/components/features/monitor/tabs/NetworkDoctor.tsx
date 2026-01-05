@@ -39,7 +39,7 @@ export function NetworkDoctor() {
             </div>
             <div>
                 <h3 className="font-semibold text-sm">{getText('monitor', 'navNetwork', language)}</h3>
-                <p className="text-xs text-muted-foreground mt-0.5 opacity-80">Connectivity & Latency Check</p>
+                <p className="text-xs text-muted-foreground mt-0.5 opacity-80">{getText('monitor', 'netCheckDesc', language)}</p>
             </div>
          </div>
          <button 

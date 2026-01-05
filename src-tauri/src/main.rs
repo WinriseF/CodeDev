@@ -17,6 +17,7 @@ mod export;
 mod gitleaks;
 mod db;
 mod monitor;
+mod env_probe;
 
 // =================================================================
 // 系统监控相关数据结构
@@ -156,15 +157,19 @@ fn main() {
             db::save_prompt,
             db::delete_prompt,
             db::toggle_prompt_favorite,
+            db::record_url_visit,
+            db::search_url_history,
             monitor::get_system_metrics,
             monitor::get_top_processes,
             monitor::get_active_ports,
             monitor::kill_process,
+            monitor::check_file_locks,
             monitor::get_env_info,
-            monitor::diagnose_network
+            monitor::diagnose_network,
+            monitor::get_ai_context
         ])
         .setup(|app| {
-            let system = System::new_all();
+            let system = System::new();
             app.manage(Arc::new(Mutex::new(system)));
 
             match db::init_db(app.handle()) {

@@ -83,11 +83,11 @@ export function MonitorDashboard() {
       
       {/* 顶部指标卡片 */}
       <div className="grid grid-cols-2 gap-4 shrink-0">
-        <MetricCard 
-          icon={<Cpu className="text-blue-500" />} 
-          label={getText('monitor', 'cpu', language)} 
-          value={`${metrics?.cpu_usage.toFixed(1) || 0}%`} 
-          subValue="Total Load"
+        <MetricCard
+          icon={<Cpu className="text-blue-500" />}
+          label={getText('monitor', 'cpu', language)}
+          value={`${metrics?.cpu_usage.toFixed(1) || 0}%`}
+          subValue={getText('monitor', 'totalLoad', language)}
           percent={metrics?.cpu_usage || 0}
           color="bg-blue-500"
         />
@@ -109,7 +109,7 @@ export function MonitorDashboard() {
              {getText('monitor', 'topProcesses', language)}
            </h3>
            <span className="text-[10px] text-muted-foreground bg-secondary px-2 py-0.5 rounded">
-             Auto-refresh
+             {getText('monitor', 'autoRefresh', language)}
            </span>
         </div>
         
@@ -133,7 +133,7 @@ export function MonitorDashboard() {
                       <div className="flex items-center gap-2 max-w-[180px]">
                         <span className="truncate" title={proc.name}>{proc.name}</span>
                         {proc.is_system && (
-                            <div title="System Process">
+                            <div title={getText('monitor', 'systemProcess', language)}>
                                 <ShieldCheck size={12} className="text-green-500 shrink-0" />
                             </div>
                         )}
