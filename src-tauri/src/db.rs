@@ -460,14 +460,8 @@ pub async fn record_url_visit(
 ) -> Result<(), String> {
     let now = chrono::Utc::now().timestamp();
     
-    // 1. Immediately update DB with visit (Optimistic UI update)
-    // We insert a blank title initially if it doesn't exist.
-    // If it exists, we preserve the title (DO NOT overwrite with empty string).
     {
         let conn = state.conn.lock().map_err(|e| e.to_string())?;
-        
-        // We use ON CONFLICT(url) DO UPDATE SET visit_count...
-        // For title, we use coalesce to keep existing title if present.
         conn.execute(
             "INSERT INTO url_history (url, visit_count, last_visit, title)
              VALUES (?1, 1, ?2, '')
@@ -478,40 +472,32 @@ pub async fn record_url_visit(
         ).map_err(|e| e.to_string())?;
     } 
 
-    // 2. Spawn async task to fetch title if it's missing or empty
     let url_clone = url.clone();
     tauri::async_runtime::spawn(async move {
-        // Construct a client to fetch the page
         let client = reqwest::Client::builder()
             .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-            .timeout(std::time::Duration::from_secs(3)) // Short timeout to avoid hanging
+            .timeout(std::time::Duration::from_secs(3))
             .build();
 
         if let Ok(c) = client {
-            // Attempt to fetch URL
-            if let Ok(resp) = c.get(&url_clone).send().await {
-                // Only process if status is OK
-                if resp.status().is_success() {
-                    // Stream text (limit to first 10KB to find title quickly and save bandwidth)
-                    // Simplified: just get text() which reads whole body, usually fine for HTML pages.
-                    // Ideally, we'd use a streaming parser or range header, but this is sufficient.
+            if let Ok(resp) = c.get(&url_clone)
+                .header("Range", "bytes=0-16384") // Only request the first 16KB
+                .send()
+                .await
+            {
+                // A successful range request returns 206 Partial Content
+                if resp.status().is_success() || resp.status() == reqwest::StatusCode::PARTIAL_CONTENT {
                     if let Ok(text) = resp.text().await {
-                        // Regex to extract <title>...</title>
-                        // (?is) enables dot-matches-newline and case-insensitive
                         if let Ok(re) = Regex::new(r"(?is)<title>(.*?)</title>") {
                             if let Some(caps) = re.captures(&text) {
                                 if let Some(title_match) = caps.get(1) {
                                     let raw_title = title_match.as_str().trim();
-                                    // Decode HTML entities if necessary (skipped for simplicity, usually browser handles display)
-                                    // Simple cleanup: replace newlines with space
                                     let clean_title = raw_title.replace('\n', " ").replace('\r', "").trim().to_string();
 
                                     if !clean_title.is_empty() {
-                                        // Re-open DB connection locally in this thread (avoid passing Mutex across await)
                                         if let Ok(app_dir) = app_handle.path().app_local_data_dir() {
                                             let db_path = app_dir.join("prompts.db");
                                             if let Ok(conn) = Connection::open(db_path) {
-                                                // Only update if title is currently empty/null or we want to refresh it
                                                 let _ = conn.execute(
                                                     "UPDATE url_history SET title = ?1 WHERE url = ?2 AND (title IS NULL OR title = '')",
                                                     params![clean_title, url_clone],
@@ -540,7 +526,6 @@ pub fn search_url_history(
     
     let clean_query = query.replace("\"", "");
     
-    // Case 1: Empty query -> Return recently visited
     if clean_query.trim().is_empty() {
         let mut stmt = conn.prepare(
             "SELECT url, title, visit_count, last_visit FROM url_history 
@@ -563,8 +548,6 @@ pub fn search_url_history(
         return Ok(results);
     }
 
-    // Case 2: Full Text Search using FTS5
-    // We append '*' to perform a prefix search on tokens
     let fts_query = format!("\"{}\"*", clean_query);
 
     let mut stmt = conn.prepare(
