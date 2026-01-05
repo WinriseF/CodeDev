@@ -35,13 +35,9 @@ function App() {
         setTheme(event.payload, true); 
     });
 
-    // 优雅显示窗口 (防闪白)
-    // 延迟 100ms 确保 CSS 渲染完毕，再把原本隐藏(visible: false)的窗口显示出来
-    setTimeout(() => {
-        appWindow.show();
-        appWindow.setFocus();
-    }, 100);
-
+    appWindow.show();
+    appWindow.setFocus();
+    
     return () => {
         unlistenPromise.then(unlisten => unlisten());
     };

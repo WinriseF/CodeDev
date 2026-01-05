@@ -167,7 +167,7 @@ fn main() {
             monitor::get_ai_context
         ])
         .setup(|app| {
-            let system = System::new_all();
+            let system = System::new();
             app.manage(Arc::new(Mutex::new(system)));
 
             match db::init_db(app.handle()) {
