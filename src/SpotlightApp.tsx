@@ -1,244 +1,76 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { LogicalSize } from '@tauri-apps/api/dpi';
-import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { listen } from '@tauri-apps/api/event';
-import { invoke } from '@tauri-apps/api/core';
+import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { message } from '@tauri-apps/plugin-dialog';
-import { 
-  Search as SearchIcon, Sparkles, Terminal, CornerDownLeft, Check, 
-  Command, Bot, User, Brain, ChevronDown, Zap, Copy, FileText, Code 
-} from 'lucide-react';
-import { usePromptStore } from '@/store/usePromptStore';
+
 import { useAppStore, AppTheme } from '@/store/useAppStore';
-import { Prompt } from '@/types/prompt';
-import { cn, stripMarkdown } from '@/lib/utils';
-import { streamChatCompletion, ChatMessage } from '@/lib/llm';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { getText } from './lib/i18n';
-import { CodeBlock } from '@/components/ui/CodeBlock';
-import { useSmartContextMenu } from '@/lib/hooks';
+import { useContextStore } from '@/store/useContextStore';
+import { getText } from '@/lib/i18n';
 import { parseVariables } from '@/lib/template';
+import { executeCommand } from '@/lib/command_executor';
 import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
-import { executeCommand } from './lib/command_executor';
-import { useContextStore } from './store/useContextStore';
 
-const appWindow = getCurrentWebviewWindow()
+// Core Architecture
+import { SpotlightProvider, useSpotlight } from '@/components/features/spotlight/core/SpotlightContext';
+import { SpotlightLayout } from '@/components/features/spotlight/core/SpotlightLayout';
+import { SearchBar } from '@/components/features/spotlight/core/SearchBar';
 
-const FIXED_HEIGHT = 106; 
+// Modes & Hooks
+import { useSpotlightSearch } from '@/components/features/spotlight/hooks/useSpotlightSearch';
+import { useSpotlightChat } from '@/components/features/spotlight/hooks/useSpotlightChat';
+import { SearchMode } from '@/components/features/spotlight/modes/search/SearchMode';
+import { ChatMode } from '@/components/features/spotlight/modes/chat/ChatMode';
+import { SpotlightItem } from '@/types/spotlight';
+
+const appWindow = getCurrentWebviewWindow();
+const FIXED_HEIGHT = 106;
 const MAX_WINDOW_HEIGHT = 460;
 
-type SpotlightMode = 'search' | 'chat';
-
-function useDebounce<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-  useEffect(() => {
-    const handler = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(handler);
-  }, [value, delay]);
-  return debouncedValue;
-}
-
-function MessageCopyMenu({ content }: { content: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const { language } = useAppStore(); 
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    if (isOpen) document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isOpen]);
-
-  const handleCopy = async (type: 'text' | 'markdown') => {
-    try {
-      const textToCopy = type === 'text' ? stripMarkdown(content) : content;
-      await writeText(textToCopy);
-      setIsCopied(true);
-      setIsOpen(false);
-      setTimeout(() => setIsCopied(false), 2000);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  return (
-    <div className="absolute top-2 left-[100%] ml-2 opacity-0 group-hover:opacity-100 transition-opacity z-20" ref={menuRef}>
-       <button
-         onClick={() => setIsOpen(!isOpen)}
-         className={cn(
-            "p-1.5 rounded-md bg-secondary/80 hover:bg-background border border-border/50 shadow-sm backdrop-blur-sm transition-colors",
-            isCopied ? "text-green-500 border-green-500/20 bg-green-500/10" : "text-muted-foreground hover:text-foreground"
-         )}
-         title={getText('spotlight', 'copyMessage', language)}
-       >
-         {isCopied ? <Check size={14} /> : <Copy size={14} />}
-       </button>
-
-       {isOpen && (
-         <div className="absolute right-0 top-full mt-1 w-36 bg-popover border border-border rounded-md shadow-lg py-1 flex flex-col animate-in fade-in zoom-in-95 duration-100 origin-top-right z-30">
-            <button
-              onClick={() => handleCopy('text')}
-              className="flex items-center gap-2 px-3 py-2 text-xs hover:bg-secondary text-left w-full transition-colors text-foreground"
-            >
-              <FileText size={12} className="text-muted-foreground" />
-              <span>Copy as Text</span>
-            </button>
-            <button
-              onClick={() => handleCopy('markdown')}
-              className="flex items-center gap-2 px-3 py-2 text-xs hover:bg-secondary text-left w-full transition-colors text-foreground"
-            >
-              <Code size={12} className="text-muted-foreground" />
-              <span>Copy Markdown</span>
-            </button>
-         </div>
-       )}
-    </div>
-  );
-}
-
-export default function SpotlightApp() {
-  const [query, setQuery] = useState('');
-  const debouncedQuery = useDebounce(query, 150);
-  
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [results, setResults] = useState<Prompt[]>([]); 
-  
-  const [mode, setMode] = useState<SpotlightMode>('search');
-  const [chatInput, setChatInput] = useState('');
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [isStreaming, setIsStreaming] = useState(false);
-  
-  const inputRef = useRef<HTMLInputElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
-  const chatEndRef = useRef<HTMLDivElement>(null); 
-  
-  const { theme, setTheme, aiConfig, setAIConfig, spotlightAppearance, language } = useAppStore(); 
+function SpotlightContent() {
+  const { mode, toggleMode, focusInput } = useSpotlight();
+  const { language, spotlightAppearance } = useAppStore();
   const { projectRoot } = useContextStore();
-  
-  const handlePaste = (pastedText: string, input: HTMLInputElement | HTMLTextAreaElement | null) => {
-    if (!input || !(input instanceof HTMLInputElement)) return;
 
-    const { selectionStart, selectionEnd } = input;
-    const currentValue = mode === 'search' ? query : chatInput;
-    const newValue = currentValue.substring(0, selectionStart ?? 0) + pastedText + currentValue.substring(selectionEnd ?? 0);
-    
-    if (mode === 'search') {
-      setQuery(newValue);
-    } else {
-      setChatInput(newValue);
-    }
+  // 挂载业务逻辑 Hooks
+  const search = useSpotlightSearch();
+  const chat = useSpotlightChat();
 
-    setTimeout(() => {
-      if (input) {
-        const newCursorPos = (selectionStart ?? 0) + pastedText.length;
-        input.focus();
-        input.setSelectionRange(newCursorPos, newCursorPos);
-      }
-    }, 0);
-  };
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const { onContextMenu } = useSmartContextMenu({ onPaste: handlePaste });
-  
-  const cycleProvider = () => {
-    const providers: Array<'openai' | 'deepseek' | 'anthropic'> = ['deepseek', 'openai', 'anthropic'];
-    const currentIndex = providers.indexOf(aiConfig.providerId);
-    const nextIndex = (currentIndex + 1) % providers.length;
-    setAIConfig({ providerId: providers[nextIndex] });
-  };
-
+  // 监听窗口聚焦，自动聚焦输入框
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
-    const unlistenPromise = listen<AppTheme>('theme-changed', (event) => {
-        setTheme(event.payload, true); 
-        root.classList.remove('light', 'dark');
-        root.classList.add(event.payload);
-    });
-    return () => { unlistenPromise.then(unlisten => unlisten()); };
-  }, [theme, setTheme]);
-
-  useEffect(() => {
-    const unlistenPromise = appWindow.onFocusChanged(async ({ payload: isFocused }) => {
+    const unlisten = appWindow.onFocusChanged(({ payload: isFocused }) => {
       if (isFocused) {
-        await usePromptStore.persist.rehydrate();
-        await useAppStore.persist.rehydrate();
-        await useContextStore.persist.rehydrate();
-        setTimeout(() => inputRef.current?.focus(), 50);
-        setSelectedIndex(0);
-        setCopiedId(null);
-      } 
+        focusInput();
+      }
     });
-    return () => { unlistenPromise.then(f => f()); };
-  }, []);
+    return () => { unlisten.then(f => f()); };
+  }, [focusInput]);
 
-  // --- 搜索逻辑 ---
-  useEffect(() => {
-    if (mode === 'chat') {
-        setResults([]);
-        return;
-    }
-
-    const performSearch = async () => {
-        try {
-            let data: Prompt[] = [];
-            const q = debouncedQuery.trim();
-            if (!q) {
-                // 修复：增加 category: null 参数
-                data = await invoke('get_prompts', { 
-                    page: 1, 
-                    pageSize: 20, 
-                    group: 'all', 
-                    category: null 
-                });
-            } else {
-                // 修复：增加 category: null 参数
-                data = await invoke('search_prompts', { 
-                    query: q, 
-                    page: 1, 
-                    pageSize: 20, 
-                    category: null 
-                });
-            }
-            setResults(data);
-            setSelectedIndex(0);
-        } catch (err) {
-            console.error("Search failed:", err);
-            setResults([]);
-        }
-    };
-
-    performSearch();
-  }, [debouncedQuery, mode]);
-
-  // 窗口大小调整
+  // 窗口大小自适应逻辑
   useLayoutEffect(() => {
     let finalHeight = 120;
     const targetWidth = spotlightAppearance.width;
+
     if (mode === 'search') {
-        const listHeight = Math.min(results.length * 60, 400); 
-        const actualListHeight = listRef.current?.scrollHeight || listHeight;
-        const totalIdealHeight = FIXED_HEIGHT + actualListHeight;
-        finalHeight = Math.min(Math.max(totalIdealHeight, 120), MAX_WINDOW_HEIGHT);
+      const resultCount = search.results.length;
+      const listHeight = Math.min(resultCount * 60, 400);
+      const totalIdealHeight = FIXED_HEIGHT + listHeight;
+      finalHeight = Math.min(Math.max(totalIdealHeight, 120), MAX_WINDOW_HEIGHT);
     } else {
-        finalHeight = messages.length > 0 ? spotlightAppearance.maxChatHeight : 300;
+      finalHeight = chat.messages.length > 0 ? spotlightAppearance.maxChatHeight : 300;
     }
     appWindow.setSize(new LogicalSize(targetWidth, finalHeight));
-  }, [results, selectedIndex, mode, messages.length, spotlightAppearance]);
+  }, [search.results.length, mode, chat.messages.length, spotlightAppearance]);
 
-  const handleEnterAction = async (prompt: Prompt) => {
-    if (!prompt) return;
-    
-    if (prompt.isExecutable) {
-      const vars = parseVariables(prompt.content);
+  const handleItemSelect = async (item: SpotlightItem) => {
+    if (!item) return;
+
+    if (item.isExecutable) {
+      const content = item.content || '';
+      const vars = parseVariables(content);
       if (vars.length > 0) {
         await message(getText('spotlight', 'commandHasVariables', language), {
           title: getText('spotlight', 'actionRequired', language),
@@ -246,12 +78,13 @@ export default function SpotlightApp() {
         });
         return;
       }
-      await executeCommand(prompt.content, prompt.shellType, projectRoot);
+      // @ts-ignore
+      await executeCommand(content, item.shellType, projectRoot);
       await appWindow.hide();
     } else {
       try {
-        await writeText(prompt.content);
-        setCopiedId(prompt.id);
+        await writeText(item.content || '');
+        setCopiedId(item.id);
         setTimeout(async () => {
           await appWindow.hide();
           setCopiedId(null);
@@ -262,309 +95,132 @@ export default function SpotlightApp() {
     }
   };
 
-  const toggleMode = () => {
-    setMode(prev => prev === 'search' ? 'chat' : 'search');
-    setTimeout(() => inputRef.current?.focus(), 10);
-  };
-
-  const handleSendToAI = async () => {
-      if (!chatInput.trim() || isStreaming) return;
-      const userText = chatInput.trim();
-      setChatInput(''); 
-      const newMessages: ChatMessage[] = [...messages, { role: 'user', content: userText }];
-      setMessages(newMessages);
-      setIsStreaming(true);
-      setMessages(prev => [...prev, { role: 'assistant', content: '', reasoning: '' }]);
-      await streamChatCompletion(newMessages, aiConfig,
-          (contentDelta, reasoningDelta) => {
-              setMessages(current => {
-                  const updated = [...current];
-                  const lastMsg = updated[updated.length - 1];
-                  if (lastMsg && lastMsg.role === 'assistant') {
-                      updated[updated.length - 1] = {
-                          ...lastMsg,
-                          content: lastMsg.content + contentDelta,
-                          reasoning: (lastMsg.reasoning || "") + reasoningDelta
-                      };
-                  }
-                  return updated;
-              });
-          },
-          (err) => {
-              setMessages(current => {
-                  const updated = [...current];
-                  const lastMsg = updated[updated.length - 1];
-                  if (lastMsg) {
-                      updated[updated.length - 1] = {
-                          ...lastMsg,
-                          content: lastMsg.content + `\n\n**[Error]**: ${err}`
-                      };
-                  }
-                  return updated;
-              });
-          },
-          () => setIsStreaming(false)
-      );
-  };
-
-  const handleClearChat = () => {
-      setMessages([]);
-      setChatInput('');
-      setIsStreaming(false);
-      setTimeout(() => inputRef.current?.focus(), 50);
-  };
-
-  useEffect(() => {
-      if (mode === 'chat' && chatEndRef.current) {
-          chatEndRef.current.scrollIntoView({ behavior: "smooth" });
-      }
-  }, [messages.length, mode, isStreaming]); 
-
+  // 全局键盘事件监听
   useEffect(() => {
     const handleGlobalKeyDown = async (e: KeyboardEvent) => {
+      // 关键修复：如果在输入法组字过程中，直接返回，不触发 Enter 发送
       if (e.isComposing) return;
-      
+
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
-          e.preventDefault();
-          return;
+        e.preventDefault();
+        return;
       }
+
       if (e.key === 'Tab') {
-          e.preventDefault();
-          toggleMode();
-          return;
+        e.preventDefault();
+        toggleMode();
+        return;
       }
 
       if (e.key === 'Escape') {
         e.preventDefault();
-        if (mode === 'search' && query) setQuery('');
-        else if (mode === 'chat' && chatInput) setChatInput('');
-        else await appWindow.hide();
+        await appWindow.hide();
         return;
       }
-      
+
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-          e.preventDefault();
-          if (mode === 'chat' && !isStreaming) {
-              handleClearChat();
-          }
-          return;
+        e.preventDefault();
+        if (mode === 'chat' && !chat.isStreaming) {
+          chat.clearChat();
+        }
+        return;
       }
 
       if (mode === 'search') {
-          if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            setSelectedIndex(prev => (prev + 1) % (results.length || 1));
-          } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            setSelectedIndex(prev => (prev - 1 + (results.length || 1)) % (results.length || 1));
-          } else if (e.key === 'Enter') {
-            e.preventDefault();
-            if (results[selectedIndex]) handleEnterAction(results[selectedIndex]);
-          }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            search.handleNavigation(e);
+            return;
+        }
+        
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const item = search.results[search.selectedIndex];
+          if (item) handleItemSelect(item);
+        }
       } else {
-          if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSendToAI();
-          }
+        // 聊天发送逻辑
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          // 调用最新的 sendMessage，因为它现在直接从 Store 获取 Key，
+          // 所以即使这里是旧的闭包，执行时也会去 Store 拿最新的 Key
+          chat.sendMessage();
+        }
       }
     };
+
     document.addEventListener('keydown', handleGlobalKeyDown);
     return () => document.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [results, selectedIndex, query, mode, chatInput, isStreaming, messages]);
+    
+    // 关键修复：将 chat.sendMessage 加入依赖数组
+    // 这样当输入变化导致 sendMessage 更新时，事件监听器也会更新
+  }, [
+    mode, 
+    search.results, 
+    search.selectedIndex, 
+    chat.isStreaming, 
+    chat.sendMessage, // 👈 必须加这个
+    toggleMode
+  ]);
+
+  return (
+    <SpotlightLayout 
+      header={<SearchBar />}
+      resultCount={search.results.length}
+      isStreaming={chat.isStreaming}
+    >
+      {mode === 'search' ? (
+        <SearchMode 
+          results={search.results}
+          selectedIndex={search.selectedIndex}
+          setSelectedIndex={search.setSelectedIndex}
+          onSelect={handleItemSelect}
+          copiedId={copiedId}
+        />
+      ) : (
+        <ChatMode 
+          messages={chat.messages}
+          isStreaming={chat.isStreaming}
+          chatEndRef={chat.chatEndRef}
+        />
+      )}
+    </SpotlightLayout>
+  );
+}
+
+export default function SpotlightApp() {
+  const { setTheme, theme } = useAppStore();
 
   useEffect(() => {
-    if (mode === 'search' && listRef.current && results.length > 0) {
-        const activeItem = listRef.current.children[selectedIndex] as HTMLElement;
-        if (activeItem) activeItem.scrollIntoView({ block: 'nearest' });
-    }
-  }, [selectedIndex, results, mode]);
+    const root = document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
 
-  const isCommand = (p: Prompt) => p.type === 'command' || (!p.type && p.content.length < 50);
+    const unlistenPromise = appWindow.onFocusChanged(async ({ payload: isFocused }) => {
+      if (isFocused) {
+        // 确保在窗口获得焦点时，强制从磁盘重新加载最新状态
+        await useAppStore.persist.rehydrate();
+        await useContextStore.persist.rehydrate();
+        appWindow.setFocus();
+      } 
+    });
+
+    const themeUnlisten = listen<AppTheme>('theme-changed', (event) => {
+        setTheme(event.payload, true); 
+        root.classList.remove('light', 'dark');
+        root.classList.add(event.payload);
+    });
+
+    return () => { 
+        unlistenPromise.then(f => f());
+        themeUnlisten.then(f => f());
+    };
+  }, []);
 
   return (
     <>
-      <style>{`
-        @keyframes gradient-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .animate-gradient-flow { background-size: 400% 400%; animation: gradient-flow 10s ease infinite; }
-        .markdown-body p { margin-bottom: 0.5em; }
-        .markdown-body p:last-child { margin-bottom: 0; }
-        .markdown-body pre { margin: 0.5em 0; }
-        .markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.9em; }
-      `}</style>
-
-      <div className="w-screen h-screen flex flex-col items-center p-1 bg-transparent font-sans overflow-hidden">
-        <div className="w-full h-full flex flex-col bg-background/95 backdrop-blur border border-border/50 rounded-xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 relative overflow-hidden">
-          
-          <div className={cn("absolute inset-0 pointer-events-none transition-opacity duration-1000 ease-in-out", mode === 'chat' ? "opacity-100" : "opacity-0")}>
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />
-              <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-purple-500/5 to-transparent" />
-          </div>
-
-          <div data-tauri-drag-region className={cn("h-16 shrink-0 flex items-center px-5 gap-4 border-b transition-colors duration-300 cursor-move relative z-10", mode === 'chat' ? "border-purple-500/20" : "border-border/40")}>
-            <button onClick={toggleMode} className="w-6 h-6 flex items-center justify-center relative outline-none group" title={getText('spotlight', 'toggleMode', language)}>
-                <SearchIcon className={cn("absolute transition-all duration-300 text-muted-foreground/70 group-hover:text-foreground", mode === 'search' ? "scale-100 opacity-100" : "scale-50 opacity-0 rotate-90")} size={24} />
-                <Bot className={cn("absolute transition-all duration-300 text-purple-500", mode === 'chat' ? "scale-100 opacity-100 rotate-0" : "scale-50 opacity-0 -rotate-90")} size={24} />
-            </button>
-
-            <input
-              ref={inputRef}
-              onContextMenu={onContextMenu}
-              className="flex-1 bg-transparent border-none outline-none text-xl placeholder:text-muted-foreground/40 h-full text-foreground caret-primary relative z-10"
-              placeholder={mode === 'search' ? getText('spotlight', 'searchPlaceholder', language) : getText('spotlight', 'chatPlaceholder', language)}
-              value={mode === 'search' ? query : chatInput}
-              onChange={e => mode === 'search' ? setQuery(e.target.value) : setChatInput(e.target.value)}
-              autoFocus
-              spellCheck={false}
-            />
-            
-            <div className="flex items-center gap-2 relative z-10">
-               {mode === 'chat' && (
-                  <button onClick={cycleProvider} className="flex items-center gap-1.5 px-2 py-1 rounded bg-secondary/50 hover:bg-secondary text-[10px] font-medium transition-colors border border-border/50 group" title={getText('spotlight', 'currentProvider', language, { provider: aiConfig.providerId })}>
-                      <Zap size={10} className={cn(aiConfig.providerId === 'deepseek' ? "text-blue-500" : aiConfig.providerId === 'openai' ? "text-green-500" : "text-orange-500")} />
-                      <span className="opacity-70 group-hover:opacity-100 uppercase">{aiConfig.providerId}</span>
-                  </button>
-               )}
-               <div className="flex items-center gap-2 pointer-events-none opacity-50">
-                    <span className={cn("text-[10px] px-1.5 py-0.5 rounded font-medium border transition-colors duration-300", mode === 'chat' ? "bg-purple-500/10 text-purple-500 border-purple-500/20" : "bg-secondary text-muted-foreground border-border")}>TAB</span>
-                    {mode === 'search' && query && <span className="text-[10px] bg-secondary px-1.5 py-0.5 rounded text-muted-foreground font-medium border border-border">ESC {getText('spotlight', 'clear', language)}</span>}
-               </div>
-            </div>
-          </div>
-
-          <div className="relative z-10 flex-1 min-h-0 flex flex-col">
-              {mode === 'search' ? (
-                  <div ref={listRef} className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar scroll-smooth">
-                  {results.length === 0 ? (
-                      <div className="h-full flex flex-col items-center justify-center text-muted-foreground gap-2 opacity-60 min-h-[100px]">
-                          <Command size={24} strokeWidth={1.5} />
-                          <span className="text-sm">{getText('spotlight', 'noCommands', language)}</span>
-                      </div>
-                  ) : (
-                      results.map((item, index) => {
-                        const isActive = index === selectedIndex;
-                        const isCopied = copiedId === item.id;
-                        const isExecutable = !!item.isExecutable;
-                        const hasDesc = !!item.description;
-
-                        return (
-                          <div
-                            key={item.id}
-                            onClick={() => handleEnterAction(item)}
-                            onMouseEnter={() => setSelectedIndex(index)}
-                            className={cn(
-                                "relative px-4 py-3 rounded-lg flex items-start gap-4 cursor-pointer transition-all duration-150 group",
-                                isActive ? (isExecutable ? "bg-indigo-600 text-white shadow-sm scale-[0.99]" : "bg-primary text-primary-foreground shadow-sm scale-[0.99]") : "text-foreground hover:bg-secondary/40",
-                                isCopied && "bg-green-500 text-white"
-                            )}
-                          >
-                            <div className={cn( "w-9 h-9 mt-0.5 rounded-md flex items-center justify-center shrink-0 transition-colors", isActive ? "bg-white/20 text-white" : "bg-secondary text-muted-foreground", isCopied && "bg-white/20" )}>
-                                {isCopied ? <Check size={18} /> : (isExecutable ? <Zap size={18} /> : (isCommand(item) ? <Terminal size={18} /> : <Sparkles size={18} />))}
-                            </div>
-                            <div className="flex-1 min-w-0 flex flex-col gap-1">
-                                <div className="flex items-center justify-between">
-                                    <span className={cn("font-semibold truncate text-sm tracking-tight", isActive ? "text-white" : "text-foreground")}>
-                                        {item.title}
-                                    </span>
-                                    {isActive && !isCopied && (
-                                        <span className="text-[10px] opacity-70 flex items-center gap-1 font-medium bg-black/10 px-1.5 rounded whitespace-nowrap">
-                                            <CornerDownLeft size={10} /> {isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language)}
-                                        </span>
-                                    )}
-                                </div>
-                                {hasDesc && ( <div className={cn("text-xs transition-all", isActive ? "opacity-90 text-white/90 whitespace-pre-wrap" : "text-muted-foreground opacity-70 truncate")}>{item.description}</div> )}
-                                <div className={cn("text-xs font-mono transition-all duration-200", isActive ? "mt-1 bg-black/20 rounded p-2 text-white/95 whitespace-pre-wrap break-all line-clamp-6" : (hasDesc ? "hidden" : "text-muted-foreground opacity-50 truncate"))}>
-                                    {item.content}
-                                </div>
-                            </div>
-                          </div>
-                        );
-                      })
-                  )}
-                  </div>
-              ) : (
-                  <div className="flex-1 p-4 overflow-y-auto custom-scrollbar flex flex-col gap-4">
-                      {messages.length === 0 ? (
-                           <div className="flex-1 flex flex-col items-center justify-start text-muted-foreground animate-in fade-in slide-in-from-bottom-2 duration-500">
-                               <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mb-4 text-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.15)] animate-pulse">
-                                   <Sparkles size={24} />
-                               </div>
-                               <h3 className="text-foreground font-medium mb-1">{getText('spotlight', 'aiReady', language)}</h3>
-                               <p className="text-xs text-center max-w-[200px] opacity-70 leading-relaxed">
-                                   {getText('spotlight', 'aiDesc', language)} <span className="text-purple-500 font-medium">{useAppStore.getState().aiConfig.providerId}</span>.
-                               </p>
-                               <div className="mt-8 text-[10px] opacity-40 font-mono bg-background/50 border border-border/50 px-2 py-1 rounded">
-                                   {getText('spotlight', 'ephemeral', language)}
-                               </div>
-                           </div>
-                      ) : (
-                          <div className="space-y-4 pb-2">
-                               {messages.map((msg, idx) => (
-                                   <div key={idx} className={cn("flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300 group", msg.role === 'user' ? "flex-row-reverse" : "flex-row")}>
-                                       <div className={cn("w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm", msg.role === 'user' ? "bg-secondary/80 border-border text-foreground" : "bg-purple-500/10 border-purple-500/20 text-purple-500")}>
-                                           {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
-                                       </div>
-                                       <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm border relative", msg.role === 'user' ? "bg-primary text-primary-foreground border-primary/50 rounded-tr-sm" : "bg-secondary/50 border-border/50 text-foreground rounded-tl-sm markdown-body", "select-text cursor-text")}>
-                                           {msg.role === 'assistant' && !isStreaming && ( <MessageCopyMenu content={msg.content} /> )}
-                                           {msg.role === 'user' ? ( <div className="whitespace-pre-wrap">{msg.content}</div> ) : (
-                                              <>
-                                                  {msg.reasoning && (
-                                                      <details className="mb-2 group/reasoning" open={isStreaming && idx === messages.length - 1}>
-                                                          <summary className="flex items-center gap-1.5 text-[10px] uppercase font-bold text-muted-foreground/60 cursor-pointer hover:text-purple-400 transition-colors select-none list-none outline-none">
-                                                              <Brain size={12} />
-                                                              <span>{getText('spotlight', 'thinking', language)}</span>
-                                                              <ChevronDown size={12} className="group-open/reasoning:rotate-180 transition-transform duration-200" />
-                                                          </summary>
-                                                          <div className="mt-2 pl-2 border-l-2 border-purple-500/20 text-xs font-mono text-muted-foreground/80 whitespace-pre-wrap leading-relaxed opacity-80">
-                                                              {msg.reasoning}
-                                                              {isStreaming && idx === messages.length - 1 && !msg.content && ( <span className="inline-block w-1.5 h-3 ml-1 bg-purple-500/50 align-middle animate-pulse" /> )}
-                                                          </div>
-                                                      </details>
-                                                  )}
-                                                  <ReactMarkdown
-                                                      remarkPlugins={[remarkGfm]}
-                                                      components={{
-                                                          code({node, inline, className, children, ...props}: any) {
-                                                              const match = /language-(\w+)/.exec(className || '')
-                                                              return !inline && match ? ( <CodeBlock language={match[1]} className="text-sm">{String(children).replace(/\n$/, '')}</CodeBlock> ) : ( <code className={cn("bg-black/20 px-1 py-0.5 rounded font-mono", className)} {...props}>{children}</code> )
-                                                          }
-                                                      }}
-                                                  >
-                                                      {msg.content || (isStreaming && idx === messages.length - 1 && !msg.reasoning ? "..." : "")}
-                                                  </ReactMarkdown>
-                                              </>
-                                           )}
-                                       </div>
-                                   </div>
-                               ))}
-                               <div ref={chatEndRef} />
-                          </div>
-                      )}
-                  </div>
-              )}
-          </div>
-          
-          <div data-tauri-drag-region className="h-8 shrink-0 bg-secondary/30 border-t border-border/40 flex items-center justify-between px-4 text-[10px] text-muted-foreground/60 select-none backdrop-blur-sm cursor-move relative z-10">
-              <span className="pointer-events-none flex items-center gap-2">
-                  {mode === 'search' ? `${results.length} ${getText('spotlight', 'results', language)}` : getText('spotlight', 'console', language)}
-                  {isStreaming && <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />}
-              </span>
-              <div className="flex gap-4 pointer-events-none">
-                  {mode === 'search' ? (
-                      <>
-                          <span>{getText('spotlight', 'nav', language)} ↑↓</span>
-                          <span>{results[selectedIndex]?.isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language)} ↵</span>
-                      </>
-                  ) : (
-                      <>
-                      <span className={cn(isStreaming && "opacity-30")}>{getText('spotlight', 'clear', language)} Ctrl+K</span> 
-                      <span>{getText('spotlight', 'send', language)} ↵</span>
-                      </>
-                  )}
-                  <span>{getText('spotlight', 'close', language)} Esc</span>
-              </div>
-          </div>
-        </div>
-      </div>
+      <SpotlightProvider>
+        <SpotlightContent />
+      </SpotlightProvider>
       <GlobalConfirmDialog /> 
     </>
   );
