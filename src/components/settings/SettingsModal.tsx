@@ -96,7 +96,7 @@ export function SettingsModal() {
                             {/* Default Height Slider */}
                             <div className="space-y-3">
                                 <div className="flex justify-between text-xs">
-                                    <span>Default Height (Search/Min Chat)</span>
+                                    <span>{getText('settings', 'defaultHeight', language)}</span>
                                     <span className="font-mono text-muted-foreground">{spotlightAppearance.defaultHeight}px</span>
                                 </div>
                                 <input 
