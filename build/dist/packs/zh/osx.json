@@ -1110,6 +1110,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-osx-appsleepd-0",
+    "type": "command",
+    "title": "appsleepd - 启动该守护进程",
+    "content": "appsleepd",
+    "group": "macOS",
+    "description": "appsleepd: 启动应用休眠服务。 不应手动调用此命令。 (启动该守护进程)",
+    "tags": [
+      "osx",
+      "appsleepd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-osx-mdfind-0",
     "type": "command",
     "title": "mdfind - 按文件名查找文件",
@@ -1920,6 +1935,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-osx-avbdeviced-0",
+    "type": "command",
+    "title": "avbdeviced - 启动守护进程",
+    "content": "avbdeviced",
+    "group": "macOS",
+    "description": "avbdeviced: 用于管理音视频桥接（Audio Video Bridging，AVB）设备的服务。 不应手动调用。 (启动守护进程)",
+    "tags": [
+      "osx",
+      "avbdeviced",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-osx-ditto-0",
     "type": "command",
     "title": "ditto - 用源目录的内容覆盖目标目录的内容",
@@ -2394,6 +2424,21 @@
     "tags": [
       "osx",
       "llvm-lipo",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-applecamerad-0",
+    "type": "command",
+    "title": "applecamerad - 启动守护进程",
+    "content": "applecamerad",
+    "group": "macOS",
+    "description": "applecamerad: 相机管理器。 不应手动调用。 (启动守护进程)",
+    "tags": [
+      "osx",
+      "applecamerad",
       "tldr",
       "zh"
     ],
@@ -4620,6 +4665,66 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-osx-afplay-0",
+    "type": "command",
+    "title": "afplay - 播放一个声音文件（等待播放结束）",
+    "content": "afplay {{路径/到/文件}}",
+    "group": "macOS",
+    "description": "afplay: 命令行音频播放器。 (播放一个声音文件（等待播放结束）)",
+    "tags": [
+      "osx",
+      "afplay",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-afplay-1",
+    "type": "command",
+    "title": "afplay - 以 2 倍速播放一个声音文件（播放速率）",
+    "content": "afplay --rate {{2}} {{路径/到/文件}}",
+    "group": "macOS",
+    "description": "afplay: 命令行音频播放器。 (以 2 倍速播放一个声音文件（播放速率）)",
+    "tags": [
+      "osx",
+      "afplay",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-afplay-2",
+    "type": "command",
+    "title": "afplay - 以半速播放一个声音文件",
+    "content": "afplay --rate {{0.5}} {{路径/到/文件}}",
+    "group": "macOS",
+    "description": "afplay: 命令行音频播放器。 (以半速播放一个声音文件)",
+    "tags": [
+      "osx",
+      "afplay",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-afplay-3",
+    "type": "command",
+    "title": "afplay - 播放声音文件的前 `n` 秒",
+    "content": "afplay --time {{n}} {{路径/到/文件}}",
+    "group": "macOS",
+    "description": "afplay: 命令行音频播放器。 (播放声音文件的前 `n` 秒)",
+    "tags": [
+      "osx",
+      "afplay",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-osx-afinfo-0",
     "type": "command",
     "title": "afinfo - 显示给定音频文件的详细信息",
@@ -4854,6 +4959,36 @@
     "tags": [
       "osx",
       "gmkfifo",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-automountd-0",
+    "type": "command",
+    "title": "automountd - 启动守护进程",
+    "content": "automountd",
+    "group": "macOS",
+    "description": "automountd: 一个用于 `autofs` 的自动挂载/卸载守护进程，由 `launchd` 按需启动。 不应手动调用。 (启动守护进程)",
+    "tags": [
+      "osx",
+      "automountd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-automountd-1",
+    "type": "command",
+    "title": "automountd - 向 `syslog` 记录更多详细信息",
+    "content": "automountd -v",
+    "group": "macOS",
+    "description": "automountd: 一个用于 `autofs` 的自动挂载/卸载守护进程，由 `launchd` 按需启动。 不应手动调用。 (向 `syslog` 记录更多详细信息)",
+    "tags": [
+      "osx",
+      "automountd",
       "tldr",
       "zh"
     ],
@@ -5265,6 +5400,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-osx-autoraise-0",
+    "type": "command",
+    "title": "autoraise - 在后台运行 AutoRaise",
+    "content": "autoraise &",
+    "group": "macOS",
+    "description": "autoraise: 当鼠标悬停在窗口上时，自动将其置顶和/或聚焦。 (在后台运行 AutoRaise)",
+    "tags": [
+      "osx",
+      "autoraise",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-osx-gpwd-0",
     "type": "command",
     "title": "gpwd - 原命令的文档在",
@@ -5490,6 +5640,66 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-osx-automount-0",
+    "type": "command",
+    "title": "automount - 运行 automount，在此之前先清空缓存（`-c`），并显示详细信息（`-v`）（最常用的方式）",
+    "content": "automount -cv",
+    "group": "macOS",
+    "description": "automount: 读取 `/etc/auto_master` 文件，并在适当的挂载点上挂载 `autofs`，以触发目录的按需挂载。本质上，这是一种手动启动系统自动挂载过程的方式。 注意：如果没有必要权限，很可能需要使用 `sudo` 运行。 (运行 automount，在此之前先清空缓存（`-c`），并显示详细信息（`-v`）（最常用的方式）)",
+    "tags": [
+      "osx",
+      "automount",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-automount-1",
+    "type": "command",
+    "title": "automount - 在 5 分钟（300 秒）不活动后自动卸载",
+    "content": "automount -t 300",
+    "group": "macOS",
+    "description": "automount: 读取 `/etc/auto_master` 文件，并在适当的挂载点上挂载 `autofs`，以触发目录的按需挂载。本质上，这是一种手动启动系统自动挂载过程的方式。 注意：如果没有必要权限，很可能需要使用 `sudo` 运行。 (在 5 分钟（300 秒）不活动后自动卸载)",
+    "tags": [
+      "osx",
+      "automount",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-automount-2",
+    "type": "command",
+    "title": "automount - 卸载所有先前由 automount 挂载的文件系统和/或在 `/etc/auto_master` 中定义的内容",
+    "content": "automount -u",
+    "group": "macOS",
+    "description": "automount: 读取 `/etc/auto_master` 文件，并在适当的挂载点上挂载 `autofs`，以触发目录的按需挂载。本质上，这是一种手动启动系统自动挂载过程的方式。 注意：如果没有必要权限，很可能需要使用 `sudo` 运行。 (卸载所有先前由 automount 挂载的文件系统和/或在 `/etc/auto_master` 中定义的内容)",
+    "tags": [
+      "osx",
+      "automount",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-autofsd-0",
+    "type": "command",
+    "title": "autofsd - 启动守护进程",
+    "content": "autofsd",
+    "group": "macOS",
+    "description": "autofsd: 在系统启动和网络配置变更事件时运行 `automount`。 不应手动调用此命令。 (启动守护进程)",
+    "tags": [
+      "osx",
+      "autofsd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-osx-gjoin-0",
     "type": "command",
     "title": "gjoin - 原命令的文档在",
@@ -5559,6 +5769,36 @@
     "tags": [
       "osx",
       "getfileinfo",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-auvaltool-0",
+    "type": "command",
+    "title": "auvaltool - 列出所有可用的任意类型的 AudioUnit",
+    "content": "auvaltool -a",
+    "group": "macOS",
+    "description": "auvaltool: 用于 Mac 的 AudioUnit 验证工具。 (列出所有可用的任意类型的 AudioUnit)",
+    "tags": [
+      "osx",
+      "auvaltool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-auvaltool-1",
+    "type": "command",
+    "title": "auvaltool - 列出所有可用的任意类型的 AudioUnit 及其位置",
+    "content": "auvaltool -al",
+    "group": "macOS",
+    "description": "auvaltool: 用于 Mac 的 AudioUnit 验证工具。 (列出所有可用的任意类型的 AudioUnit 及其位置)",
+    "tags": [
+      "osx",
+      "auvaltool",
       "tldr",
       "zh"
     ],
@@ -5730,6 +5970,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-osx-aiac-0",
+    "type": "command",
+    "title": "aiac - 生成用于 Azure 存储账户的 Terraform 配置",
+    "content": "aiac get terraform {{用于 Azure 存储账户}}",
+    "group": "macOS",
+    "description": "aiac: 使用 OpenAI 生成基础设施即代码（IaC）配置、实用工具、查询等。 (生成用于 Azure 存储账户的 Terraform 配置)",
+    "tags": [
+      "osx",
+      "aiac",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-aiac-1",
+    "type": "command",
+    "title": "aiac - 生成一个 `nginx` 的 Dockerfile",
+    "content": "aiac get dockerfile {{用于安全的 nginx}}",
+    "group": "macOS",
+    "description": "aiac: 使用 OpenAI 生成基础设施即代码（IaC）配置、实用工具、查询等。 (生成一个 `nginx` 的 Dockerfile)",
+    "tags": [
+      "osx",
+      "aiac",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-aiac-2",
+    "type": "command",
+    "title": "aiac - 生成一个应用 Terraform 的 GitHub Actions 工作流",
+    "content": "aiac get github action {{用于计划并应用 Terraform}}",
+    "group": "macOS",
+    "description": "aiac: 使用 OpenAI 生成基础设施即代码（IaC）配置、实用工具、查询等。 (生成一个应用 Terraform 的 GitHub Actions 工作流)",
+    "tags": [
+      "osx",
+      "aiac",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-aiac-3",
+    "type": "command",
+    "title": "aiac - 生成一个用 Python 编写的端口扫描器",
+    "content": "aiac get python {{扫描我网络中所有开放端口的代码}}",
+    "group": "macOS",
+    "description": "aiac: 使用 OpenAI 生成基础设施即代码（IaC）配置、实用工具、查询等。 (生成一个用 Python 编写的端口扫描器)",
+    "tags": [
+      "osx",
+      "aiac",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-aiac-4",
+    "type": "command",
+    "title": "aiac - 生成一个 MongoDB 查询",
+    "content": "aiac get mongo {{按创建日期聚合所有文档的查询}}",
+    "group": "macOS",
+    "description": "aiac: 使用 OpenAI 生成基础设施即代码（IaC）配置、实用工具、查询等。 (生成一个 MongoDB 查询)",
+    "tags": [
+      "osx",
+      "aiac",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-osx-gwc-0",
     "type": "command",
     "title": "gwc - 原命令的文档在",
@@ -5739,6 +6054,21 @@
     "tags": [
       "osx",
       "gwc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-osx-airportd-0",
+    "type": "command",
+    "title": "airportd - 启动守护进程",
+    "content": "airportd",
+    "group": "macOS",
+    "description": "airportd: 管理无线网络接口。 不应手动调用此命令。 (启动守护进程)",
+    "tags": [
+      "osx",
+      "airportd",
       "tldr",
       "zh"
     ],

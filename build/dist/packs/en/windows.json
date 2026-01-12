@@ -348,7 +348,7 @@
     "id": "tldr-en-windows-powershell-3",
     "type": "command",
     "title": "powershell - Execute a specific script",
-    "content": "powershell -File {{path/to/script.ps1}}",
+    "content": "powershell -File {{path\\to\\script.ps1}}",
     "group": "Windows",
     "description": "powershell: Command-line shell and scripting language designed especially for system administration. This command refers to PowerShell version 5.1 and below (also known as the legacy Windows PowerShell). To use the newer, cross-platform version of PowerShell (also known as PowerShell Core), use `pwsh` instead of `powershell`. (Execute a specific script)",
     "tags": [
@@ -618,7 +618,7 @@
     "id": "tldr-en-windows-rename-item-0",
     "type": "command",
     "title": "rename-item - Rename a file",
-    "content": "Rename-Item -Path \"{{path/to/file}}\" -NewName \"{{new_file_name}}\"",
+    "content": "Rename-Item -Path \"{{path\\to\\file}}\" -NewName \"{{new_file_name}}\"",
     "group": "Windows",
     "description": "rename-item: Powershell command to rename an item. Note: `ren` and `rni` can both be used as an alias for `Rename-Item`. (Rename a file)",
     "tags": [
@@ -633,7 +633,7 @@
     "id": "tldr-en-windows-rename-item-1",
     "type": "command",
     "title": "rename-item - Rename a directory",
-    "content": "Rename-Item -Path \"{{path/to/directory}}\" -NewName \"{{new_directory_name}}\"",
+    "content": "Rename-Item -Path \"{{path\\to\\directory}}\" -NewName \"{{new_directory_name}}\"",
     "group": "Windows",
     "description": "rename-item: Powershell command to rename an item. Note: `ren` and `rni` can both be used as an alias for `Rename-Item`. (Rename a directory)",
     "tags": [
@@ -648,7 +648,7 @@
     "id": "tldr-en-windows-rename-item-2",
     "type": "command",
     "title": "rename-item - Rename and move a file",
-    "content": "Rename-Item -Path \"{{path/to/file}}\" -NewName \"{{path/to/new_file_name}}\"",
+    "content": "Rename-Item -Path \"{{path\\to\\file}}\" -NewName \"{{path\\to\\new_file_name}}\"",
     "group": "Windows",
     "description": "rename-item: Powershell command to rename an item. Note: `ren` and `rni` can both be used as an alias for `Rename-Item`. (Rename and move a file)",
     "tags": [
@@ -663,7 +663,7 @@
     "id": "tldr-en-windows-rename-item-3",
     "type": "command",
     "title": "rename-item - Rename a file by force",
-    "content": "Rename-Item -Path \"{{path/to/file}}\" -NewName \"{{new_file_name}}\" -Force",
+    "content": "Rename-Item -Path \"{{path\\to\\file}}\" -NewName \"{{new_file_name}}\" -Force",
     "group": "Windows",
     "description": "rename-item: Powershell command to rename an item. Note: `ren` and `rni` can both be used as an alias for `Rename-Item`. (Rename a file by force)",
     "tags": [
@@ -678,7 +678,7 @@
     "id": "tldr-en-windows-rename-item-4",
     "type": "command",
     "title": "rename-item - Prompt confirmation before renaming a file",
-    "content": "Rename-Item -Path \"{{path/to/file}}\" -NewName \"{{new_file_name}}\" {{[-Confirm|-cf]}}",
+    "content": "Rename-Item -Path \"{{path\\to\\file}}\" -NewName \"{{new_file_name}}\" {{[-Confirm|-cf]}}",
     "group": "Windows",
     "description": "rename-item: Powershell command to rename an item. Note: `ren` and `rni` can both be used as an alias for `Rename-Item`. (Prompt confirmation before renaming a file)",
     "tags": [
@@ -798,7 +798,7 @@
     "id": "tldr-en-windows-set-clipboard-2",
     "type": "command",
     "title": "set-clipboard - Copy files or directories to clipboard",
-    "content": "Set-Clipboard -Path \"{{path/to/files_or_directories}}\"",
+    "content": "Set-Clipboard -Path \"{{path\\to\\files_or_directories}}\"",
     "group": "Windows",
     "description": "set-clipboard: PowerShell command to set content to clipboard. Note: `scb` can be used as an alias for `Set-Clipboard`. (Copy files or directories to clipboard)",
     "tags": [
@@ -813,7 +813,7 @@
     "id": "tldr-en-windows-set-clipboard-3",
     "type": "command",
     "title": "set-clipboard - Copy multiple files",
-    "content": "Set-Clipboard -Path \"{{path/to/file1}}\",\"{{path/to/file2}}\",\"{{path/to/file3}}\"",
+    "content": "Set-Clipboard -Path \"{{path\\to\\file1}}\",\"{{path\\to\\file2}}\",\"{{path\\to\\file3}}\"",
     "group": "Windows",
     "description": "set-clipboard: PowerShell command to set content to clipboard. Note: `scb` can be used as an alias for `Set-Clipboard`. (Copy multiple files)",
     "tags": [
@@ -2778,7 +2778,7 @@
     "id": "tldr-en-windows-wsl-5",
     "type": "command",
     "title": "wsl - Import a distribution from a `.tar` file",
-    "content": "wsl --import {{distribution}} {{path\\to\\install_location}} {{path/to/distro_file.tar}}",
+    "content": "wsl --import {{distribution}} {{path\\to\\install_location}} {{path\\to\\distro_file.tar}}",
     "group": "Windows",
     "description": "wsl: Manage the Windows Subsystem for Linux. (Import a distribution from a `.tar` file)",
     "tags": [
@@ -4863,7 +4863,7 @@
     "id": "tldr-en-windows-pabcnetcclear-1",
     "type": "command",
     "title": "pabcnetcclear - Compile the specified source file into an executable with the specified name",
-    "content": "pabcnetcclear /Output:{{path\\to\\_file.exe}} {{path\\to\\source_file.pas}}",
+    "content": "pabcnetcclear /Output:{{path\\to\\file.exe}} {{path\\to\\source_file.pas}}",
     "group": "Windows",
     "description": "pabcnetcclear: Preprocess and compile PascalABC.NET source files. (Compile the specified source file into an executable with the specified name)",
     "tags": [
@@ -5088,7 +5088,7 @@
     "id": "tldr-en-windows-winget-6",
     "type": "command",
     "title": "winget - Import packages from a file, or export installed packages to a file",
-    "content": "winget {{import|export}} {{--import-file|--output}} {{path/to/file}}",
+    "content": "winget {{import|export}} {{--import-file|--output}} {{path\\to\\file}}",
     "group": "Windows",
     "description": "winget: Windows Package Manager. (Import packages from a file, or export installed packages to a file)",
     "tags": [
@@ -5103,7 +5103,7 @@
     "id": "tldr-en-windows-winget-7",
     "type": "command",
     "title": "winget - Validate manifests before submitting a PR to the winget-pkgs repository",
-    "content": "winget validate {{path/to/manifest}}",
+    "content": "winget validate {{path\\to\\manifest}}",
     "group": "Windows",
     "description": "winget: Windows Package Manager. (Validate manifests before submitting a PR to the winget-pkgs repository)",
     "tags": [
@@ -5478,7 +5478,7 @@
     "id": "tldr-en-windows-cl-0",
     "type": "command",
     "title": "cl - Compile a source file",
-    "content": "cl {{path/to/source.c}}",
+    "content": "cl {{path\\to\\source.c}}",
     "group": "Windows",
     "description": "cl: The Microsoft C/C++ compiler for compiling and linking source code files. (Compile a source file)",
     "tags": [
@@ -5493,7 +5493,7 @@
     "id": "tldr-en-windows-cl-1",
     "type": "command",
     "title": "cl - Compile and create an executable with a custom name",
-    "content": "cl /Fe {{path/to/output_executable}} {{path/to/source.c}}",
+    "content": "cl /Fe {{path\\to\\output_executable}} {{path\\to\\source.c}}",
     "group": "Windows",
     "description": "cl: The Microsoft C/C++ compiler for compiling and linking source code files. (Compile and create an executable with a custom name)",
     "tags": [
@@ -5508,7 +5508,7 @@
     "id": "tldr-en-windows-cl-2",
     "type": "command",
     "title": "cl - Compile a source file with optimization enabled",
-    "content": "cl /O2 {{path/to/source.c}}",
+    "content": "cl /O2 {{path\\to\\source.c}}",
     "group": "Windows",
     "description": "cl: The Microsoft C/C++ compiler for compiling and linking source code files. (Compile a source file with optimization enabled)",
     "tags": [
@@ -5523,7 +5523,7 @@
     "id": "tldr-en-windows-cl-3",
     "type": "command",
     "title": "cl - Compile a source file and create a debug executable",
-    "content": "cl /Zi {{path/to/source.c}}",
+    "content": "cl /Zi {{path\\to\\source.c}}",
     "group": "Windows",
     "description": "cl: The Microsoft C/C++ compiler for compiling and linking source code files. (Compile a source file and create a debug executable)",
     "tags": [
@@ -5538,7 +5538,7 @@
     "id": "tldr-en-windows-cl-4",
     "type": "command",
     "title": "cl - Compile multiple source files",
-    "content": "cl {{path/to/source1.c path/to/source2.c ...}}",
+    "content": "cl {{path\\to\\source1.c path\\to\\source2.c ...}}",
     "group": "Windows",
     "description": "cl: The Microsoft C/C++ compiler for compiling and linking source code files. (Compile multiple source files)",
     "tags": [
@@ -5553,7 +5553,7 @@
     "id": "tldr-en-windows-cl-5",
     "type": "command",
     "title": "cl - Specify the output directory for compiled files",
-    "content": "cl /Fo {{path/to/output_directory}}/ {{path/to/source.c}}",
+    "content": "cl /Fo {{path\\to\\output_directory}}/ {{path\\to\\source.c}}",
     "group": "Windows",
     "description": "cl: The Microsoft C/C++ compiler for compiling and linking source code files. (Specify the output directory for compiled files)",
     "tags": [
@@ -5568,7 +5568,7 @@
     "id": "tldr-en-windows-cl-6",
     "type": "command",
     "title": "cl - Compile with warnings as errors",
-    "content": "cl /WX {{path/to/source.c}}",
+    "content": "cl /WX {{path\\to\\source.c}}",
     "group": "Windows",
     "description": "cl: The Microsoft C/C++ compiler for compiling and linking source code files. (Compile with warnings as errors)",
     "tags": [
@@ -6963,7 +6963,7 @@
     "id": "tldr-en-windows-vol.py-0",
     "type": "command",
     "title": "vol.py - Get information about a memory dump file",
-    "content": "python3 vol.py {{[-f|--filename]}} {{path/to/memory_dump_file}} windows.info",
+    "content": "python3 vol.py {{[-f|--filename]}} {{path\\to\\memory_dump_file}} windows.info",
     "group": "Windows",
     "description": "vol.py: Forensics framework used to analyze volatile memory (RAM) dumps. With volatility3, plugins are now based on operating system. Examples below will use Windows. (Get information about a memory dump file)",
     "tags": [
@@ -6978,7 +6978,7 @@
     "id": "tldr-en-windows-vol.py-1",
     "type": "command",
     "title": "vol.py - List active processes",
-    "content": "python3 vol.py {{[-f|--filename]}} {{path/to/memory_dump_file}} windows.pslist",
+    "content": "python3 vol.py {{[-f|--filename]}} {{path\\to\\memory_dump_file}} windows.pslist",
     "group": "Windows",
     "description": "vol.py: Forensics framework used to analyze volatile memory (RAM) dumps. With volatility3, plugins are now based on operating system. Examples below will use Windows. (List active processes)",
     "tags": [
@@ -6993,7 +6993,7 @@
     "id": "tldr-en-windows-vol.py-2",
     "type": "command",
     "title": "vol.py - List hashes of users on system",
-    "content": "python3 vol.py {{[-f|--filename]}} {{path/to/memory_dump_file}} windows.hashdump",
+    "content": "python3 vol.py {{[-f|--filename]}} {{path\\to\\memory_dump_file}} windows.hashdump",
     "group": "Windows",
     "description": "vol.py: Forensics framework used to analyze volatile memory (RAM) dumps. With volatility3, plugins are now based on operating system. Examples below will use Windows. (List hashes of users on system)",
     "tags": [
@@ -7008,7 +7008,7 @@
     "id": "tldr-en-windows-vol.py-3",
     "type": "command",
     "title": "vol.py - List active network connections",
-    "content": "python3 vol.py {{[-f|--filename]}} {{path/to/memory_dump_file}} windows.netstat",
+    "content": "python3 vol.py {{[-f|--filename]}} {{path\\to\\memory_dump_file}} windows.netstat",
     "group": "Windows",
     "description": "vol.py: Forensics framework used to analyze volatile memory (RAM) dumps. With volatility3, plugins are now based on operating system. Examples below will use Windows. (List active network connections)",
     "tags": [
@@ -8448,7 +8448,7 @@
     "id": "tldr-en-windows-choco-new-3",
     "type": "command",
     "title": "choco-new - Create a new package in a custom output directory",
-    "content": "choco new {{package}} {{[--out|--output-directory]}} {{path/to/directory}}",
+    "content": "choco new {{package}} {{[--out|--output-directory]}} {{path\\to\\directory}}",
     "group": "Windows",
     "description": "choco-new: Generate new package specification files with Chocolatey. (Create a new package in a custom output directory)",
     "tags": [
@@ -12273,7 +12273,7 @@
     "id": "tldr-en-windows-lib-0",
     "type": "command",
     "title": "lib - Create a static library from object files",
-    "content": "lib /OUT :{{path/to/library.lib}} {{path/to/file1.obj path/to/file2.obj ...}}",
+    "content": "lib /OUT :{{path\\to\\library.lib}} {{path\\to\\file1.obj path\\to\\file2.obj ...}}",
     "group": "Windows",
     "description": "lib: The Microsoft Library Manager for creating and managing static libraries of object files. (Create a static library from object files)",
     "tags": [
@@ -12288,7 +12288,7 @@
     "id": "tldr-en-windows-lib-1",
     "type": "command",
     "title": "lib - List the contents of a library",
-    "content": "lib /LIST {{path/to/library.lib}}",
+    "content": "lib /LIST {{path\\to\\library.lib}}",
     "group": "Windows",
     "description": "lib: The Microsoft Library Manager for creating and managing static libraries of object files. (List the contents of a library)",
     "tags": [
@@ -12303,7 +12303,7 @@
     "id": "tldr-en-windows-lib-2",
     "type": "command",
     "title": "lib - Add an object file to an existing library",
-    "content": "lib {{path/to/library.lib}} {{path/to/file.obj}}",
+    "content": "lib {{path\\to\\library.lib}} {{path\\to\\file.obj}}",
     "group": "Windows",
     "description": "lib: The Microsoft Library Manager for creating and managing static libraries of object files. (Add an object file to an existing library)",
     "tags": [
@@ -12318,7 +12318,7 @@
     "id": "tldr-en-windows-lib-3",
     "type": "command",
     "title": "lib - Remove an object file from a library",
-    "content": "lib /REMOVE :{{path/to/file.obj}} {{path/to/library.lib}}",
+    "content": "lib /REMOVE :{{path\\to\\file.obj}} {{path\\to\\library.lib}}",
     "group": "Windows",
     "description": "lib: The Microsoft Library Manager for creating and managing static libraries of object files. (Remove an object file from a library)",
     "tags": [
@@ -12333,7 +12333,7 @@
     "id": "tldr-en-windows-lib-4",
     "type": "command",
     "title": "lib - Extract an object file from a library",
-    "content": "lib /EXTRACT :{{path/to/file.obj}} {{path/to/library.lib}}",
+    "content": "lib /EXTRACT :{{path\\to\\file.obj}} {{path\\to\\library.lib}}",
     "group": "Windows",
     "description": "lib: The Microsoft Library Manager for creating and managing static libraries of object files. (Extract an object file from a library)",
     "tags": [
@@ -12348,7 +12348,7 @@
     "id": "tldr-en-windows-lib-5",
     "type": "command",
     "title": "lib - Create an import library from a DLL",
-    "content": "lib /DEF :{{path/to/definition.def}} /OUT:{{path/to/import.lib}}",
+    "content": "lib /DEF :{{path\\to\\definition.def}} /OUT:{{path\\to\\import.lib}}",
     "group": "Windows",
     "description": "lib: The Microsoft Library Manager for creating and managing static libraries of object files. (Create an import library from a DLL)",
     "tags": [
@@ -12723,7 +12723,7 @@
     "id": "tldr-en-windows-ftype-2",
     "type": "command",
     "title": "ftype - Set the associated program for a specific file type",
-    "content": "ftype {{file_type}}=\"{{path/to/executable_file}}\"",
+    "content": "ftype {{file_type}}=\"{{path\\to\\executable_file}}\"",
     "group": "Windows",
     "description": "ftype: Display or modify file types used for file extension association. (Set the associated program for a specific file type)",
     "tags": [
@@ -13083,7 +13083,7 @@
     "id": "tldr-en-windows-bleachbit_console-1",
     "type": "command",
     "title": "bleachbit_console - Shred a file",
-    "content": "bleachbit_console.exe --shred {{path/to/file}}",
+    "content": "bleachbit_console.exe --shred {{path\\to\\file}}",
     "group": "Windows",
     "description": "bleachbit_console: Clean junk files on the filesystem. (Shred a file)",
     "tags": [
@@ -15633,7 +15633,7 @@
     "id": "tldr-en-windows-nmake-1",
     "type": "command",
     "title": "nmake - Build targets using a specific makefile",
-    "content": "nmake /F {{path/to/makefile}}",
+    "content": "nmake /F {{path\\to\\makefile}}",
     "group": "Windows",
     "description": "nmake: The Microsoft Program Maintenance Utility for building projects based on commands in a makefile. (Build targets using a specific makefile)",
     "tags": [
@@ -16293,7 +16293,7 @@
     "id": "tldr-en-windows-py-1",
     "type": "command",
     "title": "py - Execute a specific Python file",
-    "content": "py {{path/to/file.py}}",
+    "content": "py {{path\\to\\file.py}}",
     "group": "Windows",
     "description": "py: Python Launcher for Windows that runs with specified Python version. (Execute a specific Python file)",
     "tags": [

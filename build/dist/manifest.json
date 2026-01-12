@@ -1,5 +1,5 @@
 {
-  "updated_at": 1767625614420,
+  "updated_at": 1768182100256,
   "version": "2.0.0",
   "packages": [
     {
@@ -7,9 +7,9 @@
       "language": "en",
       "platform": "llm",
       "name": "ChatGPT Prompts (English)",
-      "description": "Collection of 922 role-play prompts.",
-      "count": 922,
-      "size_kb": 1570.67,
+      "description": "Collection of 983 role-play prompts.",
+      "count": 983,
+      "size_kb": 1790.14,
       "url": "packs/prompts-en-roles.json",
       "category": "prompt"
     },
@@ -106,9 +106,9 @@
       "language": "zh",
       "platform": "common",
       "name": "通用工具 (Common) (ZH)",
-      "description": "Contains 3431 zh commands for common.",
-      "count": 3431,
-      "size_kb": 1670,
+      "description": "Contains 3534 zh commands for common.",
+      "count": 3534,
+      "size_kb": 1720,
       "url": "packs/zh/common.json",
       "category": "command"
     },
@@ -117,9 +117,9 @@
       "language": "zh",
       "platform": "osx",
       "name": "macOS (ZH)",
-      "description": "Contains 435 zh commands for osx.",
-      "count": 435,
-      "size_kb": 183,
+      "description": "Contains 457 zh commands for osx.",
+      "count": 457,
+      "size_kb": 193,
       "url": "packs/zh/osx.json",
       "category": "command"
     },
@@ -205,9 +205,9 @@
       "language": "en",
       "platform": "linux",
       "name": "Linux Ops (EN)",
-      "description": "Contains 7700 en commands for linux.",
-      "count": 7700,
-      "size_kb": 3639,
+      "description": "Contains 7728 en commands for linux.",
+      "count": 7728,
+      "size_kb": 3650,
       "url": "packs/en/linux.json",
       "category": "command"
     },
@@ -216,9 +216,9 @@
       "language": "en",
       "platform": "common",
       "name": "Common Tools (EN)",
-      "description": "Contains 19456 en commands for common.",
-      "count": 19456,
-      "size_kb": 9432,
+      "description": "Contains 19527 en commands for common.",
+      "count": 19527,
+      "size_kb": 9465,
       "url": "packs/en/common.json",
       "category": "command"
     },

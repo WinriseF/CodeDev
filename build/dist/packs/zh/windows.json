@@ -4412,10 +4412,10 @@
   {
     "id": "tldr-zh-windows-finger-3",
     "type": "command",
-    "title": "finger - 显示帮助信息",
+    "title": "finger - 显示帮助",
     "content": "finger /?",
     "group": "Windows",
-    "description": "finger: 返回有关指定系统上的一个或多个用户的信息。 远程系统必须运行 Finger 服务。 (显示帮助信息)",
+    "description": "finger: 返回有关指定系统上的一个或多个用户的信息。 远程系统必须运行 Finger 服务。 (显示帮助)",
     "tags": [
       "windows",
       "finger",
@@ -4998,7 +4998,7 @@
     "id": "tldr-zh-windows-explorer-2",
     "type": "command",
     "title": "explorer - 在指定目录打开 Windows 文件资源管理器",
-    "content": "explorer {{path/to/directory}}",
+    "content": "explorer {{路径\\到\\目录}}",
     "group": "Windows",
     "description": "explorer: Windows 文件资源管理器。 (在指定目录打开 Windows 文件资源管理器)",
     "tags": [

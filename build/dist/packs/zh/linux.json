@@ -2402,10 +2402,10 @@
   {
     "id": "tldr-zh-linux-oma-7",
     "type": "command",
-    "title": "oma - 查看帮助",
+    "title": "oma - 显示帮助",
     "content": "oma help",
     "group": "Linux 运维",
-    "description": "oma: 一款为使用 dpkg 的发行版打造的软件包管理前端。 (查看帮助)",
+    "description": "oma: 一款为使用 dpkg 的发行版打造的软件包管理前端。 (显示帮助)",
     "tags": [
       "linux",
       "oma",
@@ -8297,10 +8297,10 @@
   {
     "id": "tldr-zh-linux-balooctl-7",
     "type": "command",
-    "title": "balooctl - 显示帮助信息",
+    "title": "balooctl - 显示帮助",
     "content": "balooctl --help",
     "group": "Linux 运维",
-    "description": "balooctl: KDE Plasma 的文件索引和搜索框架。 (显示帮助信息)",
+    "description": "balooctl: KDE Plasma 的文件索引和搜索框架。 (显示帮助)",
     "tags": [
       "linux",
       "balooctl",

@@ -152,10 +152,10 @@
   {
     "id": "tldr-zh-dos-path-5",
     "type": "command",
-    "title": "path - 显示帮助信息",
+    "title": "path - 显示帮助",
     "content": "PATH /?",
     "group": "Dos",
-    "description": "path: 显示或设置可执行文件的搜索路径。 此命令仅在 `FreeDOS` 中可用。 (显示帮助信息)",
+    "description": "path: 显示或设置可执行文件的搜索路径。 此命令仅在 `FreeDOS` 中可用。 (显示帮助)",
     "tags": [
       "dos",
       "path",

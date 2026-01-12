@@ -380,7 +380,7 @@
     "title": "xbps - View documentation for installing and updating packages",
     "content": "tldr xbps-install",
     "group": "Linux Ops",
-    "description": "xbps: The X Binary Package System is the package manager used by Void Linux. `xbps` isn't a command, but a set of commands. For equivalent commands in other package managers, see . (View documentation for installing and updating packages)",
+    "description": "xbps: The X Binary Package System is the package manager used by Void Linux. Note: `xbps` isn't a command, but a set of commands. For equivalent commands in other package managers, see . (View documentation for installing and updating packages)",
     "tags": [
       "linux",
       "xbps",
@@ -395,7 +395,7 @@
     "title": "xbps - View documentation for removing packages",
     "content": "tldr xbps-remove",
     "group": "Linux Ops",
-    "description": "xbps: The X Binary Package System is the package manager used by Void Linux. `xbps` isn't a command, but a set of commands. For equivalent commands in other package managers, see . (View documentation for removing packages)",
+    "description": "xbps: The X Binary Package System is the package manager used by Void Linux. Note: `xbps` isn't a command, but a set of commands. For equivalent commands in other package managers, see . (View documentation for removing packages)",
     "tags": [
       "linux",
       "xbps",
@@ -410,7 +410,7 @@
     "title": "xbps - View documentation for querying for package and repository information",
     "content": "tldr xbps-query",
     "group": "Linux Ops",
-    "description": "xbps: The X Binary Package System is the package manager used by Void Linux. `xbps` isn't a command, but a set of commands. For equivalent commands in other package managers, see . (View documentation for querying for package and repository information)",
+    "description": "xbps: The X Binary Package System is the package manager used by Void Linux. Note: `xbps` isn't a command, but a set of commands. For equivalent commands in other package managers, see . (View documentation for querying for package and repository information)",
     "tags": [
       "linux",
       "xbps",
@@ -1404,6 +1404,66 @@
     "tags": [
       "linux",
       "virt-sysprep",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-kmscon-0",
+    "type": "command",
+    "title": "kmscon - Start `kmscon` on the first available TTY",
+    "content": "sudo kmscon",
+    "group": "Linux Ops",
+    "description": "kmscon: Use the framebuffer instead of text mode to draw a terminal in a TTY. (Start `kmscon` on the first available TTY)",
+    "tags": [
+      "linux",
+      "kmscon",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-kmscon-1",
+    "type": "command",
+    "title": "kmscon - Start `kmscon` in a specific TTY",
+    "content": "sudo kmscon --vt {{/dev/ttyX|ttyX|X}}",
+    "group": "Linux Ops",
+    "description": "kmscon: Use the framebuffer instead of text mode to draw a terminal in a TTY. (Start `kmscon` in a specific TTY)",
+    "tags": [
+      "linux",
+      "kmscon",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-kmscon-2",
+    "type": "command",
+    "title": "kmscon - Enable mouse support",
+    "content": "sudo kmscon --mouse",
+    "group": "Linux Ops",
+    "description": "kmscon: Use the framebuffer instead of text mode to draw a terminal in a TTY. (Enable mouse support)",
+    "tags": [
+      "linux",
+      "kmscon",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-kmscon-3",
+    "type": "command",
+    "title": "kmscon - Specify the command to use for login",
+    "content": "sudo kmscon {{[-l|--login]}} {{command}}",
+    "group": "Linux Ops",
+    "description": "kmscon: Use the framebuffer instead of text mode to draw a terminal in a TTY. (Specify the command to use for login)",
+    "tags": [
+      "linux",
+      "kmscon",
       "tldr",
       "en"
     ],
@@ -39320,7 +39380,7 @@
     "title": "systemctl-mask - Mask a service",
     "content": "systemctl mask {{service_name}}",
     "group": "Linux Ops",
-    "description": "systemctl-mask: Link units to `/dev/null` so that they can be even started. (Mask a service)",
+    "description": "systemctl-mask: Link units to `/dev/null` so that they cannot be started. (Mask a service)",
     "tags": [
       "linux",
       "systemctl-mask",
@@ -39335,7 +39395,7 @@
     "title": "systemctl-mask - Ensure that the service is shut down while masking",
     "content": "systemctl mask {{service_name}} --now",
     "group": "Linux Ops",
-    "description": "systemctl-mask: Link units to `/dev/null` so that they can be even started. (Ensure that the service is shut down while masking)",
+    "description": "systemctl-mask: Link units to `/dev/null` so that they cannot be started. (Ensure that the service is shut down while masking)",
     "tags": [
       "linux",
       "systemctl-mask",
@@ -39350,7 +39410,7 @@
     "title": "systemctl-mask - Mask a user service",
     "content": "systemctl mask {{service_name}} --user",
     "group": "Linux Ops",
-    "description": "systemctl-mask: Link units to `/dev/null` so that they can be even started. (Mask a user service)",
+    "description": "systemctl-mask: Link units to `/dev/null` so that they cannot be started. (Mask a user service)",
     "tags": [
       "linux",
       "systemctl-mask",
@@ -48017,10 +48077,10 @@
   {
     "id": "tldr-en-linux-protonvpn-connect-0",
     "type": "command",
-    "title": "protonvpn-connect - Connect to ProtonVPN interactively",
-    "content": "protonvpn {{[c|connect]}}",
+    "title": "protonvpn-connect - Connect to Proton VPN using the fastest server available",
+    "content": "protonvpn connect",
     "group": "Linux Ops",
-    "description": "protonvpn-connect: Connect to ProtonVPN. (Connect to ProtonVPN interactively)",
+    "description": "protonvpn-connect: Connect to Proton VPN. (Connect to Proton VPN using the fastest server available)",
     "tags": [
       "linux",
       "protonvpn-connect",
@@ -48032,10 +48092,10 @@
   {
     "id": "tldr-en-linux-protonvpn-connect-1",
     "type": "command",
-    "title": "protonvpn-connect - Connect to ProtonVPN using the fastest server available",
-    "content": "protonvpn {{[c|connect]}} {{[-f|--fastest]}}",
+    "title": "protonvpn-connect - Connect to the fastest server in a specific country",
+    "content": "protonvpn connect --country \"{{country_code_or_name}}\"",
     "group": "Linux Ops",
-    "description": "protonvpn-connect: Connect to ProtonVPN. (Connect to ProtonVPN using the fastest server available)",
+    "description": "protonvpn-connect: Connect to Proton VPN. (Connect to the fastest server in a specific country)",
     "tags": [
       "linux",
       "protonvpn-connect",
@@ -48047,10 +48107,10 @@
   {
     "id": "tldr-en-linux-protonvpn-connect-2",
     "type": "command",
-    "title": "protonvpn-connect - Connect to ProtonVPN using a specific server with a specific protocol",
-    "content": "protonvpn {{[c|connect]}} {{server_name}} -p {{udp|tcp}}",
+    "title": "protonvpn-connect - Connect to the fastest server in a specific city",
+    "content": "protonvpn connect --city \"{{city_name}}\"",
     "group": "Linux Ops",
-    "description": "protonvpn-connect: Connect to ProtonVPN. (Connect to ProtonVPN using a specific server with a specific protocol)",
+    "description": "protonvpn-connect: Connect to Proton VPN. (Connect to the fastest server in a specific city)",
     "tags": [
       "linux",
       "protonvpn-connect",
@@ -48062,10 +48122,10 @@
   {
     "id": "tldr-en-linux-protonvpn-connect-3",
     "type": "command",
-    "title": "protonvpn-connect - Connect to ProtonVPN using a random server with a specific protocol",
-    "content": "protonvpn {{[c|connect]}} {{[-r|--random]}} -p {{udp|tcp}}",
+    "title": "protonvpn-connect - Connect to a specific server",
+    "content": "protonvpn connect {{server_name}}",
     "group": "Linux Ops",
-    "description": "protonvpn-connect: Connect to ProtonVPN. (Connect to ProtonVPN using a random server with a specific protocol)",
+    "description": "protonvpn-connect: Connect to Proton VPN. (Connect to a specific server)",
     "tags": [
       "linux",
       "protonvpn-connect",
@@ -48077,25 +48137,10 @@
   {
     "id": "tldr-en-linux-protonvpn-connect-4",
     "type": "command",
-    "title": "protonvpn-connect - Connect to ProtonVPN using the fastest Tor-supporting server",
-    "content": "protonvpn {{[c|connect]}} --tor",
-    "group": "Linux Ops",
-    "description": "protonvpn-connect: Connect to ProtonVPN. (Connect to ProtonVPN using the fastest Tor-supporting server)",
-    "tags": [
-      "linux",
-      "protonvpn-connect",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-protonvpn-connect-5",
-    "type": "command",
     "title": "protonvpn-connect - Display help",
-    "content": "protonvpn {{[c|connect]}} --help",
+    "content": "protonvpn connect {{[-h|--help]}}",
     "group": "Linux Ops",
-    "description": "protonvpn-connect: Connect to ProtonVPN. (Display help)",
+    "description": "protonvpn-connect: Connect to Proton VPN. (Display help)",
     "tags": [
       "linux",
       "protonvpn-connect",
@@ -54000,6 +54045,126 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-dnf4-0",
+    "type": "command",
+    "title": "dnf4 - Upgrade installed packages to the newest available versions",
+    "content": "sudo dnf4 {{[up|upgrade]}}",
+    "group": "Linux Ops",
+    "description": "dnf4: Package manager for RHEL 8/9 and older Fedora versions (pre-41). For equivalent commands in other package managers, see . (Upgrade installed packages to the newest available versions)",
+    "tags": [
+      "linux",
+      "dnf4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-dnf4-1",
+    "type": "command",
+    "title": "dnf4 - Search packages via keywords",
+    "content": "dnf4 {{[se|search]}} {{keyword1 keyword2 ...}}",
+    "group": "Linux Ops",
+    "description": "dnf4: Package manager for RHEL 8/9 and older Fedora versions (pre-41). For equivalent commands in other package managers, see . (Search packages via keywords)",
+    "tags": [
+      "linux",
+      "dnf4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-dnf4-2",
+    "type": "command",
+    "title": "dnf4 - Display details about a package",
+    "content": "dnf4 {{[if|info]}} {{package}}",
+    "group": "Linux Ops",
+    "description": "dnf4: Package manager for RHEL 8/9 and older Fedora versions (pre-41). For equivalent commands in other package managers, see . (Display details about a package)",
+    "tags": [
+      "linux",
+      "dnf4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-dnf4-3",
+    "type": "command",
+    "title": "dnf4 - Install a new package (use `--assumeyes` to confirm all prompts automatically)",
+    "content": "sudo dnf4 {{[in|install]}} {{package1 package2 ...}}",
+    "group": "Linux Ops",
+    "description": "dnf4: Package manager for RHEL 8/9 and older Fedora versions (pre-41). For equivalent commands in other package managers, see . (Install a new package (use `--assumeyes` to confirm all prompts automatically))",
+    "tags": [
+      "linux",
+      "dnf4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-dnf4-4",
+    "type": "command",
+    "title": "dnf4 - Remove a package",
+    "content": "sudo dnf4 {{[rm|remove]}} {{package1 package2 ...}}",
+    "group": "Linux Ops",
+    "description": "dnf4: Package manager for RHEL 8/9 and older Fedora versions (pre-41). For equivalent commands in other package managers, see . (Remove a package)",
+    "tags": [
+      "linux",
+      "dnf4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-dnf4-5",
+    "type": "command",
+    "title": "dnf4 - List installed packages",
+    "content": "dnf4 {{[ls|list]}} --installed",
+    "group": "Linux Ops",
+    "description": "dnf4: Package manager for RHEL 8/9 and older Fedora versions (pre-41). For equivalent commands in other package managers, see . (List installed packages)",
+    "tags": [
+      "linux",
+      "dnf4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-dnf4-6",
+    "type": "command",
+    "title": "dnf4 - Find which packages provide a given command",
+    "content": "dnf4 {{[wp|provides]}} {{command}}",
+    "group": "Linux Ops",
+    "description": "dnf4: Package manager for RHEL 8/9 and older Fedora versions (pre-41). For equivalent commands in other package managers, see . (Find which packages provide a given command)",
+    "tags": [
+      "linux",
+      "dnf4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-dnf4-7",
+    "type": "command",
+    "title": "dnf4 - View all past operations",
+    "content": "dnf4 {{[hist|history]}}",
+    "group": "Linux Ops",
+    "description": "dnf4: Package manager for RHEL 8/9 and older Fedora versions (pre-41). For equivalent commands in other package managers, see . (View all past operations)",
+    "tags": [
+      "linux",
+      "dnf4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-sbcast-0",
     "type": "command",
     "title": "sbcast - Send a file to all nodes allocated to the current job",
@@ -56390,7 +56555,7 @@
     "title": "distrobox - View documentation for creating containers",
     "content": "tldr distrobox-create",
     "group": "Linux Ops",
-    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. `distrobox` isn't a command, but a set of commands. Note: It uses Podman or Docker to create your containers. (View documentation for creating containers)",
+    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. Note: `distrobox` isn't a command, but a set of commands. (View documentation for creating containers)",
     "tags": [
       "linux",
       "distrobox",
@@ -56405,7 +56570,7 @@
     "title": "distrobox - View documentation for listing container's information",
     "content": "tldr distrobox-list",
     "group": "Linux Ops",
-    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. `distrobox` isn't a command, but a set of commands. Note: It uses Podman or Docker to create your containers. (View documentation for listing container's information)",
+    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. Note: `distrobox` isn't a command, but a set of commands. (View documentation for listing container's information)",
     "tags": [
       "linux",
       "distrobox",
@@ -56420,7 +56585,7 @@
     "title": "distrobox - View documentation for entering the container",
     "content": "tldr distrobox-enter",
     "group": "Linux Ops",
-    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. `distrobox` isn't a command, but a set of commands. Note: It uses Podman or Docker to create your containers. (View documentation for entering the container)",
+    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. Note: `distrobox` isn't a command, but a set of commands. (View documentation for entering the container)",
     "tags": [
       "linux",
       "distrobox",
@@ -56435,7 +56600,7 @@
     "title": "distrobox - View documentation for executing a command on the host from inside a container",
     "content": "tldr distrobox-host-exec",
     "group": "Linux Ops",
-    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. `distrobox` isn't a command, but a set of commands. Note: It uses Podman or Docker to create your containers. (View documentation for executing a command on the host from inside a container)",
+    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. Note: `distrobox` isn't a command, but a set of commands. (View documentation for executing a command on the host from inside a container)",
     "tags": [
       "linux",
       "distrobox",
@@ -56450,7 +56615,7 @@
     "title": "distrobox - View documentation for exporting app/service/binary from the container to the host",
     "content": "tldr distrobox-export",
     "group": "Linux Ops",
-    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. `distrobox` isn't a command, but a set of commands. Note: It uses Podman or Docker to create your containers. (View documentation for exporting app/service/binary from the container to the host)",
+    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. Note: `distrobox` isn't a command, but a set of commands. (View documentation for exporting app/service/binary from the container to the host)",
     "tags": [
       "linux",
       "distrobox",
@@ -56465,7 +56630,7 @@
     "title": "distrobox - View documentation for upgrading containers",
     "content": "tldr distrobox-upgrade",
     "group": "Linux Ops",
-    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. `distrobox` isn't a command, but a set of commands. Note: It uses Podman or Docker to create your containers. (View documentation for upgrading containers)",
+    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. Note: `distrobox` isn't a command, but a set of commands. (View documentation for upgrading containers)",
     "tags": [
       "linux",
       "distrobox",
@@ -56480,7 +56645,7 @@
     "title": "distrobox - View documentation for stopping the containers",
     "content": "tldr distrobox-stop",
     "group": "Linux Ops",
-    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. `distrobox` isn't a command, but a set of commands. Note: It uses Podman or Docker to create your containers. (View documentation for stopping the containers)",
+    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. Note: `distrobox` isn't a command, but a set of commands. (View documentation for stopping the containers)",
     "tags": [
       "linux",
       "distrobox",
@@ -56495,7 +56660,7 @@
     "title": "distrobox - View documentation for removing the containers",
     "content": "tldr distrobox-rm",
     "group": "Linux Ops",
-    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. `distrobox` isn't a command, but a set of commands. Note: It uses Podman or Docker to create your containers. (View documentation for removing the containers)",
+    "description": "distrobox: Use any Linux distribution inside your terminal in a container. Install & use packages inside it while tightly integrating with the host OS, sharing storage (`home` directory) and hardware. Note: `distrobox` isn't a command, but a set of commands. (View documentation for removing the containers)",
     "tags": [
       "linux",
       "distrobox",
@@ -58359,6 +58524,96 @@
     "tags": [
       "linux",
       "koji-build",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-sign-0",
+    "type": "command",
+    "title": "apptainer-sign - Sign a container image using the default PGP key",
+    "content": "apptainer sign {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-sign: Add digital signatures to a SIF container image. (Sign a container image using the default PGP key)",
+    "tags": [
+      "linux",
+      "apptainer-sign",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-sign-1",
+    "type": "command",
+    "title": "apptainer-sign - Sign a container image using a specific private key file",
+    "content": "apptainer sign --key {{path/to/private.pem}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-sign: Add digital signatures to a SIF container image. (Sign a container image using a specific private key file)",
+    "tags": [
+      "linux",
+      "apptainer-sign",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-sign-2",
+    "type": "command",
+    "title": "apptainer-sign - Sign a container image using a specific PGP key index",
+    "content": "apptainer sign {{[-k|--keyidx]}} {{key_index}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-sign: Add digital signatures to a SIF container image. (Sign a container image using a specific PGP key index)",
+    "tags": [
+      "linux",
+      "apptainer-sign",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-sign-3",
+    "type": "command",
+    "title": "apptainer-sign - Sign a specific object group within the image",
+    "content": "apptainer sign {{[-g|--group-id]}} {{group_id}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-sign: Add digital signatures to a SIF container image. (Sign a specific object group within the image)",
+    "tags": [
+      "linux",
+      "apptainer-sign",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-sign-4",
+    "type": "command",
+    "title": "apptainer-sign - Sign a specific object by ID within the image",
+    "content": "apptainer sign {{[-i|--sif-id]}} {{object_id}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-sign: Add digital signatures to a SIF container image. (Sign a specific object by ID within the image)",
+    "tags": [
+      "linux",
+      "apptainer-sign",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-sign-5",
+    "type": "command",
+    "title": "apptainer-sign - Display help",
+    "content": "apptainer sign {{[-h|--help]}}",
+    "group": "Linux Ops",
+    "description": "apptainer-sign: Add digital signatures to a SIF container image. (Display help)",
+    "tags": [
+      "linux",
+      "apptainer-sign",
       "tldr",
       "en"
     ],
@@ -79230,6 +79485,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-gpm-0",
+    "type": "command",
+    "title": "gpm - Start gpm with a PS/2 [m]ouse of [t]ype ps2",
+    "content": "sudo gpm -m /dev/input/mice -t ps2",
+    "group": "Linux Ops",
+    "description": "gpm: Enable mouse support for the Linux virtual console. (Start gpm with a PS/2 [m]ouse of [t]ype ps2)",
+    "tags": [
+      "linux",
+      "gpm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-gpm-1",
+    "type": "command",
+    "title": "gpm - Start gpm with a Microsoft serial [m]ouse of [t]ype ms",
+    "content": "sudo gpm -m /dev/ttyS0 -t ms",
+    "group": "Linux Ops",
+    "description": "gpm: Enable mouse support for the Linux virtual console. (Start gpm with a Microsoft serial [m]ouse of [t]ype ms)",
+    "tags": [
+      "linux",
+      "gpm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-gpm-2",
+    "type": "command",
+    "title": "gpm - Start gpm with a [m]ouse and [t]ype in the foreground for [D]ebugging",
+    "content": "sudo gpm -m {{path/to/mouse_device}} -t {{mouse_type}} -D",
+    "group": "Linux Ops",
+    "description": "gpm: Enable mouse support for the Linux virtual console. (Start gpm with a [m]ouse and [t]ype in the foreground for [D]ebugging)",
+    "tags": [
+      "linux",
+      "gpm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-gpm-3",
+    "type": "command",
+    "title": "gpm - [k]ill the running gpm",
+    "content": "sudo gpm -k",
+    "group": "Linux Ops",
+    "description": "gpm: Enable mouse support for the Linux virtual console. ([k]ill the running gpm)",
+    "tags": [
+      "linux",
+      "gpm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-gpm-4",
+    "type": "command",
+    "title": "gpm - Start gpm with a [m]ouse and [t]ype in [R]epeater mode for X server compatibility",
+    "content": "sudo gpm -m {{path/to/mouse_device}} -t {{mouse_type}} -R",
+    "group": "Linux Ops",
+    "description": "gpm: Enable mouse support for the Linux virtual console. (Start gpm with a [m]ouse and [t]ype in [R]epeater mode for X server compatibility)",
+    "tags": [
+      "linux",
+      "gpm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-gpm-5",
+    "type": "command",
+    "title": "gpm - List the available mouse [t]ypes",
+    "content": "gpm -t help",
+    "group": "Linux Ops",
+    "description": "gpm: Enable mouse support for the Linux virtual console. (List the available mouse [t]ypes)",
+    "tags": [
+      "linux",
+      "gpm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-exiqgrep-0",
     "type": "command",
     "title": "exiqgrep - Match the sender address using a case-insensitive search",
@@ -91892,115 +92237,10 @@
   {
     "id": "tldr-en-linux-dnf5-0",
     "type": "command",
-    "title": "dnf5 - Upgrade installed packages to the newest available versions",
-    "content": "sudo dnf5 upgrade",
+    "title": "dnf5 - View documentation for the original command",
+    "content": "tldr dnf",
     "group": "Linux Ops",
-    "description": "dnf5: Package management utility for RHEL, Fedora, and CentOS (it replaces dnf, which in turn replaced yum). DNF5 is a C++ rewrite of the DNF package manager featuring improved performance and a smaller size. For equivalent commands in other package managers, see . (Upgrade installed packages to the newest available versions)",
-    "tags": [
-      "linux",
-      "dnf5",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dnf5-1",
-    "type": "command",
-    "title": "dnf5 - Search packages via keywords",
-    "content": "dnf5 search {{keyword1 keyword2 ...}}",
-    "group": "Linux Ops",
-    "description": "dnf5: Package management utility for RHEL, Fedora, and CentOS (it replaces dnf, which in turn replaced yum). DNF5 is a C++ rewrite of the DNF package manager featuring improved performance and a smaller size. For equivalent commands in other package managers, see . (Search packages via keywords)",
-    "tags": [
-      "linux",
-      "dnf5",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dnf5-2",
-    "type": "command",
-    "title": "dnf5 - Display details about a package",
-    "content": "dnf5 info {{package}}",
-    "group": "Linux Ops",
-    "description": "dnf5: Package management utility for RHEL, Fedora, and CentOS (it replaces dnf, which in turn replaced yum). DNF5 is a C++ rewrite of the DNF package manager featuring improved performance and a smaller size. For equivalent commands in other package managers, see . (Display details about a package)",
-    "tags": [
-      "linux",
-      "dnf5",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dnf5-3",
-    "type": "command",
-    "title": "dnf5 - Install new packages (Note: Use `-y` to confirm all prompts automatically)",
-    "content": "sudo dnf5 install {{package1 package2 ...}}",
-    "group": "Linux Ops",
-    "description": "dnf5: Package management utility for RHEL, Fedora, and CentOS (it replaces dnf, which in turn replaced yum). DNF5 is a C++ rewrite of the DNF package manager featuring improved performance and a smaller size. For equivalent commands in other package managers, see . (Install new packages (Note: Use `-y` to confirm all prompts automatically))",
-    "tags": [
-      "linux",
-      "dnf5",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dnf5-4",
-    "type": "command",
-    "title": "dnf5 - Remove packages",
-    "content": "sudo dnf5 remove {{package1 package2 ...}}",
-    "group": "Linux Ops",
-    "description": "dnf5: Package management utility for RHEL, Fedora, and CentOS (it replaces dnf, which in turn replaced yum). DNF5 is a C++ rewrite of the DNF package manager featuring improved performance and a smaller size. For equivalent commands in other package managers, see . (Remove packages)",
-    "tags": [
-      "linux",
-      "dnf5",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dnf5-5",
-    "type": "command",
-    "title": "dnf5 - List installed packages",
-    "content": "dnf5 list --installed",
-    "group": "Linux Ops",
-    "description": "dnf5: Package management utility for RHEL, Fedora, and CentOS (it replaces dnf, which in turn replaced yum). DNF5 is a C++ rewrite of the DNF package manager featuring improved performance and a smaller size. For equivalent commands in other package managers, see . (List installed packages)",
-    "tags": [
-      "linux",
-      "dnf5",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dnf5-6",
-    "type": "command",
-    "title": "dnf5 - Find which packages provide a given command",
-    "content": "dnf5 provides {{command}}",
-    "group": "Linux Ops",
-    "description": "dnf5: Package management utility for RHEL, Fedora, and CentOS (it replaces dnf, which in turn replaced yum). DNF5 is a C++ rewrite of the DNF package manager featuring improved performance and a smaller size. For equivalent commands in other package managers, see . (Find which packages provide a given command)",
-    "tags": [
-      "linux",
-      "dnf5",
-      "tldr",
-      "en"
-    ],
-    "source": "official"
-  },
-  {
-    "id": "tldr-en-linux-dnf5-7",
-    "type": "command",
-    "title": "dnf5 - Remove or expire cached data",
-    "content": "sudo dnf5 clean all",
-    "group": "Linux Ops",
-    "description": "dnf5: Package management utility for RHEL, Fedora, and CentOS (it replaces dnf, which in turn replaced yum). DNF5 is a C++ rewrite of the DNF package manager featuring improved performance and a smaller size. For equivalent commands in other package managers, see . (Remove or expire cached data)",
+    "description": "dnf5: This command is an alias of `dnf`. (View documentation for the original command)",
     "tags": [
       "linux",
       "dnf5",
@@ -97610,7 +97850,7 @@
     "title": "dnf - Upgrade installed packages to the newest available versions",
     "content": "sudo dnf {{[up|upgrade]}}",
     "group": "Linux Ops",
-    "description": "dnf: Package management utility for RHEL, Fedora, and CentOS (replaces yum). Some subcommands such as `group` and `config-manager` have their own usage documentation. For equivalent commands in other package managers, see . (Upgrade installed packages to the newest available versions)",
+    "description": "dnf: Package manager for Fedora 41+ and RHEL 10. For equivalent commands in other package managers, see . (Upgrade installed packages to the newest available versions)",
     "tags": [
       "linux",
       "dnf",
@@ -97625,7 +97865,7 @@
     "title": "dnf - Search packages via keywords",
     "content": "dnf {{[se|search]}} {{keyword1 keyword2 ...}}",
     "group": "Linux Ops",
-    "description": "dnf: Package management utility for RHEL, Fedora, and CentOS (replaces yum). Some subcommands such as `group` and `config-manager` have their own usage documentation. For equivalent commands in other package managers, see . (Search packages via keywords)",
+    "description": "dnf: Package manager for Fedora 41+ and RHEL 10. For equivalent commands in other package managers, see . (Search packages via keywords)",
     "tags": [
       "linux",
       "dnf",
@@ -97640,7 +97880,7 @@
     "title": "dnf - Display details about a package",
     "content": "dnf {{[if|info]}} {{package}}",
     "group": "Linux Ops",
-    "description": "dnf: Package management utility for RHEL, Fedora, and CentOS (replaces yum). Some subcommands such as `group` and `config-manager` have their own usage documentation. For equivalent commands in other package managers, see . (Display details about a package)",
+    "description": "dnf: Package manager for Fedora 41+ and RHEL 10. For equivalent commands in other package managers, see . (Display details about a package)",
     "tags": [
       "linux",
       "dnf",
@@ -97652,10 +97892,10 @@
   {
     "id": "tldr-en-linux-dnf-3",
     "type": "command",
-    "title": "dnf - Install a new package (use `--assumeyes` to confirm all prompts automatically)",
+    "title": "dnf - Install new packages (use `--assumeyes` to confirm all prompts automatically)",
     "content": "sudo dnf {{[in|install]}} {{package1 package2 ...}}",
     "group": "Linux Ops",
-    "description": "dnf: Package management utility for RHEL, Fedora, and CentOS (replaces yum). Some subcommands such as `group` and `config-manager` have their own usage documentation. For equivalent commands in other package managers, see . (Install a new package (use `--assumeyes` to confirm all prompts automatically))",
+    "description": "dnf: Package manager for Fedora 41+ and RHEL 10. For equivalent commands in other package managers, see . (Install new packages (use `--assumeyes` to confirm all prompts automatically))",
     "tags": [
       "linux",
       "dnf",
@@ -97667,10 +97907,10 @@
   {
     "id": "tldr-en-linux-dnf-4",
     "type": "command",
-    "title": "dnf - Remove a package",
+    "title": "dnf - Remove packages",
     "content": "sudo dnf {{[rm|remove]}} {{package1 package2 ...}}",
     "group": "Linux Ops",
-    "description": "dnf: Package management utility for RHEL, Fedora, and CentOS (replaces yum). Some subcommands such as `group` and `config-manager` have their own usage documentation. For equivalent commands in other package managers, see . (Remove a package)",
+    "description": "dnf: Package manager for Fedora 41+ and RHEL 10. For equivalent commands in other package managers, see . (Remove packages)",
     "tags": [
       "linux",
       "dnf",
@@ -97685,7 +97925,7 @@
     "title": "dnf - List installed packages",
     "content": "dnf {{[ls|list]}} --installed",
     "group": "Linux Ops",
-    "description": "dnf: Package management utility for RHEL, Fedora, and CentOS (replaces yum). Some subcommands such as `group` and `config-manager` have their own usage documentation. For equivalent commands in other package managers, see . (List installed packages)",
+    "description": "dnf: Package manager for Fedora 41+ and RHEL 10. For equivalent commands in other package managers, see . (List installed packages)",
     "tags": [
       "linux",
       "dnf",
@@ -97698,9 +97938,9 @@
     "id": "tldr-en-linux-dnf-6",
     "type": "command",
     "title": "dnf - Find which packages provide a given command",
-    "content": "dnf {{[wp|provides]}} {{command}}",
+    "content": "dnf provides {{command}}",
     "group": "Linux Ops",
-    "description": "dnf: Package management utility for RHEL, Fedora, and CentOS (replaces yum). Some subcommands such as `group` and `config-manager` have their own usage documentation. For equivalent commands in other package managers, see . (Find which packages provide a given command)",
+    "description": "dnf: Package manager for Fedora 41+ and RHEL 10. For equivalent commands in other package managers, see . (Find which packages provide a given command)",
     "tags": [
       "linux",
       "dnf",
@@ -97712,10 +97952,10 @@
   {
     "id": "tldr-en-linux-dnf-7",
     "type": "command",
-    "title": "dnf - View all past operations",
-    "content": "dnf {{[hist|history]}}",
+    "title": "dnf - Clean cached data",
+    "content": "sudo dnf clean {{all|dbcache|expire-cache|metadata|packages}}",
     "group": "Linux Ops",
-    "description": "dnf: Package management utility for RHEL, Fedora, and CentOS (replaces yum). Some subcommands such as `group` and `config-manager` have their own usage documentation. For equivalent commands in other package managers, see . (View all past operations)",
+    "description": "dnf: Package manager for Fedora 41+ and RHEL 10. For equivalent commands in other package managers, see . (Clean cached data)",
     "tags": [
       "linux",
       "dnf",
@@ -98739,6 +98979,111 @@
     "tags": [
       "linux",
       "calcurse",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-inspect-0",
+    "type": "command",
+    "title": "apptainer-inspect - Show the labels of an image (default)",
+    "content": "apptainer inspect {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-inspect: Display metadata of Apptainer container images. (Show the labels of an image (default))",
+    "tags": [
+      "linux",
+      "apptainer-inspect",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-inspect-1",
+    "type": "command",
+    "title": "apptainer-inspect - Show the definition file used to build the image",
+    "content": "apptainer inspect {{[-d|--deffile]}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-inspect: Display metadata of Apptainer container images. (Show the definition file used to build the image)",
+    "tags": [
+      "linux",
+      "apptainer-inspect",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-inspect-2",
+    "type": "command",
+    "title": "apptainer-inspect - Show the runscript for the image",
+    "content": "apptainer inspect {{[-r|--runscript]}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-inspect: Display metadata of Apptainer container images. (Show the runscript for the image)",
+    "tags": [
+      "linux",
+      "apptainer-inspect",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-inspect-3",
+    "type": "command",
+    "title": "apptainer-inspect - Show the environment variables of the image",
+    "content": "apptainer inspect {{[-e|--environment]}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-inspect: Display metadata of Apptainer container images. (Show the environment variables of the image)",
+    "tags": [
+      "linux",
+      "apptainer-inspect",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-inspect-4",
+    "type": "command",
+    "title": "apptainer-inspect - List all apps in the container",
+    "content": "apptainer inspect --list-apps {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-inspect: Display metadata of Apptainer container images. (List all apps in the container)",
+    "tags": [
+      "linux",
+      "apptainer-inspect",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-inspect-5",
+    "type": "command",
+    "title": "apptainer-inspect - Show all available data in JSON format",
+    "content": "apptainer inspect --all {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-inspect: Display metadata of Apptainer container images. (Show all available data in JSON format)",
+    "tags": [
+      "linux",
+      "apptainer-inspect",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-inspect-6",
+    "type": "command",
+    "title": "apptainer-inspect - Display help",
+    "content": "apptainer inspect {{[-h|--help]}}",
+    "group": "Linux Ops",
+    "description": "apptainer-inspect: Display metadata of Apptainer container images. (Display help)",
+    "tags": [
+      "linux",
+      "apptainer-inspect",
       "tldr",
       "en"
     ],
@@ -103395,6 +103740,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-gio-5",
+    "type": "command",
+    "title": "gio - Launch an application from a `.desktop` file",
+    "content": "gio launch {{path/to/file}}.desktop",
+    "group": "Linux Ops",
+    "description": "gio: Handle local and virtual files (GVfs). Part of GLib used in GNOME-based systems. (Launch an application from a `.desktop` file)",
+    "tags": [
+      "linux",
+      "gio",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-a2dismod-0",
     "type": "command",
     "title": "a2dismod - Disable a module",
@@ -105377,10 +105737,10 @@
   {
     "id": "tldr-en-linux-protonvpn-0",
     "type": "command",
-    "title": "protonvpn - Initialize ProtonVPN profile",
-    "content": "protonvpn init",
+    "title": "protonvpn - Initialize Proton VPN profile",
+    "content": "protonvpn signin",
     "group": "Linux Ops",
-    "description": "protonvpn: Unofficial third-party ProtonVPN client. (Initialize ProtonVPN profile)",
+    "description": "protonvpn: Official Proton VPN client. Some subcommands such as `connect` have their own usage documentation. (Initialize Proton VPN profile)",
     "tags": [
       "linux",
       "protonvpn",
@@ -105392,10 +105752,10 @@
   {
     "id": "tldr-en-linux-protonvpn-1",
     "type": "command",
-    "title": "protonvpn - Connect to ProtonVPN interactively",
-    "content": "protonvpn {{c|connect}}",
+    "title": "protonvpn - Remove account credentials",
+    "content": "protonvpn signout",
     "group": "Linux Ops",
-    "description": "protonvpn: Unofficial third-party ProtonVPN client. (Connect to ProtonVPN interactively)",
+    "description": "protonvpn: Official Proton VPN client. Some subcommands such as `connect` have their own usage documentation. (Remove account credentials)",
     "tags": [
       "linux",
       "protonvpn",
@@ -105407,10 +105767,10 @@
   {
     "id": "tldr-en-linux-protonvpn-2",
     "type": "command",
-    "title": "protonvpn - Display connection status",
-    "content": "protonvpn {{s|status}}",
+    "title": "protonvpn - Display Proton VPN account information",
+    "content": "protonvpn info",
     "group": "Linux Ops",
-    "description": "protonvpn: Unofficial third-party ProtonVPN client. (Display connection status)",
+    "description": "protonvpn: Official Proton VPN client. Some subcommands such as `connect` have their own usage documentation. (Display Proton VPN account information)",
     "tags": [
       "linux",
       "protonvpn",
@@ -105422,10 +105782,10 @@
   {
     "id": "tldr-en-linux-protonvpn-3",
     "type": "command",
-    "title": "protonvpn - Disconnect from ProtonVPN",
-    "content": "protonvpn {{d|disconnect}}",
+    "title": "protonvpn - Connect to Proton VPN interactively",
+    "content": "protonvpn connect",
     "group": "Linux Ops",
-    "description": "protonvpn: Unofficial third-party ProtonVPN client. (Disconnect from ProtonVPN)",
+    "description": "protonvpn: Official Proton VPN client. Some subcommands such as `connect` have their own usage documentation. (Connect to Proton VPN interactively)",
     "tags": [
       "linux",
       "protonvpn",
@@ -105437,10 +105797,10 @@
   {
     "id": "tldr-en-linux-protonvpn-4",
     "type": "command",
-    "title": "protonvpn - Reconnect or connect to the last server used",
-    "content": "protonvpn {{r|reconnect}}",
+    "title": "protonvpn - Disconnect from Proton VPN",
+    "content": "protonvpn disconnect",
     "group": "Linux Ops",
-    "description": "protonvpn: Unofficial third-party ProtonVPN client. (Reconnect or connect to the last server used)",
+    "description": "protonvpn: Official Proton VPN client. Some subcommands such as `connect` have their own usage documentation. (Disconnect from Proton VPN)",
     "tags": [
       "linux",
       "protonvpn",
@@ -105452,10 +105812,10 @@
   {
     "id": "tldr-en-linux-protonvpn-5",
     "type": "command",
-    "title": "protonvpn - Refresh OpenVPN configuration and server data",
-    "content": "protonvpn refresh",
+    "title": "protonvpn - Display help",
+    "content": "protonvpn {{[-h|--help]}}",
     "group": "Linux Ops",
-    "description": "protonvpn: Unofficial third-party ProtonVPN client. (Refresh OpenVPN configuration and server data)",
+    "description": "protonvpn: Official Proton VPN client. Some subcommands such as `connect` have their own usage documentation. (Display help)",
     "tags": [
       "linux",
       "protonvpn",
@@ -105465,15 +105825,75 @@
     "source": "official"
   },
   {
-    "id": "tldr-en-linux-protonvpn-6",
+    "id": "tldr-en-linux-apptainer-search-0",
     "type": "command",
-    "title": "protonvpn - Display help for a subcommand",
-    "content": "protonvpn {{subcommand}} --help",
+    "title": "apptainer-search - Search for container images matching a query",
+    "content": "apptainer search {{query}}",
     "group": "Linux Ops",
-    "description": "protonvpn: Unofficial third-party ProtonVPN client. (Display help for a subcommand)",
+    "description": "apptainer-search: Search a Container Library for container images. (Search for container images matching a query)",
     "tags": [
       "linux",
-      "protonvpn",
+      "apptainer-search",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-search-1",
+    "type": "command",
+    "title": "apptainer-search - Search for container images for a specific architecture",
+    "content": "apptainer search --arch {{amd64|arm64|386|ppc64le|s390x}} {{query}}",
+    "group": "Linux Ops",
+    "description": "apptainer-search: Search a Container Library for container images. (Search for container images for a specific architecture)",
+    "tags": [
+      "linux",
+      "apptainer-search",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-search-2",
+    "type": "command",
+    "title": "apptainer-search - Search for only signed container images",
+    "content": "apptainer search --signed {{query}}",
+    "group": "Linux Ops",
+    "description": "apptainer-search: Search a Container Library for container images. (Search for only signed container images)",
+    "tags": [
+      "linux",
+      "apptainer-search",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-search-3",
+    "type": "command",
+    "title": "apptainer-search - Search in a specific Container Library",
+    "content": "apptainer search --library {{library_url}} {{query}}",
+    "group": "Linux Ops",
+    "description": "apptainer-search: Search a Container Library for container images. (Search in a specific Container Library)",
+    "tags": [
+      "linux",
+      "apptainer-search",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-search-4",
+    "type": "command",
+    "title": "apptainer-search - Display help",
+    "content": "apptainer search {{[-h|--help]}}",
+    "group": "Linux Ops",
+    "description": "apptainer-search: Search a Container Library for container images. (Display help)",
+    "tags": [
+      "linux",
+      "apptainer-search",
       "tldr",
       "en"
     ],

@@ -255,6 +255,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zed-0",
+    "type": "command",
+    "title": "zed - 在 Zed 中打开指定路径",
+    "content": "zed {{路径/到/文件或目录1 路径/到/文件或目录2 ...}}",
+    "group": "通用工具 (Common)",
+    "description": "zed: 一款旨在快速、高效且便捷的文本编辑器。 (在 Zed 中打开指定路径)",
+    "tags": [
+      "common",
+      "zed",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zed-1",
+    "type": "command",
+    "title": "zed - 在前台打开一个路径并显示日志",
+    "content": "zed {{路径/到/项目}} --foreground",
+    "group": "通用工具 (Common)",
+    "description": "zed: 一款旨在快速、高效且便捷的文本编辑器。 (在前台打开一个路径并显示日志)",
+    "tags": [
+      "common",
+      "zed",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zed-2",
+    "type": "command",
+    "title": "zed - 在新窗口中打开一个路径",
+    "content": "zed {{路径/到/项目}} {{[-n|--new]}}",
+    "group": "通用工具 (Common)",
+    "description": "zed: 一款旨在快速、高效且便捷的文本编辑器。 (在新窗口中打开一个路径)",
+    "tags": [
+      "common",
+      "zed",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zed-3",
+    "type": "command",
+    "title": "zed - 在指定的行号和列号处打开文件",
+    "content": "zed {{路径/到/文件}}:{{行号}}:{{列号}}",
+    "group": "通用工具 (Common)",
+    "description": "zed: 一款旨在快速、高效且便捷的文本编辑器。 (在指定的行号和列号处打开文件)",
+    "tags": [
+      "common",
+      "zed",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zed-4",
+    "type": "command",
+    "title": "zed - 在 Zed 中为同一文件的两个版本打开一个差异选项卡",
+    "content": "zed --diff {{路径/到/旧文件}} {{路径/到/新文件}}",
+    "group": "通用工具 (Common)",
+    "description": "zed: 一款旨在快速、高效且便捷的文本编辑器。 (在 Zed 中为同一文件的两个版本打开一个差异选项卡)",
+    "tags": [
+      "common",
+      "zed",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-ld-0",
     "type": "command",
     "title": "ld - 将一个没有依赖项的特定目标文件链接到可执行文件中",
@@ -347,10 +422,10 @@
   {
     "id": "tldr-zh-common-docker-container-rm-3",
     "type": "command",
-    "title": "docker-container-rm - 显示帮助信息",
+    "title": "docker-container-rm - 显示帮助",
     "content": "docker rm {{[-h|--help]}}",
     "group": "通用工具 (Common)",
-    "description": "docker-container-rm: 移除容器。 (显示帮助信息)",
+    "description": "docker-container-rm: 移除容器。 (显示帮助)",
     "tags": [
       "common",
       "docker-container-rm",
@@ -1170,6 +1245,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zapier-validate-0",
+    "type": "command",
+    "title": "zapier-validate - 验证一个集成",
+    "content": "zapier validate",
+    "group": "通用工具 (Common)",
+    "description": "zapier-validate: 验证一个 Zapier 集成。 (验证一个集成)",
+    "tags": [
+      "common",
+      "zapier-validate",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-validate-1",
+    "type": "command",
+    "title": "zapier-validate - 在不进行样式检查的情况下验证一个集成",
+    "content": "zapier validate --without-style",
+    "group": "通用工具 (Common)",
+    "description": "zapier-validate: 验证一个 Zapier 集成。 (在不进行样式检查的情况下验证一个集成)",
+    "tags": [
+      "common",
+      "zapier-validate",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-validate-2",
+    "type": "command",
+    "title": "zapier-validate - 在不运行构建脚本的情况下验证一个集成",
+    "content": "zapier validate --skip-build",
+    "group": "通用工具 (Common)",
+    "description": "zapier-validate: 验证一个 Zapier 集成。 (在不运行构建脚本的情况下验证一个集成)",
+    "tags": [
+      "common",
+      "zapier-validate",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-validate-3",
+    "type": "command",
+    "title": "zapier-validate - 使用额外的调试输出验证一个集成",
+    "content": "zapier validate {{[-d|--debug]}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-validate: 验证一个 Zapier 集成。 (使用额外的调试输出验证一个集成)",
+    "tags": [
+      "common",
+      "zapier-validate",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-validate-4",
+    "type": "command",
+    "title": "zapier-validate - 使用不同的输出结构验证一个集成",
+    "content": "zapier validate {{[-f|--format]}} {{plain|json|raw|row|table}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-validate: 验证一个 Zapier 集成。 (使用不同的输出结构验证一个集成)",
+    "tags": [
+      "common",
+      "zapier-validate",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-zapier-push-0",
     "type": "command",
     "title": "zapier-push - 向 Zapier 推送一个集成",
@@ -1554,6 +1704,111 @@
     "tags": [
       "common",
       "git-add",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-yek-0",
+    "type": "command",
+    "title": "yek - 序列化当前目录并将输出写入临时文件（打印文件路径）",
+    "content": "yek",
+    "group": "通用工具 (Common)",
+    "description": "yek: 将一个代码仓库或目录序列化为适合 LLM 使用的单个文件（基于 Rust 的快速 repomapper 工具）。 (序列化当前目录并将输出写入临时文件（打印文件路径）)",
+    "tags": [
+      "common",
+      "yek",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-yek-1",
+    "type": "command",
+    "title": "yek - 序列化指定目录并将输出写入目标目录",
+    "content": "yek {{路径/到/目录1 路径/到/目录2 ...}} --output-dir {{路径/到/输出目录}}",
+    "group": "通用工具 (Common)",
+    "description": "yek: 将一个代码仓库或目录序列化为适合 LLM 使用的单个文件（基于 Rust 的快速 repomapper 工具）。 (序列化指定目录并将输出写入目标目录)",
+    "tags": [
+      "common",
+      "yek",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-yek-2",
+    "type": "command",
+    "title": "yek - 处理多个文件或使用通配符模式（请用引号包裹通配符，以避免 shell 展开）",
+    "content": "yek \"{{路径/到/目录/**/*.rs}}\" \"{{路径/到/目录/**/*.md}}\"",
+    "group": "通用工具 (Common)",
+    "description": "yek: 将一个代码仓库或目录序列化为适合 LLM 使用的单个文件（基于 Rust 的快速 repomapper 工具）。 (处理多个文件或使用通配符模式（请用引号包裹通配符，以避免 shell 展开）)",
+    "tags": [
+      "common",
+      "yek",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-yek-3",
+    "type": "command",
+    "title": "yek - 将基于 token 的输出大小限制为 128k tokens",
+    "content": "yek {{路径/到/目录}} --tokens 128k",
+    "group": "通用工具 (Common)",
+    "description": "yek: 将一个代码仓库或目录序列化为适合 LLM 使用的单个文件（基于 Rust 的快速 repomapper 工具）。 (将基于 token 的输出大小限制为 128k tokens)",
+    "tags": [
+      "common",
+      "yek",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-yek-4",
+    "type": "command",
+    "title": "yek - 以字节为单位限制最大输出大小，并显式指定输出文件名",
+    "content": "yek {{路径/到/目录}} --max-size {{100KB}} --output-name {{yek-output.txt}}",
+    "group": "通用工具 (Common)",
+    "description": "yek: 将一个代码仓库或目录序列化为适合 LLM 使用的单个文件（基于 Rust 的快速 repomapper 工具）。 (以字节为单位限制最大输出大小，并显式指定输出文件名)",
+    "tags": [
+      "common",
+      "yek",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-yek-5",
+    "type": "command",
+    "title": "yek - 以流式 JSON 格式输出",
+    "content": "yek {{路径/到/目录}} --json",
+    "group": "通用工具 (Common)",
+    "description": "yek: 将一个代码仓库或目录序列化为适合 LLM 使用的单个文件（基于 Rust 的快速 repomapper 工具）。 (以流式 JSON 格式输出)",
+    "tags": [
+      "common",
+      "yek",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-yek-6",
+    "type": "command",
+    "title": "yek - 在输出中包含目录树结构头部",
+    "content": "yek {{路径/到/目录}} --tree-header",
+    "group": "通用工具 (Common)",
+    "description": "yek: 将一个代码仓库或目录序列化为适合 LLM 使用的单个文件（基于 Rust 的快速 repomapper 工具）。 (在输出中包含目录树结构头部)",
+    "tags": [
+      "common",
+      "yek",
       "tldr",
       "zh"
     ],
@@ -2057,10 +2312,10 @@
   {
     "id": "tldr-zh-common-gendesk-2",
     "type": "command",
-    "title": "gendesk - 显示帮助信息",
+    "title": "gendesk - 显示帮助",
     "content": "gendesk -h",
     "group": "通用工具 (Common)",
-    "description": "gendesk: 通过指定少量信息的命令来生成`.desktop`文件以及下载图标。 (显示帮助信息)",
+    "description": "gendesk: 通过指定少量信息的命令来生成`.desktop`文件以及下载图标。 (显示帮助)",
     "tags": [
       "common",
       "gendesk",
@@ -3213,7 +3468,7 @@
     "id": "tldr-zh-common-ls-3",
     "type": "command",
     "title": "ls - 列出包含隐藏文件的所有文件信息，包括权限，所有者，大小和修改日期",
-    "content": "ls {{[-la|--all -l]}}",
+    "content": "ls {{[-la|-l --all]}}",
     "group": "通用工具 (Common)",
     "description": "ls: 列出目录中的内容。 (列出包含隐藏文件的所有文件信息，包括权限，所有者，大小和修改日期)",
     "tags": [
@@ -3243,7 +3498,7 @@
     "id": "tldr-zh-common-ls-5",
     "type": "command",
     "title": "ls - 列出所有文件信息，按大小降序排序",
-    "content": "ls {{-lSR|-lS --recursive}}",
+    "content": "ls {{[-lSR|-lS --recursive]}}",
     "group": "通用工具 (Common)",
     "description": "ls: 列出目录中的内容。 (列出所有文件信息，按大小降序排序)",
     "tags": [
@@ -4185,6 +4440,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zerotier-one-0",
+    "type": "command",
+    "title": "zerotier-one - 启动 ZeroTier One [d] 守护进程",
+    "content": "sudo zerotier-one -d",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-one: 启动 ZeroTier One 守护进程。 (启动 ZeroTier One [d] 守护进程)",
+    "tags": [
+      "common",
+      "zerotier-one",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-qtcreator-0",
     "type": "command",
     "title": "qtcreator - 启动 Qt Creator",
@@ -4637,10 +4907,10 @@
   {
     "id": "tldr-zh-common-stty-6",
     "type": "command",
-    "title": "stty - 显示帮助信息",
+    "title": "stty - 显示帮助",
     "content": "stty --help",
     "group": "通用工具 (Common)",
-    "description": "stty: 设置终端设备接口的选项。 (显示帮助信息)",
+    "description": "stty: 设置终端设备接口的选项。 (显示帮助)",
     "tags": [
       "common",
       "stty",
@@ -5925,6 +6195,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zapier-test-0",
+    "type": "command",
+    "title": "zapier-test - 测试一个集成",
+    "content": "zapier test",
+    "group": "通用工具 (Common)",
+    "description": "zapier-test: 通过 `package.json` 中的 `test` 脚本测试一个 Zapier 集成。 (测试一个集成)",
+    "tags": [
+      "common",
+      "zapier-test",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-test-1",
+    "type": "command",
+    "title": "zapier-test - 在跳过验证的情况下测试一个集成",
+    "content": "zapier test --skip-validate",
+    "group": "通用工具 (Common)",
+    "description": "zapier-test: 通过 `package.json` 中的 `test` 脚本测试一个 Zapier 集成。 (在跳过验证的情况下测试一个集成)",
+    "tags": [
+      "common",
+      "zapier-test",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-test-2",
+    "type": "command",
+    "title": "zapier-test - 使用额外的调试输出测试一个集成",
+    "content": "zapier test {{[-d|--debug]}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-test: 通过 `package.json` 中的 `test` 脚本测试一个 Zapier 集成。 (使用额外的调试输出测试一个集成)",
+    "tags": [
+      "common",
+      "zapier-test",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-git-alias-0",
     "type": "command",
     "title": "git-alias - 列出所有别名",
@@ -6468,7 +6783,7 @@
     "id": "tldr-zh-common-youtube-dl-1",
     "type": "command",
     "title": "youtube-dl - 列出视频或播放列表的所有可用格式",
-    "content": "youtube-dl --list-formats '{{https://www.youtube.com/watch?v=Mwa0_nE9H7A}}'",
+    "content": "youtube-dl {{[-F|--list-formats]}} '{{https://www.youtube.com/watch?v=Mwa0_nE9H7A}}'",
     "group": "通用工具 (Common)",
     "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`, `ytfzf`, `you-get`。 (列出视频或播放列表的所有可用格式)",
     "tags": [
@@ -6483,7 +6798,7 @@
     "id": "tldr-zh-common-youtube-dl-2",
     "type": "command",
     "title": "youtube-dl - 以特定质量下载视频或播放列表",
-    "content": "youtube-dl --format \"{{best[height<=480]}}\" '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'",
+    "content": "youtube-dl {{[-f|--format]}} \"{{best[height<=480]}}\" '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'",
     "group": "通用工具 (Common)",
     "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`, `ytfzf`, `you-get`。 (以特定质量下载视频或播放列表)",
     "tags": [
@@ -6498,7 +6813,7 @@
     "id": "tldr-zh-common-youtube-dl-3",
     "type": "command",
     "title": "youtube-dl - 下载视频的音频并将其转换为 MP3",
-    "content": "youtube-dl -x --audio-format {{mp3}} '{{url}}'",
+    "content": "youtube-dl {{[-x|--extract-audio]}} --audio-format {{mp3}} '{{url}}'",
     "group": "通用工具 (Common)",
     "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`, `ytfzf`, `you-get`。 (下载视频的音频并将其转换为 MP3)",
     "tags": [
@@ -6513,7 +6828,7 @@
     "id": "tldr-zh-common-youtube-dl-4",
     "type": "command",
     "title": "youtube-dl - 下载最佳质量的音频和视频并合并它们",
-    "content": "youtube-dl -f bestvideo+bestaudio '{{url}}'",
+    "content": "youtube-dl {{[-f|--format]}} bestvideo+bestaudio '{{url}}'",
     "group": "通用工具 (Common)",
     "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`, `ytfzf`, `you-get`。 (下载最佳质量的音频和视频并合并它们)",
     "tags": [
@@ -6528,7 +6843,7 @@
     "id": "tldr-zh-common-youtube-dl-5",
     "type": "command",
     "title": "youtube-dl - 将视频下载为 MP4 文件并自定义文件名",
-    "content": "youtube-dl --format {{mp4}} -o \"{{%(playlist_index)s-%(title)s by %(uploader)s on %(upload_date)s in %(playlist)s.%(ext)s}}\" '{{url}}'",
+    "content": "youtube-dl {{[-f|--format]}} {{mp4}} {{[-o|--output]}} \"{{%(playlist_index)s-%(title)s by %(uploader)s on %(upload_date)s in %(playlist)s.%(ext)s}}\" '{{url}}'",
     "group": "通用工具 (Common)",
     "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`, `ytfzf`, `you-get`。 (将视频下载为 MP4 文件并自定义文件名)",
     "tags": [
@@ -6558,7 +6873,7 @@
     "id": "tldr-zh-common-youtube-dl-7",
     "type": "command",
     "title": "youtube-dl - 下载一个播放列表并从中提取 MP3",
-    "content": "youtube-dl -f \"bestaudio\" --continue --no-overwrites --ignore-errors --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s\" '{{url_to_playlist}}'",
+    "content": "youtube-dl {{[-f|--format]}} \"bestaudio\" {{[-c|--continue]}} {{[-w|--no-overwrites]}} {{[-i|--ignore-errors]}} {{[-x|--extract-audio]}} --audio-format mp3 {{[-o|--output]}} \"%(title)s.%(ext)s\" '{{url_to_playlist}}'",
     "group": "通用工具 (Common)",
     "description": "youtube-dl: 从 YouTube 和其他网站下载视频。 另请参阅：`yt-dlp`, `ytfzf`, `you-get`。 (下载一个播放列表并从中提取 MP3)",
     "tags": [
@@ -10440,6 +10755,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zapier-login-0",
+    "type": "command",
+    "title": "zapier-login - 登录到一个 Zapier 帐户",
+    "content": "zapier login",
+    "group": "通用工具 (Common)",
+    "description": "zapier-login: 登录到一个 Zapier 帐户。 (登录到一个 Zapier 帐户)",
+    "tags": [
+      "common",
+      "zapier-login",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-login-1",
+    "type": "command",
+    "title": "zapier-login - 使用 SSO 部署密钥登录到一个 Zapier 帐户",
+    "content": "zapier login {{[-s|--sso]}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-login: 登录到一个 Zapier 帐户。 (使用 SSO 部署密钥登录到一个 Zapier 帐户)",
+    "tags": [
+      "common",
+      "zapier-login",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-login-2",
+    "type": "command",
+    "title": "zapier-login - 显示额外的调试输出",
+    "content": "zapier login {{[-d|--debug]}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-login: 登录到一个 Zapier 帐户。 (显示额外的调试输出)",
+    "tags": [
+      "common",
+      "zapier-login",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-copr-0",
     "type": "command",
     "title": "copr - 查看原命令的文档",
@@ -12182,10 +12542,10 @@
   {
     "id": "tldr-zh-common-compgen-7",
     "type": "command",
-    "title": "compgen - 显示帮助信息",
+    "title": "compgen - 显示帮助",
     "content": "compgen --help",
     "group": "通用工具 (Common)",
-    "description": "compgen: 用于在 bash 中自动完成的内置命令，按两次 `` 键即可调用该命令。 另请参阅：`complete`, `compopt`。 (显示帮助信息)",
+    "description": "compgen: 用于在 bash 中自动完成的内置命令，按两次 `` 键即可调用该命令。 另请参阅：`complete`, `compopt`。 (显示帮助)",
     "tags": [
       "common",
       "compgen",
@@ -13335,6 +13695,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zinit-0",
+    "type": "command",
+    "title": "zinit - 显示所有已安装的插件",
+    "content": "zinit plugins",
+    "group": "通用工具 (Common)",
+    "description": "zinit: 灵活且极其快速的 Zsh 插件管理器。 (显示所有已安装的插件)",
+    "tags": [
+      "common",
+      "zinit",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zinit-1",
+    "type": "command",
+    "title": "zinit - 进入某个插件的目录",
+    "content": "zinit cd {{仓库所有者}}/{{仓库名称}}",
+    "group": "通用工具 (Common)",
+    "description": "zinit: 灵活且极其快速的 Zsh 插件管理器。 (进入某个插件的目录)",
+    "tags": [
+      "common",
+      "zinit",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zinit-2",
+    "type": "command",
+    "title": "zinit - 从 GitHub 获取最新版的 `zinit`",
+    "content": "zinit self-update",
+    "group": "通用工具 (Common)",
+    "description": "zinit: 灵活且极其快速的 Zsh 插件管理器。 (从 GitHub 获取最新版的 `zinit`)",
+    "tags": [
+      "common",
+      "zinit",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zinit-3",
+    "type": "command",
+    "title": "zinit - 列出所有已安装补全的状态",
+    "content": "zinit completions",
+    "group": "通用工具 (Common)",
+    "description": "zinit: 灵活且极其快速的 Zsh 插件管理器。 (列出所有已安装补全的状态)",
+    "tags": [
+      "common",
+      "zinit",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zinit-4",
+    "type": "command",
+    "title": "zinit - 为某个插件安装补全",
+    "content": "zinit creinstall {{仓库所有者}}/{{仓库名称}}",
+    "group": "通用工具 (Common)",
+    "description": "zinit: 灵活且极其快速的 Zsh 插件管理器。 (为某个插件安装补全)",
+    "tags": [
+      "common",
+      "zinit",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zinit-5",
+    "type": "command",
+    "title": "zinit - 删除某个插件的补全",
+    "content": "zinit cuninstall {{仓库所有者}}/{{仓库名称}}",
+    "group": "通用工具 (Common)",
+    "description": "zinit: 灵活且极其快速的 Zsh 插件管理器。 (删除某个插件的补全)",
+    "tags": [
+      "common",
+      "zinit",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-lzmore-0",
     "type": "command",
     "title": "lzmore - 查看原命令的文档",
@@ -13464,6 +13914,126 @@
     "tags": [
       "common",
       "yt-dlp",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_server-0",
+    "type": "command",
+    "title": "zabbix_server - 使用默认配置文件启动服务器",
+    "content": "zabbix_server",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_server: Zabbix 软件的核心守护进程。 (使用默认配置文件启动服务器)",
+    "tags": [
+      "common",
+      "zabbix_server",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_server-1",
+    "type": "command",
+    "title": "zabbix_server - 使用自定义配置文件启动服务器",
+    "content": "zabbix_server {{[-c|--config]}} {{路径/到/zabbix_server.conf}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_server: Zabbix 软件的核心守护进程。 (使用自定义配置文件启动服务器)",
+    "tags": [
+      "common",
+      "zabbix_server",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_server-2",
+    "type": "command",
+    "title": "zabbix_server - 在前台运行服务器",
+    "content": "zabbix_server {{[-c|--config]}} {{路径/到/zabbix_server.conf}} {{[-f|--foreground]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_server: Zabbix 软件的核心守护进程。 (在前台运行服务器)",
+    "tags": [
+      "common",
+      "zabbix_server",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_server-3",
+    "type": "command",
+    "title": "zabbix_server - 测试配置文件并退出",
+    "content": "zabbix_server {{[-c|--config]}} {{路径/到/zabbix_server.conf}} {{[-T|--test-config]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_server: Zabbix 软件的核心守护进程。 (测试配置文件并退出)",
+    "tags": [
+      "common",
+      "zabbix_server",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_server-4",
+    "type": "command",
+    "title": "zabbix_server - 重新加载配置缓存（运行时控制）",
+    "content": "zabbix_server {{[-c|--config]}} {{路径/到/zabbix_server.conf}} {{[-R|--runtime-control]}} config_cache_reload",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_server: Zabbix 软件的核心守护进程。 (重新加载配置缓存（运行时控制）)",
+    "tags": [
+      "common",
+      "zabbix_server",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_server-5",
+    "type": "command",
+    "title": "zabbix_server - 执行 housekeeper（运行时控制）",
+    "content": "zabbix_server {{[-c|--config]}} {{路径/到/zabbix_server.conf}} {{[-R|--runtime-control]}} housekeeper_execute",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_server: Zabbix 软件的核心守护进程。 (执行 housekeeper（运行时控制）)",
+    "tags": [
+      "common",
+      "zabbix_server",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_server-6",
+    "type": "command",
+    "title": "zabbix_server - 增加或减少所有进程的日志级别（运行时控制）",
+    "content": "zabbix_server {{[-c|--config]}} {{路径/到/zabbix_server.conf}} {{[-R|--runtime-control]}} log_level_{{increase|decrease}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_server: Zabbix 软件的核心守护进程。 (增加或减少所有进程的日志级别（运行时控制）)",
+    "tags": [
+      "common",
+      "zabbix_server",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_server-7",
+    "type": "command",
+    "title": "zabbix_server - 显示帮助",
+    "content": "zabbix_server {{[-h|--help]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_server: Zabbix 软件的核心守护进程。 (显示帮助)",
+    "tags": [
+      "common",
+      "zabbix_server",
       "tldr",
       "zh"
     ],
@@ -13832,10 +14402,10 @@
   {
     "id": "tldr-zh-common-jest-7",
     "type": "command",
-    "title": "jest - 显示帮助信息",
+    "title": "jest - 显示帮助",
     "content": "jest --help",
     "group": "通用工具 (Common)",
-    "description": "jest: 一个零配置的 JavaScript 测试平台。 (显示帮助信息)",
+    "description": "jest: 一个零配置的 JavaScript 测试平台。 (显示帮助)",
     "tags": [
       "common",
       "jest",
@@ -15977,10 +16547,10 @@
   {
     "id": "tldr-zh-common-btop-6",
     "type": "command",
-    "title": "btop - 显示帮助信息",
+    "title": "btop - 显示帮助",
     "content": "btop {{[-h|--help]}}",
     "group": "通用工具 (Common)",
-    "description": "btop: 显示有关 CPU、内存、磁盘、网络和进程的信息的资源监视器。 `bpytop` 的 C++ 版本。 另请参阅：`btm`, `glances`, `atop`, `htop`, `top`。 (显示帮助信息)",
+    "description": "btop: 显示有关 CPU、内存、磁盘、网络和进程的信息的资源监视器。 `bpytop` 的 C++ 版本。 另请参阅：`btm`, `glances`, `atop`, `htop`, `top`。 (显示帮助)",
     "tags": [
       "common",
       "btop",
@@ -16907,10 +17477,10 @@
   {
     "id": "tldr-zh-common-qmake-5",
     "type": "command",
-    "title": "qmake - 显示帮助信息",
+    "title": "qmake - 显示帮助",
     "content": "qmake -help",
     "group": "通用工具 (Common)",
-    "description": "qmake: 从 Qt 项目文件生成 Makefile。 (显示帮助信息)",
+    "description": "qmake: 从 Qt 项目文件生成 Makefile。 (显示帮助)",
     "tags": [
       "common",
       "qmake",
@@ -17627,10 +18197,10 @@
   {
     "id": "tldr-zh-common-jdeps-4",
     "type": "command",
-    "title": "jdeps - 显示帮助信息",
+    "title": "jdeps - 显示帮助",
     "content": "jdeps --help",
     "group": "通用工具 (Common)",
-    "description": "jdeps: Java 类依赖分析器。 (显示帮助信息)",
+    "description": "jdeps: Java 类依赖分析器。 (显示帮助)",
     "tags": [
       "common",
       "jdeps",
@@ -18018,7 +18588,7 @@
     "id": "tldr-zh-common-agate-0",
     "type": "command",
     "title": "agate - 运行并生成一个私钥和证书",
-    "content": "agate --content {{路径/到/内容/}} --addr {{[::]:1965}} --addr {{0.0.0.0:1965}} --hostname {{example.com}} --lang {{en-US}}",
+    "content": "agate --content {{路径/到/内容}}/ --addr {{[::]:1965}} --addr {{0.0.0.0:1965}} --hostname {{example.com}} --lang {{en-US}}",
     "group": "通用工具 (Common)",
     "description": "agate: 一个简单的 Gemini 网络协议的服务器。 (运行并生成一个私钥和证书)",
     "tags": [
@@ -18048,7 +18618,7 @@
     "id": "tldr-zh-common-agate-2",
     "type": "command",
     "title": "agate - 显示帮助",
-    "content": "agate -h",
+    "content": "agate {{[-h|--help]}}",
     "group": "通用工具 (Common)",
     "description": "agate: 一个简单的 Gemini 网络协议的服务器。 (显示帮助)",
     "tags": [
@@ -19275,6 +19845,111 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zabbix_agent2-0",
+    "type": "command",
+    "title": "zabbix_agent2 - 使用默认配置文件启动代理",
+    "content": "zabbix_agent2",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agent2: 用于监控服务器参数的守护进程。 (使用默认配置文件启动代理)",
+    "tags": [
+      "common",
+      "zabbix_agent2",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agent2-1",
+    "type": "command",
+    "title": "zabbix_agent2 - 使用自定义配置文件启动代理",
+    "content": "zabbix_agent2 {{[-c|--config]}} {{路径/到/zabbix_agent2.conf}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agent2: 用于监控服务器参数的守护进程。 (使用自定义配置文件启动代理)",
+    "tags": [
+      "common",
+      "zabbix_agent2",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agent2-2",
+    "type": "command",
+    "title": "zabbix_agent2 - 测试配置文件并退出",
+    "content": "zabbix_agent2 {{[-c|--config]}} {{路径/到/zabbix_agent2.conf}} {{[-T|--test-config]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agent2: 用于监控服务器参数的守护进程。 (测试配置文件并退出)",
+    "tags": [
+      "common",
+      "zabbix_agent2",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agent2-3",
+    "type": "command",
+    "title": "zabbix_agent2 - 测试指定监控项并输出详细信息",
+    "content": "zabbix_agent2 {{[-c|--config]}} {{路径/到/zabbix_agent2.conf}} {{[-t|--test]}} {{监控项键值}} {{[-v|--verbose]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agent2: 用于监控服务器参数的守护进程。 (测试指定监控项并输出详细信息)",
+    "tags": [
+      "common",
+      "zabbix_agent2",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agent2-4",
+    "type": "command",
+    "title": "zabbix_agent2 - 从配置文件中重新加载用户参数（运行时控制）",
+    "content": "zabbix_agent2 {{[-c|--config]}} {{路径/到/zabbix_agent2.conf}} {{[-R|--runtime-control]}} userparameter_reload",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agent2: 用于监控服务器参数的守护进程。 (从配置文件中重新加载用户参数（运行时控制）)",
+    "tags": [
+      "common",
+      "zabbix_agent2",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agent2-5",
+    "type": "command",
+    "title": "zabbix_agent2 - 增加或减少日志级别（运行时控制）",
+    "content": "zabbix_agent2 {{[-c|--config]}} {{路径/到/zabbix_agent2.conf}} {{[-R|--runtime-control]}} loglevel {{increase|decrease}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agent2: 用于监控服务器参数的守护进程。 (增加或减少日志级别（运行时控制）)",
+    "tags": [
+      "common",
+      "zabbix_agent2",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agent2-6",
+    "type": "command",
+    "title": "zabbix_agent2 - 显示帮助",
+    "content": "zabbix_agent2 {{[-h|--help]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agent2: 用于监控服务器参数的守护进程。 (显示帮助)",
+    "tags": [
+      "common",
+      "zabbix_agent2",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-nop-0",
     "type": "command",
     "title": "nop - 漂亮地打印一个或多个规范格式的图形",
@@ -19412,10 +20087,10 @@
   {
     "id": "tldr-zh-common-git-annex-5",
     "type": "command",
-    "title": "git-annex - 显示帮助信息",
+    "title": "git-annex - 显示帮助",
     "content": "git annex help",
     "group": "通用工具 (Common)",
-    "description": "git-annex: 用 Git 管理文件，但不将其内容提交到版本库中。 当文件被附属时，其内容会被移至键值存储中，并创建一个指向该内容的符号链接。 (显示帮助信息)",
+    "description": "git-annex: 用 Git 管理文件，但不将其内容提交到版本库中。 当文件被附属时，其内容会被移至键值存储中，并创建一个指向该内容的符号链接。 (显示帮助)",
     "tags": [
       "common",
       "git-annex",
@@ -20672,10 +21347,10 @@
   {
     "id": "tldr-zh-common-picocom-4",
     "type": "command",
-    "title": "picocom - 显示帮助信息",
+    "title": "picocom - 显示帮助",
     "content": "picocom {{[-h|--help]}}",
     "group": "通用工具 (Common)",
-    "description": "picocom: 模拟串行端口的极简程序。 (显示帮助信息)",
+    "description": "picocom: 模拟串行端口的极简程序。 (显示帮助)",
     "tags": [
       "common",
       "picocom",
@@ -26220,6 +26895,66 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zapier-versions-0",
+    "type": "command",
+    "title": "zapier-versions - 列出某个集成的版本",
+    "content": "zapier versions",
+    "group": "通用工具 (Common)",
+    "description": "zapier-versions: 列出 Zapier 集成的版本。 (列出某个集成的版本)",
+    "tags": [
+      "common",
+      "zapier-versions",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-versions-1",
+    "type": "command",
+    "title": "zapier-versions - 包含已弃用的版本",
+    "content": "zapier versions {{[-a|--all]}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-versions: 列出 Zapier 集成的版本。 (包含已弃用的版本)",
+    "tags": [
+      "common",
+      "zapier-versions",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-versions-2",
+    "type": "command",
+    "title": "zapier-versions - 显示额外的调试输出",
+    "content": "zapier versions {{[-d|--debug]}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-versions: 列出 Zapier 集成的版本。 (显示额外的调试输出)",
+    "tags": [
+      "common",
+      "zapier-versions",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-versions-3",
+    "type": "command",
+    "title": "zapier-versions - 使用不同的输出结构列出版本",
+    "content": "zapier versions {{[-f|--format]}} {{plain|json|raw|row|table}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-versions: 列出 Zapier 集成的版本。 (使用不同的输出结构列出版本)",
+    "tags": [
+      "common",
+      "zapier-versions",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-carbon-now-0",
     "type": "command",
     "title": "carbon-now - 使用默认设置从文件创建图片",
@@ -26358,7 +27093,7 @@
     "id": "tldr-zh-common-anki-1",
     "type": "command",
     "title": "anki - 用一个特定的配置文件启动 `anki`",
-    "content": "anki -p {{配置文件名称}}",
+    "content": "anki {{[-p|--profile]}} {{配置文件名称}}",
     "group": "通用工具 (Common)",
     "description": "anki: 强大、智能的记忆卡片软件。 (用一个特定的配置文件启动 `anki`)",
     "tags": [
@@ -26373,7 +27108,7 @@
     "id": "tldr-zh-common-anki-2",
     "type": "command",
     "title": "anki - 以特定语言启动 `anki`",
-    "content": "anki -l {{语言}}",
+    "content": "anki {{[-l|--lang]}} {{语言}}",
     "group": "通用工具 (Common)",
     "description": "anki: 强大、智能的记忆卡片软件。 (以特定语言启动 `anki`)",
     "tags": [
@@ -26388,7 +27123,7 @@
     "id": "tldr-zh-common-anki-3",
     "type": "command",
     "title": "anki - 从一个特定的目录而不是默认的（`~/Anki`）启动`anki`",
-    "content": "anki -b {{路径/到/目录}}",
+    "content": "anki {{[-b|--base]}} {{路径/到/目录}}",
     "group": "通用工具 (Common)",
     "description": "anki: 强大、智能的记忆卡片软件。 (从一个特定的目录而不是默认的（`~/Anki`）启动`anki`)",
     "tags": [
@@ -26507,10 +27242,10 @@
   {
     "id": "tldr-zh-common-uname-7",
     "type": "command",
-    "title": "uname - 显示帮助信息",
+    "title": "uname - 显示帮助",
     "content": "uname --help",
     "group": "通用工具 (Common)",
-    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (显示帮助信息)",
+    "description": "uname: 输出关于当前机器和运行在该机器上的操作系统的详细信息。 另请参阅：`lsb_release`。 (显示帮助)",
     "tags": [
       "common",
       "uname",
@@ -28365,6 +29100,126 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-ytmdl-0",
+    "type": "command",
+    "title": "ytmdl - 通过歌曲名称下载（交互式选择）",
+    "content": "ytmdl {{歌曲名称}}",
+    "group": "通用工具 (Common)",
+    "description": "ytmdl: 从 YouTube 下载歌曲并自动添加元数据。 从 iTunes、Spotify 等来源获取歌曲信息（艺术家、专辑、封面等）。 (通过歌曲名称下载（交互式选择）)",
+    "tags": [
+      "common",
+      "ytmdl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-ytmdl-1",
+    "type": "command",
+    "title": "ytmdl - 不提示直接下载第一个结果",
+    "content": "ytmdl {{[-q|--quiet]}} {{歌曲名称}}",
+    "group": "通用工具 (Common)",
+    "description": "ytmdl: 从 YouTube 下载歌曲并自动添加元数据。 从 iTunes、Spotify 等来源获取歌曲信息（艺术家、专辑、封面等）。 (不提示直接下载第一个结果)",
+    "tags": [
+      "common",
+      "ytmdl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-ytmdl-2",
+    "type": "command",
+    "title": "ytmdl - 将歌曲下载到指定目录",
+    "content": "ytmdl {{[-o|--output-dir]}} {{路径/到/目录}} {{歌曲名称}}",
+    "group": "通用工具 (Common)",
+    "description": "ytmdl: 从 YouTube 下载歌曲并自动添加元数据。 从 iTunes、Spotify 等来源获取歌曲信息（艺术家、专辑、封面等）。 (将歌曲下载到指定目录)",
+    "tags": [
+      "common",
+      "ytmdl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-ytmdl-3",
+    "type": "command",
+    "title": "ytmdl - 从 YouTube URL 下载歌曲",
+    "content": "ytmdl --url https://www.youtube.com/watch?v={{oHg5SJYRHA0}}",
+    "group": "通用工具 (Common)",
+    "description": "ytmdl: 从 YouTube 下载歌曲并自动添加元数据。 从 iTunes、Spotify 等来源获取歌曲信息（艺术家、专辑、封面等）。 (从 YouTube URL 下载歌曲)",
+    "tags": [
+      "common",
+      "ytmdl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-ytmdl-4",
+    "type": "command",
+    "title": "ytmdl - 以指定格式（mp3、m4a 或 opus）下载歌曲",
+    "content": "ytmdl --format {{mp3|m4a|opus}} {{歌曲名称}}",
+    "group": "通用工具 (Common)",
+    "description": "ytmdl: 从 YouTube 下载歌曲并自动添加元数据。 从 iTunes、Spotify 等来源获取歌曲信息（艺术家、专辑、封面等）。 (以指定格式（mp3、m4a 或 opus）下载歌曲)",
+    "tags": [
+      "common",
+      "ytmdl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-ytmdl-5",
+    "type": "command",
+    "title": "ytmdl - 下载歌曲并指定艺术家和专辑信息",
+    "content": "ytmdl --artist {{艺术家名称}} --album {{专辑名称}} {{歌曲名称}}",
+    "group": "通用工具 (Common)",
+    "description": "ytmdl: 从 YouTube 下载歌曲并自动添加元数据。 从 iTunes、Spotify 等来源获取歌曲信息（艺术家、专辑、封面等）。 (下载歌曲并指定艺术家和专辑信息)",
+    "tags": [
+      "common",
+      "ytmdl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-ytmdl-6",
+    "type": "command",
+    "title": "ytmdl - 从文本文件中批量下载歌曲列表",
+    "content": "ytmdl --list {{路径/到/歌曲列表.txt}}",
+    "group": "通用工具 (Common)",
+    "description": "ytmdl: 从 YouTube 下载歌曲并自动添加元数据。 从 iTunes、Spotify 等来源获取歌曲信息（艺术家、专辑、封面等）。 (从文本文件中批量下载歌曲列表)",
+    "tags": [
+      "common",
+      "ytmdl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-ytmdl-7",
+    "type": "command",
+    "title": "ytmdl - 显示帮助",
+    "content": "ytmdl {{[-h|--help]}}",
+    "group": "通用工具 (Common)",
+    "description": "ytmdl: 从 YouTube 下载歌曲并自动添加元数据。 从 iTunes、Spotify 等来源获取歌曲信息（艺术家、专辑、封面等）。 (显示帮助)",
+    "tags": [
+      "common",
+      "ytmdl",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-cargo-test-0",
     "type": "command",
     "title": "cargo-test - 仅运行包含特定字符串在其名称中的测试",
@@ -28712,10 +29567,10 @@
   {
     "id": "tldr-zh-common-javap-2",
     "type": "command",
-    "title": "javap - 显示帮助信息",
+    "title": "javap - 显示帮助",
     "content": "javap -help",
     "group": "通用工具 (Common)",
-    "description": "javap: 反汇编类文件并列出它们。 (显示帮助信息)",
+    "description": "javap: 反汇编类文件并列出它们。 (显示帮助)",
     "tags": [
       "common",
       "javap",
@@ -29544,6 +30399,21 @@
     "tags": [
       "common",
       "ln",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-((-0",
+    "type": "command",
+    "title": "(( - 查看原命令的文档",
+    "content": "tldr let",
+    "group": "通用工具 (Common)",
+    "description": "((: 此命令为 `let` 的别名。 (查看原命令的文档)",
+    "tags": [
+      "common",
+      "((",
       "tldr",
       "zh"
     ],
@@ -32162,10 +33032,10 @@
   {
     "id": "tldr-zh-common-fastapi-4",
     "type": "command",
-    "title": "fastapi - 显示帮助信息",
+    "title": "fastapi - 显示帮助",
     "content": "fastapi --help",
     "group": "通用工具 (Common)",
-    "description": "fastapi: 运行 FastAPI 应用的命令行工具，底层使用 Uvicorn。 (显示帮助信息)",
+    "description": "fastapi: 运行 FastAPI 应用的命令行工具，底层使用 Uvicorn。 (显示帮助)",
     "tags": [
       "common",
       "fastapi",
@@ -32745,6 +33615,51 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zapier-history-0",
+    "type": "command",
+    "title": "zapier-history - 列出某个集成的历史记录",
+    "content": "zapier history",
+    "group": "通用工具 (Common)",
+    "description": "zapier-history: 列出 Zapier 集成的历史记录。 (列出某个集成的历史记录)",
+    "tags": [
+      "common",
+      "zapier-history",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-history-1",
+    "type": "command",
+    "title": "zapier-history - 显示额外的调试输出",
+    "content": "zapier history {{[-d|--debug]}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-history: 列出 Zapier 集成的历史记录。 (显示额外的调试输出)",
+    "tags": [
+      "common",
+      "zapier-history",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zapier-history-2",
+    "type": "command",
+    "title": "zapier-history - 以不同的输出结构列出历史记录",
+    "content": "zapier history {{[-f|--format]}} {{plain|json|raw|row|table}}",
+    "group": "通用工具 (Common)",
+    "description": "zapier-history: 列出 Zapier 集成的历史记录。 (以不同的输出结构列出历史记录)",
+    "tags": [
+      "common",
+      "zapier-history",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-cargo-update-0",
     "type": "command",
     "title": "cargo-update - 将 `Cargo.lock` 中的依赖项更新为可能的最新版本",
@@ -33315,6 +34230,81 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zerotier-cli-0",
+    "type": "command",
+    "title": "zerotier-cli - 加入一个网络",
+    "content": "sudo zerotier-cli join {{网络 ID}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-cli: 控制本地的 ZeroTier 虚拟网络服务。 (加入一个网络)",
+    "tags": [
+      "common",
+      "zerotier-cli",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-cli-1",
+    "type": "command",
+    "title": "zerotier-cli - 列出网络",
+    "content": "sudo zerotier-cli listnetworks",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-cli: 控制本地的 ZeroTier 虚拟网络服务。 (列出网络)",
+    "tags": [
+      "common",
+      "zerotier-cli",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-cli-2",
+    "type": "command",
+    "title": "zerotier-cli - 以可读格式列出对等节点",
+    "content": "sudo zerotier-cli peers",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-cli: 控制本地的 ZeroTier 虚拟网络服务。 (以可读格式列出对等节点)",
+    "tags": [
+      "common",
+      "zerotier-cli",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-cli-3",
+    "type": "command",
+    "title": "zerotier-cli - 离开一个网络",
+    "content": "sudo zerotier-cli leave {{网络 ID}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-cli: 控制本地的 ZeroTier 虚拟网络服务。 (离开一个网络)",
+    "tags": [
+      "common",
+      "zerotier-cli",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-cli-4",
+    "type": "command",
+    "title": "zerotier-cli - 显示 ZeroTier One 的状态",
+    "content": "sudo zerotier-cli {{[info|status]}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-cli: 控制本地的 ZeroTier 虚拟网络服务。 (显示 ZeroTier One 的状态)",
+    "tags": [
+      "common",
+      "zerotier-cli",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-python-0",
     "type": "command",
     "title": "python - 启动 REPL（交互式 shell）",
@@ -33707,10 +34697,10 @@
   {
     "id": "tldr-zh-common-magick-mogrify-6",
     "type": "command",
-    "title": "magick-mogrify - 查看帮助",
+    "title": "magick-mogrify - 显示帮助",
     "content": "magick mogrify -help",
     "group": "通用工具 (Common)",
-    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (查看帮助)",
+    "description": "magick-mogrify: 对图片进行调整尺寸，裁剪旋转或添加效果等操作。 修改直接作用于原文件。 另请参阅：`magick`。 (显示帮助)",
     "tags": [
       "common",
       "magick-mogrify",
@@ -34367,10 +35357,10 @@
   {
     "id": "tldr-zh-common-manim-6",
     "type": "command",
-    "title": "manim - 显示帮助信息",
+    "title": "manim - 显示帮助",
     "content": "manim --help",
     "group": "通用工具 (Common)",
-    "description": "manim: 用于制作数学动画的视频引擎。 (显示帮助信息)",
+    "description": "manim: 用于制作数学动画的视频引擎。 (显示帮助)",
     "tags": [
       "common",
       "manim",
@@ -35265,6 +36255,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zpaq-0",
+    "type": "command",
+    "title": "zpaq - 将文件或目录添加到新的或已有的归档中",
+    "content": "zpaq {{[a|add]}} {{路径/到/归档.zpaq}} {{路径/到/文件或目录}}",
+    "group": "通用工具 (Common)",
+    "description": "zpaq: 增量日志式备份工具和归档程序。 (将文件或目录添加到新的或已有的归档中)",
+    "tags": [
+      "common",
+      "zpaq",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zpaq-1",
+    "type": "command",
+    "title": "zpaq - 创建或添加到加密的归档",
+    "content": "zpaq {{[a|add]}} -k{{密码}} {{路径/到/归档.zpaq}} {{路径/到/文件或目录}}",
+    "group": "通用工具 (Common)",
+    "description": "zpaq: 增量日志式备份工具和归档程序。 (创建或添加到加密的归档)",
+    "tags": [
+      "common",
+      "zpaq",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zpaq-2",
+    "type": "command",
+    "title": "zpaq - 解压文件的最新版本",
+    "content": "zpaq {{[x|extract]}} {{路径/到/归档.zpaq}}",
+    "group": "通用工具 (Common)",
+    "description": "zpaq: 增量日志式备份工具和归档程序。 (解压文件的最新版本)",
+    "tags": [
+      "common",
+      "zpaq",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zpaq-3",
+    "type": "command",
+    "title": "zpaq - 列出归档内容",
+    "content": "zpaq {{[l|list]}} {{路径/到/归档.zpaq}}",
+    "group": "通用工具 (Common)",
+    "description": "zpaq: 增量日志式备份工具和归档程序。 (列出归档内容)",
+    "tags": [
+      "common",
+      "zpaq",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zpaq-4",
+    "type": "command",
+    "title": "zpaq - 设置压缩级别（级别越高，压缩率越高但速度越慢）",
+    "content": "zpaq {{[a|add]}} {{路径/到/归档.zpaq}} -m{{1|2|3|4|5}} {{路径/到/文件或目录}}",
+    "group": "通用工具 (Common)",
+    "description": "zpaq: 增量日志式备份工具和归档程序。 (设置压缩级别（级别越高，压缩率越高但速度越慢）)",
+    "tags": [
+      "common",
+      "zpaq",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zpaq-5",
+    "type": "command",
+    "title": "zpaq - 从归档中解压不晚于指定日期的指定文件",
+    "content": "zpaq {{[x|extract]}} {{路径/到/归档.zpaq}} {{归档/中/要/解压/的/路径}} -to {{路径/到/输出}} -until {{YYYY-MM-DD}}",
+    "group": "通用工具 (Common)",
+    "description": "zpaq: 增量日志式备份工具和归档程序。 (从归档中解压不晚于指定日期的指定文件)",
+    "tags": [
+      "common",
+      "zpaq",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-pulumi-down-0",
     "type": "command",
     "title": "pulumi-down - 查看原命令的文档",
@@ -36093,7 +37173,7 @@
     "id": "tldr-zh-common-ant-1",
     "type": "command",
     "title": "ant - 使用 `build.xml` 以外的构建文件构建项目",
-    "content": "ant -f {{构建文件.xml}}",
+    "content": "ant {{[-f|-buildfile]}} {{构建文件.xml}}",
     "group": "通用工具 (Common)",
     "description": "ant: Apache Ant。 用于构建和管理基于 Java 的项目的工具。 (使用 `build.xml` 以外的构建文件构建项目)",
     "tags": [
@@ -36108,7 +37188,7 @@
     "id": "tldr-zh-common-ant-2",
     "type": "command",
     "title": "ant - 打印该项目可能的目标信息",
-    "content": "ant -p",
+    "content": "ant {{[-p|-projecthelp]}}",
     "group": "通用工具 (Common)",
     "description": "ant: Apache Ant。 用于构建和管理基于 Java 的项目的工具。 (打印该项目可能的目标信息)",
     "tags": [
@@ -36123,7 +37203,7 @@
     "id": "tldr-zh-common-ant-3",
     "type": "command",
     "title": "ant - 打印调试信息",
-    "content": "ant -d",
+    "content": "ant {{[-d|-debug]}}",
     "group": "通用工具 (Common)",
     "description": "ant: Apache Ant。 用于构建和管理基于 Java 的项目的工具。 (打印调试信息)",
     "tags": [
@@ -36138,7 +37218,7 @@
     "id": "tldr-zh-common-ant-4",
     "type": "command",
     "title": "ant - 执行所有不依赖失败目标的目标",
-    "content": "ant -k",
+    "content": "ant {{[-k|-keep-going]}}",
     "group": "通用工具 (Common)",
     "description": "ant: Apache Ant。 用于构建和管理基于 Java 的项目的工具。 (执行所有不依赖失败目标的目标)",
     "tags": [
@@ -36767,10 +37847,10 @@
   {
     "id": "tldr-zh-common-glances-6",
     "type": "command",
-    "title": "glances - 显示帮助信息",
+    "title": "glances - 显示帮助",
     "content": "glances {{[-h|--help]}}",
     "group": "通用工具 (Common)",
-    "description": "glances: 一个跨平台的系统监控工具。 另请参阅：`htop`, `atop`, `top`, `btm`, `btop`。 (显示帮助信息)",
+    "description": "glances: 一个跨平台的系统监控工具。 另请参阅：`htop`, `atop`, `top`, `btm`, `btop`。 (显示帮助)",
     "tags": [
       "common",
       "glances",
@@ -37044,6 +38124,126 @@
     "tags": [
       "common",
       "docker-container-diff",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-idtool-0",
+    "type": "command",
+    "title": "zerotier-idtool - 生成一个新的 ZeroTier 身份，并将私钥部分输出到 `stdout`",
+    "content": "zerotier-idtool generate",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-idtool: 创建和操作 ZeroTier 身份。 (生成一个新的 ZeroTier 身份，并将私钥部分输出到 `stdout`)",
+    "tags": [
+      "common",
+      "zerotier-idtool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-idtool-1",
+    "type": "command",
+    "title": "zerotier-idtool - 生成一个新的 ZeroTier 身份，并将私钥和公钥部分保存到文件中",
+    "content": "zerotier-idtool generate {{路径/到/identity.secret}} {{路径/到/identity.public}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-idtool: 创建和操作 ZeroTier 身份。 (生成一个新的 ZeroTier 身份，并将私钥和公钥部分保存到文件中)",
+    "tags": [
+      "common",
+      "zerotier-idtool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-idtool-2",
+    "type": "command",
+    "title": "zerotier-idtool - 生成一个具有指定十六进制靓号前缀的 ZeroTier 身份（可能需要很长时间）",
+    "content": "zerotier-idtool generate {{路径/到/identity.secret}} {{路径/到/identity.public}} {{靓号_前缀}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-idtool: 创建和操作 ZeroTier 身份。 (生成一个具有指定十六进制靓号前缀的 ZeroTier 身份（可能需要很长时间）)",
+    "tags": [
+      "common",
+      "zerotier-idtool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-idtool-3",
+    "type": "command",
+    "title": "zerotier-idtool - 从私钥身份中提取公钥部分",
+    "content": "zerotier-idtool getpublic {{路径/到/identity.secret}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-idtool: 创建和操作 ZeroTier 身份。 (从私钥身份中提取公钥部分)",
+    "tags": [
+      "common",
+      "zerotier-idtool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-idtool-4",
+    "type": "command",
+    "title": "zerotier-idtool - 使用私钥身份对文件进行签名",
+    "content": "zerotier-idtool sign {{路径/到/identity.secret}} {{路径/到/文件}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-idtool: 创建和操作 ZeroTier 身份。 (使用私钥身份对文件进行签名)",
+    "tags": [
+      "common",
+      "zerotier-idtool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-idtool-5",
+    "type": "command",
+    "title": "zerotier-idtool - 使用公钥身份和一个十六进制签名来验证已签名的文件",
+    "content": "zerotier-idtool verify {{路径/到/identity.public}} {{路径/到/文件}} {{签名_十六进制}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-idtool: 创建和操作 ZeroTier 身份。 (使用公钥身份和一个十六进制签名来验证已签名的文件)",
+    "tags": [
+      "common",
+      "zerotier-idtool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-idtool-6",
+    "type": "command",
+    "title": "zerotier-idtool - 在本地验证一个身份的密钥和工作量证明",
+    "content": "zerotier-idtool validate {{路径/到/identity.public}}",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-idtool: 创建和操作 ZeroTier 身份。 (在本地验证一个身份的密钥和工作量证明)",
+    "tags": [
+      "common",
+      "zerotier-idtool",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zerotier-idtool-7",
+    "type": "command",
+    "title": "zerotier-idtool - 显示帮助",
+    "content": "zerotier-idtool help",
+    "group": "通用工具 (Common)",
+    "description": "zerotier-idtool: 创建和操作 ZeroTier 身份。 (显示帮助)",
+    "tags": [
+      "common",
+      "zerotier-idtool",
       "tldr",
       "zh"
     ],
@@ -40502,10 +41702,10 @@
   {
     "id": "tldr-zh-common-a2ping-6",
     "type": "command",
-    "title": "a2ping - 显示帮助信息",
+    "title": "a2ping - 显示帮助",
     "content": "a2ping -h",
     "group": "通用工具 (Common)",
-    "description": "a2ping: 将图像转换为 EPS 或 PDF 文件。 (显示帮助信息)",
+    "description": "a2ping: 将图像转换为 EPS 或 PDF 文件。 (显示帮助)",
     "tags": [
       "common",
       "a2ping",
@@ -41034,6 +42234,111 @@
     "tags": [
       "common",
       "git-status",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zrok-0",
+    "type": "command",
+    "title": "zrok - 请求使用公共 zrok 服务的邀请（首先运行此命令）",
+    "content": "zrok invite",
+    "group": "通用工具 (Common)",
+    "description": "zrok: 将本地服务和文件暴露到互联网。 OpenZiti 项目的一部分，提供安全的零信任共享。 (请求使用公共 zrok 服务的邀请（首先运行此命令）)",
+    "tags": [
+      "common",
+      "zrok",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zrok-1",
+    "type": "command",
+    "title": "zrok - 使用邀请邮件中的令牌启用 zrok 环境",
+    "content": "zrok enable {{你的令牌}}",
+    "group": "通用工具 (Common)",
+    "description": "zrok: 将本地服务和文件暴露到互联网。 OpenZiti 项目的一部分，提供安全的零信任共享。 (使用邀请邮件中的令牌启用 zrok 环境)",
+    "tags": [
+      "common",
+      "zrok",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zrok-2",
+    "type": "command",
+    "title": "zrok - 为本地 Web 服务器创建一个可公开访问的 URL",
+    "content": "zrok share public {{http://localhost:8080}}",
+    "group": "通用工具 (Common)",
+    "description": "zrok: 将本地服务和文件暴露到互联网。 OpenZiti 项目的一部分，提供安全的零信任共享。 (为本地 Web 服务器创建一个可公开访问的 URL)",
+    "tags": [
+      "common",
+      "zrok",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zrok-3",
+    "type": "command",
+    "title": "zrok - 创建一个仅可通过唯一令牌访问的安全共享",
+    "content": "zrok share private {{http://localhost:3000}}",
+    "group": "通用工具 (Common)",
+    "description": "zrok: 将本地服务和文件暴露到互联网。 OpenZiti 项目的一部分，提供安全的零信任共享。 (创建一个仅可通过唯一令牌访问的安全共享)",
+    "tags": [
+      "common",
+      "zrok",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zrok-4",
+    "type": "command",
+    "title": "zrok - 访问由其他用户创建的私有共享",
+    "content": "zrok access private {{共享令牌}}",
+    "group": "通用工具 (Common)",
+    "description": "zrok: 将本地服务和文件暴露到互联网。 OpenZiti 项目的一部分，提供安全的零信任共享。 (访问由其他用户创建的私有共享)",
+    "tags": [
+      "common",
+      "zrok",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zrok-5",
+    "type": "command",
+    "title": "zrok - 将本地目录的内容作为一个简单的网站提供服务",
+    "content": "zrok share public --backend-mode web {{路径/到/目录}}",
+    "group": "通用工具 (Common)",
+    "description": "zrok: 将本地服务和文件暴露到互联网。 OpenZiti 项目的一部分，提供安全的零信任共享。 (将本地目录的内容作为一个简单的网站提供服务)",
+    "tags": [
+      "common",
+      "zrok",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zrok-6",
+    "type": "command",
+    "title": "zrok - 显示 zrok 环境的状态以及当前活动的共享",
+    "content": "zrok status",
+    "group": "通用工具 (Common)",
+    "description": "zrok: 将本地服务和文件暴露到互联网。 OpenZiti 项目的一部分，提供安全的零信任共享。 (显示 zrok 环境的状态以及当前活动的共享)",
+    "tags": [
+      "common",
+      "zrok",
       "tldr",
       "zh"
     ],
@@ -42060,6 +43365,126 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-zabbix_agentd-0",
+    "type": "command",
+    "title": "zabbix_agentd - 使用默认配置文件启动 agent",
+    "content": "zabbix_agentd",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agentd: 用于监控服务器参数的守护进程。 (使用默认配置文件启动 agent)",
+    "tags": [
+      "common",
+      "zabbix_agentd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agentd-1",
+    "type": "command",
+    "title": "zabbix_agentd - 使用自定义配置文件启动 agent",
+    "content": "zabbix_agentd {{[-c|--config]}} {{路径/到/zabbix_agentd.conf}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agentd: 用于监控服务器参数的守护进程。 (使用自定义配置文件启动 agent)",
+    "tags": [
+      "common",
+      "zabbix_agentd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agentd-2",
+    "type": "command",
+    "title": "zabbix_agentd - 在前台运行 agent（保持附着在当前终端会话中）",
+    "content": "zabbix_agentd {{[-c|--config]}} {{路径/到/zabbix_agentd.conf}} {{[-f|--foreground]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agentd: 用于监控服务器参数的守护进程。 (在前台运行 agent（保持附着在当前终端会话中）)",
+    "tags": [
+      "common",
+      "zabbix_agentd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agentd-3",
+    "type": "command",
+    "title": "zabbix_agentd - 测试配置文件",
+    "content": "zabbix_agentd {{[-c|--config]}} {{路径/到/zabbix_agentd.conf}} {{[-T|--test-config]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agentd: 用于监控服务器参数的守护进程。 (测试配置文件)",
+    "tags": [
+      "common",
+      "zabbix_agentd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agentd-4",
+    "type": "command",
+    "title": "zabbix_agentd - 使用详细输出测试指定的监控项",
+    "content": "zabbix_agentd {{[-c|--config]}} {{路径/到/zabbix_agentd.conf}} {{[-t|--test]}} {{监控项键值}} {{[-v|--verbose]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agentd: 用于监控服务器参数的守护进程。 (使用详细输出测试指定的监控项)",
+    "tags": [
+      "common",
+      "zabbix_agentd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agentd-5",
+    "type": "command",
+    "title": "zabbix_agentd - 从配置文件重新加载用户参数（运行时控制）",
+    "content": "zabbix_agentd {{[-c|--config]}} {{路径/到/zabbix_agentd.conf}} {{[-R|--runtime-control]}} userparameter_reload",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agentd: 用于监控服务器参数的守护进程。 (从配置文件重新加载用户参数（运行时控制）)",
+    "tags": [
+      "common",
+      "zabbix_agentd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agentd-6",
+    "type": "command",
+    "title": "zabbix_agentd - 提高或降低所有进程的日志级别（运行时控制）",
+    "content": "zabbix_agentd {{[-c|--config]}} {{路径/到/zabbix_agentd.conf}} {{[-R|--runtime-control]}} log_level_{{increase|decrease}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agentd: 用于监控服务器参数的守护进程。 (提高或降低所有进程的日志级别（运行时控制）)",
+    "tags": [
+      "common",
+      "zabbix_agentd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zabbix_agentd-7",
+    "type": "command",
+    "title": "zabbix_agentd - 显示帮助",
+    "content": "zabbix_agentd {{[-h|--help]}}",
+    "group": "通用工具 (Common)",
+    "description": "zabbix_agentd: 用于监控服务器参数的守护进程。 (显示帮助)",
+    "tags": [
+      "common",
+      "zabbix_agentd",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-jmeter-0",
     "type": "command",
     "title": "jmeter - 在非 GUI 模式下运行指定的测试计划",
@@ -42662,10 +44087,10 @@
   {
     "id": "tldr-zh-common-ulimit-4",
     "type": "command",
-    "title": "ulimit - 显示帮助信息",
+    "title": "ulimit - 显示帮助",
     "content": "help ulimit",
     "group": "通用工具 (Common)",
-    "description": "ulimit: 获取和设置用户限制。 (显示帮助信息)",
+    "description": "ulimit: 获取和设置用户限制。 (显示帮助)",
     "tags": [
       "common",
       "ulimit",
@@ -45527,13 +46952,133 @@
   {
     "id": "tldr-zh-common-tred-1",
     "type": "command",
-    "title": "tred - 显示帮助信息",
+    "title": "tred - 显示帮助",
     "content": "tred -?",
     "group": "通用工具 (Common)",
-    "description": "tred: 计算有向图的传递闭包约简。 Graphviz 过滤器：`acyclic`、`bcomps`、`comps`、`edgepaint`、`gvcolor`、`gvpack`、`mingle`、`nop`、`sccmap`、`tred` 和 `unflatten`。 (显示帮助信息)",
+    "description": "tred: 计算有向图的传递闭包约简。 Graphviz 过滤器：`acyclic`、`bcomps`、`comps`、`edgepaint`、`gvcolor`、`gvpack`、`mingle`、`nop`、`sccmap`、`tred` 和 `unflatten`。 (显示帮助)",
     "tags": [
       "common",
       "tred",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zmap-0",
+    "type": "command",
+    "title": "zmap - 扫描一个子网或整个 IPv4 地址空间上的指定 TCP 端口（默认：80）",
+    "content": "zmap {{SUBNETS}} {{[-p|--target-ports]}} {{端口}}",
+    "group": "通用工具 (Common)",
+    "description": "zmap: 用于全网范围调查的快速、开源网络扫描器。 (扫描一个子网或整个 IPv4 地址空间上的指定 TCP 端口（默认：80）)",
+    "tags": [
+      "common",
+      "zmap",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zmap-1",
+    "type": "command",
+    "title": "zmap - 在一个子网中扫描指定的端口或端口范围",
+    "content": "zmap {{[-p|--target-ports]}} {{端口1, 端口2-端口3,...}} {{SUBNETS}}",
+    "group": "通用工具 (Common)",
+    "description": "zmap: 用于全网范围调查的快速、开源网络扫描器。 (在一个子网中扫描指定的端口或端口范围)",
+    "tags": [
+      "common",
+      "zmap",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zmap-2",
+    "type": "command",
+    "title": "zmap - 将结果输出到包含自定义字段的 CSV 文件中",
+    "content": "zmap {{[-o|--output-file]}} {{路径/到/输出文件.csv}} {{[-f|--output-fields]}} \"{{saddr, daddr, sport, dport}}\" {{SUBNETS}}",
+    "group": "通用工具 (Common)",
+    "description": "zmap: 用于全网范围调查的快速、开源网络扫描器。 (将结果输出到包含自定义字段的 CSV 文件中)",
+    "tags": [
+      "common",
+      "zmap",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zmap-3",
+    "type": "command",
+    "title": "zmap - 将扫描速率限制为每秒指定数量的数据包",
+    "content": "zmap {{[-r|--rate]}} {{每秒数据包数}} {{SUBNETS}}",
+    "group": "通用工具 (Common)",
+    "description": "zmap: 用于全网范围调查的快速、开源网络扫描器。 (将扫描速率限制为每秒指定数量的数据包)",
+    "tags": [
+      "common",
+      "zmap",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zmap-4",
+    "type": "command",
+    "title": "zmap - 执行一次不发送任何数据包的空跑",
+    "content": "zmap {{[-d|--dryrun]}} {{SUBNETS}}",
+    "group": "通用工具 (Common)",
+    "description": "zmap: 用于全网范围调查的快速、开源网络扫描器。 (执行一次不发送任何数据包的空跑)",
+    "tags": [
+      "common",
+      "zmap",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zmap-5",
+    "type": "command",
+    "title": "zmap - 使用 CIDR 表示法的阻止列表文件来排除子网",
+    "content": "zmap {{[-b|--blocklist-file]}} {{路径/到/阻止列表.txt}} {{SUBNETS}}",
+    "group": "通用工具 (Common)",
+    "description": "zmap: 用于全网范围调查的快速、开源网络扫描器。 (使用 CIDR 表示法的阻止列表文件来排除子网)",
+    "tags": [
+      "common",
+      "zmap",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zmap-6",
+    "type": "command",
+    "title": "zmap - 为扫描数据包设置指定的源 IP 地址",
+    "content": "zmap {{[-S|--source-ip]}} {{源_IP}} {{SUBNETS}}",
+    "group": "通用工具 (Common)",
+    "description": "zmap: 用于全网范围调查的快速、开源网络扫描器。 (为扫描数据包设置指定的源 IP 地址)",
+    "tags": [
+      "common",
+      "zmap",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-zmap-7",
+    "type": "command",
+    "title": "zmap - 限制要探测的目标数量或百分比（例如 1000 个 IP/端口组合）",
+    "content": "zmap {{[-n|--max-targets]}} {{1000}} {{SUBNETS}} {{[-p|--target-ports]}} {{端口1, 端口2-端口3}}",
+    "group": "通用工具 (Common)",
+    "description": "zmap: 用于全网范围调查的快速、开源网络扫描器。 (限制要探测的目标数量或百分比（例如 1000 个 IP/端口组合）)",
+    "tags": [
+      "common",
+      "zmap",
       "tldr",
       "zh"
     ],
@@ -49022,10 +50567,10 @@
   {
     "id": "tldr-zh-common-ninja-4",
     "type": "command",
-    "title": "ninja - 查看帮助",
+    "title": "ninja - 显示帮助",
     "content": "ninja -h",
     "group": "通用工具 (Common)",
-    "description": "ninja: 一个快速的构建系统。 (查看帮助)",
+    "description": "ninja: 一个快速的构建系统。 (显示帮助)",
     "tags": [
       "common",
       "ninja",
@@ -51258,7 +52803,7 @@
     "id": "tldr-zh-common-apropos-1",
     "type": "command",
     "title": "apropos - 搜索时不限制输出到终端宽度",
-    "content": "apropos -l {{正则表达式}}",
+    "content": "apropos {{[-l|--long]}} {{正则表达式}}",
     "group": "通用工具 (Common)",
     "description": "apropos: 在 manpages 中搜索，例如查找一个新命令。 另请参阅：`man`。 (搜索时不限制输出到终端宽度)",
     "tags": [
@@ -51273,7 +52818,7 @@
     "id": "tldr-zh-common-apropos-2",
     "type": "command",
     "title": "apropos - 搜索与给定的所有表达式都匹配的页面",
-    "content": "apropos {{正则表达式_1}} -a {{正则表达式_2}} -a {{正则表达式_3}}",
+    "content": "apropos {{正则表达式_1}} {{[-a|--and]}} {{正则表达式_2}} {{[-a|--and]}} {{正则表达式_3}}",
     "group": "通用工具 (Common)",
     "description": "apropos: 在 manpages 中搜索，例如查找一个新命令。 另请参阅：`man`。 (搜索与给定的所有表达式都匹配的页面)",
     "tags": [
@@ -51347,10 +52892,10 @@
   {
     "id": "tldr-zh-common-nix-flake-4",
     "type": "command",
-    "title": "nix-flake - 显示帮助信息",
+    "title": "nix-flake - 显示帮助",
     "content": "nix flake --help",
     "group": "通用工具 (Common)",
-    "description": "nix-flake: 管理 Nix Flakes。 此命令也有关于其子命令的文件，例如：`init`、`show`、`info`. (显示帮助信息)",
+    "description": "nix-flake: 管理 Nix Flakes。 此命令也有关于其子命令的文件，例如：`init`、`show`、`info`. (显示帮助)",
     "tags": [
       "common",
       "nix-flake",
