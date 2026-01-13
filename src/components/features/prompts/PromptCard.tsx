@@ -193,6 +193,8 @@ export const PromptCard = memo(PromptCardComponent, (prev, next) => {
         prev.prompt.title === next.prompt.title &&
         prev.prompt.content === next.prompt.content &&
         prev.prompt.group === next.prompt.group &&
-        prev.prompt.isExecutable === next.prompt.isExecutable
+        prev.prompt.isExecutable === next.prompt.isExecutable &&
+        prev.prompt.shellType === next.prompt.shellType &&
+        prev.prompt.type === next.prompt.type
     );
 });

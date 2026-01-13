@@ -8,12 +8,12 @@ import { useConfirmStore } from '@/store/useConfirmStore';
 import { useAppStore } from '@/store/useAppStore';
 import { getText } from '@/lib/i18n';
 
-// 定义高风险命令关键词
+// 危险命令关键词检测
 const DANGEROUS_KEYWORDS = [
   'rm ', 'del ', 'remove-item', 'mv ', 'move ', 'format', 'mkfs', '>', 'chmod ', 'chown ', 'icacls '
 ];
 
-// 风险检测函数
+// 检查命令风险
 const checkCommandRisk = (commandStr: string): boolean => {
   const lowerCaseCmd = commandStr.toLowerCase().trim();
   return DANGEROUS_KEYWORDS.some(keyword => {
@@ -26,15 +26,11 @@ const showNotification = async (msg: string, type: 'info' | 'error' = 'info') =>
   await message(msg, { title: 'CodeForge AI', kind: type });
 };
 
-/**
- * 核心执行函数
- * @param commandStr 要执行的命令字符串
- * @param _shell Shell类型 (暂未使用，通过后缀名区分)
- * @param cwd 指定工作目录 (可选，默认为临时目录)
- */
-export async function executeCommand(commandStr: string, _shell: ShellType = 'auto', cwd?: string | null) {
+// 执行命令的主函数
+export async function executeCommand(commandStr: string, shell: ShellType = 'auto', cwd?: string | null) {
   const language = useAppStore.getState().language;
-  // 1. 安全审查 (使用自定义 UI 组件)
+  
+  // 1. 风险检查
   if (checkCommandRisk(commandStr)) {
     const confirmed = await useConfirmStore.getState().ask({
         title: getText('executor', 'riskTitle', language),
@@ -55,18 +51,52 @@ export async function executeCommand(commandStr: string, _shell: ShellType = 'au
     const timestamp = Date.now();
 
     if (osType === 'windows') {
-      // --- Windows 逻辑 (.bat) ---
-      const fileName = `codeforge_exec_${timestamp}.bat`;
-      const scriptPath = await join(baseDir, fileName);
       
-      /* 
-       Windows 批处理逻辑：
-       1. 不含中文注释，防止 GBK/UTF-8 编码冲突。
-       2. 使用 @echo on 自动回显命令，完美解决多行、特殊符号(>|&)转义问题。
-       3. 只有命令部分开启回显，其他部分关闭，模拟原生体验。
-       4. 最后使用 start /b ... del 自我销毁。
-      */
-      const fileContent = `
+      // === Windows 逻辑 ===
+      
+      if (shell === 'powershell') {
+        // --- PowerShell 分支 ---
+        const fileName = `codeforge_exec_${timestamp}.ps1`;
+        const scriptPath = await join(baseDir, fileName);
+
+        // 构建 PowerShell 脚本内容
+        // 注意：Remove-Item 用于执行后自删除脚本
+        const psContent = `
+Set-Location -Path "${cleanCwd}"
+Clear-Host
+Write-Host "Windows PowerShell (CodeForge AI)" -ForegroundColor Cyan
+Write-Host "-----------------------------------"
+Write-Host ""
+
+# Execute User Command
+${commandStr}
+
+Write-Host ""
+Write-Host "-----------------------------------"
+Read-Host -Prompt "Press Enter to close"
+Remove-Item -Path $MyInvocation.MyCommand.Path -Force
+`.trim();
+
+        await writeTextFile(scriptPath, psContent);
+
+        // 使用 cmd /c start powershell ... 来弹出一个新的 PowerShell 窗口
+        // -ExecutionPolicy Bypass 允许执行未签名的临时脚本
+        const cmd = Command.create('cmd', [
+            '/c', 
+            'start', 
+            'powershell', 
+            '-NoProfile', 
+            '-ExecutionPolicy', 'Bypass', 
+            '-File', scriptPath
+        ]);
+        await cmd.spawn();
+
+      } else {
+        // --- CMD/Batch 分支 (默认) ---
+        const fileName = `codeforge_exec_${timestamp}.bat`;
+        const scriptPath = await join(baseDir, fileName);
+        
+        const fileContent = `
 @echo off
 cd /d "${cleanCwd}"
 cls
@@ -82,22 +112,26 @@ ${commandStr}
 echo.
 pause
 start /b "" cmd /c del "%~f0"&exit /b
-      `.trim();
+        `.trim();
 
-      await writeTextFile(scriptPath, fileContent);
-      
-      // 启动新 CMD 窗口运行脚本
-      const cmd = Command.create('cmd', ['/c', 'start', '', scriptPath]);
-      await cmd.spawn();
+        await writeTextFile(scriptPath, fileContent);
+        
+        // 使用 start 命令弹出新窗口执行 bat
+        const cmd = Command.create('cmd', ['/c', 'start', '', scriptPath]);
+        await cmd.spawn();
+      }
 
     } else if (osType === 'macos') {
-      // --- macOS 逻辑 (.sh) ---
+      
+      // === macOS 逻辑 ===
+      // 这里也可以根据 shell 类型 (bash/zsh) 微调，但通常 .sh 兼容性最好
+      
       const fileName = `codeforge_exec_${timestamp}.sh`;
       const scriptPath = await join(baseDir, fileName);
+      const targetShell = shell === 'zsh' ? 'zsh' : 'bash';
 
-      // 手动构造回显，Mac 下 echo 显示比较稳定
       const fileContent = `
-#!/bin/bash
+#!/bin/${targetShell}
 clear
 cd "${cleanCwd}"
 echo "$(pwd) $ ${commandStr.split('\n').join('\n> ')}"
@@ -110,7 +144,8 @@ rm "$0"
 
       await writeTextFile(scriptPath, fileContent);
       
-      // 使用 AppleScript 唤起 Terminal.app
+      // macOS 使用 osascript 控制 Terminal.app
+      // 这里显式指定用 sh 运行脚本，脚本内部 shebang 会决定解释器
       const appleScript = `
         tell application "Terminal"
           activate
@@ -121,12 +156,15 @@ rm "$0"
       await cmd.spawn();
 
     } else if (osType === 'linux') {
-      // --- Linux 逻辑 (.sh) ---
+      
+      // === Linux 逻辑 ===
+      
       const fileName = `codeforge_exec_${timestamp}.sh`;
       const scriptPath = await join(baseDir, fileName);
+      const targetShell = shell === 'zsh' ? 'zsh' : 'bash';
 
       const fileContent = `
-#!/bin/bash
+#!/bin/${targetShell}
 cd "${cleanCwd}"
 echo "$(pwd) $ ${commandStr.split('\n').join('\n> ')}"
 ${commandStr}
@@ -138,7 +176,7 @@ rm "$0"
 
       await writeTextFile(scriptPath, fileContent);
       
-      // 调用通用终端模拟器
+      // 尝试调用 x-terminal-emulator
       const cmd = Command.create('x-terminal-emulator', ['-e', `bash "${scriptPath}"`]);
       await cmd.spawn();
 
