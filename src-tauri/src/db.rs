@@ -575,3 +575,34 @@ pub fn search_url_history(
 
     Ok(results)
 }
+
+
+#[derive(serde::Serialize)]
+pub struct PromptCounts {
+    pub prompt: i64,
+    pub command: i64,
+}
+
+#[tauri::command]
+pub fn get_prompt_counts(state: State<DbState>) -> Result<PromptCounts, String> {
+    let conn = state.conn.lock().map_err(|e| e.to_string())?;
+    
+    // 统计 Command 类型
+    let command_count: i64 = conn.query_row(
+        "SELECT COUNT(*) FROM prompts WHERE type = 'command'",
+        [],
+        |row| row.get(0),
+    ).unwrap_or(0);
+
+    // 统计 Prompt 类型 (包括旧数据的 NULL)
+    let prompt_count: i64 = conn.query_row(
+        "SELECT COUNT(*) FROM prompts WHERE type = 'prompt' OR type IS NULL",
+        [],
+        |row| row.get(0),
+    ).unwrap_or(0);
+
+    Ok(PromptCounts {
+        prompt: prompt_count,
+        command: command_count,
+    })
+}

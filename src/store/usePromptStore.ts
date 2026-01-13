@@ -25,13 +25,14 @@ interface PromptState {
   hasMore: boolean;
   isLoading: boolean;
   activeGroup: string;
-  activeCategory: 'command' | 'prompt'; 
+  activeCategory: 'command' | 'prompt';
   searchQuery: string;
   isStoreLoading: boolean;
   manifest: PackManifest | null;
   activeManifestUrl: string;
   installedPackIds: string[];
   migrationVersion: number;
+  counts: { prompt: number; command: number };
 
   initStore: () => Promise<void>;
   migrateLegacyData: () => Promise<void>;
@@ -44,7 +45,8 @@ interface PromptState {
   deletePrompt: (id: string) => Promise<void>;
   toggleFavorite: (id: string) => Promise<void>;
   refreshGroups: () => Promise<void>;
-  deleteGroup: (name: string) => Promise<void>; 
+  refreshCounts: () => Promise<void>;
+  deleteGroup: (name: string) => Promise<void>;
   fetchManifest: () => Promise<void>;
   installPack: (pack: PackManifestItem) => Promise<void>;
   uninstallPack: (packId: string) => Promise<void>;
@@ -66,10 +68,21 @@ export const usePromptStore = create<PromptState>()(
       activeManifestUrl: MIRROR_BASES[0],
       installedPackIds: [],
       migrationVersion: 0,
+      counts: { prompt: 0, command: 0 },
 
       initStore: async () => {
         await get().migrateLegacyData();
         await get().refreshGroups();
+        await get().refreshCounts();
+      },
+
+      refreshCounts: async () => {
+        try {
+            const counts = await invoke<{ prompt: number, command: number }>('get_prompt_counts');
+            set({ counts });
+        } catch (e) {
+            console.error("Failed to fetch counts:", e);
+        }
       },
 
       migrateLegacyData: async () => {
@@ -191,9 +204,10 @@ export const usePromptStore = create<PromptState>()(
             source: 'local'
         };
         await invoke('save_prompt', { prompt: newPrompt });
-        
+
         get().loadPrompts(true);
         get().refreshGroups();
+        get().refreshCounts();
       },
 
       updatePrompt: async (id, data) => {
@@ -216,6 +230,7 @@ export const usePromptStore = create<PromptState>()(
         set(state => ({
             prompts: state.prompts.filter(p => p.id !== id)
         }));
+        get().refreshCounts();
       },
 
       toggleFavorite: async (id) => {
@@ -333,6 +348,7 @@ export const usePromptStore = create<PromptState>()(
 
             get().loadPrompts(true);
             get().refreshGroups();
+            get().refreshCounts();
 
         } catch (e: any) {
             console.error("Install failed:", e);
@@ -353,9 +369,10 @@ export const usePromptStore = create<PromptState>()(
             set(state => ({
                 installedPackIds: state.installedPackIds.filter(id => id !== packId)
             }));
-            
+
             get().loadPrompts(true);
             get().refreshGroups();
+            get().refreshCounts();
         } catch (e) {
             console.error("Uninstall failed:", e);
         } finally {

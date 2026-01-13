@@ -159,6 +159,7 @@ fn main() {
             db::toggle_prompt_favorite,
             db::record_url_visit,
             db::search_url_history,
+            db::get_prompt_counts,
             monitor::get_system_metrics,
             monitor::get_top_processes,
             monitor::get_active_ports,

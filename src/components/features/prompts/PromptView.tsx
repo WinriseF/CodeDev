@@ -86,14 +86,15 @@ const Cell = memo(({ columnIndex, rowIndex, style, data }: CellProps) => {
 });
 
 export function PromptView() {
-  const { 
-    prompts, 
-    groups, 
-    activeGroup, setActiveGroup, 
+  const {
+    prompts,
+    groups,
+    activeGroup, setActiveGroup,
     activeCategory, setActiveCategory,
-    searchQuery: storeSearchQuery, setSearchQuery, 
+    searchQuery: storeSearchQuery, setSearchQuery,
     initStore, loadPrompts, isLoading, hasMore,
     deleteGroup, deletePrompt,
+    counts,
   } = usePromptStore();
 
   const { isPromptSidebarOpen, setPromptSidebarOpen, language } = useAppStore();
@@ -178,12 +179,24 @@ export function PromptView() {
       
       {/* 侧边栏 */}
       <aside className={cn("flex flex-col bg-secondary/5 select-none transition-all duration-300 ease-in-out overflow-hidden", isPromptSidebarOpen ? "w-56 border-r border-border opacity-100" : "w-0 border-none opacity-0")}>
-        <div className="p-3 pb-0 flex gap-1 shrink-0">
-            <button onClick={() => setActiveCategory('prompt')} className={cn("flex-1 py-2 text-xs font-bold rounded-md flex items-center justify-center gap-2 transition-colors", activeCategory === 'prompt' ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary")}>
-                <Sparkles size={14} /> Prompts
+        <div className="p-3 pb-0 flex flex-col gap-1 shrink-0">
+            <button onClick={() => setActiveCategory('prompt')} className={cn("w-full flex items-center justify-between px-3 py-2 text-xs font-bold rounded-md transition-colors group", activeCategory === 'prompt' ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary")}>
+                <div className="flex items-center gap-2">
+                    <Sparkles size={14} />
+                    <span>{getText('editor', 'typePrompt', language)}</span>
+                </div>
+                <span className={cn("text-[10px] px-1.5 py-0.5 rounded-full transition-colors font-mono", activeCategory === 'prompt' ? "bg-primary/20 text-primary" : "bg-secondary/50 text-muted-foreground group-hover:bg-secondary-foreground/10")}>
+                    {counts.prompt}
+                </span>
             </button>
-            <button onClick={() => setActiveCategory('command')} className={cn("flex-1 py-2 text-xs font-bold rounded-md flex items-center justify-center gap-2 transition-colors", activeCategory === 'command' ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary")}>
-                <Terminal size={14} /> Commands
+            <button onClick={() => setActiveCategory('command')} className={cn("w-full flex items-center justify-between px-3 py-2 text-xs font-bold rounded-md transition-colors group", activeCategory === 'command' ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary")}>
+                <div className="flex items-center gap-2">
+                    <Terminal size={14} />
+                    <span>{getText('editor', 'typeCommand', language)}</span>
+                </div>
+                <span className={cn("text-[10px] px-1.5 py-0.5 rounded-full transition-colors font-mono", activeCategory === 'command' ? "bg-primary/20 text-primary" : "bg-secondary/50 text-muted-foreground group-hover:bg-secondary-foreground/10")}>
+                    {counts.command}
+                </span>
             </button>
         </div>
 
