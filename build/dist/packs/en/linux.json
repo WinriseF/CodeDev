@@ -2357,10 +2357,10 @@
   {
     "id": "tldr-en-linux-apptainer-build-3",
     "type": "command",
-    "title": "apptainer-build - Build a writable [s]andbox directory instead of an image file",
+    "title": "apptainer-build - Build a writable sandbox directory instead of an image file",
     "content": "apptainer build {{[-s|--sandbox]}} {{path/to/directory}} docker://{{image}}:{{tag}}",
     "group": "Linux Ops",
-    "description": "apptainer-build: Build Apptainer container images. (Build a writable [s]andbox directory instead of an image file)",
+    "description": "apptainer-build: Build Apptainer container images. (Build a writable sandbox directory instead of an image file)",
     "tags": [
       "linux",
       "apptainer-build",
@@ -2387,10 +2387,10 @@
   {
     "id": "tldr-en-linux-apptainer-build-5",
     "type": "command",
-    "title": "apptainer-build - [F]orce overwrite an existing image file",
+    "title": "apptainer-build - Force overwrite an existing image file",
     "content": "apptainer build {{[-F|--force]}} {{path/to/image.sif}} {{path/to/definition.def}}",
     "group": "Linux Ops",
-    "description": "apptainer-build: Build Apptainer container images. ([F]orce overwrite an existing image file)",
+    "description": "apptainer-build: Build Apptainer container images. (Force overwrite an existing image file)",
     "tags": [
       "linux",
       "apptainer-build",
@@ -2402,10 +2402,10 @@
   {
     "id": "tldr-en-linux-apptainer-build-6",
     "type": "command",
-    "title": "apptainer-build - Build using [f]akeroot for unprivileged builds",
+    "title": "apptainer-build - Build using fakeroot for unprivileged builds",
     "content": "apptainer build {{[-f|--fakeroot]}} {{path/to/image.sif}} {{path/to/definition.def}}",
     "group": "Linux Ops",
-    "description": "apptainer-build: Build Apptainer container images. (Build using [f]akeroot for unprivileged builds)",
+    "description": "apptainer-build: Build Apptainer container images. (Build using fakeroot for unprivileged builds)",
     "tags": [
       "linux",
       "apptainer-build",
@@ -9909,6 +9909,96 @@
     "tags": [
       "linux",
       "setfiles",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-overlay-0",
+    "type": "command",
+    "title": "apptainer-overlay - Add a writable overlay to an existing SIF image",
+    "content": "apptainer overlay create {{[-s|--size]}} {{size}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-overlay: Manage EXT3 writable overlay images for Apptainer containers. (Add a writable overlay to an existing SIF image)",
+    "tags": [
+      "linux",
+      "apptainer-overlay",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-overlay-1",
+    "type": "command",
+    "title": "apptainer-overlay - Create a standalone EXT3 writable overlay image",
+    "content": "apptainer overlay create {{[-s|--size]}} {{size}} {{path/to/overlay.img}}",
+    "group": "Linux Ops",
+    "description": "apptainer-overlay: Manage EXT3 writable overlay images for Apptainer containers. (Create a standalone EXT3 writable overlay image)",
+    "tags": [
+      "linux",
+      "apptainer-overlay",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-overlay-2",
+    "type": "command",
+    "title": "apptainer-overlay - Create a sparse overlay image",
+    "content": "apptainer overlay create {{[-s|--size]}} {{size}} {{[-S|--sparse]}} {{path/to/overlay.img}}",
+    "group": "Linux Ops",
+    "description": "apptainer-overlay: Manage EXT3 writable overlay images for Apptainer containers. (Create a sparse overlay image)",
+    "tags": [
+      "linux",
+      "apptainer-overlay",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-overlay-3",
+    "type": "command",
+    "title": "apptainer-overlay - Create an overlay for use with fakeroot",
+    "content": "apptainer overlay create {{[-f|--fakeroot]}} {{[-s|--size]}} {{size}} {{path/to/overlay.img}}",
+    "group": "Linux Ops",
+    "description": "apptainer-overlay: Manage EXT3 writable overlay images for Apptainer containers. (Create an overlay for use with fakeroot)",
+    "tags": [
+      "linux",
+      "apptainer-overlay",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-overlay-4",
+    "type": "command",
+    "title": "apptainer-overlay - Create an overlay with a specific directory in the layout",
+    "content": "apptainer overlay create --create-dir {{path/to/directory}} {{path/to/overlay.img}}",
+    "group": "Linux Ops",
+    "description": "apptainer-overlay: Manage EXT3 writable overlay images for Apptainer containers. (Create an overlay with a specific directory in the layout)",
+    "tags": [
+      "linux",
+      "apptainer-overlay",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-overlay-5",
+    "type": "command",
+    "title": "apptainer-overlay - Display help",
+    "content": "apptainer overlay {{[-h|--help]}}",
+    "group": "Linux Ops",
+    "description": "apptainer-overlay: Manage EXT3 writable overlay images for Apptainer containers. (Display help)",
+    "tags": [
+      "linux",
+      "apptainer-overlay",
       "tldr",
       "en"
     ],
@@ -40185,6 +40275,126 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-apptainer-verify-0",
+    "type": "command",
+    "title": "apptainer-verify - Verify a container image using the default PGP keyring",
+    "content": "apptainer verify {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-verify: Verify digital signatures of SIF container images. (Verify a container image using the default PGP keyring)",
+    "tags": [
+      "linux",
+      "apptainer-verify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-verify-1",
+    "type": "command",
+    "title": "apptainer-verify - Verify a container image using a specific public key file",
+    "content": "apptainer verify --key {{path/to/public.pem}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-verify: Verify digital signatures of SIF container images. (Verify a container image using a specific public key file)",
+    "tags": [
+      "linux",
+      "apptainer-verify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-verify-2",
+    "type": "command",
+    "title": "apptainer-verify - Verify a container image using a certificate file",
+    "content": "apptainer verify --certificate {{path/to/certificate.pem}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-verify: Verify digital signatures of SIF container images. (Verify a container image using a certificate file)",
+    "tags": [
+      "linux",
+      "apptainer-verify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-verify-3",
+    "type": "command",
+    "title": "apptainer-verify - Verify all objects in the image",
+    "content": "apptainer verify {{[-a|--all]}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-verify: Verify digital signatures of SIF container images. (Verify all objects in the image)",
+    "tags": [
+      "linux",
+      "apptainer-verify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-verify-4",
+    "type": "command",
+    "title": "apptainer-verify - Verify a specific object group within the image",
+    "content": "apptainer verify {{[-g|--group-id]}} {{group_id}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-verify: Verify digital signatures of SIF container images. (Verify a specific object group within the image)",
+    "tags": [
+      "linux",
+      "apptainer-verify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-verify-5",
+    "type": "command",
+    "title": "apptainer-verify - Verify a specific object by ID within the image",
+    "content": "apptainer verify {{[-i|--sif-id]}} {{object_id}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-verify: Verify digital signatures of SIF container images. (Verify a specific object by ID within the image)",
+    "tags": [
+      "linux",
+      "apptainer-verify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-verify-6",
+    "type": "command",
+    "title": "apptainer-verify - Output verification results in JSON format",
+    "content": "apptainer verify {{[-j|--json]}} {{path/to/image.sif}}",
+    "group": "Linux Ops",
+    "description": "apptainer-verify: Verify digital signatures of SIF container images. (Output verification results in JSON format)",
+    "tags": [
+      "linux",
+      "apptainer-verify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-apptainer-verify-7",
+    "type": "command",
+    "title": "apptainer-verify - Display help",
+    "content": "apptainer verify {{[-h|--help]}}",
+    "group": "Linux Ops",
+    "description": "apptainer-verify: Verify digital signatures of SIF container images. (Display help)",
+    "tags": [
+      "linux",
+      "apptainer-verify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-portablectl-0",
     "type": "command",
     "title": "portablectl - List available portable service images discovered in the portable image search paths",
@@ -45663,7 +45873,7 @@
     "id": "tldr-en-linux-apptainer-delete-1",
     "type": "command",
     "title": "apptainer-delete - Delete an image for a specific architecture",
-    "content": "apptainer delete --arch {{amd64|arm64|ppc64le}} library://{{user/collection/container}}:{{tag}}",
+    "content": "apptainer delete {{[-A|--arch]}} {{amd64|arm64|ppc64le}} library://{{user/collection/container}}:{{tag}}",
     "group": "Linux Ops",
     "description": "apptainer-delete: Delete container images from a remote library. (Delete an image for a specific architecture)",
     "tags": [
@@ -45677,10 +45887,10 @@
   {
     "id": "tldr-en-linux-apptainer-delete-2",
     "type": "command",
-    "title": "apptainer-delete - [F]orce delete an image without confirmation",
+    "title": "apptainer-delete - Force delete an image without confirmation",
     "content": "apptainer delete {{[-F|--force]}} library://{{user/collection/container}}:{{tag}}",
     "group": "Linux Ops",
-    "description": "apptainer-delete: Delete container images from a remote library. ([F]orce delete an image without confirmation)",
+    "description": "apptainer-delete: Delete container images from a remote library. (Force delete an image without confirmation)",
     "tags": [
       "linux",
       "apptainer-delete",
@@ -84437,10 +84647,10 @@
   {
     "id": "tldr-en-linux-apptainer-pull-4",
     "type": "command",
-    "title": "apptainer-pull - [F]orce overwrite an existing image file",
+    "title": "apptainer-pull - Force overwrite an existing image file",
     "content": "apptainer pull {{[-F|--force]}} {{path/to/image.sif}} docker://{{image}}:{{tag}}",
     "group": "Linux Ops",
-    "description": "apptainer-pull: Pull container images from remote sources. ([F]orce overwrite an existing image file)",
+    "description": "apptainer-pull: Pull container images from remote sources. (Force overwrite an existing image file)",
     "tags": [
       "linux",
       "apptainer-pull",
@@ -97517,10 +97727,10 @@
   {
     "id": "tldr-en-linux-apptainer-push-2",
     "type": "command",
-    "title": "apptainer-push - Push an [U]nsigned container (skip signature verification)",
+    "title": "apptainer-push - Push an unsigned container (skip signature verification)",
     "content": "apptainer push {{[-U|--allow-unsigned]}} {{path/to/image.sif}} library://{{user/collection/container}}:{{tag}}",
     "group": "Linux Ops",
-    "description": "apptainer-push: Push container images to remote registries. (Push an [U]nsigned container (skip signature verification))",
+    "description": "apptainer-push: Push container images to remote registries. (Push an unsigned container (skip signature verification))",
     "tags": [
       "linux",
       "apptainer-push",
@@ -97532,10 +97742,10 @@
   {
     "id": "tldr-en-linux-apptainer-push-3",
     "type": "command",
-    "title": "apptainer-push - Push a container with a [D]escription (library only)",
+    "title": "apptainer-push - Push a container with a description (library only)",
     "content": "apptainer push {{[-D|--description]}} \"{{description}}\" {{path/to/image.sif}} library://{{user/collection/container}}:{{tag}}",
     "group": "Linux Ops",
-    "description": "apptainer-push: Push container images to remote registries. (Push a container with a [D]escription (library only))",
+    "description": "apptainer-push: Push container images to remote registries. (Push a container with a description (library only))",
     "tags": [
       "linux",
       "apptainer-push",
@@ -113900,7 +114110,7 @@
     "title": "slurmrestd - Change the [g]roup ID (and drop supplemental groups) before processing client requests",
     "content": "slurmrestd -g {{group_id}} {{[host]:port|unix:/path/to/socket}}",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: *Inetd Mode* & *Listen Mode*. (Change the [g]roup ID (and drop supplemental groups) before processing client requests)",
+    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Change the [g]roup ID (and drop supplemental groups) before processing client requests)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -113915,7 +114125,7 @@
     "title": "slurmrestd - Comma-delimited list of [a]uthentication plugins to load",
     "content": "slurmrestd -a {{authentication_plugins}} {{[host]:port|unix:/path/to/socket}}",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: *Inetd Mode* & *Listen Mode*. (Comma-delimited list of [a]uthentication plugins to load)",
+    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Comma-delimited list of [a]uthentication plugins to load)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -113930,7 +114140,7 @@
     "title": "slurmrestd - Read Slurm configuration from the specified [f]ile",
     "content": "slurmrestd -f {{path/to/file}}",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: *Inetd Mode* & *Listen Mode*. (Read Slurm configuration from the specified [f]ile)",
+    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Read Slurm configuration from the specified [f]ile)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -113945,7 +114155,7 @@
     "title": "slurmrestd - Change [u]ser ID before processing client request",
     "content": "slurmrestd -u {{user_id}}",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: *Inetd Mode* & *Listen Mode*. (Change [u]ser ID before processing client request)",
+    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Change [u]ser ID before processing client request)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -113960,7 +114170,7 @@
     "title": "slurmrestd - Display [h]elp",
     "content": "slurmrestd -h",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: *Inetd Mode* & *Listen Mode*. (Display [h]elp)",
+    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Display [h]elp)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -113975,7 +114185,7 @@
     "title": "slurmrestd - Display [V]ersion",
     "content": "slurmrestd -V",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: *Inetd Mode* & *Listen Mode*. (Display [V]ersion)",
+    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Display [V]ersion)",
     "tags": [
       "linux",
       "slurmrestd",

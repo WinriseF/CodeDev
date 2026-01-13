@@ -1023,7 +1023,7 @@
     "id": "tldr-zh-windows-wsl-1",
     "type": "command",
     "title": "wsl - 在不使用 Shell 的情况下运行 Linux 命令",
-    "content": "wsl --exec {{命令}} {{命令参数}}",
+    "content": "wsl {{[-e|--exec]}} {{命令}} {{命令参数}}",
     "group": "Windows",
     "description": "wsl: 从命令行管理适用于 Linux 的 Windows 子系统。 (在不使用 Shell 的情况下运行 Linux 命令)",
     "tags": [
@@ -1038,7 +1038,7 @@
     "id": "tldr-zh-windows-wsl-2",
     "type": "command",
     "title": "wsl - 指定特定的发行版",
-    "content": "wsl --distribution {{发行版}} {{shell_命令}}",
+    "content": "wsl {{[-d|--distribution]}} {{发行版}} {{shell_命令}}",
     "group": "Windows",
     "description": "wsl: 从命令行管理适用于 Linux 的 Windows 子系统。 (指定特定的发行版)",
     "tags": [
@@ -1053,7 +1053,7 @@
     "id": "tldr-zh-windows-wsl-3",
     "type": "command",
     "title": "wsl - 列出所有可用发行版",
-    "content": "wsl --list",
+    "content": "wsl {{[-l|--list]}}",
     "group": "Windows",
     "description": "wsl: 从命令行管理适用于 Linux 的 Windows 子系统。 (列出所有可用发行版)",
     "tags": [
@@ -1068,7 +1068,7 @@
     "id": "tldr-zh-windows-wsl-4",
     "type": "command",
     "title": "wsl - 将发行版导出到 `.tar` 文件",
-    "content": "wsl --export {{发行版}} {{路径/distro_fs.tar}}",
+    "content": "wsl --export {{发行版}} {{路径\\distro_fs.tar}}",
     "group": "Windows",
     "description": "wsl: 从命令行管理适用于 Linux 的 Windows 子系统。 (将发行版导出到 `.tar` 文件)",
     "tags": [
@@ -1083,7 +1083,7 @@
     "id": "tldr-zh-windows-wsl-5",
     "type": "command",
     "title": "wsl - 从 `.tar` 文件导入发行版",
-    "content": "wsl --import {{发行版}} {{路径/安装位置}} {{路径/distro_fs.tar}}",
+    "content": "wsl --import {{发行版}} {{路径\\安装位置}} {{路径\\distro_fs.tar}}",
     "group": "Windows",
     "description": "wsl: 从命令行管理适用于 Linux 的 Windows 子系统。 (从 `.tar` 文件导入发行版)",
     "tags": [
@@ -1758,7 +1758,7 @@
     "id": "tldr-zh-windows-winget-0",
     "type": "command",
     "title": "winget - 安装一个包",
-    "content": "winget install {{包}}",
+    "content": "winget {{[add|install]}} {{包}}",
     "group": "Windows",
     "description": "winget: Windows 软件包管理器命令行工具。 (安装一个包)",
     "tags": [
@@ -1773,7 +1773,7 @@
     "id": "tldr-zh-windows-winget-1",
     "type": "command",
     "title": "winget - 移除一个包（注意：`remove` 也可以用来代替 `uninstall`）",
-    "content": "winget uninstall {{包}}",
+    "content": "winget {{[rm|uninstall]}} {{包}}",
     "group": "Windows",
     "description": "winget: Windows 软件包管理器命令行工具。 (移除一个包（注意：`remove` 也可以用来代替 `uninstall`）)",
     "tags": [
@@ -1818,7 +1818,7 @@
     "id": "tldr-zh-windows-winget-4",
     "type": "command",
     "title": "winget - 将所有包升级到最新版本",
-    "content": "winget upgrade --all",
+    "content": "winget upgrade {{[-r|--all]}}",
     "group": "Windows",
     "description": "winget: Windows 软件包管理器命令行工具。 (将所有包升级到最新版本)",
     "tags": [
@@ -1833,7 +1833,7 @@
     "id": "tldr-zh-windows-winget-5",
     "type": "command",
     "title": "winget - 列出所有可以通过 `winget` 管理的已安装包",
-    "content": "winget list --source winget",
+    "content": "winget {{[ls|list]}} {{[-s|--source]}} winget",
     "group": "Windows",
     "description": "winget: Windows 软件包管理器命令行工具。 (列出所有可以通过 `winget` 管理的已安装包)",
     "tags": [
@@ -1848,7 +1848,7 @@
     "id": "tldr-zh-windows-winget-6",
     "type": "command",
     "title": "winget - 从文件导入包，或将已安装的包导出到文件",
-    "content": "winget {{import|export}} {{--import-file|--output}} {{路径/到/文件}}",
+    "content": "winget {{import|export}} {{--import-file|--output}} {{路径\\到\\文件}}",
     "group": "Windows",
     "description": "winget: Windows 软件包管理器命令行工具。 (从文件导入包，或将已安装的包导出到文件)",
     "tags": [
@@ -1863,7 +1863,7 @@
     "id": "tldr-zh-windows-winget-7",
     "type": "command",
     "title": "winget - 在提交合并到 winget-pkgs 仓库之前验证清单",
-    "content": "winget validate {{路径/到/清单}}",
+    "content": "winget validate {{路径\\到\\清单}}",
     "group": "Windows",
     "description": "winget: Windows 软件包管理器命令行工具。 (在提交合并到 winget-pkgs 仓库之前验证清单)",
     "tags": [
