@@ -61863,7 +61863,7 @@
     "id": "tldr-en-linux-factorio-2",
     "type": "command",
     "title": "factorio - Create a new save file with specific settings",
-    "content": "{{path/to}}/factorio --create {{path/to/save.zip}} --map-gen-settings {{path/to/map-gen-settings.json}} --map-settings {{path/to/map-settings.json}}",
+    "content": "{{path/to}}/factorio --create {{path/to/save.zip}} --map-gen-settings {{path/to/map_gen_settings.json}} --map-settings {{path/to/map_settings.json}}",
     "group": "Linux Ops",
     "description": "factorio: Create and start a headless Factorio server. (Create a new save file with specific settings)",
     "tags": [
