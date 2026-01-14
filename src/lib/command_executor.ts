@@ -56,8 +56,7 @@ export async function executeCommand(commandStr: string, shell: ShellType = 'aut
         const pyFileName = `codeforge_script_${timestamp}.py`;
         const pyScriptPath = await join(baseDir, pyFileName);
 
-        // 1. 构造 Python 源码
-        // 在头部注入编码设置和 CWD 切换，确保环境一致性
+        // 优化 Python 脚本内容，内置暂停逻辑，避免 Shell 层面复杂的命令拼接
         const pyContent = `
 import os
 import sys
@@ -65,8 +64,11 @@ import io
 
 # 强制 UTF-8 输出 (解决 Windows 乱码问题)
 if sys.platform.startswith('win'):
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+    try:
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+    except:
+        pass
 
 # 切换工作目录
 try:
@@ -80,21 +82,28 @@ print("-" * 40)
 # 用户代码开始
 ${commandStr}
 # 用户代码结束
+
+print("")
+print("-" * 40)
+try:
+    if sys.platform.startswith('win'):
+        input("Press Enter to close...")
+except:
+    pass
 `.trim();
 
         await writeTextFile(pyScriptPath, pyContent);
 
         // 2. 根据 OS 启动 Python
         if (osType === 'windows') {
-            // Windows: 使用 cmd /c start "Title" cmd /c "python ... & pause"
-            // 这样可以确保窗口保留，且能看到 Python 的输出
+            // 修复：移除手动引号和复杂的 & 链式命令
+            // 直接传递路径，Tauri/Shell 会自动处理含空格路径的转义
             const cmd = Command.create('cmd', [
                 '/c',
                 'start',
-                'CodeForge Python Executor',
-                'cmd',
-                '/c',
-                `python "${pyScriptPath}" & echo. & echo ----------------------------------- & pause`
+                'CodeForge Python Executor', // 窗口标题
+                'python',
+                pyScriptPath
             ]);
             await cmd.spawn();
 

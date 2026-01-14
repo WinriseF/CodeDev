@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { X, Save, Tag, FileText, Folder, ChevronDown, Check, Plus, Sparkles, Terminal, Loader2 } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { invoke } from '@tauri-apps/api/core';
+import { X, Save, Tag, FileText, Folder, ChevronDown, Check, Plus, Sparkles, Terminal, Loader2, AlertTriangle, RefreshCw } from 'lucide-react';
 import { usePromptStore } from '@/store/usePromptStore';
-import { useAppStore } from '@/store/useAppStore'; 
+import { useAppStore } from '@/store/useAppStore';
 import { Prompt, DEFAULT_GROUP, ShellType } from '@/types/prompt';
 import { cn } from '@/lib/utils';
 import { getText } from '@/lib/i18n';
@@ -40,6 +41,14 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
   const [isShellOpen, setIsShellOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  // Python 环境检测状态
+  const [pythonStatus, setPythonStatus] = useState<{
+      loading: boolean;
+      available: boolean;
+      version: string;
+      checked: boolean;
+  }>({ loading: false, available: false, version: '', checked: false });
+
   useEffect(() => {
     if (isOpen) {
       if (initialData) {
@@ -62,6 +71,7 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
       setIsGroupOpen(false);
       setIsShellOpen(false);
       setIsSaving(false);
+      setPythonStatus({ loading: false, available: false, version: '', checked: false });
     }
   }, [isOpen, initialData]);
   
@@ -70,6 +80,36 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
       setIsExecutable(false);
     }
   }, [type]);
+
+  // 检测 Python 环境
+  const checkPythonEnv = useCallback(async () => {
+      setPythonStatus(prev => ({ ...prev, loading: true }));
+      try {
+          const version = await invoke<string>('check_python_env');
+          setPythonStatus({
+              loading: false,
+              available: true,
+              version,
+              checked: true
+          });
+      } catch {
+          setPythonStatus({
+              loading: false,
+              available: false,
+              version: '',
+              checked: true
+          });
+      }
+  }, []);
+
+  // 监听 Shell 类型变化，自动检测 Python
+  useEffect(() => {
+      if (type === 'command' && isExecutable && shellType === 'python') {
+          if (!pythonStatus.checked) {
+              checkPythonEnv();
+          }
+      }
+  }, [type, isExecutable, shellType, checkPythonEnv, pythonStatus.checked]);
 
   if (!isOpen) return null;
 
@@ -226,8 +266,46 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
                               </>
                           )}
                       </div>
-                      
-                      <p className="text-[10px] text-muted-foreground/70"> {getText('patch', 'autoRecommended', language)} </p>
+
+                      {/* Python 环境状态栏 */}
+                      {shellType === 'python' && (
+                          <div className={cn(
+                              "flex items-center gap-2 text-xs px-3 py-2 rounded-lg border transition-all",
+                              pythonStatus.loading ? "bg-secondary/20 border-border text-muted-foreground" :
+                              pythonStatus.available ? "bg-green-500/10 border-green-500/20 text-green-600" :
+                              "bg-red-500/10 border-red-500/20 text-red-500"
+                          )}>
+                              {pythonStatus.loading ? (
+                                  <>
+                                      <Loader2 size={14} className="animate-spin" />
+                                      <span>{getText('common', 'checking', language)}</span>
+                                  </>
+                              ) : pythonStatus.available ? (
+                                  <>
+                                      <Check size={14} />
+                                      <span className="font-mono font-medium">{pythonStatus.version}</span>
+                                  </>
+                              ) : (
+                                  <>
+                                      <AlertTriangle size={14} />
+                                      <span>Python Not Found</span>
+                                      <button
+                                          onClick={checkPythonEnv}
+                                          className="ml-auto p-1 hover:bg-red-500/10 rounded transition-colors"
+                                          title={getText('monitor', 'refresh', language)}
+                                      >
+                                          <RefreshCw size={12} />
+                                      </button>
+                                  </>
+                              )}
+                          </div>
+                      )}
+
+                      <p className="text-[10px] text-muted-foreground/70">
+                          {shellType === 'python'
+                              ? "Runs code in an isolated .py file with UTF-8 encoding."
+                              : getText('patch', 'autoRecommended', language)}
+                      </p>
                   </div>
               )}
             </div>

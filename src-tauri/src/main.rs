@@ -4,6 +4,7 @@
 )]
 
 use std::fs;
+use std::process::Command;
 use std::sync::{Arc, Mutex};
 use sysinfo::{System, RefreshKind, CpuRefreshKind, MemoryRefreshKind};
 use tauri::{
@@ -77,6 +78,30 @@ fn get_system_info(
     }
 }
 
+#[tauri::command]
+fn check_python_env() -> Result<String, String> {
+    #[cfg(target_os = "windows")]
+    let bin = "python";
+    #[cfg(not(target_os = "windows"))]
+    let bin = "python3";
+
+    let output = Command::new(bin)
+        .arg("--version")
+        .output()
+        .map_err(|_| "Not Found".to_string())?;
+
+    if output.status.success() {
+        let version = String::from_utf8_lossy(&output.stdout).trim().to_string();
+        if version.is_empty() {
+            Ok(String::from_utf8_lossy(&output.stderr).trim().to_string())
+        } else {
+            Ok(version)
+        }
+    } else {
+        Err("Not Installed".to_string())
+    }
+}
+
 // =================================================================
 // 导出命令
 // =================================================================
@@ -141,9 +166,10 @@ fn main() {
             }
         }))
         .invoke_handler(tauri::generate_handler![
-            greet, 
-            get_file_size, 
+            greet,
+            get_file_size,
             get_system_info,
+            check_python_env,
             git::get_git_commits,
             git::get_git_diff,
             git::get_git_diff_text,
