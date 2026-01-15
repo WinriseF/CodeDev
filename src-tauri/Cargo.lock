@@ -550,6 +550,7 @@ dependencies = [
  "tauri-plugin-single-instance",
  "uuid",
  "wait-timeout",
+ "walkdir",
  "which",
  "windows",
 ]

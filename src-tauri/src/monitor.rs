@@ -1,5 +1,7 @@
 use serde::Serialize;
+use std::collections::HashSet;
 use std::net::SocketAddr;
+use std::path::Path;
 use std::process::Command;
 use std::sync::{Arc, Mutex};
 use sysinfo::{
@@ -9,10 +11,11 @@ use sysinfo::{
 use tauri::State;
 use listeners::{get_all, Protocol};
 use rayon::prelude::*;
+use walkdir::WalkDir;
 use crate::env_probe::{self, EnvReport, AiContextReport};
 
 #[cfg(target_os = "windows")]
-use windows::Win32::Foundation::{ERROR_MORE_DATA, ERROR_SUCCESS};
+use windows::Win32::Foundation::{ERROR_MORE_DATA, ERROR_SUCCESS, WIN32_ERROR};
 #[cfg(target_os = "windows")]
 use windows::Win32::System::Threading::{OpenProcess, IsProcessCritical, PROCESS_QUERY_LIMITED_INFORMATION};
 #[cfg(target_os = "windows")]
@@ -262,36 +265,80 @@ pub fn kill_process(pid: u32, system: State<'_, Arc<Mutex<System>>>) -> Result<S
 // File lock detection
 #[tauri::command]
 pub fn check_file_locks(path: String, system: State<'_, Arc<Mutex<System>>>) -> Result<Vec<LockedFileProcess>, String> {
-    let locking_pids: Vec<u32>;
+    let path_obj = Path::new(&path);
+    if !path_obj.exists() {
+        return Err("Path does not exist".to_string());
+    }
+
+    let is_dir = path_obj.is_dir();
+    let mut locking_pids = HashSet::new(); // Use Set for automatic deduplication
 
     #[cfg(target_os = "windows")]
     {
-        locking_pids = get_locking_pids_windows(&path)?;
+        // Windows strategy:
+        // 1. If file, directly check.
+        // 2. If folder, traverse all files, collect paths, batch check.
+        let mut paths_to_check = Vec::new();
+
+        if is_dir {
+            // Traverse directory, collect all file paths
+            for entry in WalkDir::new(&path).min_depth(1).into_iter().filter_map(|e| e.ok()) {
+                if entry.file_type().is_file() {
+                    paths_to_check.push(entry.path().to_string_lossy().to_string());
+                }
+            }
+            // Also add the folder itself (in case a process has a handle on the folder)
+            paths_to_check.push(path.clone());
+        } else {
+            paths_to_check.push(path.clone());
+        }
+
+        // Batch process to prevent API overflow
+        // Windows Restart Manager recommends not registering too many resources at once
+        let str_refs: Vec<&str> = paths_to_check.iter().map(|s| s.as_str()).collect();
+        for chunk in str_refs.chunks(50) {
+            if let Ok(pids) = get_locking_pids_windows(chunk) {
+                for pid in pids {
+                    locking_pids.insert(pid);
+                }
+            }
+        }
     }
 
     #[cfg(not(target_os = "windows"))]
     {
-        let mut locking_pids_vec = Vec::new();
-        let output = Command::new("lsof")
-            .arg("-t")
-            .arg(&path)
-            .output()
-            .map_err(|e| format!("Failed to run lsof: {}", e))?;
+        // Linux/macOS strategy:
+        // Use lsof +D (recursive) or -d (non-recursive)
+        let mut cmd = Command::new("lsof");
+        cmd.arg("-t"); // Only output PID
+
+        if is_dir {
+            cmd.arg("+D"); // Recursive directory
+        }
+
+        cmd.arg(&path);
+
+        let output = cmd.output().map_err(|e| format!("Failed to run lsof: {}", e))?;
 
         if output.status.success() {
             let out_str = String::from_utf8_lossy(&output.stdout);
             for line in out_str.lines() {
                 if let Ok(pid) = line.trim().parse::<u32>() {
-                    locking_pids_vec.push(pid);
+                    locking_pids.insert(pid);
                 }
             }
         }
-        locking_pids = locking_pids_vec;
     }
 
+    // Get process details - locking_pids is now a HashSet
     let mut sys = system.lock().map_err(|e| e.to_string())?;
 
     let pids_to_refresh: Vec<Pid> = locking_pids.iter().map(|&p| Pid::from(p as usize)).collect();
+
+    if pids_to_refresh.is_empty() {
+        return Ok(Vec::new());
+    }
+
     sys.refresh_processes_specifics(
         ProcessesToUpdate::Some(&pids_to_refresh),
         false,
@@ -320,7 +367,7 @@ pub fn check_file_locks(path: String, system: State<'_, Arc<Mutex<System>>>) -> 
 }
 
 #[cfg(target_os = "windows")]
-fn get_locking_pids_windows(path_str: &str) -> Result<Vec<u32>, String> {
+fn get_locking_pids_windows(path_strs: &[&str]) -> Result<Vec<u32>, String> {
     use std::ffi::OsStr;
     use std::os::windows::ffi::OsStrExt;
 
@@ -341,14 +388,28 @@ fn get_locking_pids_windows(path_str: &str) -> Result<Vec<u32>, String> {
         }
         let _guard = SessionGuard(session_handle);
 
-        let wide_path: Vec<u16> = OsStr::new(path_str).encode_wide().chain(Some(0)).collect();
-        let paths = [PCWSTR(wide_path.as_ptr())];
+        // Prepare path array - convert Vec<&str> to Vec<Vec<u16>> (to keep memory alive), then to Vec<PCWSTR>
+        let wide_paths_storage: Vec<Vec<u16>> = path_strs.iter()
+            .map(|s| OsStr::new(s).encode_wide().chain(Some(0)).collect())
+            .collect();
 
-        let res = RmRegisterResources(session_handle, Some(&paths), None, None);
+        let paths_ptrs: Vec<PCWSTR> = wide_paths_storage.iter()
+            .map(|w| PCWSTR(w.as_ptr()))
+            .collect();
+
+        // Register resources (RmRegisterResources accepts array)
+        let res = RmRegisterResources(
+            session_handle,
+            Some(&paths_ptrs),
+            None,
+            None
+        );
+
         if res != ERROR_SUCCESS {
             return Err(format!("RmRegisterResources failed: {:?}", res));
         }
 
+        // Get list of locking processes
         let mut proc_info_needed = 0u32;
         let mut proc_info: [RM_PROCESS_INFO; 10] = std::mem::zeroed();
         let mut reboot_reasons = 0u32;
@@ -378,6 +439,11 @@ fn get_locking_pids_windows(path_str: &str) -> Result<Vec<u32>, String> {
         }
 
         if res != ERROR_SUCCESS {
+            if res == WIN32_ERROR(0) {
+                // ERROR_SUCCESS - no processes
+                let count = proc_info_needed as usize;
+                return Ok(proc_info[..count].iter().map(|p| p.Process.dwProcessId).collect());
+            }
             return Err(format!("RmGetList failed: {:?}", res));
         }
 
