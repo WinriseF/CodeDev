@@ -24618,7 +24618,7 @@
     "id": "tldr-zh-common-asar-0",
     "type": "command",
     "title": "asar - 打包一个文件或目录",
-    "content": "asar pack {{文件或目录路径}} {{输出的 asar 文件}}",
+    "content": "asar {{[p|pack]}} {{文件或目录路径}} {{输出的 asar 文件}}",
     "group": "通用工具 (Common)",
     "description": "asar: Electron 平台的文件打包工具。 (打包一个文件或目录)",
     "tags": [
@@ -24633,7 +24633,7 @@
     "id": "tldr-zh-common-asar-1",
     "type": "command",
     "title": "asar - 解压一个 asar 文件",
-    "content": "asar extract {{asar 文件}}",
+    "content": "asar {{[e|extract]}} {{asar 文件}}",
     "group": "通用工具 (Common)",
     "description": "asar: Electron 平台的文件打包工具。 (解压一个 asar 文件)",
     "tags": [
@@ -24648,7 +24648,7 @@
     "id": "tldr-zh-common-asar-2",
     "type": "command",
     "title": "asar - 从 asar 文件中解压指定的文件",
-    "content": "asar extract-file {{asar 文件}} {{文件}}",
+    "content": "asar {{[ef|extract-file]}} {{asar 文件}} {{文件}}",
     "group": "通用工具 (Common)",
     "description": "asar: Electron 平台的文件打包工具。 (从 asar 文件中解压指定的文件)",
     "tags": [
@@ -24663,7 +24663,7 @@
     "id": "tldr-zh-common-asar-3",
     "type": "command",
     "title": "asar - 列出一个 asar 文件中的内容",
-    "content": "asar list {{asar 文件}}",
+    "content": "asar {{[l|list]}} {{asar 文件}}",
     "group": "通用工具 (Common)",
     "description": "asar: Electron 平台的文件打包工具。 (列出一个 asar 文件中的内容)",
     "tags": [
@@ -43593,7 +43593,7 @@
     "id": "tldr-zh-common-aspell-3",
     "type": "command",
     "title": "aspell - 指定不同的语言（取 ISO 639 语言代码的 2 个字母）来运行 `aspell`",
-    "content": "aspell --lang={{cs}}",
+    "content": "aspell --lang {{cs}}",
     "group": "通用工具 (Common)",
     "description": "aspell: 交互式拼写检查工具。 (指定不同的语言（取 ISO 639 语言代码的 2 个字母）来运行 `aspell`)",
     "tags": [
@@ -43608,7 +43608,7 @@
     "id": "tldr-zh-common-aspell-4",
     "type": "command",
     "title": "aspell - 列出来自标准输入的拼写错误单词，并且忽略个人单词列表中的单词",
-    "content": "cat {{文件}} | aspell --personal={{个人单词列表.pws}} list",
+    "content": "cat {{文件}} | aspell --personal {{个人单词列表.pws}} list",
     "group": "通用工具 (Common)",
     "description": "aspell: 交互式拼写检查工具。 (列出来自标准输入的拼写错误单词，并且忽略个人单词列表中的单词)",
     "tags": [

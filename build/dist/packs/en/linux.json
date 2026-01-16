@@ -213,7 +213,7 @@
     "id": "tldr-en-linux-virt-sparsify-0",
     "type": "command",
     "title": "virt-sparsify - Create a sparsified compressed image without snapshots from an unsparsified one",
-    "content": "virt-sparsify --compress {{path/to/image.qcow2}} {{path/to/image_new.qcow2}}",
+    "content": "virt-sparsify --compress {{path/to/image.qcow2}} {{path/to/new_image.qcow2}}",
     "group": "Linux Ops",
     "description": "virt-sparsify: Make virtual machine drive images thin-provisioned. Note: Use only for offline machines to avoid data corruption. (Create a sparsified compressed image without snapshots from an unsparsified one)",
     "tags": [
@@ -231,6 +231,21 @@
     "content": "virt-sparsify --in-place {{path/to/image.img}}",
     "group": "Linux Ops",
     "description": "virt-sparsify: Make virtual machine drive images thin-provisioned. Note: Use only for offline machines to avoid data corruption. (Sparsify an image in-place)",
+    "tags": [
+      "linux",
+      "virt-sparsify",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-virt-sparsify-2",
+    "type": "command",
+    "title": "virt-sparsify - Convert from one image format to another",
+    "content": "virt-sparsify {{path/to/image}} --convert {{qcow2|raw|vdi|...}} {{path/to/new_image}}",
+    "group": "Linux Ops",
+    "description": "virt-sparsify: Make virtual machine drive images thin-provisioned. Note: Use only for offline machines to avoid data corruption. (Convert from one image format to another)",
     "tags": [
       "linux",
       "virt-sparsify",
@@ -54150,6 +54165,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-deluser-4",
+    "type": "command",
+    "title": "deluser - Remove a user from a group, without deleting the user",
+    "content": "sudo deluser {{username}} {{group}}",
+    "group": "Linux Ops",
+    "description": "deluser: Delete a user from the system. (Remove a user from a group, without deleting the user)",
+    "tags": [
+      "linux",
+      "deluser",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-arch-chroot-0",
     "type": "command",
     "title": "arch-chroot - Start an interactive shell (Bash, by default) in a new root directory",
@@ -60798,7 +60828,7 @@
     "id": "tldr-en-linux-sed-4",
     "type": "command",
     "title": "sed - [d]elete lines 1 to 5 of a file and back up the original file with a `.orig` extension",
-    "content": "sed {{[-i|--in-place=]}}{{.orig}} '1,5d' {{path/to/file}}",
+    "content": "sed {{[-i|--in-place=]}}.orig '1,5d' {{path/to/file}}",
     "group": "Linux Ops",
     "description": "sed: GNU stream editor for filtering and transforming text. ([d]elete lines 1 to 5 of a file and back up the original file with a `.orig` extension)",
     "tags": [
