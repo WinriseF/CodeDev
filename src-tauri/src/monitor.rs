@@ -262,7 +262,6 @@ pub fn kill_process(pid: u32, system: State<'_, Arc<Mutex<System>>>) -> Result<S
     }
 }
 
-// File lock detection
 #[tauri::command]
 pub fn check_file_locks(path: String, system: State<'_, Arc<Mutex<System>>>) -> Result<Vec<LockedFileProcess>, String> {
     let path_obj = Path::new(&path);
@@ -271,30 +270,23 @@ pub fn check_file_locks(path: String, system: State<'_, Arc<Mutex<System>>>) -> 
     }
 
     let is_dir = path_obj.is_dir();
-    let mut locking_pids = HashSet::new(); // Use Set for automatic deduplication
+    let mut locking_pids = HashSet::new();
 
     #[cfg(target_os = "windows")]
     {
-        // Windows strategy:
-        // 1. If file, directly check.
-        // 2. If folder, traverse all files, collect paths, batch check.
         let mut paths_to_check = Vec::new();
 
         if is_dir {
-            // Traverse directory, collect all file paths
             for entry in WalkDir::new(&path).min_depth(1).into_iter().filter_map(|e| e.ok()) {
                 if entry.file_type().is_file() {
                     paths_to_check.push(entry.path().to_string_lossy().to_string());
                 }
             }
-            // Also add the folder itself (in case a process has a handle on the folder)
             paths_to_check.push(path.clone());
         } else {
             paths_to_check.push(path.clone());
         }
 
-        // Batch process to prevent API overflow
-        // Windows Restart Manager recommends not registering too many resources at once
         let str_refs: Vec<&str> = paths_to_check.iter().map(|s| s.as_str()).collect();
         for chunk in str_refs.chunks(50) {
             if let Ok(pids) = get_locking_pids_windows(chunk) {
@@ -307,13 +299,10 @@ pub fn check_file_locks(path: String, system: State<'_, Arc<Mutex<System>>>) -> 
 
     #[cfg(not(target_os = "windows"))]
     {
-        // Linux/macOS strategy:
-        // Use lsof +D (recursive) or -d (non-recursive)
         let mut cmd = Command::new("lsof");
-        cmd.arg("-t"); // Only output PID
 
         if is_dir {
-            cmd.arg("+D"); // Recursive directory
+            cmd.arg("+D");
         }
 
         cmd.arg(&path);
@@ -330,7 +319,6 @@ pub fn check_file_locks(path: String, system: State<'_, Arc<Mutex<System>>>) -> 
         }
     }
 
-    // Get process details - locking_pids is now a HashSet
     let mut sys = system.lock().map_err(|e| e.to_string())?;
 
     let pids_to_refresh: Vec<Pid> = locking_pids.iter().map(|&p| Pid::from(p as usize)).collect();
@@ -388,7 +376,7 @@ fn get_locking_pids_windows(path_strs: &[&str]) -> Result<Vec<u32>, String> {
         }
         let _guard = SessionGuard(session_handle);
 
-        // Prepare path array - convert Vec<&str> to Vec<Vec<u16>> (to keep memory alive), then to Vec<PCWSTR>
+        // Prepare path array
         let wide_paths_storage: Vec<Vec<u16>> = path_strs.iter()
             .map(|s| OsStr::new(s).encode_wide().chain(Some(0)).collect())
             .collect();
@@ -397,7 +385,7 @@ fn get_locking_pids_windows(path_strs: &[&str]) -> Result<Vec<u32>, String> {
             .map(|w| PCWSTR(w.as_ptr()))
             .collect();
 
-        // Register resources (RmRegisterResources accepts array)
+        // Register resources
         let res = RmRegisterResources(
             session_handle,
             Some(&paths_ptrs),
@@ -440,7 +428,7 @@ fn get_locking_pids_windows(path_strs: &[&str]) -> Result<Vec<u32>, String> {
 
         if res != ERROR_SUCCESS {
             if res == WIN32_ERROR(0) {
-                // ERROR_SUCCESS - no processes
+                // No processes locking the file
                 let count = proc_info_needed as usize;
                 return Ok(proc_info[..count].iter().map(|p| p.Process.dwProcessId).collect());
             }
