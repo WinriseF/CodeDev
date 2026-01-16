@@ -1,6 +1,6 @@
-# CodeForge AI - 详细使用指南 (Detailed Usage Guide)
+# CtxRun - 详细使用指南 (Detailed Usage Guide)
 
-本文档提供了 CodeForge AI 各项核心功能的详细使用方法、配置指南和快捷键参考。
+本文档提供了 CtxRun 各项核心功能的详细使用方法、配置指南和快捷键参考。
 
 ## 目录 (Table of Contents)
 

@@ -83,7 +83,7 @@ def parse_markdown(content, cmd_name, platform, lang, platform_display_name):
     return prompts
 
 def main():
-    print("开始构建 CodeForgeAI 指令库...")
+    print("开始构建 CtxRun 指令库...")
     print(f"脚本位置: {SCRIPT_DIR}")
 
     if not OUTPUT_DIR.exists():

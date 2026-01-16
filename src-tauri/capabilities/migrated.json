@@ -1,6 +1,6 @@
 {
   "identifier": "migrated",
-  "description": "Permissions for CodeForge AI (v2)",
+  "description": "Permissions for CtxRun (v2)",
   "local": true,
   "windows": [
     "main",

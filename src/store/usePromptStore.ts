@@ -9,9 +9,9 @@ import { exists, readTextFile, BaseDirectory } from '@tauri-apps/plugin-fs';
 
 // 镜像源优先级：jsDelivr (CDN) -> Gitee (国内) -> GitHub (源站)
 const MIRROR_BASES = [
-    'https://cdn.jsdelivr.net/gh/WinriseF/CodeDev@main/build/dist/',
+    'https://cdn.jsdelivr.net/gh/WinriseF/CtxRun@main/build/dist/',
     'https://gitee.com/winriseF/models/raw/master/build/dist/',
-    'https://raw.githubusercontent.com/WinriseF/CodeDev/main/build/dist/'
+    'https://raw.githubusercontent.com/WinriseF/CtxRun/main/build/dist/'
 ];
 
 const PAGE_SIZE = 20;

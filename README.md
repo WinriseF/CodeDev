@@ -1,19 +1,19 @@
 <div align="center">
-  <a href="https://github.com/WinriseF/Code-Forge-AI">
-    <img src="images/logo.png" alt="CodeForge AI Logo" width="120" height="120">
+  <a href="https://github.com/WinriseF/CtxRun">
+    <img src="images/logo.png" alt="CtxRun Logo" width="120" height="120">
   </a>
 
-  <h1 align="center">CodeForge AI</h1>
+  <h1 align="center">CtxRun</h1>
 
   <p align="center">
-    <strong>Forge your code with intelligence.</strong>
+    <strong>Run with context, AI at your fingertips.</strong>
     <br />
     为开发者打造的 AI 辅助生产力工具：上下文组装 · 提示词管理 · 全局 AI 对话 · 代码对比
   </p>
 
   <p align="center">
-    <a href="https://github.com/WinriseF/Code-Forge-AI/actions">
-      <img src="https://img.shields.io/github/actions/workflow/status/WinriseF/Code-Forge-AI/update-prompts.yml?style=flat-square&logo=github&label=build" alt="Build Status">
+    <a href="https://github.com/WinriseF/CtxRun/actions">
+      <img src="https://img.shields.io/github/actions/workflow/status/WinriseF/CtxRun/update-prompts.yml?style=flat-square&logo=github&label=build" alt="Build Status">
     </a>
     <a href="https://tauri.app">
       <img src="https://img.shields.io/badge/built%20with-Tauri-24C8DB?style=flat-square&logo=tauri&logoColor=white" alt="Built with Tauri">
@@ -25,14 +25,14 @@
       <img src="https://img.shields.io/badge/backend-Rust-000000?style=flat-square&logo=rust&logoColor=white" alt="Rust">
     </a>
     <a href="LICENSE">
-      <img src="https://img.shields.io/github/license/WinriseF/Code-Forge-AI?style=flat-square&color=blue" alt="License">
+      <img src="https://img.shields.io/github/license/WinriseF/CtxRun?style=flat-square&color=blue" alt="License">
     </a>
   </p>
 </div>
 
 <br />
 
-**CodeForge AI** 是一款专为开发者打造的 AI 辅助生产力工具。它集成了代码上下文组装、代码对比、提示词管理以及一个随时待命的全局 AI 终端，旨在无缝连接你的 IDE 与大语言模型（LLM）。
+**CtxRun** 是一款专为开发者打造的 AI 辅助生产力工具。它集成了代码上下文组装、代码对比、提示词管理以及一个随时待命的全局 AI 终端，旨在无缝连接你的 IDE 与大语言模型（LLM）。
 
 ![alt text](images/ScreenShot_2025-11-28_185818_533.png)
 ![alt text](images/ScreenShot_2025-11-28_185842_701.png)
@@ -65,7 +65,7 @@
 
 ## 📥 下载与安装 (Download & Installation)
 
-请前往 [Releases](../../releases) 页面下载适合您操作系统的安装包，或者直接下载运行版本(**CodeForge.AI.exe**)，无需安装点击即用（数据存储在`C:\Users\<name>\AppData\Local\com.codeforge.ai`内，即`%localappdata%\com.codeforge.ai`）：
+请前往 [Releases](../../releases) 页面下载适合您操作系统的安装包，或者直接下载运行版本(**CtxRun.exe**)，无需安装点击即用（数据存储在`C:\Users\<name>\AppData\Local\com.ctxrun`内，即`%localappdata%\com.ctxrun`）：
 
 *   **Windows**: `.msi` 或 `.exe`
 
@@ -75,7 +75,7 @@
 
 启动应用时，你可能会看到 **“Windows 已保护你的电脑” (Microsoft Defender SmartScreen)** 的蓝色拦截窗口。
 
-**这是正常现象**。因为 CodeForge AI 是一个由个人维护的开源项目，没有购买微软数字签名证书 (EV Code Signing Certificate)，所以会被系统标记为“未知发布者”。
+**这是正常现象**。因为 CtxRun 是一个由个人维护的开源项目，没有购买微软数字签名证书 (EV Code Signing Certificate)，所以会被系统标记为"未知发布者"。
 
 **如何运行：**
 1. 在蓝色拦截窗口中，点击 **<u>更多信息 (More info)</u>**。
@@ -93,4 +93,4 @@
 
 ---
 
-*CodeForge AI - Forge your code with intelligence.*
+*CtxRun - Run with context, AI at your fingertips.*

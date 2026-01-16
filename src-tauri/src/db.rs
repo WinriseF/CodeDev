@@ -1,9 +1,12 @@
 use rusqlite::{params, Connection, Result};
 use serde::{Deserialize, Serialize};
+use std::fs::File;
+use std::io::Write;
 use std::sync::Mutex;
 use tauri::State;
 use tauri::{AppHandle, Manager};
 use regex::Regex;
+use uuid::Uuid;
 
 pub struct DbState {
     pub conn: Mutex<Connection>,
@@ -634,4 +637,194 @@ pub fn get_prompt_counts(state: State<DbState>) -> Result<PromptCounts, String> 
         prompt: prompt_count,
         command: command_count,
     })
+}
+
+// --- CSV Import/Export ---
+
+/// CSV row structure for import/export (DTO)
+#[derive(Debug, Serialize, Deserialize)]
+#[allow(dead_code)]
+struct PromptCsvRow {
+    #[serde(default)]
+    id: Option<String>,
+    title: String,
+    content: String,
+    #[serde(rename = "group")]
+    group_name: String,
+    description: Option<String>,
+    #[serde(default)]
+    tags: String,
+    #[serde(default)]
+    is_favorite: bool,
+    #[serde(rename = "type", default = "default_type")]
+    type_: String,
+    #[serde(default)]
+    is_executable: bool,
+    shell_type: Option<String>,
+}
+
+#[allow(dead_code)]
+fn default_type() -> String {
+    "prompt".to_string()
+}
+
+#[tauri::command]
+#[allow(dead_code)]
+pub fn export_prompts_to_csv(
+    state: State<DbState>,
+    save_path: String,
+) -> Result<usize, String> {
+    let conn = state.conn.lock().map_err(|e| e.to_string())?;
+
+    // 1. Create file and write BOM (for Excel compatibility)
+    let mut file = File::create(&save_path).map_err(|e| e.to_string())?;
+    file.write_all(b"\xEF\xBB\xBF").map_err(|e| e.to_string())?; // UTF-8 BOM
+
+    // 2. Initialize CSV Writer with auto-flush
+    let mut wtr = csv::WriterBuilder::new()
+        .has_headers(true)
+        .from_writer(file);
+
+    // 3. Stream data from database (row by row, no intermediate Vec)
+    let mut stmt = conn
+        .prepare("SELECT * FROM prompts ORDER BY group_name, title")
+        .map_err(|e| e.to_string())?;
+
+    let mut count = 0;
+    let rows = stmt.query_map([], |row| {
+        let tags_json: Option<String> = row.get("tags")?;
+        let tags_vec: Vec<String> = tags_json
+            .and_then(|s| serde_json::from_str(&s).ok())
+            .unwrap_or_default();
+
+        Ok(PromptCsvRow {
+            id: Some(row.get("id")?),
+            title: row.get("title")?,
+            content: row.get("content")?,
+            group_name: row.get("group_name")?,
+            description: row.get("description")?,
+            tags: tags_vec.join(", "),
+            is_favorite: row.get("is_favorite")?,
+            type_: row.get::<_, Option<String>>("type")?.unwrap_or("prompt".to_string()),
+            is_executable: row.get("is_executable").unwrap_or(false),
+            shell_type: row.get("shell_type").unwrap_or(None),
+        })
+    }).map_err(|e| e.to_string())?;
+
+    for result in rows {
+        let row = result.map_err(|e| e.to_string())?;
+        wtr.serialize(row).map_err(|e| e.to_string())?;
+        // Auto-flush every 100 rows to balance performance and memory
+        if count % 100 == 0 {
+            wtr.flush().map_err(|e| e.to_string())?;
+        }
+        count += 1;
+    }
+
+    wtr.flush().map_err(|e| e.to_string())?;
+    Ok(count)
+}
+
+#[tauri::command]
+#[allow(dead_code)]
+pub fn import_prompts_from_csv(
+    state: State<DbState>,
+    file_path: String,
+    mode: String,
+) -> Result<usize, String> {
+    let mut conn = state.conn.lock().map_err(|e| e.to_string())?;
+
+    // 1. Read CSV
+    let mut rdr = csv::ReaderBuilder::new()
+        .has_headers(true)
+        .trim(csv::Trim::All)
+        .from_path(file_path)
+        .map_err(|e| format!("无法读取 CSV 文件: {}", e))?;
+
+    let now = chrono::Utc::now().timestamp_millis();
+
+    // 2. Execute write in transaction
+    let tx = conn.transaction().map_err(|e| e.to_string())?;
+
+    if mode == "overwrite" {
+        tx.execute("DELETE FROM prompts", []).map_err(|e| e.to_string())?;
+    }
+
+    // overwrite: INSERT OR REPLACE (存在则更新)
+    // merge: INSERT OR IGNORE (存在则跳过)
+    let sql = if mode == "overwrite" {
+        "INSERT OR REPLACE INTO prompts (
+            id, title, content, group_name, description, tags,
+            is_favorite, created_at, updated_at, source, type,
+            is_executable, shell_type
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    } else {
+        "INSERT OR IGNORE INTO prompts (
+            id, title, content, group_name, description, tags,
+            is_favorite, created_at, updated_at, source, type,
+            is_executable, shell_type
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    };
+
+    let mut affected = 0;
+
+    {
+        let mut stmt = tx.prepare(sql).map_err(|e| e.to_string())?;
+
+        for result in rdr.deserialize() {
+            let record: PromptCsvRow =
+                result.map_err(|e| format!("CSV 格式错误: {}", e))?;
+
+            // Process ID: empty -> generate new UUID
+            let id = if let Some(ref pid) = record.id {
+                if pid.trim().is_empty() {
+                    Uuid::new_v4().to_string()
+                } else {
+                    pid.clone()
+                }
+            } else {
+                Uuid::new_v4().to_string()
+            };
+
+            // Process Tags: "tag1, tag2" -> ["tag1", "tag2"]
+            let tags_vec: Vec<String> = record
+                .tags
+                .split(',')
+                .map(|s| s.trim().to_string())
+                .filter(|s| !s.is_empty())
+                .collect();
+            let tags_json = serde_json::to_string(&tags_vec).unwrap_or("[]".to_string());
+
+            let group_name = if record.group_name.is_empty() {
+                "Default".to_string()
+            } else {
+                record.group_name
+            };
+
+            let result = stmt.execute(params![
+                id,
+                record.title,
+                record.content,
+                group_name,
+                record.description,
+                tags_json,
+                record.is_favorite,
+                now,
+                now,
+                "local".to_string(),
+                record.type_,
+                record.is_executable,
+                record.shell_type,
+            ]);
+
+            // INSERT OR IGNORE 返回变化行数为 0 时表示已存在
+            if result.is_ok() {
+                affected += 1;
+            }
+        }
+    } // stmt 在这里被释放
+
+    tx.commit().map_err(|e| e.to_string())?;
+
+    Ok(affected)
 }

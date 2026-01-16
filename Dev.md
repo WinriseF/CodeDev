@@ -1,10 +1,10 @@
-# CodeForge AI 开发流程文档
+# CtxRun 开发流程文档
 
-> 本文档记录 CodeForge AI 项目的完整开发历程，基于 git 提交历史和代码变更分析编写。
+> 本文档记录 CtxRun 项目的完整开发历程，基于 git 提交历史和代码变更分析编写。
 
 ## 项目概述
 
-**CodeForge AI** 是一款专为开发者打造的 AI 辅助生产力工具，基于 Tauri 框架构建。
+**CtxRun** 是一款专为开发者打造的 AI 辅助生产力工具，基于 Tauri 框架构建。
 
 ### 技术栈
 - **核心框架**: Tauri (Rust 1.80 + WebView2)
@@ -342,7 +342,7 @@ src/lib/i18n.ts                   | +-44 国际化支持
 ## 目录结构
 
 ```
-code-forge-ai/
+ctxrun/
 ├── src/                      # React 前端源码
 │   ├── components/           # UI 组件
 │   │   ├── features/         # 功能组件

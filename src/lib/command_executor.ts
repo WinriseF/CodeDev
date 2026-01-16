@@ -21,7 +21,7 @@ const checkCommandRisk = (commandStr: string): boolean => {
 };
 
 const showNotification = async (msg: string, type: 'info' | 'error' = 'info') => {
-  await message(msg, { title: 'CodeForge AI', kind: type });
+  await message(msg, { title: 'CtxRun', kind: type });
 };
 
 export async function executeCommand(commandStr: string, shell: ShellType = 'auto', cwd?: string | null) {
@@ -47,7 +47,7 @@ export async function executeCommand(commandStr: string, shell: ShellType = 'aut
     const timestamp = Date.now();
 
     if (shell === 'python') {
-        const pyFileName = `codeforge_script_${timestamp}.py`;
+        const pyFileName = `ctxrun_script_${timestamp}.py`;
         const pyScriptPath = await join(baseDir, pyFileName);
 
         const pyContent = `
@@ -87,14 +87,14 @@ except:
             const cmd = Command.create('cmd', [
                 '/c',
                 'start',
-                'CodeForge Python Executor',
+                'CtxRun Python Executor',
                 'python',
                 pyScriptPath
             ]);
             await cmd.spawn();
 
         } else if (osType === 'macos') {
-            const launcherName = `codeforge_launcher_${timestamp}.sh`;
+            const launcherName = `ctxrun_launcher_${timestamp}.sh`;
             const launcherPath = await join(baseDir, launcherName);
 
             const shContent = `
@@ -144,13 +144,13 @@ rm "${pyScriptPath}"
 
     if (osType === 'windows') {
       if (shell === 'powershell') {
-          const fileName = `codeforge_exec_${timestamp}.ps1`;
+          const fileName = `ctxrun_exec_${timestamp}.ps1`;
           const scriptPath = await join(baseDir, fileName);
 
           const psContent = `
 Set-Location -Path "${cleanCwd}"
 Clear-Host
-Write-Host "Windows PowerShell (CodeForge AI)" -ForegroundColor Cyan
+Write-Host "Windows PowerShell (CtxRun)" -ForegroundColor Cyan
 Write-Host "-----------------------------------"
 Write-Host ""
 
@@ -175,7 +175,7 @@ Remove-Item -Path $MyInvocation.MyCommand.Path -Force
           await cmd.spawn();
 
       } else {
-          const fileName = `codeforge_exec_${timestamp}.bat`;
+          const fileName = `ctxrun_exec_${timestamp}.bat`;
           const scriptPath = await join(baseDir, fileName);
 
           const fileContent = `
@@ -202,7 +202,7 @@ start /b "" cmd /c del "%~f0"&exit /b
       }
 
     } else if (osType === 'macos') {
-      const fileName = `codeforge_exec_${timestamp}.sh`;
+      const fileName = `ctxrun_exec_${timestamp}.sh`;
       const scriptPath = await join(baseDir, fileName);
       const targetShell = shell === 'zsh' ? 'zsh' : 'bash';
 
@@ -230,7 +230,7 @@ rm "$0"
       await cmd.spawn();
 
     } else if (osType === 'linux') {
-      const fileName = `codeforge_exec_${timestamp}.sh`;
+      const fileName = `ctxrun_exec_${timestamp}.sh`;
       const scriptPath = await join(baseDir, fileName);
       const targetShell = shell === 'zsh' ? 'zsh' : 'bash';
 

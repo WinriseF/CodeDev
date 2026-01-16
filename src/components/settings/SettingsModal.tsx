@@ -1,6 +1,9 @@
 import { useState } from 'react';
-import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell } from 'lucide-react';
+import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell, Database, Upload, Download, FileSpreadsheet, AlertTriangle } from 'lucide-react';
+import { save, open } from '@tauri-apps/plugin-dialog';
+import { invoke } from '@tauri-apps/api/core';
 import { useAppStore } from '@/store/useAppStore';
+import { usePromptStore } from '@/store/usePromptStore';
 import { getText } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import { FilterManager } from '../features/context/FilterManager';
@@ -8,9 +11,9 @@ import { PromptLibraryManager } from './PromptLibraryManager';
 import { ShortcutInput } from '@/components/ui/ShortcutInput';
 
 export function SettingsModal() {
-  const { 
-    isSettingsOpen, setSettingsOpen, 
-    theme, setTheme, 
+  const {
+    isSettingsOpen, setSettingsOpen,
+    theme, setTheme,
     language, setLanguage,
     globalIgnore, updateGlobalIgnore,
     aiConfig, setAIConfig,
@@ -19,7 +22,60 @@ export function SettingsModal() {
     spotlightAppearance, setSpotlightAppearance
   } = useAppStore();
 
-  const [activeSection, setActiveSection] = useState<'appearance' | 'language' | 'filters' | 'library' | 'ai'>('appearance');
+  const { loadPrompts, refreshGroups, refreshCounts } = usePromptStore();
+
+  const [activeSection, setActiveSection] = useState<'appearance' | 'language' | 'filters' | 'library' | 'ai' | 'data'>('appearance');
+  const [importStatus, setImportStatus] = useState<string>('');
+
+  // 导出处理函数
+  const handleExport = async () => {
+    try {
+      const filePath = await save({
+        filters: [{ name: 'CSV File', extensions: ['csv'] }],
+        defaultPath: `codeforge_prompts_${new Date().toISOString().split('T')[0]}.csv`
+      });
+
+      if (!filePath) return;
+
+      const count = await invoke<number>('export_prompts_to_csv', { savePath: filePath });
+      setImportStatus(`${getText('settings', 'exportSuccess', language)}: ${count} items`);
+    } catch (e) {
+      console.error(e);
+      setImportStatus(`Export failed: ${e}`);
+    }
+  };
+
+  // 导入处理函数
+  const handleImport = async () => {
+    try {
+      const filePath = await open({
+        filters: [{ name: 'CSV File', extensions: ['csv'] }],
+        multiple: false
+      });
+
+      if (!filePath || typeof filePath !== 'string') return;
+
+      const isOverwrite = confirm(getText('settings', 'importModeMsg', language));
+      const mode = isOverwrite ? 'overwrite' : 'merge';
+
+      setImportStatus(getText('settings', 'loading', language));
+      const count = await invoke<number>('import_prompts_from_csv', {
+        filePath,
+        mode
+      });
+
+      setImportStatus(`${getText('settings', 'importSuccess', language)}: ${count} items`);
+
+      // 刷新数据
+      await loadPrompts(true);
+      await refreshGroups();
+      await refreshCounts();
+
+    } catch (e) {
+      console.error(e);
+      setImportStatus(`Import failed: ${e}`);
+    }
+  };
 
   if (!isSettingsOpen) return null;
 
@@ -51,6 +107,7 @@ export function SettingsModal() {
                 <NavBtn active={activeSection === 'filters'} onClick={() => setActiveSection('filters')} icon={<Filter size={14} />} label={getText('settings', 'navFilters', language)} />
                 <NavBtn active={activeSection === 'library'} onClick={() => setActiveSection('library')} icon={<DownloadCloud size={14} />} label={getText('settings', 'navLibrary', language)} />
                 <NavBtn active={activeSection === 'ai'} onClick={() => setActiveSection('ai')} icon={<Bot size={14} />} label={getText('settings', 'navAI', language)} />
+                <NavBtn active={activeSection === 'data'} onClick={() => setActiveSection('data')} icon={<Database size={14} />} label={getText('settings', 'navData', language)} />
             </div>
 
             {/* Main Content Area */}
@@ -312,6 +369,69 @@ export function SettingsModal() {
                                     />
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Data Management */}
+                {activeSection === 'data' && (
+                    <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-200">
+                        <div>
+                            <h3 className="text-sm font-medium text-foreground flex items-center gap-2">
+                                <FileSpreadsheet size={18} className="text-green-600"/>
+                                {getText('settings', 'dataTitle', language)}
+                            </h3>
+                            <p className="text-xs text-muted-foreground mt-1">
+                                {getText('settings', 'dataDesc', language)}
+                            </p>
+                        </div>
+
+                        {/* 导出卡片 */}
+                        <div className="bg-secondary/20 border border-border rounded-lg p-4 flex flex-col gap-3">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-blue-500/10 text-blue-500 rounded-md">
+                                    <Download size={20} />
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-medium">{getText('settings', 'exportTitle', language)}</h4>
+                                    <p className="text-xs text-muted-foreground">{getText('settings', 'exportDesc', language)}</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={handleExport}
+                                className="w-full py-2 bg-background border border-border hover:border-primary/50 hover:text-primary rounded-md text-sm font-medium transition-all shadow-sm"
+                            >
+                                {getText('settings', 'btnExportCsv', language)}
+                            </button>
+                        </div>
+
+                        {/* 导入卡片 */}
+                        <div className="bg-secondary/20 border border-border rounded-lg p-4 flex flex-col gap-3">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-orange-500/10 text-orange-500 rounded-md">
+                                    <Upload size={20} />
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-medium">{getText('settings', 'importTitle', language)}</h4>
+                                    <p className="text-xs text-muted-foreground">{getText('settings', 'importDesc', language)}</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={handleImport}
+                                className="w-full py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-md text-sm font-medium transition-all shadow-sm"
+                            >
+                                {getText('settings', 'btnImportCsv', language)}
+                            </button>
+                            {importStatus && (
+                                <div className="text-[10px] text-muted-foreground text-center flex items-center justify-center gap-1.5 pt-1">
+                                    <Check size={10} /> {importStatus}
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="p-3 bg-yellow-500/5 border border-yellow-500/20 rounded-lg flex gap-2 items-start text-xs text-yellow-600/80">
+                            <AlertTriangle size={14} className="shrink-0 mt-0.5" />
+                            <p>{getText('settings', 'csvTip', language)}</p>
                         </div>
                     </div>
                 )}

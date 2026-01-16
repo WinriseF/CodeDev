@@ -180,6 +180,8 @@ fn main() {
             db::record_url_visit,
             db::search_url_history,
             db::get_prompt_counts,
+            db::export_prompts_to_csv,
+            db::import_prompts_from_csv,
             monitor::get_system_metrics,
             monitor::get_top_processes,
             monitor::get_active_ports,

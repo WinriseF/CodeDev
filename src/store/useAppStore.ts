@@ -47,8 +47,8 @@ export const DEFAULT_MODELS: AIModelConfig[] = [
 
 const REMOTE_CONFIG_URLS = [
   'https://gitee.com/winriseF/models/raw/master/models/models.json',
-  'https://cdn.jsdelivr.net/gh/WinriseF/Code-Forge-AI@main/models/models.json',
-  'https://raw.githubusercontent.com/WinriseF/Code-Forge-AI/main/models/models.json'
+  'https://cdn.jsdelivr.net/gh/WinriseF/CtxRun@main/models/models.json',
+  'https://raw.githubusercontent.com/WinriseF/CtxRun/main/models/models.json'
 ];
 
 export interface SpotlightAppearance {
