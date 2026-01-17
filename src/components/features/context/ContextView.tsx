@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef, type CSSProperties, memo } from 'react';
 import { open, save } from '@tauri-apps/plugin-dialog';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import { writeText as writeClipboard } from '@tauri-apps/plugin-clipboard-manager';
@@ -21,8 +21,43 @@ import { ScanResultDialog, SecretMatch } from './ScanResultDialog';
 import { cn } from '@/lib/utils';
 import { getText } from '@/lib/i18n';
 import { Toast, ToastType } from '@/components/ui/Toast';
+import { FileNode } from '@/types/context';
 import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
+
+interface FlatNode {
+  node: FileNode;
+  depth: number;
+  isExpanded: boolean;
+  hasChildren: boolean;
+}
+
+interface RowProps {
+  index: number;
+  style: CSSProperties;
+  data: {
+    items: FlatNode[];
+    onToggleSelect: (id: string, checked: boolean) => void;
+    onToggleExpand: (id: string) => void;
+  };
+}
+
+const Row = memo(function Row({ index, style, data }: RowProps) {
+  const { items, onToggleSelect, onToggleExpand } = data;
+  const item = items[index];
+
+  return (
+    <FileTreeNode
+      node={item.node}
+      depth={item.depth}
+      isExpanded={item.isExpanded}
+      hasChildren={item.hasChildren}
+      style={style}
+      onToggleSelect={onToggleSelect}
+      onToggleExpand={onToggleExpand}
+    />
+  );
+});
 
 export function ContextView() {
   const {
@@ -84,6 +119,13 @@ export function ContextView() {
   const flatData = useMemo(() => {
     return flattenTree(fileTree, expandedIds);
   }, [fileTree, expandedIds]);
+
+  // 传递给 Row 的数据，使用 useMemo 避免不必要的重新创建
+  const rowData = useMemo(() => ({
+    items: flatData,
+    onToggleSelect: toggleSelect,
+    onToggleExpand: toggleExpand
+  }), [flatData, toggleSelect, toggleExpand]);
 
   const triggerToast = (msg: string, type: ToastType = 'success') => {
     setToastState({ show: true, msg, type });
@@ -330,21 +372,10 @@ export function ContextView() {
                     width={width}
                     className="custom-scrollbar"
                     overscanCount={10}
+                    itemData={rowData}
+                    itemKey={(index) => rowData.items[index]?.node.id ?? index}
                   >
-                    {({ index, style }) => {
-                      const item = flatData[index];
-                      return (
-                        <FileTreeNode
-                          node={item.node}
-                          depth={item.depth}
-                          isExpanded={item.isExpanded}
-                          hasChildren={item.hasChildren}
-                          style={style}
-                          onToggleSelect={toggleSelect}
-                          onToggleExpand={toggleExpand}
-                        />
-                      );
-                    }}
+                    {Row}
                   </List>
                 )}
               </AutoSizer>
