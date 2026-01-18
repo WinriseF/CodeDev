@@ -1,5 +1,5 @@
 import { createContext, useContext, useRef, useState, ReactNode, useCallback } from 'react';
-import { SpotlightMode } from '@/types/spotlight';
+import { SpotlightMode, SearchScope } from '@/types/spotlight';
 
 interface SpotlightContextType {
   // 状态
@@ -7,10 +7,16 @@ interface SpotlightContextType {
   query: string;
   chatInput: string;
 
+  // 新增：搜索范围状态
+  searchScope: SearchScope;
+
   // 动作
   setMode: (mode: SpotlightMode) => void;
   setQuery: (query: string) => void;
   setChatInput: (input: string) => void;
+
+  // 新增：设置搜索范围的方法
+  setSearchScope: (scope: SearchScope) => void;
   toggleMode: () => void;
 
   // 引用 (用于跨组件聚焦)
@@ -24,7 +30,10 @@ export function SpotlightProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<SpotlightMode>('search');
   const [query, setQuery] = useState('');
   const [chatInput, setChatInput] = useState('');
-  
+
+  // 新增：初始化搜索范围状态
+  const [searchScope, setSearchScope] = useState<SearchScope>('global');
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const focusInput = useCallback(() => {
@@ -48,9 +57,11 @@ export function SpotlightProvider({ children }: { children: ReactNode }) {
       mode,
       query,
       chatInput,
+      searchScope,
       setMode,
       setQuery,
       setChatInput,
+      setSearchScope,
       toggleMode,
       inputRef,
       focusInput

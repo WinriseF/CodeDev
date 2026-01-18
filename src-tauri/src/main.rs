@@ -24,6 +24,7 @@ mod gitleaks;
 mod db;
 mod monitor;
 mod env_probe;
+mod apps;
 
 #[derive(serde::Serialize)]
 struct SystemInfo {
@@ -209,6 +210,10 @@ fn main() {
             db::add_ignored_secrets,
             db::get_ignored_secrets,
             db::delete_ignored_secret,
+            // --- Apps 相关命令 ---
+            db::search_apps_in_db,
+            apps::refresh_apps,
+            apps::open_app,
             // -------------------
             monitor::get_system_metrics,
             monitor::get_top_processes,

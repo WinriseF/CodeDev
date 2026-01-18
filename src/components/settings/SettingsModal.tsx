@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell, Database, Upload, Download, FileSpreadsheet, AlertTriangle, FolderCog, Shield } from 'lucide-react';
+import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell, Database, Upload, Download, FileSpreadsheet, AlertTriangle, FolderCog, Shield, RefreshCw, AppWindow } from 'lucide-react';
 import { save, open } from '@tauri-apps/plugin-dialog';
 import { invoke } from '@tauri-apps/api/core';
 import { useAppStore } from '@/store/useAppStore';
@@ -27,6 +27,7 @@ export function SettingsModal() {
 
   const [activeSection, setActiveSection] = useState<'appearance' | 'language' | 'filters' | 'library' | 'ai' | 'data' | 'security'>('appearance');
   const [importStatus, setImportStatus] = useState<string>('');
+  const [isScanningApps, setIsScanningApps] = useState(false);
 
   // 导出处理函数
   const handleExport = async () => {
@@ -119,6 +120,20 @@ export function SettingsModal() {
     } catch (e) {
       console.error(e);
       setImportStatus(`Import failed: ${e}`);
+    }
+  };
+
+  // 刷新应用索引
+  const handleRefreshApps = async () => {
+    setIsScanningApps(true);
+    setImportStatus(getText('common', 'loading', language));
+    try {
+      const msg = await invoke<string>('refresh_apps');
+      setImportStatus(msg);
+    } catch (e) {
+      setImportStatus(`Scan failed: ${e}`);
+    } finally {
+      setIsScanningApps(false);
     }
   };
 
@@ -525,6 +540,34 @@ export function SettingsModal() {
                         <div className="p-3 bg-yellow-500/5 border border-yellow-500/20 rounded-lg flex gap-2 items-start text-xs text-yellow-600/80">
                             <AlertTriangle size={14} className="shrink-0 mt-0.5" />
                             <p>{getText('settings', 'csvTip', language)}</p>
+                        </div>
+
+                        {/* 分割线 */}
+                        <div className="w-full h-px bg-border/50 my-2" />
+
+                        {/* 应用索引管理 */}
+                        <div>
+                            <h3 className="text-sm font-medium text-foreground flex items-center gap-2">
+                                <AppWindow size={18} className="text-cyan-600"/>
+                                {getText('spotlight', 'appIndex', language)}
+                            </h3>
+                            <p className="text-xs text-muted-foreground mt-1">
+                                {getText('spotlight', 'rebuildAppIndex', language)}
+                            </p>
+                        </div>
+
+                        <div className="bg-secondary/20 border border-border rounded-lg p-4 flex items-center justify-between">
+                            <div className="text-xs text-muted-foreground">
+                                {getText('spotlight', 'appIndexStored', language)}
+                            </div>
+                            <button
+                                onClick={handleRefreshApps}
+                                disabled={isScanningApps}
+                                className="flex items-center gap-2 px-3 py-1.5 bg-background border border-border hover:border-primary/50 hover:text-primary rounded-md text-xs font-medium transition-all shadow-sm disabled:opacity-50"
+                            >
+                                <RefreshCw size={14} className={cn(isScanningApps && "animate-spin")} />
+                                {getText('spotlight', 'refreshIndexNow', language)}
+                            </button>
                         </div>
                     </div>
                 )}

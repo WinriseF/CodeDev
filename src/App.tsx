@@ -10,6 +10,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { SettingsModal } from "@/components/settings/SettingsModal";
 import { useAppStore, AppTheme } from "@/store/useAppStore";
 import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
+import { getText } from '@/lib/i18n';
 const PromptView = lazy(() => import('@/components/features/prompts/PromptView').then(module => ({ default: module.PromptView })));
 const ContextView = lazy(() => import('@/components/features/context/ContextView').then(module => ({ default: module.ContextView })));
 const PatchView = lazy(() => import('@/components/features/patch/PatchView').then(module => ({ default: module.PatchView })));
@@ -149,7 +150,7 @@ function App() {
 
     const showRestNotification = async () => {
       try {
-        const title = language === 'zh' ? '休息提醒' : 'Rest Reminder';
+        const title = getText('spotlight', 'restReminder', language);
         const body = language === 'zh'
           ? `您已经工作了 ${restReminder.intervalMinutes} 分钟，建议休息一下！`
           : `You've been working for ${restReminder.intervalMinutes} minutes. Time to take a break!`;
