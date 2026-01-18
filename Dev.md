@@ -17,16 +17,16 @@
 
 ## 版本历史
 
-### v1.3.2 (2026-01-18)
+### v1.3.3 (2026-01-18)
 
 | 提交哈希 | 变更内容 | 详细说明 |
 |---------|---------|---------|
-| `xxxxxx` | 发布 1.3.2 | 版本发布 |
+| `xxxxxx` | 发布 1.3.3 | 版本发布 |
 | `xxxxxx` | **Spotlight 增强** | 新增计算器、Shell 命令、范围搜索功能 |
 | `xxxxxx` | **国际化完善** | 统一所有硬编码文案为 getText 调用 |
 | `xxxxxx` | **性能优化** | 正则静态化、loading 短路优化 |
 
-**v1.3.2 Spotlight 增强文件变更**:
+**v1.3.3 Spotlight 增强文件变更**:
 ```
 src/types/spotlight.ts              | +12 新增 SearchScope 和 math/shell 类型
 src/lib/calculator.ts               | +45 数学表达式计算工具
@@ -38,14 +38,14 @@ src/lib/i18n.ts                     | +24 新增国际化词条
 src/SpotlightApp.tsx                | +12 点击处理逻辑
 ```
 
-**v1.3.2 国际化优化文件变更**:
+**v1.3.3 国际化优化文件变更**:
 ```
 src/App.tsx                          | +2 getText 导入
 src/components/settings/SettingsModal.tsx | +6 getText 调用
 src/components/features/monitor/tabs/EnvFingerprint.tsx | +2 getText 调用
 ```
 
-**v1.3.2 性能优化**:
+**v1.3.3 性能优化**:
 ```
 src/lib/calculator.ts                | 正则静态化、超长浮点数限制
 src/components/features/spotlight/hooks/useSpotlightSearch.ts | 计算/Shel 模式短路
@@ -401,10 +401,10 @@ src/lib/i18n.ts                   | +-44 国际化支持
 | 初始 | 全局快捷键唤起 (`Alt+S`) |
 | v1.1.2 | 自定义快捷键配置 |
 | v1.1.3 | 通知系统集成 |
-| v1.3.2 | 计算器模式 (`=`) |
-| v1.3.2 | Shell 命令执行 (`>`) |
-| v1.3.2 | 范围搜索 (`/app`, `/cmd`, `/pmt`) |
-| v1.3.2 | Tag 交互 UI |
+| v1.3.3 | 计算器模式 (`=`) |
+| v1.3.3 | Shell 命令执行 (`>`) |
+| v1.3.3 | 范围搜索 (`/app`, `/cmd`, `/pmt`) |
+| v1.3.3 | Tag 交互 UI |
 
 ### 3. Prompt Verse (提示词库)
 | 版本 | 功能 |

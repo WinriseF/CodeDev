@@ -4,7 +4,6 @@ import { useAppStore } from '@/store/useAppStore';
 import { useSpotlight } from './SpotlightContext';
 import { useSmartContextMenu } from '@/lib/hooks';
 import { getText } from '@/lib/i18n';
-import { SearchScope } from '@/types/spotlight';
 
 interface SearchBarProps {
   onKeyDown?: (e: React.KeyboardEvent) => void;
