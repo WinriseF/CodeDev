@@ -17,6 +17,100 @@
 
 ## 版本历史
 
+### v1.3.1 (2026-01-18)
+
+| 提交哈希 | 变更内容 | 详细说明 |
+|---------|---------|---------|
+| `8353dfa` | 发布 1.3.1 | 版本发布 |
+| `04fff71` | **优化 Git 对比** | 支持 Working Directory 对比，新增 Rayon 并行处理和 CRLF 优化 |
+| `2546dab` | 优化性能 | 整体性能优化 |
+
+**v1.3.1 Git 对比优化文件变更**:
+```
+src-tauri/src/git.rs                           | +118 引入 Rayon 并行处理
+src/components/features/patch/PatchSidebar.tsx | +14  工作区选项
+src/components/features/patch/PatchView.tsx    | +11  默认对比逻辑
+```
+
+**主要更新**:
+- ⚡ **并行处理**: 引入 Rayon 并行读取多文件内容，显著提升大项目对比速度
+- 🔄 **Working Directory 支持**: 新增 "__WORK_DIR__" 虚拟版本，可对比未保存的工作区变更
+- 🪟 **CRLF 优化**: 修复 Windows 换行符问题，避免全文件误判为变更
+- 🛡️ **内存优化**: 大文件预检查防止内存溢出，条件性 CRLF 替换
+
+---
+
+### v1.3.0 (2026-01-16)
+
+| 提交哈希 | 变更内容 | 详细说明 |
+|---------|---------|---------|
+| `aae7ac5` | 发布 1.3.0 | 版本发布 |
+| `547308a` | **新增配置记忆** | 上下文组装配置自动保存到数据库 |
+| `1cff1eb` | **新增白名单** | 安全扫描支持忽略特定密钥 |
+| `9e6a3e4` | 优化性能 | 性能调优 |
+| `528cf9c` | 优化性能 | 性能优化 |
+
+**v1.3.0 配置记忆功能文件变更**:
+```
+src-tauri/src/db.rs                       | +148 数据库表扩展
+src-tauri/src/main.rs                     | +4
+src/components/settings/SettingsModal.tsx | +88 设置界面增强
+src/store/useContextStore.ts              | +39 状态持久化
+src/lib/i18n.ts                           | +18 国际化
+```
+
+**v1.3.0 白名单管理文件变更**:
+```
+src-tauri/src/db.rs                                | +93
+src-tauri/src/main.rs                              | +34
+src/components/features/context/ScanResultDialog.tsx | +145
+src/components/settings/IgnoredSecretsManager.tsx  | +124 白名单管理界面
+src/components/settings/SettingsModal.tsx          | +14
+src/lib/i18n.ts                                    | +28
+```
+
+**主要更新**:
+- 💾 **配置持久化**: 上下文组装过滤器、设置选项自动保存
+- 🔓 **白名单管理**: 安全扫描支持添加误报白名单
+- 📝 **UI 优化**: 设置界面重构，白名单管理独立 Tab
+
+---
+
+### v1.2.5 (2026-01-14)
+
+| 提交哈希 | 变更内容 | 详细说明 |
+|---------|---------|---------|
+| `a96a00b` | 发布 1.2.5 | 版本发布 |
+| `ecafbf3` | **新增 Python 支持** | 命令执行器支持 Python 脚本 |
+| `1a33162` | 优化 top 进程 | 进程监控优化 |
+
+**v1.2.5 Python 支持文件变更**:
+```
+src-tauri/capabilities/migrated.json               | 4 +-
+src/lib/command_executor.ts                        | +145 命令执行重构
+src/types/prompt.ts                                | +2
+```
+
+**主要更新**:
+- 🐍 **Python 集成**: 命令执行器支持 Python 脚本执行
+- ⚙️ **命令执行重构**: 增强跨平台命令执行能力
+
+---
+
+### v1.2.4 (2026-01-12)
+
+| 提交哈希 | 变更内容 | 详细说明 |
+|---------|---------|---------|
+| `794cab3` | 发布 1.2.4 | 版本发布 |
+| `228472a` | 国际化 | 国际化完善 |
+| `76e346d` | 优化体验 | 用户体验优化 |
+
+**主要更新**:
+- 🌍 **国际化完善**: 更多语言支持
+- ✨ **体验优化**: 交互细节打磨
+
+---
+
 ### v1.2.0 (2025-12-27)
 
 | 提交哈希 | 变更内容 | 详细说明 |
@@ -251,9 +345,11 @@ src/lib/i18n.ts                   | +-44 国际化支持
 ### 1. Context Forge (文件整合)
 | 版本 | 功能 |
 |-----|------|
-| v1.1.4+ | 过滤器管理，支持按类型过滤 |
-| v1.1.7 | 隐私扫描集成，安全检测 |
-| v1.1.7 | Token 消耗实时预估 |
+| v1.2.4 | 国际化完善 |
+| v1.2.5 | Python 脚本支持 |
+| v1.3.0 | 配置自动保存 |
+| v1.3.0 | 白名单管理 |
+| v1.3.1 | Rayon 并行处理 |
 
 ### 2. Spotlight (全局 AI 终端)
 | 版本 | 功能 |
@@ -274,6 +370,9 @@ src/lib/i18n.ts                   | +-44 国际化支持
 | v1.1.5 | Git Diff 可视化 |
 | v1.1.5 | Commit 选择器 |
 | v1.1.5 | 多格式导出 |
+| v1.3.1 | Working Directory 对比 |
+| v1.3.1 | Rayon 并行处理 |
+| v1.3.1 | CRLF 换行符优化 |
 
 ---
 
@@ -305,6 +404,13 @@ src/lib/i18n.ts                   | +-44 国际化支持
 | 包管理 | NPM, PyPI, RubyGems |
 | 数据库 | MongoDB, PostgreSQL 连接串 |
 | 通用密钥 | Generic API Key, Bearer Token |
+
+### 白名单管理 (v1.3.0)
+
+**新增功能**:
+- 界面化白名单管理 (`IgnoredSecretsManager.tsx`)
+- 白名单持久化存储 (SQLite)
+- 支持正则表达式白名单
 
 ---
 
@@ -350,6 +456,7 @@ ctxrun/
 │   │   │   ├── prompts/      # 提示词管理
 │   │   │   └── patch/        # 代码对比
 │   │   ├── layout/           # 布局组件
+│   │   ├── settings/         # 设置界面
 │   │   └── ui/               # 基础 UI
 │   ├── lib/                  # 工具函数
 │   ├── store/                # Zustand 状态管理
@@ -357,8 +464,9 @@ ctxrun/
 ├── src-tauri/                # Rust 后端
 │   ├── src/
 │   │   ├── db.rs             # SQLite 数据库
-│   │   ├── git.rs            # Git 操作
+│   │   ├── git.rs            # Git 操作 (含 Rayon 并行)
 │   │   ├── gitleaks/         # 安全扫描
+│   │   ├── monitor.rs        # 进程监控
 │   │   └── main.rs           # 入口
 │   └── Cargo.toml
 ├── build/dist/               # 预构建资源
@@ -368,5 +476,5 @@ ctxrun/
 
 ---
 
-*文档最后更新: 2025-12-28*
+*文档最后更新: 2026-01-18*
 *基于 git 提交历史和代码 diff 分析编写*
