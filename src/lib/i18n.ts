@@ -278,6 +278,7 @@ const translations = {
       searchPlaceholder: "Search commands...",
       chatPlaceholder: "Ask AI anything...",
       noCommands: "No matching commands.",
+      filterPlaceholder: "Filter by",
       aiReady: "AI Assistant Ready",
       aiDesc: "Type your question and press Enter to start chatting with",
       ephemeral: "Ephemeral Mode (History not saved)",
@@ -296,7 +297,13 @@ const translations = {
       actionRequired: "Action Required",
       commandHasVariables: "This command has variables. Please use it from the main window to fill them in.",
       openLink: "Open Link",
-      visitedTimes: "Visited {count} times"
+      visitedTimes: "Visited {count} times",
+      Apps: "Apps",
+      Commands: "Commands",
+      Prompts: "Prompts",
+      executeCommand: "Execute Command",
+      mathResult: "Math Result",
+      copyResult: "Copy Result"
     },
     actions: {
       collapse: "Collapse Sidebar",
@@ -747,6 +754,7 @@ const translations = {
       searchPlaceholder: "搜索指令...",
       chatPlaceholder: "询问 AI...",
       noCommands: "没有匹配的指令。",
+      filterPlaceholder: "筛选",
       aiReady: "AI 助手就绪",
       aiDesc: "输入问题并按回车键，开始与",
       ephemeral: "即时模式 (不保存历史记录)",
@@ -765,7 +773,13 @@ const translations = {
       actionRequired: "需要操作",
       commandHasVariables: "此命令包含变量，请在主窗口中使用以填充变量",
       openLink: "打开",
-      visitedTimes: "访问 {count} 次"
+      visitedTimes: "访问 {count} 次",
+      Apps: "应用",
+      Commands: "命令",
+      Prompts: "提示词",
+      executeCommand: "执行命令",
+      mathResult: "计算结果",
+      copyResult: "复制结果"
     },
     actions: {
       collapse: "收起侧栏",

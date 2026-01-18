@@ -4,6 +4,7 @@ import { Prompt } from '@/types/prompt';
 import { SpotlightItem } from '@/types/spotlight';
 import { useSpotlight } from '../core/SpotlightContext';
 import { getText } from '@/lib/i18n';
+import { evaluateMath } from '@/lib/calculator';
 
 interface AppEntry {
   name: string;
@@ -45,9 +46,9 @@ interface UrlHistoryRecord {
 }
 
 export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
-  const { query, mode } = useSpotlight();
-  const debouncedQuery = useDebounce(query, 100); 
-  
+  const { query, mode, searchScope } = useSpotlight();
+  const debouncedQuery = useDebounce(query, 100);
+
   const [results, setResults] = useState<SpotlightItem[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,44 +57,112 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
     if (mode !== 'search') return;
 
     const performSearch = async () => {
+      const q = debouncedQuery.trim();
+
+      // 1. 处理特殊模式 (仅在 Global 模式下生效)
+      if (searchScope === 'global') {
+        // --- 计算器模式 ---
+        if (q.startsWith('=')) {
+            const mathResult = evaluateMath(q);
+            if (mathResult) {
+                setResults([{
+                    id: 'math-result',
+                    title: mathResult,
+                    description: `${getText('spotlight', 'mathResult', language) || 'Result'} (${q.substring(1)})`,
+                    content: mathResult,
+                    type: 'math',
+                    mathResult: mathResult
+                }]);
+                setSelectedIndex(0);
+                return;
+            }
+        }
+
+        // --- Shell 命令模式 ---
+        if (q.startsWith('>') || q.startsWith('》')) {
+            const cmd = q.substring(1).trim();
+            if (cmd) {
+                setResults([{
+                    id: 'shell-exec',
+                    title: `${getText('spotlight', 'executeCommand', language) || 'Execute'}: ${cmd}`,
+                    description: language === 'zh' ? '在终端中运行' : 'Run in terminal',
+                    content: cmd,
+                    type: 'shell',
+                    shellCmd: cmd,
+                    isExecutable: true,
+                    shellType: 'auto'
+                }]);
+                setSelectedIndex(0);
+                return;
+            }
+        }
+      }
+
+      // 2. 常规搜索逻辑
       setIsLoading(true);
       try {
-        const q = debouncedQuery.trim();
-        
-        let dynamicUrlItem: SpotlightItem | null = null;
-        if (isValidUrl(q)) {
-            const url = normalizeUrl(q);
-            dynamicUrlItem = {
-                id: `dynamic-url-${q}`,
-                title: `Open ${q}`,
-                description: "Open in default browser",
-                content: url,
-                type: 'url',
-                url: url
-            };
+        let finalResults: SpotlightItem[] = [];
+
+        // 并行请求数据，根据 Scope 过滤请求
+        const promises = [];
+
+        // A. Prompts (Command/Prompt)
+        if (searchScope === 'global' || searchScope === 'command' || searchScope === 'prompt') {
+            const categoryFilter = searchScope === 'global' ? null : searchScope;
+            promises.push(
+                q ? invoke<Prompt[]>('search_prompts', {
+                    query: q,
+                    page: 1,
+                    pageSize: 10,
+                    category: categoryFilter
+                }) : invoke<Prompt[]>('get_prompts', {
+                    page: 1,
+                    pageSize: 10,
+                    group: 'all',
+                    category: categoryFilter
+                })
+            );
+        } else {
+            promises.push(Promise.resolve([]));
         }
-        const [promptsData, urlHistoryData, appsData] = await Promise.all([
-            // 查询 Prompts
-            q ? invoke<Prompt[]>('search_prompts', {
-                query: q,
-                page: 1,
-                pageSize: 10,
-                category: null
-            }) : invoke<Prompt[]>('get_prompts', {
-                page: 1,
-                pageSize: 10,
-                group: 'all',
-                category: null
-            }),
 
-            // 查询 URL 历史 (Rust 端已实现 FTS5 和 Title 搜索)
-            invoke<UrlHistoryRecord[]>('search_url_history', { query: q }),
+        // B. URL History & Dynamic URL (仅 Global)
+        if (searchScope === 'global') {
+            promises.push(invoke<UrlHistoryRecord[]>('search_url_history', { query: q }));
+        } else {
+            promises.push(Promise.resolve([]));
+        }
 
-            // 查询应用
-            q ? invoke<AppEntry[]>('search_apps_in_db', { query: q }) : []
-        ]);
+        // C. Apps (Global 或 App 模式)
+        if (searchScope === 'global' || searchScope === 'app') {
+            promises.push(q ? invoke<AppEntry[]>('search_apps_in_db', { query: q }) : Promise.resolve([]));
+        } else {
+            promises.push(Promise.resolve([]));
+        }
 
-        const appItems: SpotlightItem[] = appsData.map(app => ({
+        const [promptsData, urlHistoryData, appsData] = await Promise.all(promises);
+
+        // --- 处理结果 ---
+
+        // 1. Dynamic URL (Global Only)
+        let dynamicUrlItem: SpotlightItem | null = null;
+        if (searchScope === 'global' && isValidUrl(q)) {
+            const url = normalizeUrl(q);
+            const existsInHistory = (urlHistoryData as UrlHistoryRecord[]).some(h => normalizeUrl(h.url) === url);
+            if (!existsInHistory) {
+                dynamicUrlItem = {
+                    id: `dynamic-url-${q}`,
+                    title: `${getText('spotlight', 'openLink', language)} ${q}`,
+                    description: "Open in default browser",
+                    content: url,
+                    type: 'url',
+                    url: url
+                };
+            }
+        }
+
+        // 2. Apps
+        const appItems: SpotlightItem[] = (appsData as AppEntry[]).map(app => ({
             id: `app-${app.path}`,
             title: app.name,
             description: language === 'zh' ? '应用程序' : 'Application',
@@ -102,22 +171,18 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
             appPath: app.path
         }));
 
-        const historyItems: SpotlightItem[] = urlHistoryData.map(h => {
-            if (dynamicUrlItem && normalizeUrl(h.url) === dynamicUrlItem.url) {
-                dynamicUrlItem = null;
-            }
+        // 3. History
+        const historyItems: SpotlightItem[] = (urlHistoryData as UrlHistoryRecord[]).map(h => ({
+            id: `history-${h.url}`,
+            title: h.title && h.title.length > 0 ? h.title : h.url,
+            description: h.title ? h.url : getText('spotlight', 'visitedTimes', language, { count: String(h.visit_count) }),
+            content: h.url,
+            type: 'url',
+            url: h.url
+        }));
 
-            return {
-                id: `history-${h.url}`,
-                title: h.title && h.title.length > 0 ? h.title : h.url,
-                description: h.title ? h.url : getText('spotlight', 'visitedTimes', language, { count: String(h.visit_count) }),
-                content: h.url,
-                type: 'url',
-                url: h.url
-            };
-        });
-
-        const promptItems: SpotlightItem[] = promptsData.map(p => ({
+        // 4. Prompts
+        const promptItems: SpotlightItem[] = (promptsData as Prompt[]).map(p => ({
           id: p.id,
           title: p.title,
           description: p.description,
@@ -128,9 +193,16 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
           shellType: p.shellType
         }));
 
-        let finalResults: SpotlightItem[] = [];
-        if (dynamicUrlItem) finalResults.push(dynamicUrlItem);
-        finalResults = [...finalResults, ...appItems, ...historyItems, ...promptItems];
+        // --- 聚合 ---
+        if (searchScope === 'app') {
+            finalResults = [...appItems];
+        } else if (searchScope === 'command' || searchScope === 'prompt') {
+            finalResults = [...promptItems];
+        } else {
+            // Global: 混合排序
+            if (dynamicUrlItem) finalResults.push(dynamicUrlItem);
+            finalResults = [...finalResults, ...appItems, ...historyItems, ...promptItems];
+        }
 
         setResults(finalResults);
         setSelectedIndex(0);
@@ -143,7 +215,7 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
     };
 
     performSearch();
-  }, [debouncedQuery, mode]);
+  }, [debouncedQuery, mode, searchScope]);
 
   const handleNavigation = useCallback((e: KeyboardEvent) => {
     if (mode !== 'search') return;

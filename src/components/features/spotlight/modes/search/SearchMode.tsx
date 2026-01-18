@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Command, Sparkles, Terminal, CornerDownLeft, Check, Zap, Globe, AppWindow } from 'lucide-react';
+import { Command, Sparkles, Terminal, CornerDownLeft, Check, Zap, Globe, AppWindow, Calculator } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAppStore } from '@/store/useAppStore';
 import { SpotlightItem } from '@/types/spotlight';
@@ -37,20 +37,27 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
     );
   }
 
+  const getActionLabel = (item: SpotlightItem) => {
+    if (item.type === 'url') return getText('spotlight', 'openLink', language);
+    if (item.type === 'app') return language === 'zh' ? '打开' : 'Open';
+    if (item.type === 'shell' || item.isExecutable) return getText('actions', 'run', language);
+    if (item.type === 'math') return getText('spotlight', 'copyResult', language) || "Copy";
+    return getText('spotlight', 'copy', language);
+  };
+
   return (
     <div ref={listRef} className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar scroll-smooth">
       {results.map((item, index) => {
         const isActive = index === selectedIndex;
         const isCopied = copiedId === item.id;
         const isExecutable = !!item.isExecutable;
-        const isUrl = item.type === 'url';
-        const isApp = item.type === 'app';
         const hasDesc = !!item.description;
 
-        // 图标渲染逻辑
         let Icon = Sparkles;
-        if (isUrl) Icon = Globe;
-        else if (isApp) Icon = AppWindow;
+        if (item.type === 'math') Icon = Calculator;
+        else if (item.type === 'shell') Icon = Terminal;
+        else if (item.type === 'url') Icon = Globe;
+        else if (item.type === 'app') Icon = AppWindow;
         else if (isExecutable) Icon = Zap;
         else if (isCommand(item)) Icon = Terminal;
 
@@ -62,15 +69,15 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
             className={cn(
               "relative px-4 py-3 rounded-lg flex items-start gap-4 cursor-pointer transition-all duration-150 group",
               isActive
-                ? (isExecutable ? "bg-indigo-600 text-white shadow-sm scale-[0.99]" :
-                   isUrl ? "bg-blue-600 text-white shadow-sm scale-[0.99]" :
-                   isApp ? "bg-cyan-600 text-white shadow-sm scale-[0.99]" :
+                ? (isExecutable || item.type === 'shell' ? "bg-indigo-600 text-white shadow-sm scale-[0.99]" :
+                   item.type === 'url' ? "bg-blue-600 text-white shadow-sm scale-[0.99]" :
+                   item.type === 'app' ? "bg-cyan-600 text-white shadow-sm scale-[0.99]" :
+                   item.type === 'math' ? "bg-emerald-600 text-white shadow-sm scale-[0.99]" :
                    "bg-primary text-primary-foreground shadow-sm scale-[0.99]")
                 : "text-foreground hover:bg-secondary/40",
               isCopied && "bg-green-500 text-white"
             )}
           >
-            {/* Icon Box */}
             <div className={cn(
               "w-9 h-9 mt-0.5 rounded-md flex items-center justify-center shrink-0 transition-colors",
               isActive ? "bg-white/20 text-white" : "bg-secondary text-muted-foreground",
@@ -81,31 +88,31 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
               )}
             </div>
 
-            {/* Content */}
             <div className="flex-1 min-w-0 flex flex-col gap-1">
               <div className="flex items-center justify-between">
                 <span className={cn("font-semibold truncate text-sm tracking-tight", isActive ? "text-white" : "text-foreground")}>
                   {item.title}
                 </span>
-                
-                {/* Action Hint (Right side) */}
+
                 {isActive && !isCopied && (
                   <span className="text-[10px] opacity-70 flex items-center gap-1 font-medium bg-black/10 px-1.5 rounded whitespace-nowrap">
                     <CornerDownLeft size={10} />
-                    {isUrl ? getText('spotlight', 'openLink', language) : (isApp ? (language === 'zh' ? '打开' : 'Open') : (isExecutable ? getText('actions', 'run', language) : getText('spotlight', 'copy', language)))}
+                    {getActionLabel(item)}
                   </span>
                 )}
               </div>
-              
+
               {hasDesc && (
                 <div className={cn("text-xs transition-all", isActive ? "opacity-90 text-white/90 whitespace-pre-wrap" : "text-muted-foreground opacity-70 truncate")}>
                   {item.description}
                 </div>
               )}
-              
-              <div className={cn("text-xs transition-all duration-200", isActive ? (isApp ? "opacity-80 text-white/80 truncate" : "mt-1 bg-black/20 rounded p-2 text-white/95 whitespace-pre-wrap break-all line-clamp-6") : (hasDesc ? "hidden" : "text-muted-foreground opacity-50 truncate"))}>
-                {item.content}
-              </div>
+
+              {item.type !== 'math' && (
+                <div className={cn("text-xs transition-all duration-200", isActive ? (item.type === 'app' ? "opacity-80 text-white/80 truncate" : "mt-1 bg-black/20 rounded p-2 text-white/95 whitespace-pre-wrap break-all line-clamp-6") : (hasDesc ? "hidden" : "text-muted-foreground opacity-50 truncate"))}>
+                    {item.content}
+                </div>
+              )}
             </div>
           </div>
         );

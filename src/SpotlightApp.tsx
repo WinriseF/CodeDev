@@ -91,7 +91,7 @@ function SpotlightContent() {
         return;
     }
 
-    if (item.isExecutable) {
+    if (item.isExecutable || item.type === 'shell') {
       const content = item.content || '';
       const vars = parseVariables(content);
       if (vars.length > 0) {
@@ -101,16 +101,21 @@ function SpotlightContent() {
         });
         return;
       }
-      
-      await executeCommand(content, item.shellType as ShellType, projectRoot);
+
+      await executeCommand(content, (item.shellType as ShellType) || 'auto', projectRoot);
       await appWindow.hide();
+      setQuery('');
     } else {
       try {
         await writeText(item.content || '');
         setCopiedId(item.id);
+
         setTimeout(async () => {
           await appWindow.hide();
           setCopiedId(null);
+          if (item.type === 'math') {
+            setQuery('');
+          }
         }, 300);
       } catch (err) {
         console.error("Failed to copy:", err);
