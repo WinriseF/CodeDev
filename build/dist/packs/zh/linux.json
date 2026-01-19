@@ -1218,7 +1218,7 @@
     "id": "tldr-zh-linux-dmidecode-1",
     "type": "command",
     "title": "dmidecode - 显示 BIOS 版本",
-    "content": "sudo dmidecode -s bios-version",
+    "content": "sudo dmidecode {{[-s|--string]}} bios-version",
     "group": "Linux 运维",
     "description": "dmidecode: 以人类可读的格式显示 DMI（也称为 SMBIOS）表内容。 需要 root 权限。 (显示 BIOS 版本)",
     "tags": [
@@ -1233,7 +1233,7 @@
     "id": "tldr-zh-linux-dmidecode-2",
     "type": "command",
     "title": "dmidecode - 显示系统的序列号",
-    "content": "sudo dmidecode -s system-serial-number",
+    "content": "sudo dmidecode {{[-s|--string]}} system-serial-number",
     "group": "Linux 运维",
     "description": "dmidecode: 以人类可读的格式显示 DMI（也称为 SMBIOS）表内容。 需要 root 权限。 (显示系统的序列号)",
     "tags": [
@@ -1248,7 +1248,7 @@
     "id": "tldr-zh-linux-dmidecode-3",
     "type": "command",
     "title": "dmidecode - 显示 BIOS 信息",
-    "content": "sudo dmidecode -t bios",
+    "content": "sudo dmidecode {{[-t|--type]}} bios",
     "group": "Linux 运维",
     "description": "dmidecode: 以人类可读的格式显示 DMI（也称为 SMBIOS）表内容。 需要 root 权限。 (显示 BIOS 信息)",
     "tags": [
@@ -1263,7 +1263,7 @@
     "id": "tldr-zh-linux-dmidecode-4",
     "type": "command",
     "title": "dmidecode - 显示 CPU 信息",
-    "content": "sudo dmidecode -t processor",
+    "content": "sudo dmidecode {{[-t|--type]}} processor",
     "group": "Linux 运维",
     "description": "dmidecode: 以人类可读的格式显示 DMI（也称为 SMBIOS）表内容。 需要 root 权限。 (显示 CPU 信息)",
     "tags": [
@@ -1278,7 +1278,7 @@
     "id": "tldr-zh-linux-dmidecode-5",
     "type": "command",
     "title": "dmidecode - 显示内存信息",
-    "content": "sudo dmidecode -t memory",
+    "content": "sudo dmidecode {{[-t|--type]}} memory",
     "group": "Linux 运维",
     "description": "dmidecode: 以人类可读的格式显示 DMI（也称为 SMBIOS）表内容。 需要 root 权限。 (显示内存信息)",
     "tags": [

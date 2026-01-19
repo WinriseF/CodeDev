@@ -59700,6 +59700,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-mkfs.ext4-2",
+    "type": "command",
+    "title": "mkfs.ext4 - Create an ext4 filesystem owned by a specific user and group",
+    "content": "sudo mkfs.ext4 -E root_owner={{uid}}:{{gid}} {{/dev/sdXY}}",
+    "group": "Linux Ops",
+    "description": "mkfs.ext4: Create an ext4 filesystem inside a partition. (Create an ext4 filesystem owned by a specific user and group)",
+    "tags": [
+      "linux",
+      "mkfs.ext4",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-dnsmap-0",
     "type": "command",
     "title": "dnsmap - Scan for subdomains using the internal wordlist",
@@ -114275,7 +114290,7 @@
     "title": "slurmrestd - Change the [g]roup ID (and drop supplemental groups) before processing client requests",
     "content": "slurmrestd -g {{group_id}} {{[host]:port|unix:/path/to/socket}}",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Change the [g]roup ID (and drop supplemental groups) before processing client requests)",
+    "description": "slurmrestd: Interface to Slurm via REST API. Note: Can be used in two modes: Inetd Mode and Listen Mode. (Change the [g]roup ID (and drop supplemental groups) before processing client requests)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -114290,7 +114305,7 @@
     "title": "slurmrestd - Comma-delimited list of [a]uthentication plugins to load",
     "content": "slurmrestd -a {{authentication_plugins}} {{[host]:port|unix:/path/to/socket}}",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Comma-delimited list of [a]uthentication plugins to load)",
+    "description": "slurmrestd: Interface to Slurm via REST API. Note: Can be used in two modes: Inetd Mode and Listen Mode. (Comma-delimited list of [a]uthentication plugins to load)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -114305,7 +114320,7 @@
     "title": "slurmrestd - Read Slurm configuration from the specified [f]ile",
     "content": "slurmrestd -f {{path/to/file}}",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Read Slurm configuration from the specified [f]ile)",
+    "description": "slurmrestd: Interface to Slurm via REST API. Note: Can be used in two modes: Inetd Mode and Listen Mode. (Read Slurm configuration from the specified [f]ile)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -114320,7 +114335,7 @@
     "title": "slurmrestd - Change [u]ser ID before processing client request",
     "content": "slurmrestd -u {{user_id}}",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Change [u]ser ID before processing client request)",
+    "description": "slurmrestd: Interface to Slurm via REST API. Note: Can be used in two modes: Inetd Mode and Listen Mode. (Change [u]ser ID before processing client request)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -114335,7 +114350,7 @@
     "title": "slurmrestd - Display [h]elp",
     "content": "slurmrestd -h",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Display [h]elp)",
+    "description": "slurmrestd: Interface to Slurm via REST API. Note: Can be used in two modes: Inetd Mode and Listen Mode. (Display [h]elp)",
     "tags": [
       "linux",
       "slurmrestd",
@@ -114350,7 +114365,7 @@
     "title": "slurmrestd - Display [V]ersion",
     "content": "slurmrestd -V",
     "group": "Linux Ops",
-    "description": "slurmrestd: Interface to Slurm via REST API. It can be used in two modes: Inetd Mode and Listen Mode. (Display [V]ersion)",
+    "description": "slurmrestd: Interface to Slurm via REST API. Note: Can be used in two modes: Inetd Mode and Listen Mode. (Display [V]ersion)",
     "tags": [
       "linux",
       "slurmrestd",
