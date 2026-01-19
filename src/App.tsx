@@ -4,6 +4,7 @@ import { getAllWebviewWindows } from '@tauri-apps/api/webviewWindow';
 import { listen } from '@tauri-apps/api/event';
 import { register, unregisterAll } from '@tauri-apps/plugin-global-shortcut';
 import { sendNotification } from '@tauri-apps/plugin-notification';
+import { invoke } from '@tauri-apps/api/core';
 import { Loader2 } from 'lucide-react';
 import { TitleBar } from "@/components/layout/TitleBar";
 import { Sidebar } from "@/components/layout/Sidebar";
@@ -19,11 +20,13 @@ const SystemMonitorModal = lazy(() => import('@/components/features/monitor/Syst
 const appWindow = getCurrentWebviewWindow()
 
 function App() {
-  const { currentView, theme, setTheme, syncModels, lastUpdated, spotlightShortcut, restReminder, language } = useAppStore();
+  const { currentView, setView, theme, setTheme, syncModels, lastUpdated, spotlightShortcut, restReminder, language, hibernate } = useAppStore();
   const restTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const lastRestTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {
+    // 强制回到首页 (Prompt View)
+    setView('prompts');
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
@@ -35,10 +38,18 @@ function App() {
     appWindow.show();
     appWindow.setFocus();
 
+    // 同步休眠配置到后端
+    if (hibernate.enabled) {
+      invoke('update_hibernate_config', {
+        enable: hibernate.enabled,
+        duration: hibernate.duration
+      }).catch(console.error);
+    }
+
     return () => {
         unlistenPromise.then(unlisten => unlisten());
     };
-  }, []);
+  }, [hibernate, setView, setTheme]);
 
   useEffect(() => {
     const handleBlur = () => {
