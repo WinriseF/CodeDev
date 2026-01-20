@@ -8,7 +8,7 @@ export interface AIModelConfig {
 }
 
 export interface AIProviderConfig {
-  providerId: 'openai' | 'deepseek' | 'anthropic';
+  providerId: string;
   apiKey: string;
   baseUrl?: string;
   modelId: string;
