@@ -1337,10 +1337,10 @@
   {
     "id": "tldr-en-linux-virt-sysprep-0",
     "type": "command",
-    "title": "virt-sysprep - List all supported operations (enabled operations are indicated with asterisks)",
+    "title": "virt-sysprep - List all supported operations (default enabled operations are indicated with asterisks)",
     "content": "virt-sysprep --list-operations",
     "group": "Linux Ops",
-    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. (List all supported operations (enabled operations are indicated with asterisks))",
+    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. This command can be used on a virtual machine or directly on a virtual machine disk image. Note: You may need to pass `--connect URI` to the commands or setup the URI in `$XDG_CONFIG_HOME/libvirt/libvirt.conf`. (List all supported operations (default enabled operations are indicated with asterisks))",
     "tags": [
       "linux",
       "virt-sysprep",
@@ -1352,10 +1352,10 @@
   {
     "id": "tldr-en-linux-virt-sysprep-1",
     "type": "command",
-    "title": "virt-sysprep - Remove sensitive system data from a virtual machine image",
-    "content": "sudo virt-sysprep {{[-a|--add]}} {{path/to/image.qcow2}}",
+    "title": "virt-sysprep - Run only the specified operations",
+    "content": "sudo virt-sysprep {{[-d|--domain]}} {{vm_name}} --operations {{operation1,operation2,...}}",
     "group": "Linux Ops",
-    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. (Remove sensitive system data from a virtual machine image)",
+    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. This command can be used on a virtual machine or directly on a virtual machine disk image. Note: You may need to pass `--connect URI` to the commands or setup the URI in `$XDG_CONFIG_HOME/libvirt/libvirt.conf`. (Run only the specified operations)",
     "tags": [
       "linux",
       "virt-sysprep",
@@ -1367,10 +1367,10 @@
   {
     "id": "tldr-en-linux-virt-sysprep-2",
     "type": "command",
-    "title": "virt-sysprep - Specify a virtual machine by its name and run all enabled operations but don't actually apply the changes",
-    "content": "sudo virt-sysprep {{[-d|--domain]}} {{vm_name}} {{[-n|--dry-run]}}",
+    "title": "virt-sysprep - Remove sensitive system data from a virtual machine image (operations marked as default)",
+    "content": "sudo virt-sysprep {{[-a|--add]}} {{path/to/image.qcow2}}",
     "group": "Linux Ops",
-    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. (Specify a virtual machine by its name and run all enabled operations but don't actually apply the changes)",
+    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. This command can be used on a virtual machine or directly on a virtual machine disk image. Note: You may need to pass `--connect URI` to the commands or setup the URI in `$XDG_CONFIG_HOME/libvirt/libvirt.conf`. (Remove sensitive system data from a virtual machine image (operations marked as default))",
     "tags": [
       "linux",
       "virt-sysprep",
@@ -1382,10 +1382,10 @@
   {
     "id": "tldr-en-linux-virt-sysprep-3",
     "type": "command",
-    "title": "virt-sysprep - Run only the specified operations",
-    "content": "sudo virt-sysprep {{[-d|--domain]}} {{vm_name}} --operations {{operation1,operation2,...}}",
+    "title": "virt-sysprep - Specify a virtual machine by its name and run all enabled operations but don't actually apply the changes",
+    "content": "sudo virt-sysprep {{[-d|--domain]}} {{vm_name}} {{[-n|--dry-run]}}",
     "group": "Linux Ops",
-    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. (Run only the specified operations)",
+    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. This command can be used on a virtual machine or directly on a virtual machine disk image. Note: You may need to pass `--connect URI` to the commands or setup the URI in `$XDG_CONFIG_HOME/libvirt/libvirt.conf`. (Specify a virtual machine by its name and run all enabled operations but don't actually apply the changes)",
     "tags": [
       "linux",
       "virt-sysprep",
@@ -1397,10 +1397,10 @@
   {
     "id": "tldr-en-linux-virt-sysprep-4",
     "type": "command",
-    "title": "virt-sysprep - Generate a new `/etc/machine-id` file and enable customizations to be able to change the host name to avoid network conflicts",
-    "content": "sudo virt-sysprep {{[-d|--domain]}} {{vm_name}} --enable {{customizations}} --hostname {{host_name}} --operation {{machine-id}}",
+    "title": "virt-sysprep - Reset NetworkManager network configurations, persistent MAC mappings, and the hostname to avoid network conflicts",
+    "content": "sudo virt-sysprep {{[-d|--domain]}} {{vm_name}} --operations machine-id,net-hwaddr,net-hostname,net-nmconn,customize --hostname {{new_hostname}}",
     "group": "Linux Ops",
-    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. (Generate a new `/etc/machine-id` file and enable customizations to be able to change the host name to avoid network conflicts)",
+    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. This command can be used on a virtual machine or directly on a virtual machine disk image. Note: You may need to pass `--connect URI` to the commands or setup the URI in `$XDG_CONFIG_HOME/libvirt/libvirt.conf`. (Reset NetworkManager network configurations, persistent MAC mappings, and the hostname to avoid network conflicts)",
     "tags": [
       "linux",
       "virt-sysprep",
@@ -1412,10 +1412,40 @@
   {
     "id": "tldr-en-linux-virt-sysprep-5",
     "type": "command",
-    "title": "virt-sysprep - Display help",
-    "content": "virt-sysprep {{[-he|--help]}}",
+    "title": "virt-sysprep - Set the root password for a disk image",
+    "content": "sudo virt-sysprep {{[-a|--add]}} {{path/to/image.qcow2}} --operations customize --root-password password:{{new_password}}",
     "group": "Linux Ops",
-    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. (Display help)",
+    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. This command can be used on a virtual machine or directly on a virtual machine disk image. Note: You may need to pass `--connect URI` to the commands or setup the URI in `$XDG_CONFIG_HOME/libvirt/libvirt.conf`. (Set the root password for a disk image)",
+    "tags": [
+      "linux",
+      "virt-sysprep",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-virt-sysprep-6",
+    "type": "command",
+    "title": "virt-sysprep - Inject a new user with a defined password and add them to the sudo group",
+    "content": "sudo virt-sysprep {{[-a|--add]}} {{path/to/image.qcow2}} --run-command 'useradd -m {{username}} && echo {{username}}:{{password}} | chpasswd && usermod -aG sudo {{username}}'",
+    "group": "Linux Ops",
+    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. This command can be used on a virtual machine or directly on a virtual machine disk image. Note: You may need to pass `--connect URI` to the commands or setup the URI in `$XDG_CONFIG_HOME/libvirt/libvirt.conf`. (Inject a new user with a defined password and add them to the sudo group)",
+    "tags": [
+      "linux",
+      "virt-sysprep",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-virt-sysprep-7",
+    "type": "command",
+    "title": "virt-sysprep - Install specific package(s) on a disk image (use `--update` to upgrade all installed packages to latest)",
+    "content": "sudo virt-sysprep {{[-a|--add]}} {{path/to/image.qcow2}} --operations customize --network --install {{package_name1,package_name2,...}}",
+    "group": "Linux Ops",
+    "description": "virt-sysprep: Reset, unconfigure, or customize a virtual machine image. This command can be used on a virtual machine or directly on a virtual machine disk image. Note: You may need to pass `--connect URI` to the commands or setup the URI in `$XDG_CONFIG_HOME/libvirt/libvirt.conf`. (Install specific package(s) on a disk image (use `--update` to upgrade all installed packages to latest))",
     "tags": [
       "linux",
       "virt-sysprep",
@@ -11431,6 +11461,21 @@
   },
   {
     "id": "tldr-en-linux-gio-trash-2",
+    "type": "command",
+    "title": "gio-trash - Empty the trash",
+    "content": "gio trash --empty",
+    "group": "Linux Ops",
+    "description": "gio-trash: Move files to the trash bin. Used by GNOME to handle trash. (Empty the trash)",
+    "tags": [
+      "linux",
+      "gio-trash",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-gio-trash-3",
     "type": "command",
     "title": "gio-trash - Restore a specific item from trash using its ID",
     "content": "gio trash trash://{{id}}",
@@ -40605,6 +40650,111 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-iscsiadm-0",
+    "type": "command",
+    "title": "iscsiadm - Show active iSCSI sessions",
+    "content": "sudo iscsiadm {{[-m|--mode]}} session",
+    "group": "Linux Ops",
+    "description": "iscsiadm: Manage iSCSI sessions, nodes, and discovery. (Show active iSCSI sessions)",
+    "tags": [
+      "linux",
+      "iscsiadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-iscsiadm-1",
+    "type": "command",
+    "title": "iscsiadm - List all known iSCSI nodes",
+    "content": "sudo iscsiadm {{[-m|--mode]}} node",
+    "group": "Linux Ops",
+    "description": "iscsiadm: Manage iSCSI sessions, nodes, and discovery. (List all known iSCSI nodes)",
+    "tags": [
+      "linux",
+      "iscsiadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-iscsiadm-2",
+    "type": "command",
+    "title": "iscsiadm - Discover available iSCSI targets on a portal (no authentication)",
+    "content": "sudo iscsiadm {{[-m|--mode]}} discovery {{[-t|--type]}} sendtargets {{[-p|--portal]}} {{ip_address}}",
+    "group": "Linux Ops",
+    "description": "iscsiadm: Manage iSCSI sessions, nodes, and discovery. (Discover available iSCSI targets on a portal (no authentication))",
+    "tags": [
+      "linux",
+      "iscsiadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-iscsiadm-3",
+    "type": "command",
+    "title": "iscsiadm - Log in to a specific iSCSI target without authentication",
+    "content": "sudo iscsiadm {{[-m|--mode]}} node {{[-T|--targetname]}} {{iqn}} {{[-p|--portal]}} {{ip_address}}:3260 {{[-l|--login]}}",
+    "group": "Linux Ops",
+    "description": "iscsiadm: Manage iSCSI sessions, nodes, and discovery. (Log in to a specific iSCSI target without authentication)",
+    "tags": [
+      "linux",
+      "iscsiadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-iscsiadm-4",
+    "type": "command",
+    "title": "iscsiadm - Log out from a specific iSCSI target",
+    "content": "sudo iscsiadm {{[-m|--mode]}} node {{[-T|--targetname]}} {{iqn}} {{[-p|--portal]}} {{ip_address}}:3260 {{[-u|--logout]}}",
+    "group": "Linux Ops",
+    "description": "iscsiadm: Manage iSCSI sessions, nodes, and discovery. (Log out from a specific iSCSI target)",
+    "tags": [
+      "linux",
+      "iscsiadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-iscsiadm-5",
+    "type": "command",
+    "title": "iscsiadm - Create an iSCSI node when discovery is blocked (for CHAP authentication)",
+    "content": "sudo iscsiadm {{[-m|--mode]}} node {{[-o|--op]}} new {{[-T|--targetname]}} {{iqn}} {{[-p|--portal]}} {{ip_address}}:3260",
+    "group": "Linux Ops",
+    "description": "iscsiadm: Manage iSCSI sessions, nodes, and discovery. (Create an iSCSI node when discovery is blocked (for CHAP authentication))",
+    "tags": [
+      "linux",
+      "iscsiadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-iscsiadm-6",
+    "type": "command",
+    "title": "iscsiadm - Configure CHAP authentication for an iSCSI target",
+    "content": "sudo iscsiadm {{[-m|--mode]}} node {{[-T|--targetname]}} {{iqn}} {{[-p|--portal]}} {{ip_address}}:3260 {{[-o|--op]}} update {{[-n|--name]}} node.session.auth.authmethod {{[-v|--value]}} CHAP",
+    "group": "Linux Ops",
+    "description": "iscsiadm: Manage iSCSI sessions, nodes, and discovery. (Configure CHAP authentication for an iSCSI target)",
+    "tags": [
+      "linux",
+      "iscsiadm",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-fakeroot-0",
     "type": "command",
     "title": "fakeroot - Start the default shell as fakeroot",
@@ -56364,6 +56514,96 @@
     "tags": [
       "linux",
       "wl-copy",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-yad-0",
+    "type": "command",
+    "title": "yad - Display the contents of a file in a text information dialog",
+    "content": "yad --text-info --filename {{path/to/file}}",
+    "group": "Linux Ops",
+    "description": "yad: Display GTK+ dialogs from shell scripts. (Display the contents of a file in a text information dialog)",
+    "tags": [
+      "linux",
+      "yad",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-yad-1",
+    "type": "command",
+    "title": "yad - Open a text entry dialog and return the input to `stdout`",
+    "content": "yad --entry --text \"{{message}}\"",
+    "group": "Linux Ops",
+    "description": "yad: Display GTK+ dialogs from shell scripts. (Open a text entry dialog and return the input to `stdout`)",
+    "tags": [
+      "linux",
+      "yad",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-yad-2",
+    "type": "command",
+    "title": "yad - Open a file picker with a specific title",
+    "content": "yad --file --title \"{{title_message}}\"",
+    "group": "Linux Ops",
+    "description": "yad: Display GTK+ dialogs from shell scripts. (Open a file picker with a specific title)",
+    "tags": [
+      "linux",
+      "yad",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-yad-3",
+    "type": "command",
+    "title": "yad - Open a date picker dialog with a specific title",
+    "content": "yad --calendar --title \"{{title_message}}\"",
+    "group": "Linux Ops",
+    "description": "yad: Display GTK+ dialogs from shell scripts. (Open a date picker dialog with a specific title)",
+    "tags": [
+      "linux",
+      "yad",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-yad-4",
+    "type": "command",
+    "title": "yad - Display a list dialog with multiple columns and data",
+    "content": "yad --list --column \"{{col1}}\" --column \"{{col2}}\" {{col1_row1 col2_row1 col1_row2 col2_row2 ...}}",
+    "group": "Linux Ops",
+    "description": "yad: Display GTK+ dialogs from shell scripts. (Display a list dialog with multiple columns and data)",
+    "tags": [
+      "linux",
+      "yad",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-yad-5",
+    "type": "command",
+    "title": "yad - Open a pulsating progress bar that automatically closes at 100%",
+    "content": "{{command}} | yad --progress --pulsate --auto-close --text \"{{message}}\"",
+    "group": "Linux Ops",
+    "description": "yad: Display GTK+ dialogs from shell scripts. (Open a pulsating progress bar that automatically closes at 100%)",
+    "tags": [
+      "linux",
+      "yad",
       "tldr",
       "en"
     ],
@@ -104132,10 +104372,40 @@
   {
     "id": "tldr-en-linux-gio-5",
     "type": "command",
+    "title": "gio - Empty the trash",
+    "content": "gio trash --empty",
+    "group": "Linux Ops",
+    "description": "gio: Handle local and virtual files (GVfs). Part of GLib used in GNOME-based systems. (Empty the trash)",
+    "tags": [
+      "linux",
+      "gio",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-gio-6",
+    "type": "command",
     "title": "gio - Launch an application from a `.desktop` file",
     "content": "gio launch {{path/to/file}}.desktop",
     "group": "Linux Ops",
     "description": "gio: Handle local and virtual files (GVfs). Part of GLib used in GNOME-based systems. (Launch an application from a `.desktop` file)",
+    "tags": [
+      "linux",
+      "gio",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-en-linux-gio-7",
+    "type": "command",
+    "title": "gio - Mark a `.desktop` file as trusted, allowing it to be executed",
+    "content": "gio set {{path/to/file}}.desktop metadata::trusted true",
+    "group": "Linux Ops",
+    "description": "gio: Handle local and virtual files (GVfs). Part of GLib used in GNOME-based systems. (Mark a `.desktop` file as trusted, allowing it to be executed)",
     "tags": [
       "linux",
       "gio",

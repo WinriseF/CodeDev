@@ -8810,7 +8810,7 @@
     "title": "mimikatz-crypto - List cryptographic providers",
     "content": "mimikatz \"crypto::providers\"",
     "group": "Windows",
-    "description": "mimikatz-crypto: Manipulate Windows cryptographic services and certificates. (List cryptographic providers)",
+    "description": "mimikatz-crypto: Manipulate Windows cryptographic services and certificates, allowing you to list and export certificates and keys, even those marked as non-exportable. It generally requires elevated privileges, especially when accessing system keys. (List cryptographic providers)",
     "tags": [
       "windows",
       "mimikatz-crypto",
@@ -8825,7 +8825,7 @@
     "title": "mimikatz-crypto - List keys in a cryptographic provider",
     "content": "mimikatz \"crypto::capi\"",
     "group": "Windows",
-    "description": "mimikatz-crypto: Manipulate Windows cryptographic services and certificates. (List keys in a cryptographic provider)",
+    "description": "mimikatz-crypto: Manipulate Windows cryptographic services and certificates, allowing you to list and export certificates and keys, even those marked as non-exportable. It generally requires elevated privileges, especially when accessing system keys. (List keys in a cryptographic provider)",
     "tags": [
       "windows",
       "mimikatz-crypto",
@@ -8840,7 +8840,7 @@
     "title": "mimikatz-crypto - Export certificates and keys",
     "content": "mimikatz \"crypto::certificates /export\"",
     "group": "Windows",
-    "description": "mimikatz-crypto: Manipulate Windows cryptographic services and certificates. (Export certificates and keys)",
+    "description": "mimikatz-crypto: Manipulate Windows cryptographic services and certificates, allowing you to list and export certificates and keys, even those marked as non-exportable. It generally requires elevated privileges, especially when accessing system keys. (Export certificates and keys)",
     "tags": [
       "windows",
       "mimikatz-crypto",

@@ -15885,6 +15885,36 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-frp-0",
+    "type": "command",
+    "title": "frp - 查看 `frp` 客户端组件 `frpc` 的文档",
+    "content": "tldr frpc",
+    "group": "通用工具 (Common)",
+    "description": "frp: 高性能的反向代理，可快速搭建网络隧道，将内网服务暴露到互联网或其他外部网络。 注意：`frp` 不是一个单独的命令，而是一组命令。 (查看 `frp` 客户端组件 `frpc` 的文档)",
+    "tags": [
+      "common",
+      "frp",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frp-1",
+    "type": "command",
+    "title": "frp - 查看 `frp` 服务端组件 `frps` 的文档",
+    "content": "tldr frps",
+    "group": "通用工具 (Common)",
+    "description": "frp: 高性能的反向代理，可快速搭建网络隧道，将内网服务暴露到互联网或其他外部网络。 注意：`frp` 不是一个单独的命令，而是一组命令。 (查看 `frp` 服务端组件 `frps` 的文档)",
+    "tags": [
+      "common",
+      "frp",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-unflatten-0",
     "type": "command",
     "title": "unflatten - 调整一个或多个有向图以改善布局的纵横比",
@@ -31485,6 +31515,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-frpc-0",
+    "type": "command",
+    "title": "frpc - 使用默认配置文件（当前目录下的 `frpc.ini`）启动服务",
+    "content": "frpc",
+    "group": "通用工具 (Common)",
+    "description": "frpc: frp 客户端组件，用于连接 frps 服务端并启动反向代理。 属于 `frp` 的一部分。 (使用默认配置文件（当前目录下的 `frpc.ini`）启动服务)",
+    "tags": [
+      "common",
+      "frpc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frpc-1",
+    "type": "command",
+    "title": "frpc - 使用新的 TOML 配置文件启动服务",
+    "content": "frpc {{[-c|--config]}} {{path/to/frpc.toml}}",
+    "group": "通用工具 (Common)",
+    "description": "frpc: frp 客户端组件，用于连接 frps 服务端并启动反向代理。 属于 `frp` 的一部分。 (使用新的 TOML 配置文件启动服务)",
+    "tags": [
+      "common",
+      "frpc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frpc-2",
+    "type": "command",
+    "title": "frpc - 使用指定的配置文件启动服务",
+    "content": "frpc {{[-c|--config]}} {{path/to/file}}",
+    "group": "通用工具 (Common)",
+    "description": "frpc: frp 客户端组件，用于连接 frps 服务端并启动反向代理。 属于 `frp` 的一部分。 (使用指定的配置文件启动服务)",
+    "tags": [
+      "common",
+      "frpc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frpc-3",
+    "type": "command",
+    "title": "frpc - 检查配置文件的有效性",
+    "content": "frpc verify {{[-c|--config]}} {{path/to/file}}",
+    "group": "通用工具 (Common)",
+    "description": "frpc: frp 客户端组件，用于连接 frps 服务端并启动反向代理。 属于 `frp` 的一部分。 (检查配置文件的有效性)",
+    "tags": [
+      "common",
+      "frpc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frpc-4",
+    "type": "command",
+    "title": "frpc - 生成 Bash、fish、PowerShell 或 Zsh 的自动补全脚本",
+    "content": "frpc completion {{bash|fish|powershell|zsh}}",
+    "group": "通用工具 (Common)",
+    "description": "frpc: frp 客户端组件，用于连接 frps 服务端并启动反向代理。 属于 `frp` 的一部分。 (生成 Bash、fish、PowerShell 或 Zsh 的自动补全脚本)",
+    "tags": [
+      "common",
+      "frpc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frpc-5",
+    "type": "command",
+    "title": "frpc - 显示版本",
+    "content": "frpc {{[-v|--version]}}",
+    "group": "通用工具 (Common)",
+    "description": "frpc: frp 客户端组件，用于连接 frps 服务端并启动反向代理。 属于 `frp` 的一部分。 (显示版本)",
+    "tags": [
+      "common",
+      "frpc",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-npm-start-0",
     "type": "command",
     "title": "npm-start - 查看原命令的文档",
@@ -40920,10 +41040,100 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-frps-0",
+    "type": "command",
+    "title": "frps - 使用默认配置文件启动服务（假定当前目录中存在 `frps.ini`）",
+    "content": "frps",
+    "group": "通用工具 (Common)",
+    "description": "frps: 快速建立反向代理服务。 属于 `frp` 的一部分。 (使用默认配置文件启动服务（假定当前目录中存在 `frps.ini`）)",
+    "tags": [
+      "common",
+      "frps",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frps-1",
+    "type": "command",
+    "title": "frps - 使用新的 TOML 配置文件启动服务",
+    "content": "frps {{[-c|--config]}} {{path/to/frps.toml}}",
+    "group": "通用工具 (Common)",
+    "description": "frps: 快速建立反向代理服务。 属于 `frp` 的一部分。 (使用新的 TOML 配置文件启动服务)",
+    "tags": [
+      "common",
+      "frps",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frps-2",
+    "type": "command",
+    "title": "frps - 使用指定的配置文件启动服务",
+    "content": "frps {{[-c|--config]}} {{path/to/file}}",
+    "group": "通用工具 (Common)",
+    "description": "frps: 快速建立反向代理服务。 属于 `frp` 的一部分。 (使用指定的配置文件启动服务)",
+    "tags": [
+      "common",
+      "frps",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frps-3",
+    "type": "command",
+    "title": "frps - 检查配置文件的有效性",
+    "content": "frps verify {{[-c|--config]}} {{path/to/file}}",
+    "group": "通用工具 (Common)",
+    "description": "frps: 快速建立反向代理服务。 属于 `frp` 的一部分。 (检查配置文件的有效性)",
+    "tags": [
+      "common",
+      "frps",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frps-4",
+    "type": "command",
+    "title": "frps - 生成 Bash、fish、PowerShell 或 Zsh 的自动补全脚本",
+    "content": "frps completion {{bash|fish|powershell|zsh}}",
+    "group": "通用工具 (Common)",
+    "description": "frps: 快速建立反向代理服务。 属于 `frp` 的一部分。 (生成 Bash、fish、PowerShell 或 Zsh 的自动补全脚本)",
+    "tags": [
+      "common",
+      "frps",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-frps-5",
+    "type": "command",
+    "title": "frps - 显示版本",
+    "content": "frps {{[-v|--version]}}",
+    "group": "通用工具 (Common)",
+    "description": "frps: 快速建立反向代理服务。 属于 `frp` 的一部分。 (显示版本)",
+    "tags": [
+      "common",
+      "frps",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-docker-image-0",
     "type": "command",
     "title": "docker-image - 列出本地的 Docker 镜像",
-    "content": "docker image ls",
+    "content": "docker {{[images|image ls]}}",
     "group": "通用工具 (Common)",
     "description": "docker-image: 管理 Docker 镜像。 另请参阅：`docker build`, `docker image pull`, `docker image rm`。 (列出本地的 Docker 镜像)",
     "tags": [
@@ -40968,7 +41178,7 @@
     "id": "tldr-zh-common-docker-image-3",
     "type": "command",
     "title": "docker-image - 展示本地 Docker 镜像的历史",
-    "content": "docker image history {{镜像}}",
+    "content": "docker {{[history|image history]}} {{镜像}}",
     "group": "通用工具 (Common)",
     "description": "docker-image: 管理 Docker 镜像。 另请参阅：`docker build`, `docker image pull`, `docker image rm`。 (展示本地 Docker 镜像的历史)",
     "tags": [
