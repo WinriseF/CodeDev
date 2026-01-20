@@ -62,6 +62,11 @@ export interface RestReminderConfig {
   intervalMinutes: number;
 }
 
+export interface HibernateConfig {
+  enabled: boolean;
+  duration: number; // 分钟
+}
+
 interface AppState {
   currentView: AppView;
   isSidebarOpen: boolean;
@@ -76,6 +81,7 @@ interface AppState {
   spotlightShortcut: string;
   globalIgnore: IgnoreConfig;
   restReminder: RestReminderConfig;
+  hibernate: HibernateConfig;
 
   models: AIModelConfig[];
   lastUpdated: number;
@@ -96,6 +102,7 @@ interface AppState {
   setAIConfig: (config: Partial<AIProviderConfig>) => void;
   setSpotlightShortcut: (shortcut: string) => void;
   setRestReminder: (config: Partial<RestReminderConfig>) => void;
+  setHibernate: (config: Partial<HibernateConfig>) => Promise<void>;
   syncModels: () => Promise<void>;
   resetModels: () => void;
   setSpotlightAppearance: (config: Partial<SpotlightAppearance>) => void;
@@ -120,6 +127,10 @@ export const useAppStore = create<AppState>()(
       restReminder: {
         enabled: false,
         intervalMinutes: 45
+      },
+      hibernate: {
+        enabled: false,
+        duration: 10,
       },
 
       models: DEFAULT_MODELS,
@@ -228,6 +239,20 @@ export const useAppStore = create<AppState>()(
       },
 
       resetModels: () => set({ models: DEFAULT_MODELS }),
+
+      setHibernate: async (config) => {
+        set((state) => {
+          const newConfig = { ...state.hibernate, ...config };
+          // 调用 Rust 命令同步配置
+          import('@tauri-apps/api/core').then(({ invoke }) => {
+            invoke('update_hibernate_config', {
+              enable: newConfig.enabled,
+              duration: newConfig.duration
+            }).catch(console.error);
+          });
+          return { hibernate: newConfig };
+        });
+      },
     }),
     {
       name: 'app-config',
@@ -247,7 +272,8 @@ export const useAppStore = create<AppState>()(
         aiConfig: state.aiConfig,
         savedProviderSettings: state.savedProviderSettings,
         spotlightAppearance: state.spotlightAppearance,
-        restReminder: state.restReminder
+        restReminder: state.restReminder,
+        hibernate: state.hibernate
       }),
     }
   )
