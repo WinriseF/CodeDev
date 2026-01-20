@@ -25,6 +25,7 @@ mod db;
 mod monitor;
 mod env_probe;
 mod apps;
+mod window_manager; // <--- 新增这行
 
 #[derive(serde::Serialize)]
 struct SystemInfo {
@@ -222,11 +223,17 @@ fn main() {
             monitor::check_file_locks,
             monitor::get_env_info,
             monitor::diagnose_network,
-            monitor::get_ai_context
+            monitor::get_ai_context,
+            // --- 新增休眠配置命令 ---
+            window_manager::update_hibernate_config,
+            window_manager::get_hibernate_config,
         ])
         .setup(|app| {
             let system = System::new();
             app.manage(Arc::new(Mutex::new(system)));
+
+            // 初始化休眠状态管理
+            app.manage(window_manager::HibernateState::new()); // <--- 新增这行
 
             match db::init_db(app.handle()) {
                 Ok(conn) => {
@@ -268,6 +275,9 @@ fn main() {
                             }
                             let _ = window.show();
                             let _ = window.set_focus();
+                        } else {
+                            // 窗口已被销毁，重建它
+                            window_manager::recreate_main_window(&app);
                         }
                     }
                     _ => {}
@@ -284,6 +294,18 @@ fn main() {
                     let _ = window.hide();
                 }
             }
+            // --- 新增：休眠逻辑集成 ---
+            WindowEvent::Focused(focused) => {
+                let app_handle = window.app_handle();
+                if *focused {
+                    // 窗口获得焦点，取消定时器
+                    window_manager::cancel_hibernate_timer(&app_handle);
+                } else {
+                    // 窗口失去焦点，开始倒计时
+                    window_manager::start_hibernate_timer(&app_handle);
+                }
+            }
+            // --------------------------------
             _ => {}
         })
         .run(tauri::generate_context!())
