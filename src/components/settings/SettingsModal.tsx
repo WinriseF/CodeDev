@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell, Database, Upload, Download, FileSpreadsheet, AlertTriangle, FolderCog, Shield, RefreshCw, AppWindow } from 'lucide-react';
+import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell, Database, Upload, Download, FileSpreadsheet, AlertTriangle, FolderCog, Shield, RefreshCw, AppWindow, Zap, Clock } from 'lucide-react';
 import { save, open } from '@tauri-apps/plugin-dialog';
 import { invoke } from '@tauri-apps/api/core';
 import { useAppStore } from '@/store/useAppStore';
@@ -20,7 +20,8 @@ export function SettingsModal() {
     aiConfig, setAIConfig,
     spotlightShortcut, setSpotlightShortcut,
     restReminder, setRestReminder,
-    spotlightAppearance, setSpotlightAppearance
+    spotlightAppearance, setSpotlightAppearance,
+    hibernate, setHibernate
   } = useAppStore();
 
   const { loadPrompts, refreshGroups, refreshCounts } = usePromptStore();
@@ -304,6 +305,74 @@ export function SettingsModal() {
                                         <div className="flex justify-between text-[10px] text-muted-foreground">
                                             <span>1 {getText('settings', 'minutes', language)}</span>
                                             <span>180 {getText('settings', 'minutes', language)}</span>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* 休眠设置 */}
+                        <div className="w-full h-px bg-border/50 my-4" />
+
+                        <div className="space-y-4">
+                            <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                                <Zap size={14} />
+                                {language === 'zh' ? '性能与休眠' : 'Performance & Hibernate'}
+                            </h3>
+
+                            <div className="space-y-3">
+                                {/* 开关 */}
+                                <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/30 border border-border">
+                                    <div className="flex gap-3 items-center">
+                                        <div className={`p-2 rounded-full ${hibernate.enabled ? 'bg-blue-500/20 text-blue-500' : 'bg-secondary text-muted-foreground'}`}>
+                                            <Clock size={18} />
+                                        </div>
+                                        <div>
+                                            <div className="text-sm font-medium text-foreground">
+                                                {language === 'zh' ? '后台自动休眠' : 'Auto Hibernate'}
+                                            </div>
+                                            <div className="text-xs text-muted-foreground mt-0.5">
+                                                {language === 'zh' ? '主窗口失焦后自动销毁以释放内存' : 'Destroy main window to free memory when unfocused'}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => setHibernate({ ...hibernate, enabled: !hibernate.enabled })}
+                                        className={cn(
+                                            "relative w-11 h-6 rounded-full transition-colors",
+                                            hibernate.enabled ? "bg-primary" : "bg-secondary"
+                                        )}
+                                    >
+                                        <div className={cn(
+                                            "absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-transform",
+                                            hibernate.enabled ? "translate-x-5" : "translate-x-0"
+                                        )} />
+                                    </button>
+                                </div>
+
+                                {/* 时间滑块 */}
+                                {hibernate.enabled && (
+                                    <div className="space-y-3 p-3 rounded-lg bg-secondary/10 border border-border animate-in fade-in slide-in-from-top-1">
+                                        <div className="flex justify-between text-xs">
+                                            <span className="text-foreground">
+                                                {language === 'zh' ? '休眠等待时间' : 'Hibernate Delay'}
+                                            </span>
+                                            <span className="font-mono text-muted-foreground">
+                                                {hibernate.duration} {language === 'zh' ? '分钟' : 'min'}
+                                            </span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="1"
+                                            max="60"
+                                            step="1"
+                                            className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
+                                            value={hibernate.duration}
+                                            onChange={(e) => setHibernate({ ...hibernate, duration: parseInt(e.target.value) })}
+                                        />
+                                        <div className="flex justify-between text-[10px] text-muted-foreground">
+                                            <span>1 {language === 'zh' ? '分钟' : 'min'}</span>
+                                            <span>60 {language === 'zh' ? '分钟' : 'min'}</span>
                                         </div>
                                     </div>
                                 )}
