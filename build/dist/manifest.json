@@ -1,5 +1,5 @@
 {
-  "updated_at": 1768958428755,
+  "updated_at": 1768975125036,
   "version": "2.0.0",
   "packages": [
     {
@@ -7,9 +7,9 @@
       "language": "en",
       "platform": "llm",
       "name": "ChatGPT Prompts (English)",
-      "description": "Collection of 1055 role-play prompts.",
-      "count": 1055,
-      "size_kb": 2175.0,
+      "description": "Collection of 1067 role-play prompts.",
+      "count": 1067,
+      "size_kb": 2265.58,
       "url": "packs/prompts-en-roles.json",
       "category": "prompt"
     },
