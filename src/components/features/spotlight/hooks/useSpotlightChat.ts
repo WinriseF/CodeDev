@@ -80,12 +80,16 @@ export function useSpotlightChat() {
   }, [isStreaming, setChatInput]);
 
   const cycleProvider = useCallback(() => {
-    // 这里使用 useAppStore.getState() 也是安全的，但用 hook 里的也没问题
+    // 动态获取当前的 keys
+    const currentSettings = useAppStore.getState().savedProviderSettings;
+    const providers = Object.keys(currentSettings);
     const currentProvider = useAppStore.getState().aiConfig.providerId;
-    const providers: Array<'openai' | 'deepseek' | 'anthropic'> = ['deepseek', 'openai', 'anthropic'];
-    const currentIndex = providers.indexOf(currentProvider);
-    const nextIndex = (currentIndex + 1) % providers.length;
-    setAIConfig({ providerId: providers[nextIndex] });
+
+    if (providers.length > 0) {
+        const currentIndex = providers.indexOf(currentProvider);
+        const nextIndex = (currentIndex + 1) % providers.length;
+        setAIConfig({ providerId: providers[nextIndex] });
+    }
   }, [setAIConfig]);
 
   return {

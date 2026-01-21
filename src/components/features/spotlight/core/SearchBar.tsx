@@ -11,7 +11,7 @@ interface SearchBarProps {
 
 export function SearchBar({ onKeyDown }: SearchBarProps) {
   const { mode, query, chatInput, setQuery, setChatInput, toggleMode, inputRef, searchScope, setSearchScope } = useSpotlight();
-  const { language, aiConfig, setAIConfig } = useAppStore();
+  const { language, aiConfig, setAIConfig, savedProviderSettings } = useAppStore();
 
   // 处理搜索前缀的逻辑
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,10 +67,14 @@ export function SearchBar({ onKeyDown }: SearchBarProps) {
 
 
   const cycleProvider = () => {
-    const providers: Array<'openai' | 'deepseek' | 'anthropic'> = ['deepseek', 'openai', 'anthropic'];
+    // 修改: 从 savedProviderSettings 的 keys 获取列表，不再硬编码
+    const providers = Object.keys(savedProviderSettings);
     const currentIndex = providers.indexOf(aiConfig.providerId);
-    const nextIndex = (currentIndex + 1) % providers.length;
-    setAIConfig({ providerId: providers[nextIndex] });
+
+    if (providers.length > 0) {
+        const nextIndex = (currentIndex + 1) % providers.length;
+        setAIConfig({ providerId: providers[nextIndex] });
+    }
   };
 
   // 渲染搜索范围标签
@@ -164,8 +168,16 @@ export function SearchBar({ onKeyDown }: SearchBarProps) {
       <div className="flex items-center gap-2 relative z-10">
          {mode === 'chat' && (
             <button onClick={cycleProvider} className="flex items-center gap-1.5 px-2 py-1 rounded bg-secondary/50 hover:bg-secondary text-[10px] font-medium transition-colors border border-border/50 group" title={getText('spotlight', 'currentProvider', language, { provider: aiConfig.providerId })}>
-                <Zap size={10} className={cn(aiConfig.providerId === 'deepseek' ? "text-blue-500" : aiConfig.providerId === 'openai' ? "text-green-500" : "text-orange-500")} />
-                <span className="opacity-70 group-hover:opacity-100 uppercase">{aiConfig.providerId}</span>
+                <Zap size={10} className={cn(
+                    // 简单的模糊匹配，如果名字里包含这些词就用对应颜色，否则默认橙色
+                    aiConfig.providerId.toLowerCase().includes('deepseek') ? "text-blue-500" :
+                    aiConfig.providerId.toLowerCase().includes('openai') ? "text-green-500" :
+                    aiConfig.providerId.toLowerCase().includes('anthropic') ? "text-purple-500" :
+                    "text-orange-500"
+                )} />
+                <span className="opacity-70 group-hover:opacity-100 uppercase truncate max-w-[80px]">
+                    {aiConfig.providerId}
+                </span>
             </button>
          )}
          <div className="flex items-center gap-2 pointer-events-none opacity-50">

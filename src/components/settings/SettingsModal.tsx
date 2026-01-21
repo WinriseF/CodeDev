@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell, Database, Upload, Download, FileSpreadsheet, AlertTriangle, FolderCog, Shield, RefreshCw, AppWindow, Zap, Clock } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { X, Monitor, Moon, Sun, Languages, Check, Filter, DownloadCloud, Bot, Bell, Database, Upload, Download, FileSpreadsheet, AlertTriangle, FolderCog, Shield, RefreshCw, AppWindow, Edit3, Zap, Clock } from 'lucide-react';
 import { save, open } from '@tauri-apps/plugin-dialog';
 import { invoke } from '@tauri-apps/api/core';
 import { useAppStore } from '@/store/useAppStore';
@@ -18,6 +18,8 @@ export function SettingsModal() {
     language, setLanguage,
     globalIgnore, updateGlobalIgnore,
     aiConfig, setAIConfig,
+    savedProviderSettings,
+    renameAIProvider,
     spotlightShortcut, setSpotlightShortcut,
     restReminder, setRestReminder,
     spotlightAppearance, setSpotlightAppearance,
@@ -29,6 +31,32 @@ export function SettingsModal() {
   const [activeSection, setActiveSection] = useState<'appearance' | 'language' | 'filters' | 'library' | 'ai' | 'data' | 'security'>('appearance');
   const [importStatus, setImportStatus] = useState<string>('');
   const [isScanningApps, setIsScanningApps] = useState(false);
+
+  // --- 新增：重命名相关的局部状态 ---
+  const [isRenaming, setIsRenaming] = useState(false);
+  const [renameValue, setRenameValue] = useState('');
+  const renameInputRef = useRef<HTMLInputElement>(null);
+
+  // 当进入重命名模式时，自动聚焦输入框
+  useEffect(() => {
+    if (isRenaming && renameInputRef.current) {
+        renameInputRef.current.focus();
+    }
+  }, [isRenaming]);
+
+  // 处理重命名提交
+  const handleRenameSubmit = () => {
+      if (renameValue.trim()) {
+          renameAIProvider(aiConfig.providerId, renameValue.trim());
+      }
+      setIsRenaming(false);
+  };
+
+  const handleRenameKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter') handleRenameSubmit();
+      if (e.key === 'Escape') setIsRenaming(false);
+  };
+  // --- 结束新增状态 ---
 
   // 导出处理函数
   const handleExport = async () => {
@@ -424,25 +452,74 @@ export function SettingsModal() {
                         </div>
                         
                         <div className="space-y-4">
-                            {/* Provider Select */}
+                            {/* Provider Selection Area */}
                             <div className="space-y-1.5">
                                 <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{getText('settings', 'provider', language)}</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                    {['deepseek', 'openai', 'anthropic'].map((p) => (
-                                        <button
-                                            key={p}
-                                            onClick={() => setAIConfig({ providerId: p as any })}
-                                            className={cn(
-                                                "py-2 px-3 rounded-md text-sm border transition-all capitalize",
-                                                aiConfig.providerId === p 
-                                                    ? "bg-primary/10 border-primary text-primary font-medium shadow-sm" 
-                                                    : "bg-secondary/30 border-border text-muted-foreground hover:bg-secondary/50"
-                                            )}
-                                        >
-                                            {p}
-                                        </button>
-                                    ))}
+                                    {/* 动态渲染 savedProviderSettings 的 keys，而不是硬编码数组 */}
+                                    {Object.keys(savedProviderSettings).map((p) => {
+                                        const isActive = aiConfig.providerId === p;
+
+                                        // 如果是当前选中的项，并且处于重命名模式，渲染输入框
+                                        if (isActive && isRenaming) {
+                                            return (
+                                                <div key={p} className="relative">
+                                                    <input
+                                                        ref={renameInputRef}
+                                                        className="w-full py-2 px-3 rounded-md text-sm border border-primary bg-background outline-none font-medium shadow-sm"
+                                                        value={renameValue}
+                                                        onChange={(e) => setRenameValue(e.target.value)}
+                                                        onBlur={handleRenameSubmit}
+                                                        onKeyDown={handleRenameKeyDown}
+                                                    />
+                                                    <div className="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 pointer-events-none">
+                                                        <Check size={14} />
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+
+                                        // 常规按钮渲染
+                                        return (
+                                            <button
+                                                key={p}
+                                                onClick={() => setAIConfig({ providerId: p })}
+                                                className={cn(
+                                                    "group relative py-2 px-3 rounded-md text-sm border transition-all capitalize flex items-center justify-center gap-2",
+                                                    isActive
+                                                        ? "bg-primary/10 border-primary text-primary font-medium shadow-sm"
+                                                        : "bg-secondary/30 border-border text-muted-foreground hover:bg-secondary/50"
+                                                )}
+                                                onDoubleClick={() => {
+                                                    if (isActive) {
+                                                        setRenameValue(p);
+                                                        setIsRenaming(true);
+                                                    }
+                                                }}
+                                            >
+                                                <span className="truncate">{p}</span>
+
+                                                {/* 仅在选中状态下显示的编辑小图标 */}
+                                                {isActive && (
+                                                    <span
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setRenameValue(p);
+                                                            setIsRenaming(true);
+                                                        }}
+                                                        className="opacity-50 hover:opacity-100 hover:bg-background/50 p-0.5 rounded transition-all cursor-pointer"
+                                                        title="Rename"
+                                                    >
+                                                        <Edit3 size={12} />
+                                                    </span>
+                                                )}
+                                            </button>
+                                        );
+                                    })}
                                 </div>
+                                <p className="text-[10px] text-muted-foreground/60 text-right pt-1">
+                                    Double-click or use the icon to rename.
+                                </p>
                             </div>
 
                             {/* API Key */}

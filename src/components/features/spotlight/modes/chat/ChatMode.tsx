@@ -98,6 +98,9 @@ export function ChatMode({ messages, isStreaming, chatEndRef }: ChatModeProps) {
         .markdown-body p:last-child { margin-bottom: 0; }
         .markdown-body pre { margin: 0.5em 0; }
         .markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.9em; }
+        /* 针对思考过程的微调样式 */
+        .reasoning-body p { margin-bottom: 0.4em; }
+        .reasoning-body pre { background: rgba(0,0,0,0.1); padding: 0.5em; border-radius: 4px; overflow-x: auto; }
       `}</style>
       
       {messages.map((msg, idx) => (
@@ -116,8 +119,17 @@ export function ChatMode({ messages, isStreaming, chatEndRef }: ChatModeProps) {
                       <span>{getText('spotlight', 'thinking', language)}</span>
                       <ChevronDown size={12} className="group-open/reasoning:rotate-180 transition-transform duration-200" />
                     </summary>
-                    <div className="mt-2 pl-2 border-l-2 border-purple-500/20 text-xs font-mono text-muted-foreground/80 whitespace-pre-wrap leading-relaxed opacity-80">
-                      {msg.reasoning}
+                    <div className="mt-2 pl-2 border-l-2 border-purple-500/20 text-xs text-muted-foreground/80 leading-relaxed opacity-80 reasoning-body">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          code({node, inline, className, children, ...props}: any) {
+                            return <code className={cn("bg-black/10 dark:bg-black/30 px-1 py-0.5 rounded font-mono", className)} {...props}>{children}</code>
+                          }
+                        }}
+                      >
+                        {msg.reasoning}
+                      </ReactMarkdown>
                       {isStreaming && idx === messages.length - 1 && !msg.content && ( <span className="inline-block w-1.5 h-3 ml-1 bg-purple-500/50 align-middle animate-pulse" /> )}
                     </div>
                   </details>
