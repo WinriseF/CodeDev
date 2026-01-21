@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { X, Save, Tag, FileText, Folder, ChevronDown, Check, Plus, Sparkles, Terminal, Loader2, AlertTriangle, RefreshCw } from 'lucide-react';
+// [New] 引入 MessageSquare 图标
+import { X, Save, Tag, FileText, Folder, ChevronDown, Check, Plus, Sparkles, Terminal, Loader2, AlertTriangle, RefreshCw, MessageSquare } from 'lucide-react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore } from '@/store/useAppStore';
 import { Prompt, DEFAULT_GROUP, ShellType } from '@/types/prompt';
@@ -32,6 +33,10 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
   const [type, setType] = useState<'command' | 'prompt'>('prompt');
   const [isExecutable, setIsExecutable] = useState(false);
   const [shellType, setShellType] = useState<ShellType>('auto');
+
+  // [New] 新增状态
+  const [useAsChatTemplate, setUseAsChatTemplate] = useState(false);
+
   const [newGroupMode, setNewGroupMode] = useState(false);
   const [newGroupName, setNewGroupName] = useState('');
 
@@ -55,6 +60,8 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
         setType(initialData.type || 'prompt');
         setIsExecutable(initialData.type === 'command' && (initialData.isExecutable || false));
         setShellType(initialData.shellType || 'auto');
+        // [New] 初始化状态
+        setUseAsChatTemplate(initialData.useAsChatTemplate || false);
       } else {
         setTitle('');
         setContent('');
@@ -62,6 +69,8 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
         setType('prompt');
         setIsExecutable(false);
         setShellType('auto');
+        // [New] 初始化状态
+        setUseAsChatTemplate(false);
       }
       setNewGroupMode(false);
       setNewGroupName('');
@@ -75,6 +84,9 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
   useEffect(() => {
     if (type === 'prompt') {
       setIsExecutable(false);
+    } else {
+      // 切换到 Command 时关闭 Chat Template
+      setUseAsChatTemplate(false);
     }
   }, [type]);
 
@@ -118,13 +130,15 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
           finalGroup = newGroupName.trim();
         }
 
-        const data = { 
-            title, 
-            content, 
+        const data = {
+            title,
+            content,
             group: finalGroup,
             type: type,
             isExecutable: isExecutable,
             shellType: shellType,
+            // [New] 保存字段
+            useAsChatTemplate: type === 'prompt' ? useAsChatTemplate : false,
         };
 
         if (initialData) {
@@ -175,10 +189,80 @@ export function PromptEditorDialog({ isOpen, onClose, initialData }: PromptEdito
              </button>
           </div>
 
+          {/* [New] Chat Slash Command 配置区 (仅在 Prompt 模式显示) */}
+          {type === 'prompt' && (
+            <div className={cn(
+              "rounded-xl border border-border/60 p-3 transition-all duration-300 animate-in fade-in slide-in-from-top-1",
+              useAsChatTemplate ? "bg-primary/5 border-primary/20" : "bg-secondary/10"
+            )}>
+              <div className="flex items-center justify-between cursor-pointer select-none" onClick={() => setUseAsChatTemplate(!useAsChatTemplate)}>
+                 <div className="flex items-center gap-3">
+                    <div className={cn(
+                      "w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-300",
+                      useAsChatTemplate ? "bg-primary text-primary-foreground shadow-sm" : "bg-secondary text-muted-foreground"
+                    )}>
+                        <MessageSquare size={16} />
+                    </div>
+                    <div>
+                        <h3 className="text-sm font-medium text-foreground">
+                            {language === 'zh' ? "设为聊天快捷指令" : "Chat Slash Command"}
+                        </h3>
+                        <p className="text-[10px] text-muted-foreground mt-0.5">
+                            {language === 'zh'
+                                ? "在 AI 聊天中输入 '/' + 标题 快速调用"
+                                : "Type '/' + Title in chat to invoke"}
+                        </p>
+                    </div>
+                 </div>
+
+                 {/* 开关组件 */}
+                 <div className={cn(
+                    "w-10 h-5 rounded-full relative transition-colors duration-300",
+                    useAsChatTemplate ? "bg-primary" : "bg-slate-300 dark:bg-slate-600"
+                 )}>
+                    <div className={cn(
+                        "absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform duration-300 shadow",
+                        useAsChatTemplate ? "translate-x-5" : "translate-x-0.5"
+                    )} />
+                 </div>
+              </div>
+
+              {/* 展开的详细说明 - 智能提示 */}
+              {useAsChatTemplate && (
+                  <div className="mt-3 pt-3 border-t border-border/50 flex gap-2 animate-in fade-in">
+                      <div className="shrink-0 mt-0.5 text-primary"><Sparkles size={12} /></div>
+                      <div className="text-[10px] text-muted-foreground leading-relaxed">
+                          {language === 'zh' ? (
+                              <>
+                                  <span className="font-medium text-foreground">智能拼接模式：</span><br/>
+                                  • 若内容包含 <code className="bg-secondary px-1 rounded border border-border">{'{{变量}}'}</code>，输入将自动填充。<br/>
+                                  • 若无变量，输入将自动拼接到内容末尾。
+                              </>
+                          ) : (
+                              <>
+                                  <span className="font-medium text-foreground">Smart Assembly:</span><br/>
+                                  • Fills <code className="bg-secondary px-1 rounded border border-border">{'{{variable}}'}</code> if present.<br/>
+                                  • Otherwise, appends your input to the end.
+                              </>
+                          )}
+                      </div>
+                  </div>
+              )}
+            </div>
+          )}
+
           {/* Title Input */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5"> <Tag size={14} /> {getText('editor', 'labelTitle', language)} </label>
             <input autoFocus className="w-full bg-secondary/20 border border-border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-primary/50 focus:border-primary/50 outline-none transition-all placeholder:text-muted-foreground/40" placeholder={getText('editor', 'placeholderTitle', language)} value={title} onChange={e => setTitle(e.target.value)} />
+            {/* 提示用户标题将作为指令名 */}
+            {useAsChatTemplate && title && (
+                <p className="text-[10px] text-primary/80 animate-in fade-in flex items-center gap-1">
+                    <Terminal size={10} />
+                    {language === 'zh' ? "调用指令：" : "Trigger:"}
+                    <span className="font-mono font-bold">/{title.replace(/\s+/g, '')}</span>
+                </p>
+            )}
           </div>
 
           {/* Group Selector */}

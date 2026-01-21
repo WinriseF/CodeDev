@@ -214,6 +214,8 @@ fn main() {
             db::search_apps_in_db,
             apps::refresh_apps,
             apps::open_app,
+            // --- 聊天快捷指令命令 ---
+            db::get_chat_templates,
             // -------------------
             monitor::get_system_metrics,
             monitor::get_top_processes,

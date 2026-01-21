@@ -32,6 +32,8 @@ pub struct Prompt {
     pub type_: Option<String>,
     pub is_executable: Option<bool>,
     pub shell_type: Option<String>,
+    // [New] 新增字段
+    pub use_as_chat_template: Option<bool>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -98,7 +100,8 @@ pub fn init_db(app_handle: &AppHandle) -> Result<Connection> {
             original_id TEXT,
             type TEXT,
             is_executable INTEGER DEFAULT 0,
-            shell_type TEXT
+            shell_type TEXT,
+            use_as_chat_template INTEGER DEFAULT 0
         )",
         [],
     )?;
@@ -106,6 +109,12 @@ pub fn init_db(app_handle: &AppHandle) -> Result<Connection> {
     // Migrations for Prompts
     let _ = conn.execute("ALTER TABLE prompts ADD COLUMN is_executable INTEGER DEFAULT 0", []);
     let _ = conn.execute("ALTER TABLE prompts ADD COLUMN shell_type TEXT", []);
+
+    // [重要] 尝试添加 use_as_chat_template 列
+    match conn.execute("ALTER TABLE prompts ADD COLUMN use_as_chat_template INTEGER DEFAULT 0", []) {
+        Ok(_) => println!("[Database] Migration: Added 'use_as_chat_template' column."),
+        Err(_) => println!("[Database] Column 'use_as_chat_template' likely exists, skipping."),
+    }
 
     // Prompts FTS
     conn.execute_batch("
@@ -290,6 +299,8 @@ pub fn get_prompts(
             type_: row.get("type")?,
             is_executable: row.get("is_executable").unwrap_or(Some(false)),
             shell_type: row.get("shell_type").unwrap_or(None),
+            // [New] 读取新字段 (注意处理 NULL)
+            use_as_chat_template: row.get("use_as_chat_template").unwrap_or(Some(false)),
         })
     }).map_err(|e| e.to_string())?;
 
@@ -385,6 +396,8 @@ pub fn search_prompts(
             type_: row.get("type")?,
             is_executable: row.get("is_executable").unwrap_or(Some(false)),
             shell_type: row.get("shell_type").unwrap_or(None),
+            // [New] 读取新字段
+            use_as_chat_template: row.get("use_as_chat_template").unwrap_or(Some(false)),
         })
     }).map_err(|e| e.to_string())?;
 
@@ -404,28 +417,31 @@ pub fn save_prompt(
     let conn = state.conn.lock().map_err(|e| e.to_string())?;
     let tags_json = serde_json::to_string(&prompt.tags).unwrap_or("[]".to_string());
 
+    // [New] 更新 SQL：增加 ?16 占位符和对应的列名
     conn.execute(
         "INSERT OR REPLACE INTO prompts (
             id, title, content, group_name, description, tags,
             is_favorite, created_at, updated_at, source, pack_id, original_id, type,
-            is_executable, shell_type
-        ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15)",
+            is_executable, shell_type, use_as_chat_template
+        ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16)",
         params![
-            prompt.id, 
-            prompt.title, 
-            prompt.content, 
-            prompt.group_name, 
-            prompt.description, 
+            prompt.id,
+            prompt.title,
+            prompt.content,
+            prompt.group_name,
+            prompt.description,
             tags_json,
-            prompt.is_favorite, 
-            prompt.created_at, 
-            prompt.updated_at, 
+            prompt.is_favorite,
+            prompt.created_at,
+            prompt.updated_at,
             prompt.source,
-            prompt.pack_id, 
-            prompt.original_id, 
+            prompt.pack_id,
+            prompt.original_id,
             prompt.type_,
             prompt.is_executable,
-            prompt.shell_type
+            prompt.shell_type,
+            // [New] 插入新字段
+            prompt.use_as_chat_template
         ],
     ).map_err(|e| e.to_string())?;
 
@@ -473,8 +489,8 @@ pub fn import_prompt_pack(
             "INSERT OR REPLACE INTO prompts (
                 id, title, content, group_name, description, tags,
                 is_favorite, created_at, updated_at, source, pack_id, original_id, type,
-                is_executable, shell_type
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                is_executable, shell_type, use_as_chat_template
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         ).map_err(|e| e.to_string())?;
 
         for p in prompts {
@@ -482,7 +498,7 @@ pub fn import_prompt_pack(
             stmt.execute(params![
                 p.id, p.title, p.content, p.group_name, p.description, tags_json,
                 p.is_favorite, p.created_at, p.updated_at, p.source, pack_id.clone(), p.original_id, p.type_,
-                p.is_executable, p.shell_type
+                p.is_executable, p.shell_type, p.use_as_chat_template
             ]).map_err(|e| e.to_string())?;
         }
     }
@@ -505,8 +521,8 @@ pub fn batch_import_local_prompts(
             "INSERT OR IGNORE INTO prompts (
                 id, title, content, group_name, description, tags,
                 is_favorite, created_at, updated_at, source, pack_id, original_id, type,
-                is_executable, shell_type
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                is_executable, shell_type, use_as_chat_template
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         ).map_err(|e| e.to_string())?;
 
         for p in prompts {
@@ -514,7 +530,7 @@ pub fn batch_import_local_prompts(
             stmt.execute(params![
                 p.id, p.title, p.content, p.group_name, p.description, tags_json,
                 p.is_favorite, p.created_at, p.updated_at, p.source, p.pack_id, p.original_id, p.type_,
-                p.is_executable, p.shell_type
+                p.is_executable, p.shell_type, p.use_as_chat_template
             ]).map_err(|e| e.to_string())?;
             count += 1;
         }
@@ -1185,4 +1201,45 @@ pub fn sync_scanned_apps(conn: &Connection, scanned_apps: Vec<AppEntry>) -> Resu
 
     tx.commit()?;
     Ok(scanned_apps.len())
+}
+
+// --- 聊天快捷指令专用查询 ---
+
+#[tauri::command]
+pub fn get_chat_templates(state: State<DbState>) -> Result<Vec<Prompt>, String> {
+    let conn = state.conn.lock().map_err(|e| e.to_string())?;
+
+    // 只查询开启了 use_as_chat_template 的条目，且按标题排序方便查找
+    let mut stmt = conn.prepare(
+        "SELECT * FROM prompts
+         WHERE use_as_chat_template = 1
+         ORDER BY title ASC"
+    ).map_err(|e| e.to_string())?;
+
+    let prompt_iter = stmt.query_map([], |row| {
+        Ok(Prompt {
+            id: row.get("id")?,
+            title: row.get("title")?,
+            content: row.get("content")?,
+            group_name: row.get("group_name")?,
+            description: row.get("description")?,
+            tags: row.get::<_, Option<String>>("tags")?.map(|s| serde_json::from_str(&s).unwrap_or_default()),
+            is_favorite: row.get("is_favorite")?,
+            created_at: row.get("created_at")?,
+            updated_at: row.get("updated_at")?,
+            source: row.get("source")?,
+            pack_id: row.get("pack_id")?,
+            original_id: row.get("original_id")?,
+            type_: row.get("type")?,
+            is_executable: row.get("is_executable").unwrap_or(Some(false)),
+            shell_type: row.get("shell_type").unwrap_or(None),
+            use_as_chat_template: row.get("use_as_chat_template").unwrap_or(Some(false)),
+        })
+    }).map_err(|e| e.to_string())?;
+
+    let mut prompts = Vec::new();
+    for p in prompt_iter {
+        prompts.push(p.map_err(|e| e.to_string())?);
+    }
+    Ok(prompts)
 }

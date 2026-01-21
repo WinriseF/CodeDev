@@ -19,6 +19,9 @@ export interface Prompt {
 
   isExecutable?: boolean;
   shellType?: ShellType;
+
+  // [New] 标记是否作为聊天模式下的快捷指令 (/指令)
+  useAsChatTemplate?: boolean;
 }
 
 export const DEFAULT_GROUP = 'Default';
