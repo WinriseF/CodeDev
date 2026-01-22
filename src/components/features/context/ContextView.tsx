@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState, useMemo, useEffect, useRef, type CSSProperties, memo } from 'react';
 import { open, save } from '@tauri-apps/plugin-dialog';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
@@ -468,14 +469,23 @@ function ViewToggleBtn({ active, onClick, icon, label }: any) {
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-all duration-200",
-        active 
-          ? "bg-background text-foreground shadow-sm ring-1 ring-black/5 dark:ring-white/10" 
+        "relative flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-colors outline-none",
+        active
+          ? "text-foreground"
           : "text-muted-foreground hover:text-foreground hover:bg-background/50"
       )}
     >
-      {icon}
-      <span>{label}</span>
+      {active && (
+        <motion.div
+          layoutId="context-view-toggle"
+          className="absolute inset-0 bg-background shadow-sm rounded-lg ring-1 ring-black/5 dark:ring-white/10"
+          transition={{ type: "spring", bounce: 0, duration: 0.3 }}
+        />
+      )}
+      <span className="relative z-10 flex items-center gap-2">
+        {icon}
+        <span>{label}</span>
+      </span>
     </button>
   );
 }
