@@ -1,5 +1,5 @@
 {
-  "updated_at": 1769062470075,
+  "updated_at": 1769075078054,
   "version": "2.0.0",
   "packages": [
     {
@@ -205,9 +205,9 @@
       "language": "en",
       "platform": "linux",
       "name": "Linux Ops (EN)",
-      "description": "Contains 7772 en commands for linux.",
-      "count": 7772,
-      "size_kb": 3674,
+      "description": "Contains 7773 en commands for linux.",
+      "count": 7773,
+      "size_kb": 3675,
       "url": "packs/en/linux.json",
       "category": "command"
     },
@@ -216,9 +216,9 @@
       "language": "en",
       "platform": "common",
       "name": "Common Tools (EN)",
-      "description": "Contains 19647 en commands for common.",
-      "count": 19647,
-      "size_kb": 9523,
+      "description": "Contains 19649 en commands for common.",
+      "count": 19649,
+      "size_kb": 9524,
       "url": "packs/en/common.json",
       "category": "command"
     },

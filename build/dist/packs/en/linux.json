@@ -7425,6 +7425,21 @@
     "source": "official"
   },
   {
+    "id": "tldr-en-linux-cryptsetup-5",
+    "type": "command",
+    "title": "cryptsetup - Display LUKS header information and key slot metadata of an encrypted device",
+    "content": "cryptsetup luksDump {{/dev/sdXY}}",
+    "group": "Linux Ops",
+    "description": "cryptsetup: Manage plain `dm-crypt` and LUKS (Linux Unified Key Setup) encrypted volumes. Some subcommands such as `luksFormat` have their own usage documentation. (Display LUKS header information and key slot metadata of an encrypted device)",
+    "tags": [
+      "linux",
+      "cryptsetup",
+      "tldr",
+      "en"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-en-linux-xwinwrap-0",
     "type": "command",
     "title": "xwinwrap - Run a video using mpv",
@@ -8868,7 +8883,7 @@
     "id": "tldr-en-linux-systemd-hwdb-0",
     "type": "command",
     "title": "systemd-hwdb - Update the binary hardware database in `/etc/udev`",
-    "content": "systemd-hwdb update",
+    "content": "sudo systemd-hwdb update",
     "group": "Linux Ops",
     "description": "systemd-hwdb: Hardware database management tool. (Update the binary hardware database in `/etc/udev`)",
     "tags": [
@@ -8898,7 +8913,7 @@
     "id": "tldr-en-linux-systemd-hwdb-2",
     "type": "command",
     "title": "systemd-hwdb - Update the binary hardware database, returning a non-zero exit value on any parsing error",
-    "content": "systemd-hwdb {{[-s|--strict]}} update",
+    "content": "sudo systemd-hwdb {{[-s|--strict]}} update",
     "group": "Linux Ops",
     "description": "systemd-hwdb: Hardware database management tool. (Update the binary hardware database, returning a non-zero exit value on any parsing error)",
     "tags": [
@@ -8913,7 +8928,7 @@
     "id": "tldr-en-linux-systemd-hwdb-3",
     "type": "command",
     "title": "systemd-hwdb - Update the binary hardware database in `/usr/lib/udev`",
-    "content": "systemd-hwdb --usr update",
+    "content": "sudo systemd-hwdb --usr update",
     "group": "Linux Ops",
     "description": "systemd-hwdb: Hardware database management tool. (Update the binary hardware database in `/usr/lib/udev`)",
     "tags": [
@@ -21558,7 +21573,7 @@
     "id": "tldr-en-linux-systemd-inhibit-0",
     "type": "command",
     "title": "systemd-inhibit - List all active inhibition locks and the reasons for their creation",
-    "content": "systemd-inhibit --list",
+    "content": "systemd-inhibit",
     "group": "Linux Ops",
     "description": "systemd-inhibit: Prohibit the system from entering certain power states. Inhibitor locks may be used to block or delay system sleep and shutdown requests as well as automatic idle handling. (List all active inhibition locks and the reasons for their creation)",
     "tags": [
@@ -31773,7 +31788,7 @@
     "id": "tldr-en-linux-updatectl-2",
     "type": "command",
     "title": "updatectl - Show update targets",
-    "content": "updatectl list",
+    "content": "updatectl",
     "group": "Linux Ops",
     "description": "updatectl: System update utility. (Show update targets)",
     "tags": [
@@ -32163,7 +32178,7 @@
     "id": "tldr-en-linux-systemd-sysext-2",
     "type": "command",
     "title": "systemd-sysext - Check the current merge status",
-    "content": "systemd-sysext status",
+    "content": "systemd-sysext",
     "group": "Linux Ops",
     "description": "systemd-sysext: Activate or deactivate system extension images. (Check the current merge status)",
     "tags": [
@@ -47418,7 +47433,7 @@
     "id": "tldr-en-linux-busctl-0",
     "type": "command",
     "title": "busctl - Show all peers on the bus by their service names",
-    "content": "busctl list",
+    "content": "busctl",
     "group": "Linux Ops",
     "description": "busctl: Introspect and monitor the D-Bus bus. (Show all peers on the bus by their service names)",
     "tags": [
@@ -57573,7 +57588,7 @@
     "id": "tldr-en-linux-userdbctl-0",
     "type": "command",
     "title": "userdbctl - List all known user records",
-    "content": "userdbctl user",
+    "content": "userdbctl",
     "group": "Linux Ops",
     "description": "userdbctl: Inspect users, groups, and group memberships on the system. (List all known user records)",
     "tags": [
@@ -76713,7 +76728,7 @@
     "id": "tldr-en-linux-networkctl-0",
     "type": "command",
     "title": "networkctl - List existing links with their status",
-    "content": "networkctl list",
+    "content": "networkctl",
     "group": "Linux Ops",
     "description": "networkctl: Query the status of network links. Manage the network configuration using `systemd-networkd`. (List existing links with their status)",
     "tags": [
@@ -84933,7 +84948,7 @@
     "id": "tldr-en-linux-powerprofilesctl-0",
     "type": "command",
     "title": "powerprofilesctl - List available power profiles",
-    "content": "powerprofilesctl list",
+    "content": "powerprofilesctl",
     "group": "Linux Ops",
     "description": "powerprofilesctl: Make power profiles handling available over D-Bus. (List available power profiles)",
     "tags": [
@@ -105123,7 +105138,7 @@
     "id": "tldr-en-linux-oomctl-0",
     "type": "command",
     "title": "oomctl - Show the current state of the cgroups and system contexts stored by `systemd-oomd`",
-    "content": "oomctl dump",
+    "content": "oomctl",
     "group": "Linux Ops",
     "description": "oomctl: Analyze the state stored in `systemd-oomd`. (Show the current state of the cgroups and system contexts stored by `systemd-oomd`)",
     "tags": [
