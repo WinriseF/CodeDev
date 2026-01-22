@@ -35715,6 +35715,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-x-tping-0",
+    "type": "command",
+    "title": "x-tping - 使用详细模式 Ping 主机的 80 端口（默认端口）",
+    "content": "x tping {{host}}",
+    "group": "通用工具 (Common)",
+    "description": "x-tping: 通过 TCP 协议 ping 主机以检查其可达性。 (使用详细模式 Ping 主机的 80 端口（默认端口）)",
+    "tags": [
+      "common",
+      "x-tping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-tping-1",
+    "type": "command",
+    "title": "x-tping - Ping 指定主机的特定端口",
+    "content": "x tping {{host}}:{{port}}",
+    "group": "通用工具 (Common)",
+    "description": "x-tping: 通过 TCP 协议 ping 主机以检查其可达性。 (Ping 指定主机的特定端口)",
+    "tags": [
+      "common",
+      "x-tping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-tping-2",
+    "type": "command",
+    "title": "x-tping - 以热力图形式显示结果",
+    "content": "x tping {{[-m|--heatmap]}} {{host}}",
+    "group": "通用工具 (Common)",
+    "description": "x-tping: 通过 TCP 协议 ping 主机以检查其可达性。 (以热力图形式显示结果)",
+    "tags": [
+      "common",
+      "x-tping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-tping-3",
+    "type": "command",
+    "title": "x-tping - 以柱状图形式显示结果",
+    "content": "x tping {{[-b|--bar]}} {{host}}:{{port}}",
+    "group": "通用工具 (Common)",
+    "description": "x-tping: 通过 TCP 协议 ping 主机以检查其可达性。 (以柱状图形式显示结果)",
+    "tags": [
+      "common",
+      "x-tping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-tping-4",
+    "type": "command",
+    "title": "x-tping - 输出原始数据",
+    "content": "x tping {{[-r|--raw]}} {{host}}",
+    "group": "通用工具 (Common)",
+    "description": "x-tping: 通过 TCP 协议 ping 主机以检查其可达性。 (输出原始数据)",
+    "tags": [
+      "common",
+      "x-tping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-tping-5",
+    "type": "command",
+    "title": "x-tping - 输出指定格式",
+    "content": "x tping {{--csv|--tsv}} {{host}}",
+    "group": "通用工具 (Common)",
+    "description": "x-tping: 通过 TCP 协议 ping 主机以检查其可达性。 (输出指定格式)",
+    "tags": [
+      "common",
+      "x-tping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-docker-container-run-0",
     "type": "command",
     "title": "docker-container-run - 使用打上标签的 Docker 镜像的新容器中执行命令",
@@ -38145,6 +38235,96 @@
     "source": "official"
   },
   {
+    "id": "tldr-zh-common-x-0",
+    "type": "command",
+    "title": "x - 使用特定模块（例如 path 模块）",
+    "content": "x {{module}}",
+    "group": "通用工具 (Common)",
+    "description": "x: 用于管理模块和软件包。 (使用特定模块（例如 path 模块）)",
+    "tags": [
+      "common",
+      "x",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-1",
+    "type": "command",
+    "title": "x - 全局安装一个软件包（例如 jq）",
+    "content": "x env use {{package}}",
+    "group": "通用工具 (Common)",
+    "description": "x: 用于管理模块和软件包。 (全局安装一个软件包（例如 jq）)",
+    "tags": [
+      "common",
+      "x",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-2",
+    "type": "command",
+    "title": "x - 在当前 Shell 会话中临时尝试软件包",
+    "content": "x env try {{package}}",
+    "group": "通用工具 (Common)",
+    "description": "x: 用于管理模块和软件包。 (在当前 Shell 会话中临时尝试软件包)",
+    "tags": [
+      "common",
+      "x",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-3",
+    "type": "command",
+    "title": "x - 无需安装直接使用软件包",
+    "content": "x {{package}}",
+    "group": "通用工具 (Common)",
+    "description": "x: 用于管理模块和软件包。 (无需安装直接使用软件包)",
+    "tags": [
+      "common",
+      "x",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-4",
+    "type": "command",
+    "title": "x - 初始化 OpenAI API 密钥以使用 AI 功能",
+    "content": "x openai init",
+    "group": "通用工具 (Common)",
+    "description": "x: 用于管理模块和软件包。 (初始化 OpenAI API 密钥以使用 AI 功能)",
+    "tags": [
+      "common",
+      "x",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-5",
+    "type": "command",
+    "title": "x - 查询包的安装方法并执行",
+    "content": "x install",
+    "group": "通用工具 (Common)",
+    "description": "x: 用于管理模块和软件包。 (查询包的安装方法并执行)",
+    "tags": [
+      "common",
+      "x",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
     "id": "tldr-zh-common-jira-issues-0",
     "type": "command",
     "title": "jira-issues - 查看原命令的文档",
@@ -39924,6 +40104,81 @@
     "tags": [
       "common",
       "ping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-ping-0",
+    "type": "command",
+    "title": "x-ping - ping 指定的主机（省略则默认为 bing.com）",
+    "content": "x ping {{host}}",
+    "group": "通用工具 (Common)",
+    "description": "x-ping: ping 命令的增强模块。 (ping 指定的主机（省略则默认为 bing.com）)",
+    "tags": [
+      "common",
+      "x-ping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-ping-1",
+    "type": "command",
+    "title": "x-ping - 以热力图形式显示 ping 结果",
+    "content": "x ping {{[-m|--heatmap]}} {{host}}",
+    "group": "通用工具 (Common)",
+    "description": "x-ping: ping 命令的增强模块。 (以热力图形式显示 ping 结果)",
+    "tags": [
+      "common",
+      "x-ping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-ping-2",
+    "type": "command",
+    "title": "x-ping - 以柱状图形式显示 ping 结果",
+    "content": "x ping {{[-b|--bar]}} {{host}}",
+    "group": "通用工具 (Common)",
+    "description": "x-ping: ping 命令的增强模块。 (以柱状图形式显示 ping 结果)",
+    "tags": [
+      "common",
+      "x-ping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-ping-3",
+    "type": "command",
+    "title": "x-ping - 处理现有 ping 结果并以热力图显示",
+    "content": "ping {{host}} | x ping vis {{[-m|--heatmap]}}",
+    "group": "通用工具 (Common)",
+    "description": "x-ping: ping 命令的增强模块。 (处理现有 ping 结果并以热力图显示)",
+    "tags": [
+      "common",
+      "x-ping",
+      "tldr",
+      "zh"
+    ],
+    "source": "official"
+  },
+  {
+    "id": "tldr-zh-common-x-ping-4",
+    "type": "command",
+    "title": "x-ping - 显示帮助",
+    "content": "x ping {{[-h|--help]}}",
+    "group": "通用工具 (Common)",
+    "description": "x-ping: ping 命令的增强模块。 (显示帮助)",
+    "tags": [
+      "common",
+      "x-ping",
       "tldr",
       "zh"
     ],
