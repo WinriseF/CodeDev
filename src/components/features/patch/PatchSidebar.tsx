@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import { useState } from 'react';
-import { 
-  FolderOpen, FileText, Sparkles, FileCode, 
-  CheckCircle2, ArrowRightLeft, Loader2, 
+import {
+  FolderOpen, FileText, Sparkles, FileCode,
+  CheckCircle2, ArrowRightLeft, Loader2,
   Copy, ChevronDown, ChevronRight, Trash2, Info, GitMerge,
   CheckSquare, Square, FileImage, AlertOctagon
 } from 'lucide-react';
@@ -135,11 +136,41 @@ export function PatchSidebar({
       
       <div className="p-4 border-b border-border bg-background shadow-sm z-10 shrink-0">
         <div className="flex bg-secondary p-1 rounded-lg border border-border/50">
-           <button onClick={() => setMode('patch')} className={cn("flex-1 flex items-center justify-center gap-2 py-1.5 rounded-md text-xs font-bold transition-all", mode === 'patch' ? "bg-background text-primary shadow-sm" : "text-muted-foreground hover:text-foreground")}>
-             <Sparkles size={14} /> {getText('patch', 'aiPatch', language)}
+           <button
+             onClick={() => setMode('diff')}
+             className={cn(
+               "relative flex-1 flex items-center justify-center gap-2 py-1.5 rounded-md text-xs font-bold transition-colors outline-none",
+               mode === 'diff' ? "text-primary" : "text-muted-foreground hover:text-foreground"
+             )}
+           >
+             {mode === 'diff' && (
+                <motion.div
+                    layoutId="patch-mode-switch"
+                    className="absolute inset-0 bg-background shadow-sm rounded-md border border-border/50"
+                    transition={{ type: "spring", bounce: 0, duration: 0.3 }}
+                />
+             )}
+             <span className="relative z-10 flex items-center gap-2">
+                <ArrowRightLeft size={14} /> {getText('patch', 'manual', language)}
+             </span>
            </button>
-           <button onClick={() => setMode('diff')} className={cn("flex-1 flex items-center justify-center gap-2 py-1.5 rounded-md text-xs font-bold transition-all", mode === 'diff' ? "bg-background text-primary shadow-sm" : "text-muted-foreground hover:text-foreground")}>
-             <ArrowRightLeft size={14} /> {getText('patch', 'manual', language)}
+           <button
+             onClick={() => setMode('patch')}
+             className={cn(
+               "relative flex-1 flex items-center justify-center gap-2 py-1.5 rounded-md text-xs font-bold transition-colors outline-none",
+               mode === 'patch' ? "text-primary" : "text-muted-foreground hover:text-foreground"
+             )}
+           >
+             {mode === 'patch' && (
+                <motion.div
+                    layoutId="patch-mode-switch"
+                    className="absolute inset-0 bg-background shadow-sm rounded-md border border-border/50"
+                    transition={{ type: "spring", bounce: 0, duration: 0.3 }}
+                />
+             )}
+             <span className="relative z-10 flex items-center gap-2">
+                <Sparkles size={14} /> {getText('patch', 'aiPatch', language)}
+             </span>
            </button>
         </div>
       </div>

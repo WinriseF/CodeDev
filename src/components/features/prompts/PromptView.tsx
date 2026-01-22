@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState, useEffect, useCallback, CSSProperties, memo } from 'react';
 import { usePromptStore } from '@/store/usePromptStore';
 import { useAppStore } from '@/store/useAppStore';
@@ -171,21 +172,53 @@ export function PromptView() {
       {/* 侧边栏 */}
       <aside className={cn("flex flex-col bg-secondary/5 select-none transition-all duration-300 ease-in-out overflow-hidden", isPromptSidebarOpen ? "w-56 border-r border-border opacity-100" : "w-0 border-none opacity-0")}>
         <div className="p-3 pb-0 flex flex-col gap-1 shrink-0">
-            <button onClick={() => setActiveCategory('prompt')} className={cn("w-full flex items-center justify-between px-3 py-2 text-xs font-bold rounded-md transition-colors group", activeCategory === 'prompt' ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary")}>
-                <div className="flex items-center gap-2">
+            <button
+                onClick={() => setActiveCategory('prompt')}
+                className={cn(
+                    "relative w-full flex items-center justify-between px-3 py-2 text-xs font-bold rounded-md transition-colors group outline-none",
+                    activeCategory === 'prompt' ? "text-primary" : "text-muted-foreground hover:bg-secondary"
+                )}
+            >
+                {activeCategory === 'prompt' && (
+                    <motion.div
+                        layoutId="prompt-category-bg"
+                        className="absolute inset-0 bg-primary/10 rounded-md"
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                )}
+                <div className="flex items-center gap-2 relative z-10">
                     <Sparkles size={14} />
                     <span>{getText('editor', 'typePrompt', language)}</span>
                 </div>
-                <span className={cn("text-[10px] px-1.5 py-0.5 rounded-full transition-colors font-mono", activeCategory === 'prompt' ? "bg-primary/20 text-primary" : "bg-secondary/50 text-muted-foreground group-hover:bg-secondary-foreground/10")}>
+                <span className={cn(
+                    "relative z-10 text-[10px] px-1.5 py-0.5 rounded-full transition-colors font-mono",
+                    activeCategory === 'prompt' ? "bg-primary/20 text-primary" : "bg-secondary/50 text-muted-foreground group-hover:bg-secondary-foreground/10"
+                )}>
                     {counts.prompt}
                 </span>
             </button>
-            <button onClick={() => setActiveCategory('command')} className={cn("w-full flex items-center justify-between px-3 py-2 text-xs font-bold rounded-md transition-colors group", activeCategory === 'command' ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary")}>
-                <div className="flex items-center gap-2">
+            <button
+                onClick={() => setActiveCategory('command')}
+                className={cn(
+                    "relative w-full flex items-center justify-between px-3 py-2 text-xs font-bold rounded-md transition-colors group outline-none",
+                    activeCategory === 'command' ? "text-primary" : "text-muted-foreground hover:bg-secondary"
+                )}
+            >
+                {activeCategory === 'command' && (
+                    <motion.div
+                        layoutId="prompt-category-bg"
+                        className="absolute inset-0 bg-primary/10 rounded-md"
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                )}
+                <div className="flex items-center gap-2 relative z-10">
                     <Terminal size={14} />
                     <span>{getText('editor', 'typeCommand', language)}</span>
                 </div>
-                <span className={cn("text-[10px] px-1.5 py-0.5 rounded-full transition-colors font-mono", activeCategory === 'command' ? "bg-primary/20 text-primary" : "bg-secondary/50 text-muted-foreground group-hover:bg-secondary-foreground/10")}>
+                <span className={cn(
+                    "relative z-10 text-[10px] px-1.5 py-0.5 rounded-full transition-colors font-mono",
+                    activeCategory === 'command' ? "bg-primary/20 text-primary" : "bg-secondary/50 text-muted-foreground group-hover:bg-secondary-foreground/10"
+                )}>
                     {counts.command}
                 </span>
             </button>

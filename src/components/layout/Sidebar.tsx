@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { BookOpen, FileJson, GitMerge, Settings, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAppStore, AppView } from '@/store/useAppStore';
 import { getMenuLabel, getText } from '@/lib/i18n';
@@ -68,10 +69,15 @@ export function Sidebar() {
             )}
           >
             {currentView === item.id && (
-              <div className={cn(
-                "absolute left-0 top-0 bottom-0 w-1 bg-primary transition-all duration-300",
-                isSidebarOpen && "w-full opacity-10 border-r border-primary/20 left-0"
-              )} />
+              <motion.div
+                layoutId="sidebar-indicator"
+                className="absolute left-0 top-0 bottom-0 w-1 bg-primary"
+                transition={{
+                  type: "spring",
+                  stiffness: 500,
+                  damping: 30
+                }}
+              />
             )}
             <div className="w-16 flex items-center justify-center shrink-0 z-10">
               <item.icon size={20} className="transition-transform duration-300 group-hover:scale-110" />
