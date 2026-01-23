@@ -17,14 +17,81 @@
 
 ## 版本历史
 
+### v1.3.6 (2026-01-22)
+
+| 提交哈希 | 变更内容 | 详细说明 |
+|---------|---------|---------|
+| `dd1871f` | **优化数据库迁移** | 引入 Refinery 迁移框架，支持遗留数据库补丁 |
+| `a888718` | 发布 1.3.6 | 版本发布 |
+
+**v1.3.6 数据库迁移优化文件变更**:
+```
+src-tauri/migrations/V1__baseline.sql | +114 基准迁移脚本
+src-tauri/Cargo.toml                   | +3   引入 refinery
+src-tauri/src/db.rs                    | +277 数据库重构
+src/components/features/patch/PatchView.tsx | +2 适配调整
+```
+
+**主要更新**:
+- 🗄️ **Refinery 迁移框架**: 引入专业数据库迁移管理工具
+- 🔧 **遗留数据库补丁**: 自动检测并修补老版本数据库结构
+- 📊 **基准迁移 V1**: 统一的数据库 Schema 定义
+- 🛡️ **健壮性提升**: 列存在性检查、事务保护
+
+---
+
+### v1.3.5 (2026-01-21)
+
+| 提交哈希 | 变更内容 | 详细说明 |
+|---------|---------|---------|
+| `a4ca88e` | **修复 BUG** | 修复 1.3.5 相关问题 |
+| `dc0be15` | **新增模板 AI** | 提示词支持聊天模板功能 |
+| `f71510b` | 发布 1.3.5 | 版本发布 |
+
+**v1.3.5 模板 AI 功能文件变更**:
+```
+src-tauri/src/db.rs                                | +97  数据库字段扩展
+src-tauri/src/main.rs                              | +2   命令注册
+src/SpotlightApp.tsx                               | +5   点击处理
+src/components/features/prompts/dialogs/PromptEditorDialog.tsx | +92  编辑器增强
+src/components/features/spotlight/core/ChatCommandMenu.tsx    | +113 命令菜单
+src/components/features/spotlight/core/SearchBar.tsx          | +257 搜索栏重构
+src/components/features/spotlight/core/SpotlightContext.tsx   | +31  上下文
+src/components/features/spotlight/hooks/useSpotlightChat.ts   | +54  聊天逻辑
+src/lib/template.ts                                | +29  模板引擎
+src/store/usePromptStore.ts                        | +15  状态管理
+src/types/prompt.ts                                | +3   类型定义
+```
+
+**主要更新**:
+- 🤖 **模板 AI**: 提示词支持配置为聊天模板，AI 对话时自动应用
+- 💬 **命令菜单**: Spotlight 新增斜杠命令菜单 (/)
+- 🔍 **搜索增强**: 搜索栏重构，支持更复杂的过滤和排序
+- 🎨 **编辑器增强**: 提示词编辑器 UI 优化
+
+---
+
+### v1.3.4 (2026-01-18)
+
+| 提交哈希 | 变更内容 | 详细说明 |
+|---------|---------|---------|
+| `834a1d0` | **修复 BUG** | 修复多个问题 |
+| `8f28fa8` | 发布 1.3.4 | 版本发布 |
+
+**主要更新**:
+- 🐛 **BUG 修复**: 修复 Spotlight 聊天模式问题
+
+---
+
 ### v1.3.3 (2026-01-18)
 
 | 提交哈希 | 变更内容 | 详细说明 |
 |---------|---------|---------|
-| `xxxxxx` | 发布 1.3.3 | 版本发布 |
-| `xxxxxx` | **Spotlight 增强** | 新增计算器、Shell 命令、范围搜索功能 |
-| `xxxxxx` | **国际化完善** | 统一所有硬编码文案为 getText 调用 |
-| `xxxxxx` | **性能优化** | 正则静态化、loading 短路优化 |
+| `d45ae11` | 发布 1.3.3 | 版本发布 |
+| `34c32a0` | 发布 1.3.2 | 版本发布 |
+| `0476720` | **Spotlight 增强** | 新增计算器、Shell 命令、范围搜索功能 |
+| `828d088` | **国际化完善** | 统一所有硬编码文案为 getText 调用 |
+| `967da22` | **性能优化** | 正则静态化、loading 短路优化 |
 
 **v1.3.3 Spotlight 增强文件变更**:
 ```
@@ -524,5 +591,5 @@ ctxrun/
 
 ---
 
-*文档最后更新: 2026-01-18*
+*文档最后更新: 2026-01-23*
 *基于 git 提交历史和代码 diff 分析编写*
