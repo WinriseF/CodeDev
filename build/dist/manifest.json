@@ -1,5 +1,5 @@
 {
-  "updated_at": 1769178542587,
+  "updated_at": 1769178773197,
   "version": "2.1.0",
   "packages": [
     {
@@ -254,28 +254,6 @@
       "size_kb": 17,
       "url": "packs/commands/en/cisco-ios.json",
       "category": "command"
-    },
-    {
-      "id": "custom-prompt-en-prompts-en-roles",
-      "language": "en",
-      "platform": "custom",
-      "name": "prompts-en-roles",
-      "description": "prompts-en-roles",
-      "count": 1069,
-      "size_kb": 2275.94,
-      "url": "packs/prompts-en-roles.json",
-      "category": "prompt"
-    },
-    {
-      "id": "custom-prompt-en-prompts-zh-roles",
-      "language": "en",
-      "platform": "custom",
-      "name": "prompts-zh-roles",
-      "description": "prompts-zh-roles",
-      "count": 124,
-      "size_kb": 97.47,
-      "url": "packs/prompts-zh-roles.json",
-      "category": "prompt"
     }
   ]
 }
