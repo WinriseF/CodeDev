@@ -61,11 +61,13 @@ jobs:
           import time
 
           dist_dir = 'build/dist'
+          packs_dir = os.path.join(dist_dir, 'packs')
           all_packages = []
-          
-          print('🔄 Merging manifests...')
+          recorded_urls = set()
 
-          # 扫描所有以 _partial.json 结尾的文件
+          print('🔄 Merging manifests and scanning directory structure...')
+
+          # 1. 加载官方脚本生成的 partial json
           if os.path.exists(dist_dir):
               for f in os.listdir(dist_dir):
                   if f.endswith('_partial.json'):
@@ -75,27 +77,100 @@ jobs:
                               data = json.load(fp)
                               if isinstance(data, list):
                                   all_packages.extend(data)
-                                  print(f'  ➕ Added {len(data)} packs from {f}')
-                              else:
-                                  print(f'  ⚠️ Warning: {f} is not a list, skipping.')
-                          
-                          # 合并后删除片段文件，保持整洁
-                          os.remove(path) 
+                                  for item in data:
+                                      recorded_urls.add(item.get('url'))
+                                  print(f'  ➕ Added {len(data)} official packs from {f}')
+                          os.remove(path)
                       except Exception as e:
                           print(f'  ❌ Error reading {f}: {e}')
 
-          # 构建最终清单对象
+          # 2. 智能扫描 packs 文件夹结构
+          if os.path.exists(packs_dir):
+              for root, dirs, files in os.walk(packs_dir):
+                  for filename in files:
+                      if not filename.endswith('.json'):
+                          continue
+
+                      full_path = os.path.join(root, filename)
+                      # 这里的 rel_path 是 manifest 里的下载地址，保持不变
+                      rel_path = os.path.relpath(full_path, dist_dir).replace('\\\\', '/')
+
+                      if rel_path in recorded_urls:
+                          continue
+
+                      # === 📂 路径解析逻辑 ===
+                      # rel_from_packs 例如: 'prompts/zh/中文角色扮演精选.json'
+                      rel_from_packs = os.path.relpath(full_path, packs_dir).replace('\\\\', '/')
+                      path_parts = rel_from_packs.split('/')
+
+                      # 默认值
+                      category = 'prompt'
+                      lang = 'en'
+
+                      # 根据文件夹层级推断
+                      if len(path_parts) >= 2:
+                          # 第一层: prompts 或 commands
+                          folder_type = path_parts[0].lower()
+                          if 'command' in folder_type:
+                              category = 'command'
+                          elif 'prompt' in folder_type:
+                              category = 'prompt'
+
+                          # 第二层: en 或 zh
+                          folder_lang = path_parts[1].lower()
+                          if 'zh' in folder_lang:
+                              lang = 'zh'
+                          elif 'en' in folder_lang:
+                              lang = 'en'
+
+                      try:
+                          with open(full_path, 'r', encoding='utf-8') as fp:
+                              content = json.load(fp)
+
+                          if not isinstance(content, list):
+                              print(f'  ⚠️ Skipping {rel_path}: Root must be a list.')
+                              continue
+
+                          # === 🏷️ 命名与ID逻辑 (更新点) ===
+
+                          # 1. 名字直接用文件名 (去掉后缀)
+                          # 比如 '中文角色扮演精选.json' -> '中文角色扮演精选'
+                          file_pure_name = os.path.splitext(filename)[0]
+
+                          # 2. 生成唯一 ID
+                          # 为了防止不同文件夹下有同名文件冲突，ID 加上前缀
+                          # 比如 'custom-prompt-zh-中文角色扮演精选'
+                          safe_id = f'custom-{category}-{lang}-{file_pure_name}'
+
+                          new_pack = {
+                              'id': safe_id,
+                              'language': lang,
+                              'platform': 'custom',
+                              'name': file_pure_name,  # 直接使用文件名作为显示名称
+                              'description': f'{file_pure_name}',  # 描述也默认用文件名
+                              'count': len(content),
+                              'size_kb': round(os.path.getsize(full_path) / 1024, 2),
+                              'url': rel_path,
+                              'category': category
+                          }
+
+                          all_packages.append(new_pack)
+                          print(f'  🕵️ Auto-detected: {filename} -> Name: \"{file_pure_name}\"')
+
+                      except Exception as e:
+                          print(f'  ❌ Error processing {filename}: {e}')
+
+          # 3. 生成最终 Manifest
           final_manifest = {
               'updated_at': int(time.time() * 1000),
-              'version': '2.0.0', # 升级版本号
+              'version': '2.1.0',
               'packages': all_packages
           }
 
-          # 写入最终文件
           with open(os.path.join(dist_dir, 'manifest.json'), 'w', encoding='utf-8') as f:
               json.dump(final_manifest, f, indent=2, ensure_ascii=False)
-          
-          print(f'✅ Final manifest.json created with {len(all_packages)} total packages.')
+
+          print(f'✅ Final manifest created with {len(all_packages)} total packages.')
           "
 
       # 8. 提交结果到 GitHub

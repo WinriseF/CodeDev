@@ -22,12 +22,12 @@ SOURCES = {
 }
 
 DIST_DIR = os.path.join(os.path.dirname(__file__), "dist")
-PACKS_DIR = os.path.join(DIST_DIR, "packs")
+PACKS_ROOT = os.path.join(DIST_DIR, "packs", "prompts")
 
 if not os.path.exists(DIST_DIR):
     os.makedirs(DIST_DIR)
-if not os.path.exists(PACKS_DIR):
-    os.makedirs(PACKS_DIR)
+if not os.path.exists(PACKS_ROOT):
+    os.makedirs(PACKS_ROOT)
 
 CATEGORY_MAP = {
     "coding": [
@@ -182,14 +182,18 @@ def process_source(key, config):
         }
         final_prompts.append(prompt_obj)
 
-    filename = f"prompts-{config['lang']}-roles.json"
+    # 确保目录结构 packs/prompts/{lang}/
+    lang_dir = os.path.join(PACKS_ROOT, config['lang'])
+    if not os.path.exists(lang_dir):
+        os.makedirs(lang_dir)
 
-    output_path = os.path.join(PACKS_DIR, filename)
+    filename = "roles.json"
+    output_path = os.path.join(lang_dir, filename)
 
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(final_prompts, f, ensure_ascii=False, indent=2)
 
-    print(f"Generated {filename}: {len(final_prompts)} prompts in packs/ folder.")
+    print(f"Generated {config['lang']}/{filename}: {len(final_prompts)} prompts in prompts/ folder.")
 
     return {
         "id": f"{config['lang']}-roles",
@@ -199,12 +203,12 @@ def process_source(key, config):
         "description": f"Collection of {len(final_prompts)} role-play prompts.",
         "count": len(final_prompts),
         "size_kb": round(os.path.getsize(output_path) / 1024, 2),
-        "url": f"packs/{filename}",
+        "url": f"packs/prompts/{config['lang']}/{filename}",
         "category": "prompt"
     }
 
 def main():
-    print("Starting Prompt ETL Process...")
+    print("Starting Prompt ETL Process (Folder Structure Refactored)...")
     manifest_items = []
     for key, config in SOURCES.items():
         result = process_source(key, config)

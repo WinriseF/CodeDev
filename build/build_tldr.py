@@ -5,7 +5,8 @@ from pathlib import Path
 import time
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
-OUTPUT_DIR = SCRIPT_DIR / 'dist'
+DIST_DIR = SCRIPT_DIR / 'dist'
+PACKS_ROOT = DIST_DIR / 'packs' / 'commands'
 LANG_CONFIG = {
     'zh': {
         'source': SCRIPT_DIR / 'tldr' / 'pages.zh',
@@ -83,11 +84,11 @@ def parse_markdown(content, cmd_name, platform, lang, platform_display_name):
     return prompts
 
 def main():
-    print("开始构建 CtxRun 指令库...")
+    print("开始构建 CtxRun 指令库 (Folder Structure Refactored)...")
     print(f"脚本位置: {SCRIPT_DIR}")
 
-    if not OUTPUT_DIR.exists():
-        OUTPUT_DIR.mkdir(parents=True)
+    if not PACKS_ROOT.exists():
+        PACKS_ROOT.mkdir(parents=True, exist_ok=True)
 
     manifest_packages = []
 
@@ -102,9 +103,9 @@ def main():
             print(f"错误: 找不到源目录 {source_dir}，跳过此语言。")
             continue
 
-        lang_pack_dir = OUTPUT_DIR / 'packs' / lang
+        lang_pack_dir = PACKS_ROOT / lang
         if not lang_pack_dir.exists():
-            lang_pack_dir.mkdir(parents=True)
+            lang_pack_dir.mkdir(parents=True, exist_ok=True)
 
         platforms = [d.name for d in source_dir.iterdir() if d.is_dir()]
 
@@ -144,17 +145,17 @@ def main():
                     "description": f"Contains {len(all_platform_prompts)} {lang} commands for {platform}.",
                     "count": len(all_platform_prompts),
                     "size_kb": size_kb,
-                    "url": f"packs/{lang}/{output_filename}",
+                    "url": f"packs/commands/{lang}/{output_filename}",
                     "category": "command"
                 })
 
-    partial_manifest_path = OUTPUT_DIR / 'manifest_tldr_partial.json'
+    partial_manifest_path = DIST_DIR / 'manifest_tldr_partial.json'
 
     with open(partial_manifest_path, 'w', encoding='utf-8') as f:
         json.dump(manifest_packages, f, ensure_ascii=False, indent=2)
 
     print(f"构建完成! 清单片段已生成: {partial_manifest_path}")
-    print(f"产物目录: {OUTPUT_DIR}")
+    print(f"产物目录: {DIST_DIR}")
 
 if __name__ == "__main__":
     main()
