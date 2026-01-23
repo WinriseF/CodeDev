@@ -1,6 +1,6 @@
 {
-  "updated_at": 1769155994634,
-  "version": "2.0.0",
+  "updated_at": 1769178302196,
+  "version": "2.1.0",
   "packages": [
     {
       "id": "en-roles",
@@ -10,7 +10,7 @@
       "description": "Collection of 1069 role-play prompts.",
       "count": 1069,
       "size_kb": 2275.94,
-      "url": "packs/prompts-en-roles.json",
+      "url": "packs/prompts/en/roles.json",
       "category": "prompt"
     },
     {
@@ -21,7 +21,7 @@
       "description": "Collection of 124 role-play prompts.",
       "count": 124,
       "size_kb": 97.47,
-      "url": "packs/prompts-zh-roles.json",
+      "url": "packs/prompts/zh/roles.json",
       "category": "prompt"
     },
     {
@@ -32,7 +32,7 @@
       "description": "Contains 54 zh commands for android.",
       "count": 54,
       "size_kb": 23,
-      "url": "packs/zh/android.json",
+      "url": "packs/commands/zh/android.json",
       "category": "command"
     },
     {
@@ -43,7 +43,7 @@
       "description": "Contains 425 zh commands for windows.",
       "count": 425,
       "size_kb": 183,
-      "url": "packs/zh/windows.json",
+      "url": "packs/commands/zh/windows.json",
       "category": "command"
     },
     {
@@ -54,7 +54,7 @@
       "description": "Contains 11 zh commands for dos.",
       "count": 11,
       "size_kb": 4,
-      "url": "packs/zh/dos.json",
+      "url": "packs/commands/zh/dos.json",
       "category": "command"
     },
     {
@@ -65,7 +65,7 @@
       "description": "Contains 2 zh commands for openbsd.",
       "count": 2,
       "size_kb": 1,
-      "url": "packs/zh/openbsd.json",
+      "url": "packs/commands/zh/openbsd.json",
       "category": "command"
     },
     {
@@ -76,7 +76,7 @@
       "description": "Contains 2 zh commands for netbsd.",
       "count": 2,
       "size_kb": 1,
-      "url": "packs/zh/netbsd.json",
+      "url": "packs/commands/zh/netbsd.json",
       "category": "command"
     },
     {
@@ -87,7 +87,7 @@
       "description": "Contains 5 zh commands for freebsd.",
       "count": 5,
       "size_kb": 2,
-      "url": "packs/zh/freebsd.json",
+      "url": "packs/commands/zh/freebsd.json",
       "category": "command"
     },
     {
@@ -98,7 +98,7 @@
       "description": "Contains 754 zh commands for linux.",
       "count": 754,
       "size_kb": 338,
-      "url": "packs/zh/linux.json",
+      "url": "packs/commands/zh/linux.json",
       "category": "command"
     },
     {
@@ -109,7 +109,7 @@
       "description": "Contains 3565 zh commands for common.",
       "count": 3565,
       "size_kb": 1734,
-      "url": "packs/zh/common.json",
+      "url": "packs/commands/zh/common.json",
       "category": "command"
     },
     {
@@ -120,7 +120,7 @@
       "description": "Contains 457 zh commands for osx.",
       "count": 457,
       "size_kb": 193,
-      "url": "packs/zh/osx.json",
+      "url": "packs/commands/zh/osx.json",
       "category": "command"
     },
     {
@@ -131,7 +131,7 @@
       "description": "Contains 3 zh commands for sunos.",
       "count": 3,
       "size_kb": 1,
-      "url": "packs/zh/sunos.json",
+      "url": "packs/commands/zh/sunos.json",
       "category": "command"
     },
     {
@@ -142,7 +142,7 @@
       "description": "Contains 57 en commands for android.",
       "count": 57,
       "size_kb": 25,
-      "url": "packs/en/android.json",
+      "url": "packs/commands/en/android.json",
       "category": "command"
     },
     {
@@ -153,7 +153,7 @@
       "description": "Contains 1089 en commands for windows.",
       "count": 1089,
       "size_kb": 532,
-      "url": "packs/en/windows.json",
+      "url": "packs/commands/en/windows.json",
       "category": "command"
     },
     {
@@ -164,7 +164,7 @@
       "description": "Contains 11 en commands for dos.",
       "count": 11,
       "size_kb": 5,
-      "url": "packs/en/dos.json",
+      "url": "packs/commands/en/dos.json",
       "category": "command"
     },
     {
@@ -175,7 +175,7 @@
       "description": "Contains 36 en commands for openbsd.",
       "count": 36,
       "size_kb": 16,
-      "url": "packs/en/openbsd.json",
+      "url": "packs/commands/en/openbsd.json",
       "category": "command"
     },
     {
@@ -186,7 +186,7 @@
       "description": "Contains 41 en commands for netbsd.",
       "count": 41,
       "size_kb": 19,
-      "url": "packs/en/netbsd.json",
+      "url": "packs/commands/en/netbsd.json",
       "category": "command"
     },
     {
@@ -197,7 +197,7 @@
       "description": "Contains 63 en commands for freebsd.",
       "count": 63,
       "size_kb": 29,
-      "url": "packs/en/freebsd.json",
+      "url": "packs/commands/en/freebsd.json",
       "category": "command"
     },
     {
@@ -208,7 +208,7 @@
       "description": "Contains 7775 en commands for linux.",
       "count": 7775,
       "size_kb": 3676,
-      "url": "packs/en/linux.json",
+      "url": "packs/commands/en/linux.json",
       "category": "command"
     },
     {
@@ -219,7 +219,7 @@
       "description": "Contains 19666 en commands for common.",
       "count": 19666,
       "size_kb": 9533,
-      "url": "packs/en/common.json",
+      "url": "packs/commands/en/common.json",
       "category": "command"
     },
     {
@@ -230,7 +230,7 @@
       "description": "Contains 935 en commands for osx.",
       "count": 935,
       "size_kb": 414,
-      "url": "packs/en/osx.json",
+      "url": "packs/commands/en/osx.json",
       "category": "command"
     },
     {
@@ -241,7 +241,7 @@
       "description": "Contains 49 en commands for sunos.",
       "count": 49,
       "size_kb": 21,
-      "url": "packs/en/sunos.json",
+      "url": "packs/commands/en/sunos.json",
       "category": "command"
     },
     {
@@ -252,8 +252,261 @@
       "description": "Contains 42 en commands for cisco-ios.",
       "count": 42,
       "size_kb": 17,
-      "url": "packs/en/cisco-ios.json",
+      "url": "packs/commands/en/cisco-ios.json",
       "category": "command"
+    },
+    {
+      "id": "custom-prompt-en-prompts-en-roles",
+      "language": "en",
+      "platform": "custom",
+      "name": "prompts-en-roles",
+      "description": "prompts-en-roles",
+      "count": 1069,
+      "size_kb": 2275.94,
+      "url": "packs/prompts-en-roles.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-prompts-zh-roles",
+      "language": "en",
+      "platform": "custom",
+      "name": "prompts-zh-roles",
+      "description": "prompts-zh-roles",
+      "count": 124,
+      "size_kb": 97.47,
+      "url": "packs/prompts-zh-roles.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-dos",
+      "language": "en",
+      "platform": "custom",
+      "name": "dos",
+      "description": "dos",
+      "count": 11,
+      "size_kb": 4.51,
+      "url": "packs/en/dos.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-common",
+      "language": "en",
+      "platform": "custom",
+      "name": "common",
+      "description": "common",
+      "count": 19666,
+      "size_kb": 9532.67,
+      "url": "packs/en/common.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-freebsd",
+      "language": "en",
+      "platform": "custom",
+      "name": "freebsd",
+      "description": "freebsd",
+      "count": 63,
+      "size_kb": 28.88,
+      "url": "packs/en/freebsd.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-netbsd",
+      "language": "en",
+      "platform": "custom",
+      "name": "netbsd",
+      "description": "netbsd",
+      "count": 41,
+      "size_kb": 18.63,
+      "url": "packs/en/netbsd.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-openbsd",
+      "language": "en",
+      "platform": "custom",
+      "name": "openbsd",
+      "description": "openbsd",
+      "count": 36,
+      "size_kb": 15.82,
+      "url": "packs/en/openbsd.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-android",
+      "language": "en",
+      "platform": "custom",
+      "name": "android",
+      "description": "android",
+      "count": 57,
+      "size_kb": 25.1,
+      "url": "packs/en/android.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-sunos",
+      "language": "en",
+      "platform": "custom",
+      "name": "sunos",
+      "description": "sunos",
+      "count": 49,
+      "size_kb": 20.91,
+      "url": "packs/en/sunos.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-cisco-ios",
+      "language": "en",
+      "platform": "custom",
+      "name": "cisco-ios",
+      "description": "cisco-ios",
+      "count": 42,
+      "size_kb": 16.63,
+      "url": "packs/en/cisco-ios.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-windows",
+      "language": "en",
+      "platform": "custom",
+      "name": "windows",
+      "description": "windows",
+      "count": 1089,
+      "size_kb": 532.13,
+      "url": "packs/en/windows.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-osx",
+      "language": "en",
+      "platform": "custom",
+      "name": "osx",
+      "description": "osx",
+      "count": 935,
+      "size_kb": 414.19,
+      "url": "packs/en/osx.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-linux",
+      "language": "en",
+      "platform": "custom",
+      "name": "linux",
+      "description": "linux",
+      "count": 7775,
+      "size_kb": 3675.88,
+      "url": "packs/en/linux.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-dos",
+      "language": "en",
+      "platform": "custom",
+      "name": "dos",
+      "description": "dos",
+      "count": 11,
+      "size_kb": 4.27,
+      "url": "packs/zh/dos.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-common",
+      "language": "en",
+      "platform": "custom",
+      "name": "common",
+      "description": "common",
+      "count": 3565,
+      "size_kb": 1734.36,
+      "url": "packs/zh/common.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-freebsd",
+      "language": "en",
+      "platform": "custom",
+      "name": "freebsd",
+      "description": "freebsd",
+      "count": 5,
+      "size_kb": 1.8,
+      "url": "packs/zh/freebsd.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-netbsd",
+      "language": "en",
+      "platform": "custom",
+      "name": "netbsd",
+      "description": "netbsd",
+      "count": 2,
+      "size_kb": 0.7,
+      "url": "packs/zh/netbsd.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-openbsd",
+      "language": "en",
+      "platform": "custom",
+      "name": "openbsd",
+      "description": "openbsd",
+      "count": 2,
+      "size_kb": 0.71,
+      "url": "packs/zh/openbsd.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-android",
+      "language": "en",
+      "platform": "custom",
+      "name": "android",
+      "description": "android",
+      "count": 54,
+      "size_kb": 23.39,
+      "url": "packs/zh/android.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-sunos",
+      "language": "en",
+      "platform": "custom",
+      "name": "sunos",
+      "description": "sunos",
+      "count": 3,
+      "size_kb": 1.1,
+      "url": "packs/zh/sunos.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-windows",
+      "language": "en",
+      "platform": "custom",
+      "name": "windows",
+      "description": "windows",
+      "count": 425,
+      "size_kb": 183.27,
+      "url": "packs/zh/windows.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-osx",
+      "language": "en",
+      "platform": "custom",
+      "name": "osx",
+      "description": "osx",
+      "count": 457,
+      "size_kb": 193.18,
+      "url": "packs/zh/osx.json",
+      "category": "prompt"
+    },
+    {
+      "id": "custom-prompt-en-linux",
+      "language": "en",
+      "platform": "custom",
+      "name": "linux",
+      "description": "linux",
+      "count": 754,
+      "size_kb": 337.88,
+      "url": "packs/zh/linux.json",
+      "category": "prompt"
     }
   ]
 }
