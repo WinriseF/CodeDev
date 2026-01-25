@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useMemo, useEffect, useRef, type CSSProperties, memo } from 'react';
 import { open, save } from '@tauri-apps/plugin-dialog';
+import { basename } from '@tauri-apps/api/path';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import { writeText as writeClipboard } from '@tauri-apps/plugin-clipboard-manager';
 import { invoke } from '@tauri-apps/api/core';
@@ -112,7 +113,6 @@ export function ContextView() {
     }
   }, [globalIgnore, projectIgnore, refreshTreeStatus]);
 
-  // 计算选中的文件数量
   const selectedFileCount = useMemo(() => {
     let count = 0;
     const traverse = (nodes: typeof fileTree) => {
@@ -125,12 +125,10 @@ export function ContextView() {
     return count;
   }, [fileTree]);
 
-  // 计算扁平化列表
   const flatData = useMemo(() => {
     return flattenTree(fileTree, expandedIds);
   }, [fileTree, expandedIds]);
 
-  // 传递给 Row 的数据，使用 useMemo 避免不必要的重新创建
   const rowData = useMemo(() => ({
     items: flatData,
     onToggleSelect: toggleSelect,
@@ -141,7 +139,26 @@ export function ContextView() {
     setToastState({ show: true, msg, type });
   };
 
-  // 通用执行器：执行最终的复制或保存
+  const getDefaultSavePath = async () => {
+    let namePart = 'context';
+
+    if (projectRoot) {
+      try {
+        const base = await basename(projectRoot);
+        if (base) namePart = base;
+      } catch (e) {
+        const separator = projectRoot.includes('\\') ? '\\' : '/';
+        const cleanRoot = projectRoot.endsWith(separator) ? projectRoot.slice(0, -1) : projectRoot;
+        namePart = cleanRoot.split(separator).pop() || 'context';
+      }
+    }
+
+    const now = new Date();
+    const timeStr = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
+
+    return `${namePart}_${timeStr}.txt`;
+  };
+
   const executeFinalAction = async (text: string, action: 'copy' | 'save') => {
       try {
           if (action === 'copy') {
@@ -150,9 +167,10 @@ export function ContextView() {
               console.log(`Context copied! Approx tokens: ${actualTokens}`);
               triggerToast(getText('context', 'toastCopied', language), 'success');
           } else if (action === 'save') {
+              const defaultPath = await getDefaultSavePath();
               const filePath = await save({
                   filters: [{ name: 'Text File', extensions: ['txt', 'md', 'json'] }],
-                  defaultPath: 'context.txt'
+                  defaultPath: defaultPath
               });
               if (!filePath) return;
 
@@ -255,10 +273,10 @@ export function ContextView() {
       const paths = getSelectedPaths(fileTree);
       const header = generateHeader(fileTree, removeComments);
 
-      // 1. 先弹出保存对话框拿到路径
+      const defaultPath = await getDefaultSavePath();
       const filePath = await save({
         filters: [{ name: 'Text File', extensions: ['txt', 'md', 'json'] }],
-        defaultPath: 'context.txt'
+        defaultPath: defaultPath
       });
 
       if (!filePath) {
@@ -267,11 +285,9 @@ export function ContextView() {
       }
 
       if (detectSecrets) {
-        // 有安全检测：必须把内容拿回前端扫描
         const text = await invoke<string>('get_context_content', { paths, header, removeComments });
         await processWithSecurityCheck(text, 'save');
       } else {
-        // [优化] 无安全检测时，直接后端写文件，内存占用为 0
         await invoke('save_context_to_file', {
           paths,
           header,
