@@ -5,6 +5,8 @@ on:
     - cron: '0 0 * * 1' # 每周一国际标准时间 0点 运行
   workflow_dispatch:    # 允许手动触发
   push:
+    branches:
+      - main
     paths:
       - 'build/**'      # 当 build 目录有脚本修改时触发
 
