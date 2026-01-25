@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-build/tldr/
+build/dist/
 node_modules
 dist
 dist-ssr
