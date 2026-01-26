@@ -214,6 +214,11 @@ fn main() {
             apps::refresh_apps,
             apps::open_app,
             db::get_chat_templates,
+            // >>> 新增 Shell History 相关命令 <<<
+            db::record_shell_command,
+            db::get_recent_shell_history,
+            db::search_shell_history,
+            // >>> 结束新增 <<<
             monitor::get_system_metrics,
             monitor::get_top_processes,
             monitor::get_active_ports,

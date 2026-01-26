@@ -45,6 +45,14 @@ interface UrlHistoryRecord {
   last_visit: number;
 }
 
+// 新增接口定义，对应 Rust 的结构体
+interface ShellHistoryEntry {
+  id: number;
+  command: string;
+  timestamp: number;
+  execution_count: number;
+}
+
 export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
   const { query, mode, searchScope } = useSpotlight();
   const debouncedQuery = useDebounce(query, 100);
@@ -81,22 +89,59 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
 
         // --- Shell 命令模式 ---
         if (q.startsWith('>') || q.startsWith('》')) {
-            const cmd = q.substring(1).trim();
-            if (cmd) {
-                setResults([{
-                    id: 'shell-exec',
-                    title: `${getText('spotlight', 'executeCommand', language) || 'Execute'}: ${cmd}`,
-                    description: getText('spotlight', 'runInTerminal', language),
-                    content: cmd,
-                    type: 'shell',
-                    shellCmd: cmd,
-                    isExecutable: true,
-                    shellType: 'auto'
-                }]);
-                setSelectedIndex(0);
-                setIsLoading(false); // 短路：确保 loading 关闭
-                return;
+          const cmd = q.substring(1).trim(); // 去掉前缀
+
+          let shellResults: SpotlightItem[] = [];
+
+          // 1. 第一项永远是：直接执行当前输入
+          // 只有当用户输入了内容时才显示"执行"，否则显示提示
+          const currentShellItem: SpotlightItem = {
+            id: 'shell-exec-current',
+            title: cmd
+              ? `${getText('spotlight', 'executeCommand', language) || 'Execute'}: ${cmd}`
+              : getText('spotlight', 'shellPlaceholder', language) || 'Type a command to run...',
+            description: getText('spotlight', 'runInTerminal', language) || 'Run in Terminal',
+            content: cmd,
+            type: 'shell',
+            shellCmd: cmd,
+            isExecutable: true,
+            shellType: 'auto'
+          };
+          shellResults.push(currentShellItem);
+
+          // 2. 后续项：从数据库加载历史记录
+          try {
+            console.log('[Spotlight] Loading shell history, cmd:', cmd);
+            let historyEntries: ShellHistoryEntry[] = [];
+            if (cmd === '') {
+              // 输入为空时，显示最近的历史记录
+              historyEntries = await invoke<ShellHistoryEntry[]>('get_recent_shell_history', { limit: 10 });
+            } else {
+              // 有输入时，进行模糊搜索
+              historyEntries = await invoke<ShellHistoryEntry[]>('search_shell_history', { query: cmd, limit: 10 });
             }
+
+            console.log('[Spotlight] Loaded history entries:', historyEntries);
+
+            const historyItems: SpotlightItem[] = historyEntries.map(entry => ({
+              id: `shell-history-${entry.id}`,
+              title: entry.command,
+              description: `History • Used ${entry.execution_count} times`,
+              content: entry.command,
+              type: 'shell_history',
+              historyCommand: entry.command, // 关键字段用于补全
+              isExecutable: false, // 历史记录本身不直接执行，而是补全
+            }));
+
+            shellResults = [...shellResults, ...historyItems];
+          } catch (err) {
+            console.error("Failed to load shell history:", err);
+          }
+
+          setResults(shellResults);
+          setSelectedIndex(0); // 重置选中项到第一项
+          setIsLoading(false);
+          return; // 结束，不再执行后续的常规搜索
         }
       }
 
@@ -217,7 +262,7 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
     };
 
     performSearch();
-  }, [debouncedQuery, mode, searchScope]);
+  }, [debouncedQuery, mode, searchScope, language]);
 
   const handleNavigation = useCallback((e: KeyboardEvent) => {
     if (mode !== 'search') return;

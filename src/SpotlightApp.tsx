@@ -29,7 +29,7 @@ import { ShellType } from '@/types/prompt';
 const appWindow = getCurrentWebviewWindow();
 
 function SpotlightContent() {
-  const { mode, toggleMode, focusInput, setQuery } = useSpotlight();
+  const { mode, toggleMode, focusInput, setQuery, inputRef } = useSpotlight();
   const { language, spotlightAppearance } = useAppStore();
   const { projectRoot } = useContextStore();
 
@@ -67,6 +67,29 @@ function SpotlightContent() {
   const handleItemSelect = async (item: SpotlightItem) => {
     if (!item) return;
 
+    // >>> 处理 shell_history 类型：补全而不是执行 <<<
+    if (item.type === 'shell_history') {
+      const command = item.historyCommand?.trim() || '';
+      if (command) {
+        // 将命令填入搜索框，保持前缀
+        setQuery(`> ${command}`);
+
+        // 聚焦输入框并将光标移到末尾
+        setTimeout(() => {
+          const input = inputRef.current;
+          if (input) {
+            input.focus();
+            const pos = command.length + 2; // +2 是因为 "> "
+            input.setSelectionRange(pos, pos);
+          }
+        }, 0);
+
+        // 重新定位到第一行（即"执行"选项）
+        search.setSelectedIndex(0);
+      }
+      return; // 不执行其他逻辑
+    }
+
     if (item.type === 'app' && item.appPath) {
         try {
             await invoke('open_app', { path: item.appPath });
@@ -103,7 +126,26 @@ function SpotlightContent() {
         return;
       }
 
-      await executeCommand(content, (item.shellType as ShellType) || 'auto', projectRoot);
+      // 执行命令
+      const executionTask = executeCommand(content, (item.shellType as ShellType) || 'auto', projectRoot)
+        .catch(err => console.error('[Spotlight] Execution failed:', err));
+
+      // 如果是 shell 类型，记录到历史
+      let recordTask: Promise<void> | null = null;
+      if (item.type === 'shell') {
+        console.log('[Spotlight] Recording shell command to history:', content);
+        recordTask = invoke('record_shell_command', { command: content })
+          .then(() => console.log('[Spotlight] Shell command recorded successfully'))
+          .catch(err => console.error('[Spotlight] Failed to record shell command:', err));
+      }
+
+      // 等待执行和记录完成
+      if (recordTask) {
+        await Promise.all([executionTask, recordTask]);
+      } else {
+        await executionTask;
+      }
+
       await appWindow.hide();
       setQuery('');
     } else {

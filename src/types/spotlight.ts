@@ -17,8 +17,8 @@ export interface SpotlightItem {
 
   originalData?: Prompt;
 
-  // 修改：新增 'math' 和 'shell' 类型
-  type: 'prompt' | 'command' | 'action' | 'url' | 'app' | 'math' | 'shell';
+  // >>> 修改：新增 'shell' 和 'shell_history' 类型
+  type: 'prompt' | 'command' | 'action' | 'url' | 'app' | 'math' | 'shell' | 'shell_history';
 
   isExecutable?: boolean;
   shellType?: string;
@@ -29,6 +29,9 @@ export interface SpotlightItem {
   // 新增：特定类型的字段
   mathResult?: string;
   shellCmd?: string;
+
+  // >>> 新增：Shell 相关字段
+  historyCommand?: string; // 用于历史记录
 }
 
 export interface SpotlightState {
