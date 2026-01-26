@@ -29,7 +29,13 @@ import { ShellType } from '@/types/prompt';
 const appWindow = getCurrentWebviewWindow();
 
 function SpotlightContent() {
-  const { mode, toggleMode, focusInput, setQuery, inputRef } = useSpotlight();
+  const {
+    mode, toggleMode, focusInput, inputRef,
+    query, setQuery,
+    chatInput, setChatInput,
+    searchScope, setSearchScope,
+    activeTemplate, setActiveTemplate
+  } = useSpotlight();
   const { language, spotlightAppearance } = useAppStore();
   const { projectRoot } = useContextStore();
 
@@ -174,6 +180,27 @@ function SpotlightContent() {
 
       if (e.key === 'Escape') {
         e.preventDefault();
+
+        if (mode === 'search') {
+            if (query.length > 0) {
+                setQuery('');
+                return;
+            }
+            if (searchScope !== 'global') {
+                setSearchScope('global');
+                return;
+            }
+        } else {
+            if (chatInput.length > 0) {
+                setChatInput('');
+                return;
+            }
+            if (activeTemplate) {
+                setActiveTemplate(null);
+                return;
+            }
+        }
+
         await appWindow.hide();
         return;
       }
@@ -208,11 +235,12 @@ function SpotlightContent() {
     document.addEventListener('keydown', handleGlobalKeyDown);
     return () => document.removeEventListener('keydown', handleGlobalKeyDown);
   }, [
-    mode, 
-    search.results, 
-    search.selectedIndex, 
-    chat.isStreaming, 
-    chat.sendMessage, 
+    mode,
+    query, chatInput, searchScope, activeTemplate,
+    search.results,
+    search.selectedIndex,
+    chat.isStreaming,
+    chat.sendMessage,
     toggleMode
   ]);
 
