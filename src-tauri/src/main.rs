@@ -26,6 +26,7 @@ mod monitor;
 mod env_probe;
 mod apps;
 mod context;
+mod hyperview;
 
 #[derive(serde::Serialize)]
 struct SystemInfo {
@@ -180,6 +181,7 @@ fn main() {
                 let _ = window.set_focus();
             }
         }))
+        .register_uri_scheme_protocol("preview", hyperview::protocol::preview_protocol_handler)
         .invoke_handler(tauri::generate_handler![
             greet,
             get_file_size,
@@ -229,6 +231,7 @@ fn main() {
             context::commands::get_context_content,
             context::commands::copy_context_to_clipboard,
             context::commands::save_context_to_file,
+            hyperview::get_file_meta,
         ])
         .setup(|app| {
             let system = System::new();

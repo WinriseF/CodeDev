@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useContextStore } from '@/store/useContextStore';
 import { useAppStore, DEFAULT_MODELS } from '@/store/useAppStore';
+import { usePreviewStore } from '@/store/usePreviewStore';
 import { scanProject } from '@/lib/fs_helper';
 import { calculateIdealTreeWidth, flattenTree } from '@/lib/tree_utils';
 import { getSelectedPaths, generateHeader } from '@/lib/context_assembler';
@@ -41,11 +42,12 @@ interface RowProps {
     items: FlatNode[];
     onToggleSelect: (id: string, checked: boolean) => void;
     onToggleExpand: (id: string) => void;
+    onPreview?: (path: string) => void;
   };
 }
 
 const Row = memo(function Row({ index, style, data }: RowProps) {
-  const { items, onToggleSelect, onToggleExpand } = data;
+  const { items, onToggleSelect, onToggleExpand, onPreview } = data;
   const item = items[index];
 
   return (
@@ -57,6 +59,7 @@ const Row = memo(function Row({ index, style, data }: RowProps) {
       style={style}
       onToggleSelect={onToggleSelect}
       onToggleExpand={onToggleExpand}
+      onPreview={onPreview}
     />
   );
 });
@@ -71,12 +74,19 @@ export function ContextView() {
     expandedIds, toggleExpand
   } = useContextStore();
 
-  const { 
+  const {
     isContextSidebarOpen, setContextSidebarOpen,
     contextSidebarWidth, setContextSidebarWidth,
     globalIgnore,
     models, language
-  } = useAppStore(); 
+  } = useAppStore();
+
+  const { openPreview } = usePreviewStore();
+
+  // Debug: Log when ContextView mounts
+  useEffect(() => {
+    console.log('[ContextView] Component mounted, space key preview enabled');
+  }, []);
 
   const [pathInput, setPathInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -133,12 +143,55 @@ export function ContextView() {
   const rowData = useMemo(() => ({
     items: flatData,
     onToggleSelect: toggleSelect,
-    onToggleExpand: toggleExpand
-  }), [flatData, toggleSelect, toggleExpand]);
+    onToggleExpand: toggleExpand,
+    onPreview: openPreview
+  }), [flatData, toggleSelect, toggleExpand, openPreview]);
 
   const triggerToast = (msg: string, type: ToastType = 'success') => {
     setToastState({ show: true, msg, type });
   };
+
+  // Space key preview
+  useEffect(() => {
+    console.log('[ContextView] Setting up space key preview listener');
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Log all key presses for debugging
+      if (e.code === 'Space') {
+        console.log('[Preview] Space key detected!', {
+          repeat: e.repeat,
+          target: e.target,
+          targetTagName: (e.target as HTMLElement).tagName
+        });
+      }
+
+      // Space key to trigger preview
+      if (e.code === 'Space' && !e.repeat &&
+          !(e.target instanceof HTMLInputElement) &&
+          !(e.target instanceof HTMLTextAreaElement)) {
+        e.preventDefault(); // Prevent page scrolling
+
+        // Get currently selected file paths
+        const paths = getSelectedPaths(fileTree);
+        console.log('[Preview] Space pressed, selected paths:', paths);
+
+        if (paths.length === 0) {
+          triggerToast(getText('common', 'selectOneFileFirst', language) || 'Please select one file first (check the checkbox)', 'warning');
+        } else if (paths.length === 1) {
+          console.log('[Preview] Opening preview for:', paths[0]);
+          openPreview(paths[0]);
+        } else {
+          triggerToast(getText('common', 'selectOnlyOneFile', language) || 'Please select only one file for preview (check the checkbox)', 'warning');
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown, true); // Use capture phase
+    return () => {
+      console.log('[ContextView] Removing space key preview listener');
+      window.removeEventListener('keydown', handleKeyDown, true);
+    };
+  }, [fileTree, openPreview, language, triggerToast]);
 
   const getDefaultSavePath = async () => {
     let namePart = 'context';

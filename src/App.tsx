@@ -11,6 +11,7 @@ import { SettingsModal } from "@/components/settings/SettingsModal";
 import { useAppStore, AppTheme } from "@/store/useAppStore";
 import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
 import { getText } from '@/lib/i18n';
+import { PreviewModal } from "@/components/features/hyperview";
 const PromptView = lazy(() => import('@/components/features/prompts/PromptView').then(module => ({ default: module.PromptView })));
 const ContextView = lazy(() => import('@/components/features/context/ContextView').then(module => ({ default: module.ContextView })));
 const PatchView = lazy(() => import('@/components/features/patch/PatchView').then(module => ({ default: module.PatchView })));
@@ -201,6 +202,7 @@ function App() {
       <Suspense fallback={null}>
         <SystemMonitorModal />
       </Suspense>
+      <PreviewModal />
       <GlobalConfirmDialog />
     </div>
     </>
