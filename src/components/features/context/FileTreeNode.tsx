@@ -110,7 +110,7 @@ export function FileTreeNode({
         <button
           onClick={handlePreviewClick}
           className="opacity-0 group-hover:opacity-100 p-1 hover:bg-background rounded mr-1 text-muted-foreground hover:text-primary transition-all"
-          title="Preview (Space or Double Click)"
+          title="Preview (Double Click)"
         >
           <Eye size={12} />
         </button>

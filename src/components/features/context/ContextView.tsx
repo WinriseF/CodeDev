@@ -83,11 +83,6 @@ export function ContextView() {
 
   const { openPreview } = usePreviewStore();
 
-  // Debug: Log when ContextView mounts
-  useEffect(() => {
-    console.log('[ContextView] Component mounted, space key preview enabled');
-  }, []);
-
   const [pathInput, setPathInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [showFilters, setShowFilters] = useState(false); 
@@ -150,48 +145,6 @@ export function ContextView() {
   const triggerToast = (msg: string, type: ToastType = 'success') => {
     setToastState({ show: true, msg, type });
   };
-
-  // Space key preview
-  useEffect(() => {
-    console.log('[ContextView] Setting up space key preview listener');
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Log all key presses for debugging
-      if (e.code === 'Space') {
-        console.log('[Preview] Space key detected!', {
-          repeat: e.repeat,
-          target: e.target,
-          targetTagName: (e.target as HTMLElement).tagName
-        });
-      }
-
-      // Space key to trigger preview
-      if (e.code === 'Space' && !e.repeat &&
-          !(e.target instanceof HTMLInputElement) &&
-          !(e.target instanceof HTMLTextAreaElement)) {
-        e.preventDefault(); // Prevent page scrolling
-
-        // Get currently selected file paths
-        const paths = getSelectedPaths(fileTree);
-        console.log('[Preview] Space pressed, selected paths:', paths);
-
-        if (paths.length === 0) {
-          triggerToast(getText('common', 'selectOneFileFirst', language) || 'Please select one file first (check the checkbox)', 'warning');
-        } else if (paths.length === 1) {
-          console.log('[Preview] Opening preview for:', paths[0]);
-          openPreview(paths[0]);
-        } else {
-          triggerToast(getText('common', 'selectOnlyOneFile', language) || 'Please select only one file for preview (check the checkbox)', 'warning');
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown, true); // Use capture phase
-    return () => {
-      console.log('[ContextView] Removing space key preview listener');
-      window.removeEventListener('keydown', handleKeyDown, true);
-    };
-  }, [fileTree, openPreview, language, triggerToast]);
 
   const getDefaultSavePath = async () => {
     let namePart = 'context';
