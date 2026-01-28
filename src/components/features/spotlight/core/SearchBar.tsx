@@ -241,7 +241,7 @@ export function SearchBar({ onKeyDown }: SearchBarProps) {
                     ? (searchScope === 'global' ? getText('spotlight', 'searchPlaceholder', language) :
                        searchScope === 'math' ? "Expression..." :
                        searchScope === 'shell' ? "Shell Command..." :
-                       searchScope === 'web' ? "Search Google..." :
+                       searchScope === 'web' ? "Search..." :
                        `${getText('spotlight', 'filterPlaceholder', language)}...`)
                     : (activeTemplate ? "" : getText('spotlight', 'chatPlaceholder', language))
             }
