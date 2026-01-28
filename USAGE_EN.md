@@ -87,6 +87,14 @@ Quickly search and use your command library, applications, and system functions.
 *   Click "Run in terminal" button to execute in full terminal
 *   Supports command history matching, use arrow keys to browse
 
+**Web Search Mode:**
+*   Enter prefix `?` to enter Web search mode
+*   Example: `?react hooks`
+*   Supports multiple search engines: Google, Bing, Baidu
+*   Configure default search engine and custom search URL in settings
+*   Search engine icons displayed with brand colors for quick identification
+*   Search results show official brand icons for each search engine
+
 **Application Launcher:**
 *   Enter application name or keywords to quickly find
 *   After selecting target application, press `Enter` or click "Open" to launch
@@ -298,6 +306,17 @@ To use Spotlight's AI chat feature, you need to configure model providers.
     *   Enable/disable reminders
     *   Set reminder interval
 
+#### Search Settings
+
+*   **Default Engine**: Select default search engine
+    *   Google: Global search engine
+    *   Bing: Microsoft search engine
+    *   Baidu: Chinese search engine
+    *   Custom: Custom search engine
+*   **Custom URL**: Configure custom search address
+    *   Use `%s` as search keyword placeholder
+    *   Example: `https://www.google.com/search?q=%s`
+
 #### Appearance
 
 *   **Theme**: Select light or dark theme
@@ -349,6 +368,7 @@ Configure files and folders to ignore across all features:
 | `/` | Open command menu | Open command menu |
 | `=` | Switch to calculator mode | - |
 | `>` | Switch to Shell command mode | - |
+| `?` | Switch to Web search mode | - |
 
 ---
 

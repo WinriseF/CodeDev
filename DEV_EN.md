@@ -17,6 +17,35 @@
 
 ## Version History
 
+### v1.4.0 (2026-01-28)
+
+| Commit Hash | Change | Description |
+|-------------|--------|-------------|
+| `7cb60e5` | **Search Engine Icon Optimization** | Add SearchEngineIcon component for unified brand icon management |
+| `124cede` | **Backspace BUG Fix** | Fix backspace deletion logic when switching search scopes |
+| `4193cc1` | **Code Cleanup** | Remove unnecessary comments and debug code |
+
+**v1.4.0 Detailed File Changes**:
+```
+New Files:
+  src/components/ui/SearchEngineIcon.tsx                 | +46  new search engine icon component
+
+Modified Files:
+  src/components/features/spotlight/hooks/useSpotlightSearch.ts | -6 +2  remove icon imports, icon field changed to string
+  src/components/features/spotlight/core/SearchBar.tsx  | -7 +14  remove buggy reset logic, web tag uses SearchEngineIcon
+  src/components/features/spotlight/modes/search/SearchMode.tsx | +9   web_search uses SearchEngineIcon with colorize support
+  src/components/settings/SettingsModal.tsx              | ~8   search engine cards use SearchEngineIcon
+  src/App.tsx                                           | -1   remove shortcut registration debug log
+  src/components/features/context/ContextView.tsx        | -2   remove token count log
+```
+
+**Key Updates**:
+- 🎨 **Search Engine Brand Icons**: New `SearchEngineIcon` component with official Google, Bing, Baidu icons and brand colors
+- 🔧 **Architecture Optimization**: Hook layer no longer handles icon rendering, only passes engine type string - separation of concerns
+- 🎯 **Interaction Enhancement**: Search results show white icons when selected for better dark background contrast
+- 🐛 **BUG Fix**: Fixed backspace deletion logic - only exits search scope when pressing backspace on empty query
+- 🧹 **Code Cleanup**: Removed unnecessary debug logs and comments
+
 ### v1.3.9 (2026-01-28)
 
 | Commit Hash | Change | Description |
