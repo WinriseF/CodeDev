@@ -79,7 +79,6 @@ function App() {
             }
           }
         });
-        console.log(`[Shortcut] Registered: ${spotlightShortcut}`);
       } catch (err) {
         console.error('[Shortcut] Registration failed:', err);
       }

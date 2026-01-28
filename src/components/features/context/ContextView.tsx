@@ -170,8 +170,6 @@ export function ContextView() {
       try {
           if (action === 'copy') {
               await writeClipboard(text);
-              const actualTokens = Math.ceil(text.length / 4);
-              console.log(`Context copied! Approx tokens: ${actualTokens}`);
               triggerToast(getText('context', 'toastCopied', language), 'success');
           } else if (action === 'save') {
               let filePath = savePath;

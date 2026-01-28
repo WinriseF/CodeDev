@@ -170,7 +170,6 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
                   content: q,
                   type: 'web_search',
                   url: finalUrl,
-                  // 存储引擎类型字符串，让渲染层去决定如何使用组件
                   icon: key
               };
           });
