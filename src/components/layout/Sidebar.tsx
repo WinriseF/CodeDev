@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BookOpen, FileJson, GitMerge, Settings, ChevronLeft, ChevronRight } from 'lucide-react';
+import { BookOpen, FileJson, GitMerge, Settings, ChevronLeft, ChevronRight, FileText, Files } from 'lucide-react';
 import { useAppStore, AppView } from '@/store/useAppStore';
 import { getMenuLabel, getText } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
@@ -15,6 +15,8 @@ export function Sidebar() {
     { id: 'prompts', icon: BookOpen },
     { id: 'context', icon: FileJson },
     { id: 'patch', icon: GitMerge },
+    { id: 'memos', icon: FileText },
+    { id: 'files', icon: Files },
   ];
 
   return (

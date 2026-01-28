@@ -6,7 +6,7 @@ import { fetch } from '@tauri-apps/plugin-http';
 import { emit } from '@tauri-apps/api/event'; 
 import { AIModelConfig, AIProviderConfig, AIProviderSetting, DEFAULT_AI_CONFIG, DEFAULT_PROVIDER_SETTINGS } from '@/types/model';
 
-export type AppView = 'prompts' | 'context' | 'patch';
+export type AppView = 'prompts' | 'context' | 'patch' | 'memos' | 'files';
 export type AppTheme = 'dark' | 'light';
 export type AppLang = 'en' | 'zh';
 

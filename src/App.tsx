@@ -11,10 +11,12 @@ import { SettingsModal } from "@/components/settings/SettingsModal";
 import { useAppStore, AppTheme } from "@/store/useAppStore";
 import { GlobalConfirmDialog } from "@/components/ui/GlobalConfirmDialog";
 import { getText } from '@/lib/i18n';
-const PromptView = lazy(() => import('@/components/features/prompts/PromptView').then(module => ({ default: module.PromptView })));
-const ContextView = lazy(() => import('@/components/features/context/ContextView').then(module => ({ default: module.ContextView })));
-const PatchView = lazy(() => import('@/components/features/patch/PatchView').then(module => ({ default: module.PatchView })));
-const SystemMonitorModal = lazy(() => import('@/components/features/monitor/SystemMonitorModal').then(module => ({ default: module.SystemMonitorModal })));
+const PromptView = lazy(() => import('@/components/features/prompts/PromptView').then(m => ({ default: m.PromptView })));
+const ContextView = lazy(() => import('@/components/features/context/ContextView').then(m => ({ default: m.ContextView })));
+const PatchView = lazy(() => import('@/components/features/patch/PatchView').then(m => ({ default: m.PatchView })));
+const SystemMonitorModal = lazy(() => import('@/components/features/monitor/SystemMonitorModal').then(m => ({ default: m.SystemMonitorModal })));
+const MemoView = lazy(() => import('@/components/features/memo/MemoView'));
+const FileTransferView = lazy(() => import('@/components/features/files/FileTransferView'));
 
 const appWindow = getCurrentWebviewWindow()
 
@@ -194,6 +196,8 @@ function App() {
             {currentView === 'prompts' && <PromptView />}
             {currentView === 'context' && <ContextView />}
             {currentView === 'patch' && <PatchView />}
+            {currentView === 'memos' && <MemoView />}
+            {currentView === 'files' && <FileTransferView />}
           </Suspense>
         </main>
       </div>

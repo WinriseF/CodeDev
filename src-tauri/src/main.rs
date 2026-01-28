@@ -26,6 +26,9 @@ mod monitor;
 mod env_probe;
 mod apps;
 mod context;
+mod server;
+mod memo;
+mod files;
 
 #[derive(serde::Serialize)]
 struct SystemInfo {
@@ -39,6 +42,28 @@ struct SystemInfo {
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
+}
+
+#[tauri::command]
+fn get_all_memos() -> Result<Vec<memo::Memo>, String> {
+    let conn = rusqlite::Connection::open("codeforge.db")
+        .map_err(|e| e.to_string())?;
+    memo::MemoService::get_all(&conn).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+async fn get_connection_info() -> Result<serde_json::Value, String> {
+    let my_local_ip = local_ip_address::local_ip().map_err(|e| e.to_string())?;
+    let port = 1420;
+
+    let token = "auth_token_example";
+    let url = format!("http://{}:{}/mobile?token={}", my_local_ip, port, token);
+
+    Ok(serde_json::json!({
+        "url": url,
+        "ip": my_local_ip.to_string(),
+        "port": port
+    }))
 }
 
 #[tauri::command]
@@ -183,6 +208,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             greet,
             get_file_size,
+            get_all_memos,
+            get_connection_info,
             get_system_info,
             check_python_env,
             git::get_git_commits,
@@ -231,6 +258,17 @@ fn main() {
             context::commands::save_context_to_file,
         ])
         .setup(|app| {
+            // 获取数据库路径并启动 Axum 服务器
+            let app_dir = app.path().app_local_data_dir().unwrap();
+            let db_path = app_dir.join("prompts.db");
+
+            let _app_handle = app.handle().clone();
+            tauri::async_runtime::spawn(async move {
+                if let Err(e) = server::start_web_server(1420, db_path).await {
+                    eprintln!("Web服务启动失败: {}", e);
+                }
+            });
+
             let system = System::new();
             app.manage(Arc::new(Mutex::new(system)));
 
