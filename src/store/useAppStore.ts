@@ -2,9 +2,9 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { fileStorage } from '@/lib/storage';
 import { IgnoreConfig, DEFAULT_GLOBAL_IGNORE } from '@/types/context';
-import { fetch } from '@tauri-apps/plugin-http';
-import { emit } from '@tauri-apps/api/event'; 
+import { emit } from '@tauri-apps/api/event';
 import { AIModelConfig, AIProviderConfig, AIProviderSetting, DEFAULT_AI_CONFIG, DEFAULT_PROVIDER_SETTINGS } from '@/types/model';
+import { fetchFromMirrors, MODEL_MIRROR_BASES } from '@/lib/network';
 
 export type AppView = 'prompts' | 'context' | 'patch';
 export type AppTheme = 'dark' | 'light';
@@ -43,12 +43,6 @@ export const DEFAULT_MODELS: AIModelConfig[] = [
     "inputPricePerMillion": 0.6,
     "color": "bg-blue-400"
   }
-];
-
-const REMOTE_CONFIG_URLS = [
-  'https://gitee.com/winriseF/models/raw/master/models/models.json',
-  'https://cdn.jsdelivr.net/gh/WinriseF/CtxRun@main/models/models.json',
-  'https://raw.githubusercontent.com/WinriseF/CtxRun/main/models/models.json'
 ];
 
 export interface SpotlightAppearance {
@@ -201,25 +195,14 @@ export const useAppStore = create<AppState>()(
       }),
 
       syncModels: async () => {
-        const fetchUrl = async (url: string) => {
-          const response = await fetch(url, {
-            method: 'GET',
+        try {
+          const result = await fetchFromMirrors<AIModelConfig[]>(MODEL_MIRROR_BASES, {
+            path: 'models/models.json',
+            validate: (data) => Array.isArray(data) && data.length > 0
           });
 
-          if (response.ok) {
-            const data = await response.json() as AIModelConfig[];
-            if (Array.isArray(data) && data.length > 0) {
-              return data;
-            }
-          }
-          throw new Error(`Invalid response from ${url}`);
-        };
-
-        try {
-          const data = await Promise.any(REMOTE_CONFIG_URLS.map(url => fetchUrl(url)));
-
           set({
-            models: data,
+            models: result.data,
             lastUpdated: Date.now()
           });
 

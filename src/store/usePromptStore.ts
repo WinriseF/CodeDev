@@ -3,16 +3,9 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
 import { fileStorage } from '@/lib/storage';
 import { Prompt, DEFAULT_GROUP, PackManifest, PackManifestItem } from '@/types/prompt';
-import { fetch } from '@tauri-apps/plugin-http';
 import { invoke } from '@tauri-apps/api/core';
 import { exists, readTextFile, BaseDirectory } from '@tauri-apps/plugin-fs';
-
-// 镜像源优先级：Gitee (国内) -> GitHub Raw -> jsDelivr CDN
-const MIRROR_BASES = [
-    'https://gitee.com/winriseF/models/raw/master/build/dist/',
-    'https://raw.githubusercontent.com/WinriseF/CtxRun/main/build/dist/',
-    'https://cdn.jsdelivr.net/gh/WinriseF/CtxRun@main/build/dist/'
-];
+import { fetchFromMirrors, PROMPT_MIRROR_BASES } from '@/lib/network';
 
 const PAGE_SIZE = 20;
 const LEGACY_STORE_FILE = 'prompts-data.json';
@@ -66,7 +59,7 @@ export const usePromptStore = create<PromptState>()(
       searchQuery: '',
       isStoreLoading: false,
       manifest: null,
-      activeManifestUrl: MIRROR_BASES[0],
+      activeManifestUrl: PROMPT_MIRROR_BASES[0],
       installedPackIds: [],
       migrationVersion: 0,
       counts: { prompt: 0, command: 0 },
@@ -253,26 +246,18 @@ export const usePromptStore = create<PromptState>()(
         }
       },
 
-      // 商店逻辑：获取 Manifest
       fetchManifest: async () => {
         set({ isStoreLoading: true });
-        // 构建 Promise 数组
-        const promises = MIRROR_BASES.map(async (baseUrl) => {
-            const url = `${baseUrl}manifest.json?t=${Date.now()}`;
-            const res = await fetch(url, { method: 'GET' });
-            if (res.ok) {
-                const data = await res.json() as PackManifest;
-                return { baseUrl, data };
-            }
-            throw new Error(`HTTP ${res.status}`);
-        });
 
         try {
-            // Promise.any 返回第一个成功的 Promise，不用等所有
-            const winner = await Promise.any(promises);
+            const result = await fetchFromMirrors<PackManifest>(PROMPT_MIRROR_BASES, {
+                path: 'manifest.json',
+                cacheBust: true,
+            });
+
             set({
-                manifest: winner.data,
-                activeManifestUrl: winner.baseUrl,
+                manifest: result.data,
+                activeManifestUrl: result.sourceUrl,
                 isStoreLoading: false
             });
         } catch (errors) {
@@ -281,29 +266,15 @@ export const usePromptStore = create<PromptState>()(
         }
       },
 
-      // 下载逻辑：安装指令包
       installPack: async (pack) => {
         set({ isStoreLoading: true });
         try {
-            const downloadPromises = MIRROR_BASES.map(async (baseUrl) => {
-                const url = `${baseUrl}${pack.url}`;
-                const res = await fetch(url);
-                if (res.ok) {
-                    const json = await res.json();
-                    if (Array.isArray(json) && json.length > 0) {
-                        return json;
-                    }
-                }
-                throw new Error(`HTTP ${res.status}`);
+            const result = await fetchFromMirrors<any[]>(PROMPT_MIRROR_BASES, {
+                path: pack.url,
+                validate: (data) => Array.isArray(data) && data.length > 0
             });
 
-            let rawData: any;
-            try {
-                rawData = await Promise.any(downloadPromises);
-            } catch (e) {
-                console.error("Install failed: All mirrors failed.", e);
-                throw new Error("Download failed: Network error or file not found on any mirror.");
-            }
+            const rawData = result.data;
 
             // 数据清洗
             const enrichedPrompts: any[] = rawData.map((p: any) => ({
@@ -324,7 +295,7 @@ export const usePromptStore = create<PromptState>()(
                 shellType: p.shellType || null
             }));
 
-            // 调用 Rust 事务导入 (先 DELETE 再 INSERT，保证不重复)
+            // 调用 Rust 事务导入
             await invoke('import_prompt_pack', {
                 packId: pack.id,
                 prompts: enrichedPrompts

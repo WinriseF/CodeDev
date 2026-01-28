@@ -218,6 +218,13 @@ jobs:
           mkdir -p gitee_workspace/models
           cp -r models/* gitee_workspace/models/
           
+          echo "📄 Copying documentation files..."
+          for file in README.md README.zh-CN.md USAGE.md USAGE_EN.md; do
+            if [ -f "$file" ]; then
+              cp "$file" gitee_workspace/
+            fi
+          done
+
           cd gitee_workspace
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
