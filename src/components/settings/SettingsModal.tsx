@@ -11,6 +11,7 @@ import { PromptLibraryManager } from './PromptLibraryManager';
 import { IgnoredSecretsManager } from './IgnoredSecretsManager';
 import { ShortcutInput } from '@/components/ui/ShortcutInput';
 import { AboutSection } from './AboutSection';
+import { SearchEngineIcon } from '@/components/ui/SearchEngineIcon';
 
 export function SettingsModal() {
   const {
@@ -373,25 +374,25 @@ export function SettingsModal() {
                                 <ThemeCard
                                     active={searchSettings.defaultEngine === 'google'}
                                     onClick={() => setSearchSettings({ defaultEngine: 'google' })}
-                                    icon={<SearchIcon size={24} className="text-blue-500" />}
+                                    icon={<SearchEngineIcon engine="google" size={24} />}
                                     label={getText('settings', 'engineGoogle', language)}
                                 />
                                 <ThemeCard
                                     active={searchSettings.defaultEngine === 'bing'}
                                     onClick={() => setSearchSettings({ defaultEngine: 'bing' })}
-                                    icon={<SearchIcon size={24} className="text-cyan-500" />}
+                                    icon={<SearchEngineIcon engine="bing" size={24} />}
                                     label={getText('settings', 'engineBing', language)}
                                 />
                                 <ThemeCard
                                     active={searchSettings.defaultEngine === 'baidu'}
                                     onClick={() => setSearchSettings({ defaultEngine: 'baidu' })}
-                                    icon={<SearchIcon size={24} className="text-blue-700" />}
+                                    icon={<SearchEngineIcon engine="baidu" size={24} />}
                                     label={getText('settings', 'engineBaidu', language)}
                                 />
                                 <ThemeCard
                                     active={searchSettings.defaultEngine === 'custom'}
                                     onClick={() => setSearchSettings({ defaultEngine: 'custom' })}
-                                    icon={<SearchIcon size={24} className="text-purple-500" />}
+                                    icon={<SearchEngineIcon engine="custom" size={24} />}
                                     label={getText('settings', 'engineCustom', language)}
                                 />
                             </div>

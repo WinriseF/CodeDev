@@ -5,7 +5,6 @@ import { SpotlightItem } from '@/types/spotlight';
 import { useSpotlight } from '../core/SpotlightContext';
 import { getText } from '@/lib/i18n';
 import { evaluateMath } from '@/lib/calculator';
-import { Search, Globe, Compass, Link } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 
 interface AppEntry {
@@ -164,21 +163,15 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
                 ? template.replace('%s', encodeURIComponent(q))
                 : `${template}${encodeURIComponent(q)}`;
 
-              let Icon;
-              switch (key) {
-                  case 'google': Icon = Search; break;
-                  case 'bing': Icon = Compass; break;
-                  case 'baidu': Icon = Globe; break;
-                  default: Icon = Link;
-              }
-
               return {
                   id: `web-search-${key}`,
                   title: `Search ${config.name}: ${q}`,
                   description: key === 'custom' ? `Custom: ${template.substring(0, 30)}...` : `Open in default browser`,
                   content: q,
                   type: 'web_search',
-                  url: finalUrl
+                  url: finalUrl,
+                  // 存储引擎类型字符串，让渲染层去决定如何使用组件
+                  icon: key
               };
           });
 

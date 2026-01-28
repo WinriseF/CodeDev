@@ -8,6 +8,7 @@ import { useSpotlight } from '../../core/SpotlightContext';
 import { invoke } from '@tauri-apps/api/core';
 import { executeCommand } from '@/lib/command_executor';
 import { useContextStore } from '@/store/useContextStore';
+import { SearchEngineIcon } from '@/components/ui/SearchEngineIcon';
 
 interface SearchModeProps {
   results: SpotlightItem[];
@@ -138,7 +139,15 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
               isCopied && "bg-white/20"
             )}>
               {isCopied ? <Check size={18} /> : (
-                item.icon && typeof item.icon === 'object' ? item.icon : <Icon size={18} />
+                item.type === 'web_search' ? (
+                  <SearchEngineIcon
+                    engine={item.icon as string}
+                    size={18}
+                    colorize={!isActive}
+                  />
+                ) : (
+                  item.icon && typeof item.icon === 'object' ? item.icon : <Icon size={18} />
+                )
               )}
             </div>
 
