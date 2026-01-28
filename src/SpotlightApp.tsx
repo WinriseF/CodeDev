@@ -76,13 +76,14 @@ function SpotlightContent() {
     if (item.type === 'shell_history') {
       const command = item.historyCommand?.trim() || '';
       if (command) {
-        setQuery(`> ${command}`);
+        setSearchScope('shell');
+        setQuery(command);
 
         setTimeout(() => {
           const input = inputRef.current;
           if (input) {
             input.focus();
-            const pos = command.length + 2;
+            const pos = command.length;
             input.setSelectionRange(pos, pos);
           }
         }, 0);
@@ -113,6 +114,17 @@ function SpotlightContent() {
         } catch (e) {
             console.error("Failed to open URL:", e);
             await message(getText('common', 'failedToOpenUrl', language, { error: String(e) }), { kind: 'error' });
+        }
+        return;
+    }
+
+    if (item.type === 'web_search' && item.url) {
+        try {
+            await open(item.url);
+            await appWindow.hide();
+            setQuery('');
+        } catch (e) {
+            console.error("Failed to open Web Search:", e);
         }
         return;
     }

@@ -19,7 +19,7 @@ interface SearchModeProps {
 
 export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect, copiedId }: SearchModeProps) {
   const { language } = useAppStore();
-  const { setQuery, inputRef } = useSpotlight();
+  const { setQuery, inputRef, setSearchScope } = useSpotlight();
   const { projectRoot } = useContextStore();
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -38,13 +38,14 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
     if (item.type === 'shell_history') {
       const command = item.historyCommand?.trim() || '';
       if (command) {
-        setQuery(`> ${command}`);
+        setSearchScope('shell');
+        setQuery(command);
 
         setTimeout(() => {
           const input = inputRef.current;
           if (input) {
             input.focus();
-            const pos = command.length + 2;
+            const pos = command.length;
             input.setSelectionRange(pos, pos);
           }
         }, 0);
@@ -86,6 +87,7 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
   const getActionLabel = (item: SpotlightItem) => {
     if (item.type === 'url') return getText('spotlight', 'openLink', language);
     if (item.type === 'app') return getText('spotlight', 'openApp', language);
+    if (item.type === 'web_search') return "Search Google";
     if (item.type === 'shell' || item.isExecutable) return getText('actions', 'run', language);
     if (item.type === 'shell_history') return getText('actions', 'run', language);
     if (item.type === 'math') return getText('spotlight', 'copyResult', language) || "Copy";
@@ -105,6 +107,7 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
         if (item.type === 'shell') Icon = Zap;
         else if (item.type === 'math') Icon = Calculator;
         else if (item.type === 'url') Icon = Globe;
+        else if (item.type === 'web_search') Icon = Globe;
         else if (item.type === 'app') Icon = AppWindow;
         else if (isExecutable) Icon = Zap;
         else if (isCommand(item)) Icon = Terminal;
@@ -121,6 +124,7 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
                    item.type === 'shell_history' ? "bg-indigo-600 text-white shadow-sm scale-[0.99]" :
                    isExecutable ? "bg-indigo-600 text-white shadow-sm scale-[0.99]" :
                    item.type === 'url' ? "bg-blue-600 text-white shadow-sm scale-[0.99]" :
+                   item.type === 'web_search' ? "bg-blue-600 text-white shadow-sm scale-[0.99]" :
                    item.type === 'app' ? "bg-cyan-600 text-white shadow-sm scale-[0.99]" :
                    item.type === 'math' ? "bg-emerald-600 text-white shadow-sm scale-[0.99]" :
                    "bg-primary text-primary-foreground shadow-sm scale-[0.99]")
@@ -166,7 +170,7 @@ export function SearchMode({ results, selectedIndex, setSelectedIndex, onSelect,
                 </div>
               )}
 
-              {item.type !== 'math' && (
+              {item.type !== 'math' && item.type !== 'web_search' && (
                 <div className={cn("text-xs transition-all duration-200", isActive ? (item.type === 'app' ? "opacity-80 text-white/80 truncate" : "mt-1 bg-black/20 rounded p-2 text-white/95 whitespace-pre-wrap break-all line-clamp-6") : (hasDesc ? "hidden" : "text-muted-foreground opacity-50 truncate"))}>
                     {item.content}
                 </div>

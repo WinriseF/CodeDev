@@ -65,49 +65,51 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
     const performSearch = async () => {
       const q = debouncedQuery.trim();
 
-      if (searchScope === 'global') {
-        if (q.startsWith('=')) {
-            const mathResult = evaluateMath(q);
-            if (mathResult) {
-                setResults([{
-                    id: 'math-result',
-                    title: mathResult,
-                    description: `${getText('spotlight', 'mathResult', language) || 'Result'} (${q.substring(1)})`,
-                    content: mathResult,
-                    type: 'math',
-                    mathResult: mathResult
-                }]);
-                setSelectedIndex(0);
-                setIsLoading(false);
-                return;
-            }
-        }
+      if (searchScope === 'math') {
+          if (!q) {
+              setResults([]);
+              return;
+          }
+          const mathResult = evaluateMath(q);
+          if (mathResult) {
+              setResults([{
+                  id: 'math-result',
+                  title: mathResult,
+                  description: `${getText('spotlight', 'mathResult', language) || 'Result'} (${q})`,
+                  content: mathResult,
+                  type: 'math',
+                  mathResult: mathResult
+              }]);
+              setSelectedIndex(0);
+          } else {
+              setResults([]);
+          }
+          setIsLoading(false);
+          return;
+      }
 
-        if (q.startsWith('>') || q.startsWith('》')) {
-          const cmd = q.substring(1).trim();
-
-          let shellResults: SpotlightItem[] = [];
-
+      if (searchScope === 'shell') {
           const currentShellItem: SpotlightItem = {
             id: 'shell-exec-current',
-            title: cmd
-              ? `${getText('spotlight', 'executeCommand', language) || 'Execute'}: ${cmd}`
+            title: q
+              ? `${getText('spotlight', 'executeCommand', language) || 'Execute'}: ${q}`
               : getText('spotlight', 'shellPlaceholder', language) || 'Type a command to run...',
             description: getText('spotlight', 'runInTerminal', language) || 'Run in Terminal',
-            content: cmd,
+            content: q,
             type: 'shell',
-            shellCmd: cmd,
+            shellCmd: q,
             isExecutable: true,
             shellType: 'auto'
           };
-          shellResults.push(currentShellItem);
+
+          let shellResults: SpotlightItem[] = [currentShellItem];
 
           try {
             let historyEntries: ShellHistoryEntry[] = [];
-            if (cmd === '') {
+            if (q === '') {
               historyEntries = await invoke<ShellHistoryEntry[]>('get_recent_shell_history', { limit: 10 });
             } else {
-              historyEntries = await invoke<ShellHistoryEntry[]>('search_shell_history', { query: cmd, limit: 10 });
+              historyEntries = await invoke<ShellHistoryEntry[]>('search_shell_history', { query: q, limit: 10 });
             }
 
             const historyItems: SpotlightItem[] = historyEntries.map(entry => ({
@@ -129,17 +131,31 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
           setSelectedIndex(0);
           setIsLoading(false);
           return;
-        }
+      }
+
+      if (searchScope === 'web') {
+          if (!q) {
+              setResults([]);
+              return;
+          }
+          setResults([{
+              id: 'web-search-item',
+              title: `Search Google: ${q}`,
+              description: "Open in default browser",
+              content: q,
+              type: 'web_search',
+              url: `https://www.google.com/search?q=${encodeURIComponent(q)}`
+          }]);
+          setSelectedIndex(0);
+          setIsLoading(false);
+          return;
       }
 
       setIsLoading(true);
       try {
         let finalResults: SpotlightItem[] = [];
-
-        // 并行请求数据，根据 Scope 过滤请求
         const promises = [];
 
-        // A. Prompts (Command/Prompt)
         if (searchScope === 'global' || searchScope === 'command' || searchScope === 'prompt') {
             const categoryFilter = searchScope === 'global' ? null : searchScope;
             promises.push(
@@ -159,14 +175,12 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
             promises.push(Promise.resolve([]));
         }
 
-        // B. URL History & Dynamic URL (仅 Global)
         if (searchScope === 'global') {
             promises.push(invoke<UrlHistoryRecord[]>('search_url_history', { query: q }));
         } else {
             promises.push(Promise.resolve([]));
         }
 
-        // C. Apps (Global 或 App 模式)
         if (searchScope === 'global' || searchScope === 'app') {
             promises.push(q ? invoke<AppEntry[]>('search_apps_in_db', { query: q }) : Promise.resolve([]));
         } else {
@@ -175,9 +189,6 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
 
         const [promptsData, urlHistoryData, appsData] = await Promise.all(promises);
 
-        // --- 处理结果 ---
-
-        // 1. Dynamic URL (Global Only)
         let dynamicUrlItem: SpotlightItem | null = null;
         if (searchScope === 'global' && isValidUrl(q)) {
             const url = normalizeUrl(q);
@@ -194,7 +205,6 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
             }
         }
 
-        // 2. Apps
         const appItems: SpotlightItem[] = (appsData as AppEntry[]).map(app => ({
             id: `app-${app.path}`,
             title: app.name,
@@ -204,7 +214,6 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
             appPath: app.path
         }));
 
-        // 3. History
         const historyItems: SpotlightItem[] = (urlHistoryData as UrlHistoryRecord[]).map(h => ({
             id: `history-${h.url}`,
             title: h.title && h.title.length > 0 ? h.title : h.url,
@@ -214,7 +223,6 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
             url: h.url
         }));
 
-        // 4. Prompts
         const promptItems: SpotlightItem[] = (promptsData as Prompt[]).map(p => ({
           id: p.id,
           title: p.title,
@@ -226,13 +234,11 @@ export function useSpotlightSearch(language: 'zh' | 'en' = 'en') {
           shellType: p.shellType
         }));
 
-        // --- 聚合 ---
         if (searchScope === 'app') {
             finalResults = [...appItems];
         } else if (searchScope === 'command' || searchScope === 'prompt') {
             finalResults = [...promptItems];
         } else {
-            // Global: 混合排序
             if (dynamicUrlItem) finalResults.push(dynamicUrlItem);
             finalResults = [...finalResults, ...appItems, ...historyItems, ...promptItems];
         }

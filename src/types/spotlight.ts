@@ -3,7 +3,7 @@ import { Prompt } from './prompt';
 
 export type SpotlightMode = 'search' | 'chat';
 
-export type SearchScope = 'global' | 'app' | 'command' | 'prompt';
+export type SearchScope = 'global' | 'app' | 'command' | 'prompt' | 'math' | 'shell' | 'web';
 
 export interface SpotlightItem {
   id: string;
@@ -16,7 +16,7 @@ export interface SpotlightItem {
 
   originalData?: Prompt;
 
-  type: 'prompt' | 'command' | 'action' | 'url' | 'app' | 'math' | 'shell' | 'shell_history';
+  type: 'prompt' | 'command' | 'action' | 'url' | 'app' | 'math' | 'shell' | 'shell_history' | 'web_search';
 
   isExecutable?: boolean;
   shellType?: string;
