@@ -49,8 +49,6 @@ fn ensure_main_window(app: &AppHandle) {
         .inner_size(800.0, 600.0)
         .center()
         .decorations(false)
-        .transparent(true)
-        .shadow(false)
         .resizable(true)
         .visible(true);
 
