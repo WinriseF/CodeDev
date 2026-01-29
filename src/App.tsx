@@ -106,7 +106,7 @@ function App() {
           animation-play-state: paused !important;
         }
       `}</style>
-      <div className="h-screen w-full bg-background text-foreground overflow-hidden flex flex-col rounded-xl border border-border transition-colors duration-300 relative shadow-2xl">
+      <div className="h-screen w-full bg-background text-foreground overflow-hidden flex flex-col rounded-lg border border-border transition-colors duration-300 relative shadow-2xl">
       <TitleBar />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
