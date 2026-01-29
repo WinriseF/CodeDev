@@ -322,24 +322,29 @@ export default function SpotlightApp() {
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
 
+    // Spotlight 窗口需要透明 html 背景以显示圆角
+    document.documentElement.style.backgroundColor = 'transparent';
+
     const unlistenPromise = appWindow.onFocusChanged(async ({ payload: isFocused }) => {
       if (isFocused) {
         await useAppStore.persist.rehydrate();
         await useContextStore.persist.rehydrate();
         fetchChatTemplates();
         appWindow.setFocus();
-      } 
+      }
     });
 
     const themeUnlisten = listen<AppTheme>('theme-changed', (event) => {
-        setTheme(event.payload, true); 
+        setTheme(event.payload, true);
         root.classList.remove('light', 'dark');
         root.classList.add(event.payload);
     });
 
-    return () => { 
+    return () => {
         unlistenPromise.then(f => f());
         themeUnlisten.then(f => f());
+        // 清理时恢复 html 背景色
+        document.documentElement.style.backgroundColor = '';
     };
   }, []);
 

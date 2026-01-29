@@ -94,10 +94,14 @@
   * {
     @apply border-border;
   }
+  html {
+    @apply bg-background transition-colors duration-300;
+  }
+
   body {
     @apply text-foreground transition-colors duration-300 select-none cursor-default;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-color: transparent; 
+    background-color: transparent;
     border: none;
   }
   /* 强制所有输入框和文本域可以选中 */
