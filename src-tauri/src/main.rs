@@ -30,6 +30,7 @@ mod env_probe;
 mod apps;
 mod context;
 mod hyperview;
+mod scheduler;
 
 const MAIN_WINDOW_LABEL: &str = "main";
 
@@ -285,11 +286,14 @@ fn main() {
             context::commands::copy_context_to_clipboard,
             context::commands::save_context_to_file,
             hyperview::get_file_meta,
+            scheduler::update_reminder_config,
         ])
         .setup(|app| {
             let system = System::new();
             app.manage(Arc::new(Mutex::new(system)));
-
+            app.manage(scheduler::ReminderState(std::sync::Mutex::new(scheduler::ReminderConfig::default())));
+            scheduler::start_background_task(app.handle().clone());
+            
             match db::init_db(app.handle()) {
                 Ok(conn) => {
                     app.manage(db::DbState {

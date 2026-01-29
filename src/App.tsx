@@ -1,7 +1,7 @@
-import { useEffect, useRef, Suspense, lazy } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { listen } from '@tauri-apps/api/event';
-import { sendNotification } from '@tauri-apps/plugin-notification';
+import { invoke } from '@tauri-apps/api/core';
 import { Loader2 } from 'lucide-react';
 import { TitleBar } from "@/components/layout/TitleBar";
 import { Sidebar } from "@/components/layout/Sidebar";
@@ -19,8 +19,6 @@ const appWindow = getCurrentWebviewWindow()
 
 function App() {
   const { currentView, theme, setTheme, syncModels, lastUpdated, restReminder, language } = useAppStore();
-  const restTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const lastRestTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {
     const root = document.documentElement;
@@ -90,57 +88,16 @@ function App() {
     }
   }, []);
 
+  // [新增] 将休息提醒配置同步到 Rust 后端
+  // 当配置在 SettingsModal 中被修改，或应用启动时，此 Effect 会自动触发
   useEffect(() => {
-    if (restTimerRef.current) {
-      clearInterval(restTimerRef.current);
-      restTimerRef.current = null;
-    }
-
-    if (!restReminder.enabled || restReminder.intervalMinutes <= 0) {
-      return;
-    }
-
-    const intervalMs = restReminder.intervalMinutes * 60 * 1000;
-
-    const scheduleNextReminder = () => {
-      const now = Date.now();
-      const timeSinceLastRest = now - lastRestTimeRef.current;
-
-      if (timeSinceLastRest >= intervalMs) {
-        showRestNotification();
-        lastRestTimeRef.current = now;
-      }
-
-      restTimerRef.current = setInterval(() => {
-        showRestNotification();
-        lastRestTimeRef.current = Date.now();
-      }, intervalMs);
-    };
-
-    const showRestNotification = async () => {
-      try {
-        const title = getText('spotlight', 'restReminder', language);
-        const body = getText('common', 'restReminderBody', language, { minutes: restReminder.intervalMinutes.toString() });
-
-        await sendNotification({
-          title,
-          body,
-          sound: 'default'
-        });
-      } catch (err) {
-        console.error('Failed to send rest reminder notification:', err);
-      }
-    };
-
-    scheduleNextReminder();
-
-    return () => {
-      if (restTimerRef.current) {
-        clearInterval(restTimerRef.current);
-        restTimerRef.current = null;
-      }
-    };
-  }, [restReminder.enabled, restReminder.intervalMinutes, language]);
+    invoke('update_reminder_config', {
+      enabled: restReminder.enabled,
+      intervalMinutes: restReminder.intervalMinutes // Tauri 会自动映射为 Rust 的 interval_minutes
+    }).catch(err => {
+      console.error("Failed to sync reminder config to backend:", err);
+    });
+  }, [restReminder.enabled, restReminder.intervalMinutes]);
 
   return (
     <>

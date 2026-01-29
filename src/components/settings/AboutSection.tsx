@@ -265,7 +265,7 @@ export function AboutSection() {
                  {/* 底部版权声明 */}
                  <div className="mt-16 pt-8 border-t border-border/30 text-center">
                     <p className="text-[10px] text-muted-foreground/40 font-mono">
-                        © {new Date().getFullYear()} {appName}. Open Source under MIT License.
+                        © {new Date().getFullYear()} {appName}. Open Source under GPL-3.0 License.
                     </p>
                  </div>
                  
