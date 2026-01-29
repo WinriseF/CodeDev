@@ -95,7 +95,8 @@
     @apply border-border;
   }
   html {
-    @apply bg-background transition-colors duration-300;
+    background-color: transparent;
+    @apply transition-colors duration-300;
   }
 
   body {
